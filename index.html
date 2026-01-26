@@ -595,12 +595,11 @@
         const CONFIG = {
             GITHUB_USER: 'industriastobias',
             REPO_NAME: 'klohesvtiendaonline',
-            IMAGES_FOLDER: 'klohe_imagenes',
             WHATSAPP_NUMBER: '50366711569',
             CURRENCY: '$'
         };
 
-        // 95 productos (sin Pulsera Glenda ni Tarjetas)
+        // 95 productos (sin Glenda ni Tarjetas)
         let products = [
             // CARTERAS (34)
             { id: 1, name: "Cartera Elegante", code: "03", price: 12.50, category: "cartera" },
@@ -717,8 +716,9 @@
             renderProducts(products);
         });
 
+        // URL corregida - imágenes en la raíz del repositorio
         function getImageUrl(code) {
-            return `https://industriastobias.github.io/klohesvtiendaonline/klohe_imagenes/${code}.jpg`;
+            return `https://industriastobias.github.io/klohesvtiendaonline/${code}.jpg`;
         }
 
         function renderProducts(productsToRender) {

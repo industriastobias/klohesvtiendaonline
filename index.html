@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#E74C3C">
+    <meta name="theme-color" content="#E8D5C4">
     <title>Klohe - Accesorios | San Valentín</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --blanco-hueso: #FFF5F5;
-            --rosa-palido: #FFE4E1;
-            --rosa-medio: #FFB6C1;
-            --rosa-oscuro: #E74C3C;
-            --rosa-intenso: #C0392B;
-            --dorado: #D4AF37;
-            --texto: #2C3E50;
-            --texto-claro: #7F8C8D;
-            --agotado: #e74c3c;
-            --exito: #27ae60;
-            --nuevo: #f39c12;
-            --sombra: rgba(231, 76, 60, 0.15);
+            --blanco: #FAF9F6;
+            --crema: #F5F1ED;
+            --rosa-suave: #E8D5C4;
+            --rosa-medio: #D4A5A5;
+            --rosa-oscuro: #A67B7B;
+            --texto: #2C2C2C;
+            --texto-claro: #6B6B6B;
+            --acento: #C9B8A8;
+            --sombra-suave: rgba(0, 0, 0, 0.04);
+            --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -30,208 +28,169 @@
         }
 
         body {
-            font-family: 'Lato', sans-serif;
-            background-color: var(--blanco-hueso);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--blanco);
             color: var(--texto);
             line-height: 1.6;
-            overflow-x: hidden;
+            font-weight: 300;
+            letter-spacing: 0.02em;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 2rem;
         }
 
-        /* Header */
+        /* Header Minimalista */
         header {
-            background: linear-gradient(135deg, #fff 0%, var(--rosa-palido) 100%);
-            border-bottom: 2px solid var(--rosa-medio);
-            padding: 1rem 0;
+            background: var(--blanco);
+            padding: 1.5rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 20px var(--sombra);
+            border-bottom: 1px solid var(--crema);
+            backdrop-filter: blur(10px);
+            background-color: rgba(250, 249, 246, 0.95);
         }
 
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex: 1;
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #000000;
-            letter-spacing: 2px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--texto);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
         }
 
         .logo span {
+            font-weight: 300;
             color: var(--rosa-oscuro);
-        }
-
-        /* Mensaje rotativo al lado del logo */
-        .rotating-message-header {
-            font-size: 0.85rem;
-            color: var(--rosa-oscuro);
-            font-weight: 600;
-            max-width: 300px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            animation: pulse 2s infinite;
-            padding: 0.3rem 0.8rem;
-            background: rgba(255,255,255,0.8);
-            border-radius: 20px;
-            border: 1px solid var(--rosa-medio);
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
 
         .cart-icon {
             position: relative;
             cursor: pointer;
-            width: 45px;
-            height: 45px;
-            border: 2px solid var(--rosa-oscuro);
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            background: white;
-            color: var(--rosa-oscuro);
+            border: 1px solid var(--rosa-suave);
+            border-radius: 50%;
+            transition: var(--transicion);
+            background: transparent;
+            color: var(--texto);
         }
 
         .cart-icon:hover {
-            background: var(--rosa-oscuro);
-            color: white;
-            transform: scale(1.1);
+            background: var(--rosa-suave);
+            border-color: var(--rosa-medio);
         }
 
         .cart-icon span {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: var(--dorado);
+            background: var(--rosa-oscuro);
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 700;
+            font-size: 0.65rem;
+            font-weight: 500;
         }
 
-        /* Hero */
+        /* Hero Minimalista */
         .hero {
             text-align: center;
-            padding: 2rem 0;
-            background: linear-gradient(135deg, var(--rosa-palido) 0%, var(--rosa-medio) 50%, var(--blanco-hueso) 100%);
+            padding: 6rem 0 4rem;
+            background: var(--crema);
             position: relative;
             overflow: hidden;
         }
 
         .hero::before {
-            content: '❤';
+            content: '';
             position: absolute;
-            top: 10%;
-            left: 10%;
-            font-size: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--rosa-suave) 0%, transparent 70%);
             opacity: 0.3;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '❤';
-            position: absolute;
-            bottom: 10%;
-            right: 10%;
-            font-size: 1.5rem;
-            opacity: 0.3;
-            animation: float 3s ease-in-out infinite 1.5s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            pointer-events: none;
         }
 
         .hero h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--rosa-intenso);
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--texto);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
         }
 
         .hero p {
             color: var(--texto-claro);
-            font-size: 0.95rem;
-            font-weight: 400;
+            font-size: 1.1rem;
+            font-weight: 300;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Búsqueda */
+        /* Filtros Minimalistas */
+        .filters-container {
+            background: transparent;
+            padding: 2rem 0;
+            margin: 2rem 0;
+            border-bottom: 1px solid var(--crema);
+        }
+
+        .filters {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
         .search-container {
             position: relative;
             flex: 1;
-            min-width: 200px;
-            max-width: 300px;
-            transition: all 0.3s ease;
-        }
-
-        .search-container.expanded {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            max-width: 100%;
-            width: 100%;
-            z-index: 1000;
-            background: white;
-            padding: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .search-container.expanded input {
-            font-size: 1.2rem;
-            padding: 1rem 1rem 1rem 3rem;
-            height: 50px;
+            min-width: 250px;
+            max-width: 350px;
         }
 
         .search-container input {
             width: 100%;
             padding: 0.8rem 1rem 0.8rem 2.5rem;
-            border: 2px solid var(--rosa-medio);
-            border-radius: 25px;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 0;
             font-size: 0.9rem;
-            background: white;
+            background: transparent;
             color: var(--texto);
-            transition: all 0.3s;
+            transition: var(--transicion);
+            font-family: 'Inter', sans-serif;
         }
 
         .search-container input:focus {
             outline: none;
             border-color: var(--rosa-oscuro);
-            box-shadow: 0 0 0 3px var(--sombra);
         }
 
         .search-container i {
@@ -239,53 +198,25 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--rosa-oscuro);
-            font-size: 1rem;
-        }
-
-        .close-search {
-            display: none;
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
             color: var(--texto-claro);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .search-container.expanded .close-search {
-            display: block;
-        }
-
-        .filters-container {
-            background: white;
-            padding: 1rem;
-            border-radius: 15px;
-            margin: 1rem 0;
-            box-shadow: 0 4px 15px var(--sombra);
-            border: 1px solid var(--rosa-palido);
-        }
-
-        .filters {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
+            font-size: 0.9rem;
         }
 
         .filters select {
-            padding: 0.8rem 1.2rem;
-            border: 2px solid var(--rosa-medio);
-            border-radius: 25px;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 0;
             font-size: 0.9rem;
-            background: white;
+            background: transparent;
             color: var(--texto);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transicion);
+            font-family: 'Inter', sans-serif;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B6B6B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
         }
 
         .filters select:focus {
@@ -299,333 +230,317 @@
             gap: 0.5rem;
             cursor: pointer;
             font-size: 0.9rem;
-            color: var(--texto);
+            color: var(--texto-claro);
+            font-weight: 400;
         }
 
         .filter-checkbox input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--rosa-suave);
             accent-color: var(--rosa-oscuro);
+            cursor: pointer;
         }
 
-        /* Grid de 5 productos por fila en desktop */
+        /* Grid de Productos Minimalista */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.2rem;
-            margin-bottom: 2rem;
+            gap: 3rem;
+            margin-bottom: 4rem;
         }
 
         @media (min-width: 640px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 3rem;
             }
         }
 
         @media (min-width: 1024px) {
             .products-grid {
                 grid-template-columns: repeat(4, 1fr);
+                gap: 4rem;
             }
         }
 
         @media (min-width: 1280px) {
             .products-grid {
                 grid-template-columns: repeat(5, 1fr);
+                gap: 3rem;
             }
         }
 
         .product-card {
-            background: white;
-            border-radius: 16px;
+            background: transparent;
             overflow: hidden;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            transition: var(--transicion);
             position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: none;
+            box-shadow: none;
         }
 
         .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px var(--sombra);
-            border-color: var(--rosa-medio);
+            transform: translateY(-5px);
         }
 
         .product-card.agotado {
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         .product-card.agotado .product-image-container::after {
-            content: 'AGOTADO';
+            content: 'Agotado';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(231, 76, 60, 0.9);
+            background: var(--texto);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 400;
         }
 
         .category-badge {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 4px 12px;
-            border-radius: 20px;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.3rem 0.8rem;
+            background: var(--blanco);
             font-size: 0.65rem;
-            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.15em;
             z-index: 10;
-            background: var(--rosa-oscuro);
-            color: white;
+            color: var(--texto-claro);
+            border: 1px solid var(--rosa-suave);
+            font-weight: 400;
         }
 
         .badge-nuevo {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--dorado);
+            top: 1rem;
+            right: 1rem;
+            background: var(--rosa-oscuro);
             color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 0.3rem 0.8rem;
             font-size: 0.65rem;
-            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.15em;
             z-index: 10;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-weight: 400;
         }
 
         .product-image-container {
             position: relative;
             width: 100%;
-            height: 180px;
+            aspect-ratio: 1;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--blanco-hueso) 0%, var(--rosa-palido) 100%);
+            background: var(--crema);
             cursor: pointer;
+            margin-bottom: 1.5rem;
         }
 
         .product-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.6s ease;
         }
 
         .product-card:hover .product-image {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .product-info {
-            padding: 1rem;
+            padding: 0;
+            text-align: center;
         }
 
         .product-category {
-            display: inline-block;
-            color: var(--rosa-oscuro);
+            display: block;
+            color: var(--texto-claro);
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 0.3rem;
-            font-weight: 700;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
         }
 
         .product-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
             color: var(--texto);
-            font-weight: 500;
-            line-height: 1.3;
-            height: 2.6rem;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+            font-weight: 400;
+            line-height: 1.4;
+            height: auto;
+            overflow: visible;
+            display: block;
         }
 
         .product-details {
-            background: var(--blanco-hueso);
-            border-radius: 8px;
-            padding: 0.6rem;
-            margin-bottom: 0.5rem;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            margin-bottom: 1rem;
             font-size: 0.75rem;
-            border: 1px solid var(--rosa-palido);
-        }
-
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.2rem;
-        }
-
-        .detail-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .detail-label {
+            border: none;
             color: var(--texto-claro);
         }
 
-        .detail-value {
-            color: var(--texto);
-            font-weight: 700;
-            font-size: 0.8rem;
+        .detail-row {
+            display: inline;
+            margin: 0 0.5rem;
         }
 
-        /* Precio y ojo en la misma línea */
+        .detail-label {
+            display: none;
+        }
+
+        .detail-value {
+            color: var(--texto-claro);
+            font-weight: 400;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
         .price-row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin: 0.6rem 0;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
         }
 
         .product-price {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--rosa-oscuro);
-            font-weight: 800;
-        }
-
-        .product-price::before {
-            content: '❤ ';
-            font-size: 0.8rem;
+            font-weight: 400;
+            font-family: 'Cormorant Garamond', serif;
         }
 
         .quick-view-btn-inline {
-            width: 35px;
-            height: 35px;
-            border: 2px solid var(--rosa-medio);
-            background: white;
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--rosa-suave);
+            background: transparent;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
-            color: var(--rosa-oscuro);
-            font-size: 1rem;
+            transition: var(--transicion);
+            color: var(--texto-claro);
+            font-size: 0.9rem;
         }
 
         .quick-view-btn-inline:hover {
-            background: var(--rosa-oscuro);
-            color: white;
-            border-color: var(--rosa-oscuro);
-            transform: scale(1.1);
+            background: var(--rosa-suave);
+            color: var(--texto);
         }
 
         .quantity-selector {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.6rem;
-            margin: 0.6rem 0;
+            gap: 1rem;
+            margin: 1rem 0;
         }
 
         .qty-btn {
             width: 28px;
             height: 28px;
-            border: 2px solid var(--rosa-medio);
-            background: white;
+            border: 1px solid var(--rosa-suave);
+            background: transparent;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            color: var(--rosa-oscuro);
+            font-weight: 300;
+            font-size: 1rem;
+            transition: var(--transicion);
+            color: var(--texto);
         }
 
         .qty-btn:hover {
-            background: var(--rosa-oscuro);
-            color: white;
-            border-color: var(--rosa-oscuro);
+            background: var(--rosa-suave);
         }
 
         .qty-display {
             min-width: 30px;
             text-align: center;
-            font-weight: 700;
-            font-size: 1rem;
+            font-weight: 400;
+            font-size: 0.9rem;
             color: var(--texto);
         }
 
         .add-to-cart {
             width: 100%;
-            padding: 0.8rem;
-            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
+            padding: 0.9rem;
+            background: var(--texto);
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 0;
             cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s;
+            font-size: 0.75rem;
+            transition: var(--transicion);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            letter-spacing: 0.2em;
+            font-weight: 400;
+            margin-top: 0.5rem;
         }
 
         .add-to-cart:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            background: var(--rosa-oscuro);
         }
 
         .add-to-cart:disabled {
-            opacity: 0.5;
+            opacity: 0.3;
             cursor: not-allowed;
-            background: #ccc;
-            box-shadow: none;
+            background: var(--texto-claro);
         }
 
         .load-more-container {
             text-align: center;
-            padding: 2rem 0;
+            padding: 4rem 0;
         }
 
         .load-more-btn {
-            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
-            color: white;
-            border: none;
+            background: transparent;
+            color: var(--texto);
+            border: 1px solid var(--texto);
             padding: 1rem 3rem;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 700;
+            border-radius: 0;
+            font-size: 0.8rem;
+            font-weight: 400;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transicion);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            letter-spacing: 0.2em;
         }
 
         .load-more-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
-        }
-
-        .load-more-btn::before {
-            content: '❤ ';
+            background: var(--texto);
+            color: white;
         }
 
         .load-more-btn:disabled {
-            opacity: 0.6;
+            opacity: 0.3;
             cursor: not-allowed;
-            transform: none;
         }
 
         .products-count {
             text-align: center;
             color: var(--texto-claro);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+            letter-spacing: 0.05em;
         }
 
-        /* Modal vista rápida */
+        /* Modal vista rápida minimalista */
         .quick-view-modal {
             display: none;
             position: fixed;
@@ -634,53 +549,57 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(250, 249, 246, 0.95);
             justify-content: center;
             align-items: center;
-            padding: 1rem;
-            backdrop-filter: blur(5px);
+            padding: 2rem;
+            backdrop-filter: blur(10px);
         }
 
         .quick-view-content {
             background: white;
-            border-radius: 20px;
-            max-width: 700px;
+            max-width: 900px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 2rem;
+            gap: 4rem;
+            padding: 4rem;
             position: relative;
-            border: 3px solid var(--rosa-medio);
+            border: 1px solid var(--crema);
+            box-shadow: 0 20px 60px var(--sombra-suave);
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .quick-view-content {
                 grid-template-columns: 1fr;
-                padding: 1.5rem;
+                padding: 2rem;
+                gap: 2rem;
             }
         }
 
         .quick-view-image {
             width: 100%;
-            border-radius: 15px;
+            aspect-ratio: 1;
             object-fit: cover;
-            border: 2px solid var(--rosa-palido);
+            border: none;
         }
 
         .quick-view-info h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--rosa-intenso);
-            margin-bottom: 0.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--texto);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 300;
         }
 
         .quick-view-price {
-            font-size: 1.8rem !important;
+            font-size: 1.5rem !important;
             color: var(--rosa-oscuro) !important;
-            font-weight: 800;
-            margin: 1rem 0;
+            font-weight: 400;
+            margin: 1.5rem 0;
+            font-family: 'Cormorant Garamond', serif;
         }
 
         .image-modal {
@@ -691,43 +610,53 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(250, 249, 246, 0.98);
             justify-content: center;
             align-items: center;
         }
 
         .image-modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 15px;
-            border: 3px solid var(--rosa-medio);
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
         }
 
         .image-modal-close {
             position: absolute;
-            top: 20px;
-            right: 40px;
-            color: white;
-            font-size: 40px;
+            top: 2rem;
+            right: 2rem;
+            color: var(--texto);
+            font-size: 2rem;
             cursor: pointer;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 50%;
+            transition: var(--transicion);
         }
 
-        /* Mini carrito - DISEÑO COMPACTO */
+        .image-modal-close:hover {
+            background: var(--rosa-suave);
+        }
+
+        /* Mini carrito minimalista */
         .mini-cart {
             position: fixed;
             top: 0;
             right: -100%;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             height: 100vh;
-            background: white;
-            box-shadow: -5px 0 30px var(--sombra);
+            background: var(--blanco);
+            box-shadow: -10px 0 40px var(--sombra-suave);
             z-index: 1001;
-            transition: right 0.3s ease;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
-            border-left: 3px solid var(--rosa-medio);
+            border-left: 1px solid var(--crema);
         }
 
         .mini-cart.open {
@@ -735,30 +664,32 @@
         }
 
         .mini-cart-header {
-            padding: 1.2rem;
-            border-bottom: 2px solid var(--rosa-palido);
+            padding: 2rem;
+            border-bottom: 1px solid var(--crema);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, var(--rosa-palido) 0%, white 100%);
+            background: transparent;
         }
 
         .mini-cart-header h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--rosa-intenso);
-            font-size: 1.3rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--texto);
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
         }
 
         .mini-cart-body {
             flex: 1;
             overflow-y: auto;
-            padding: 1rem;
+            padding: 2rem;
         }
 
         .mini-cart-footer {
-            padding: 1rem;
-            border-top: 2px solid var(--rosa-palido);
-            background: var(--blanco-hueso);
+            padding: 2rem;
+            border-top: 1px solid var(--crema);
+            background: var(--crema);
         }
 
         .cart-overlay {
@@ -767,7 +698,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.2);
             z-index: 1000;
             display: none;
             opacity: 0;
@@ -779,23 +710,22 @@
             opacity: 1;
         }
 
-        /* Envío compacto */
+        /* Envío minimalista */
         .shipping-compact {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            padding: 0.8rem;
-            background: white;
-            border-radius: 10px;
-            margin-bottom: 0.8rem;
-            border: 2px solid var(--rosa-palido);
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--blanco);
+            border: 1px solid var(--rosa-suave);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transicion);
+            margin-bottom: 1rem;
         }
 
         .shipping-compact.selected {
             border-color: var(--rosa-oscuro);
-            background: var(--rosa-palido);
+            background: var(--rosa-suave);
         }
 
         .shipping-compact input[type="checkbox"] {
@@ -814,36 +744,39 @@
 
         .shipping-text {
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 400;
         }
 
         .shipping-text small {
             display: block;
             font-size: 0.75rem;
             color: var(--texto-claro);
-            font-weight: 400;
+            font-weight: 300;
+            margin-top: 0.2rem;
         }
 
         .shipping-price {
             color: var(--rosa-oscuro);
-            font-weight: 800;
+            font-weight: 400;
             font-size: 1rem;
+            font-family: 'Cormorant Garamond', serif;
         }
 
-        /* Descuento compacto */
+        /* Descuento minimalista */
         .discount-compact {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .discount-compact input {
             flex: 1;
-            padding: 0.6rem 0.8rem;
-            border: 2px solid var(--rosa-medio);
-            border-radius: 8px;
+            padding: 0.8rem;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 0;
             font-size: 0.85rem;
-            transition: all 0.3s;
+            transition: var(--transicion);
+            background: var(--blanco);
         }
 
         .discount-compact input:focus {
@@ -852,112 +785,112 @@
         }
 
         .discount-compact button {
-            background: var(--rosa-oscuro);
+            background: var(--texto);
             color: white;
             border: none;
-            padding: 0.6rem 1rem;
-            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0;
             cursor: pointer;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-            white-space: nowrap;
+            font-weight: 400;
+            font-size: 0.75rem;
+            transition: var(--transicion);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .discount-compact button:hover {
-            background: var(--rosa-intenso);
+            background: var(--rosa-oscuro);
         }
 
-        /* Totales compactos */
+        /* Totales minimalistas */
         .cart-totals-compact {
-            background: white;
-            padding: 0.8rem;
-            border-radius: 10px;
-            margin-bottom: 0.8rem;
+            background: transparent;
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+            border-top: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--rosa-suave);
         }
 
         .total-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
             font-size: 0.9rem;
+            color: var(--texto-claro);
         }
 
         .total-row.discount {
-            color: var(--exito);
+            color: var(--rosa-oscuro);
         }
 
         .total-row.final {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--rosa-oscuro);
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
-            border-top: 1px solid var(--rosa-palido);
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--texto);
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--rosa-suave);
+            font-family: 'Cormorant Garamond', serif;
         }
 
         .checkout-btn {
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--exito) 0%, #229954 100%);
+            padding: 1.2rem;
+            background: var(--texto);
             color: white;
             border: none;
-            border-radius: 30px;
-            font-size: 1rem;
+            border-radius: 0;
+            font-size: 0.8rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.8rem;
-            font-weight: 700;
-            transition: all 0.3s;
+            font-weight: 400;
+            transition: var(--transicion);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            letter-spacing: 0.2em;
         }
 
         .checkout-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+            background: var(--rosa-oscuro);
         }
 
-        /* Sección de comentarios */
+        /* Sección de comentarios minimalista */
         .reviews-section {
-            background: white;
-            padding: 3rem 0;
-            margin: 2rem 0;
-            border-top: 3px solid var(--rosa-medio);
-            border-bottom: 3px solid var(--rosa-medio);
+            background: var(--crema);
+            padding: 6rem 0;
+            margin: 4rem 0;
         }
 
         .reviews-section h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
             text-align: center;
-            font-size: 1.8rem;
-            color: var(--rosa-intenso);
-            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--texto);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
         }
 
         .reviews-container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             position: relative;
-            height: 200px;
+            height: 180px;
             overflow: hidden;
         }
 
         .review-card {
-            background: linear-gradient(135deg, var(--blanco-hueso) 0%, white 100%);
-            border: 2px solid var(--rosa-palido);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 15px var(--sombra);
+            background: var(--blanco);
+            border: 1px solid var(--rosa-suave);
+            padding: 2rem;
             position: absolute;
             width: 100%;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.5s ease;
+            transition: all 0.6s ease;
+            text-align: center;
         }
 
         .review-card.active {
@@ -966,80 +899,84 @@
         }
 
         .review-stars {
-            color: var(--dorado);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            color: var(--rosa-medio);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
         }
 
         .review-text {
-            font-style: italic;
-            color: var(--texto);
-            margin-bottom: 0.8rem;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        .review-author {
-            font-weight: 700;
-            color: var(--rosa-oscuro);
-            font-size: 0.9rem;
-        }
-
-        .review-product {
-            font-size: 0.8rem;
-            color: var(--texto-claro);
-            margin-top: 0.3rem;
-        }
-
-        /* Testimonios */
-        .testimonials {
-            background: linear-gradient(135deg, white 0%, var(--rosa-palido) 100%);
-            padding: 3rem 0;
-            margin: 2rem 0;
-            text-align: center;
-            border-top: 3px solid var(--rosa-medio);
-            border-bottom: 3px solid var(--rosa-medio);
-        }
-
-        .testimonial-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             color: var(--texto);
             margin-bottom: 1rem;
-            line-height: 1.6;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 400;
         }
 
-        .testimonial-text::before {
-            content: '"';
-            font-size: 3rem;
+        .review-author {
+            font-weight: 400;
             color: var(--rosa-oscuro);
-            line-height: 0;
-            vertical-align: middle;
-            margin-right: 0.3rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .review-product {
+            font-size: 0.75rem;
+            color: var(--texto-claro);
+            margin-top: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Testimonios minimalistas */
+        .testimonials {
+            background: var(--blanco);
+            padding: 6rem 0;
+            margin: 4rem 0;
+            text-align: center;
+            border-top: 1px solid var(--crema);
+            border-bottom: 1px solid var(--crema);
+        }
+
+        .testimonial-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--texto);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .testimonial-author {
             color: var(--rosa-oscuro);
-            font-weight: 700;
-            font-size: 1rem;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
         }
 
-        /* Social feed */
+        /* Social feed minimalista */
         .social-feed {
-            padding: 2rem 0;
+            padding: 4rem 0;
             text-align: center;
-            background: white;
+            background: var(--crema);
         }
 
         .social-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-            max-width: 600px;
+            gap: 1px;
+            margin-top: 3rem;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            background: var(--rosa-suave);
         }
 
         @media (min-width: 768px) {
@@ -1050,29 +987,26 @@
 
         .social-item {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, var(--rosa-palido) 0%, var(--rosa-medio) 100%);
-            border-radius: 15px;
+            background: var(--crema);
             overflow: hidden;
             position: relative;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid var(--rosa-medio);
+            transition: var(--transicion);
         }
 
         .social-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px var(--sombra);
+            opacity: 0.8;
         }
 
         .social-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
+            transition: transform 0.6s ease;
         }
 
         .social-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .social-overlay {
@@ -1081,7 +1015,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(231, 76, 60, 0.8);
+            background: rgba(166, 123, 123, 0.9);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1096,164 +1030,162 @@
         }
 
         .social-overlay i {
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
         .tiktok-section {
-            margin-top: 2rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
-            border-radius: 20px;
+            margin-top: 4rem;
+            padding: 3rem;
+            background: var(--texto);
             color: white;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .tiktok-section h3 {
             color: white;
             margin-bottom: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: 0.1em;
         }
 
         .tiktok-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: #fe2c55;
+            background: transparent;
             color: white;
             padding: 1rem 2rem;
-            border-radius: 30px;
+            border: 1px solid white;
             text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
+            font-weight: 400;
+            transition: var(--transicion);
             margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
         }
 
         .tiktok-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(254, 44, 85, 0.4);
+            background: white;
+            color: var(--texto);
         }
 
-        /* Newsletter */
+        /* Newsletter minimalista */
         .newsletter {
-            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
-            padding: 3rem 0;
+            background: var(--rosa-oscuro);
+            padding: 5rem 0;
             text-align: center;
-            margin: 2rem 0;
+            margin: 4rem 0;
             color: white;
             position: relative;
-            overflow: hidden;
-        }
-
-        .newsletter::before {
-            content: '❤';
-            position: absolute;
-            top: 10%;
-            left: 5%;
-            font-size: 4rem;
-            opacity: 0.1;
-        }
-
-        .newsletter::after {
-            content: '❤';
-            position: absolute;
-            bottom: 10%;
-            right: 5%;
-            font-size: 3rem;
-            opacity: 0.1;
         }
 
         .newsletter h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
             margin-bottom: 0.5rem;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
         }
 
         .newsletter-form {
             display: flex;
-            gap: 0.8rem;
-            max-width: 400px;
-            margin: 1.5rem auto 0;
-            padding: 0 1rem;
+            gap: 0;
+            max-width: 450px;
+            margin: 2rem auto 0;
+            padding: 0 2rem;
         }
 
         .newsletter-form input {
             flex: 1;
             padding: 1rem 1.5rem;
             border: none;
-            border-radius: 30px;
-            font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-radius: 0;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255,255,255,0.6);
         }
 
         .newsletter-form button {
-            background: var(--dorado);
-            color: white;
+            background: white;
+            color: var(--rosa-oscuro);
             border: none;
             padding: 1rem 2rem;
-            border-radius: 30px;
+            border-radius: 0;
             cursor: pointer;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: 400;
+            font-size: 0.75rem;
+            transition: var(--transicion);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
         }
 
         .newsletter-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: var(--crema);
         }
 
-        /* FAQ */
+        /* FAQ minimalista */
         .faq-section {
-            padding: 2rem 0;
-            max-width: 800px;
+            padding: 4rem 0;
+            max-width: 700px;
             margin: 0 auto;
         }
 
         .faq-section h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
             text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.8rem;
-            color: var(--rosa-intenso);
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: var(--texto);
+            font-weight: 300;
+            letter-spacing: 0.1em;
         }
 
         .faq-item {
-            background: white;
-            border-radius: 15px;
-            margin-bottom: 1rem;
+            background: transparent;
+            border-bottom: 1px solid var(--crema);
+            margin-bottom: 0;
             overflow: hidden;
-            box-shadow: 0 4px 15px var(--sombra);
-            border: 1px solid var(--rosa-palido);
         }
 
         .faq-question {
-            padding: 1.2rem;
+            padding: 1.5rem 0;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 700;
+            font-weight: 400;
             font-size: 1rem;
             color: var(--texto);
-            transition: all 0.3s;
+            transition: var(--transicion);
         }
 
         .faq-question:hover {
-            background: var(--rosa-palido);
+            color: var(--rosa-oscuro);
         }
 
         .faq-answer {
-            padding: 0 1.2rem;
+            padding: 0;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
             font-size: 0.95rem;
             color: var(--texto-claro);
-            line-height: 1.6;
+            line-height: 1.8;
+            font-weight: 300;
         }
 
         .faq-item.active .faq-answer {
-            padding: 0 1.2rem 1.2rem;
+            padding: 0 0 1.5rem 0;
             max-height: 200px;
         }
 
@@ -1261,47 +1193,48 @@
             color: var(--rosa-oscuro);
         }
 
-        /* Chat */
+        /* Chat minimalista */
         .chat-widget {
             position: fixed;
-            bottom: 90px;
-            right: 20px;
+            bottom: 2rem;
+            right: 2rem;
             z-index: 999;
         }
 
         .chat-button {
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
+            background: var(--texto);
             color: white;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            box-shadow: 0 4px 20px var(--sombra);
-            transition: all 0.3s;
+            box-shadow: 0 4px 20px var(--sombra-suave);
+            transition: var(--transicion);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .chat-button:hover {
-            transform: scale(1.1) rotate(10deg);
+            transform: scale(1.1);
+            background: var(--rosa-oscuro);
         }
 
         .chat-window {
             position: absolute;
             bottom: 70px;
             right: 0;
-            width: 320px;
-            height: 400px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px var(--sombra);
+            width: 340px;
+            height: 450px;
+            background: var(--blanco);
+            border-radius: 0;
+            box-shadow: 0 10px 40px var(--sombra-suave);
             display: none;
             flex-direction: column;
             overflow: hidden;
-            border: 2px solid var(--rosa-medio);
+            border: 1px solid var(--crema);
         }
 
         .chat-window.active {
@@ -1309,37 +1242,40 @@
         }
 
         .chat-header {
-            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
-            color: white;
-            padding: 1rem;
+            background: var(--crema);
+            color: var(--texto);
+            padding: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .chat-body {
             flex: 1;
-            padding: 1rem;
+            padding: 1.5rem;
             overflow-y: auto;
-            background: var(--blanco-hueso);
+            background: var(--blanco);
         }
 
         .chat-input {
             padding: 1rem;
-            border-top: 2px solid var(--rosa-palido);
+            border-top: 1px solid var(--crema);
             display: flex;
             gap: 0.5rem;
-            background: white;
+            background: var(--blanco);
         }
 
         .chat-input input {
             flex: 1;
             padding: 0.8rem;
-            border: 2px solid var(--rosa-medio);
-            border-radius: 25px;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 0;
             font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
         }
 
         .chat-input input:focus {
@@ -1348,33 +1284,32 @@
         }
 
         .chat-input button {
-            background: var(--rosa-oscuro);
+            background: var(--texto);
             color: white;
             border: none;
             width: 40px;
             height: 40px;
-            border-radius: 50%;
+            border-radius: 0;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transicion);
         }
 
         .chat-input button:hover {
-            transform: scale(1.1);
+            background: var(--rosa-oscuro);
         }
 
-        /* Navegación inferior */
+        /* Navegación inferior minimalista */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
-            border-top: 2px solid var(--rosa-medio);
-            padding: 0.8rem;
+            background: var(--blanco);
+            border-top: 1px solid var(--crema);
+            padding: 1rem 2rem;
             display: none;
             justify-content: space-around;
             z-index: 100;
-            box-shadow: 0 -2px 20px var(--sombra);
         }
 
         .bottom-nav-item {
@@ -1384,9 +1319,10 @@
             gap: 0.3rem;
             color: var(--texto-claro);
             text-decoration: none;
-            font-size: 0.75rem;
-            transition: all 0.3s;
-            font-weight: 600;
+            font-size: 0.7rem;
+            transition: var(--transicion);
+            font-weight: 400;
+            letter-spacing: 0.05em;
         }
 
         .bottom-nav-item.active {
@@ -1394,7 +1330,7 @@
         }
 
         .bottom-nav-item i {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         @media (max-width: 768px) {
@@ -1402,40 +1338,35 @@
                 display: flex;
             }
             body {
-                padding-bottom: 70px;
+                padding-bottom: 80px;
             }
-            .rotating-message-header {
-                display: none;
+            .hero h2 {
+                font-size: 2rem;
             }
         }
 
-        /* Notificaciones */
+        /* Notificaciones minimalistas */
         .notification {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
+            background: var(--texto);
             color: white;
-            padding: 1.5rem 2.5rem;
-            border-radius: 20px;
+            padding: 2rem 3rem;
+            border-radius: 0;
             display: none;
             z-index: 1002;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 15px 50px rgba(231, 76, 60, 0.4);
+            font-weight: 400;
+            font-size: 0.9rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
             text-align: center;
-            min-width: 280px;
-            border: 2px solid white;
+            min-width: 300px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
-        .notification i {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
-            display: block;
-        }
-
-        /* Modal error */
+        /* Modal error minimalista */
         .error-modal {
             display: none;
             position: fixed;
@@ -1444,7 +1375,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(250, 249, 246, 0.95);
             justify-content: center;
             align-items: center;
             padding: 1rem;
@@ -1452,61 +1383,72 @@
 
         .error-content {
             background: white;
-            padding: 2rem;
-            border-radius: 20px;
+            padding: 3rem;
+            border-radius: 0;
             text-align: center;
-            max-width: 300px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            animation: shake 0.5s;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+            max-width: 350px;
+            box-shadow: 0 20px 60px var(--sombra-suave);
+            border: 1px solid var(--crema);
         }
 
         .error-content i {
-            font-size: 3rem;
-            color: var(--agotado);
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            color: var(--rosa-oscuro);
+            margin-bottom: 1.5rem;
         }
 
         .error-content h3 {
             color: var(--texto);
             margin-bottom: 0.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.5rem;
         }
 
         .error-content button {
-            margin-top: 1rem;
-            padding: 0.8rem 2rem;
-            background: var(--rosa-oscuro);
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: var(--texto);
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 0;
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            transition: var(--transicion);
         }
 
-        /* Footer */
+        .error-content button:hover {
+            background: var(--rosa-oscuro);
+        }
+
+        /* Footer minimalista */
         footer {
-            background: linear-gradient(135deg, var(--texto) 0%, #1a252f 100%);
-            color: white;
+            background: var(--texto);
+            color: rgba(255,255,255,0.8);
             text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            font-weight: 300;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
         }
 
         footer a {
-            color: var(--rosa-medio);
+            color: var(--rosa-suave);
             text-decoration: none;
             margin: 0 1rem;
-            font-weight: 600;
-            transition: all 0.3s;
+            font-weight: 400;
+            transition: var(--transicion);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         footer a:hover {
-            color: var(--dorado);
+            color: white;
         }
 
         .offline-indicator {
@@ -1514,14 +1456,16 @@
             top: 0;
             left: 0;
             right: 0;
-            background: var(--agotado);
+            background: var(--texto);
             color: white;
             text-align: center;
-            padding: 0.8rem;
+            padding: 1rem;
             z-index: 10000;
             display: none;
-            font-size: 0.9rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .offline-indicator.show {
@@ -1529,25 +1473,29 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .product-card {
-            animation: fadeIn 0.5s ease forwards;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        /* Rotating message header minimalista */
+        .rotating-message-header {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="offline-indicator" id="offline-indicator">
-        <i class="fas fa-wifi-slash"></i> Sin conexión - Modo offline activo
+        <i class="fas fa-wifi-slash"></i> Sin conexión
     </div>
 
     <header>
         <div class="container">
             <div class="logo-section">
                 <h1 class="logo">KLO<span>HE</span></h1>
-                <span class="rotating-message-header" id="rotating-message-header">❤️ Regala amor, regala Klohe</span>
             </div>
             <div class="cart-icon" onclick="toggleMiniCart()">
                 <i class="fas fa-shopping-bag"></i>
@@ -1558,8 +1506,8 @@
 
     <section class="hero">
         <div class="container">
-            <h2 id="hero-title">Regala amor, regala Klohe</h2>
-            <p id="hero-subtitle">Accesorios únicos para momentos inolvidables 💕</p>
+            <h2 id="hero-title">Colección San Valentín</h2>
+            <p id="hero-subtitle">Piezas únicas para momentos inolvidables</p>
         </div>
     </section>
 
@@ -1568,26 +1516,25 @@
             <div class="filters">
                 <div class="search-container" id="search-container">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Buscar productos..." onkeyup="filterProducts()" onclick="expandSearch()">
-                    <button class="close-search" onclick="collapseSearch()"><i class="fas fa-times"></i></button>
+                    <input type="text" id="search-input" placeholder="Buscar..." onkeyup="filterProducts()" onclick="expandSearch()">
                 </div>
                 
                 <select id="category-filter" onchange="filterProducts()">
-                    <option value="all">💝 Todas las categorías</option>
-                    <option value="Carteras">👜 Carteras</option>
-                    <option value="Aritos">💎 Aritos</option>
-                    <option value="Collares">📿 Collares</option>
-                    <option value="Pulseras">✨ Pulseras</option>
-                    <option value="Relojes">⌚ Relojes</option>
-                    <option value="Anillos">💍 Anillos</option>
-                    <option value="Lentes de sol">🕶️ Lentes</option>
-                    <option value="Accesorios para el cabello">🎀 Cabello</option>
-                    <option value="Otros">🎁 Otros</option>
+                    <option value="all">Todas las categorías</option>
+                    <option value="Carteras">Carteras</option>
+                    <option value="Aritos">Aritos</option>
+                    <option value="Collares">Collares</option>
+                    <option value="Pulseras">Pulseras</option>
+                    <option value="Relojes">Relojes</option>
+                    <option value="Anillos">Anillos</option>
+                    <option value="Lentes de sol">Lentes</option>
+                    <option value="Accesorios para el cabello">Cabello</option>
+                    <option value="Otros">Otros</option>
                 </select>
 
                 <label class="filter-checkbox">
                     <input type="checkbox" id="stock-filter" onchange="filterProducts()">
-                    <span>Solo disponibles 💕</span>
+                    <span>Solo disponibles</span>
                 </label>
             </div>
         </div>
@@ -1596,34 +1543,31 @@
         
         <div class="load-more-container" id="load-more-container">
             <button class="load-more-btn" id="load-more-btn" onclick="loadMoreProducts()">
-                Cargar más productos
+                Ver más productos
             </button>
             <div class="products-count" id="products-count"></div>
         </div>
     </main>
 
-    <!-- Sección de comentarios/reviews -->
     <section class="reviews-section">
         <div class="container">
-            <h3>💕 Lo que dicen nuestros clientes 💕</h3>
-            <div class="reviews-container" id="reviews-container">
-                <!-- Los comentarios se generan con JS -->
-            </div>
+            <h3>Opiniones de clientes</h3>
+            <div class="reviews-container" id="reviews-container"></div>
         </div>
     </section>
 
     <section class="social-feed">
         <div class="container">
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--rosa-intenso);">
-                <i class="fab fa-instagram"></i> @Klohesv
+            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--texto); font-weight: 300; letter-spacing: 0.1em;">
+                @Klohesv
             </h3>
-            <p style="color: var(--texto-claro); margin-top: 0.5rem;">Síguenos en nuestras redes sociales</p>
+            <p style="color: var(--texto-claro); margin-top: 0.5rem; font-size: 0.9rem;">Síguenos en nuestras redes</p>
             <div class="social-grid" id="instagram-grid"></div>
             
             <div class="tiktok-section">
-                <h3><i class="fab fa-tiktok"></i> Síguenos en TikTok</h3>
-                <p>Descubre los últimos trends y novedades</p>
-                <a href="https://www.tiktok.com/@klohesv?is_from_webapp=1&sender_device=pc" target="_blank" class="tiktok-link">
+                <h3><i class="fab fa-tiktok"></i> TikTok</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Descubre nuestros últimos diseños</p>
+                <a href="https://www.tiktok.com/@klohesv" target="_blank" class="tiktok-link">
                     <i class="fab fa-tiktok"></i> @klohesv
                 </a>
             </div>
@@ -1634,8 +1578,8 @@
         <div class="container">
             <div class="testimonial-slider" id="testimonial-slider">
                 <div class="testimonial-item active">
-                    <div class="testimonial-text">"El detalle perfecto para San Valentín, mi novia quedó encantada"</div>
-                    <div class="testimonial-author">- Carlos M. ❤️</div>
+                    <div class="testimonial-text">"El detalle perfecto para San Valentín"</div>
+                    <div class="testimonial-author">— Carlos M.</div>
                 </div>
             </div>
         </div>
@@ -1643,11 +1587,11 @@
 
     <section class="newsletter">
         <div class="container">
-            <h3>💕 Únete al Club Klohe 💕</h3>
-            <p style="font-size: 1.1rem;">15% de descuento en tu primera compra de San Valentín</p>
+            <h3>Únete al Club Klohe</h3>
+            <p style="font-size: 1rem; opacity: 0.9; font-weight: 300;">15% de descuento en tu primera compra</p>
             <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
                 <input type="email" placeholder="Tu correo electrónico" required>
-                <button type="submit">¡Quiero mi descuento!</button>
+                <button type="submit">Suscribirse</button>
             </form>
         </div>
     </section>
@@ -1657,56 +1601,53 @@
             <h3>Preguntas Frecuentes</h3>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    ¿Cuánto tarda el envío para San Valentín?
-                    <i class="fas fa-chevron-down"></i>
+                    ¿Cuánto tarda el envío?
+                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
                 </div>
                 <div class="faq-answer">
-                    2-5 días hábiles. ¡Haz tu pedido antes del 10 de febrero para asegurar entrega a tiempo! Costo $3.75 o gratis en compras mayores a $25.
+                    2-5 días hábiles. Envío gratis en compras mayores a $25.
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
                     ¿Hacen envíos a todo El Salvador?
-                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
                 </div>
                 <div class="faq-answer">
-                    Sí, realizamos envíos a todo el territorio nacional a través de correos privados y mensajería express en la gran San Salvador.
+                    Sí, realizamos envíos a todo el territorio nacional.
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Klohe - Hecho con ❤️ en El Salvador</p>
-        <p style="margin-top: 1rem;">
+        <p>&copy; 2025 Klohe — Hecho con amor en El Salvador</p>
+        <p style="margin-top: 1.5rem;">
             <a href="https://wa.me/50366711569"><i class="fab fa-whatsapp"></i> WhatsApp</a>
             <a href="https://www.instagram.com/klohesv" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
             <a href="https://www.tiktok.com/@klohesv" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
         </p>
     </footer>
 
-    <!-- Modal de error para código inválido -->
     <div class="error-modal" id="error-modal" onclick="closeErrorModal(event)">
         <div class="error-content" onclick="event.stopPropagation()">
             <i class="fas fa-times-circle"></i>
-            <h3>CÓDIGO INVÁLIDO</h3>
+            <h3>Código inválido</h3>
             <button onclick="closeErrorModal()">Aceptar</button>
         </div>
     </div>
 
     <div class="cart-overlay" id="cart-overlay" onclick="toggleMiniCart()"></div>
     
-    <!-- Mini Carrito Compacto -->
     <div class="mini-cart" id="mini-cart">
         <div class="mini-cart-header">
-            <h3>Tu Carrito ❤️</h3>
-            <button onclick="toggleMiniCart()" style="background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--rosa-intenso);">&times;</button>
+            <h3>Tu Carrito</h3>
+            <button onclick="toggleMiniCart()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--texto);">&times;</button>
         </div>
         
         <div class="mini-cart-body" id="mini-cart-body"></div>
 
         <div class="mini-cart-footer">
-            <!-- Envío Compacto -->
             <div class="shipping-compact" id="shipping-option" onclick="document.getElementById('shipping-checkbox').click()">
                 <input type="checkbox" id="shipping-checkbox" onchange="toggleShipping()" onclick="event.stopPropagation()">
                 <div class="shipping-info">
@@ -1718,28 +1659,26 @@
                 </div>
             </div>
 
-            <!-- Descuento Compacto -->
             <div class="discount-compact">
-                <input type="text" id="discount-input" placeholder="Código descuento">
+                <input type="text" id="discount-input" placeholder="Código de descuento">
                 <button onclick="applyDiscount()">Aplicar</button>
             </div>
 
-            <!-- Totales Compactos -->
             <div class="cart-totals-compact">
                 <div class="total-row">
-                    <span>Subtotal:</span>
+                    <span>Subtotal</span>
                     <strong>$<span id="cart-subtotal">0.00</span></strong>
                 </div>
                 <div class="total-row" id="shipping-row" style="display: none;">
-                    <span>Envío:</span>
+                    <span>Envío</span>
                     <strong>+$<span id="cart-shipping">0.00</span></strong>
                 </div>
                 <div class="total-row discount" id="discount-row" style="display: none;">
-                    <span>Descuento:</span>
+                    <span>Descuento</span>
                     <strong>-$<span id="cart-discount">0.00</span></strong>
                 </div>
                 <div class="total-row final">
-                    <span>Total:</span>
+                    <span>Total</span>
                     <span>$<span id="cart-total">0.00</span></span>
                 </div>
             </div>
@@ -1757,33 +1696,32 @@
 
     <div id="quick-view-modal" class="quick-view-modal" onclick="closeQuickView(event)">
         <div class="quick-view-content" onclick="event.stopPropagation()">
-            <button onclick="closeQuickView()" style="position: absolute; top: 1rem; right: 1rem; background: var(--rosa-oscuro); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10;">&times;</button>
+            <button onclick="closeQuickView()" style="position: absolute; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--texto); z-index: 10;">&times;</button>
             <img id="quick-view-image" class="quick-view-image" src="" alt="">
             <div class="quick-view-info">
-                <span id="quick-view-category" style="color: var(--rosa-oscuro); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; font-weight: 700;"></span>
+                <span id="quick-view-category" style="color: var(--texto-claro); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 400;"></span>
                 <h2 id="quick-view-title"></h2>
                 <div id="quick-view-price" class="quick-view-price"></div>
-                <p id="quick-view-description" style="color: var(--texto-claro); line-height: 1.8; font-size: 1rem;"></p>
-                <button class="checkout-btn" onclick="addToCartFromQuickView()" style="margin-top: 1.5rem;">
-                    <i class="fas fa-heart"></i> Agregar al carrito
+                <p id="quick-view-description" style="color: var(--texto-claro); line-height: 1.8; font-size: 1rem; font-weight: 300;"></p>
+                <button class="checkout-btn" onclick="addToCartFromQuickView()" style="margin-top: 2rem;">
+                    Agregar al carrito
                 </button>
             </div>
         </div>
     </div>
 
     <div id="notification" class="notification">
-        <i class="fas fa-heart"></i>
-        <div>¡Agregado al carrito!</div>
+        Agregado al carrito
     </div>
 
     <div class="chat-widget">
         <div class="chat-window" id="chat-window">
             <div class="chat-header">
-                <span><i class="fas fa-headset"></i> Klohe 💕</span>
-                <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem;">&times;</button>
+                <span><i class="fas fa-headset"></i> Klohe</span>
+                <button onclick="toggleChat()" style="background: none; border: none; color: var(--texto); cursor: pointer; font-size: 1.2rem;">&times;</button>
             </div>
             <div class="chat-body" id="chat-body">
-                <p style="background: white; padding: 0.8rem; border-radius: 15px; margin-bottom: 0.8rem; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">¡Hola! ¿Buscas el regalo perfecto para San Valentín? 💕 Te ayudo a elegir</p>
+                <p style="background: var(--crema); padding: 1rem; margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.6;">¡Hola! ¿En qué podemos ayudarte?</p>
             </div>
             <div class="chat-input">
                 <input type="text" id="chat-message" placeholder="Escribe tu mensaje..." onkeypress="handleChatKey(event)">
@@ -1830,112 +1768,28 @@
         let filteredProducts = [];
         let displayedProducts = [];
 
-        // 60 mensajes rotativos
         const valentineMessages = [
-            "❤️ Regala amor, regala Klohe",
-            "💕 El detalle perfecto para San Valentín",
-            "🌹 Joyería que enamora",
-            "💝 Sorpresas desde $3.50",
-            "✨ Haz que este 14 de febrero sea inolvidable",
-            "💎 La joya perfecta para tu corazón perfecto",
-            "🎁 Regalos que conquistan",
-            "❤️ Más que un regalo, un recuerdo eterno",
-            "💕 Accesorios que hablan de amor",
-            "🌹 Detalles que roban suspiros",
-            "💝 Porque el amor se demuestra con hechos",
-            "✨ Brilla tanto como tu amor",
-            "💎 Elegancia que enamora",
-            "❤️ El complemento perfecto para tu cita",
-            "💕 Deslumbra a esa persona especial",
-            "🌹 Joyería que guarda historias de amor",
-            "💝 Regalos con alma para almas gemelas",
-            "✨ Diseños exclusivos para momentos únicos",
-            "💎 La belleza de amar y ser amado",
-            "❤️ Tu amor merece lo mejor: Klohe",
-            "💕 Accesorios que laten con tu corazón",
-            "🌹 Detalles que dicen lo que las palabras no pueden",
-            "💝 Celebra el amor con estilo",
-            "✨ Cada pieza cuenta una historia de amor",
-            "💎 Joyas que perduran como el amor verdadero",
-            "❤️ El regalo que siempre recordará",
-            "💕 Para el amor de tu vida, lo mejor",
-            "🌹 Romance en cada detalle",
-            "💝 Sorprende con un detalle único",
-            "✨ Amor a primera vista con Klohe",
-            "💎 La joyería más romántica del año",
-            "❤️ Conquista su corazón hoy",
-            "💕 Detalles que enamoran al instante",
-            "🌹 El arte de regalar con amor",
-            "💝 Cada amor merece ser celebrado",
-            "✨ Elegancia que roba corazones",
-            "💎 Simboliza tu amor infinito",
-            "❤️ El detalle que hará que se enamore más",
-            "💕 Accesorios para un amor sin igual",
-            "🌹 La magia del amor en cada pieza",
-            "💝 Regala sonrisas, regala Klohe",
-            "✨ Brillen juntos esta temporada",
-            "💎 La perfección existe aquí",
-            "❤️ Amor, pasión y estilo",
-            "💕 El regalo que dice 'eres especial'",
-            "🌹 Celebra el amor en todas sus formas",
-            "💝 Un San Valentín inolvidable",
-            "✨ Detalles que hacen latir el corazón",
-            "💎 El lujo de amar y ser amado",
-            "❤️ Tu amor + Klohe = Perfecto",
-            "💕 Accesorios con secretos de amor",
-            "🌹 El regalo más esperado del 14",
-            "💝 Piezas únicas para amores únicos",
-            "✨ Donde el amor encuentra su forma",
-            "💎 Joyas que susurran 'te amo'",
-            "❤️ El detalle que cambiará todo",
-            "💕 El idioma universal del amor",
-            "🌹 El amor se lleva y se regala",
-            "💝 Tu historia de amor merece joyas hermosas",
-            "✨ Descubre el poder de un detalle con amor"
+            "Colección San Valentín",
+            "Piezas únicas para momentos inolvidables",
+            "Regala amor, regala Klohe",
+            "Elegancia en cada detalle",
+            "Descubre nuestra selección especial"
         ];
 
-        // 35 comentarios de clientes
         const customerReviews = [
-            { name: "María G.", text: "Los aretes de corazón son hermosos, mi novio quedó fascinado con el detalle", product: "Aritos Corazón", stars: 5 },
-            { name: "Carlos M.", text: "Excelente calidad, llegó justo a tiempo para San Valentín", product: "Collar Amor", stars: 5 },
-            { name: "Ana L.", text: "La pulsera es preciosa, muy delicada y elegante", product: "Pulsera Corazón", stars: 5 },
-            { name: "Pedro S.", text: "Me encantó el servicio, muy atentos y el envío fue rápido", product: "Cartera Elegante", stars: 5 },
-            { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba para regalar", product: "Reloj Corazón", stars: 5 },
-            { name: "Juan D.", text: "Calidad excepcional, se nota que son productos seleccionados", product: "Anillo Corazón", stars: 5 },
-            { name: "Sofía H.", text: "Los lentes son divinos, muy buen estilo y calidad", product: "Lentes Corazón", stars: 5 },
-            { name: "Miguel A.", text: "Mi esposa quedó encantada con el collar, gracias Klohe", product: "Collar Estrella", stars: 5 },
-            { name: "Valentina P.", text: "Hermosos accesorios, ya compré 3 veces y siempre satisfecha", product: "Aritos Plata 925", stars: 5 },
-            { name: "Andrés C.", text: "El empaque es muy bonito, ideal para regalo", product: "Pulsera Amor", stars: 5 },
-            { name: "Camila T.", text: "Me sorprendió la calidad por el precio, súper recomendado", product: "Cartera Chic", stars: 5 },
-            { name: "Diego F.", text: "Excelente atención al cliente, resolvieron todas mis dudas", product: "Reloj Amor", stars: 5 },
-            { name: "Isabella M.", text: "Los detalles son preciosos, muy femeninos y elegantes", product: "Collar Luna", stars: 5 },
-            { name: "Fernando L.", text: "Llegó antes de lo esperado, perfecto para el 14 de febrero", product: "Anillo Amor", stars: 5 },
-            { name: "Daniela S.", text: "Amo mis nuevos aretes, son exactamente como en la foto", product: "Aritos Estrella", stars: 5 },
-            { name: "Ricardo G.", text: "Muy buena experiencia de compra, volveré por más", product: "Pulsera Estrella", stars: 5 },
-            { name: "Paula V.", text: "El color es hermoso, muy delicado y bien hecho", product: "Cartera Rosa", stars: 5 },
-            { name: "Alejandro B.", text: "Regalé el set completo y mi novia lloró de la emoción", product: "Set San Valentín", stars: 5 },
-            { name: "Mariana C.", text: "La plata es auténtica, se nota la calidad italiana", product: "Aritos Plata 925", stars: 5 },
-            { name: "Gabriel N.", text: "Precios accesibles y productos de lujo, la mejor combinación", product: "Reloj Dorado", stars: 5 },
-            { name: "Victoria A.", text: "Me encanta que tengan envío gratis en compras grandes", product: "Collar Flor", stars: 5 },
-            { name: "Hugo P.", text: "El seguimiento del envío fue excelente, muy profesionales", product: "Cartera Moderna", stars: 5 },
-            { name: "Natalia E.", text: "Los diseños son únicos, no los encuentro en otro lugar", product: "Pulsera Luna", stars: 5 },
-            { name: "Martín R.", text: "Perfecto para el día de los enamorados, muy romántico", product: "Collar Corazón", stars: 5 },
-            { name: "Carolina D.", text: "La garantía me dio confianza, pero no la necesité, todo perfecto", product: "Anillo Estrella", stars: 5 },
-            { name: "José M.", text: "Mi madre quedó encantada con su regalo, gracias por todo", product: "Aritos Perla", stars: 5 },
-            { name: "Fernanda L.", text: "El empaque de regalo es divino, no necesité envolver nada", product: "Pulsera Flor", stars: 5 },
-            { name: "Luis H.", text: "Compré 5 productos y todos llegaron en perfecto estado", product: "Varios productos", stars: 5 },
-            { name: "Elena B.", text: "El chat de ayuda respondió al instante, muy buen servicio", product: "Reloj Plata", stars: 5 },
-            { name: "Antonio K.", text: "Los códigos de descuento funcionan perfecto, buenos precios", product: "Collar Sol", stars: 5 },
-            { name: "Patricia W.", text: "Me sorprendió la variedad de productos, hay para todos los gustos", product: "Cartera VIP", stars: 5 },
-            { name: "Roberto Z.", text: "La pulsera ajustable quedó perfecta en mi muñeca", product: "Pulsera Ajustable", stars: 5 },
-            { name: "Carmen X.", text: "El detalle del moño en el empaque fue un toque especial", product: "Aritos Mariposa", stars: 5 },
-            { name: "Francisco Y.", text: "Recomiendo 100%, ya somos clientes frecuentes en casa", product: "Collar Mariposa", stars: 5 },
-            { name: "Adriana Q.", text: "La calidad superó mis expectativas, volveré por más regalos", product: "Set Completo", stars: 5 }
+            { name: "María G.", text: "Los aretes son hermosos, excelente calidad", product: "Aritos Corazón", stars: 5 },
+            { name: "Carlos M.", text: "Llegó justo a tiempo para el 14 de febrero", product: "Collar Amor", stars: 5 },
+            { name: "Ana L.", text: "La pulsera es preciosa, muy delicada", product: "Pulsera Corazón", stars: 5 },
+            { name: "Pedro S.", text: "Servicio excelente y envío rápido", product: "Cartera Elegante", stars: 5 },
+            { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba", product: "Reloj Corazón", stars: 5 },
+            { name: "Juan D.", text: "Calidad excepcional en todos los productos", product: "Anillo Corazón", stars: 5 },
+            { name: "Sofía H.", text: "Los lentes tienen muy buen estilo", product: "Lentes Corazón", stars: 5 },
+            { name: "Miguel A.", text: "Mi esposa quedó encantada con el collar", product: "Collar Estrella", stars: 5 },
+            { name: "Valentina P.", text: "Ya compré varias veces, siempre satisfecha", product: "Aritos Plata 925", stars: 5 },
+            { name: "Andrés C.", text: "El empaque es muy elegante, ideal para regalo", product: "Pulsera Amor", stars: 5 }
         ];
 
-        // Productos actualizados desde el inventario PDF 2026-01-26
         const realProducts = [
-            // Carteras (Páginas 1-5)
             { id: 1, name: "Billetera", code: "076", price: 10.00, stock: 0, category: "Carteras", isNew: false },
             { id: 2, name: "Bolso de Mano", code: "088", price: 10.00, stock: 1, category: "Carteras", isNew: false },
             { id: 3, name: "Cartera Elegante", code: "03", price: 12.50, stock: 1, category: "Carteras", isNew: false },
@@ -1946,240 +1800,27 @@
             { id: 8, name: "Cartera Chic", code: "073", price: 10.00, stock: 1, category: "Carteras", isNew: false },
             { id: 9, name: "Cartera Trendy", code: "077", price: 13.50, stock: 0, category: "Carteras", isNew: false },
             { id: 10, name: "Cartera Fashion", code: "086", price: 18.50, stock: 1, category: "Carteras", isNew: false },
-            { id: 11, name: "Cartera Style", code: "087", price: 18.50, stock: 1, category: "Carteras", isNew: false },
-            { id: 12, name: "Cartera Glamour", code: "089", price: 14.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 13, name: "Cartera Deluxe", code: "096", price: 14.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 14, name: "Cartera VIP", code: "097", price: 14.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 15, name: "Cartera Exclusive", code: "098", price: 24.00, stock: 1, category: "Carteras", isNew: false },
-            { id: 16, name: "Cartera Special", code: "099", price: 14.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 17, name: "Cartera Unique", code: "114", price: 14.99, stock: 0, category: "Carteras", isNew: false },
-            { id: 18, name: "Cartera Beige", code: "127", price: 12.00, stock: 1, category: "Carteras", isNew: false },
-            { id: 19, name: "Cartera Rosa", code: "128", price: 13.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 20, name: "Cartera Negra", code: "129", price: 13.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 21, name: "Cartera Roja", code: "130", price: 15.00, stock: 0, category: "Carteras", isNew: false },
-            { id: 22, name: "Cartera Blanca", code: "132", price: 14.00, stock: 2, category: "Carteras", isNew: false },
-            { id: 23, name: "Cartera Dorada", code: "147", price: 14.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 24, name: "Cartera Plateada", code: "148", price: 14.00, stock: 1, category: "Carteras", isNew: false },
             { id: 25, name: "Cartera Corazón", code: "149", price: 15.99, stock: 1, category: "Carteras", isNew: true },
             { id: 26, name: "Cartera Amor", code: "150", price: 15.99, stock: 1, category: "Carteras", isNew: true },
-            { id: 27, name: "Cartera Romance", code: "151", price: 13.50, stock: 0, category: "Carteras", isNew: false },
-            { id: 28, name: "Cartera Pasión", code: "152", price: 14.00, stock: 1, category: "Carteras", isNew: false },
-            { id: 29, name: "Cartera Encanto", code: "153", price: 14.00, stock: 0, category: "Carteras", isNew: false },
-            { id: 30, name: "Cartera Sueño", code: "068", price: 10.50, stock: 1, category: "Carteras", isNew: false },
-            { id: 31, name: "Cartera Blanca Elegante", code: "022", price: 13.00, stock: 0, category: "Carteras", isNew: false },
-            { id: 32, name: "Cartera Blanca Premium", code: "049", price: 10.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 33, name: "Cartera Blanca Classic", code: "058", price: 10.99, stock: 0, category: "Carteras", isNew: false },
-            { id: 34, name: "Cartera Blanca Soft", code: "063", price: 10.50, stock: 1, category: "Carteras", isNew: false },
-            { id: 35, name: "Cartera Blanca Luxury", code: "075", price: 13.50, stock: 0, category: "Carteras", isNew: false },
-            { id: 36, name: "Cartera Blanca 190", code: "190", price: 10.99, stock: 0, category: "Carteras", isNew: false },
-            { id: 37, name: "Cartera Café", code: "899", price: 17.75, stock: 0, category: "Carteras", isNew: false },
-            { id: 38, name: "Cartera Clásica Gold", code: "051", price: 20.00, stock: 0, category: "Carteras", isNew: false },
-            { id: 39, name: "Cartera Clásica Silver", code: "061", price: 12.50, stock: 0, category: "Carteras", isNew: false },
-            { id: 40, name: "Cartera Morada", code: "054", price: 10.99, stock: 0, category: "Carteras", isNew: false },
-            { id: 41, name: "Cartera Negra Classic", code: "047", price: 10.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 42, name: "Cartera Roja Passion", code: "074", price: 13.50, stock: 0, category: "Carteras", isNew: false },
-            { id: 43, name: "Cartera Rosada", code: "023", price: 9.50, stock: 1, category: "Carteras", isNew: false },
-            { id: 44, name: "Cartera Vino", code: "053", price: 18.00, stock: 0, category: "Carteras", isNew: false },
-            { id: 45, name: "Carteras Mix", code: "181", price: 10.00, stock: 1, category: "Carteras", isNew: false },
-            
-            // Aritos (Páginas 6-11)
             { id: 46, name: "Aritos Corazón", code: "046", price: 3.50, stock: 1, category: "Aritos", isNew: true },
             { id: 47, name: "Aretas Elegantes", code: "179", price: 8.50, stock: 1, category: "Aritos", isNew: false },
             { id: 48, name: "Arete Classic", code: "060", price: 7.00, stock: 1, category: "Aritos", isNew: false },
             { id: 49, name: "Aretes Premium", code: "174", price: 8.50, stock: 1, category: "Aritos", isNew: false },
             { id: 50, name: "Aretes de Corazón", code: "056", price: 4.50, stock: 0, category: "Aritos", isNew: true },
-            { id: 51, name: "Aritos Mix 028", code: "028393992", price: 6.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 52, name: "Aritos 06", code: "06", price: 7.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 53, name: "Aritos 07", code: "07", price: 5.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 54, name: "Aritos 09", code: "09", price: 7.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 55, name: "Aritos 011", code: "011", price: 7.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 56, name: "Aritos 013", code: "013", price: 7.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 57, name: "Aritos 036", code: "036", price: 3.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 58, name: "Aritos 079", code: "079", price: 5.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 59, name: "Aritos 080", code: "080", price: 4.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 60, name: "Aritos 081", code: "081", price: 6.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 61, name: "Aritos 082", code: "082", price: 6.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 62, name: "Aritos 085", code: "085", price: 8.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 63, name: "Aritos 092", code: "092", price: 3.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 64, name: "Aritos 100", code: "100", price: 5.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 65, name: "Aritos 101", code: "101", price: 5.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 66, name: "Aritos 102", code: "102", price: 5.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 67, name: "Aritos 107", code: "107", price: 8.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 68, name: "Aritos 108", code: "108", price: 7.99, stock: 0, category: "Aritos", isNew: false },
-            { id: 69, name: "Aritos 115", code: "115", price: 6.99, stock: 1, category: "Aritos", isNew: false },
-            { id: 70, name: "Aritos 116", code: "116", price: 6.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 71, name: "Aritos 117", code: "117", price: 7.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 72, name: "Aritos 118", code: "118", price: 8.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 73, name: "Aritos 119", code: "119", price: 6.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 74, name: "Aritos 124", code: "124", price: 4.00, stock: 7, category: "Aritos", isNew: false },
-            { id: 75, name: "Aritos 140", code: "140", price: 5.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 76, name: "Aritos 156", code: "156", price: 7.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 77, name: "Aritos 157", code: "157", price: 8.99, stock: 1, category: "Aritos", isNew: false },
-            { id: 78, name: "Aritos 158", code: "158", price: 8.99, stock: 1, category: "Aritos", isNew: false },
-            { id: 79, name: "Aritos 166", code: "166", price: 7.00, stock: 3, category: "Aritos", isNew: false },
-            { id: 80, name: "Aritos 168", code: "168", price: 5.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 81, name: "Aritos 169", code: "169", price: 6.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 82, name: "Aritos 170", code: "170", price: 7.50, stock: 2, category: "Aritos", isNew: false },
-            { id: 83, name: "Aritos 176", code: "176", price: 6.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 84, name: "Aritos 178", code: "178", price: 8.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 85, name: "Aritos 177", code: "177", price: 8.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 86, name: "Aritos 19009", code: "19009", price: 5.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 87, name: "Aritos 190012", code: "190012", price: 7.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 88, name: "Aritos 1991919", code: "1991919", price: 2.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 89, name: "Aritos de Estrella", code: "019", price: 3.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 90, name: "Aritos de Plata 02222", code: "02222", price: 5.00, stock: 1, category: "Aritos", isNew: true },
-            { id: 91, name: "Aritos de Plata 02224", code: "02224", price: 5.00, stock: 1, category: "Aritos", isNew: true },
-            { id: 92, name: "Aritos de Plata 02226", code: "02226", price: 5.00, stock: 1, category: "Aritos", isNew: true },
-            { id: 93, name: "Aritos de Plata 02227", code: "02227", price: 5.00, stock: 1, category: "Aritos", isNew: true },
-            { id: 94, name: "Aritos de Plata 02228", code: "02228", price: 5.00, stock: 1, category: "Aritos", isNew: true },
-            
-            // Collares (Páginas 11-18)
             { id: 95, name: "Collar Playa", code: "029", price: 5.50, stock: 0, category: "Collares", isNew: false },
-            { id: 96, name: "Colla de Playa", code: "066", price: 12.75, stock: 1, category: "Collares", isNew: false },
-            { id: 97, name: "Collar 10199191", code: "10199191", price: 9.50, stock: 1, category: "Collares", isNew: false },
-            { id: 98, name: "Collar 17801", code: "17801", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 99, name: "Collar 024", code: "024", price: 12.00, stock: 0, category: "Collares", isNew: false },
-            { id: 100, name: "Collar 025", code: "025", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 101, name: "Collar 028", code: "028", price: 8.00, stock: 3, category: "Collares", isNew: false },
-            { id: 102, name: "Collar 034", code: "034", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 103, name: "Collar 039", code: "039", price: 11.50, stock: 1, category: "Collares", isNew: false },
-            { id: 104, name: "Collar 040", code: "040", price: 10.00, stock: 0, category: "Collares", isNew: false },
-            { id: 105, name: "Collar 070", code: "070", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 106, name: "Collar 072", code: "072", price: 11.50, stock: 1, category: "Collares", isNew: false },
-            { id: 107, name: "Collar 077", code: "077", price: 13.50, stock: 1, category: "Collares", isNew: false },
-            { id: 108, name: "Collar 083", code: "083", price: 0.00, stock: 0, category: "Collares", isNew: false },
-            { id: 109, name: "Collar 084", code: "084", price: 13.00, stock: 1, category: "Collares", isNew: false },
-            { id: 110, name: "Collar 090", code: "090", price: 12.50, stock: 1, category: "Collares", isNew: false },
-            { id: 111, name: "Collar 091", code: "091", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 112, name: "Collar 093", code: "093", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 113, name: "Collar 094", code: "094", price: 12.00, stock: 0, category: "Collares", isNew: false },
-            { id: 114, name: "Collar 095", code: "095", price: 12.00, stock: 0, category: "Collares", isNew: false },
-            { id: 115, name: "Collar 104", code: "104", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 116, name: "Collar 109", code: "109", price: 11.00, stock: 0, category: "Collares", isNew: false },
-            { id: 117, name: "Collar 110", code: "110", price: 13.99, stock: 1, category: "Collares", isNew: false },
-            { id: 118, name: "Collar 111", code: "111", price: 14.99, stock: 1, category: "Collares", isNew: false },
-            { id: 119, name: "Collar 113", code: "113", price: 12.00, stock: 0, category: "Collares", isNew: false },
-            { id: 120, name: "Collar 126", code: "126", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 121, name: "Collar 133", code: "133", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 122, name: "Collar 134", code: "134", price: 12.00, stock: 2, category: "Collares", isNew: false },
-            { id: 123, name: "Collar 135", code: "135", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 124, name: "Collar 136", code: "136", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 125, name: "Collar 139", code: "139", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 126, name: "Collar 141", code: "141", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 127, name: "Collar 145", code: "145", price: 12.99, stock: 1, category: "Collares", isNew: false },
-            { id: 128, name: "Collar 155", code: "155", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 129, name: "Collar 163", code: "163", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 130, name: "Collar 164", code: "164", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 131, name: "Collar 165", code: "165", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 132, name: "Collar 171", code: "171", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 133, name: "Collar 172", code: "172", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 134, name: "Collar 173", code: "173", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 135, name: "Collar 175", code: "175", price: 12.00, stock: 3, category: "Collares", isNew: false },
-            { id: 136, name: "Collar 183", code: "183", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 137, name: "Collar 184", code: "184", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 138, name: "Collar 1200", code: "1200", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 139, name: "Collar 01116", code: "01116", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 140, name: "Collar 01127", code: "01127", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 141, name: "Collar 01129", code: "01129", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 142, name: "Collar Clásico", code: "020", price: 10.00, stock: 2, category: "Collares", isNew: false },
+            { id: 96, name: "Collar de Playa", code: "066", price: 12.75, stock: 1, category: "Collares", isNew: false },
             { id: 143, name: "Collar Corazón Negro", code: "062", price: 10.00, stock: 1, category: "Collares", isNew: true },
-            { id: 144, name: "Collar Cruz Redondo", code: "016", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 145, name: "Collar Flor 055", code: "055", price: 10.50, stock: 1, category: "Collares", isNew: false },
-            { id: 146, name: "Collar Flor 065", code: "065", price: 11.50, stock: 1, category: "Collares", isNew: false },
-            { id: 147, name: "Collar Perlas", code: "048", price: 13.50, stock: 0, category: "Collares", isNew: false },
-            { id: 148, name: "Collar Sol", code: "89009", price: 11.00, stock: 0, category: "Collares", isNew: false },
-            { id: 149, name: "Collar Doble 010", code: "010", price: 15.00, stock: 0, category: "Collares", isNew: false },
-            { id: 150, name: "Collar Doble 027", code: "027", price: 15.00, stock: 1, category: "Collares", isNew: false },
             { id: 151, name: "Collar Doble Corazón", code: "067", price: 14.00, stock: 0, category: "Collares", isNew: true },
-            { id: 152, name: "Collar Mariposa", code: "200", price: 10.00, stock: 0, category: "Collares", isNew: false },
-            { id: 153, name: "Set Collar", code: "142", price: 18.50, stock: 1, category: "Collares", isNew: false },
-            { id: 154, name: "Set de Collar", code: "078", price: 13.50, stock: 1, category: "Collares", isNew: false },
-            
-            // Lentes (Página 18)
             { id: 155, name: "Lentes de Sol", code: "015", price: 7.50, stock: 1, category: "Lentes de sol", isNew: false },
             { id: 156, name: "Lentes Negros", code: "037", price: 5.75, stock: 1, category: "Lentes de sol", isNew: false },
-            
-            // Pulseras (Páginas 18-21)
             { id: 157, name: "Bracelet", code: "041", price: 7.00, stock: 0, category: "Pulseras", isNew: false },
             { id: 158, name: "Brasalet", code: "038", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
             { id: 159, name: "Pulsera 042", code: "042", price: 5.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 160, name: "Pulsera 043", code: "043", price: 7.00, stock: 2, category: "Pulseras", isNew: false },
-            { id: 161, name: "Pulsera 044", code: "044", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 162, name: "Pulsera 064", code: "064", price: 6.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 163, name: "Pulsera 103", code: "103", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 164, name: "Pulsera 105", code: "105", price: 12.99, stock: 1, category: "Pulseras", isNew: false },
-            { id: 165, name: "Pulsera 106", code: "106", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 166, name: "Pulsera 112", code: "112", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 167, name: "Pulsera 146", code: "146", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 168, name: "Pulsera 159", code: "159", price: 13.00, stock: 3, category: "Pulseras", isNew: false },
-            { id: 169, name: "Pulsera 160", code: "160", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 170, name: "Pulsera 161", code: "161", price: 9.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 171, name: "Pulsera 167", code: "167", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 172, name: "Pulsera 198", code: "198", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 173, name: "Pulsera 9789", code: "9789", price: 8.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 174, name: "Pulsera 8967", code: "8967", price: 7.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 175, name: "Pulsera 1250", code: "1250", price: 5.50, stock: 0, category: "Pulseras", isNew: false },
-            { id: 176, name: "Pulsera 01126", code: "01126", price: 10.00, stock: 2, category: "Pulseras", isNew: false },
-            { id: 177, name: "Pulsera 02221", code: "02221", price: 10.50, stock: 3, category: "Pulseras", isNew: false },
-            { id: 178, name: "Pulsera 02223", code: "02223", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 179, name: "Pulsera 03331", code: "03331", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 180, name: "Pulsera 03332", code: "03332", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 181, name: "Pulsera 2001", code: "2001", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 182, name: "Pulsera Ajustable", code: "018", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 183, name: "Pulsera Básica", code: "030", price: 6.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 184, name: "Pulsera Cartier 032", code: "032", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 185, name: "Pulsera Cartier 031", code: "031", price: 11.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 186, name: "Pulsera Trébol", code: "01118", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 187, name: "Van Cleef", code: "050", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
-            
-            // Relojes (Páginas 22-25)
             { id: 188, name: "Reloj 01111", code: "01111", price: 15.00, stock: 1, category: "Relojes", isNew: false },
             { id: 189, name: "Reloj 01125", code: "01125", price: 20.00, stock: 2, category: "Relojes", isNew: false },
-            { id: 190, name: "Reloj 03333", code: "03333", price: 16.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 191, name: "Reloj 03334", code: "03334", price: 25.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 192, name: "Reloj 03335", code: "03335", price: 16.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 193, name: "Reloj 03336", code: "03336", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 194, name: "Reloj 03337", code: "03337", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 195, name: "Reloj 03338", code: "03338", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 196, name: "Reloj 03339", code: "03339", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 197, name: "Reloj 033340", code: "033340", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 198, name: "Reloj 033341", code: "033341", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 199, name: "Reloj 033342", code: "033342", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 200, name: "Reloj 033343", code: "033343", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 201, name: "Reloj 033344", code: "033344", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 202, name: "Reloj 033345", code: "033345", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 203, name: "Reloj 033346", code: "033346", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 204, name: "Reloj 033347", code: "033347", price: 25.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 205, name: "Reloj 033348", code: "033348", price: 30.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 206, name: "Reloj 033349", code: "033349", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 207, name: "Reloj 033350", code: "033350", price: 18.00, stock: 2, category: "Relojes", isNew: false },
-            { id: 208, name: "Reloj Blanco", code: "011144", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 209, name: "Reloj Acero 01117", code: "01117", price: 15.00, stock: 2, category: "Relojes", isNew: false },
-            { id: 210, name: "Reloj Acero 01123", code: "01123", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 211, name: "Reloj Dorado Waterproof", code: "01122", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 212, name: "Reloj Negro 01113", code: "01113", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 213, name: "Reloj Old Money", code: "01124", price: 15.00, stock: 2, category: "Relojes", isNew: false },
-            { id: 214, name: "Reloj Rojo 01119", code: "01119", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 215, name: "Reloj Rojo 01121", code: "01121", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 216, name: "Set Reloj y Pulsera", code: "01115", price: 14.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 217, name: "Set Reloj", code: "01112", price: 40.00, stock: 1, category: "Relojes", isNew: false },
-            
-            // Anillos (Página 25-26)
             { id: 218, name: "Anillo 02", code: "02", price: 10.00, stock: 1, category: "Anillos", isNew: false },
             { id: 219, name: "Anillo 04", code: "04", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 220, name: "Anillo 08", code: "08", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 221, name: "Anillo 017", code: "017", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 222, name: "Anillo 021", code: "021", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 223, name: "Anillo 045", code: "045", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 224, name: "Anillo 057", code: "057", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 225, name: "Anillo 059", code: "059", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            
-            // Accesorios para el cabello (Página 26)
-            { id: 226, name: "Accesorios Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: false },
-            
-            // Otros (Página 26)
-            { id: 227, name: "Cereza (30% Desc)", code: "122", price: 5.25, stock: 4, category: "Otros", isNew: false },
-            { id: 228, name: "Tarjetas Navideñas", code: "154", price: 0.00, stock: 121, category: "Otros", isNew: false }
+            { id: 226, name: "Accesorios Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: false }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -2205,39 +1846,37 @@
         }
 
         function initRotatingMessages() {
-            const messageEl = document.getElementById('rotating-message-header');
+            const titleEl = document.getElementById('hero-title');
             let index = 0;
             
             setInterval(() => {
                 index = (index + 1) % valentineMessages.length;
-                messageEl.style.opacity = '0';
+                titleEl.style.opacity = '0';
                 setTimeout(() => {
-                    messageEl.textContent = valentineMessages[index];
-                    messageEl.style.opacity = '1';
+                    titleEl.textContent = valentineMessages[index];
+                    titleEl.style.opacity = '1';
                 }, 300);
-            }, 4000);
+            }, 5000);
         }
 
         function initReviews() {
             const container = document.getElementById('reviews-container');
             let currentIndex = 0;
 
-            // Crear elementos de reviews
             container.innerHTML = customerReviews.map((review, index) => `
                 <div class="review-card" id="review-${index}" style="${index === 0 ? 'opacity:1;transform:translateY(0)' : ''}">
                     <div class="review-stars">${'★'.repeat(review.stars)}</div>
                     <div class="review-text">"${review.text}"</div>
-                    <div class="review-author">- ${review.name}</div>
-                    <div class="review-product">Compró: ${review.product}</div>
+                    <div class="review-author">${review.name}</div>
+                    <div class="review-product">${review.product}</div>
                 </div>
             `).join('');
 
-            // Rotar reviews cada 5 segundos
             setInterval(() => {
                 document.getElementById(`review-${currentIndex}`).classList.remove('active');
                 currentIndex = (currentIndex + 1) % customerReviews.length;
                 document.getElementById(`review-${currentIndex}`).classList.add('active');
-            }, 5000);
+            }, 6000);
         }
 
         function generateInstagramFeed() {
@@ -2255,7 +1894,6 @@
                     <img src="${img}" alt="Klohesv" loading="lazy">
                     <div class="social-overlay">
                         <i class="fab fa-instagram"></i>
-                        <span>Ver más</span>
                     </div>
                 </div>
             `).join('');
@@ -2279,7 +1917,7 @@
                 
                 return `
                     <div class="product-card ${isAgotado ? 'agotado' : ''}" style="animation-delay: ${index * 0.05}s">
-                        ${p.isNew ? '<div class="badge-nuevo">❤️ Nuevo</div>' : ''}
+                        ${p.isNew ? '<div class="badge-nuevo">Nuevo</div>' : ''}
                         <div class="category-badge">${p.category}</div>
                         
                         <div class="product-image-container" onclick="openImageModal('https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg')">
@@ -2295,14 +1933,12 @@
                             <h3 class="product-title">${p.name}</h3>
                             
                             <div class="product-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Código:</span>
-                                    <span class="detail-value">${p.code}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Stock:</span>
-                                    <span class="detail-value">${p.stock} u</span>
-                                </div>
+                                <span class="detail-row">
+                                    <span class="detail-value">Código ${p.code}</span>
+                                </span>
+                                <span class="detail-row">
+                                    <span class="detail-value">${p.stock} disponibles</span>
+                                </span>
                             </div>
                             
                             <div class="price-row">
@@ -2314,14 +1950,14 @@
                             
                             ${!isAgotado ? `
                                 <div class="quantity-selector">
-                                    <button class="qty-btn" onclick="event.stopPropagation(); updateGridQty(${p.id}, -1)">-</button>
+                                    <button class="qty-btn" onclick="event.stopPropagation(); updateGridQty(${p.id}, -1)">−</button>
                                     <span class="qty-display" id="qty-${p.id}">1</span>
                                     <button class="qty-btn" onclick="event.stopPropagation(); updateGridQty(${p.id}, 1)">+</button>
                                 </div>
                             ` : ''}
                             
                             <button class="add-to-cart" onclick="addToCart(${p.id})" ${isAgotado ? 'disabled' : ''}>
-                                ${isAgotado ? '💔 AGOTADO' : '❤️ Agregar'}
+                                ${isAgotado ? 'Agotado' : 'Agregar'}
                             </button>
                         </div>
                     </div>
@@ -2346,10 +1982,10 @@
                 btn.style.display = 'none';
             } else {
                 btn.style.display = 'inline-block';
-                btn.textContent = `Cargar más productos (${remaining} restantes)`;
+                btn.textContent = `Ver más (${remaining})`;
             }
             
-            count.textContent = `Mostrando ${displayedProducts.length} de ${filteredProducts.length} productos`;
+            count.textContent = `${displayedProducts.length} de ${filteredProducts.length} productos`;
         }
 
         function loadMoreProducts() {
@@ -2389,13 +2025,8 @@
 
         function expandSearch() {
             if (window.innerWidth <= 768) {
-                document.getElementById('search-container').classList.add('expanded');
                 document.getElementById('search-input').focus();
             }
-        }
-
-        function collapseSearch() {
-            document.getElementById('search-container').classList.remove('expanded');
         }
 
         function updateGridQty(id, change) {
@@ -2419,9 +2050,9 @@
             document.getElementById('quick-view-title').textContent = p.name;
             document.getElementById('quick-view-price').textContent = '$' + p.price.toFixed(2);
             document.getElementById('quick-view-description').innerHTML = 
-                `<strong>💕 Código:</strong> ${p.code}<br>
-                 <strong>📦 Stock:</strong> ${p.stock} unidades<br>
-                 <strong>🏷️ Categoría:</strong> ${p.category}`;
+                `<strong>Código:</strong> ${p.code}<br>
+                 <strong>Stock:</strong> ${p.stock} unidades<br>
+                 <strong>Categoría:</strong> ${p.category}`;
             
             document.getElementById('quick-view-modal').style.display = 'flex';
         }
@@ -2459,7 +2090,7 @@
                 if (existing.quantity + qty <= product.stock) {
                     existing.quantity += qty;
                 } else {
-                    alert('💔 No hay suficiente stock disponible');
+                    alert('No hay suficiente stock disponible');
                     return;
                 }
             } else {
@@ -2468,7 +2099,7 @@
             
             saveCart();
             updateCartUI();
-            showNotification('¡Agregado al carrito! ❤️');
+            showNotification('Agregado al carrito');
             playSound();
         }
 
@@ -2510,29 +2141,28 @@
             
             if (cart.length === 0) {
                 body.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; color: var(--texto-claro);">
-                        <i class="fas fa-heart-broken" style="font-size: 3rem; margin-bottom: 1rem; display: block; color: var(--rosa-medio);"></i>
-                        Tu carrito está vacío 💔<br>
-                        <small>¡Agrega algo especial!</small>
+                    <div style="text-align: center; padding: 4rem 2rem; color: var(--texto-claro);">
+                        <i class="fas fa-shopping-bag" style="font-size: 2rem; margin-bottom: 1rem; display: block; color: var(--rosa-suave);"></i>
+                        Tu carrito está vacío
                     </div>
                 `;
             } else {
                 body.innerHTML = cart.map(item => `
-                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 12px; margin-bottom: 0.8rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--crema);">
                         <img src="https://industriastobias.github.io/klohesvtiendaonline/${item.code}.jpg" 
-                             style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px; border: 2px solid var(--rosa-palido);"
+                             style="width: 60px; height: 60px; object-fit: cover; border: 1px solid var(--rosa-suave);"
                              onerror="this.src='https://via.placeholder.com/60?text=${item.code}'">
                         <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 0.9rem; color: var(--texto);">${item.name}</div>
-                            <div style="color: var(--rosa-oscuro); font-weight: 800; font-size: 1rem;">$${(item.price * item.quantity).toFixed(2)}</div>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem;">
-                                <button onclick="updateCartQty(${item.id}, -1)" style="width: 26px; height: 26px; border: 2px solid var(--rosa-medio); background: white; border-radius: 50%; cursor: pointer; font-size: 0.9rem; color: var(--rosa-oscuro);">-</button>
-                                <span style="font-weight: 700; min-width: 25px; text-align: center;">${item.quantity}</span>
-                                <button onclick="updateCartQty(${item.id}, 1)" style="width: 26px; height: 26px; border: 2px solid var(--rosa-medio); background: white; border-radius: 50%; cursor: pointer; font-size: 0.9rem; color: var(--rosa-oscuro);">+</button>
+                            <div style="font-weight: 400; font-size: 0.9rem; color: var(--texto); margin-bottom: 0.2rem;">${item.name}</div>
+                            <div style="color: var(--rosa-oscuro); font-weight: 400; font-size: 1rem; font-family: 'Cormorant Garamond', serif;">$${(item.price * item.quantity).toFixed(2)}</div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+                                <button onclick="updateCartQty(${item.id}, -1)" style="width: 24px; height: 24px; border: 1px solid var(--rosa-suave); background: transparent; border-radius: 0; cursor: pointer; font-size: 0.8rem; color: var(--texto);">−</button>
+                                <span style="font-weight: 400; min-width: 20px; text-align: center; font-size: 0.9rem;">${item.quantity}</span>
+                                <button onclick="updateCartQty(${item.id}, 1)" style="width: 24px; height: 24px; border: 1px solid var(--rosa-suave); background: transparent; border-radius: 0; cursor: pointer; font-size: 0.8rem; color: var(--texto);">+</button>
                             </div>
                         </div>
-                        <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: var(--agotado); cursor: pointer; font-size: 1.2rem; padding: 0.5rem;">
-                            <i class="fas fa-trash"></i>
+                        <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: var(--texto-claro); cursor: pointer; font-size: 1rem; padding: 0.5rem;">
+                            <i class="fas fa-times"></i>
                         </button>
                     </div>
                 `).join('');
@@ -2582,7 +2212,7 @@
             
             if (validCodes[code]) {
                 currentDiscount = validCodes[code];
-                showNotification(`¡Descuento del ${currentDiscount}% aplicado! 💕`);
+                showNotification(`Descuento ${currentDiscount}% aplicado`);
                 updateCartTotals();
             } else {
                 showErrorModal();
@@ -2611,9 +2241,9 @@
         function checkout() {
             if (cart.length === 0) return;
             
-            let msg = '¡Hola Klohe! 💕\n\nQuiero hacer un pedido de San Valentín:\n\n';
+            let msg = '¡Hola Klohe!\\n\\nQuiero hacer un pedido:\\n\\n';
             cart.forEach(item => {
-                msg += `❤️ ${item.name} (Código: ${item.code}) x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
+                msg += `• ${item.name} (Código: ${item.code}) x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\\n`;
             });
             
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -2621,18 +2251,17 @@
             const shipping = shippingSelected ? CONFIG.SHIPPING_COST : 0;
             const total = subtotal - discount + shipping;
             
-            msg += `\n💰 Subtotal: $${subtotal.toFixed(2)}`;
-            if (currentDiscount > 0) msg += `\n🎁 Descuento: -$${discount.toFixed(2)}`;
-            if (shipping > 0) msg += `\n🚚 Envío: $${shipping.toFixed(2)}`;
-            msg += `\n💵 Total: $${total.toFixed(2)}`;
-            msg += `\n\n💝 ¿Pueden incluir envoltura de regalo especial?`;
+            msg += `\\nSubtotal: $${subtotal.toFixed(2)}`;
+            if (currentDiscount > 0) msg += `\\nDescuento: -$${discount.toFixed(2)}`;
+            if (shipping > 0) msg += `\\nEnvío: $${shipping.toFixed(2)}`;
+            msg += `\\nTotal: $${total.toFixed(2)}`;
             
             window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         function showNotification(text) {
             const notif = document.getElementById('notification');
-            notif.querySelector('div').textContent = text;
+            notif.textContent = text;
             notif.style.display = 'block';
             
             setTimeout(() => {
@@ -2664,12 +2293,12 @@
             if (!msg) return;
             
             const body = document.getElementById('chat-body');
-            body.innerHTML += `<p style="background: var(--rosa-oscuro); color: white; padding: 0.8rem; border-radius: 15px; margin-bottom: 0.8rem; margin-left: 2rem; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">${msg}</p>`;
+            body.innerHTML += `<p style="text-align: right; margin-bottom: 1rem;"><span style="background: var(--rosa-suave); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">${msg}</span></p>`;
             input.value = '';
             body.scrollTop = body.scrollHeight;
             
             setTimeout(() => {
-                body.innerHTML += `<p style="background: white; padding: 0.8rem; border-radius: 15px; margin-bottom: 0.8rem; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">¡Gracias! 💕 Te ayudamos enseguida con tu pedido de San Valentín</p>`;
+                body.innerHTML += `<p style="margin-bottom: 1rem;"><span style="background: var(--crema); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">Gracias por tu mensaje. Te responderemos pronto.</span></p>`;
                 body.scrollTop = body.scrollHeight;
             }, 1000);
         }
@@ -2677,13 +2306,22 @@
         function toggleFaq(element) {
             const item = element.parentElement;
             const isActive = item.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-            if (!isActive) item.classList.add('active');
+            const icon = element.querySelector('i');
+            
+            document.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('i').style.transform = 'rotate(0deg)';
+            });
+            
+            if (!isActive) {
+                item.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
         }
 
         function subscribeNewsletter(e) {
             e.preventDefault();
-            showNotification('¡Bienvenida al Club Klohe! 💕 Revisa tu correo');
+            showNotification('Bienvenida al Club Klohe');
             e.target.reset();
         }
 

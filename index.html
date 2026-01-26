@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klohe - Tienda de Accesorios</title>
+    <title>Klohe - Accesorios</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --blanco-hueso: #FAF9F6;
+            --rosa-palido: #F5E6E8;
+            --rosa-medio: #E8D5D8;
+            --rosa-oscuro: #D4A5A9;
+            --texto: #4A4A4A;
+            --texto-claro: #7A7A7A;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,27 +23,26 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
-            min-height: 100vh;
+            font-family: 'Lato', sans-serif;
+            background-color: var(--blanco-hueso);
+            color: var(--texto);
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Header */
+        /* Header minimalista */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem 0;
+            background-color: var(--blanco-hueso);
+            border-bottom: 1px solid var(--rosa-medio);
+            padding: 2rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         header .container {
@@ -43,111 +52,159 @@
         }
 
         .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--texto);
+            letter-spacing: 3px;
         }
 
-        .logo i {
-            margin-right: 10px;
+        .logo span {
+            color: var(--rosa-oscuro);
         }
 
         .cart-icon {
             position: relative;
             cursor: pointer;
-            font-size: 1.8rem;
-            padding: 10px;
-            background: rgba(255,255,255,0.2);
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--rosa-medio);
             border-radius: 50%;
-            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background: white;
         }
 
         .cart-icon:hover {
-            transform: scale(1.1);
+            background: var(--rosa-palido);
+            border-color: var(--rosa-oscuro);
+        }
+
+        .cart-icon i {
+            font-size: 1.1rem;
+            color: var(--texto);
         }
 
         .cart-icon span {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: #ff4757;
+            background: var(--rosa-oscuro);
             color: white;
             border-radius: 50%;
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
 
-        /* Filtros */
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--blanco-hueso) 0%, var(--rosa-palido) 100%);
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--texto);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            color: var(--texto-claro);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Filtros minimalistas */
         .filters {
             display: flex;
             gap: 1rem;
-            margin: 2rem 0;
+            margin: 3rem 0;
             flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filters input {
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--rosa-medio);
+            border-radius: 30px;
+            font-size: 0.95rem;
+            min-width: 280px;
             background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: var(--texto);
+            transition: all 0.3s ease;
         }
 
-        .filters input, .filters select {
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            flex: 1;
-            min-width: 200px;
-            transition: border-color 0.3s;
-        }
-
-        .filters input:focus, .filters select:focus {
+        .filters input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--rosa-oscuro);
+            box-shadow: 0 0 0 3px rgba(212, 165, 169, 0.1);
         }
 
-        /* Grid de Productos */
+        .filters input::placeholder {
+            color: var(--texto-claro);
+        }
+
+        .filters select {
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--rosa-medio);
+            border-radius: 30px;
+            font-size: 0.95rem;
+            background: white;
+            color: var(--texto);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filters select:focus {
+            outline: none;
+            border-color: var(--rosa-oscuro);
+        }
+
+        /* Grid de Productos minimalista */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
         }
 
         .product-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(212, 165, 169, 0.15);
+            border-color: var(--rosa-medio);
         }
 
         .product-image-container {
             position: relative;
             width: 100%;
-            height: 300px;
+            height: 280px;
             overflow: hidden;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: var(--blanco-hueso);
         }
 
         .product-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
+            transition: transform 0.6s ease;
         }
 
         .product-card:hover .product-image {
@@ -156,15 +213,15 @@
 
         .product-code {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(102, 126, 234, 0.9);
-            color: white;
-            padding: 5px 12px;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--texto);
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            z-index: 10;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         .no-image {
@@ -172,65 +229,66 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #bbb;
-            font-size: 3rem;
+            color: var(--rosa-oscuro);
+            font-size: 2.5rem;
+            height: 100%;
         }
 
         .no-image span {
-            font-size: 0.9rem;
-            margin-top: 10px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            color: var(--texto-claro);
         }
 
         .product-info {
-            padding: 1.5rem;
+            padding: 1.8rem;
+            text-align: center;
         }
 
         .product-category {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
+            color: var(--rosa-oscuro);
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             margin-bottom: 0.8rem;
-        }
-
-        .product-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #2d3436;
             font-weight: 600;
         }
 
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--texto);
+            font-weight: 400;
+        }
+
         .product-price {
-            font-size: 1.8rem;
-            color: #667eea;
-            font-weight: bold;
-            margin: 1rem 0;
+            font-size: 1.4rem;
+            color: var(--texto);
+            font-weight: 600;
+            margin: 1rem 0 1.5rem;
         }
 
         .add-to-cart {
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
+            padding: 0.9rem;
+            background: transparent;
+            color: var(--texto);
+            border: 1px solid var(--rosa-medio);
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             font-weight: 600;
         }
 
         .add-to-cart:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            background: var(--rosa-palido);
+            border-color: var(--rosa-oscuro);
+            color: var(--texto);
         }
 
         /* Modal del Carrito */
@@ -242,38 +300,32 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
+            background: rgba(74, 74, 74, 0.4);
+            backdrop-filter: blur(4px);
         }
 
         .modal-content {
-            background: white;
-            margin: 3% auto;
+            background: var(--blanco-hueso);
+            margin: 5% auto;
             padding: 2.5rem;
-            border-radius: 20px;
+            border-radius: 16px;
             width: 90%;
-            max-width: 600px;
-            max-height: 85vh;
+            max-width: 500px;
+            max-height: 80vh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
         }
 
         .close {
             position: absolute;
             right: 1.5rem;
             top: 1.5rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            color: #636e72;
-            width: 40px;
-            height: 40px;
+            color: var(--texto-claro);
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -282,24 +334,30 @@
         }
 
         .close:hover {
-            background: #f1f2f6;
-            color: #2d3436;
+            background: var(--rosa-palido);
+            color: var(--texto);
+        }
+
+        .modal-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--texto);
         }
 
         .cart-item {
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1.2rem 0;
-            border-bottom: 2px solid #f1f2f6;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--rosa-medio);
         }
 
         .cart-item img {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
         }
 
         .cart-item-info {
@@ -308,85 +366,84 @@
 
         .cart-item-title {
             font-weight: 600;
-            margin-bottom: 0.3rem;
-            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            color: var(--texto);
         }
 
         .cart-item-code {
-            color: #636e72;
-            font-size: 0.85rem;
+            color: var(--texto-claro);
+            font-size: 0.8rem;
         }
 
         .cart-item-price {
-            color: #667eea;
-            font-weight: bold;
-            font-size: 1.2rem;
+            color: var(--rosa-oscuro);
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         .cart-item-quantity {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            background: #f8f9fa;
-            padding: 0.5rem;
-            border-radius: 25px;
+            gap: 0.6rem;
         }
 
         .quantity-btn {
             background: white;
-            border: 2px solid #e0e0e0;
-            width: 30px;
-            height: 30px;
+            border: 1px solid var(--rosa-medio);
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 600;
+            color: var(--texto);
             transition: all 0.3s;
         }
 
         .quantity-btn:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
+            background: var(--rosa-palido);
+            border-color: var(--rosa-oscuro);
         }
 
         .remove-item {
-            color: #ff4757;
+            color: var(--rosa-oscuro);
             cursor: pointer;
             background: none;
             border: none;
-            font-size: 1.3rem;
-            padding: 0.5rem;
+            font-size: 1.1rem;
             transition: transform 0.3s;
         }
 
         .remove-item:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
+            color: #c98a8f;
         }
 
         .cart-total {
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 3px solid #667eea;
+            border-top: 2px solid var(--rosa-medio);
             text-align: center;
         }
 
         .cart-total h3 {
-            font-size: 1.8rem;
-            color: #2d3436;
-            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--texto);
+            margin-bottom: 1.2rem;
+            font-weight: 400;
         }
 
         .checkout-btn {
             width: 100%;
-            padding: 1.2rem;
-            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            padding: 1rem;
+            background: var(--rosa-oscuro);
             color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
+            border-radius: 30px;
+            font-size: 1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -394,46 +451,68 @@
             gap: 0.8rem;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .checkout-btn:hover {
+            background: #c98a8f;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 5px 15px rgba(212, 165, 169, 0.3);
         }
 
         .empty-cart {
             text-align: center;
-            color: #636e72;
+            color: var(--texto-claro);
             padding: 3rem;
         }
 
         .empty-cart i {
-            font-size: 4rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            color: #dfe6e9;
+            color: var(--rosa-medio);
         }
 
+        /* Footer minimalista */
         footer {
-            background: #2d3436;
-            color: white;
+            background: white;
+            border-top: 1px solid var(--rosa-medio);
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
         }
 
+        footer p {
+            color: var(--texto-claro);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--rosa-oscuro);
+            font-size: 1.3rem;
+            margin: 0 12px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--texto);
+        }
+
+        /* Notificación */
         .notification {
             position: fixed;
             top: 100px;
             right: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--rosa-oscuro);
             color: white;
             padding: 1rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: none;
             animation: slideInRight 0.3s ease;
             z-index: 1001;
+            font-weight: 600;
         }
 
         @keyframes slideInRight {
@@ -441,16 +520,19 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .logo { font-size: 1.8rem; }
-            .products-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+            .hero h2 { font-size: 2rem; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+            .filters input { min-width: 100%; }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 class="logo"><i class="fas fa-gem"></i> KLOHE</h1>
+            <h1 class="logo">KLO<span>HE</span></h1>
             <div class="cart-icon" onclick="toggleCart()">
                 <i class="fas fa-shopping-bag"></i>
                 <span id="cart-count">0</span>
@@ -458,18 +540,25 @@
         </div>
     </header>
 
+    <section class="hero">
+        <div class="container">
+            <h2>Accesorios que inspiran</h2>
+            <p>Elegancia en cada detalle</p>
+        </div>
+    </section>
+
     <main class="container">
         <div class="filters">
-            <input type="text" id="search-input" placeholder="🔍 Buscar productos..." onkeyup="filterProducts()">
+            <input type="text" id="search-input" placeholder="Buscar productos..." onkeyup="filterProducts()">
             <select id="category-filter" onchange="filterProducts()">
-                <option value="all">📋 Todas las categorías</option>
-                <option value="cartera">👜 Carteras</option>
-                <option value="collar">📿 Collares</option>
-                <option value="aritos">💎 Aritos/Aretes</option>
-                <option value="pulsera">✨ Pulseras</option>
-                <option value="anillo">💍 Anillos</option>
-                <option value="billetera">👛 Billeteras</option>
-                <option value="bolso">🎒 Bolsos</option>
+                <option value="all">Todas las categorías</option>
+                <option value="cartera">Carteras</option>
+                <option value="collar">Collares</option>
+                <option value="aritos">Aritos</option>
+                <option value="pulsera">Pulseras</option>
+                <option value="anillo">Anillos</option>
+                <option value="billetera">Billeteras</option>
+                <option value="bolso">Bolsos</option>
             </select>
         </div>
 
@@ -477,20 +566,21 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Klohe - Accesorios con estilo</p>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
-            <a href="https://wa.me/50366711569" style="color: #25d366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        </p>
+        <p>&copy; 2025 Klohe. Todos los derechos reservados.</p>
+        <div class="social-links">
+            <a href="https://wa.me/50366711569" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
     </footer>
 
     <div id="notification" class="notification">
-        <i class="fas fa-check-circle"></i> Producto agregado al carrito
+        <i class="fas fa-check"></i> Agregado al carrito
     </div>
 
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="toggleCart()">&times;</span>
-            <h2><i class="fas fa-shopping-bag"></i> Tu Carrito</h2>
+            <h2>Tu Carrito</h2>
             <div id="cart-items"></div>
             <div class="cart-total">
                 <h3>Total: $<span id="cart-total">0.00</span></h3>
@@ -502,27 +592,15 @@
     </div>
 
     <script>
-        // ==========================================
-        // CONFIGURACIÓN - YA CONFIGURADO PARA TU REPOSITORIO
-        // ==========================================
         const CONFIG = {
-            // Tu usuario de GitHub
             GITHUB_USER: 'industriastobias',
-            
-            // Nombre del repositorio
             REPO_NAME: 'klohesvtiendaonline',
-            
-            // Nombre de la carpeta de imágenes
             IMAGES_FOLDER: 'klohe_imagenes',
-            
-            // Tu WhatsApp
             WHATSAPP_NUMBER: '50366711569',
             CURRENCY: '$'
         };
 
-        // ==========================================
-        // LISTA COMPLETA DE PRODUCTOS (96 productos)
-        // ==========================================
+        // 95 productos (sin Pulsera Glenda ni Tarjetas)
         let products = [
             // CARTERAS (34)
             { id: 1, name: "Cartera Elegante", code: "03", price: 12.50, category: "cartera" },
@@ -611,7 +689,7 @@
             { id: 78, name: "Aritos Corazón Sol", code: "190012", price: 7.00, category: "aritos" },
             { id: 79, name: "Aritos Abanico", code: "1991919", price: 2.00, category: "aritos" },
             
-            // PULSERAS (16)
+            // PULSERAS (15) - Sin Glenda
             { id: 80, name: "Pulsera Básica", code: "030", price: 6.00, category: "pulsera" },
             { id: 81, name: "Pulsera Cartier", code: "031", price: 11.00, category: "pulsera" },
             { id: 82, name: "Pulsera Cartier", code: "032", price: 10.00, category: "pulsera" },
@@ -622,31 +700,24 @@
             { id: 87, name: "Pulsera", code: "167", price: 12.00, category: "pulsera" },
             { id: 88, name: "Pulsera", code: "198", price: 10.00, category: "pulsera" },
             { id: 89, name: "Pulsera", code: "2001", price: 10.00, category: "pulsera" },
-            { id: 90, name: "Pulsera Glenda", code: "1090009", price: 9.50, category: "pulsera" },
-            { id: 91, name: "Pulsera", code: "9789", price: 8.00, category: "pulsera" },
-            { id: 92, name: "Pulsera", code: "8967", price: 7.00, category: "pulsera" },
-            { id: 93, name: "Pulsera", code: "1250", price: 5.50, category: "pulsera" },
-            { id: 94, name: "Pulsera de Trébol", code: "01118", price: 12.00, category: "pulsera" },
-            { id: 95, name: "Pulsera", code: "01126", price: 10.00, category: "pulsera" },
+            { id: 90, name: "Pulsera", code: "9789", price: 8.00, category: "pulsera" },
+            { id: 91, name: "Pulsera", code: "8967", price: 7.00, category: "pulsera" },
+            { id: 92, name: "Pulsera", code: "1250", price: 5.50, category: "pulsera" },
+            { id: 93, name: "Pulsera de Trébol", code: "01118", price: 12.00, category: "pulsera" },
+            { id: 94, name: "Pulsera", code: "01126", price: 10.00, category: "pulsera" },
             
             // ANILLO (1)
-            { id: 96, name: "Anillo", code: "02", price: 10.00, category: "anillo" }
+            { id: 95, name: "Anillo", code: "02", price: 10.00, category: "anillo" }
         ];
 
         let cart = [];
-
-        // ==========================================
-        // FUNCIONES
-        // ==========================================
 
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
             renderProducts(products);
         });
 
-        // URL de imágenes configurada para tu repositorio
         function getImageUrl(code) {
-            // Usando GitHub Pages - tu URL exacta
             return `https://industriastobias.github.io/klohesvtiendaonline/klohe_imagenes/${code}.jpg`;
         }
 
@@ -654,7 +725,7 @@
             const grid = document.getElementById('products-grid');
             
             if (productsToRender.length === 0) {
-                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem;"><i class="fas fa-search" style="font-size: 3rem; display: block; margin-bottom: 1rem; color: #636e72;"></i>No se encontraron productos</div>';
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--texto-claro);">No se encontraron productos</div>';
                 return;
             }
             
@@ -667,7 +738,7 @@
                         <img src="${imageUrl}" 
                              alt="${product.name}" 
                              class="product-image"
-                             onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'no-image\'><i class=\'fas fa-image\'></i><span>Imagen no disponible</span></div>';"
+                             onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'no-image\'><i class=\'far fa-image\'></i><span>Sin imagen</span></div>';"
                              loading="lazy">
                     </div>
                     <div class="product-info">
@@ -675,7 +746,7 @@
                         <h3 class="product-title">${product.name}</h3>
                         <div class="product-price">${CONFIG.CURRENCY}${product.price.toFixed(2)}</div>
                         <button class="add-to-cart" onclick="addToCart(${product.id})">
-                            <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            Agregar al carrito
                         </button>
                     </div>
                 </div>
@@ -757,7 +828,7 @@
             if (cart.length === 0) {
                 cartItems.innerHTML = `
                     <div class="empty-cart">
-                        <i class="fas fa-shopping-basket"></i>
+                        <i class="fas fa-shopping-bag"></i>
                         <p>Tu carrito está vacío</p>
                     </div>`;
                 document.getElementById('cart-total').textContent = '0.00';
@@ -779,7 +850,7 @@
                         <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
                     </div>
                     <button class="remove-item" onclick="removeFromCart(${item.id})">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-times"></i>
                     </button>
                 </div>
             `).join('');
@@ -801,7 +872,7 @@
                 message += `• ${item.name} (Cód: ${item.code}) x${item.quantity} - ${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}\n`;
             });
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `\n💰 Total: ${CONFIG.CURRENCY}${total.toFixed(2)}\n\n¡Gracias! 😊`;
+            message += `\nTotal: ${CONFIG.CURRENCY}${total.toFixed(2)}\n\n¡Gracias!`;
             
             window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
         }

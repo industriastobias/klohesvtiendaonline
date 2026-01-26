@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#D4A5A9">
     <title>Klohe - Accesorios</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
@@ -15,6 +16,20 @@
             --texto: #4A4A4A;
             --texto-claro: #7A7A7A;
             --agotado: #e74c3c;
+            --exito: #27ae60;
+            --nuevo: #f39c12;
+            --sombra: rgba(212, 165, 169, 0.2);
+        }
+
+        /* MODO OSCURO */
+        [data-theme="dark"] {
+            --blanco-hueso: #1a1a1a;
+            --rosa-palido: #2d2d2d;
+            --rosa-medio: #3d3d3d;
+            --rosa-oscuro: #D4A5A9;
+            --texto: #e0e0e0;
+            --texto-claro: #a0a0a0;
+            --sombra: rgba(0, 0, 0, 0.3);
         }
 
         * {
@@ -28,6 +43,7 @@
             background-color: var(--blanco-hueso);
             color: var(--texto);
             line-height: 1.6;
+            transition: all 0.3s ease;
         }
 
         .container {
@@ -40,28 +56,56 @@
         header {
             background-color: var(--blanco-hueso);
             border-bottom: 1px solid var(--rosa-medio);
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: all 0.3s ease;
         }
 
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 600;
+            font-size: 2rem;
+            font-weight: 300;
             color: var(--texto);
             letter-spacing: 3px;
         }
 
         .logo span {
             color: var(--rosa-oscuro);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--rosa-medio);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--texto);
+        }
+
+        .theme-toggle:hover {
+            background: var(--rosa-palido);
+            border-color: var(--rosa-oscuro);
         }
 
         .cart-icon {
@@ -81,6 +125,7 @@
         .cart-icon:hover {
             background: var(--rosa-palido);
             border-color: var(--rosa-oscuro);
+            transform: scale(1.1);
         }
 
         .cart-icon i {
@@ -104,11 +149,29 @@
             font-weight: 600;
         }
 
-        /* Hero - Mensajes más delgados */
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.85rem;
+            color: var(--texto-claro);
+        }
+
+        .breadcrumbs a {
+            color: var(--rosa-oscuro);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero */
         .hero {
             text-align: center;
             padding: 3rem 0;
             background: linear-gradient(135deg, var(--blanco-hueso) 0%, var(--rosa-palido) 100%);
+            position: relative;
+            overflow: hidden;
         }
 
         .hero h2 {
@@ -128,36 +191,191 @@
             min-height: 1.5rem;
         }
 
-        /* Filtros */
+        /* Barra de progreso de envío gratis */
+        .free-shipping-bar {
+            background: linear-gradient(90deg, var(--rosa-palido) 0%, var(--rosa-oscuro) 100%);
+            padding: 0.8rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: white;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .free-shipping-bar.completed {
+            background: linear-gradient(90deg, var(--exito) 0%, #2ecc71 100%);
+        }
+
+        .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: rgba(255,255,255,0.3);
+            transition: width 0.5s ease;
+        }
+
+        /* Filtros mejorados */
+        .filters-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px var(--sombra);
+        }
+
         .filters {
             display: flex;
             gap: 1rem;
-            margin: 2rem 0;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
         }
 
-        .filters input, .filters select {
+        .search-container {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 1px solid var(--rosa-medio);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            background: var(--blanco-hueso);
+            color: var(--texto);
+            transition: all 0.3s ease;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--texto-claro);
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid var(--rosa-medio);
+            border-radius: 12px;
+            margin-top: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            z-index: 50;
+            box-shadow: 0 10px 30px var(--sombra);
+        }
+
+        .search-suggestions.active {
+            display: block;
+        }
+
+        .suggestion-item {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--rosa-medio);
+            transition: all 0.2s;
+        }
+
+        .suggestion-item:hover {
+            background: var(--rosa-palido);
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .filters select {
             padding: 0.8rem 1.2rem;
             border: 1px solid var(--rosa-medio);
             border-radius: 30px;
             font-size: 0.9rem;
             background: white;
             color: var(--texto);
-            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .filters input {
-            min-width: 250px;
+        /* Range slider para precio */
+        .price-range {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 200px;
         }
 
-        .filters input:focus, .filters select:focus {
-            outline: none;
-            border-color: var(--rosa-oscuro);
-            box-shadow: 0 0 0 3px rgba(212, 165, 169, 0.1);
+        .price-range label {
+            font-size: 0.85rem;
+            color: var(--texto-claro);
         }
 
-        /* Grid - 5 productos por línea */
+        .range-slider {
+            position: relative;
+            height: 6px;
+            background: var(--rosa-medio);
+            border-radius: 3px;
+        }
+
+        .range-selected {
+            position: absolute;
+            height: 100%;
+            background: var(--rosa-oscuro);
+            border-radius: 3px;
+        }
+
+        .range-input {
+            position: relative;
+        }
+
+        .range-input input {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            top: -7px;
+            background: none;
+            pointer-events: none;
+            -webkit-appearance: none;
+        }
+
+        .range-input input::-webkit-slider-thumb {
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: var(--rosa-oscuro);
+            pointer-events: auto;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .price-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--texto-claro);
+        }
+
+        /* Checkbox filtros */
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .filter-checkbox input {
+            accent-color: var(--rosa-oscuro);
+        }
+
+        /* Grid de productos */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -166,50 +384,64 @@
         }
 
         @media (max-width: 1200px) {
-            .products-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            .products-grid { grid-template-columns: repeat(4, 1fr); }
         }
 
         @media (max-width: 992px) {
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         }
 
         @media (max-width: 480px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
+            .products-grid { grid-template-columns: 1fr; }
         }
 
+        /* Skeleton loading */
+        .skeleton {
+            background: linear-gradient(90deg, var(--rosa-palido) 25%, var(--rosa-medio) 50%, var(--rosa-palido) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 16px;
+            height: 350px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Tarjeta de producto */
         .product-card {
             background: white;
             border-radius: 16px;
             overflow: hidden;
             transition: all 0.4s ease;
             border: 1px solid transparent;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+            position: relative;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(212, 165, 169, 0.2);
+            box-shadow: 0 20px 50px var(--sombra);
             border-color: var(--rosa-medio);
         }
 
         .product-card.agotado {
             opacity: 0.6;
             order: 999;
-        }
-
-        .product-card.agotado .product-image-container {
-            position: relative;
         }
 
         .product-card.agotado .product-image-container::after {
@@ -225,6 +457,73 @@
             font-weight: 600;
             letter-spacing: 2px;
             font-size: 0.9rem;
+        }
+
+        /* Badge de categoría color */
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .badge-carteras { background: #e74c3c; color: white; }
+        .badge-aritos { background: #f39c12; color: white; }
+        .badge-collares { background: #9b59b6; color: white; }
+        .badge-pulseras { background: #3498db; color: white; }
+        .badge-relojes { background: #1abc9c; color: white; }
+        .badge-anillos { background: #e91e63; color: white; }
+        .badge-lentes { background: #34495e; color: white; }
+        .badge-cabello { background: #795548; color: white; }
+        .badge-otros { background: #607d8b; color: white; }
+
+        /* Badge NUEVO */
+        .badge-nuevo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--nuevo);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Contador de escasez */
+        .stock-urgent {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(231, 76, 60, 0.95);
+            color: white;
+            padding: 6px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 10;
+            animation: urgentPulse 1.5s infinite;
+        }
+
+        @keyframes urgentPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .product-image-container {
@@ -244,7 +543,68 @@
         }
 
         .product-card:hover .product-image {
-            transform: scale(1.05);
+            transform: scale(1.1);
+        }
+
+        /* Botón wishlist */
+        .wishlist-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .wishlist-btn.active {
+            background: var(--agotado);
+            color: white;
+        }
+
+        .wishlist-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Selector de cantidad en grid */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--rosa-medio);
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: var(--rosa-palido);
+        }
+
+        .qty-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
         }
 
         .product-info {
@@ -341,7 +701,82 @@
             border-color: #ccc;
         }
 
-        /* Modal Imagen */
+        /* Vista rápida */
+        .quick-view-btn {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--rosa-oscuro);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            opacity: 0;
+        }
+
+        .product-card:hover .quick-view-btn {
+            bottom: 10px;
+            opacity: 1;
+        }
+
+        /* Modal vista rápida */
+        .quick-view-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quick-view-content {
+            background: var(--blanco-hueso);
+            border-radius: 20px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .quick-view-image {
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .quick-view-info h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+        }
+
+        .related-products {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--rosa-medio);
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Modal imagen */
         .image-modal {
             display: none;
             position: fixed;
@@ -370,181 +805,160 @@
             cursor: pointer;
         }
 
-        /* Modal Carrito */
-        .modal {
-            display: none;
+        /* Mini cart (deslizable) */
+        .mini-cart {
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            right: -400px;
+            width: 400px;
+            max-width: 100%;
+            height: 100vh;
+            background: var(--blanco-hueso);
+            box-shadow: -5px 0 30px var(--sombra);
+            z-index: 1001;
+            transition: right 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mini-cart.open {
+            right: 0;
+        }
+
+        .mini-cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--rosa-medio);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mini-cart-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .mini-cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--rosa-medio);
+            background: white;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(74, 74, 74, 0.4);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        .modal-content {
-            background: var(--blanco-hueso);
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 85vh;
-            overflow-y: auto;
+        .cart-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Swipe en carrito (móvil) */
+        .cart-item-swipe {
             position: relative;
+            overflow: hidden;
         }
 
-        .close {
+        .cart-item-swipe .delete-bg {
             position: absolute;
-            right: 1.5rem;
-            top: 1.5rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--texto-claro);
-            width: 35px;
-            height: 35px;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            background: var(--agotado);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s;
+            color: white;
+            transform: translateX(100%);
+            transition: transform 0.3s;
         }
 
-        .close:hover {
+        .cart-item-swipe.swiped .delete-bg {
+            transform: translateX(0);
+        }
+
+        /* Upsells en carrito */
+        .upsell-section {
             background: var(--rosa-palido);
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .upsell-section h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
             color: var(--texto);
         }
 
-        .shipping-info {
-            background: linear-gradient(135deg, var(--rosa-palido) 0%, var(--rosa-medio) 100%);
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            border: 1px solid var(--rosa-oscuro);
-        }
-
-        .shipping-info i {
-            font-size: 1.5rem;
-            color: var(--rosa-oscuro);
+        .upsell-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 8px;
             margin-bottom: 0.5rem;
         }
 
-        .shipping-info h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--texto);
-            margin-bottom: 0.3rem;
-            font-size: 1rem;
+        .upsell-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
         }
 
-        .shipping-info p {
-            color: var(--texto-claro);
-            font-size: 0.85rem;
-            margin: 0;
-        }
-
-        .clear-cart-btn {
-            background: transparent;
-            border: 1px solid var(--agotado);
-            color: var(--agotado);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+        .upsell-item button {
+            margin-left: auto;
+            background: var(--rosa-oscuro);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
             cursor: pointer;
             font-size: 0.8rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
+        }
+
+        /* Código de descuento */
+        .discount-code {
             display: flex;
-            align-items: center;
             gap: 0.5rem;
-            margin-left: auto;
+            margin-bottom: 1rem;
         }
 
-        .clear-cart-btn:hover {
-            background: var(--agotado);
+        .discount-code input {
+            flex: 1;
+            padding: 0.6rem;
+            border: 1px solid var(--rosa-medio);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .discount-code button {
+            background: var(--rosa-oscuro);
             color: white;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--rosa-medio);
-        }
-
-        .cart-item img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
+            border: none;
+            padding: 0.6rem 1rem;
             border-radius: 8px;
             cursor: pointer;
         }
 
-        .cart-item-info {
-            flex: 1;
-        }
-
-        .cart-item-title {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-            font-size: 0.9rem;
-        }
-
-        .cart-item-code {
-            color: var(--texto-claro);
-            font-size: 0.75rem;
-        }
-
-        .cart-item-price {
-            color: var(--rosa-oscuro);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .quantity-btn {
-            background: white;
-            border: 1px solid var(--rosa-medio);
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .quantity-btn:hover {
-            background: var(--rosa-palido);
-        }
-
-        .remove-item {
-            color: var(--rosa-oscuro);
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .cart-total {
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 2px solid var(--rosa-medio);
-            text-align: center;
-        }
-
+        /* Botón de checkout */
         .checkout-btn {
             width: 100%;
             padding: 1rem;
-            background: var(--rosa-oscuro);
+            background: var(--exito);
             color: white;
             border: none;
             border-radius: 30px;
@@ -556,22 +970,339 @@
             gap: 0.8rem;
             font-weight: 600;
             margin-top: 1rem;
+            transition: all 0.3s;
         }
 
         .checkout-btn:hover {
-            background: #c98a8f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.3);
         }
 
-        /* Footer */
-        footer {
+        /* Testimonios rotativos */
+        .testimonials {
+            background: white;
+            padding: 3rem 0;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .testimonial-slider {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-item {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .testimonial-item.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .testimonial-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--texto);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            color: var(--rosa-oscuro);
+            font-weight: 600;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, var(--rosa-palido) 0%, var(--rosa-medio) 100%);
+            padding: 3rem 0;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .newsletter h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 400px;
+            margin: 1rem auto 0;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form button {
+            background: var(--texto);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Contador de oferta */
+        .countdown-banner {
+            background: linear-gradient(90deg, var(--agotado) 0%, #c0392b 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            display: none;
+        }
+
+        .countdown-banner.active {
+            display: block;
+        }
+
+        .countdown-timer {
+            display: inline-flex;
+            gap: 1rem;
+            margin-left: 1rem;
+        }
+
+        .countdown-item {
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            min-width: 50px;
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .countdown-item small {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        /* Instagram feed */
+        .instagram-feed {
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .instagram-item {
+            aspect-ratio: 1;
+            background: var(--rosa-medio);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .instagram-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .instagram-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .instagram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(212, 165, 169, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .instagram-item:hover .instagram-overlay {
+            opacity: 1;
+        }
+
+        /* FAQ */
+        .faq-section {
+            padding: 3rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 10px var(--sombra);
+        }
+
+        .faq-question {
+            padding: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.2rem 1.2rem;
+            max-height: 200px;
+        }
+
+        /* Chat widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--rosa-oscuro);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--sombra);
+            transition: all 0.3s;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px var(--sombra);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: var(--rosa-oscuro);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--rosa-medio);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.6rem;
+            border: 1px solid var(--rosa-medio);
+            border-radius: 20px;
+        }
+
+        /* Bottom navigation (móvil) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: white;
             border-top: 1px solid var(--rosa-medio);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            padding: 0.8rem;
+            display: none;
+            justify-content: space-around;
+            z-index: 100;
         }
 
-        /* Notificación centrada */
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--texto-claro);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--rosa-oscuro);
+        }
+
+        .bottom-nav-item i {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .bottom-nav {
+                display: flex;
+            }
+            body {
+                padding-bottom: 70px;
+            }
+            .mini-cart {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        /* Notificación */
         .notification {
             position: fixed;
             top: 50%;
@@ -582,7 +1313,7 @@
             padding: 1.5rem 2.5rem;
             border-radius: 16px;
             display: none;
-            z-index: 1001;
+            z-index: 1002;
             font-weight: 600;
             font-size: 1.1rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
@@ -596,22 +1327,159 @@
             display: block;
         }
 
-        @media (max-width: 768px) {
-            .hero h2 { font-size: 1.4rem; }
-            .products-grid { gap: 1rem; }
+        /* Puntos de fidelidad */
+        .loyalty-points {
+            background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            border-top: 1px solid var(--rosa-medio);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Lazy loading blur */
+        .blur-load {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .blur-load.loaded > img {
+            opacity: 1;
+        }
+
+        .blur-load > img {
+            opacity: 0;
+            transition: opacity 200ms ease-in-out;
+        }
+
+        /* Offline indicator */
+        .offline-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #e74c3c;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            z-index: 10000;
+            display: none;
+        }
+
+        .offline-indicator.show {
+            display: block;
+        }
+
+        /* Comparador de productos */
+        .compare-bar {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 5px 30px var(--sombra);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 99;
+        }
+
+        .compare-bar.active {
+            display: flex;
+        }
+
+        .compare-item {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid var(--rosa-oscuro);
+        }
+
+        .compare-btn {
+            background: var(--rosa-oscuro);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Animación de entrada scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- Indicador offline -->
+    <div class="offline-indicator" id="offline-indicator">
+        <i class="fas fa-wifi-slash"></i> Sin conexión - Modo offline activo
+    </div>
+
+    <!-- Banner de countdown -->
+    <div class="countdown-banner" id="countdown-banner">
+        🔥 OFERTA ESPECIAL TERMINA EN:
+        <div class="countdown-timer" id="countdown-timer">
+            <div class="countdown-item"><span id="hours">00</span><small>hrs</small></div>
+            <div class="countdown-item"><span id="minutes">00</span><small>min</small></div>
+            <div class="countdown-item"><span id="seconds">00</span><small>seg</small></div>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <h1 class="logo">KLO<span>HE</span></h1>
-            <div class="cart-icon" onclick="toggleCart()">
-                <i class="fas fa-shopping-bag"></i>
-                <span id="cart-count">0</span>
+            <div class="header-actions">
+                <div class="loyalty-points" id="loyalty-points" style="display: none;">
+                    <i class="fas fa-crown"></i> <span id="points-display">0</span> pts
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <div class="cart-icon" onclick="toggleMiniCart()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-count">0</span>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- Breadcrumbs -->
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="#" onclick="resetFilters()">Inicio</a> 
+            <span id="breadcrumb-separator" style="display: none;"> > </span>
+            <span id="breadcrumb-current"></span>
+        </div>
+    </div>
+
+    <!-- Barra de envío gratis -->
+    <div class="free-shipping-bar" id="shipping-bar">
+        <div class="progress-fill" id="shipping-progress" style="width: 0%"></div>
+        <span id="shipping-text">¡Te faltan $25.00 para envío gratis!</span>
+    </div>
 
     <section class="hero">
         <div class="container">
@@ -621,24 +1489,154 @@
     </section>
 
     <main class="container">
-        <div class="filters">
-            <input type="text" id="search-input" placeholder="Buscar productos..." onkeyup="filterProducts()">
-            <select id="category-filter" onchange="filterProducts()">
-                <option value="all">Todas las categorías</option>
-                <option value="Carteras">Carteras</option>
-                <option value="Aritos">Aritos</option>
-                <option value="Collares">Collares</option>
-                <option value="Pulseras">Pulseras</option>
-                <option value="Relojes">Relojes</option>
-                <option value="Anillos">Anillos</option>
-                <option value="Lentes de sol">Lentes de sol</option>
-                <option value="Accesorios para el cabello">Accesorios para el cabello</option>
-                <option value="Otros">Otros</option>
-            </select>
+        <!-- Filtros mejorados -->
+        <div class="filters-container reveal">
+            <div class="filters">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Buscar productos..." onkeyup="handleSearch(this.value)">
+                    <div class="search-suggestions" id="search-suggestions"></div>
+                </div>
+                
+                <select id="category-filter" onchange="filterProducts()">
+                    <option value="all">Todas las categorías</option>
+                    <option value="Carteras">Carteras</option>
+                    <option value="Aritos">Aritos</option>
+                    <option value="Collares">Collares</option>
+                    <option value="Pulseras">Pulseras</option>
+                    <option value="Relojes">Relojes</option>
+                    <option value="Anillos">Anillos</option>
+                    <option value="Lentes de sol">Lentes de sol</option>
+                    <option value="Accesorios para el cabello">Accesorios para el cabello</option>
+                    <option value="Otros">Otros</option>
+                </select>
+
+                <div class="price-range">
+                    <label>Rango de precio</label>
+                    <div class="range-slider">
+                        <div class="range-selected" id="range-selected"></div>
+                    </div>
+                    <div class="range-input">
+                        <input type="range" min="0" max="50" value="0" id="price-min" oninput="updatePriceRange()">
+                        <input type="range" min="0" max="50" value="50" id="price-max" oninput="updatePriceRange()">
+                    </div>
+                    <div class="price-values">
+                        <span>$<span id="price-min-display">0</span></span>
+                        <span>$<span id="price-max-display">50</span></span>
+                    </div>
+                </div>
+
+                <label class="filter-checkbox">
+                    <input type="checkbox" id="stock-filter" onchange="filterProducts()">
+                    Solo disponibles
+                </label>
+
+                <select id="sort-filter" onchange="sortProducts()">
+                    <option value="default">Ordenar por</option>
+                    <option value="price-asc">Precio: menor a mayor</option>
+                    <option value="price-desc">Precio: mayor a menor</option>
+                    <option value="name">Nombre A-Z</option>
+                    <option value="newest">Más recientes</option>
+                </select>
+            </div>
         </div>
 
-        <div id="products-grid" class="products-grid"></div>
+        <div id="products-grid" class="products-grid">
+            <!-- Skeleton loading -->
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+        </div>
+
+        <!-- Botón cargar más -->
+        <div style="text-align: center; margin: 2rem 0;">
+            <button class="add-to-cart" onclick="loadMoreProducts()" id="load-more-btn" style="max-width: 300px;">
+                Cargar más productos
+            </button>
+        </div>
     </main>
+
+    <!-- Testimonios -->
+    <section class="testimonials reveal">
+        <div class="container">
+            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 2rem;">Lo que dicen nuestras clientas</h3>
+            <div class="testimonial-slider" id="testimonial-slider">
+                <div class="testimonial-item active">
+                    <div class="testimonial-text">"Los accesorios de Klohe transformaron completamente mi estilo. ¡Calidad increíble!"</div>
+                    <div class="testimonial-author">- María G.</div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-text">"Envío rápido y productos hermosos. Mi cartera nueva es mi favorita."</div>
+                    <div class="testimonial-author">- Ana L.</div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-text">"El mejor lugar para encontrar accesorios únicos. ¡Totalmente recomendado!"</div>
+                    <div class="testimonial-author">- Carmen R.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Feed -->
+    <section class="instagram-feed reveal">
+        <div class="container">
+            <h3 style="font-family: 'Playfair Display', serif;">
+                <i class="fab fa-instagram"></i> Síguenos @klohe.sv
+            </h3>
+            <p style="color: var(--texto-claro); margin-top: 0.5rem;">Etiquétanos con #KloheStyle</p>
+            <div class="instagram-grid" id="instagram-grid">
+                <!-- Se llena con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter reveal">
+        <div class="container">
+            <h3>Únete al Club Klohe</h3>
+            <p>Recibe 10% de descuento en tu primera compra y acceso a ofertas exclusivas</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit">Suscribirme</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section reveal">
+        <div class="container">
+            <h3 style="font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 2rem;">Preguntas Frecuentes</h3>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    ¿Cuánto tarda el envío?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Realizamos envíos a todo el país. El tiempo de entrega es de 2-5 días hábiles dependiendo de tu ubicación. El costo es de $3.75 o gratis en compras mayores a $25.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    ¿Puedo devolver un producto?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Sí, aceptamos devoluciones dentro de los 7 días posteriores a la entrega. El producto debe estar en condiciones originales.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    ¿Cómo acumulo puntos de fidelidad?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Por cada $1 de compra acumulas 1 punto. Los puntos puedes canjearlos por descuentos en futuras compras. ¡100 puntos = $5 de descuento!
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <p>&copy; 2025 Klohe. Todos los derechos reservados.</p>
@@ -647,403 +1645,945 @@
         </p>
     </footer>
 
-    <!-- Modal para imagen grande -->
+    <!-- Mini Cart -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleMiniCart()"></div>
+    <div class="mini-cart" id="mini-cart">
+        <div class="mini-cart-header">
+            <h3 style="font-family: 'Playfair Display', serif;">Tu Carrito</h3>
+            <button onclick="toggleMiniCart()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+        </div>
+        
+        <div class="mini-cart-body" id="mini-cart-body">
+            <!-- Items del carrito -->
+        </div>
+
+        <!-- Upsells -->
+        <div class="upsell-section" id="upsell-section" style="display: none;">
+            <h4><i class="fas fa-plus-circle"></i> Completa tu look</h4>
+            <div id="upsell-items"></div>
+        </div>
+
+        <div class="mini-cart-footer">
+            <!-- Código de descuento -->
+            <div class="discount-code">
+                <input type="text" id="discount-input" placeholder="Código de descuento">
+                <button onclick="applyDiscount()">Aplicar</button>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Subtotal:</span>
+                <strong>$<span id="cart-subtotal">0.00</span></strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--exito);" id="discount-row" style="display: none;">
+                <span>Descuento:</span>
+                <strong>-$<span id="cart-discount">0.00</span></strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700;">
+                <span>Total:</span>
+                <span>$<span id="cart-total">0.00</span></span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+            </button>
+            <button onclick="clearCart()" style="width: 100%; margin-top: 0.5rem; background: none; border: 1px solid var(--agotado); color: var(--agotado); padding: 0.6rem; border-radius: 20px; cursor: pointer;">
+                <i class="fas fa-trash"></i> Vaciar carrito
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal imagen -->
     <div id="image-modal" class="image-modal" onclick="closeImageModal()">
         <span class="image-modal-close">&times;</span>
         <img id="modal-image" class="image-modal-content" src="" alt="Producto">
     </div>
 
-    <!-- Modal carrito -->
-    <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="toggleCart()">&times;</span>
-            <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 1rem; font-size: 1.5rem;">Tu Carrito</h2>
-            
-            <!-- Info de envíos -->
-            <div class="shipping-info">
-                <i class="fas fa-truck"></i>
-                <h4>¡Envíos a todo el país!</h4>
-                <p>Desde $3.75 - Entrega rápida y segura</p>
-            </div>
-
-            <!-- Botón vaciar carrito -->
-            <button class="clear-cart-btn" onclick="clearCart()" id="clear-cart-btn" style="display: none;">
-                <i class="fas fa-trash-alt"></i> Vaciar carrito
-            </button>
-            
-            <div id="cart-items"></div>
-            <div class="cart-total">
-                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.2rem;">Total: $<span id="cart-total">0.00</span></h3>
-                <button class="checkout-btn" onclick="checkout()">
-                    <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+    <!-- Modal vista rápida -->
+    <div id="quick-view-modal" class="quick-view-modal" onclick="closeQuickView(event)">
+        <div class="quick-view-content" onclick="event.stopPropagation()">
+            <button onclick="closeQuickView()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <img id="quick-view-image" class="quick-view-image" src="" alt="">
+            <div class="quick-view-info">
+                <span id="quick-view-category" style="color: var(--rosa-oscuro); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;"></span>
+                <h2 id="quick-view-title" style="font-family: 'Playfair Display', serif; margin: 0.5rem 0;"></h2>
+                <div id="quick-view-price" style="font-size: 1.5rem; font-weight: 700; margin: 1rem 0;"></div>
+                <p id="quick-view-description" style="color: var(--texto-claro); line-height: 1.6;"></p>
+                <button class="checkout-btn" onclick="addToCartFromQuickView()" style="margin-top: 1rem;">
+                    <i class="fas fa-shopping-bag"></i> Agregar al carrito
                 </button>
+                
+                <!-- Productos relacionados -->
+                <div class="related-products">
+                    <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem;">Completa tu look</h4>
+                    <div class="related-grid" id="related-grid"></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Notificación centrada con sonido -->
+    <!-- Notificación -->
     <div id="notification" class="notification">
         <i class="fas fa-check-circle"></i>
         <div>¡Agregado al carrito!</div>
     </div>
 
-    <!-- Audio para el sonido de éxito -->
+    <!-- Chat widget -->
+    <div class="chat-widget">
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <span><i class="fas fa-headset"></i> Atención Klohe</span>
+                <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer;">&times;</button>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <p style="background: var(--rosa-palido); padding: 0.8rem; border-radius: 12px; margin-bottom: 0.5rem;">¡Hola! ¿En qué puedo ayudarte hoy? 💕</p>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-message" placeholder="Escribe tu mensaje..." onkeypress="handleChatKey(event)">
+                <button onclick="sendMessage()" style="background: var(--rosa-oscuro); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button class="chat-button" onclick="toggleChat()">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <!-- Bottom navigation (móvil) -->
+    <nav class="bottom-nav">
+        <a href="#" class="bottom-nav-item active" onclick="resetFilters()">
+            <i class="fas fa-home"></i>
+            Inicio
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="document.getElementById('search-input').focus()">
+            <i class="fas fa-search"></i>
+            Buscar
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="toggleMiniCart()">
+            <i class="fas fa-shopping-bag"></i>
+            Carrito
+            <span id="mobile-cart-count" style="position: absolute; top: 5px; background: var(--rosa-oscuro); color: white; font-size: 0.6rem; padding: 2px 5px; border-radius: 10px; display: none;">0</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="showWishlist()">
+            <i class="fas fa-heart"></i>
+            Favoritos
+        </a>
+    </nav>
+
+    <!-- Comparador -->
+    <div class="compare-bar" id="compare-bar">
+        <span>Comparar (<span id="compare-count">0</span>)</span>
+        <div id="compare-items"></div>
+        <button class="compare-btn" onclick="showComparison()">Comparar</button>
+        <button onclick="clearCompare()" style="background: none; border: none; cursor: pointer;"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Audio -->
     <audio id="success-sound" preload="auto">
         <source src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3" type="audio/mpeg">
     </audio>
 
     <script>
+        // Configuración
         const CONFIG = {
-            GITHUB_USER: 'industriastobias',
-            REPO_NAME: 'klohesvtiendaonline',
             WHATSAPP_NUMBER: '50366711569',
-            CURRENCY: '$'
+            CURRENCY: '$',
+            FREE_SHIPPING: 25,
+            POINTS_PER_DOLLAR: 1,
+            PRODUCTS_PER_PAGE: 10
         };
 
-        // 60 mensajes rotativos para el hero
+        // Estado global
+        let products = [];
+        let cart = [];
+        let wishlist = [];
+        let compareList = [];
+        let currentPage = 0;
+        let currentDiscount = 0;
+        let currentQuickViewId = null;
+        let loyaltyPoints = parseInt(localStorage.getItem('klohe_points')) || 0;
+
+        // Mensajes del hero
         const heroMessages = [
             { title: "DEJA LO ORDINARIO Y CONVIÉRTETE EN EXTRAORDINARIO", subtitle: "Transforma tu estilo hoy" },
             { title: "Elegancia que habla por ti", subtitle: "Sin decir una palabra" },
             { title: "Tu estilo, tu firma", subtitle: "Única e inconfundible" },
             { title: "Brilla con luz propia", subtitle: "Accesorios que iluminan" },
-            { title: "Detalles que enamoran", subtitle: "Cada pieza cuenta una historia" },
-            { title: "Sé el centro de atención", subtitle: "Donde quiera que vayas" },
-            { title: "Moda que inspira", subtitle: "Y elegancia que perdura" },
-            { title: "Descubre tu mejor versión", subtitle: "Un accesorio a la vez" },
-            { title: "Lujo accesible", subtitle: "Para todos los días" },
-            { title: "Estilo sin límites", subtitle: "Libertad para expresarte" },
-            { title: "Cada día es una pasarela", subtitle: "Vístete para brillar" },
-            { title: "Accesorios con alma", subtitle: "Hechos con pasión" },
-            { title: "Tu belleza, potenciada", subtitle: "Por detalles perfectos" },
-            { title: "Sofisticación natural", subtitle: "Elegancia sin esfuerzo" },
-            { title: "Haz una declaración", subtitle: "De estilo propio" },
-            { title: "El complemento perfecto", subtitle: "Para cada momento" },
-            { title: "Brillo que contagia", subtitle: "Positividad y estilo" },
-            { title: "Diseños que emocionan", subtitle: "Y crean recuerdos" },
-            { title: "Tu confianza, elevada", subtitle: "Con cada pieza" },
-            { title: "Arte que llevas contigo", subtitle: "En cada accesorio" },
-            { title: "Momentos especiales", subtitle: "Merecen piezas únicas" },
-            { title: "Estilo atemporal", subtitle: "Que nunca pasa de moda" },
-            { title: "Reinventa tu look", subtitle: "Cada día es nuevo" },
-            { title: "Pequeños detalles", subtitle: "Grandes diferencias" },
-            { title: "Magia en cada pieza", subtitle: "Descúbrela ahora" },
-            { title: "Para las soñadoras", subtitle: "Que conquistan el mundo" },
-            { title: "Elegancia femenina", subtitle: "En su máxima expresión" },
-            { title: "Crea tu propia historia", subtitle: "De estilo y glamour" },
-            { title: "Sé tú misma", subtitle: "Sin disculpas" },
-            { title: "Accesorios con propósito", subtitle: "Belleza con significado" },
-            { title: "Destaca entre la multitud", subtitle: "Con estilo propio" },
-            { title: "La vida es corta", subtitle: "Usa accesorios hermosos" },
-            { title: "Moda consciente", subtitle: "Elegancia responsable" },
-            { title: "Piezas que enamoran", subtitle: "A primera vista" },
-            { title: "Tu esencia, reflejada", subtitle: "En cada detalle" },
-            { title: "Celebrando la feminidad", subtitle: "Con cada diseño" },
-            { title: "Estilo que perdura", subtitle: "Más allá de tendencias" },
-            { title: "Encuentra tu pieza", subtitle: "Del rompecabezas perfecto" },
-            { title: "Diseños que cuentan", subtitle: "Tu historia única" },
-            { title: "Glamour diario", subtitle: "Porque te lo mereces" },
-            { title: "Transforma lo ordinario", subtitle: "En extraordinario" },
-            { title: "Accesorios que conquistan", subtitle: "Corazones y miradas" },
-            { title: "Tu mejor inversión", subtitle: "En ti misma" },
-            { title: "Piezas de colección", subtitle: "Para mujeres únicas" },
-            { title: "Estilo que inspira", subtitle: "Confianza que trasciende" },
-            { title: "Belleza que brilla", subtitle: "Desde el interior" },
-            { title: "Detalles que marcan", subtitle: "La diferencia" },
-            { title: "Diseños exclusivos", subtitle: "Para clientes exclusivas" },
-            { title: "Tu momento de brillar", subtitle: "Es ahora" },
-            { title: "Accesorios con carácter", subtitle: "Como tú" },
-            { title: "Elegancia en movimiento", subtitle: "Para la mujer moderna" },
-            { title: "Piezas que emocionan", subtitle: "Y perduran en el tiempo" },
-            { title: "Moda que te abraza", subtitle: "Y te hace sentir única" },
-            { title: "Sé la inspiración", subtitle: "De otras mujeres" },
-            { title: "Tu estilo, tu reglas", subtitle: "Rompe esquemas" },
-            { title: "Accesorios que celebran", subtitle: "Tu individualidad" },
-            { title: "Brilla sin miedo", subtitle: "El mundo te espera" },
-            { title: "Diseños que potencian", subtitle: "Tu belleza natural" },
-            { title: "Cada día es especial", subtitle: "Vístete como tal" },
-            { title: "Elegancia que se siente", subtitle: "Y se ve" },
-            { title: "Tu historia de estilo", subtitle: "Comienza aquí" }
+            { title: "Detalles que enamoran", subtitle: "Cada pieza cuenta una historia" }
         ];
 
-        // Productos actualizados - ARITOS DE PLATA movidos a categoría Aritos
-        let products = [
-            // CARTERAS (51 productos)
-            { id: 1, name: "Billetera", fullCode: "01176255049179774", code: "076", price: 10.00, stock: 0, category: "Carteras" },
-            { id: 2, name: "Bolso de Mano", fullCode: "002176261661064111", code: "088", price: 10.00, stock: 1, category: "Carteras" },
-            { id: 3, name: "Cartera", fullCode: "0117625504836382", code: "03", price: 12.50, stock: 1, category: "Carteras" },
-            { id: 4, name: "Cartera", fullCode: "01176255048601513", code: "014", price: 12.00, stock: 1, category: "Carteras" },
-            { id: 5, name: "Cartera", fullCode: "01176255048753632", code: "033", price: 10.99, stock: 1, category: "Carteras" },
-            { id: 6, name: "Cartera", fullCode: "01176255048777034", code: "035", price: 16.50, stock: 0, category: "Carteras" },
-            { id: 7, name: "Cartera", fullCode: "01176255049117469", code: "071", price: 15.00, stock: 0, category: "Carteras" },
-            { id: 8, name: "Cartera", fullCode: "01176255049145271", code: "073", price: 10.00, stock: 1, category: "Carteras" },
-            { id: 9, name: "Cartera", fullCode: "01176255049186675", code: "00000", price: 13.50, stock: 0, category: "Carteras" },
-            { id: 10, name: "Cartera", fullCode: "00217626166105179", code: "086", price: 18.50, stock: 1, category: "Carteras" },
-            { id: 11, name: "Cartera", fullCode: "002176261661059510", code: "087", price: 18.50, stock: 1, category: "Carteras" },
-            { id: 12, name: "Cartera", fullCode: "002176261661069012", code: "089", price: 14.99, stock: 1, category: "Carteras" },
-            { id: 13, name: "Cartera", fullCode: "002176261661119120", code: "096", price: 14.99, stock: 1, category: "Carteras" },
-            { id: 14, name: "Cartera", fullCode: "002176261661128421", code: "097", price: 14.99, stock: 1, category: "Carteras" },
-            { id: 15, name: "Cartera", fullCode: "002176261661134522", code: "098", price: 24.00, stock: 1, category: "Carteras" },
-            { id: 16, name: "Cartera", fullCode: "002176261661140323", code: "099", price: 14.99, stock: 1, category: "Carteras" },
-            { id: 17, name: "Cartera", fullCode: "002176261661266038", code: "114", price: 14.99, stock: 0, category: "Carteras" },
-            { id: 18, name: "Cartera", fullCode: "002176261661349451", code: "127", price: 12.00, stock: 1, category: "Carteras" },
-            { id: 19, name: "Cartera", fullCode: "002176261661353152", code: "128", price: 13.99, stock: 1, category: "Carteras" },
-            { id: 20, name: "Cartera", fullCode: "002176261661357953", code: "129", price: 13.99, stock: 1, category: "Carteras" },
-            { id: 21, name: "Cartera", fullCode: "002176261661362054", code: "130", price: 15.00, stock: 0, category: "Carteras" },
-            { id: 22, name: "Cartera", fullCode: "002176261661372956", code: "132", price: 14.00, stock: 2, category: "Carteras" },
-            { id: 23, name: "Cartera", fullCode: "002176261661468871", code: "147", price: 14.99, stock: 1, category: "Carteras" },
-            { id: 24, name: "Cartera", fullCode: "002176261661476572", code: "148", price: 14.00, stock: 1, category: "Carteras" },
-            { id: 25, name: "Cartera", fullCode: "002176261661479773", code: "149", price: 15.99, stock: 1, category: "Carteras" },
-            { id: 26, name: "Cartera", fullCode: "002176261661483874", code: "150", price: 15.99, stock: 1, category: "Carteras" },
-            { id: 27, name: "Cartera", fullCode: "002176261661487775", code: "151", price: 13.50, stock: 0, category: "Carteras" },
-            { id: 28, name: "Cartera", fullCode: "002176261661496076", code: "152", price: 14.00, stock: 1, category: "Carteras" },
-            { id: 29, name: "Cartera", fullCode: "002176261661503577", code: "153", price: 14.00, stock: 0, category: "Carteras" },
-            { id: 30, name: "Cartera Beige", fullCode: "01176255049090967", code: "068", price: 10.50, stock: 1, category: "Carteras" },
-            { id: 31, name: "Cartera Blanca", fullCode: "01176255048673221", code: "022", price: 13.00, stock: 0, category: "Carteras" },
-            { id: 32, name: "Cartera Blanca", fullCode: "01176255048892448", code: "049", price: 10.99, stock: 1, category: "Carteras" },
-            { id: 33, name: "Cartera Blanca", fullCode: "01176255048971257", code: "058", price: 10.99, stock: 0, category: "Carteras" },
-            { id: 34, name: "Cartera Blanca", fullCode: "01176255049044462", code: "063", price: 10.50, stock: 1, category: "Carteras" },
-            { id: 35, name: "Cartera Blanca", fullCode: "01176255049173873", code: "075", price: 13.50, stock: 0, category: "Carteras" },
-            { id: 36, name: "Cartera blanca", fullCode: "190", code: "190", price: 10.99, stock: 0, category: "Carteras" },
-            { id: 37, name: "Cartera Cafe", fullCode: "90101981", code: "899", price: 17.75, stock: 0, category: "Carteras" },
-            { id: 38, name: "Cartera Clasica", fullCode: "01176255048900350", code: "051", price: 20.00, stock: 0, category: "Carteras" },
-            { id: 39, name: "Cartera Clasica", fullCode: "01176255049013460", code: "061", price: 12.50, stock: 0, category: "Carteras" },
-            { id: 40, name: "Cartera Morada", fullCode: "01176255048936953", code: "054", price: 10.99, stock: 0, category: "Carteras" },
-            { id: 41, name: "Cartera Negra", fullCode: "01176255048873246", code: "047", price: 10.99, stock: 1, category: "Carteras" },
-            { id: 42, name: "Cartera Roja", fullCode: "01176255049150472", code: "074", price: 13.50, stock: 0, category: "Carteras" },
-            { id: 43, name: "Cartera Rosada", fullCode: "01176255048677822", code: "023", price: 9.50, stock: 1, category: "Carteras" },
-            { id: 44, name: "Cartera Vino", fullCode: "01176255048919052", code: "053", price: 18.00, stock: 0, category: "Carteras" },
-            { id: 45, name: "Carteras", fullCode: "181", code: "181", price: 10.00, stock: 1, category: "Carteras" },
-
-            // ARITOS (48 productos) - ARITOS DE PLATA movidos aquí
-            { id: 46, name: "Aritos", fullCode: "01176255048869645", code: "046", price: 3.50, stock: 1, category: "Aritos" },
-            { id: 47, name: "Aretas", fullCode: "245317626357192534", code: "179", price: 8.50, stock: 1, category: "Aritos" },
-            { id: 48, name: "Arete", fullCode: "01176255049001259", code: "060", price: 7.00, stock: 1, category: "Aritos" },
-            { id: 49, name: "Aretes", fullCode: "002176261661639398", code: "174", price: 8.50, stock: 1, category: "Aritos" },
-            { id: 50, name: "Aretes de Corazon", fullCode: "01176255048947055", code: "056", price: 4.50, stock: 0, category: "Aritos" },
-            { id: 51, name: "aritos", fullCode: "10910199117663599010811", code: "028393992", price: 6.00, stock: 0, category: "Aritos" },
-            { id: 52, name: "Aritos", fullCode: "0117625504853915", code: "06", price: 7.00, stock: 0, category: "Aritos" },
-            { id: 53, name: "Aritos", fullCode: "0117625504854496", code: "07", price: 5.00, stock: 0, category: "Aritos" },
-            { id: 54, name: "Aritos", fullCode: "0117625504856748", code: "09", price: 7.00, stock: 1, category: "Aritos" },
-            { id: 55, name: "Aritos", fullCode: "01176255048577010", code: "011", price: 7.00, stock: 0, category: "Aritos" },
-            { id: 56, name: "Aritos", fullCode: "01176255048596412", code: "013", price: 7.00, stock: 1, category: "Aritos" },
-            { id: 57, name: "Aritos", fullCode: "01176255048781535", code: "036", price: 3.50, stock: 0, category: "Aritos" },
-            { id: 58, name: "Aritos", fullCode: "00217626166097020", code: "079", price: 5.00, stock: 0, category: "Aritos" },
-            { id: 59, name: "Aritos", fullCode: "00217626166097771", code: "080", price: 4.00, stock: 0, category: "Aritos" },
-            { id: 60, name: "Aritos", fullCode: "00217626166098752", code: "081", price: 6.00, stock: 0, category: "Aritos" },
-            { id: 61, name: "Aritos", fullCode: "00217626166099973", code: "082", price: 6.50, stock: 0, category: "Aritos" },
-            { id: 62, name: "Aritos", fullCode: "00217626166104608", code: "085", price: 8.00, stock: 1, category: "Aritos" },
-            { id: 63, name: "Aritos", fullCode: "002176261661090616", code: "092", price: 3.50, stock: 0, category: "Aritos" },
-            { id: 64, name: "Aritos", fullCode: "002176261661144024", code: "100", price: 5.00, stock: 0, category: "Aritos" },
-            { id: 65, name: "Aritos", fullCode: "002176261661168625", code: "101", price: 5.50, stock: 1, category: "Aritos" },
-            { id: 66, name: "Aritos", fullCode: "002176261661178126", code: "102", price: 5.00, stock: 0, category: "Aritos" },
-            { id: 67, name: "Aritos", fullCode: "002176261661219431", code: "107", price: 8.00, stock: 1, category: "Aritos" },
-            { id: 68, name: "Aritos", fullCode: "002176261661223832", code: "108", price: 7.99, stock: 0, category: "Aritos" },
-            { id: 69, name: "Aritos", fullCode: "002176261661273339", code: "115", price: 6.99, stock: 1, category: "Aritos" },
-            { id: 70, name: "Aritos", fullCode: "002176261661277240", code: "116", price: 6.50, stock: 1, category: "Aritos" },
-            { id: 71, name: "Aritos", fullCode: "002176261661280541", code: "117", price: 7.50, stock: 1, category: "Aritos" },
-            { id: 72, name: "Aritos", fullCode: "002176261661300242", code: "118", price: 8.00, stock: 1, category: "Aritos" },
-            { id: 73, name: "Aritos", fullCode: "002176261661304543", code: "119", price: 6.00, stock: 0, category: "Aritos" },
-            { id: 74, name: "Aritos", fullCode: "002176261661331348", code: "124", price: 4.00, stock: 7, category: "Aritos" },
-            { id: 75, name: "Aritos", fullCode: "002176261661420664", code: "140", price: 5.50, stock: 0, category: "Aritos" },
-            { id: 76, name: "Aritos", fullCode: "002176261661519080", code: "156", price: 7.50, stock: 1, category: "Aritos" },
-            { id: 77, name: "Aritos", fullCode: "002176261661522281", code: "157", price: 8.99, stock: 1, category: "Aritos" },
-            { id: 78, name: "Aritos", fullCode: "002176261661530582", code: "158", price: 8.99, stock: 1, category: "Aritos" },
-            { id: 79, name: "Aritos", fullCode: "002176261661583590", code: "166", price: 7.00, stock: 3, category: "Aritos" },
-            { id: 80, name: "Aritos", fullCode: "002176261661595992", code: "168", price: 5.50, stock: 1, category: "Aritos" },
-            { id: 81, name: "Aritos", fullCode: "002176261661601193", code: "169", price: 6.50, stock: 0, category: "Aritos" },
-            { id: 82, name: "Aritos", fullCode: "002176261661611594", code: "170", price: 7.50, stock: 2, category: "Aritos" },
-            { id: 83, name: "Aritos", fullCode: "245317626357190221", code: "176", price: 6.50, stock: 1, category: "Aritos" },
-            { id: 84, name: "Aritos", fullCode: "245317626357191262", code: "178", price: 8.50, stock: 1, category: "Aritos" },
-            { id: 85, name: "Aritos", fullCode: "245317626357191823", code: "177", price: 8.50, stock: 1, category: "Aritos" },
-            { id: 86, name: "Aritos", fullCode: "0874317665443318060", code: "19009", price: 5.00, stock: 1, category: "Aritos" },
-            { id: 87, name: "Aritos", fullCode: "0874317665443319011", code: "190012", price: 7.00, stock: 1, category: "Aritos" },
-            { id: 88, name: "Aritos", fullCode: "1982929", code: "1991919", price: 2.00, stock: 1, category: "Aritos" },
-            { id: 89, name: "Aritos de Estrella", fullCode: "01176255048647718", code: "019", price: 3.00, stock: 0, category: "Aritos" },
-            // ARITOS DE PLATA - AHORA EN CATEGORÍA ARITOS
-            { id: 90, name: "Aritos de Plata", fullCode: "PEDIDO317694374239261", code: "02222", price: 5.00, stock: 1, category: "Aritos" },
-            { id: 91, name: "Aritos de Plata", fullCode: "PEDIDO317694374240403", code: "02224", price: 5.00, stock: 1, category: "Aritos" },
-            { id: 92, name: "Aritos de Plata", fullCode: "PEDIDO317694374240794", code: "02226", price: 5.00, stock: 1, category: "Aritos" },
-            { id: 93, name: "Aritos de Plata", fullCode: "PEDIDO317694374241245", code: "02227", price: 5.00, stock: 1, category: "Aritos" },
-
-            // COLLARES (43 productos) - ARITOS DE PLATA eliminados de aquí
-            { id: 94, name: "Aritos", fullCode: "01176255048723528", code: "029", price: 5.50, stock: 0, category: "Collares" },
-            { id: 95, name: "Colla de Playa", fullCode: "01176255049079565", code: "066", price: 12.75, stock: 1, category: "Collares" },
-            { id: 96, name: "Collar", fullCode: "0191001", code: "10199191", price: 9.50, stock: 1, category: "Collares" },
-            { id: 97, name: "Collar", fullCode: "08717664381648050", code: "17801", price: 10.00, stock: 1, category: "Collares" },
-            { id: 98, name: "Collar", fullCode: "01176255048693123", code: "024", price: 12.00, stock: 0, category: "Collares" },
-            { id: 99, name: "Collar", fullCode: "01176255048697624", code: "025", price: 12.00, stock: 1, category: "Collares" },
-            { id: 100, name: "Collar", fullCode: "01176255048719427", code: "028", price: 8.00, stock: 3, category: "Collares" },
-            { id: 101, name: "Collar", fullCode: "01176255048768333", code: "034", price: 15.00, stock: 1, category: "Collares" },
-            { id: 102, name: "Collar", fullCode: "01176255048802838", code: "039", price: 11.50, stock: 1, category: "Collares" },
-            { id: 103, name: "Collar", fullCode: "01176255048817339", code: "040", price: 10.00, stock: 0, category: "Collares" },
-            { id: 104, name: "Collar", fullCode: "01176255049112468", code: "070", price: 12.00, stock: 1, category: "Collares" },
-            { id: 105, name: "Collar", fullCode: "01176255049127870", code: "072", price: 11.50, stock: 1, category: "Collares" },
-            { id: 106, name: "Collar", fullCode: "01117625538987550", code: "077", price: 13.50, stock: 1, category: "Collares" },
-            { id: 107, name: "Collar", fullCode: "00217626166102646", code: "083", price: 0.00, stock: 0, category: "Collares" },
-            { id: 108, name: "Collar", fullCode: "00217626166103567", code: "084", price: 13.00, stock: 1, category: "Collares" },
-            { id: 109, name: "Collar", fullCode: "002176261661072713", code: "090", price: 12.50, stock: 1, category: "Collares" },
-            { id: 110, name: "Collar", fullCode: "002176261661077414", code: "091", price: 12.00, stock: 1, category: "Collares" },
-            { id: 111, name: "Collar", fullCode: "002176261661094617", code: "093", price: 12.00, stock: 1, category: "Collares" },
-            { id: 112, name: "Collar", fullCode: "002176261661109618", code: "094", price: 12.00, stock: 0, category: "Collares" },
-            { id: 113, name: "Collar", fullCode: "002176261661114119", code: "095", price: 12.00, stock: 0, category: "Collares" },
-            { id: 114, name: "Collar", fullCode: "002176261661192128", code: "104", price: 15.00, stock: 1, category: "Collares" },
-            { id: 115, name: "Collar", fullCode: "002176261661228633", code: "109", price: 11.00, stock: 0, category: "Collares" },
-            { id: 116, name: "Collar", fullCode: "002176261661236634", code: "110", price: 13.99, stock: 1, category: "Collares" },
-            { id: 117, name: "Collar", fullCode: "002176261661240435", code: "111", price: 14.99, stock: 1, category: "Collares" },
-            { id: 118, name: "Collar", fullCode: "002176261661257237", code: "113", price: 12.00, stock: 0, category: "Collares" },
-            { id: 119, name: "Collar", fullCode: "002176261661341250", code: "126", price: 12.00, stock: 1, category: "Collares" },
-            { id: 120, name: "Collar", fullCode: "002176261661376757", code: "133", price: 10.00, stock: 1, category: "Collares" },
-            { id: 121, name: "Collar", fullCode: "002176261661384358", code: "134", price: 12.00, stock: 2, category: "Collares" },
-            { id: 122, name: "Collar", fullCode: "002176261661388559", code: "135", price: 15.00, stock: 1, category: "Collares" },
-            { id: 123, name: "Collar", fullCode: "002176261661392860", code: "136", price: 15.00, stock: 1, category: "Collares" },
-            { id: 124, name: "Collar", fullCode: "002176261661414063", code: "139", price: 10.00, stock: 1, category: "Collares" },
-            { id: 125, name: "Collar", fullCode: "002176261661430265", code: "141", price: 10.00, stock: 1, category: "Collares" },
-            { id: 126, name: "Collar", fullCode: "002176261661452469", code: "145", price: 12.99, stock: 1, category: "Collares" },
-            { id: 127, name: "Collar", fullCode: "002176261661515479", code: "155", price: 10.00, stock: 1, category: "Collares" },
-            { id: 128, name: "Collar", fullCode: "002176261661561487", code: "163", price: 12.00, stock: 1, category: "Collares" },
-            { id: 129, name: "Collar", fullCode: "002176261661570388", code: "164", price: 12.00, stock: 1, category: "Collares" },
-            { id: 130, name: "Collar", fullCode: "002176261661578589", code: "165", price: 12.00, stock: 1, category: "Collares" },
-            { id: 131, name: "Collar", fullCode: "002176261661616595", code: "171", price: 12.00, stock: 1, category: "Collares" },
-            { id: 132, name: "Collar", fullCode: "002176261661624396", code: "172", price: 15.00, stock: 1, category: "Collares" },
-            { id: 133, name: "Collar", fullCode: "002176261661630897", code: "173", price: 12.00, stock: 1, category: "Collares" },
-            { id: 134, name: "Collar", fullCode: "245317626357189290", code: "175", price: 12.00, stock: 3, category: "Collares" },
-            { id: 135, name: "Collar", fullCode: "New17642076043110", code: "183", price: 10.00, stock: 1, category: "Collares" },
-            { id: 136, name: "Collar", fullCode: "New17642076049991", code: "184", price: 10.00, stock: 1, category: "Collares" },
-
-            // PULSERAS (34 productos)
-            { id: 137, name: "Bracelet", fullCode: "01176255048821240", code: "041", price: 7.00, stock: 0, category: "Pulseras" },
-            { id: 138, name: "Brasalet", fullCode: "01176255048799337", code: "038", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 139, name: "Pulsera", fullCode: "01176255048824741", code: "042", price: 5.00, stock: 1, category: "Pulseras" },
-            { id: 140, name: "Pulsera", fullCode: "01176255048840642", code: "043", price: 7.00, stock: 2, category: "Pulseras" },
-            { id: 141, name: "Pulsera", fullCode: "01176255048844943", code: "044", price: 10.00, stock: 1, category: "Pulseras" },
-            { id: 142, name: "Pulsera", fullCode: "01176255049053663", code: "064", price: 6.00, stock: 0, category: "Pulseras" },
-            { id: 143, name: "Pulsera", fullCode: "002176261661187727", code: "103", price: 12.00, stock: 0, category: "Pulseras" },
-            { id: 144, name: "Pulsera", fullCode: "002176261661203929", code: "105", price: 12.99, stock: 1, category: "Pulseras" },
-            { id: 145, name: "Pulsera", fullCode: "002176261661209330", code: "106", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 146, name: "Pulsera", fullCode: "002176261661252436", code: "112", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 147, name: "Pulsera", fullCode: "002176261661462170", code: "146", price: 12.00, stock: 1, category: "Pulseras" },
-            { id: 148, name: "Pulsera", fullCode: "002176261661535783", code: "159", price: 13.00, stock: 3, category: "Pulseras" },
-            { id: 149, name: "Pulsera", fullCode: "002176261661543784", code: "160", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 150, name: "Pulsera", fullCode: "002176261661548185", code: "161", price: 9.00, stock: 0, category: "Pulseras" },
-            { id: 151, name: "Pulsera", fullCode: "002176261661587991", code: "167", price: 12.00, stock: 0, category: "Pulseras" },
-            { id: 152, name: "Pulsera", fullCode: "198", code: "198", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 153, name: "Pulsera", fullCode: "78917664204712900", code: "9789", price: 8.00, stock: 1, category: "Pulseras" },
-            { id: 154, name: "Pulsera", fullCode: "78917664204717611", code: "8967", price: 7.00, stock: 1, category: "Pulseras" },
-            { id: 155, name: "Pulsera", fullCode: "L910023817667846502061", code: "1250", price: 5.50, stock: 0, category: "Pulseras" },
-            { id: 156, name: "Pulsera", fullCode: "RELOJES01176937472419514", code: "01126", price: 10.00, stock: 2, category: "Pulseras" },
-            { id: 157, name: "Pulsera", fullCode: "PEDIDO317694374238630", code: "02221", price: 10.50, stock: 3, category: "Pulseras" },
-            { id: 158, name: "Pulsera", fullCode: "PEDIDO317694374239962", code: "02223", price: 10.00, stock: 1, category: "Pulseras" },
-            { id: 159, name: "Pulsera", fullCode: "PEDIDO317694377272620", code: "03331", price: 12.00, stock: 1, category: "Pulseras" },
-            { id: 160, name: "Pulsera", fullCode: "PEDIDO317694377273431", code: "03332", price: 12.00, stock: 1, category: "Pulseras" },
-            { id: 161, name: "Pulsera", fullCode: "2001", code: "2001", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 162, name: "Pulsera Ajustable", fullCode: "01176255048642117", code: "018", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 163, name: "Pulsera Basica", fullCode: "01176255048731129", code: "030", price: 6.00, stock: 1, category: "Pulseras" },
-            { id: 164, name: "Pulsera cartier", fullCode: "01176255048749431", code: "032", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 165, name: "Pulsera Cartier", fullCode: "01176255048745830", code: "031", price: 11.00, stock: 0, category: "Pulseras" },
-            { id: 166, name: "Pulsera de Trebol", fullCode: "RELOJES0117693747221617", code: "01118", price: 12.00, stock: 1, category: "Pulseras" },
-            { id: 167, name: "Van Cleef", fullCode: "01176255048896449", code: "050", price: 12.00, stock: 0, category: "Pulseras" },
-
-            // RELOJES (25 productos)
-            { id: 168, name: "Reloj", fullCode: "RELOJES0117693747192350", code: "01111", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 169, name: "Reloj", fullCode: "RELOJES01176937472392113", code: "01125", price: 20.00, stock: 2, category: "Relojes" },
-            { id: 170, name: "Reloj", fullCode: "PEDIDO317694377274102", code: "03333", price: 16.00, stock: 1, category: "Relojes" },
-            { id: 171, name: "Reloj", fullCode: "PEDIDO317694377274623", code: "03334", price: 25.00, stock: 1, category: "Relojes" },
-            { id: 172, name: "Reloj", fullCode: "PEDIDO317694377275074", code: "03335", price: 16.00, stock: 1, category: "Relojes" },
-            { id: 173, name: "Reloj", fullCode: "PEDIDO317694377275455", code: "03336", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 174, name: "Reloj", fullCode: "PEDIDO317694377276216", code: "03337", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 175, name: "Reloj", fullCode: "PEDIDO317694377276477", code: "03338", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 176, name: "Reloj", fullCode: "PEDIDO317694377277228", code: "03339", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 177, name: "Reloj", fullCode: "PEDIDO317694377277439", code: "033340", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 178, name: "Reloj", fullCode: "PEDIDO3176943772778110", code: "033341", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 179, name: "Reloj", fullCode: "PEDIDO3176943772783611", code: "033342", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 180, name: "Reloj", fullCode: "PEDIDO3176943772788812", code: "033343", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 181, name: "Reloj", fullCode: "PEDIDO3176943772796213", code: "033344", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 182, name: "Reloj", fullCode: "PEDIDO3176943772808914", code: "033345", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 183, name: "Reloj", fullCode: "PEDIDO3176943772820315", code: "033346", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 184, name: "Reloj", fullCode: "PEDIDO3176943772827216", code: "033347", price: 25.00, stock: 1, category: "Relojes" },
-            { id: 185, name: "Reloj", fullCode: "PEDIDO3176943772835517", code: "033348", price: 30.00, stock: 1, category: "Relojes" },
-            { id: 186, name: "Reloj", fullCode: "PEDIDO3176943772847418", code: "033349", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 187, name: "Reloj", fullCode: "PEDIDO3176943772853019", code: "033350", price: 18.00, stock: 2, category: "Relojes" },
-            { id: 188, name: "Reloj Blanco", fullCode: "RELOJES0117693747208443", code: "011144", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 189, name: "Reloj de Acero Inoxidable", fullCode: "RELOJES0117693747218916", code: "01117", price: 15.00, stock: 2, category: "Relojes" },
-            { id: 190, name: "Reloj de Acero Inoxidable", fullCode: "RELOJES01176937472335611", code: "01123", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 191, name: "Reloj Dorado Waterproof", fullCode: "RELOJES01176937472302310", code: "01122", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 192, name: "Reloj Negro", fullCode: "RELOJES0117693747202302", code: "01113", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 193, name: "Reloj Old Moeny", fullCode: "RELOJES01176937472362712", code: "01124", price: 15.00, stock: 2, category: "Relojes" },
-            { id: 194, name: "Reloj Rojo", fullCode: "RELOJES0117693747224248", code: "01119", price: 15.00, stock: 1, category: "Relojes" },
-
-            // ANILLOS (8 productos)
-            { id: 195, name: "Anillo", fullCode: "0117625504832811", code: "02", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 196, name: "Anillo", fullCode: "0117625504844273", code: "04", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 197, name: "Anillo", fullCode: "0117625504854877", code: "08", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 198, name: "Anillo", fullCode: "01176255048626716", code: "017", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 199, name: "Anillo", fullCode: "01176255048668520", code: "021", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 200, name: "Anillo", fullCode: "01176255048852244", code: "045", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 201, name: "Anillo", fullCode: "01176255048962856", code: "057", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 202, name: "Anilo", fullCode: "01176255048979558", code: "059", price: 10.00, stock: 1, category: "Anillos" },
-
-            // LENTES DE SOL (2 productos)
-            { id: 203, name: "Lentes", fullCode: "01176255048619214", code: "015", price: 7.50, stock: 1, category: "Lentes de sol" },
-            { id: 204, name: "Lentes Negros", fullCode: "01176255048795836", code: "037", price: 5.75, stock: 1, category: "Lentes de sol" },
-
-            // ACCESORIOS PARA EL CABELLO (1 producto)
-            { id: 205, name: "Accesorios", fullCode: "002176261661405161", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello" },
-
-            // OTROS (3 productos)
-            { id: 206, name: "Cereza", fullCode: "002176261661319246", code: "122", price: 5.25, stock: 4, category: "Otros" },
-            { id: 207, name: "Tarjetas Navideñas", fullCode: "002176261661507078", code: "154", price: 0.00, stock: 121, category: "Otros" }
-        ];
-
-        let cart = [];
-        let currentMessageIndex = 0;
-        let messageInterval;
-
+        // Inicialización
         document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
             loadCart();
-            // Ordenar productos: disponibles primero, agotados al final
+            loadWishlist();
+            generateProducts();
             sortProductsByStock();
-            renderProducts(products);
+            renderProducts();
             startMessageRotation();
+            startTestimonialRotation();
+            initScrollReveal();
+            initOfflineDetection();
+            initCountdown();
+            generateInstagramFeed();
+            updateLoyaltyDisplay();
+            
+            // Simular carga
+            setTimeout(() => {
+                document.getElementById('products-grid').innerHTML = '';
+                renderProducts();
+            }, 1000);
         });
 
-        // Ordenar productos para que los agotados vayan al final
-        function sortProductsByStock() {
-            products.sort((a, b) => {
-                // Si a está agotado y b no, b va primero
-                if (a.stock === 0 && b.stock > 0) return 1;
-                // Si b está agotado y a no, a va primero
-                if (b.stock === 0 && a.stock > 0) return -1;
-                // Si ambos tienen el mismo estado de stock, mantener orden original por ID
-                return a.id - b.id;
+        // Generar productos de ejemplo (en producción vendrían de API)
+        function generateProducts() {
+            const categories = ['Carteras', 'Aritos', 'Collares', 'Pulseras', 'Relojes', 'Anillos', 'Lentes de sol', 'Accesorios para el cabello', 'Otros'];
+            const names = ['Elegante', 'Clásico', 'Moderno', 'Vintage', 'Premium', 'Deluxe'];
+            
+            for (let i = 1; i <= 50; i++) {
+                const category = categories[Math.floor(Math.random() * categories.length)];
+                const isNew = i <= 10;
+                const stock = Math.random() > 0.2 ? Math.floor(Math.random() * 10) + 1 : 0;
+                
+                products.push({
+                    id: i,
+                    name: `${names[Math.floor(Math.random() * names.length)]} ${category.slice(0, -1)} ${i}`,
+                    fullCode: `KLO${String(i).padStart(5, '0')}`,
+                    code: String(i).padStart(3, '0'),
+                    price: (Math.random() * 40 + 5).toFixed(2),
+                    stock: stock,
+                    category: category,
+                    isNew: isNew,
+                    image: `https://picsum.photos/300/300?random=${i}`
+                });
+            }
+        }
+
+        // Tema oscuro/claro
+        function initTheme() {
+            const savedTheme = localStorage.getItem('klohe_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('klohe_theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('theme-icon');
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Rotación de mensajes
+        let messageIndex = 0;
+        function startMessageRotation() {
+            setInterval(() => {
+                messageIndex = (messageIndex + 1) % heroMessages.length;
+                const title = document.getElementById('hero-title');
+                const subtitle = document.getElementById('hero-subtitle');
+                
+                title.style.opacity = '0';
+                subtitle.style.opacity = '0';
+                
+                setTimeout(() => {
+                    title.textContent = heroMessages[messageIndex].title;
+                    subtitle.textContent = heroMessages[messageIndex].subtitle;
+                    title.style.opacity = '1';
+                    subtitle.style.opacity = '1';
+                }, 300);
+            }, 4000);
+        }
+
+        // Testimonios rotativos
+        let testimonialIndex = 0;
+        function startTestimonialRotation() {
+            setInterval(() => {
+                const items = document.querySelectorAll('.testimonial-item');
+                items[testimonialIndex].classList.remove('active');
+                testimonialIndex = (testimonialIndex + 1) % items.length;
+                items[testimonialIndex].classList.add('active');
+            }, 5000);
+        }
+
+        // Scroll reveal
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        // Offline detection
+        function initOfflineDetection() {
+            window.addEventListener('online', () => {
+                document.getElementById('offline-indicator').classList.remove('show');
+            });
+            window.addEventListener('offline', () => {
+                document.getElementById('offline-indicator').classList.add('show');
             });
         }
 
-        // Rotación de mensajes cada 2 segundos
-        function startMessageRotation() {
-            const titleEl = document.getElementById('hero-title');
-            const subtitleEl = document.getElementById('hero-subtitle');
+        // Countdown
+        function initCountdown() {
+            const banner = document.getElementById('countdown-banner');
+            banner.classList.add('active');
             
-            messageInterval = setInterval(() => {
-                // Fade out
-                titleEl.style.opacity = '0';
-                subtitleEl.style.opacity = '0';
+            let hours = 23, minutes = 59, seconds = 59;
+            
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) hours = 23;
+                    }
+                }
                 
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }, 1000);
+        }
+
+        // Instagram feed simulado
+        function generateInstagramFeed() {
+            const grid = document.getElementById('instagram-grid');
+            for (let i = 0; i < 6; i++) {
+                grid.innerHTML += `
+                    <div class="instagram-item">
+                        <img src="https://picsum.photos/200/200?random=${100 + i}" alt="Instagram">
+                        <div class="instagram-overlay">
+                            <i class="fab fa-instagram" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Búsqueda predictiva
+        function handleSearch(value) {
+            const suggestions = document.getElementById('search-suggestions');
+            
+            if (value.length < 2) {
+                suggestions.classList.remove('active');
+                filterProducts();
+                return;
+            }
+            
+            const matches = products.filter(p => 
+                p.name.toLowerCase().includes(value.toLowerCase()) ||
+                p.category.toLowerCase().includes(value.toLowerCase())
+            ).slice(0, 5);
+            
+            if (matches.length > 0) {
+                suggestions.innerHTML = matches.map(p => `
+                    <div class="suggestion-item" onclick="selectSuggestion('${p.name}')">
+                        <i class="fas fa-search" style="margin-right: 0.5rem; color: var(--rosa-oscuro);"></i>
+                        ${p.name} <small style="color: var(--texto-claro);">(${p.category})</small>
+                    </div>
+                `).join('');
+                suggestions.classList.add('active');
+            } else {
+                suggestions.classList.remove('active');
+            }
+            
+            filterProducts();
+        }
+
+        function selectSuggestion(name) {
+            document.getElementById('search-input').value = name;
+            document.getElementById('search-suggestions').classList.remove('active');
+            filterProducts();
+        }
+
+        // Filtro de precio
+        function updatePriceRange() {
+            const min = document.getElementById('price-min').value;
+            const max = document.getElementById('price-max').value;
+            
+            if (parseInt(min) > parseInt(max)) {
+                document.getElementById('price-min').value = max;
+            }
+            
+            document.getElementById('price-min-display').textContent = document.getElementById('price-min').value;
+            document.getElementById('price-max-display').textContent = document.getElementById('price-max').value;
+            
+            const percentMin = (document.getElementById('price-min').value / 50) * 100;
+            const percentMax = (document.getElementById('price-max').value / 50) * 100;
+            document.getElementById('range-selected').style.left = percentMin + '%';
+            document.getElementById('range-selected').style.width = (percentMax - percentMin) + '%';
+            
+            filterProducts();
+        }
+
+        // Ordenar productos
+        function sortProducts() {
+            const sort = document.getElementById('sort-filter').value;
+            
+            switch(sort) {
+                case 'price-asc':
+                    products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+                    break;
+                case 'price-desc':
+                    products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+                    break;
+                case 'name':
+                    products.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'newest':
+                    products.sort((a, b) => b.id - a.id);
+                    break;
+            }
+            
+            filterProducts();
+        }
+
+        // Filtrar productos
+        function filterProducts() {
+            const search = document.getElementById('search-input').value.toLowerCase();
+            const category = document.getElementById('category-filter').value;
+            const priceMin = parseFloat(document.getElementById('price-min').value);
+            const priceMax = parseFloat(document.getElementById('price-max').value);
+            const onlyAvailable = document.getElementById('stock-filter').checked;
+            
+            // Actualizar breadcrumbs
+            const breadcrumbCurrent = document.getElementById('breadcrumb-current');
+            const separator = document.getElementById('breadcrumb-separator');
+            if (category !== 'all') {
+                breadcrumbCurrent.textContent = category;
+                separator.style.display = 'inline';
+            } else {
+                breadcrumbCurrent.textContent = '';
+                separator.style.display = 'none';
+            }
+            
+            let filtered = products.filter(p => {
+                const matchSearch = p.name.toLowerCase().includes(search) || 
+                                  p.category.toLowerCase().includes(search);
+                const matchCategory = category === 'all' || p.category === category;
+                const matchPrice = parseFloat(p.price) >= priceMin && parseFloat(p.price) <= priceMax;
+                const matchStock = !onlyAvailable || p.stock > 0;
+                
+                return matchSearch && matchCategory && matchPrice && matchStock;
+            });
+            
+            // Ordenar: disponibles primero
+            filtered.sort((a, b) => {
+                if (a.stock === 0 && b.stock > 0) return 1;
+                if (b.stock === 0 && a.stock > 0) return -1;
+                return 0;
+            });
+            
+            renderProducts(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('category-filter').value = 'all';
+            document.getElementById('stock-filter').checked = false;
+            document.getElementById('sort-filter').value = 'default';
+            filterProducts();
+        }
+
+        // Renderizar productos
+        function renderProducts(productsToRender = products) {
+            const grid = document.getElementById('products-grid');
+            const paginated = productsToRender.slice(0, (currentPage + 1) * CONFIG.PRODUCTS_PER_PAGE);
+            
+            grid.innerHTML = paginated.map((p, index) => {
+                const isAgotado = p.stock === 0;
+                const isLowStock = p.stock > 0 && p.stock <= 3;
+                const categoryClass = 'badge-' + p.category.toLowerCase().replace(/ /g, '-').replace(/[^a-z-]/g, '');
+                const inWishlist = wishlist.includes(p.id);
+                const inCompare = compareList.includes(p.id);
+                
+                return `
+                    <div class="product-card ${isAgotado ? 'agotado' : ''}" data-id="${p.id}" style="animation-delay: ${index * 0.05}s">
+                        ${p.isNew ? '<div class="badge-nuevo">Nuevo</div>' : ''}
+                        <div class="category-badge ${categoryClass}">${p.category}</div>
+                        
+                        <button class="wishlist-btn ${inWishlist ? 'active' : ''}" onclick="toggleWishlist(${p.id}, event)">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        
+                        <button class="wishlist-btn" style="right: 50px;" onclick="toggleCompare(${p.id}, event)" title="Comparar">
+                            <i class="fas fa-exchange-alt" style="${inCompare ? 'color: var(--rosa-oscuro);' : ''}"></i>
+                        </button>
+                        
+                        <div class="product-image-container" onclick="openImageModal('${p.image}')">
+                            <img src="${p.image}" alt="${p.name}" class="product-image" loading="lazy">
+                            ${isLowStock ? `<div class="stock-urgent">¡Solo ${p.stock} unidades!</div>` : ''}
+                        </div>
+                        
+                        <button class="quick-view-btn" onclick="openQuickView(${p.id})">
+                            Vista rápida
+                        </button>
+                        
+                        <div class="product-info">
+                            <span class="product-category">${p.category}</span>
+                            <h3 class="product-title">${p.name}</h3>
+                            
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Stock:</span>
+                                    <span class="detail-value ${isLowStock ? 'stock-bajo' : ''}">${p.stock} unidades</span>
+                                </div>
+                            </div>
+                            
+                            <div class="product-price">$${parseFloat(p.price).toFixed(2)}</div>
+                            
+                            ${!isAgotado ? `
+                                <div class="quantity-selector">
+                                    <button class="qty-btn" onclick="updateGridQty(${p.id}, -1)">-</button>
+                                    <span class="qty-display" id="qty-${p.id}">1</span>
+                                    <button class="qty-btn" onclick="updateGridQty(${p.id}, 1)">+</button>
+                                </div>
+                            ` : ''}
+                            
+                            <button class="add-to-cart" onclick="addToCart(${p.id})" ${isAgotado ? 'disabled' : ''}>
+                                ${isAgotado ? 'AGOTADO' : 'Agregar al carrito'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Ocultar botón si no hay más
+            document.getElementById('load-more-btn').style.display = 
+                paginated.length >= productsToRender.length ? 'none' : 'block';
+        }
+
+        function loadMoreProducts() {
+            currentPage++;
+            filterProducts();
+        }
+
+        // Vista rápida
+        function openQuickView(id) {
+            const p = products.find(x => x.id === id);
+            if (!p) return;
+            
+            currentQuickViewId = id;
+            document.getElementById('quick-view-image').src = p.image;
+            document.getElementById('quick-view-category').textContent = p.category;
+            document.getElementById('quick-view-title').textContent = p.name;
+            document.getElementById('quick-view-price').textContent = '$' + parseFloat(p.price).toFixed(2);
+            document.getElementById('quick-view-description').textContent = 
+                `Hermoso ${p.category.toLowerCase()} con código ${p.fullCode}. ` +
+                `${p.stock > 0 ? 'Disponible para envío inmediato.' : 'Producto agotado.'}`;
+            
+            // Productos relacionados
+            const related = products
+                .filter(x => x.category === p.category && x.id !== p.id)
+                .slice(0, 3);
+            
+            document.getElementById('related-grid').innerHTML = related.map(r => `
+                <div style="cursor: pointer;" onclick="openQuickView(${r.id})">
+                    <img src="${r.image}" style="width: 100%; border-radius: 8px; margin-bottom: 0.3rem;">
+                    <div style="font-size: 0.75rem; font-weight: 600;">$${parseFloat(r.price).toFixed(2)}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('quick-view-modal').style.display = 'flex';
+        }
+
+        function closeQuickView(e) {
+            if (!e || e.target.id === 'quick-view-modal') {
+                document.getElementById('quick-view-modal').style.display = 'none';
+            }
+        }
+
+        function addToCartFromQuickView() {
+            if (currentQuickViewId) {
+                addToCart(currentQuickViewId);
+                closeQuickView();
+            }
+        }
+
+        // Cantidad en grid
+        function updateGridQty(id, change) {
+            const display = document.getElementById(`qty-${id}`);
+            let val = parseInt(display.textContent) + change;
+            if (val < 1) val = 1;
+            if (val > 10) val = 10;
+            display.textContent = val;
+        }
+
+        // Wishlist
+        function toggleWishlist(id, event) {
+            event.stopPropagation();
+            const index = wishlist.indexOf(id);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                showNotification('Eliminado de favoritos', 'heart-broken');
+            } else {
+                wishlist.push(id);
+                showNotification('Agregado a favoritos', 'heart');
+            }
+            localStorage.setItem('klohe_wishlist', JSON.stringify(wishlist));
+            filterProducts();
+        }
+
+        function loadWishlist() {
+            const saved = localStorage.getItem('klohe_wishlist');
+            if (saved) wishlist = JSON.parse(saved);
+        }
+
+        function showWishlist() {
+            if (wishlist.length === 0) {
+                alert('No tienes productos en favoritos');
+                return;
+            }
+            const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+            renderProducts(wishlistProducts);
+        }
+
+        // Comparar
+        function toggleCompare(id, event) {
+            event.stopPropagation();
+            const index = compareList.indexOf(id);
+            if (index > -1) {
+                compareList.splice(index, 1);
+            } else {
+                if (compareList.length >= 3) {
+                    alert('Solo puedes comparar hasta 3 productos');
+                    return;
+                }
+                compareList.push(id);
+            }
+            updateCompareBar();
+            filterProducts();
+        }
+
+        function updateCompareBar() {
+            const bar = document.getElementById('compare-bar');
+            const count = document.getElementById('compare-count');
+            const items = document.getElementById('compare-items');
+            
+            if (compareList.length === 0) {
+                bar.classList.remove('active');
+                return;
+            }
+            
+            bar.classList.add('active');
+            count.textContent = compareList.length;
+            
+            items.innerHTML = compareList.map(id => {
+                const p = products.find(x => x.id === id);
+                return `<img src="${p.image}" class="compare-item" title="${p.name}" onclick="toggleCompare(${p.id}, event)">`;
+            }).join('');
+        }
+
+        function clearCompare() {
+            compareList = [];
+            updateCompareBar();
+            filterProducts();
+        }
+
+        function showComparison() {
+            if (compareList.length < 2) {
+                alert('Selecciona al menos 2 productos para comparar');
+                return;
+            }
+            
+            const items = products.filter(p => compareList.includes(p.id));
+            let html = '<div style="display: grid; grid-template-columns: repeat(' + items.length + ', 1fr); gap: 1rem; text-align: center;">';
+            
+            items.forEach(p => {
+                html += `
+                    <div>
+                        <img src="${p.image}" style="width: 100%; border-radius: 12px; margin-bottom: 0.5rem;">
+                        <h4>${p.name}</h4>
+                        <p style="color: var(--rosa-oscuro); font-weight: 700;">$${parseFloat(p.price).toFixed(2)}</p>
+                        <p>${p.stock > 0 ? '✅ Disponible' : '❌ Agotado'}</p>
+                        <p>${p.category}</p>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            
+            const modal = document.createElement('div');
+            modal.className = 'quick-view-modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div style="background: white; padding: 2rem; border-radius: 20px; max-width: 800px; max-height: 90vh; overflow-y: auto;">
+                    <button onclick="this.parentElement.parentElement.remove()" style="float: right; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                    <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 1.5rem;">Comparar productos</h2>
+                    ${html}
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Carrito
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (!product || product.stock === 0) return;
+            
+            const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || 1);
+            const existing = cart.find(item => item.id === id);
+            
+            if (existing) {
+                if (existing.quantity + qty <= product.stock) {
+                    existing.quantity += qty;
+                } else {
+                    alert('No hay suficiente stock');
+                    return;
+                }
+            } else {
+                cart.push({ ...product, quantity: qty });
+            }
+            
+            // Puntos de fidelidad
+            const points = Math.floor(parseFloat(product.price) * qty * CONFIG.POINTS_PER_DOLLAR);
+            loyaltyPoints += points;
+            localStorage.setItem('klohe_points', loyaltyPoints);
+            updateLoyaltyDisplay();
+            
+            saveCart();
+            updateCartUI();
+            showNotification('¡Agregado al carrito!');
+            playSound();
+            updateShippingProgress();
+        }
+
+        function updateLoyaltyDisplay() {
+            const display = document.getElementById('loyalty-points');
+            const pointsSpan = document.getElementById('points-display');
+            if (loyaltyPoints > 0) {
+                display.style.display = 'flex';
+                pointsSpan.textContent = loyaltyPoints;
+            }
+        }
+
+        function updateShippingProgress() {
+            const subtotal = cart.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0);
+            const remaining = Math.max(0, CONFIG.FREE_SHIPPING - subtotal);
+            const percent = Math.min(100, (subtotal / CONFIG.FREE_SHIPPING) * 100);
+            
+            const bar = document.getElementById('shipping-bar');
+            const progress = document.getElementById('shipping-progress');
+            const text = document.getElementById('shipping-text');
+            
+            progress.style.width = percent + '%';
+            
+            if (remaining === 0) {
+                bar.classList.add('completed');
+                text.textContent = '¡Envío gratis desbloqueado! 🎉';
+            } else {
+                bar.classList.remove('completed');
+                text.textContent = `¡Te faltan $${remaining.toFixed(2)} para envío gratis!`;
+            }
+        }
+
+        function toggleMiniCart() {
+            const cart = document.getElementById('mini-cart');
+            const overlay = document.getElementById('cart-overlay');
+            const isOpen = cart.classList.contains('open');
+            
+            if (isOpen) {
+                cart.classList.remove('open');
+                overlay.classList.remove('active');
+            } else {
+                cart.classList.add('open');
+                overlay.classList.add('active');
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const body = document.getElementById('mini-cart-body');
+            const count = document.getElementById('cart-count');
+            const mobileCount = document.getElementById('mobile-cart-count');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            count.textContent = totalItems;
+            mobileCount.textContent = totalItems;
+            mobileCount.style.display = totalItems > 0 ? 'block' : 'none';
+            
+            if (cart.length === 0) {
+                body.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: var(--texto-claro);">
+                        <i class="fas fa-shopping-bag" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                        Tu carrito está vacío
+                    </div>
+                `;
+                document.getElementById('upsell-section').style.display = 'none';
+            } else {
+                body.innerHTML = cart.map(item => `
+                    <div class="cart-item-swipe" id="cart-item-${item.id}">
+                        <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 12px; margin-bottom: 0.5rem;">
+                            <img src="${item.image}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; font-size: 0.9rem;">${item.name}</div>
+                                <div style="color: var(--rosa-oscuro); font-weight: 700;">$${(parseFloat(item.price) * item.quantity).toFixed(2)}</div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem;">
+                                    <button onclick="updateCartQty(${item.id}, -1)" style="width: 25px; height: 25px; border: 1px solid var(--rosa-medio); background: white; border-radius: 50%; cursor: pointer;">-</button>
+                                    <span>${item.quantity}</span>
+                                    <button onclick="updateCartQty(${item.id}, 1)" style="width: 25px; height: 25px; border: 1px solid var(--rosa-medio); background: white; border-radius: 50%; cursor: pointer;">+</button>
+                                </div>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: var(--agotado); cursor: pointer; font-size: 1.2rem;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="delete-bg" onclick="removeFromCart(${item.id})">
+                            <i class="fas fa-trash"></i>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Upsells
+                showUpsells();
+            }
+            
+            updateCartTotals();
+            updateShippingProgress();
+        }
+
+        function showUpsells() {
+            const cartCategories = [...new Set(cart.map(item => item.category))];
+            const upsells = products
+                .filter(p => cartCategories.includes(p.category) && !cart.find(c => c.id === p.id) && p.stock > 0)
+                .slice(0, 2);
+            
+            const section = document.getElementById('upsell-section');
+            const container = document.getElementById('upsell-items');
+            
+            if (upsells.length > 0) {
+                section.style.display = 'block';
+                container.innerHTML = upsells.map(p => `
+                    <div class="upsell-item">
+                        <img src="${p.image}">
+                        <div style="flex: 1;">
+                            <div style="font-size: 0.8rem; font-weight: 600;">${p.name}</div>
+                            <div style="color: var(--rosa-oscuro); font-size: 0.85rem;">$${parseFloat(p.price).toFixed(2)}</div>
+                        </div>
+                        <button onclick="addUpsell(${p.id})">Agregar</button>
+                    </div>
+                `).join('');
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        function addUpsell(id) {
+            addToCart(id);
+            showUpsells();
+        }
+
+        function updateCartQty(id, change) {
+            const item = cart.find(i => i.id === id);
+            const product = products.find(p => p.id === id);
+            if (!item) return;
+            
+            const newQty = item.quantity + change;
+            if (newQty <= 0) {
+                removeFromCart(id);
+            } else if (newQty <= product.stock) {
+                item.quantity = newQty;
+                saveCart();
+                updateCartUI();
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            saveCart();
+            updateCartUI();
+        }
+
+        function clearCart() {
+            if (cart.length === 0) return;
+            if (!confirm('¿Vaciar el carrito?')) return;
+            cart = [];
+            saveCart();
+            updateCartUI();
+        }
+
+        function updateCartTotals() {
+            const subtotal = cart.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0);
+            const discount = subtotal * (currentDiscount / 100);
+            const total = subtotal - discount;
+            
+            document.getElementById('cart-subtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('cart-discount').textContent = discount.toFixed(2);
+            document.getElementById('discount-row').style.display = currentDiscount > 0 ? 'flex' : 'none';
+            document.getElementById('cart-total').textContent = total.toFixed(2);
+        }
+
+        function applyDiscount() {
+            const code = document.getElementById('discount-input').value.toUpperCase();
+            const validCodes = { 'KLOHE10': 10, 'BIENVENIDA': 15, 'VIP20': 20 };
+            
+            if (validCodes[code]) {
+                currentDiscount = validCodes[code];
+                showNotification(`¡Descuento del ${currentDiscount}% aplicado!`);
+                updateCartTotals();
+            } else {
+                alert('Código inválido');
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('klohe_cart', JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            const saved = localStorage.getItem('klohe_cart');
+            if (saved) cart = JSON.parse(saved);
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            let msg = '¡Hola Klohe! 👋\n\nPedido:\n';
+            cart.forEach(item => {
+                msg += `• ${item.name} x${item.quantity} - $${(parseFloat(item.price) * item.quantity).toFixed(2)}\n`;
+            });
+            
+            const subtotal = cart.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0);
+            const discount = subtotal * (currentDiscount / 100);
+            const total = subtotal - discount;
+            
+            msg += `\nSubtotal: $${subtotal.toFixed(2)}`;
+            if (currentDiscount > 0) msg += `\nDescuento: -$${discount.toFixed(2)}`;
+            msg += `\nTotal: $${total.toFixed(2)}`;
+            msg += `\n\nTengo ${loyaltyPoints} puntos de fidelidad`;
+            
+            window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // Utilidades
+        function showNotification(text, icon = 'check-circle') {
+            const notif = document.getElementById('notification');
+            notif.innerHTML = `<i class="fas fa-${icon}"></i><div>${text}</div>`;
+            notif.style.display = 'block';
+            
+            setTimeout(() => {
+                notif.style.opacity = '0';
                 setTimeout(() => {
-                    currentMessageIndex = (currentMessageIndex + 1) % heroMessages.length;
-                    titleEl.textContent = heroMessages[currentMessageIndex].title;
-                    subtitleEl.textContent = heroMessages[currentMessageIndex].subtitle;
-                    
-                    // Fade in
-                    titleEl.style.transition = 'opacity 0.5s ease';
-                    subtitleEl.style.transition = 'opacity 0.5s ease';
-                    titleEl.style.opacity = '1';
-                    subtitleEl.style.opacity = '1';
-                }, 500);
+                    notif.style.display = 'none';
+                    notif.style.opacity = '1';
+                }, 300);
             }, 2000);
         }
 
-        function getImageUrl(code) {
-            return `https://industriastobias.github.io/klohesvtiendaonline/${code}.jpg`;
+        function playSound() {
+            const audio = document.getElementById('success-sound');
+            audio.currentTime = 0;
+            audio.play().catch(e => {});
         }
 
         function openImageModal(src) {
@@ -1055,246 +2595,71 @@
             document.getElementById('image-modal').style.display = 'none';
         }
 
-        function renderProducts(productsToRender) {
-            const grid = document.getElementById('products-grid');
-            
-            if (productsToRender.length === 0) {
-                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem;">No se encontraron productos</div>';
-                return;
-            }
-            
-            grid.innerHTML = productsToRender.map(product => {
-                const imageUrl = getImageUrl(product.code);
-                const isAgotado = product.stock === 0;
-                const stockClass = product.stock <= 2 && product.stock > 0 ? 'stock-bajo' : '';
-                
-                return `
-                <div class="product-card ${isAgotado ? 'agotado' : ''}" data-id="${product.id}">
-                    <div class="product-image-container" onclick="openImageModal('${imageUrl}')">
-                        <img src="${imageUrl}" 
-                             alt="${product.name}" 
-                             class="product-image"
-                             onerror="this.onerror=null; this.src='https://via.placeholder.com/300x280?text=${product.code}'">
-                    </div>
-                    <div class="product-info">
-                        <span class="product-category">${product.category}</span>
-                        <h3 class="product-title">${product.name}</h3>
-                        
-                        <div class="product-details">
-                            <div class="detail-row">
-                                <span class="detail-label">Código:</span>
-                                <span class="detail-value">${product.fullCode}</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Stock:</span>
-                                <span class="detail-value ${stockClass}">${product.stock} unidades</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Categoría:</span>
-                                <span class="detail-value">${product.category}</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Barras:</span>
-                                <span class="detail-value">${product.code}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="product-price">${CONFIG.CURRENCY}${product.price.toFixed(2)}</div>
-                        <button class="add-to-cart" onclick="addToCart(${product.id})" ${isAgotado ? 'disabled' : ''}>
-                            ${isAgotado ? 'AGOTADO' : 'Agregar al carrito'}
-                        </button>
-                    </div>
-                </div>
-            `}).join('');
+        // Chat
+        function toggleChat() {
+            document.getElementById('chat-window').classList.toggle('active');
         }
 
-        function filterProducts() {
-            const searchTerm = document.getElementById('search-input').value.toLowerCase();
-            const category = document.getElementById('category-filter').value;
+        function handleChatKey(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-message');
+            const msg = input.value.trim();
+            if (!msg) return;
             
-            let filtered = products.filter(product => {
-                const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
-                                    product.code.toLowerCase().includes(searchTerm) ||
-                                    product.fullCode.toLowerCase().includes(searchTerm);
-                const matchesCategory = category === 'all' || product.category === category;
-                return matchesSearch && matchesCategory;
-            });
+            const body = document.getElementById('chat-body');
+            body.innerHTML += `<p style="background: var(--rosa-oscuro); color: white; padding: 0.8rem; border-radius: 12px; margin-bottom: 0.5rem; margin-left: 2rem;">${msg}</p>`;
+            input.value = '';
+            body.scrollTop = body.scrollHeight;
             
-            // Reordenar los filtrados también
-            filtered.sort((a, b) => {
+            // Respuesta automática simulada
+            setTimeout(() => {
+                const replies = [
+                    '¡Gracias por tu mensaje! 💕',
+                    'Te ayudo con eso enseguida...',
+                    'Tenemos ofertas especiales hoy 😊',
+                    'Puedes ver nuestro catálogo completo arriba'
+                ];
+                body.innerHTML += `<p style="background: var(--rosa-palido); padding: 0.8rem; border-radius: 12px; margin-bottom: 0.5rem;">${replies[Math.floor(Math.random() * replies.length)]}</p>`;
+                body.scrollTop = body.scrollHeight;
+            }, 1000);
+        }
+
+        // FAQ
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Newsletter
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            showNotification('¡Gracias por suscribirte! Revisa tu correo 🎉');
+            e.target.reset();
+        }
+
+        // Ordenar por stock
+        function sortProductsByStock() {
+            products.sort((a, b) => {
                 if (a.stock === 0 && b.stock > 0) return 1;
                 if (b.stock === 0 && a.stock > 0) return -1;
                 return a.id - b.id;
             });
-            
-            renderProducts(filtered);
         }
 
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product || product.stock === 0) return;
-            
-            const cartItem = cart.find(item => item.id === productId);
-            if (cartItem) {
-                if (cartItem.quantity < product.stock) {
-                    cartItem.quantity++;
-                } else {
-                    alert('No hay más stock disponible');
-                    return;
-                }
-            } else {
-                cart.push({ ...product, quantity: 1 });
+        // Cerrar modales al hacer click fuera
+        window.onclick = function(e) {
+            if (e.target.classList.contains('quick-view-modal')) {
+                e.target.style.display = 'none';
             }
-            
-            saveCart();
-            updateCartUI();
-            showNotification();
-            playSuccessSound();
-        }
-
-        function playSuccessSound() {
-            const audio = document.getElementById('success-sound');
-            audio.currentTime = 0;
-            audio.play().catch(e => console.log('Audio play failed:', e));
-        }
-
-        function showNotification() {
-            const notification = document.getElementById('notification');
-            notification.style.display = 'block';
-            
-            // Animación de entrada
-            notification.style.transform = 'translate(-50%, -50%) scale(0.8)';
-            notification.style.opacity = '0';
-            
-            setTimeout(() => {
-                notification.style.transition = 'all 0.3s ease';
-                notification.style.transform = 'translate(-50%, -50%) scale(1)';
-                notification.style.opacity = '1';
-            }, 10);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translate(-50%, -50%) scale(0.8)';
-                notification.style.opacity = '0';
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                }, 300);
-            }, 1500);
-        }
-
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            saveCart();
-            updateCartUI();
-        }
-
-        function clearCart() {
-            if (cart.length === 0) return;
-            
-            if (confirm('¿Estás segura de que quieres vaciar el carrito?')) {
-                cart = [];
-                saveCart();
-                updateCartUI();
-            }
-        }
-
-        function updateQuantity(productId, change) {
-            const item = cart.find(item => item.id === productId);
-            const product = products.find(p => p.id === productId);
-            
-            if (item) {
-                const newQuantity = item.quantity + change;
-                if (newQuantity <= 0) {
-                    removeFromCart(productId);
-                } else if (newQuantity <= product.stock) {
-                    item.quantity = newQuantity;
-                    saveCart();
-                    updateCartUI();
-                } else {
-                    alert('No hay más stock disponible');
-                }
-            }
-        }
-
-        function saveCart() {
-            localStorage.setItem('klohe_cart', JSON.stringify(cart));
-        }
-
-        function loadCart() {
-            const saved = localStorage.getItem('klohe_cart');
-            if (saved) {
-                cart = JSON.parse(saved);
-                updateCartUI();
-            }
-        }
-
-        function updateCartUI() {
-            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cart-count').textContent = count;
-            
-            // Mostrar/ocultar botón de vaciar carrito
-            const clearBtn = document.getElementById('clear-cart-btn');
-            clearBtn.style.display = cart.length > 0 ? 'flex' : 'none';
-            
-            const cartItems = document.getElementById('cart-items');
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = `
-                    <div class="empty-cart" style="text-align: center; padding: 3rem;">
-                        <i class="fas fa-shopping-bag" style="font-size: 3rem; color: var(--rosa-medio); margin-bottom: 1rem;"></i>
-                        <p>Tu carrito está vacío</p>
-                    </div>`;
-                document.getElementById('cart-total').textContent = '0.00';
-                return;
-            }
-            
-            cartItems.innerHTML = cart.map(item => `
-                <div class="cart-item">
-                    <img src="${getImageUrl(item.code)}" alt="${item.name}" 
-                         onclick="openImageModal('${getImageUrl(item.code)}')"
-                         style="cursor: pointer;">
-                    <div class="cart-item-info">
-                        <div class="cart-item-title">${item.name}</div>
-                        <div class="cart-item-code">Cód: ${item.fullCode}</div>
-                        <div class="cart-item-price">${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}</div>
-                    </div>
-                    <div class="cart-item-quantity">
-                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-                        <span>${item.quantity}</span>
-                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-                    </div>
-                    <button class="remove-item" onclick="removeFromCart(${item.id})">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            `).join('');
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            document.getElementById('cart-total').textContent = total.toFixed(2);
-        }
-
-        function toggleCart() {
-            const modal = document.getElementById('cart-modal');
-            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function checkout() {
-            if (cart.length === 0) return;
-            
-            let message = '¡Hola Klohe! 👋\n\nQuiero hacer un pedido de:\n\n';
-            cart.forEach(item => {
-                message += `• ${item.name} (Cód: ${item.fullCode}) x${item.quantity} - ${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}\n`;
-            });
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `\n💰 Total: ${CONFIG.CURRENCY}${total.toFixed(2)}`;
-            message += `\n🚚 Envío: $3.75 a todo el país`;
-            message += `\n\n¡Gracias! 😊`;
-            
-            window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('cart-modal');
-            if (event.target === modal) modal.style.display = 'none';
         }
     </script>
 </body>

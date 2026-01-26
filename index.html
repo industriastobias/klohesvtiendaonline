@@ -503,14 +503,14 @@
 
     <script>
         // ==========================================
-        // CONFIGURACIÓN - EDITAR ESTOS VALORES
+        // CONFIGURACIÓN - YA CONFIGURADO PARA TU REPOSITORIO
         // ==========================================
         const CONFIG = {
-            // Tu usuario de GitHub (ejemplo: 'maria123')
-            GITHUB_USER: 'TU_USUARIO_GITHUB',
+            // Tu usuario de GitHub
+            GITHUB_USER: 'industriastobias',
             
-            // Nombre del repositorio (ejemplo: 'tiendaklohesv')
-            REPO_NAME: 'tiendaklohesv',
+            // Nombre del repositorio
+            REPO_NAME: 'klohesvtiendaonline',
             
             // Nombre de la carpeta de imágenes
             IMAGES_FOLDER: 'klohe_imagenes',
@@ -521,7 +521,7 @@
         };
 
         // ==========================================
-        // LISTA COMPLETA DE PRODUCTOS (96 productos, sin tarjetas)
+        // LISTA COMPLETA DE PRODUCTOS (96 productos)
         // ==========================================
         let products = [
             // CARTERAS (34)
@@ -644,13 +644,10 @@
             renderProducts(products);
         });
 
-        // Generar URL de imagen - USA GITHUB PAGES (más confiable)
+        // URL de imágenes configurada para tu repositorio
         function getImageUrl(code) {
-            // Opción 1: GitHub Pages (RECOMENDADO)
-            return `https://${CONFIG.GITHUB_USER}.github.io/${CONFIG.REPO_NAME}/${CONFIG.IMAGES_FOLDER}/${code}.jpg`;
-            
-            // Opción 2: Si no funciona, descomenta esta y comenta la de arriba:
-            // return `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}/main/${CONFIG.IMAGES_FOLDER}/${code}.jpg`;
+            // Usando GitHub Pages - tu URL exacta
+            return `https://industriastobias.github.io/klohesvtiendaonline/klohe_imagenes/${code}.jpg`;
         }
 
         function renderProducts(productsToRender) {

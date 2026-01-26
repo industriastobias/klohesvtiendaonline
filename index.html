@@ -36,6 +36,10 @@
             letter-spacing: 0.02em;
         }
 
+        body.modal-open {
+            overflow: hidden;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -228,7 +232,7 @@
             cursor: pointer;
         }
 
-        /* Grid de Productos - CORREGIDO PARA MÓVIL */
+        /* Grid de Productos */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -298,21 +302,6 @@
             font-weight: 400;
         }
 
-        .category-badge {
-            position: absolute;
-            top: 0.5rem;
-            left: 0.5rem;
-            padding: 0.2rem 0.6rem;
-            background: var(--blanco);
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            z-index: 10;
-            color: var(--texto-claro);
-            border: 1px solid var(--rosa-suave);
-            font-weight: 400;
-        }
-
         .badge-nuevo {
             position: absolute;
             top: 0.5rem;
@@ -356,16 +345,6 @@
             flex-direction: column;
         }
 
-        .product-category {
-            display: block;
-            color: var(--texto-claro);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.3rem;
-            font-weight: 400;
-        }
-
         .product-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 0.95rem;
@@ -373,9 +352,13 @@
             color: var(--texto);
             font-weight: 400;
             line-height: 1.3;
-            height: auto;
-            overflow: visible;
-            display: block;
+        }
+
+        .product-material {
+            font-size: 0.7rem;
+            color: var(--rosa-oscuro);
+            margin-bottom: 0.3rem;
+            font-style: italic;
         }
 
         .product-details {
@@ -391,10 +374,6 @@
         .detail-row {
             display: inline;
             margin: 0 0.3rem;
-        }
-
-        .detail-label {
-            display: none;
         }
 
         .detail-value {
@@ -476,7 +455,6 @@
             color: var(--texto);
         }
 
-        /* BOTÓN AGREGAR UNIFICADO */
         .add-to-cart {
             width: 100%;
             padding: 0.7rem;
@@ -598,6 +576,13 @@
             font-weight: 300;
         }
 
+        .quick-view-material {
+            font-size: 0.85rem;
+            color: var(--rosa-oscuro);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
         .quick-view-price {
             font-size: 1.4rem !important;
             color: var(--rosa-oscuro) !important;
@@ -645,6 +630,85 @@
 
         .image-modal-close:hover {
             background: var(--rosa-suave);
+        }
+
+        /* MODAL DE STOCK - NUEVO */
+        .stock-modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 5000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(250, 249, 246, 0.8);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stock-modal-overlay.active {
+            display: flex;
+        }
+
+        .stock-modal-content {
+            background: var(--rosa-suave);
+            padding: 2rem;
+            border-radius: 0;
+            text-align: center;
+            max-width: 320px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 1px solid var(--rosa-medio);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stock-modal-content i {
+            font-size: 2.5rem;
+            color: var(--rosa-oscuro);
+            margin-bottom: 1rem;
+        }
+
+        .stock-modal-content h3 {
+            color: var(--texto);
+            margin-bottom: 0.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
+
+        .stock-modal-content p {
+            color: var(--texto-claro);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stock-modal-content button {
+            padding: 0.8rem 2rem;
+            background: var(--texto);
+            color: white;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            transition: var(--transicion);
+        }
+
+        .stock-modal-content button:hover {
+            background: var(--rosa-oscuro);
         }
 
         /* Mini carrito */
@@ -1487,6 +1551,16 @@
         Sin conexión
     </div>
 
+    <!-- MODAL DE STOCK INSUFICIENTE - NUEVO -->
+    <div class="stock-modal-overlay" id="stock-modal-overlay" onclick="closeStockModal()">
+        <div class="stock-modal-content" onclick="event.stopPropagation()">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>Stock insuficiente</h3>
+            <p>No hay suficiente stock disponible</p>
+            <button onclick="closeStockModal()">Entendido</button>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <h1 class="logo">KLO<span>HE</span></h1>
@@ -1581,7 +1655,7 @@
     <section class="newsletter">
         <div class="container">
             <h3>Únete al Club Klohe</h3>
-            <p style="font-size: 0.9rem; opacity: 0.9; font-weight: 300;">15% de descuento en tu primera compra</p>
+            <p style="font-size: 0.9rem; opacity: 0.9; font-weight: 300;">5% de descuento en tu primera compra</p>
             <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
                 <input type="email" placeholder="Tu correo electrónico" required>
                 <button type="submit">Suscribirse</button>
@@ -1694,6 +1768,7 @@
             <div class="quick-view-info">
                 <span id="quick-view-category" style="color: var(--texto-claro); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 400;"></span>
                 <h2 id="quick-view-title"></h2>
+                <div id="quick-view-material" class="quick-view-material"></div>
                 <div id="quick-view-price" class="quick-view-price"></div>
                 <p id="quick-view-description" style="color: var(--texto-claro); line-height: 1.8; font-size: 0.95rem; font-weight: 300;"></p>
                 <button class="checkout-btn" onclick="addToCartFromQuickView()" style="margin-top: 1.5rem;">
@@ -1776,9 +1851,22 @@
             { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba", product: "Reloj Corazón", stars: 5 }
         ];
 
+        // Función para determinar el material del producto
+        function getProductMaterial(name, code, category) {
+            // Productos de plata específicos
+            if (name.toLowerCase().includes('plata') || code.startsWith('022')) {
+                return 'Plata italiana 925';
+            }
+            // Joyería en general (aritos, collares, pulseras, anillos)
+            if (['Aritos', 'Collares', 'Pulseras', 'Anillos'].includes(category)) {
+                return 'Acero inoxidable resistente a salpicaduras de agua';
+            }
+            return null;
+        }
+
         // TODOS LOS 228 PRODUCTOS DEL INVENTARIO
         const realProducts = [
-            // CARTERAS (Páginas 1-6) - Código 077 cambiado a 00000
+            // CARTERAS (45 productos)
             { id: 1, name: "Billetera", code: "076", price: 10.00, stock: 0, category: "Carteras", isNew: false },
             { id: 2, name: "Bolso de Mano", code: "088", price: 10.00, stock: 1, category: "Carteras", isNew: false },
             { id: 3, name: "Cartera", code: "03", price: 12.50, stock: 1, category: "Carteras", isNew: false },
@@ -1787,7 +1875,7 @@
             { id: 6, name: "Cartera", code: "035", price: 16.50, stock: 0, category: "Carteras", isNew: false },
             { id: 7, name: "Cartera", code: "071", price: 15.00, stock: 0, category: "Carteras", isNew: false },
             { id: 8, name: "Cartera", code: "073", price: 10.00, stock: 1, category: "Carteras", isNew: false },
-            { id: 9, name: "Cartera", code: "00000", price: 13.50, stock: 0, category: "Carteras", isNew: false }, // CAMBIADO DE 077 A 00000
+            { id: 9, name: "Cartera", code: "00000", price: 13.50, stock: 0, category: "Carteras", isNew: false },
             { id: 10, name: "Cartera", code: "086", price: 18.50, stock: 1, category: "Carteras", isNew: false },
             { id: 11, name: "Cartera", code: "087", price: 18.50, stock: 1, category: "Carteras", isNew: false },
             { id: 12, name: "Cartera", code: "089", price: 14.99, stock: 1, category: "Carteras", isNew: false },
@@ -1825,7 +1913,7 @@
             { id: 44, name: "Cartera Vino", code: "053", price: 18.00, stock: 0, category: "Carteras", isNew: false },
             { id: 45, name: "Carteras", code: "181", price: 10.00, stock: 1, category: "Carteras", isNew: false },
             
-            // ARITOS (Páginas 6-11)
+            // ARITOS (49 productos)
             { id: 46, name: "Aritos", code: "046", price: 3.50, stock: 1, category: "Aritos", isNew: true },
             { id: 47, name: "Aretas", code: "179", price: 8.50, stock: 1, category: "Aritos", isNew: false },
             { id: 48, name: "Arete", code: "060", price: 7.00, stock: 1, category: "Aritos", isNew: false },
@@ -1870,13 +1958,13 @@
             { id: 87, name: "Aritos", code: "190012", price: 7.00, stock: 1, category: "Aritos", isNew: false },
             { id: 88, name: "Aritos", code: "1991919", price: 2.00, stock: 1, category: "Aritos", isNew: false },
             { id: 89, name: "Aritos de Estrella", code: "019", price: 3.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 90, name: "Aritos de Plata", code: "02222", price: 5.00, stock: 1, category: "Aritos", isNew: true },
-            { id: 91, name: "Aritos de Plata", code: "02224", price: 5.00, stock: 1, category: "Aritos", isNew: true },
-            { id: 92, name: "Aritos de Plata", code: "02226", price: 5.00, stock: 1, category: "Aritos", isNew: true },
-            { id: 93, name: "Aritos de Plata", code: "02227", price: 5.00, stock: 1, category: "Aritos", isNew: true },
-            { id: 94, name: "Aritos de Plata", code: "02228", price: 5.00, stock: 1, category: "Aritos", isNew: true },
+            { id: 90, name: "Aritos", code: "02222", price: 5.00, stock: 1, category: "Aritos", isNew: true },
+            { id: 91, name: "Aritos de Plata", code: "02224", price: 6.00, stock: 1, category: "Aritos", isNew: true },
+            { id: 92, name: "Aritos de Plata", code: "02226", price: 6.00, stock: 1, category: "Aritos", isNew: true },
+            { id: 93, name: "Aritos de Plata", code: "02227", price: 6.00, stock: 1, category: "Aritos", isNew: true },
+            { id: 94, name: "Aritos de Plata", code: "02228", price: 6.00, stock: 1, category: "Aritos", isNew: true },
             
-            // COLLARES (Páginas 11-18)
+            // COLLARES (60 productos)
             { id: 95, name: "Collar Playa", code: "029", price: 5.50, stock: 0, category: "Collares", isNew: false },
             { id: 96, name: "Collar de Playa", code: "066", price: 12.75, stock: 1, category: "Collares", isNew: false },
             { id: 97, name: "Collar", code: "10199191", price: 9.50, stock: 1, category: "Collares", isNew: false },
@@ -1889,7 +1977,7 @@
             { id: 104, name: "Collar", code: "040", price: 10.00, stock: 0, category: "Collares", isNew: false },
             { id: 105, name: "Collar", code: "070", price: 12.00, stock: 1, category: "Collares", isNew: false },
             { id: 106, name: "Collar", code: "072", price: 11.50, stock: 1, category: "Collares", isNew: false },
-            { id: 107, name: "Collar", code: "077", price: 13.50, stock: 1, category: "Collares", isNew: false }, // ESTE ES EL DE COLLARES, NO CARTERAS
+            { id: 107, name: "Collar", code: "077", price: 13.50, stock: 1, category: "Collares", isNew: false },
             { id: 108, name: "Collar", code: "083", price: 0.00, stock: 0, category: "Collares", isNew: false },
             { id: 109, name: "Collar", code: "084", price: 13.00, stock: 1, category: "Collares", isNew: false },
             { id: 110, name: "Collar", code: "090", price: 12.50, stock: 1, category: "Collares", isNew: false },
@@ -1938,11 +2026,11 @@
             { id: 153, name: "Set Collar", code: "142", price: 18.50, stock: 1, category: "Collares", isNew: false },
             { id: 154, name: "Set de Collar", code: "078", price: 13.50, stock: 1, category: "Collares", isNew: false },
             
-            // LENTES (Página 18)
+            // LENTES (2 productos)
             { id: 155, name: "Lentes de Sol", code: "015", price: 7.50, stock: 1, category: "Lentes de sol", isNew: false },
             { id: 156, name: "Lentes Negros", code: "037", price: 5.75, stock: 1, category: "Lentes de sol", isNew: false },
             
-            // PULSERAS (Páginas 18-21)
+            // PULSERAS (31 productos)
             { id: 157, name: "Bracelet", code: "041", price: 7.00, stock: 0, category: "Pulseras", isNew: false },
             { id: 158, name: "Brasalet", code: "038", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
             { id: 159, name: "Pulsera", code: "042", price: 5.00, stock: 1, category: "Pulseras", isNew: false },
@@ -1975,7 +2063,7 @@
             { id: 186, name: "Pulsera Trébol", code: "01118", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
             { id: 187, name: "Van Cleef", code: "050", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
             
-            // RELOJES (Páginas 22-25)
+            // RELOJES (30 productos)
             { id: 188, name: "Reloj", code: "01111", price: 15.00, stock: 1, category: "Relojes", isNew: false },
             { id: 189, name: "Reloj", code: "01125", price: 20.00, stock: 2, category: "Relojes", isNew: false },
             { id: 190, name: "Reloj", code: "03333", price: 16.00, stock: 1, category: "Relojes", isNew: false },
@@ -2007,7 +2095,7 @@
             { id: 216, name: "Set Reloj y Pulsera", code: "01115", price: 14.00, stock: 1, category: "Relojes", isNew: false },
             { id: 217, name: "Set Reloj", code: "01112", price: 40.00, stock: 1, category: "Relojes", isNew: false },
             
-            // ANILLOS (Páginas 25-26)
+            // ANILLOS (8 productos)
             { id: 218, name: "Anillo", code: "02", price: 10.00, stock: 1, category: "Anillos", isNew: false },
             { id: 219, name: "Anillo", code: "04", price: 10.00, stock: 1, category: "Anillos", isNew: false },
             { id: 220, name: "Anillo", code: "08", price: 10.00, stock: 1, category: "Anillos", isNew: false },
@@ -2017,10 +2105,10 @@
             { id: 224, name: "Anillo", code: "057", price: 10.00, stock: 1, category: "Anillos", isNew: false },
             { id: 225, name: "Anillo", code: "059", price: 10.00, stock: 1, category: "Anillos", isNew: false },
             
-            // ACCESORIOS CABELLO (Página 26)
+            // ACCESORIOS CABELLO (1 producto)
             { id: 226, name: "Accesorios Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: false },
             
-            // OTROS (Página 26)
+            // OTROS (2 productos)
             { id: 227, name: "Cereza", code: "122", price: 5.25, stock: 4, category: "Otros", isNew: false },
             { id: 228, name: "Tarjetas Navideñas", code: "154", price: 0.00, stock: 121, category: "Otros", isNew: false }
         ];
@@ -2116,11 +2204,11 @@
             
             const html = toShow.map((p, index) => {
                 const isAgotado = p.stock === 0;
+                const material = getProductMaterial(p.name, p.code, p.category);
                 
                 return `
                     <div class="product-card ${isAgotado ? 'agotado' : ''}" style="animation-delay: ${index * 0.05}s">
                         ${p.isNew ? '<div class="badge-nuevo">Nuevo</div>' : ''}
-                        <div class="category-badge">${p.category}</div>
                         
                         <div class="product-image-container" onclick="openImageModal('https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg')">
                             <img src="https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg" 
@@ -2131,8 +2219,8 @@
                         </div>
                         
                         <div class="product-info">
-                            <span class="product-category">${p.category}</span>
                             <h3 class="product-title">${p.name}</h3>
+                            ${material ? `<div class="product-material">${material}</div>` : ''}
                             
                             <div class="product-details">
                                 <span class="detail-row">
@@ -2240,10 +2328,12 @@
             if (!p) return;
             
             currentQuickViewId = id;
+            const material = getProductMaterial(p.name, p.code, p.category);
             
             document.getElementById('quick-view-image').src = `https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg`;
             document.getElementById('quick-view-category').textContent = p.category;
             document.getElementById('quick-view-title').textContent = p.name;
+            document.getElementById('quick-view-material').textContent = material || '';
             document.getElementById('quick-view-price').textContent = '$' + p.price.toFixed(2);
             document.getElementById('quick-view-description').innerHTML = 
                 `<strong>Código:</strong> ${p.code}<br>
@@ -2251,11 +2341,13 @@
                  <strong>Categoría:</strong> ${p.category}`;
             
             document.getElementById('quick-view-modal').style.display = 'flex';
+            document.body.classList.add('modal-open');
         }
 
         function closeQuickView(e) {
             if (!e || e.target.id === 'quick-view-modal') {
                 document.getElementById('quick-view-modal').style.display = 'none';
+                document.body.classList.remove('modal-open');
             }
         }
 
@@ -2269,10 +2361,25 @@
         function openImageModal(src) {
             document.getElementById('modal-image').src = src;
             document.getElementById('image-modal').style.display = 'flex';
+            document.body.classList.add('modal-open');
         }
 
         function closeImageModal() {
             document.getElementById('image-modal').style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+
+        // NUEVO: Modal de stock insuficiente
+        function showStockModal() {
+            const modal = document.getElementById('stock-modal-overlay');
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeStockModal() {
+            const modal = document.getElementById('stock-modal-overlay');
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
         }
 
         function addToCart(id) {
@@ -2286,7 +2393,7 @@
                 if (existing.quantity + qty <= product.stock) {
                     existing.quantity += qty;
                 } else {
-                    alert('No hay suficiente stock disponible');
+                    showStockModal(); // NUEVO: Mostrar modal en lugar de alert
                     return;
                 }
             } else {
@@ -2321,9 +2428,11 @@
             if (isOpen) {
                 cartEl.classList.remove('open');
                 overlay.classList.remove('active');
+                document.body.classList.remove('modal-open');
             } else {
                 cartEl.classList.add('open');
                 overlay.classList.add('active');
+                document.body.classList.add('modal-open');
                 updateCartUI();
             }
         }
@@ -2379,6 +2488,8 @@
                 item.quantity = newQty;
                 saveCart();
                 updateCartUI();
+            } else {
+                showStockModal(); // NUEVO: Mostrar modal cuando no hay stock suficiente
             }
         }
 
@@ -2417,11 +2528,13 @@
 
         function showErrorModal() {
             document.getElementById('error-modal').style.display = 'flex';
+            document.body.classList.add('modal-open');
         }
 
         function closeErrorModal(e) {
             if (!e || e.target.id === 'error-modal') {
                 document.getElementById('error-modal').style.display = 'none';
+                document.body.classList.remove('modal-open');
             }
         }
 
@@ -2532,7 +2645,7 @@
 
         window.onclick = function(e) {
             if (e.target.classList.contains('quick-view-modal')) {
-                e.target.style.display = 'none';
+                closeQuickView(e);
             }
         }
     </script>

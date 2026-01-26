@@ -1,2 +1,0 @@
-# klohesvtiendaonline
-tienda online klohe 

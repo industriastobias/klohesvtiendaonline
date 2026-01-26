@@ -40,16 +40,10 @@
         header {
             background-color: var(--blanco-hueso);
             border-bottom: 1px solid var(--rosa-medio);
-            padding: 1rem 0;
+            padding: 2rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            transition: all 0.3s ease;
-        }
-
-        header.scrolled {
-            padding: 0.5rem 0;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
 
         header .container {
@@ -58,21 +52,16 @@
             align-items: center;
         }
 
-        .logo-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
         .logo {
-            height: 60px;
-            width: auto;
-            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--texto);
+            letter-spacing: 3px;
         }
 
-        header.scrolled .logo {
-            height: 40px;
+        .logo span {
+            color: var(--rosa-oscuro);
         }
 
         .cart-icon {
@@ -87,7 +76,6 @@
             justify-content: center;
             transition: all 0.3s ease;
             background: white;
-            margin-left: auto;
         }
 
         .cart-icon:hover {
@@ -119,32 +107,31 @@
         /* Hero */
         .hero {
             text-align: center;
-            padding: 2rem 0;
+            padding: 4rem 0;
             background: linear-gradient(135deg, var(--blanco-hueso) 0%, var(--rosa-palido) 100%);
         }
 
         .hero h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 2.5rem;
             font-weight: 400;
             color: var(--texto);
-            margin-bottom: 0.3rem;
-            min-height: 1.5em;
-            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            min-height: 3.5rem;
         }
 
         .hero p {
             color: var(--texto-claro);
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             font-weight: 300;
-            min-height: 1.5em;
+            min-height: 1.5rem;
         }
 
         /* Filtros */
         .filters {
             display: flex;
             gap: 1rem;
-            margin: 2rem 0;
+            margin: 3rem 0;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -169,12 +156,36 @@
             box-shadow: 0 0 0 3px rgba(212, 165, 169, 0.1);
         }
 
-        /* Grid */
+        /* Grid - 5 productos por línea */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
             margin-bottom: 4rem;
+        }
+
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .product-card {
@@ -216,7 +227,7 @@
         .product-image-container {
             position: relative;
             width: 100%;
-            height: 280px;
+            height: 220px;
             overflow: hidden;
             background: var(--blanco-hueso);
             cursor: pointer;
@@ -234,40 +245,41 @@
         }
 
         .product-info {
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .product-category {
             display: inline-block;
             color: var(--rosa-oscuro);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.3rem;
             font-weight: 600;
         }
 
         .product-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
             color: var(--texto);
             font-weight: 400;
+            line-height: 1.3;
         }
 
         .product-details {
             background: var(--blanco-hueso);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .detail-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.5rem;
-            padding-bottom: 0.3rem;
+            margin-bottom: 0.3rem;
+            padding-bottom: 0.2rem;
             border-bottom: 1px solid var(--rosa-medio);
         }
 
@@ -292,22 +304,22 @@
         }
 
         .product-price {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             color: var(--texto);
             font-weight: 600;
-            margin: 1rem 0;
+            margin: 0.8rem 0;
             text-align: center;
         }
 
         .add-to-cart {
             width: 100%;
-            padding: 1rem;
+            padding: 0.8rem;
             background: transparent;
             color: var(--texto);
             border: 1px solid var(--rosa-medio);
             border-radius: 25px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -504,45 +516,40 @@
             margin-top: 4rem;
         }
 
+        /* Notificación centrada */
         .notification {
             position: fixed;
-            top: 100px;
-            right: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: var(--rosa-oscuro);
             color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            padding: 2rem 3rem;
+            border-radius: 16px;
             display: none;
             z-index: 1001;
             font-weight: 600;
-            animation: slideIn 0.3s ease;
+            font-size: 1.2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            min-width: 300px;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        .notification i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
         }
 
         @media (max-width: 768px) {
-            .products-grid { grid-template-columns: 1fr; }
-            .hero h2 { font-size: 1rem; }
-            .logo { height: 50px; }
-            header.scrolled .logo { height: 35px; }
+            .hero h2 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <div class="logo-container">
-                <img src="KLOHE.jpeg" alt="KLOHE" class="logo">
-            </div>
+            <h1 class="logo">KLO<span>HE</span></h1>
             <div class="cart-icon" onclick="toggleCart()">
                 <i class="fas fa-shopping-bag"></i>
                 <span id="cart-count">0</span>
@@ -552,8 +559,8 @@
 
     <section class="hero">
         <div class="container">
-            <h2 id="rotating-text">Accesorios que inspiran</h2>
-            <p id="rotating-subtext">Elegancia en cada detalle</p>
+            <h2 id="hero-title">Accesorios que inspiran</h2>
+            <p id="hero-subtitle">Elegancia en cada detalle</p>
         </div>
     </section>
 
@@ -605,13 +612,15 @@
         </div>
     </div>
 
+    <!-- Notificación centrada con sonido -->
     <div id="notification" class="notification">
-        <i class="fas fa-check"></i> Agregado al carrito
+        <i class="fas fa-check-circle"></i>
+        <div>¡Agregado al carrito!</div>
     </div>
 
-    <!-- Audio para el sonido del carrito -->
-    <audio id="cart-sound" preload="auto">
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+    <!-- Audio para el sonido de éxito -->
+    <audio id="success-sound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -622,70 +631,70 @@
             CURRENCY: '$'
         };
 
-        // 60 mensajes rotativos
-        const messages = [
-            { title: "DEJA LO ORDINARIO Y CONVIÉRTETE EN EXTRAORDINARIO", subtitle: "Elegancia en cada detalle" },
-            { title: "Accesorios que inspiran", subtitle: "Tu estilo, tu esencia" },
-            { title: "Brilla con cada pieza", subtitle: "Diseños únicos para ti" },
-            { title: "La elegancia está en los detalles", subtitle: "Descubre tu look perfecto" },
-            { title: "Transforma tu estilo hoy", subtitle: "Accesorios que hablan por ti" },
-            { title: "Sé el centro de atención", subtitle: "Piezas que enamoran" },
-            { title: "Tu belleza merece lo mejor", subtitle: "Calidad en cada accesorio" },
-            { title: "Descubre tu lado brillante", subtitle: "Brillo que cautiva" },
-            { title: "Elegancia sin esfuerzo", subtitle: "Estilo natural" },
-            { title: "Cada día es especial", subtitle: "Vístete para brillar" },
-            { title: "El complemento perfecto", subtitle: "Para tu look único" },
-            { title: "Moda que te define", subtitle: "Personalidad en cada pieza" },
-            { title: "Sé auténtica, sé tú", subtitle: "Accesorios con alma" },
-            { title: "Brilla desde dentro", subtitle: "Refleja tu luz exterior" },
-            { title: "Detalles que marcan la diferencia", subtitle: "Distingue tu estilo" },
-            { title: "Tu momento de brillar", subtitle: "Atrévete a destacar" },
-            { title: "Estilo atemporal", subtitle: "Belleza que perdura" },
-            { title: "Crea tu propia tendencia", subtitle: "Sé la inspiración" },
-            { title: "La perfección está en los detalles", subtitle: "Descúbrela aquí" },
-            { title: "Haz que cada día cuente", subtitle: "Con estilo y elegancia" },
-            { title: "Tu mejor versión", subtitle: "Comienza con los accesorios" },
-            { title: "Diseños que cuentan historias", subtitle: "¿Cuál es la tuya?" },
-            { title: "Sofisticación moderna", subtitle: "Para la mujer de hoy" },
-            { title: "El toque final perfecto", subtitle: "Completa tu outfit" },
-            { title: "Belleza en su máxima expresión", subtitle: "Accesorios de ensueño" },
-            { title: "Exprésate sin palabras", subtitle: "Deja que tus accesorios hablen" },
-            { title: "Cada pieza es única", subtitle: "Como tú" },
-            { title: "Descubre tu estilo", subtitle: "Encuentra tu esencia" },
-            { title: "La magia está en los detalles", subtitle: "Encuéntrala aquí" },
-            { title: "Viste tus sueños", subtitle: "Hazlos realidad" },
+        // 60 mensajes rotativos para el hero
+        const heroMessages = [
+            { title: "DEJA LO ORDINARIO Y CONVIÉRTETE EN EXTRAORDINARIO", subtitle: "Transforma tu estilo hoy" },
+            { title: "Elegancia que habla por ti", subtitle: "Sin decir una palabra" },
+            { title: "Tu estilo, tu firma", subtitle: "Única e inconfundible" },
+            { title: "Brilla con luz propia", subtitle: "Accesorios que iluminan" },
+            { title: "Detalles que enamoran", subtitle: "Cada pieza cuenta una historia" },
+            { title: "Sé el centro de atención", subtitle: "Donde quiera que vayas" },
+            { title: "Moda que inspira", subtitle: "Y elegancia que perdura" },
+            { title: "Descubre tu mejor versión", subtitle: "Un accesorio a la vez" },
+            { title: "Lujo accesible", subtitle: "Para todos los días" },
+            { title: "Estilo sin límites", subtitle: "Libertad para expresarte" },
+            { title: "Cada día es una pasarela", subtitle: "Vístete para brillar" },
+            { title: "Accesorios con alma", subtitle: "Hechos con pasión" },
+            { title: "Tu belleza, potenciada", subtitle: "Por detalles perfectos" },
+            { title: "Sofisticación natural", subtitle: "Elegancia sin esfuerzo" },
+            { title: "Haz una declaración", subtitle: "De estilo propio" },
+            { title: "El complemento perfecto", subtitle: "Para cada momento" },
+            { title: "Brillo que contagia", subtitle: "Positividad y estilo" },
+            { title: "Diseños que emocionan", subtitle: "Y crean recuerdos" },
+            { title: "Tu confianza, elevada", subtitle: "Con cada pieza" },
+            { title: "Arte que llevas contigo", subtitle: "En cada accesorio" },
+            { title: "Momentos especiales", subtitle: "Merecen piezas únicas" },
+            { title: "Estilo atemporal", subtitle: "Que nunca pasa de moda" },
+            { title: "Reinventa tu look", subtitle: "Cada día es nuevo" },
+            { title: "Pequeños detalles", subtitle: "Grandes diferencias" },
+            { title: "Magia en cada pieza", subtitle: "Descúbrela ahora" },
+            { title: "Para las soñadoras", subtitle: "Que conquistan el mundo" },
+            { title: "Elegancia femenina", subtitle: "En su máxima expresión" },
+            { title: "Crea tu propia historia", subtitle: "De estilo y glamour" },
+            { title: "Sé tú misma", subtitle: "Sin disculpas" },
+            { title: "Accesorios con propósito", subtitle: "Belleza con significado" },
+            { title: "Destaca entre la multitud", subtitle: "Con estilo propio" },
+            { title: "La vida es corta", subtitle: "Usa accesorios hermosos" },
+            { title: "Moda consciente", subtitle: "Elegancia responsable" },
+            { title: "Piezas que enamoran", subtitle: "A primera vista" },
+            { title: "Tu esencia, reflejada", subtitle: "En cada detalle" },
+            { title: "Celebrando la feminidad", subtitle: "Con cada diseño" },
+            { title: "Estilo que perdura", subtitle: "Más allá de tendencias" },
+            { title: "Encuentra tu pieza", subtitle: "Del rompecabezas perfecto" },
+            { title: "Diseños que cuentan", subtitle: "Tu historia única" },
+            { title: "Glamour diario", subtitle: "Porque te lo mereces" },
+            { title: "Transforma lo ordinario", subtitle: "En extraordinario" },
+            { title: "Accesorios que conquistan", subtitle: "Corazones y miradas" },
+            { title: "Tu mejor inversión", subtitle: "En ti misma" },
+            { title: "Piezas de colección", subtitle: "Para mujeres únicas" },
+            { title: "Estilo que inspira", subtitle: "Confianza que trasciende" },
+            { title: "Belleza que brilla", subtitle: "Desde el interior" },
+            { title: "Detalles que marcan", subtitle: "La diferencia" },
+            { title: "Diseños exclusivos", subtitle: "Para clientes exclusivas" },
+            { title: "Tu momento de brillar", subtitle: "Es ahora" },
+            { title: "Accesorios con carácter", subtitle: "Como tú" },
+            { title: "Elegancia en movimiento", subtitle: "Para la mujer moderna" },
+            { title: "Piezas que emocionan", subtitle: "Y perduran en el tiempo" },
+            { title: "Moda que te abraza", subtitle: "Y te hace sentir única" },
+            { title: "Sé la inspiración", subtitle: "De otras mujeres" },
+            { title: "Tu estilo, tu reglas", subtitle: "Rompe esquemas" },
+            { title: "Accesorios que celebran", subtitle: "Tu individualidad" },
+            { title: "Brilla sin miedo", subtitle: "El mundo te espera" },
+            { title: "Diseños que potencian", subtitle: "Tu belleza natural" },
+            { title: "Cada día es especial", subtitle: "Vístete como tal" },
             { title: "Elegancia que se siente", subtitle: "Y se ve" },
-            { title: "Tu confianza, tu mejor accesorio", subtitle: "Poténciala" },
-            { title: "Diseños que enamoran", subtitle: "Al primer vistazo" },
-            { title: "Estilo que trasciende", subtitle: "Más allá de las tendencias" },
-            { title: "La belleza de ser diferente", subtitle: "Celebra tu unicidad" },
-            { title: "Accesorios con propósito", subtitle: "Para mujeres con visión" },
-            { title: "Tu look, tu historia", subtitle: "Escríbela con estilo" },
-            { title: "Brillo que no pasa desapercibido", subtitle: "Destaca siempre" },
-            { title: "La elegancia nunca pasa de moda", subtitle: "Invierte en ti" },
-            { title: "Sé la protagonista", subtitle: "De tu propia historia" },
-            { title: "Detalles que enamoran", subtitle: "Piezas de colección" },
-            { title: "Tu estilo, tu firma", subtitle: "Hazlo inolvidable" },
-            { title: "Moda que inspira", subtitle: "Sé la inspiración" },
-            { title: "La perfección existe", subtitle: "La encuentras aquí" },
-            { title: "Cada día es una pasarela", subtitle: "Vístete como tal" },
-            { title: "Tu belleza, tu poder", subtitle: "Exprésalo" },
-            { title: "Diseños que evocan emociones", subtitle: "Siente la magia" },
-            { title: "Estilo consciente", subtitle: "Belleza responsable" },
-            { title: "El arte de vestir bien", subtitle: "Maestría en cada pieza" },
-            { title: "Tu momento es ahora", subtitle: "Brilla sin límites" },
-            { title: "Accesorios que conectan", subtitle: "Con tu esencia" },
-            { title: "La distinción está en ti", subtitle: "Poténciala" },
-            { title: "Crea tu propio destino", subtitle: "Con estilo propio" },
-            { title: "Belleza que trasciende", subtitle: "Más allá de lo superficial" },
-            { title: "Tu esencia, tu marca", subtitle: "Hazla brillar" },
-            { title: "Elegancia para cada ocasión", subtitle: "Siempre perfecta" },
-            { title: "Sé memorable", subtitle: "Deja huella" },
-            { title: "La moda pasa, el estilo permanece", subtitle: "Invierte en eterno" },
-            { title: "Tu mejor inversión", subtitle: "Eres tú misma" }
+            { title: "Tu historia de estilo", subtitle: "Comienza aquí" }
         ];
-
-        let currentMessageIndex = 0;
 
         // Productos actualizados desde el inventario (228 productos)
         let products = [
@@ -698,7 +707,8 @@
             { id: 6, name: "Cartera", fullCode: "01176255048777034", code: "035", price: 16.50, stock: 0, category: "Carteras" },
             { id: 7, name: "Cartera", fullCode: "01176255049117469", code: "071", price: 15.00, stock: 0, category: "Carteras" },
             { id: 8, name: "Cartera", fullCode: "01176255049145271", code: "073", price: 10.00, stock: 1, category: "Carteras" },
-            { id: 9, name: "Cartera", fullCode: "01176255049186675", code: "077", price: 13.50, stock: 0, category: "Carteras" },
+            // Cambiado el código 077 a 00000 para evitar duplicado
+            { id: 9, name: "Cartera", fullCode: "01176255049186675", code: "00000", price: 13.50, stock: 0, category: "Carteras" },
             { id: 10, name: "Cartera", fullCode: "00217626166105179", code: "086", price: 18.50, stock: 1, category: "Carteras" },
             { id: 11, name: "Cartera", fullCode: "002176261661059510", code: "087", price: 18.50, stock: 1, category: "Carteras" },
             { id: 12, name: "Cartera", fullCode: "002176261661069012", code: "089", price: 14.99, stock: 1, category: "Carteras" },
@@ -917,45 +927,37 @@
         ];
 
         let cart = [];
+        let currentMessageIndex = 0;
+        let messageInterval;
 
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
             renderProducts(products);
             startMessageRotation();
-            
-            // Scroll listener para header sticky
-            window.addEventListener('scroll', () => {
-                const header = document.querySelector('header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
         });
 
+        // Rotación de mensajes cada 2 segundos
         function startMessageRotation() {
-            const titleEl = document.getElementById('rotating-text');
-            const subtitleEl = document.getElementById('rotating-subtext');
+            const titleEl = document.getElementById('hero-title');
+            const subtitleEl = document.getElementById('hero-subtitle');
             
-            setInterval(() => {
-                currentMessageIndex = (currentMessageIndex + 1) % messages.length;
-                
+            messageInterval = setInterval(() => {
                 // Fade out
                 titleEl.style.opacity = '0';
                 subtitleEl.style.opacity = '0';
                 
                 setTimeout(() => {
-                    titleEl.textContent = messages[currentMessageIndex].title;
-                    subtitleEl.textContent = messages[currentMessageIndex].subtitle;
+                    currentMessageIndex = (currentMessageIndex + 1) % heroMessages.length;
+                    titleEl.textContent = heroMessages[currentMessageIndex].title;
+                    subtitleEl.textContent = heroMessages[currentMessageIndex].subtitle;
                     
                     // Fade in
                     titleEl.style.transition = 'opacity 0.5s ease';
                     subtitleEl.style.transition = 'opacity 0.5s ease';
                     titleEl.style.opacity = '1';
                     subtitleEl.style.opacity = '1';
-                }, 300);
-            }, 60000); // Cambia cada minuto
+                }, 500);
+            }, 2000);
         }
 
         function getImageUrl(code) {
@@ -1039,12 +1041,6 @@
             renderProducts(filtered);
         }
 
-        function playCartSound() {
-            const audio = document.getElementById('cart-sound');
-            audio.currentTime = 0;
-            audio.play().catch(e => console.log('Error reproduciendo sonido:', e));
-        }
-
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             if (!product || product.stock === 0) return;
@@ -1061,18 +1057,39 @@
                 cart.push({ ...product, quantity: 1 });
             }
             
-            // Reproducir sonido
-            playCartSound();
-            
             saveCart();
             updateCartUI();
             showNotification();
+            playSuccessSound();
+        }
+
+        function playSuccessSound() {
+            const audio = document.getElementById('success-sound');
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log('Audio play failed:', e));
         }
 
         function showNotification() {
             const notification = document.getElementById('notification');
             notification.style.display = 'block';
-            setTimeout(() => notification.style.display = 'none', 2000);
+            
+            // Animación de entrada
+            notification.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            notification.style.opacity = '0';
+            
+            setTimeout(() => {
+                notification.style.transition = 'all 0.3s ease';
+                notification.style.transform = 'translate(-50%, -50%) scale(1)';
+                notification.style.opacity = '1';
+            }, 10);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 300);
+            }, 1500);
         }
 
         function removeFromCart(productId) {
@@ -1119,8 +1136,8 @@
             
             if (cart.length === 0) {
                 cartItems.innerHTML = `
-                    <div class="empty-cart" style="text-align: center; padding: 2rem; color: var(--texto-claro);">
-                        <i class="fas fa-shopping-bag" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                    <div class="empty-cart" style="text-align: center; padding: 3rem;">
+                        <i class="fas fa-shopping-bag" style="font-size: 3rem; color: var(--rosa-medio); margin-bottom: 1rem;"></i>
                         <p>Tu carrito está vacío</p>
                     </div>`;
                 document.getElementById('cart-total').textContent = '0.00';

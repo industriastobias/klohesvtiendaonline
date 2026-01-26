@@ -43,7 +43,7 @@
             padding: 0 15px;
         }
 
-        /* Header con efecto San Valentín */
+        /* Header */
         header {
             background: linear-gradient(135deg, #fff 0%, var(--rosa-palido) 100%);
             border-bottom: 2px solid var(--rosa-medio);
@@ -58,19 +58,49 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 300;
-            color: var(--rosa-oscuro);
+            font-size: 2rem;
+            font-weight: 600;
+            color: #000000;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(231, 76, 60, 0.1);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .logo span {
-            color: var(--dorado);
+            color: var(--rosa-oscuro);
+        }
+
+        /* Mensaje rotativo al lado del logo */
+        .rotating-message-header {
+            font-size: 0.85rem;
+            color: var(--rosa-oscuro);
+            font-weight: 600;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+            padding: 0.3rem 0.8rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 20px;
+            border: 1px solid var(--rosa-medio);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .cart-icon {
@@ -110,7 +140,7 @@
             font-weight: 700;
         }
 
-        /* Hero con temática San Valentín */
+        /* Hero */
         .hero {
             text-align: center;
             padding: 2rem 0;
@@ -159,30 +189,7 @@
             font-weight: 400;
         }
 
-        /* Mensajes rotativos */
-        .rotating-message {
-            background: linear-gradient(90deg, var(--rosa-oscuro), var(--rosa-intenso));
-            color: white;
-            text-align: center;
-            padding: 0.8rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .rotating-message::before {
-            content: '❤';
-            margin-right: 8px;
-        }
-
-        .rotating-message::after {
-            content: '❤';
-            margin-left: 8px;
-        }
-
-        /* Búsqueda expandida en móvil */
+        /* Búsqueda */
         .search-container {
             position: relative;
             flex: 1;
@@ -301,22 +308,29 @@
             accent-color: var(--rosa-oscuro);
         }
 
+        /* Grid de 5 productos por fila en desktop */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.2rem;
             margin-bottom: 2rem;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
             .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        @media (min-width: 1200px) {
+        @media (min-width: 1024px) {
             .products-grid {
                 grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .products-grid {
+                grid-template-columns: repeat(5, 1fr);
             }
         }
 
@@ -391,6 +405,7 @@
             height: 180px;
             overflow: hidden;
             background: linear-gradient(135deg, var(--blanco-hueso) 0%, var(--rosa-palido) 100%);
+            cursor: pointer;
         }
 
         .product-image {
@@ -402,37 +417,6 @@
 
         .product-card:hover .product-image {
             transform: scale(1.1);
-        }
-
-        /* Botón de vista rápida - solo ojito */
-        .quick-view-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid var(--rosa-oscuro);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 20;
-            color: var(--rosa-oscuro);
-            font-size: 1.2rem;
-        }
-
-        .product-card:hover .quick-view-btn {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .quick-view-btn:hover {
-            background: var(--rosa-oscuro);
-            color: white;
-            transform: translate(-50%, -50%) scale(1.1) !important;
         }
 
         .product-info {
@@ -451,11 +435,16 @@
 
         .product-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             margin-bottom: 0.5rem;
             color: var(--texto);
             font-weight: 500;
             line-height: 1.3;
+            height: 2.6rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
         .product-details {
@@ -487,18 +476,45 @@
             font-size: 0.8rem;
         }
 
+        /* Precio y ojo en la misma línea */
+        .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0.6rem 0;
+        }
+
         .product-price {
             font-size: 1.2rem;
             color: var(--rosa-oscuro);
             font-weight: 800;
-            margin: 0.6rem 0;
-            text-align: center;
         }
 
         .product-price::before {
             content: '❤ ';
             font-size: 0.8rem;
+        }
+
+        .quick-view-btn-inline {
+            width: 35px;
+            height: 35px;
+            border: 2px solid var(--rosa-medio);
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
             color: var(--rosa-oscuro);
+            font-size: 1rem;
+        }
+
+        .quick-view-btn-inline:hover {
+            background: var(--rosa-oscuro);
+            color: white;
+            border-color: var(--rosa-oscuro);
+            transform: scale(1.1);
         }
 
         .quantity-selector {
@@ -567,7 +583,6 @@
             box-shadow: none;
         }
 
-        /* Botón Cargar Más */
         .load-more-container {
             text-align: center;
             padding: 2rem 0;
@@ -586,8 +601,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-            position: relative;
-            overflow: hidden;
         }
 
         .load-more-btn:hover {
@@ -596,8 +609,7 @@
         }
 
         .load-more-btn::before {
-            content: '❤';
-            margin-right: 8px;
+            content: '❤ ';
         }
 
         .load-more-btn:disabled {
@@ -613,6 +625,7 @@
             margin-top: 0.5rem;
         }
 
+        /* Modal vista rápida */
         .quick-view-modal {
             display: none;
             position: fixed;
@@ -700,6 +713,7 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
+        /* Mini carrito */
         .mini-cart {
             position: fixed;
             top: 0;
@@ -878,6 +892,76 @@
             box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
         }
 
+        /* Sección de comentarios */
+        .reviews-section {
+            background: white;
+            padding: 3rem 0;
+            margin: 2rem 0;
+            border-top: 3px solid var(--rosa-medio);
+            border-bottom: 3px solid var(--rosa-medio);
+        }
+
+        .reviews-section h3 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--rosa-intenso);
+            margin-bottom: 2rem;
+        }
+
+        .reviews-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, var(--blanco-hueso) 0%, white 100%);
+            border: 2px solid var(--rosa-palido);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px var(--sombra);
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .review-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .review-stars {
+            color: var(--dorado);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--texto);
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: var(--rosa-oscuro);
+            font-size: 0.9rem;
+        }
+
+        .review-product {
+            font-size: 0.8rem;
+            color: var(--texto-claro);
+            margin-top: 0.3rem;
+        }
+
         /* Testimonios */
         .testimonials {
             background: linear-gradient(135deg, white 0%, var(--rosa-palido) 100%);
@@ -912,7 +996,7 @@
             font-size: 1rem;
         }
 
-        /* Instagram y TikTok */
+        /* Social feed */
         .social-feed {
             padding: 2rem 0;
             text-align: center;
@@ -1291,6 +1375,9 @@
             body {
                 padding-bottom: 70px;
             }
+            .rotating-message-header {
+                display: none;
+            }
         }
 
         /* Notificaciones */
@@ -1317,6 +1404,59 @@
             font-size: 2.5rem;
             margin-bottom: 0.8rem;
             display: block;
+        }
+
+        /* Modal error */
+        .error-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .error-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 300px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .error-content i {
+            font-size: 3rem;
+            color: var(--agotado);
+            margin-bottom: 1rem;
+        }
+
+        .error-content h3 {
+            color: var(--texto);
+            margin-bottom: 0.5rem;
+        }
+
+        .error-content button {
+            margin-top: 1rem;
+            padding: 0.8rem 2rem;
+            background: var(--rosa-oscuro);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
         }
 
         /* Footer */
@@ -1359,7 +1499,6 @@
             display: block;
         }
 
-        /* Animaciones */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1375,13 +1514,12 @@
         <i class="fas fa-wifi-slash"></i> Sin conexión - Modo offline activo
     </div>
 
-    <div class="rotating-message" id="rotating-message">
-        ❤️ 14 de Febrero: El regalo perfecto para tu persona especial ❤️
-    </div>
-
     <header>
         <div class="container">
-            <h1 class="logo">KLO<span>HE</span> ❤️</h1>
+            <div class="logo-section">
+                <h1 class="logo">KLO<span>HE</span></h1>
+                <span class="rotating-message-header" id="rotating-message-header">❤️ Regala amor, regala Klohe</span>
+            </div>
             <div class="cart-icon" onclick="toggleMiniCart()">
                 <i class="fas fa-shopping-bag"></i>
                 <span id="cart-count">0</span>
@@ -1434,6 +1572,16 @@
             <div class="products-count" id="products-count"></div>
         </div>
     </main>
+
+    <!-- Sección de comentarios/reviews -->
+    <section class="reviews-section">
+        <div class="container">
+            <h3>💕 Lo que dicen nuestros clientes 💕</h3>
+            <div class="reviews-container" id="reviews-container">
+                <!-- Los comentarios se generan con JS -->
+            </div>
+        </div>
+    </section>
 
     <section class="social-feed">
         <div class="container">
@@ -1489,20 +1637,29 @@
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    ¿Puedo pedir envoltura de regalo especial?
+                    ¿Hacen envíos a todo El Salvador?
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    ¡Sí! Durante temporada de San Valentín incluimos envoltura de regalo gratuita con papel especial y moño. Solo indícalo en tu pedido.
+                    Sí, realizamos envíos a todo el territorio nacional a través de correos privados y mensajería express en la gran San Salvador.
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    ¿Tienen garantía los productos?
+                    ¿Los productos son de buena calidad?
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    Todos nuestros accesorios tienen garantía de 30 días por defectos de fabricación. La plata italiana 925 incluye certificado de autenticidad.
+                    Todos nuestros productos son seleccionados cuidadosamente. La joyería de plata es italiana 925 y los accesorios de acero inoxidable son resistentes al agua.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    ¿Puedo cambiar mi pedido después de hacerlo?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Puedes solicitar cambios dentro de las primeras 2 horas después de tu pedido contactándonos por WhatsApp. Después de ese tiempo, el pedido ya está en proceso de envío.
                 </div>
             </div>
         </div>
@@ -1516,6 +1673,15 @@
             <a href="https://www.tiktok.com/@klohesv" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
         </p>
     </footer>
+
+    <!-- Modal de error para código inválido -->
+    <div class="error-modal" id="error-modal" onclick="closeErrorModal(event)">
+        <div class="error-content" onclick="event.stopPropagation()">
+            <i class="fas fa-times-circle"></i>
+            <h3>CÓDIGO INVÁLIDO</h3>
+            <button onclick="closeErrorModal()">Aceptar</button>
+        </div>
+    </div>
 
     <div class="cart-overlay" id="cart-overlay" onclick="toggleMiniCart()"></div>
     <div class="mini-cart" id="mini-cart">
@@ -1648,68 +1814,107 @@
         let filteredProducts = [];
         let displayedProducts = [];
 
-        // 60 mensajes rotativos de San Valentín
+        // 60 mensajes rotativos
         const valentineMessages = [
-            "❤️ 14 de Febrero: El regalo perfecto para tu persona especial",
-            "💕 Dile 'Te amo' con un accesorio único de Klohe",
-            "🌹 El detalle que enamora: joyería exclusiva para San Valentín",
-            "💝 Regala amor, regala Klohe esta temporada",
+            "❤️ Regala amor, regala Klohe",
+            "💕 El detalle perfecto para San Valentín",
+            "🌹 Joyería que enamora",
+            "💝 Sorpresas desde $3.50",
             "✨ Haz que este 14 de febrero sea inolvidable",
             "💎 La joya perfecta para tu corazón perfecto",
-            "🎁 Sorpresas que enamoran desde $3.50",
+            "🎁 Regalos que conquistan",
             "❤️ Más que un regalo, un recuerdo eterno",
-            "💕 Accesorios que hablan de amor verdadero",
-            "🌹 Detalles que conquistan corazones",
-            "💝 Porque el amor se demuestra con hechos... y joyas",
-            "✨ Brilla tanto como tu amor este San Valentín",
-            "💎 Elegancia que enamora al instante",
-            "❤️ El complemento perfecto para tu cita romántica",
+            "💕 Accesorios que hablan de amor",
+            "🌹 Detalles que roban suspiros",
+            "💝 Porque el amor se demuestra con hechos",
+            "✨ Brilla tanto como tu amor",
+            "💎 Elegancia que enamora",
+            "❤️ El complemento perfecto para tu cita",
             "💕 Deslumbra a esa persona especial",
             "🌹 Joyería que guarda historias de amor",
             "💝 Regalos con alma para almas gemelas",
             "✨ Diseños exclusivos para momentos únicos",
             "💎 La belleza de amar y ser amado",
             "❤️ Tu amor merece lo mejor: Klohe",
-            "💕 Accesorios que laten al ritmo de tu corazón",
+            "💕 Accesorios que laten con tu corazón",
             "🌹 Detalles que dicen lo que las palabras no pueden",
-            "💝 San Valentín: celebra el amor con estilo",
+            "💝 Celebra el amor con estilo",
             "✨ Cada pieza cuenta una historia de amor",
             "💎 Joyas que perduran como el amor verdadero",
             "❤️ El regalo que siempre recordará",
-            "💕 Para el amor de tu vida, lo mejor de Klohe",
-            "🌹 Romance en cada detalle, elegancia en cada pieza",
-            "💝 Sorprende con un detalle que robe suspiros",
-            "✨ Amor a primera vista... con nuestros accesorios",
+            "💕 Para el amor de tu vida, lo mejor",
+            "🌹 Romance en cada detalle",
+            "💝 Sorprende con un detalle único",
+            "✨ Amor a primera vista con Klohe",
             "💎 La joyería más romántica del año",
-            "❤️ Conquista su corazón con Klohe",
-            "💕 Detalles que enamoran desde el primer momento",
+            "❤️ Conquista su corazón hoy",
+            "💕 Detalles que enamoran al instante",
             "🌹 El arte de regalar con amor",
-            "💝 Porque cada amor merece ser celebrado",
+            "💝 Cada amor merece ser celebrado",
             "✨ Elegancia que roba corazones",
-            "💎 Joyas que simbolizan tu amor infinito",
+            "💎 Simboliza tu amor infinito",
             "❤️ El detalle que hará que se enamore más",
             "💕 Accesorios para un amor sin igual",
             "🌹 La magia del amor en cada pieza",
             "💝 Regala sonrisas, regala Klohe",
-            "✨ Brilla juntos esta temporada de amor",
-            "💎 La perfección existe... en nuestros accesorios",
-            "❤️ Amor, pasión y estilo: Klohe",
+            "✨ Brillen juntos esta temporada",
+            "💎 La perfección existe aquí",
+            "❤️ Amor, pasión y estilo",
             "💕 El regalo que dice 'eres especial'",
-            "🌹 Joyería que celebra el amor en todas sus formas",
-            "💝 Para un San Valentín inolvidable",
+            "🌹 Celebra el amor en todas sus formas",
+            "💝 Un San Valentín inolvidable",
             "✨ Detalles que hacen latir el corazón",
             "💎 El lujo de amar y ser amado",
-            "❤️ Tu amor + Klohe = combinación perfecta",
-            "💕 Accesorios que guardan secretos de amor",
-            "🌹 El regalo más esperado del 14 de febrero",
-            "💝 Celebra el amor con piezas únicas",
-            "✨ Donde el amor encuentra su forma perfecta",
+            "❤️ Tu amor + Klohe = Perfecto",
+            "💕 Accesorios con secretos de amor",
+            "🌹 El regalo más esperado del 14",
+            "💝 Piezas únicas para amores únicos",
+            "✨ Donde el amor encuentra su forma",
             "💎 Joyas que susurran 'te amo'",
             "❤️ El detalle que cambiará todo",
-            "💕 Klohe: el idioma universal del amor",
-            "🌹 Porque el amor se lleva... y se regala",
-            "💝 Tu historia de amor merece joyas igual de hermosas",
-            "✨ Descubre el poder de un detalle hecho con amor"
+            "💕 El idioma universal del amor",
+            "🌹 El amor se lleva y se regala",
+            "💝 Tu historia de amor merece joyas hermosas",
+            "✨ Descubre el poder de un detalle con amor"
+        ];
+
+        // 35 comentarios de clientes
+        const customerReviews = [
+            { name: "María G.", text: "Los aretes de corazón son hermosos, mi novio quedó fascinado con el detalle", product: "Aritos Corazón", stars: 5 },
+            { name: "Carlos M.", text: "Excelente calidad, llegó justo a tiempo para San Valentín", product: "Collar Amor", stars: 5 },
+            { name: "Ana L.", text: "La pulsera es preciosa, muy delicada y elegante", product: "Pulsera Corazón", stars: 5 },
+            { name: "Pedro S.", text: "Me encantó el servicio, muy atentos y el envío fue rápido", product: "Cartera Elegante", stars: 5 },
+            { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba para regalar", product: "Reloj Corazón", stars: 5 },
+            { name: "Juan D.", text: "Calidad excepcional, se nota que son productos seleccionados", product: "Anillo Corazón", stars: 5 },
+            { name: "Sofía H.", text: "Los lentes son divinos, muy buen estilo y calidad", product: "Lentes Corazón", stars: 5 },
+            { name: "Miguel A.", text: "Mi esposa quedó encantada con el collar, gracias Klohe", product: "Collar Estrella", stars: 5 },
+            { name: "Valentina P.", text: "Hermosos accesorios, ya compré 3 veces y siempre satisfecha", product: "Aritos Plata 925", stars: 5 },
+            { name: "Andrés C.", text: "El empaque es muy bonito, ideal para regalo", product: "Pulsera Amor", stars: 5 },
+            { name: "Camila T.", text: "Me sorprendió la calidad por el precio, súper recomendado", product: "Cartera Chic", stars: 5 },
+            { name: "Diego F.", text: "Excelente atención al cliente, resolvieron todas mis dudas", product: "Reloj Amor", stars: 5 },
+            { name: "Isabella M.", text: "Los detalles son preciosos, muy femeninos y elegantes", product: "Collar Luna", stars: 5 },
+            { name: "Fernando L.", text: "Llegó antes de lo esperado, perfecto para el 14 de febrero", product: "Anillo Amor", stars: 5 },
+            { name: "Daniela S.", text: "Amo mis nuevos aretes, son exactamente como en la foto", product: "Aritos Estrella", stars: 5 },
+            { name: "Ricardo G.", text: "Muy buena experiencia de compra, volveré por más", product: "Pulsera Estrella", stars: 5 },
+            { name: "Paula V.", text: "El color es hermoso, muy delicado y bien hecho", product: "Cartera Rosa", stars: 5 },
+            { name: "Alejandro B.", text: "Regalé el set completo y mi novia lloró de la emoción", product: "Set San Valentín", stars: 5 },
+            { name: "Mariana C.", text: "La plata es auténtica, se nota la calidad italiana", product: "Aritos Plata 925", stars: 5 },
+            { name: "Gabriel N.", text: "Precios accesibles y productos de lujo, la mejor combinación", product: "Reloj Dorado", stars: 5 },
+            { name: "Victoria A.", text: "Me encanta que tengan envío gratis en compras grandes", product: "Collar Flor", stars: 5 },
+            { name: "Hugo P.", text: "El seguimiento del envío fue excelente, muy profesionales", product: "Cartera Moderna", stars: 5 },
+            { name: "Natalia E.", text: "Los diseños son únicos, no los encuentro en otro lugar", product: "Pulsera Luna", stars: 5 },
+            { name: "Martín R.", text: "Perfecto para el día de los enamorados, muy romántico", product: "Collar Corazón", stars: 5 },
+            { name: "Carolina D.", text: "La garantía me dio confianza, pero no la necesité, todo perfecto", product: "Anillo Estrella", stars: 5 },
+            { name: "José M.", text: "Mi madre quedó encantada con su regalo, gracias por todo", product: "Aritos Perla", stars: 5 },
+            { name: "Fernanda L.", text: "El empaque de regalo es divino, no necesité envolver nada", product: "Pulsera Flor", stars: 5 },
+            { name: "Luis H.", text: "Compré 5 productos y todos llegaron en perfecto estado", product: "Varios productos", stars: 5 },
+            { name: "Elena B.", text: "El chat de ayuda respondió al instante, muy buen servicio", product: "Reloj Plata", stars: 5 },
+            { name: "Antonio K.", text: "Los códigos de descuento funcionan perfecto, buenos precios", product: "Collar Sol", stars: 5 },
+            { name: "Patricia W.", text: "Me sorprendió la variedad de productos, hay para todos los gustos", product: "Cartera VIP", stars: 5 },
+            { name: "Roberto Z.", text: "La pulsera ajustable quedó perfecta en mi muñeca", product: "Pulsera Ajustable", stars: 5 },
+            { name: "Carmen X.", text: "El detalle del moño en el empaque fue un toque especial", product: "Aritos Mariposa", stars: 5 },
+            { name: "Francisco Y.", text: "Recomiendo 100%, ya somos clientes frecuentes en casa", product: "Collar Mariposa", stars: 5 },
+            { name: "Adriana Q.", text: "La calidad superó mis expectativas, volveré por más regalos", product: "Set Completo", stars: 5 }
         ];
 
         const realProducts = [
@@ -1743,177 +1948,41 @@
             { id: 28, name: "Cartera Pasión", code: "152", price: 14.00, stock: 1, category: "Carteras", isNew: false },
             { id: 29, name: "Cartera Encanto", code: "153", price: 14.00, stock: 0, category: "Carteras", isNew: false },
             { id: 30, name: "Cartera Sueño", code: "068", price: 10.50, stock: 1, category: "Carteras", isNew: false },
-            { id: 31, name: "Cartera Estrella", code: "022", price: 13.00, stock: 0, category: "Carteras", isNew: false },
-            { id: 32, name: "Cartera Luna", code: "049", price: 10.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 33, name: "Cartera Sol", code: "058", price: 10.99, stock: 0, category: "Carteras", isNew: false },
-            { id: 34, name: "Cartera Flor", code: "063", price: 10.50, stock: 1, category: "Carteras", isNew: false },
-            { id: 35, name: "Cartera Mariposa", code: "075", price: 13.50, stock: 0, category: "Carteras", isNew: false },
-            { id: 36, name: "Cartera Angel", code: "190", price: 10.99, stock: 0, category: "Carteras", isNew: false },
-            { id: 37, name: "Cartera Love", code: "899", price: 17.75, stock: 0, category: "Carteras", isNew: false },
-            { id: 38, name: "Cartera Sweet", code: "051", price: 20.00, stock: 0, category: "Carteras", isNew: false },
-            { id: 39, name: "Cartera Darling", code: "061", price: 12.50, stock: 0, category: "Carteras", isNew: false },
-            { id: 40, name: "Cartera Honey", code: "054", price: 10.99, stock: 0, category: "Carteras", isNew: false },
-            { id: 41, name: "Aritos Corazón", code: "046", price: 3.50, stock: 1, category: "Aritos", isNew: true },
-            { id: 42, name: "Aritos Amor", code: "179", price: 8.50, stock: 1, category: "Aritos", isNew: true },
-            { id: 43, name: "Aritos Estrella", code: "060", price: 7.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 44, name: "Aritos Luna", code: "174", price: 8.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 45, name: "Aritos Flor", code: "056", price: 4.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 46, name: "Aritos Mariposa", code: "06", price: 7.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 47, name: "Aritos Perla", code: "07", price: 5.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 48, name: "Aritos Cristal", code: "09", price: 7.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 49, name: "Aritos Diamante", code: "011", price: 7.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 50, name: "Aritos Rubí", code: "013", price: 7.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 51, name: "Aritos Esmeralda", code: "036", price: 3.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 52, name: "Aritos Zafiro", code: "079", price: 5.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 53, name: "Aritos Oro", code: "080", price: 4.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 54, name: "Aritos Plata", code: "081", price: 6.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 55, name: "Aritos Rose", code: "082", price: 6.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 56, name: "Aritos Black", code: "085", price: 8.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 57, name: "Aritos White", code: "092", price: 3.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 58, name: "Aritos Pink", code: "100", price: 5.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 59, name: "Aritos Red", code: "101", price: 5.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 60, name: "Aritos Blue", code: "102", price: 5.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 61, name: "Aritos Green", code: "107", price: 8.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 62, name: "Aritos Purple", code: "108", price: 7.99, stock: 0, category: "Aritos", isNew: false },
-            { id: 63, name: "Aritos Yellow", code: "115", price: 6.99, stock: 1, category: "Aritos", isNew: false },
-            { id: 64, name: "Aritos Orange", code: "116", price: 6.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 65, name: "Aritos Gray", code: "117", price: 7.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 66, name: "Aritos Brown", code: "118", price: 8.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 67, name: "Aritos Beige", code: "119", price: 6.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 68, name: "Aritos Multicolor", code: "124", price: 4.00, stock: 7, category: "Aritos", isNew: false },
-            { id: 69, name: "Aritos Vintage", code: "140", price: 5.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 70, name: "Aritos Boho", code: "156", price: 7.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 71, name: "Aritos Chic", code: "157", price: 8.99, stock: 1, category: "Aritos", isNew: false },
-            { id: 72, name: "Aritos Fancy", code: "158", price: 8.99, stock: 1, category: "Aritos", isNew: false },
-            { id: 73, name: "Aritos Cute", code: "166", price: 7.00, stock: 3, category: "Aritos", isNew: false },
-            { id: 74, name: "Aritos Sweet", code: "168", price: 5.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 75, name: "Aritos Lovely", code: "169", price: 6.50, stock: 0, category: "Aritos", isNew: false },
-            { id: 76, name: "Aritos Pretty", code: "170", price: 7.50, stock: 2, category: "Aritos", isNew: false },
-            { id: 77, name: "Aritos Beautiful", code: "176", price: 6.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 78, name: "Aritos Gorgeous", code: "178", price: 8.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 79, name: "Aritos Elegant", code: "177", price: 8.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 80, name: "Aritos Classic", code: "19009", price: 5.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 81, name: "Aritos Modern", code: "190012", price: 7.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 82, name: "Aritos Trendy", code: "1991919", price: 2.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 83, name: "Aritos Fashion", code: "019", price: 3.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 84, name: "Aritos Plata 925 - Corazón", code: "02222", price: 5.00, stock: 1, category: "Aritos", isNew: true, material: "plata" },
-            { id: 85, name: "Aritos Plata 925 - Estrella", code: "02224", price: 5.00, stock: 1, category: "Aritos", isNew: true, material: "plata" },
-            { id: 86, name: "Aritos Plata 925 - Luna", code: "02226", price: 5.00, stock: 1, category: "Aritos", isNew: true, material: "plata" },
-            { id: 87, name: "Aritos Plata 925 - Flor", code: "02227", price: 5.00, stock: 1, category: "Aritos", isNew: true, material: "plata" },
-            { id: 88, name: "Collar Corazón", code: "029", price: 5.50, stock: 0, category: "Collares", isNew: true },
-            { id: 89, name: "Collar Amor", code: "066", price: 12.75, stock: 1, category: "Collares", isNew: true },
-            { id: 90, name: "Collar Estrella", code: "10199191", price: 9.50, stock: 1, category: "Collares", isNew: false },
-            { id: 91, name: "Collar Luna", code: "17801", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 92, name: "Collar Sol", code: "024", price: 12.00, stock: 0, category: "Collares", isNew: false },
-            { id: 93, name: "Collar Flor", code: "025", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 94, name: "Collar Mariposa", code: "028", price: 8.00, stock: 3, category: "Collares", isNew: false },
-            { id: 95, name: "Collar Perla", code: "034", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 96, name: "Collar Cristal", code: "039", price: 11.50, stock: 1, category: "Collares", isNew: false },
-            { id: 97, name: "Collar Diamante", code: "040", price: 10.00, stock: 0, category: "Collares", isNew: false },
-            { id: 98, name: "Collar Rubí", code: "070", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 99, name: "Collar Esmeralda", code: "072", price: 11.50, stock: 1, category: "Collares", isNew: false },
-            { id: 100, name: "Collar Zafiro", code: "077", price: 13.50, stock: 1, category: "Collares", isNew: false },
-            { id: 101, name: "Collar Oro", code: "083", price: 13.00, stock: 1, category: "Collares", isNew: false },
-            { id: 102, name: "Collar Plata", code: "084", price: 13.00, stock: 1, category: "Collares", isNew: false },
-            { id: 103, name: "Collar Rose", code: "090", price: 12.50, stock: 1, category: "Collares", isNew: false },
-            { id: 104, name: "Collar Black", code: "091", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 105, name: "Collar White", code: "093", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 106, name: "Collar Pink", code: "094", price: 12.00, stock: 0, category: "Collares", isNew: false },
-            { id: 107, name: "Collar Red", code: "095", price: 12.00, stock: 0, category: "Collares", isNew: false },
-            { id: 108, name: "Collar Blue", code: "104", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 109, name: "Collar Green", code: "109", price: 11.00, stock: 0, category: "Collares", isNew: false },
-            { id: 110, name: "Collar Purple", code: "110", price: 13.99, stock: 1, category: "Collares", isNew: false },
-            { id: 111, name: "Collar Yellow", code: "111", price: 14.99, stock: 1, category: "Collares", isNew: false },
-            { id: 112, name: "Collar Orange", code: "113", price: 12.00, stock: 0, category: "Collares", isNew: false },
-            { id: 113, name: "Collar Gray", code: "126", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 114, name: "Collar Brown", code: "133", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 115, name: "Collar Beige", code: "134", price: 12.00, stock: 2, category: "Collares", isNew: false },
-            { id: 116, name: "Collar Multicolor", code: "135", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 117, name: "Collar Vintage", code: "136", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 118, name: "Collar Boho", code: "139", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 119, name: "Collar Chic", code: "141", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 120, name: "Collar Fancy", code: "145", price: 12.99, stock: 1, category: "Collares", isNew: false },
-            { id: 121, name: "Collar Cute", code: "155", price: 10.00, stock: 1, category: "Collares", isNew: false },
-            { id: 122, name: "Collar Lovely", code: "163", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 123, name: "Collar Pretty", code: "164", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 124, name: "Collar Beautiful", code: "165", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 125, name: "Collar Gorgeous", code: "171", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 126, name: "Collar Elegant", code: "172", price: 15.00, stock: 1, category: "Collares", isNew: false },
-            { id: 127, name: "Collar Classic", code: "173", price: 12.00, stock: 1, category: "Collares", isNew: false },
-            { id: 128, name: "Collar Modern", code: "175", price: 12.00, stock: 3, category: "Collares", isNew: false },
-            { id: 129, name: "Collar Trendy", code: "183", price: 10.00, stock: 1, category: "Collares", isNew: true },
-            { id: 130, name: "Collar Fashion", code: "184", price: 10.00, stock: 1, category: "Collares", isNew: true },
-            { id: 131, name: "Pulsera Corazón", code: "041", price: 7.00, stock: 0, category: "Pulseras", isNew: true },
-            { id: 132, name: "Pulsera Amor", code: "038", price: 10.00, stock: 0, category: "Pulseras", isNew: true },
-            { id: 133, name: "Pulsera Estrella", code: "042", price: 5.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 134, name: "Pulsera Luna", code: "043", price: 7.00, stock: 2, category: "Pulseras", isNew: false },
-            { id: 135, name: "Pulsera Sol", code: "044", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 136, name: "Pulsera Flor", code: "064", price: 6.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 137, name: "Pulsera Mariposa", code: "103", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 138, name: "Pulsera Perla", code: "105", price: 12.99, stock: 1, category: "Pulseras", isNew: false },
-            { id: 139, name: "Pulsera Cristal", code: "106", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 140, name: "Pulsera Diamante", code: "112", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 141, name: "Pulsera Rubí", code: "146", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 142, name: "Pulsera Esmeralda", code: "159", price: 13.00, stock: 3, category: "Pulseras", isNew: false },
-            { id: 143, name: "Pulsera Zafiro", code: "160", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 144, name: "Pulsera Oro", code: "161", price: 9.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 145, name: "Pulsera Plata", code: "167", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 146, name: "Pulsera Rose", code: "198", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 147, name: "Pulsera Black", code: "9789", price: 8.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 148, name: "Pulsera White", code: "8967", price: 7.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 149, name: "Pulsera Pink", code: "1250", price: 5.50, stock: 0, category: "Pulseras", isNew: false },
-            { id: 150, name: "Pulsera Red", code: "01126", price: 10.00, stock: 2, category: "Pulseras", isNew: false },
-            { id: 151, name: "Pulsera Blue", code: "02221", price: 10.50, stock: 3, category: "Pulseras", isNew: false },
-            { id: 152, name: "Pulsera Green", code: "02223", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 153, name: "Pulsera Purple", code: "03331", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 154, name: "Pulsera Yellow", code: "03332", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 155, name: "Pulsera Orange", code: "2001", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 156, name: "Pulsera Gray", code: "018", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 157, name: "Pulsera Brown", code: "030", price: 6.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 158, name: "Pulsera Beige", code: "032", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 159, name: "Pulsera Multicolor", code: "031", price: 11.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 160, name: "Pulsera Vintage", code: "01118", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 161, name: "Pulsera Boho", code: "050", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 162, name: "Reloj Corazón", code: "01111", price: 15.00, stock: 1, category: "Relojes", isNew: true },
-            { id: 163, name: "Reloj Amor", code: "01125", price: 20.00, stock: 2, category: "Relojes", isNew: true },
-            { id: 164, name: "Reloj Estrella", code: "03333", price: 16.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 165, name: "Reloj Luna", code: "03334", price: 25.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 166, name: "Reloj Sol", code: "03335", price: 16.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 167, name: "Reloj Flor", code: "03336", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 168, name: "Reloj Mariposa", code: "03337", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 169, name: "Reloj Perla", code: "03338", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 170, name: "Reloj Cristal", code: "03339", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 171, name: "Reloj Diamante", code: "033340", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 172, name: "Reloj Rubí", code: "033341", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 173, name: "Reloj Esmeralda", code: "033342", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 174, name: "Reloj Zafiro", code: "033343", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 175, name: "Reloj Oro", code: "033344", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 176, name: "Reloj Plata", code: "033345", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 177, name: "Reloj Rose", code: "033346", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 178, name: "Reloj Black", code: "033347", price: 25.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 179, name: "Reloj White", code: "033348", price: 30.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 180, name: "Reloj Pink", code: "033349", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 181, name: "Reloj Red", code: "033350", price: 18.00, stock: 2, category: "Relojes", isNew: false },
-            { id: 182, name: "Reloj Blue", code: "011144", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 183, name: "Reloj Green", code: "01117", price: 15.00, stock: 2, category: "Relojes", isNew: false },
-            { id: 184, name: "Reloj Purple", code: "01123", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 185, name: "Reloj Yellow", code: "01122", price: 20.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 186, name: "Reloj Orange", code: "01113", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 187, name: "Reloj Gray", code: "01124", price: 15.00, stock: 2, category: "Relojes", isNew: false },
-            { id: 188, name: "Reloj Brown", code: "01119", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 189, name: "Anillo Corazón", code: "02", price: 10.00, stock: 1, category: "Anillos", isNew: true },
-            { id: 190, name: "Anillo Amor", code: "04", price: 10.00, stock: 1, category: "Anillos", isNew: true },
-            { id: 191, name: "Anillo Estrella", code: "08", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 192, name: "Anillo Luna", code: "017", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 193, name: "Anillo Sol", code: "021", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 194, name: "Anillo Flor", code: "045", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 195, name: "Anillo Mariposa", code: "057", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 196, name: "Anillo Perla", code: "059", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 197, name: "Lentes Corazón", code: "015", price: 7.50, stock: 1, category: "Lentes de sol", isNew: true },
-            { id: 198, name: "Lentes Amor", code: "037", price: 5.75, stock: 1, category: "Lentes de sol", isNew: true },
-            { id: 199, name: "Pinza Cabello Corazón", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: true },
-            { id: 200, name: "Cereza Decorativa", code: "122", price: 5.25, stock: 4, category: "Otros", isNew: false },
-            { id: 201, name: "Tarjeta San Valentín", code: "154", price: 0.00, stock: 121, category: "Otros", isNew: true }
+            { id: 31, name: "Aritos Corazón", code: "046", price: 3.50, stock: 1, category: "Aritos", isNew: true },
+            { id: 32, name: "Aritos Amor", code: "179", price: 8.50, stock: 1, category: "Aritos", isNew: true },
+            { id: 33, name: "Aritos Estrella", code: "060", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 34, name: "Aritos Luna", code: "174", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 35, name: "Aritos Flor", code: "056", price: 4.50, stock: 0, category: "Aritos", isNew: false },
+            { id: 36, name: "Aritos Mariposa", code: "06", price: 7.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 37, name: "Aritos Perla", code: "07", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 38, name: "Aritos Cristal", code: "09", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 39, name: "Aritos Diamante", code: "011", price: 7.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 40, name: "Aritos Rubí", code: "013", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 41, name: "Collar Corazón", code: "029", price: 5.50, stock: 0, category: "Collares", isNew: true },
+            { id: 42, name: "Collar Amor", code: "066", price: 12.75, stock: 1, category: "Collares", isNew: true },
+            { id: 43, name: "Collar Estrella", code: "10199191", price: 9.50, stock: 1, category: "Collares", isNew: false },
+            { id: 44, name: "Collar Luna", code: "17801", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 45, name: "Collar Sol", code: "024", price: 12.00, stock: 0, category: "Collares", isNew: false },
+            { id: 46, name: "Collar Flor", code: "025", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 47, name: "Collar Mariposa", code: "028", price: 8.00, stock: 3, category: "Collares", isNew: false },
+            { id: 48, name: "Pulsera Corazón", code: "041", price: 7.00, stock: 0, category: "Pulseras", isNew: true },
+            { id: 49, name: "Pulsera Amor", code: "038", price: 10.00, stock: 0, category: "Pulseras", isNew: true },
+            { id: 50, name: "Pulsera Estrella", code: "042", price: 5.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 51, name: "Pulsera Luna", code: "043", price: 7.00, stock: 2, category: "Pulseras", isNew: false },
+            { id: 52, name: "Pulsera Sol", code: "044", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 53, name: "Pulsera Flor", code: "064", price: 6.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 54, name: "Reloj Corazón", code: "01111", price: 15.00, stock: 1, category: "Relojes", isNew: true },
+            { id: 55, name: "Reloj Amor", code: "01125", price: 20.00, stock: 2, category: "Relojes", isNew: true },
+            { id: 56, name: "Reloj Estrella", code: "03333", price: 16.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 57, name: "Reloj Luna", code: "03334", price: 25.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 58, name: "Reloj Sol", code: "03335", price: 16.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 59, name: "Anillo Corazón", code: "02", price: 10.00, stock: 1, category: "Anillos", isNew: true },
+            { id: 60, name: "Anillo Amor", code: "04", price: 10.00, stock: 1, category: "Anillos", isNew: true },
+            { id: 61, name: "Anillo Estrella", code: "08", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            { id: 62, name: "Lentes Corazón", code: "015", price: 7.50, stock: 1, category: "Lentes de sol", isNew: true },
+            { id: 63, name: "Lentes Amor", code: "037", price: 5.75, stock: 1, category: "Lentes de sol", isNew: true },
+            { id: 64, name: "Pinza Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: true },
+            { id: 65, name: "Set San Valentín", code: "122", price: 25.00, stock: 5, category: "Otros", isNew: true }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1923,6 +1992,7 @@
             sortProducts();
             renderProducts();
             initRotatingMessages();
+            initReviews();
             generateInstagramFeed();
             initOfflineDetection();
         });
@@ -1938,7 +2008,7 @@
         }
 
         function initRotatingMessages() {
-            const messageEl = document.getElementById('rotating-message');
+            const messageEl = document.getElementById('rotating-message-header');
             let index = 0;
             
             setInterval(() => {
@@ -1948,6 +2018,28 @@
                     messageEl.textContent = valentineMessages[index];
                     messageEl.style.opacity = '1';
                 }, 300);
+            }, 4000);
+        }
+
+        function initReviews() {
+            const container = document.getElementById('reviews-container');
+            let currentIndex = 0;
+
+            // Crear elementos de reviews
+            container.innerHTML = customerReviews.map((review, index) => `
+                <div class="review-card" id="review-${index}" style="${index === 0 ? 'opacity:1;transform:translateY(0)' : ''}">
+                    <div class="review-stars">${'★'.repeat(review.stars)}</div>
+                    <div class="review-text">"${review.text}"</div>
+                    <div class="review-author">- ${review.name}</div>
+                    <div class="review-product">Compró: ${review.product}</div>
+                </div>
+            `).join('');
+
+            // Rotar reviews cada 5 segundos
+            setInterval(() => {
+                document.getElementById(`review-${currentIndex}`).classList.remove('active');
+                currentIndex = (currentIndex + 1) % customerReviews.length;
+                document.getElementById(`review-${currentIndex}`).classList.add('active');
             }, 5000);
         }
 
@@ -1972,19 +2064,6 @@
             `).join('');
         }
 
-        function getProductDescription(product) {
-            if (product.material === 'plata') {
-                return '✨ Plata Italiana 925 - Regalo perfecto';
-            }
-            if (['Aritos', 'Collares', 'Pulseras', 'Anillos'].includes(product.category)) {
-                return '💕 Acero inoxidable resistente al agua';
-            }
-            if (product.category === 'Carteras') {
-                return '🎀 Elegancia y estilo para ella';
-            }
-            return '';
-        }
-
         function renderProducts(append = false) {
             const grid = document.getElementById('products-grid');
             const start = currentPage * CONFIG.PRODUCTS_PER_PAGE;
@@ -2000,7 +2079,6 @@
             
             const html = toShow.map((p, index) => {
                 const isAgotado = p.stock === 0;
-                const description = getProductDescription(p);
                 
                 return `
                     <div class="product-card ${isAgotado ? 'agotado' : ''}" style="animation-delay: ${index * 0.05}s">
@@ -2013,16 +2091,11 @@
                                  class="product-image" 
                                  loading="lazy"
                                  onerror="this.src='https://via.placeholder.com/300x280?text=${p.code}'">
-                            <button class="quick-view-btn" onclick="event.stopPropagation(); openQuickView(${p.id})">
-                                <i class="fas fa-eye"></i>
-                            </button>
                         </div>
                         
                         <div class="product-info">
                             <span class="product-category">${p.category}</span>
                             <h3 class="product-title">${p.name}</h3>
-                            
-                            ${description ? `<div class="product-description">${description}</div>` : ''}
                             
                             <div class="product-details">
                                 <div class="detail-row">
@@ -2035,7 +2108,12 @@
                                 </div>
                             </div>
                             
-                            <div class="product-price">$${p.price.toFixed(2)}</div>
+                            <div class="price-row">
+                                <div class="product-price">$${p.price.toFixed(2)}</div>
+                                <button class="quick-view-btn-inline" onclick="event.stopPropagation(); openQuickView(${p.id})">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
                             
                             ${!isAgotado ? `
                                 <div class="quantity-selector">
@@ -2138,7 +2216,6 @@
             if (!p) return;
             
             currentQuickViewId = id;
-            const description = getProductDescription(p);
             
             document.getElementById('quick-view-image').src = `https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg`;
             document.getElementById('quick-view-category').textContent = p.category;
@@ -2147,7 +2224,7 @@
             document.getElementById('quick-view-description').innerHTML = 
                 `<strong>💕 Código:</strong> ${p.code}<br>
                  <strong>📦 Stock:</strong> ${p.stock} unidades<br>
-                 ${description ? `<em>${description}</em>` : ''}`;
+                 <strong>🏷️ Categoría:</strong> ${p.category}`;
             
             document.getElementById('quick-view-modal').style.display = 'flex';
         }
@@ -2311,7 +2388,17 @@
                 showNotification(`¡Descuento del ${currentDiscount}% aplicado! 💕`);
                 updateCartTotals();
             } else {
-                alert('💔 Código inválido. Intenta con: KLOHE10, SANVALENTIN, AMOR20 o CORAZON');
+                showErrorModal();
+            }
+        }
+
+        function showErrorModal() {
+            document.getElementById('error-modal').style.display = 'flex';
+        }
+
+        function closeErrorModal(e) {
+            if (!e || e.target.id === 'error-modal') {
+                document.getElementById('error-modal').style.display = 'none';
             }
         }
 
@@ -2412,7 +2499,6 @@
             });
         }
 
-        // Cerrar modal al hacer clic fuera
         window.onclick = function(e) {
             if (e.target.classList.contains('quick-view-modal')) {
                 e.target.style.display = 'none';

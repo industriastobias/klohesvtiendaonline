@@ -138,6 +138,9 @@
             height: 300px;
             overflow: hidden;
             background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .product-image {
@@ -161,6 +164,21 @@
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: bold;
+            z-index: 10;
+        }
+
+        .no-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #bbb;
+            font-size: 3rem;
+        }
+
+        .no-image span {
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
 
         .product-info {
@@ -215,10 +233,6 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .add-to-cart:active {
-            transform: scale(0.98);
-        }
-
         /* Modal del Carrito */
         .modal {
             display: none;
@@ -247,14 +261,8 @@
         }
 
         @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .close {
@@ -406,7 +414,16 @@
             color: #dfe6e9;
         }
 
-        /* Footer */
+        /* Debug info */
+        .debug-info {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
         footer {
             background: #2d3436;
             color: white;
@@ -415,39 +432,6 @@
             margin-top: 3rem;
         }
 
-        .social-links {
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: #667eea;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 1.8rem;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 1.5rem;
-            }
-
-            .modal-content {
-                margin: 5% auto;
-                padding: 1.5rem;
-            }
-        }
-
-        /* Notificación */
         .notification {
             position: fixed;
             top: 100px;
@@ -463,14 +447,13 @@
         }
 
         @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 1.8rem; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
         }
     </style>
 </head>
@@ -486,6 +469,18 @@
     </header>
 
     <main class="container">
+        <!-- Información de debug (quitar después de probar) -->
+        <div class="debug-info" id="debug-info">
+            <strong>🔧 Modo de prueba:</strong> Si las imágenes no aparecen, verifica que:
+            <ul style="margin-left: 20px; margin-top: 5px;">
+                <li>GitHub Pages esté activado en Settings → Pages</li>
+                <li>Las imágenes estén en la carpeta <code>klohe_imagenes/</code></li>
+                <li>Los nombres de archivos coincidan exactamente (03.jpg, 033.jpg, etc.)</li>
+            </ul>
+            <button onclick="testImage()" style="margin-top: 10px; padding: 5px 10px; cursor: pointer;">Probar carga de imagen</button>
+            <div id="test-result" style="margin-top: 10px;"></div>
+        </div>
+
         <div class="filters">
             <input type="text" id="search-input" placeholder="🔍 Buscar productos..." onkeyup="filterProducts()">
             <select id="category-filter" onchange="filterProducts()">
@@ -501,25 +496,20 @@
             </select>
         </div>
 
-        <div id="products-grid" class="products-grid">
-            <!-- Los productos se cargarán aquí -->
-        </div>
+        <div id="products-grid" class="products-grid"></div>
     </main>
 
     <footer>
         <p>&copy; 2025 Klohe - Accesorios con estilo</p>
-        <div class="social-links">
-            <a href="https://wa.me/50366711569" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            <a href="https://wa.me/50366711569" style="color: #25d366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </p>
     </footer>
 
     <div id="notification" class="notification">
         <i class="fas fa-check-circle"></i> Producto agregado al carrito
     </div>
 
-    <!-- Modal del Carrito -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="toggleCart()">&times;</span>
@@ -536,132 +526,137 @@
 
     <script>
         // ==========================================
-        // CONFIGURACIÓN
+        // CONFIGURACIÓN - EDITAR ESTOS VALORES
         // ==========================================
         const CONFIG = {
-            GITHUB_USER: 'TU_USUARIO_GITHUB',  // CAMBIA ESTO
-            REPO_NAME: 'tiendaklohesv',        // CAMBIA ESTO
-            WHATSAPP_NUMBER: '50366711569',    // Tu número
+            // Tu usuario de GitHub (ejemplo: if tu URL es github.com/maria123, pon "maria123")
+            GITHUB_USER: 'TU_USUARIO_AQUI',
+            
+            // Nombre del repositorio (ejemplo: "tiendaklohesv")
+            REPO_NAME: 'tiendaklohesv',
+            
+            // Nombre de la carpeta de imágenes
+            IMAGES_FOLDER: 'klohe_imagenes',
+            
+            // Tu WhatsApp
+            WHATSAPP_NUMBER: '50366711569',
             CURRENCY: '$'
         };
 
         // ==========================================
-        // TODOS LOS PRODUCTOS DE KLOHE
+        // LISTA COMPLETA DE PRODUCTOS
         // ==========================================
         let products = [
-            // CARTERAS (Página 1-3)
-            { id: 1, name: "Cartera Elegante", code: "03", price: 12.50, category: "cartera", image: "03.jpg" },
-            { id: 2, name: "Cartera Moderna", code: "033", price: 10.99, category: "cartera", image: "033.jpg" },
-            { id: 3, name: "Cartera Clásica", code: "051", price: 20.00, category: "cartera", image: "051.jpg" },
-            { id: 4, name: "Cartera Casual", code: "014", price: 12.00, category: "cartera", image: "014.jpg" },
-            { id: 5, name: "Cartera Premium", code: "035", price: 16.50, category: "cartera", image: "035.jpg" },
-            { id: 6, name: "Cartera Vino", code: "053", price: 18.00, category: "cartera", image: "053.jpg" },
-            { id: 7, name: "Cartera Blanca", code: "022", price: 13.00, category: "cartera", image: "022.jpg" },
-            { id: 8, name: "Cartera Negra", code: "047", price: 10.99, category: "cartera", image: "047.jpg" },
-            { id: 9, name: "Cartera Morada", code: "054", price: 10.99, category: "cartera", image: "054.jpg" },
-            { id: 10, name: "Cartera Rosada", code: "023", price: 9.50, category: "cartera", image: "023.jpg" },
-            { id: 11, name: "Cartera Blanca", code: "049", price: 10.99, category: "cartera", image: "049.jpg" },
-            { id: 12, name: "Cartera Blanca", code: "058", price: 10.99, category: "cartera", image: "058.jpg" },
-            { id: 13, name: "Cartera Clásica", code: "061", price: 12.50, category: "cartera", image: "061.jpg" },
-            { id: 14, name: "Cartera", code: "073", price: 10.00, category: "cartera", image: "073.jpg" },
-            { id: 15, name: "Cartera", code: "077", price: 13.50, category: "cartera", image: "077.jpg" },
-            { id: 16, name: "Cartera Blanca", code: "063", price: 10.50, category: "cartera", image: "063.jpg" },
-            { id: 17, name: "Cartera Roja", code: "074", price: 13.50, category: "cartera", image: "074.jpg" },
-            { id: 18, name: "Cartera", code: "086", price: 18.50, category: "cartera", image: "086.jpg" },
-            { id: 19, name: "Cartera Beige", code: "068", price: 10.50, category: "cartera", image: "068.jpg" },
-            { id: 20, name: "Cartera Blanca", code: "075", price: 13.50, category: "cartera", image: "075.jpg" },
-            { id: 21, name: "Cartera", code: "087", price: 18.50, category: "cartera", image: "087.jpg" },
-            { id: 22, name: "Cartera", code: "071", price: 15.00, category: "cartera", image: "071.jpg" },
-            { id: 23, name: "Cartera", code: "089", price: 14.99, category: "cartera", image: "089.jpg" },
-            { id: 24, name: "Cartera", code: "096", price: 14.99, category: "cartera", image: "096.jpg" },
-            { id: 25, name: "Cartera", code: "097", price: 14.99, category: "cartera", image: "097.jpg" },
-            { id: 26, name: "Cartera", code: "098", price: 24.00, category: "cartera", image: "098.jpg" },
-            { id: 27, name: "Cartera", code: "099", price: 14.99, category: "cartera", image: "099.jpg" },
-            { id: 28, name: "Cartera", code: "114", price: 14.99, category: "cartera", image: "114.jpg" },
-            { id: 29, name: "Cartera", code: "127", price: 12.00, category: "cartera", image: "127.jpg" },
-            { id: 30, name: "Cartera", code: "128", price: 13.99, category: "cartera", image: "128.jpg" },
-            { id: 31, name: "Cartera", code: "129", price: 13.99, category: "cartera", image: "129.jpg" },
-            { id: 32, name: "Cartera", code: "130", price: 15.00, category: "cartera", image: "130.jpg" },
-            { id: 33, name: "Cartera", code: "132", price: 14.00, category: "cartera", image: "132.jpg" },
-            { id: 34, name: "Cartera", code: "147", price: 14.99, category: "cartera", image: "147.jpg" },
-
+            // CARTERAS
+            { id: 1, name: "Cartera Elegante", code: "03", price: 12.50, category: "cartera" },
+            { id: 2, name: "Cartera Moderna", code: "033", price: 10.99, category: "cartera" },
+            { id: 3, name: "Cartera Clásica", code: "051", price: 20.00, category: "cartera" },
+            { id: 4, name: "Cartera Casual", code: "014", price: 12.00, category: "cartera" },
+            { id: 5, name: "Cartera Premium", code: "035", price: 16.50, category: "cartera" },
+            { id: 6, name: "Cartera Vino", code: "053", price: 18.00, category: "cartera" },
+            { id: 7, name: "Cartera Blanca", code: "022", price: 13.00, category: "cartera" },
+            { id: 8, name: "Cartera Negra", code: "047", price: 10.99, category: "cartera" },
+            { id: 9, name: "Cartera Morada", code: "054", price: 10.99, category: "cartera" },
+            { id: 10, name: "Cartera Rosada", code: "023", price: 9.50, category: "cartera" },
+            { id: 11, name: "Cartera Blanca", code: "049", price: 10.99, category: "cartera" },
+            { id: 12, name: "Cartera Blanca", code: "058", price: 10.99, category: "cartera" },
+            { id: 13, name: "Cartera Clásica", code: "061", price: 12.50, category: "cartera" },
+            { id: 14, name: "Cartera", code: "073", price: 10.00, category: "cartera" },
+            { id: 15, name: "Cartera", code: "077", price: 13.50, category: "cartera" },
+            { id: 16, name: "Cartera Blanca", code: "063", price: 10.50, category: "cartera" },
+            { id: 17, name: "Cartera Roja", code: "074", price: 13.50, category: "cartera" },
+            { id: 18, name: "Cartera", code: "086", price: 18.50, category: "cartera" },
+            { id: 19, name: "Cartera Beige", code: "068", price: 10.50, category: "cartera" },
+            { id: 20, name: "Cartera Blanca", code: "075", price: 13.50, category: "cartera" },
+            { id: 21, name: "Cartera", code: "087", price: 18.50, category: "cartera" },
+            { id: 22, name: "Cartera", code: "071", price: 15.00, category: "cartera" },
+            { id: 23, name: "Cartera", code: "089", price: 14.99, category: "cartera" },
+            { id: 24, name: "Cartera", code: "096", price: 14.99, category: "cartera" },
+            { id: 25, name: "Cartera", code: "097", price: 14.99, category: "cartera" },
+            { id: 26, name: "Cartera", code: "098", price: 24.00, category: "cartera" },
+            { id: 27, name: "Cartera", code: "099", price: 14.99, category: "cartera" },
+            { id: 28, name: "Cartera", code: "114", price: 14.99, category: "cartera" },
+            { id: 29, name: "Cartera", code: "127", price: 12.00, category: "cartera" },
+            { id: 30, name: "Cartera", code: "128", price: 13.99, category: "cartera" },
+            { id: 31, name: "Cartera", code: "129", price: 13.99, category: "cartera" },
+            { id: 32, name: "Cartera", code: "130", price: 15.00, category: "cartera" },
+            { id: 33, name: "Cartera", code: "132", price: 14.00, category: "cartera" },
+            { id: 34, name: "Cartera", code: "147", price: 14.99, category: "cartera" },
+            
             // BILLETERAS Y BOLSOS
-            { id: 35, name: "Billetera", code: "076", price: 10.00, category: "billetera", image: "076.jpg" },
-            { id: 36, name: "Bolso de Mano", code: "088", price: 10.00, category: "bolso", image: "088.jpg" },
-
-            // COLLARES (Página 4-5)
-            { id: 37, name: "Collar Elegante", code: "141", price: 10.00, category: "collar", image: "141.jpg" },
-            { id: 38, name: "Set de Collares", code: "142", price: 18.50, category: "collar", image: "142.jpg" },
-            { id: 39, name: "Collar", code: "145", price: 12.99, category: "collar", image: "145.jpg" },
-            { id: 40, name: "Collar", code: "155", price: 10.00, category: "collar", image: "155.jpg" },
-            { id: 41, name: "Collar", code: "163", price: 12.00, category: "collar", image: "163.jpg" },
-            { id: 42, name: "Collar", code: "164", price: 12.00, category: "collar", image: "164.jpg" },
-            { id: 43, name: "Collar", code: "165", price: 12.00, category: "collar", image: "165.jpg" },
-            { id: 44, name: "Collar", code: "171", price: 12.00, category: "collar", image: "171.jpg" },
-            { id: 45, name: "Collar", code: "172", price: 15.00, category: "collar", image: "172.jpg" },
-            { id: 46, name: "Collar", code: "173", price: 12.00, category: "collar", image: "173.jpg" },
-            { id: 47, name: "Collar", code: "175", price: 12.00, category: "collar", image: "175.jpg" },
-            { id: 48, name: "Collar", code: "183", price: 10.00, category: "collar", image: "183.jpg" },
-            { id: 49, name: "Collar", code: "184", price: 10.00, category: "collar", image: "184.jpg" },
-            { id: 50, name: "Collar", code: "987", price: 10.00, category: "collar", image: "987.jpg" },
-            { id: 51, name: "Collar", code: "01116", price: 12.00, category: "collar", image: "01116.jpg" },
-            { id: 52, name: "Collar Mariposa", code: "200", price: 10.00, category: "collar", image: "200.jpg" },
-            { id: 53, name: "Collar", code: "17801", price: 10.00, category: "collar", image: "17801.jpg" },
-            { id: 54, name: "Collar", code: "01127", price: 10.00, category: "collar", image: "01127.jpg" },
-            { id: 55, name: "Collar", code: "10199191", price: 9.50, category: "collar", image: "10199191.jpg" },
-            { id: 56, name: "Collar de Plata", code: "18065", price: 5.00, category: "collar", image: "18065.jpg" },
-            { id: 57, name: "Collar", code: "01129", price: 10.00, category: "collar", image: "01129.jpg" },
-            { id: 58, name: "Collar de Sol", code: "89009", price: 11.00, category: "collar", image: "89009.jpg" },
-            { id: 59, name: "Collar", code: "1200", price: 10.00, category: "collar", image: "1200.jpg" },
-
-            // ARITOS/ARETES (Página 6-7)
-            { id: 60, name: "Aritos", code: "06", price: 7.00, category: "aritos", image: "06.jpg" },
-            { id: 61, name: "Aritos Flor", code: "07", price: 5.00, category: "aritos", image: "07.jpg" },
-            { id: 62, name: "Aritos Cuadrados", code: "09", price: 7.00, category: "aritos", image: "09.jpg" },
-            { id: 63, name: "Aritos con Perla", code: "011", price: 7.00, category: "aritos", image: "011.jpg" },
-            { id: 64, name: "Aritos", code: "013", price: 7.00, category: "aritos", image: "013.jpg" },
-            { id: 65, name: "Aritos de Estrella", code: "019", price: 3.00, category: "aritos", image: "019.jpg" },
-            { id: 66, name: "Aritos Concha", code: "036", price: 3.50, category: "aritos", image: "036.jpg" },
-            { id: 67, name: "Aritos Abeja", code: "046", price: 3.50, category: "aritos", image: "046.jpg" },
-            { id: 68, name: "Aretes de Corazón", code: "056", price: 4.50, category: "aritos", image: "056.jpg" },
-            { id: 69, name: "Aretes Espiral", code: "060", price: 7.00, category: "aritos", image: "060.jpg" },
-            { id: 70, name: "Aritos Triángulo", code: "079", price: 5.00, category: "aritos", image: "079.jpg" },
-            { id: 71, name: "Aritos Cisne", code: "080", price: 4.00, category: "aritos", image: "080.jpg" },
-            { id: 72, name: "Aritos", code: "081", price: 6.00, category: "aritos", image: "081.jpg" },
-            { id: 73, name: "Aritos Rojos", code: "178", price: 8.50, category: "aritos", image: "178.jpg" },
-            { id: 74, name: "Aritos", code: "028393992", price: 6.00, category: "aritos", image: "028393992.jpg" },
-            { id: 75, name: "Aritos Pez", code: "177", price: 8.50, category: "aritos", image: "177.jpg" },
-            { id: 76, name: "Aritos Klohe", code: "19009", price: 5.00, category: "aritos", image: "19009.jpg" },
-            { id: 77, name: "Aretas", code: "179", price: 8.50, category: "aritos", image: "179.jpg" },
-            { id: 78, name: "Aritos Corazón Sol", code: "190012", price: 7.00, category: "aritos", image: "190012.jpg" },
-            { id: 79, name: "Aritos Abanico", code: "1991919", price: 2.00, category: "aritos", image: "1991919.jpg" },
-
-            // PULSERAS (Página 7-8)
-            { id: 80, name: "Pulsera Básica", code: "030", price: 6.00, category: "pulsera", image: "030.jpg" },
-            { id: 81, name: "Pulsera Cartier", code: "031", price: 11.00, category: "pulsera", image: "031.jpg" },
-            { id: 82, name: "Pulsera Cartier", code: "032", price: 10.00, category: "pulsera", image: "032.jpg" },
-            { id: 83, name: "Pulsera Ajustable", code: "018", price: 10.00, category: "pulsera", image: "018.jpg" },
-            { id: 84, name: "Brazalete", code: "038", price: 10.00, category: "pulsera", image: "038.jpg" },
-            { id: 85, name: "Pulsera", code: "160", price: 10.00, category: "pulsera", image: "160.jpg" },
-            { id: 86, name: "Pulsera", code: "161", price: 9.00, category: "pulsera", image: "161.jpg" },
-            { id: 87, name: "Pulsera", code: "167", price: 12.00, category: "pulsera", image: "167.jpg" },
-            { id: 88, name: "Pulsera", code: "198", price: 10.00, category: "pulsera", image: "198.jpg" },
-            { id: 89, name: "Pulsera", code: "2001", price: 10.00, category: "pulsera", image: "2001.jpg" },
-            { id: 90, name: "Pulsera Glenda", code: "1090009", price: 9.50, category: "pulsera", image: "1090009.jpg" },
-            { id: 91, name: "Pulsera", code: "9789", price: 8.00, category: "pulsera", image: "9789.jpg" },
-            { id: 92, name: "Pulsera", code: "8967", price: 7.00, category: "pulsera", image: "8967.jpg" },
-            { id: 93, name: "Pulsera", code: "1250", price: 5.50, category: "pulsera", image: "1250.jpg" },
-            { id: 94, name: "Pulsera de Trébol", code: "01118", price: 12.00, category: "pulsera", image: "01118.jpg" },
-            { id: 95, name: "Pulsera", code: "01126", price: 10.00, category: "pulsera", image: "01126.jpg" },
-
-            // ANILLOS
-            { id: 96, name: "Anillo", code: "02", price: 10.00, category: "anillo", image: "02.jpg" },
-
-            // TARJETAS
-            { id: 97, name: "Tarjetas", code: "154", price: 0.00, category: "tarjeta", image: "154.jpg" }
+            { id: 35, name: "Billetera", code: "076", price: 10.00, category: "billetera" },
+            { id: 36, name: "Bolso de Mano", code: "088", price: 10.00, category: "bolso" },
+            
+            // COLLARES
+            { id: 37, name: "Collar Elegante", code: "141", price: 10.00, category: "collar" },
+            { id: 38, name: "Set de Collares", code: "142", price: 18.50, category: "collar" },
+            { id: 39, name: "Collar", code: "145", price: 12.99, category: "collar" },
+            { id: 40, name: "Collar", code: "155", price: 10.00, category: "collar" },
+            { id: 41, name: "Collar", code: "163", price: 12.00, category: "collar" },
+            { id: 42, name: "Collar", code: "164", price: 12.00, category: "collar" },
+            { id: 43, name: "Collar", code: "165", price: 12.00, category: "collar" },
+            { id: 44, name: "Collar", code: "171", price: 12.00, category: "collar" },
+            { id: 45, name: "Collar", code: "172", price: 15.00, category: "collar" },
+            { id: 46, name: "Collar", code: "173", price: 12.00, category: "collar" },
+            { id: 47, name: "Collar", code: "175", price: 12.00, category: "collar" },
+            { id: 48, name: "Collar", code: "183", price: 10.00, category: "collar" },
+            { id: 49, name: "Collar", code: "184", price: 10.00, category: "collar" },
+            { id: 50, name: "Collar", code: "987", price: 10.00, category: "collar" },
+            { id: 51, name: "Collar", code: "01116", price: 12.00, category: "collar" },
+            { id: 52, name: "Collar Mariposa", code: "200", price: 10.00, category: "collar" },
+            { id: 53, name: "Collar", code: "17801", price: 10.00, category: "collar" },
+            { id: 54, name: "Collar", code: "01127", price: 10.00, category: "collar" },
+            { id: 55, name: "Collar", code: "10199191", price: 9.50, category: "collar" },
+            { id: 56, name: "Collar de Plata", code: "18065", price: 5.00, category: "collar" },
+            { id: 57, name: "Collar", code: "01129", price: 10.00, category: "collar" },
+            { id: 58, name: "Collar de Sol", code: "89009", price: 11.00, category: "collar" },
+            { id: 59, name: "Collar", code: "1200", price: 10.00, category: "collar" },
+            
+            // ARITOS
+            { id: 60, name: "Aritos", code: "06", price: 7.00, category: "aritos" },
+            { id: 61, name: "Aritos Flor", code: "07", price: 5.00, category: "aritos" },
+            { id: 62, name: "Aritos Cuadrados", code: "09", price: 7.00, category: "aritos" },
+            { id: 63, name: "Aritos con Perla", code: "011", price: 7.00, category: "aritos" },
+            { id: 64, name: "Aritos", code: "013", price: 7.00, category: "aritos" },
+            { id: 65, name: "Aritos de Estrella", code: "019", price: 3.00, category: "aritos" },
+            { id: 66, name: "Aritos Concha", code: "036", price: 3.50, category: "aritos" },
+            { id: 67, name: "Aritos Abeja", code: "046", price: 3.50, category: "aritos" },
+            { id: 68, name: "Aretes de Corazón", code: "056", price: 4.50, category: "aritos" },
+            { id: 69, name: "Aretes Espiral", code: "060", price: 7.00, category: "aritos" },
+            { id: 70, name: "Aritos Triángulo", code: "079", price: 5.00, category: "aritos" },
+            { id: 71, name: "Aritos Cisne", code: "080", price: 4.00, category: "aritos" },
+            { id: 72, name: "Aritos", code: "081", price: 6.00, category: "aritos" },
+            { id: 73, name: "Aritos Rojos", code: "178", price: 8.50, category: "aritos" },
+            { id: 74, name: "Aritos", code: "028393992", price: 6.00, category: "aritos" },
+            { id: 75, name: "Aritos Pez", code: "177", price: 8.50, category: "aritos" },
+            { id: 76, name: "Aritos Klohe", code: "19009", price: 5.00, category: "aritos" },
+            { id: 77, name: "Aretas", code: "179", price: 8.50, category: "aritos" },
+            { id: 78, name: "Aritos Corazón Sol", code: "190012", price: 7.00, category: "aritos" },
+            { id: 79, name: "Aritos Abanico", code: "1991919", price: 2.00, category: "aritos" },
+            
+            // PULSERAS
+            { id: 80, name: "Pulsera Básica", code: "030", price: 6.00, category: "pulsera" },
+            { id: 81, name: "Pulsera Cartier", code: "031", price: 11.00, category: "pulsera" },
+            { id: 82, name: "Pulsera Cartier", code: "032", price: 10.00, category: "pulsera" },
+            { id: 83, name: "Pulsera Ajustable", code: "018", price: 10.00, category: "pulsera" },
+            { id: 84, name: "Brazalete", code: "038", price: 10.00, category: "pulsera" },
+            { id: 85, name: "Pulsera", code: "160", price: 10.00, category: "pulsera" },
+            { id: 86, name: "Pulsera", code: "161", price: 9.00, category: "pulsera" },
+            { id: 87, name: "Pulsera", code: "167", price: 12.00, category: "pulsera" },
+            { id: 88, name: "Pulsera", code: "198", price: 10.00, category: "pulsera" },
+            { id: 89, name: "Pulsera", code: "2001", price: 10.00, category: "pulsera" },
+            { id: 90, name: "Pulsera Glenda", code: "1090009", price: 9.50, category: "pulsera" },
+            { id: 91, name: "Pulsera", code: "9789", price: 8.00, category: "pulsera" },
+            { id: 92, name: "Pulsera", code: "8967", price: 7.00, category: "pulsera" },
+            { id: 93, name: "Pulsera", code: "1250", price: 5.50, category: "pulsera" },
+            { id: 94, name: "Pulsera de Trébol", code: "01118", price: 12.00, category: "pulsera" },
+            { id: 95, name: "Pulsera", code: "01126", price: 10.00, category: "pulsera" },
+            
+            // ANILLO Y TARJETA
+            { id: 96, name: "Anillo", code: "02", price: 10.00, category: "anillo" },
+            { id: 97, name: "Tarjetas", code: "154", price: 0.00, category: "tarjeta" }
         ];
 
-        // Carrito
         let cart = [];
 
         // ==========================================
@@ -673,30 +668,38 @@
             renderProducts(products);
         });
 
-        function getImageUrl(imageName) {
-            if (imageName.startsWith('http')) {
-                return imageName;
-            }
-            // Las imágenes están en la carpeta klohe_imagenes con los nombres de código
-            return `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}/main/klohe_imagenes/${imageName}`;
+        // Generar URL de imagen usando GitHub Pages (más confiable que raw)
+        function getImageUrl(code) {
+            // Opción 1: GitHub Pages (recomendado)
+            // return `https://${CONFIG.GITHUB_USER}.github.io/${CONFIG.REPO_NAME}/${CONFIG.IMAGES_FOLDER}/${code}.jpg`;
+            
+            // Opción 2: Raw GitHub (alternativa)
+            // return `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}/main/${CONFIG.IMAGES_FOLDER}/${code}.jpg`;
+            
+            // Opción 3: JSDelivr CDN (más rápido y confiable)
+            return `https://cdn.jsdelivr.net/gh/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}@main/${CONFIG.IMAGES_FOLDER}/${code}.jpg`;
         }
 
         function renderProducts(productsToRender) {
             const grid = document.getElementById('products-grid');
             
             if (productsToRender.length === 0) {
-                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; font-size: 1.2rem; color: #636e72;"><i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>No se encontraron productos</div>';
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem;"><i class="fas fa-search" style="font-size: 3rem; display: block; margin-bottom: 1rem; color: #636e72;"></i>No se encontraron productos</div>';
                 return;
             }
             
-            grid.innerHTML = productsToRender.map(product => `
+            grid.innerHTML = productsToRender.map(product => {
+                const imageUrl = getImageUrl(product.code);
+                return `
                 <div class="product-card" data-id="${product.id}">
                     <div class="product-image-container">
                         <span class="product-code">Cód: ${product.code}</span>
-                        <img src="${getImageUrl(product.image)}" 
+                        <img src="${imageUrl}" 
                              alt="${product.name}" 
                              class="product-image"
-                             onerror="this.src='https://via.placeholder.com/300x300?text=${product.code}'">
+                             onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'no-image\'><i class=\'fas fa-image\'></i><span>Imagen no disponible</span></div>';"
+                             onload="this.style.opacity='1'"
+                             style="opacity: 0; transition: opacity 0.3s;">
                     </div>
                     <div class="product-info">
                         <span class="product-category">${product.category}</span>
@@ -707,7 +710,30 @@
                         </button>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
+        }
+
+        function testImage() {
+            const testCode = '03';
+            const urls = [
+                `https://${CONFIG.GITHUB_USER}.github.io/${CONFIG.REPO_NAME}/${CONFIG.IMAGES_FOLDER}/${testCode}.jpg`,
+                `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}/main/${CONFIG.IMAGES_FOLDER}/${testCode}.jpg`,
+                `https://cdn.jsdelivr.net/gh/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}@main/${CONFIG.IMAGES_FOLDER}/${testCode}.jpg`
+            ];
+            
+            let html = '<strong>Probando URLs:</strong><br>';
+            urls.forEach((url, i) => {
+                html += `<div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                    <small>Opción ${i+1}:</small><br>
+                    <code style="font-size: 0.8rem; word-break: break-all;">${url}</code><br>
+                    <img src="${url}" style="max-width: 100px; max-height: 100px; margin-top: 5px; border: 1px solid #ddd;" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                         onload="this.nextElementSibling.style.display='none';">
+                    <span style="color: red; display: none;">❌ Error al cargar</span>
+                </div>`;
+            });
+            
+            document.getElementById('test-result').innerHTML = html;
         }
 
         function filterProducts() {
@@ -718,7 +744,6 @@
                 const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
                                     product.code.toLowerCase().includes(searchTerm);
                 const matchesCategory = category === 'all' || product.category === category;
-                
                 return matchesSearch && matchesCategory;
             });
             
@@ -730,7 +755,6 @@
             if (!product) return;
             
             const existingItem = cart.find(item => item.id === productId);
-            
             if (existingItem) {
                 existingItem.quantity++;
             } else {
@@ -745,9 +769,7 @@
         function showNotification() {
             const notification = document.getElementById('notification');
             notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 2000);
+            setTimeout(() => notification.style.display = 'none', 2000);
         }
 
         function removeFromCart(productId) {
@@ -760,9 +782,8 @@
             const item = cart.find(item => item.id === productId);
             if (item) {
                 item.quantity += change;
-                if (item.quantity <= 0) {
-                    removeFromCart(productId);
-                } else {
+                if (item.quantity <= 0) removeFromCart(productId);
+                else {
                     saveCart();
                     updateCartUI();
                 }
@@ -792,7 +813,6 @@
                     <div class="empty-cart">
                         <i class="fas fa-shopping-basket"></i>
                         <p>Tu carrito está vacío</p>
-                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">¡Agrega algunos productos!</p>
                     </div>`;
                 document.getElementById('cart-total').textContent = '0.00';
                 return;
@@ -800,7 +820,12 @@
             
             cartItems.innerHTML = cart.map(item => `
                 <div class="cart-item">
-                    <img src="${getImageUrl(item.image)}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80x80?text=${item.code}'">
+                    <img src="${getImageUrl(item.code)}" alt="${item.name}" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                         style="display: block;">
+                    <div style="display: none; width: 80px; height: 80px; background: #f0f0f0; align-items: center; justify-content: center; border-radius: 12px;">
+                        <i class="fas fa-image" style="color: #ccc;"></i>
+                    </div>
                     <div class="cart-item-info">
                         <div class="cart-item-title">${item.name}</div>
                         <div class="cart-item-code">Cód: ${item.code}</div>
@@ -830,23 +855,18 @@
             if (cart.length === 0) return;
             
             let message = '¡Hola Klohe! 👋\n\nQuiero hacer un pedido de:\n\n';
-            
             cart.forEach(item => {
                 message += `• ${item.name} (Cód: ${item.code}) x${item.quantity} - ${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}\n`;
             });
-            
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `\n💰 *Total: ${CONFIG.CURRENCY}${total.toFixed(2)}*\n\n¡Gracias! 😊`;
+            message += `\n💰 Total: ${CONFIG.CURRENCY}${total.toFixed(2)}\n\n¡Gracias! 😊`;
             
-            const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         window.onclick = function(event) {
             const modal = document.getElementById('cart-modal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
+            if (event.target === modal) modal.style.display = 'none';
         }
     </script>
 </body>

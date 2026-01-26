@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klohe - Accesorios</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --blanco-hueso: #FAF9F6;
@@ -104,25 +104,26 @@
             font-weight: 600;
         }
 
-        /* Hero */
+        /* Hero - Mensajes más delgados */
         .hero {
             text-align: center;
-            padding: 4rem 0;
+            padding: 3rem 0;
             background: linear-gradient(135deg, var(--blanco-hueso) 0%, var(--rosa-palido) 100%);
         }
 
         .hero h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 400;
+            font-size: 1.8rem;
+            font-weight: 300;
             color: var(--texto);
-            margin-bottom: 0.5rem;
-            min-height: 3.5rem;
+            margin-bottom: 0.3rem;
+            min-height: 2.5rem;
+            letter-spacing: 1px;
         }
 
         .hero p {
             color: var(--texto-claro);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 300;
             min-height: 1.5rem;
         }
@@ -131,23 +132,23 @@
         .filters {
             display: flex;
             gap: 1rem;
-            margin: 3rem 0;
+            margin: 2rem 0;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .filters input, .filters select {
-            padding: 1rem 1.5rem;
+            padding: 0.8rem 1.2rem;
             border: 1px solid var(--rosa-medio);
             border-radius: 30px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             background: white;
             color: var(--texto);
             transition: all 0.3s ease;
         }
 
         .filters input {
-            min-width: 280px;
+            min-width: 250px;
         }
 
         .filters input:focus, .filters select:focus {
@@ -203,7 +204,8 @@
         }
 
         .product-card.agotado {
-            opacity: 0.7;
+            opacity: 0.6;
+            order: 999;
         }
 
         .product-card.agotado .product-image-container {
@@ -218,16 +220,17 @@
             transform: translate(-50%, -50%);
             background: rgba(231, 76, 60, 0.9);
             color: white;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 5px;
             font-weight: 600;
             letter-spacing: 2px;
+            font-size: 0.9rem;
         }
 
         .product-image-container {
             position: relative;
             width: 100%;
-            height: 220px;
+            height: 200px;
             overflow: hidden;
             background: var(--blanco-hueso);
             cursor: pointer;
@@ -251,7 +254,7 @@
         .product-category {
             display: inline-block;
             color: var(--rosa-oscuro);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 0.3rem;
@@ -260,8 +263,8 @@
 
         .product-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
             color: var(--texto);
             font-weight: 400;
             line-height: 1.3;
@@ -270,16 +273,16 @@
         .product-details {
             background: var(--blanco-hueso);
             border-radius: 8px;
-            padding: 0.8rem;
-            margin-bottom: 0.8rem;
-            font-size: 0.75rem;
+            padding: 0.6rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.7rem;
         }
 
         .detail-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.3rem;
-            padding-bottom: 0.2rem;
+            margin-bottom: 0.2rem;
+            padding-bottom: 0.15rem;
             border-bottom: 1px solid var(--rosa-medio);
         }
 
@@ -304,22 +307,22 @@
         }
 
         .product-price {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--texto);
             font-weight: 600;
-            margin: 0.8rem 0;
+            margin: 0.6rem 0;
             text-align: center;
         }
 
         .add-to-cart {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.7rem;
             background: transparent;
             color: var(--texto);
             border: 1px solid var(--rosa-medio);
             border-radius: 25px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -383,11 +386,11 @@
         .modal-content {
             background: var(--blanco-hueso);
             margin: 5% auto;
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 16px;
             width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
+            max-width: 500px;
+            max-height: 85vh;
             overflow-y: auto;
             position: relative;
         }
@@ -413,6 +416,55 @@
             color: var(--texto);
         }
 
+        .shipping-info {
+            background: linear-gradient(135deg, var(--rosa-palido) 0%, var(--rosa-medio) 100%);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--rosa-oscuro);
+        }
+
+        .shipping-info i {
+            font-size: 1.5rem;
+            color: var(--rosa-oscuro);
+            margin-bottom: 0.5rem;
+        }
+
+        .shipping-info h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--texto);
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .shipping-info p {
+            color: var(--texto-claro);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .clear-cart-btn {
+            background: transparent;
+            border: 1px solid var(--agotado);
+            color: var(--agotado);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+
+        .clear-cart-btn:hover {
+            background: var(--agotado);
+            color: white;
+        }
+
         .cart-item {
             display: flex;
             align-items: center;
@@ -422,8 +474,8 @@
         }
 
         .cart-item img {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             object-fit: cover;
             border-radius: 8px;
             cursor: pointer;
@@ -436,35 +488,38 @@
         .cart-item-title {
             font-weight: 600;
             margin-bottom: 0.2rem;
+            font-size: 0.9rem;
         }
 
         .cart-item-code {
             color: var(--texto-claro);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .cart-item-price {
             color: var(--rosa-oscuro);
             font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .cart-item-quantity {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
         }
 
         .quantity-btn {
             background: white;
             border: 1px solid var(--rosa-medio);
-            width: 28px;
-            height: 28px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .quantity-btn:hover {
@@ -476,12 +531,12 @@
             cursor: pointer;
             background: none;
             border: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .cart-total {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
             border-top: 2px solid var(--rosa-medio);
             text-align: center;
         }
@@ -512,7 +567,7 @@
             background: white;
             border-top: 1px solid var(--rosa-medio);
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2rem;
             margin-top: 4rem;
         }
 
@@ -524,25 +579,26 @@
             transform: translate(-50%, -50%);
             background: var(--rosa-oscuro);
             color: white;
-            padding: 2rem 3rem;
+            padding: 1.5rem 2.5rem;
             border-radius: 16px;
             display: none;
             z-index: 1001;
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             text-align: center;
-            min-width: 300px;
+            min-width: 280px;
         }
 
         .notification i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
             display: block;
         }
 
         @media (max-width: 768px) {
-            .hero h2 { font-size: 2rem; }
+            .hero h2 { font-size: 1.4rem; }
+            .products-grid { gap: 1rem; }
         }
     </style>
 </head>
@@ -559,8 +615,8 @@
 
     <section class="hero">
         <div class="container">
-            <h2 id="hero-title">Accesorios que inspiran</h2>
-            <p id="hero-subtitle">Elegancia en cada detalle</p>
+            <h2 id="hero-title">DEJA LO ORDINARIO Y CONVIÉRTETE EN EXTRAORDINARIO</h2>
+            <p id="hero-subtitle">Transforma tu estilo hoy</p>
         </div>
     </section>
 
@@ -601,10 +657,23 @@
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="toggleCart()">&times;</span>
-            <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 1.5rem;">Tu Carrito</h2>
+            <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 1rem; font-size: 1.5rem;">Tu Carrito</h2>
+            
+            <!-- Info de envíos -->
+            <div class="shipping-info">
+                <i class="fas fa-truck"></i>
+                <h4>¡Envíos a todo el país!</h4>
+                <p>Desde $3.75 - Entrega rápida y segura</p>
+            </div>
+
+            <!-- Botón vaciar carrito -->
+            <button class="clear-cart-btn" onclick="clearCart()" id="clear-cart-btn" style="display: none;">
+                <i class="fas fa-trash-alt"></i> Vaciar carrito
+            </button>
+            
             <div id="cart-items"></div>
             <div class="cart-total">
-                <h3 style="font-family: 'Playfair Display', serif;">Total: $<span id="cart-total">0.00</span></h3>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.2rem;">Total: $<span id="cart-total">0.00</span></h3>
                 <button class="checkout-btn" onclick="checkout()">
                     <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
                 </button>
@@ -696,7 +765,7 @@
             { title: "Tu historia de estilo", subtitle: "Comienza aquí" }
         ];
 
-        // Productos actualizados desde el inventario (228 productos)
+        // Productos actualizados - ARITOS DE PLATA movidos a categoría Aritos
         let products = [
             // CARTERAS (51 productos)
             { id: 1, name: "Billetera", fullCode: "01176255049179774", code: "076", price: 10.00, stock: 0, category: "Carteras" },
@@ -707,7 +776,6 @@
             { id: 6, name: "Cartera", fullCode: "01176255048777034", code: "035", price: 16.50, stock: 0, category: "Carteras" },
             { id: 7, name: "Cartera", fullCode: "01176255049117469", code: "071", price: 15.00, stock: 0, category: "Carteras" },
             { id: 8, name: "Cartera", fullCode: "01176255049145271", code: "073", price: 10.00, stock: 1, category: "Carteras" },
-            // Cambiado el código 077 a 00000 para evitar duplicado
             { id: 9, name: "Cartera", fullCode: "01176255049186675", code: "00000", price: 13.50, stock: 0, category: "Carteras" },
             { id: 10, name: "Cartera", fullCode: "00217626166105179", code: "086", price: 18.50, stock: 1, category: "Carteras" },
             { id: 11, name: "Cartera", fullCode: "002176261661059510", code: "087", price: 18.50, stock: 1, category: "Carteras" },
@@ -746,7 +814,7 @@
             { id: 44, name: "Cartera Vino", fullCode: "01176255048919052", code: "053", price: 18.00, stock: 0, category: "Carteras" },
             { id: 45, name: "Carteras", fullCode: "181", code: "181", price: 10.00, stock: 1, category: "Carteras" },
 
-            // ARITOS (43 productos)
+            // ARITOS (48 productos) - ARITOS DE PLATA movidos aquí
             { id: 46, name: "Aritos", fullCode: "01176255048869645", code: "046", price: 3.50, stock: 1, category: "Aritos" },
             { id: 47, name: "Aretas", fullCode: "245317626357192534", code: "179", price: 8.50, stock: 1, category: "Aritos" },
             { id: 48, name: "Arete", fullCode: "01176255049001259", code: "060", price: 7.00, stock: 1, category: "Aritos" },
@@ -791,139 +859,139 @@
             { id: 87, name: "Aritos", fullCode: "0874317665443319011", code: "190012", price: 7.00, stock: 1, category: "Aritos" },
             { id: 88, name: "Aritos", fullCode: "1982929", code: "1991919", price: 2.00, stock: 1, category: "Aritos" },
             { id: 89, name: "Aritos de Estrella", fullCode: "01176255048647718", code: "019", price: 3.00, stock: 0, category: "Aritos" },
+            // ARITOS DE PLATA - AHORA EN CATEGORÍA ARITOS
+            { id: 90, name: "Aritos de Plata", fullCode: "PEDIDO317694374239261", code: "02222", price: 5.00, stock: 1, category: "Aritos" },
+            { id: 91, name: "Aritos de Plata", fullCode: "PEDIDO317694374240403", code: "02224", price: 5.00, stock: 1, category: "Aritos" },
+            { id: 92, name: "Aritos de Plata", fullCode: "PEDIDO317694374240794", code: "02226", price: 5.00, stock: 1, category: "Aritos" },
+            { id: 93, name: "Aritos de Plata", fullCode: "PEDIDO317694374241245", code: "02227", price: 5.00, stock: 1, category: "Aritos" },
 
-            // COLLARES (48 productos)
-            { id: 90, name: "Aritos de Plata", fullCode: "PEDIDO317694374239261", code: "02222", price: 5.00, stock: 1, category: "Collares" },
-            { id: 91, name: "Aritos de Plata", fullCode: "PEDIDO317694374240403", code: "02224", price: 5.00, stock: 1, category: "Collares" },
-            { id: 92, name: "Aritos de Plata", fullCode: "PEDIDO317694374240794", code: "02226", price: 5.00, stock: 1, category: "Collares" },
-            { id: 93, name: "Aritos de Plata", fullCode: "PEDIDO317694374241245", code: "02227", price: 5.00, stock: 1, category: "Collares" },
-            { id: 94, name: "Aritos de Plata", fullCode: "PEDIDO317694374241556", code: "02228", price: 5.00, stock: 1, category: "Collares" },
-            { id: 95, name: "Aritos", fullCode: "01176255048723528", code: "029", price: 5.50, stock: 0, category: "Collares" },
-            { id: 96, name: "Colla de Playa", fullCode: "01176255049079565", code: "066", price: 12.75, stock: 1, category: "Collares" },
-            { id: 97, name: "Collar", fullCode: "0191001", code: "10199191", price: 9.50, stock: 1, category: "Collares" },
-            { id: 98, name: "Collar", fullCode: "08717664381648050", code: "17801", price: 10.00, stock: 1, category: "Collares" },
-            { id: 99, name: "Collar", fullCode: "01176255048693123", code: "024", price: 12.00, stock: 0, category: "Collares" },
-            { id: 100, name: "Collar", fullCode: "01176255048697624", code: "025", price: 12.00, stock: 1, category: "Collares" },
-            { id: 101, name: "Collar", fullCode: "01176255048719427", code: "028", price: 8.00, stock: 3, category: "Collares" },
-            { id: 102, name: "Collar", fullCode: "01176255048768333", code: "034", price: 15.00, stock: 1, category: "Collares" },
-            { id: 103, name: "Collar", fullCode: "01176255048802838", code: "039", price: 11.50, stock: 1, category: "Collares" },
-            { id: 104, name: "Collar", fullCode: "01176255048817339", code: "040", price: 10.00, stock: 0, category: "Collares" },
-            { id: 105, name: "Collar", fullCode: "01176255049112468", code: "070", price: 12.00, stock: 1, category: "Collares" },
-            { id: 106, name: "Collar", fullCode: "01176255049127870", code: "072", price: 11.50, stock: 1, category: "Collares" },
-            { id: 107, name: "Collar", fullCode: "01117625538987550", code: "077", price: 13.50, stock: 1, category: "Collares" },
-            { id: 108, name: "Collar", fullCode: "00217626166102646", code: "083", price: 0.00, stock: 0, category: "Collares" },
-            { id: 109, name: "Collar", fullCode: "00217626166103567", code: "084", price: 13.00, stock: 1, category: "Collares" },
-            { id: 110, name: "Collar", fullCode: "002176261661072713", code: "090", price: 12.50, stock: 1, category: "Collares" },
-            { id: 111, name: "Collar", fullCode: "002176261661077414", code: "091", price: 12.00, stock: 1, category: "Collares" },
-            { id: 112, name: "Collar", fullCode: "002176261661094617", code: "093", price: 12.00, stock: 1, category: "Collares" },
-            { id: 113, name: "Collar", fullCode: "002176261661109618", code: "094", price: 12.00, stock: 0, category: "Collares" },
-            { id: 114, name: "Collar", fullCode: "002176261661114119", code: "095", price: 12.00, stock: 0, category: "Collares" },
-            { id: 115, name: "Collar", fullCode: "002176261661192128", code: "104", price: 15.00, stock: 1, category: "Collares" },
-            { id: 116, name: "Collar", fullCode: "002176261661228633", code: "109", price: 11.00, stock: 0, category: "Collares" },
-            { id: 117, name: "Collar", fullCode: "002176261661236634", code: "110", price: 13.99, stock: 1, category: "Collares" },
-            { id: 118, name: "Collar", fullCode: "002176261661240435", code: "111", price: 14.99, stock: 1, category: "Collares" },
-            { id: 119, name: "Collar", fullCode: "002176261661257237", code: "113", price: 12.00, stock: 0, category: "Collares" },
-            { id: 120, name: "Collar", fullCode: "002176261661341250", code: "126", price: 12.00, stock: 1, category: "Collares" },
-            { id: 121, name: "Collar", fullCode: "002176261661376757", code: "133", price: 10.00, stock: 1, category: "Collares" },
-            { id: 122, name: "Collar", fullCode: "002176261661384358", code: "134", price: 12.00, stock: 2, category: "Collares" },
-            { id: 123, name: "Collar", fullCode: "002176261661388559", code: "135", price: 15.00, stock: 1, category: "Collares" },
-            { id: 124, name: "Collar", fullCode: "002176261661392860", code: "136", price: 15.00, stock: 1, category: "Collares" },
-            { id: 125, name: "Collar", fullCode: "002176261661414063", code: "139", price: 10.00, stock: 1, category: "Collares" },
-            { id: 126, name: "Collar", fullCode: "002176261661430265", code: "141", price: 10.00, stock: 1, category: "Collares" },
-            { id: 127, name: "Collar", fullCode: "002176261661452469", code: "145", price: 12.99, stock: 1, category: "Collares" },
-            { id: 128, name: "Collar", fullCode: "002176261661515479", code: "155", price: 10.00, stock: 1, category: "Collares" },
-            { id: 129, name: "Collar", fullCode: "002176261661561487", code: "163", price: 12.00, stock: 1, category: "Collares" },
-            { id: 130, name: "Collar", fullCode: "002176261661570388", code: "164", price: 12.00, stock: 1, category: "Collares" },
-            { id: 131, name: "Collar", fullCode: "002176261661578589", code: "165", price: 12.00, stock: 1, category: "Collares" },
-            { id: 132, name: "Collar", fullCode: "002176261661616595", code: "171", price: 12.00, stock: 1, category: "Collares" },
-            { id: 133, name: "Collar", fullCode: "002176261661624396", code: "172", price: 15.00, stock: 1, category: "Collares" },
-            { id: 134, name: "Collar", fullCode: "002176261661630897", code: "173", price: 12.00, stock: 1, category: "Collares" },
-            { id: 135, name: "Collar", fullCode: "245317626357189290", code: "175", price: 12.00, stock: 3, category: "Collares" },
-            { id: 136, name: "Collar", fullCode: "New17642076043110", code: "183", price: 10.00, stock: 1, category: "Collares" },
-            { id: 137, name: "Collar", fullCode: "New17642076049991", code: "184", price: 10.00, stock: 1, category: "Collares" },
+            // COLLARES (43 productos) - ARITOS DE PLATA eliminados de aquí
+            { id: 94, name: "Aritos", fullCode: "01176255048723528", code: "029", price: 5.50, stock: 0, category: "Collares" },
+            { id: 95, name: "Colla de Playa", fullCode: "01176255049079565", code: "066", price: 12.75, stock: 1, category: "Collares" },
+            { id: 96, name: "Collar", fullCode: "0191001", code: "10199191", price: 9.50, stock: 1, category: "Collares" },
+            { id: 97, name: "Collar", fullCode: "08717664381648050", code: "17801", price: 10.00, stock: 1, category: "Collares" },
+            { id: 98, name: "Collar", fullCode: "01176255048693123", code: "024", price: 12.00, stock: 0, category: "Collares" },
+            { id: 99, name: "Collar", fullCode: "01176255048697624", code: "025", price: 12.00, stock: 1, category: "Collares" },
+            { id: 100, name: "Collar", fullCode: "01176255048719427", code: "028", price: 8.00, stock: 3, category: "Collares" },
+            { id: 101, name: "Collar", fullCode: "01176255048768333", code: "034", price: 15.00, stock: 1, category: "Collares" },
+            { id: 102, name: "Collar", fullCode: "01176255048802838", code: "039", price: 11.50, stock: 1, category: "Collares" },
+            { id: 103, name: "Collar", fullCode: "01176255048817339", code: "040", price: 10.00, stock: 0, category: "Collares" },
+            { id: 104, name: "Collar", fullCode: "01176255049112468", code: "070", price: 12.00, stock: 1, category: "Collares" },
+            { id: 105, name: "Collar", fullCode: "01176255049127870", code: "072", price: 11.50, stock: 1, category: "Collares" },
+            { id: 106, name: "Collar", fullCode: "01117625538987550", code: "077", price: 13.50, stock: 1, category: "Collares" },
+            { id: 107, name: "Collar", fullCode: "00217626166102646", code: "083", price: 0.00, stock: 0, category: "Collares" },
+            { id: 108, name: "Collar", fullCode: "00217626166103567", code: "084", price: 13.00, stock: 1, category: "Collares" },
+            { id: 109, name: "Collar", fullCode: "002176261661072713", code: "090", price: 12.50, stock: 1, category: "Collares" },
+            { id: 110, name: "Collar", fullCode: "002176261661077414", code: "091", price: 12.00, stock: 1, category: "Collares" },
+            { id: 111, name: "Collar", fullCode: "002176261661094617", code: "093", price: 12.00, stock: 1, category: "Collares" },
+            { id: 112, name: "Collar", fullCode: "002176261661109618", code: "094", price: 12.00, stock: 0, category: "Collares" },
+            { id: 113, name: "Collar", fullCode: "002176261661114119", code: "095", price: 12.00, stock: 0, category: "Collares" },
+            { id: 114, name: "Collar", fullCode: "002176261661192128", code: "104", price: 15.00, stock: 1, category: "Collares" },
+            { id: 115, name: "Collar", fullCode: "002176261661228633", code: "109", price: 11.00, stock: 0, category: "Collares" },
+            { id: 116, name: "Collar", fullCode: "002176261661236634", code: "110", price: 13.99, stock: 1, category: "Collares" },
+            { id: 117, name: "Collar", fullCode: "002176261661240435", code: "111", price: 14.99, stock: 1, category: "Collares" },
+            { id: 118, name: "Collar", fullCode: "002176261661257237", code: "113", price: 12.00, stock: 0, category: "Collares" },
+            { id: 119, name: "Collar", fullCode: "002176261661341250", code: "126", price: 12.00, stock: 1, category: "Collares" },
+            { id: 120, name: "Collar", fullCode: "002176261661376757", code: "133", price: 10.00, stock: 1, category: "Collares" },
+            { id: 121, name: "Collar", fullCode: "002176261661384358", code: "134", price: 12.00, stock: 2, category: "Collares" },
+            { id: 122, name: "Collar", fullCode: "002176261661388559", code: "135", price: 15.00, stock: 1, category: "Collares" },
+            { id: 123, name: "Collar", fullCode: "002176261661392860", code: "136", price: 15.00, stock: 1, category: "Collares" },
+            { id: 124, name: "Collar", fullCode: "002176261661414063", code: "139", price: 10.00, stock: 1, category: "Collares" },
+            { id: 125, name: "Collar", fullCode: "002176261661430265", code: "141", price: 10.00, stock: 1, category: "Collares" },
+            { id: 126, name: "Collar", fullCode: "002176261661452469", code: "145", price: 12.99, stock: 1, category: "Collares" },
+            { id: 127, name: "Collar", fullCode: "002176261661515479", code: "155", price: 10.00, stock: 1, category: "Collares" },
+            { id: 128, name: "Collar", fullCode: "002176261661561487", code: "163", price: 12.00, stock: 1, category: "Collares" },
+            { id: 129, name: "Collar", fullCode: "002176261661570388", code: "164", price: 12.00, stock: 1, category: "Collares" },
+            { id: 130, name: "Collar", fullCode: "002176261661578589", code: "165", price: 12.00, stock: 1, category: "Collares" },
+            { id: 131, name: "Collar", fullCode: "002176261661616595", code: "171", price: 12.00, stock: 1, category: "Collares" },
+            { id: 132, name: "Collar", fullCode: "002176261661624396", code: "172", price: 15.00, stock: 1, category: "Collares" },
+            { id: 133, name: "Collar", fullCode: "002176261661630897", code: "173", price: 12.00, stock: 1, category: "Collares" },
+            { id: 134, name: "Collar", fullCode: "245317626357189290", code: "175", price: 12.00, stock: 3, category: "Collares" },
+            { id: 135, name: "Collar", fullCode: "New17642076043110", code: "183", price: 10.00, stock: 1, category: "Collares" },
+            { id: 136, name: "Collar", fullCode: "New17642076049991", code: "184", price: 10.00, stock: 1, category: "Collares" },
 
             // PULSERAS (34 productos)
-            { id: 138, name: "Bracelet", fullCode: "01176255048821240", code: "041", price: 7.00, stock: 0, category: "Pulseras" },
-            { id: 139, name: "Brasalet", fullCode: "01176255048799337", code: "038", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 140, name: "Pulsera", fullCode: "01176255048824741", code: "042", price: 5.00, stock: 1, category: "Pulseras" },
-            { id: 141, name: "Pulsera", fullCode: "01176255048840642", code: "043", price: 7.00, stock: 2, category: "Pulseras" },
-            { id: 142, name: "Pulsera", fullCode: "01176255048844943", code: "044", price: 10.00, stock: 1, category: "Pulseras" },
-            { id: 143, name: "Pulsera", fullCode: "01176255049053663", code: "064", price: 6.00, stock: 0, category: "Pulseras" },
-            { id: 144, name: "Pulsera", fullCode: "002176261661187727", code: "103", price: 12.00, stock: 0, category: "Pulseras" },
-            { id: 145, name: "Pulsera", fullCode: "002176261661203929", code: "105", price: 12.99, stock: 1, category: "Pulseras" },
-            { id: 146, name: "Pulsera", fullCode: "002176261661209330", code: "106", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 147, name: "Pulsera", fullCode: "002176261661252436", code: "112", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 148, name: "Pulsera", fullCode: "002176261661462170", code: "146", price: 12.00, stock: 1, category: "Pulseras" },
-            { id: 149, name: "Pulsera", fullCode: "002176261661535783", code: "159", price: 13.00, stock: 3, category: "Pulseras" },
-            { id: 150, name: "Pulsera", fullCode: "002176261661543784", code: "160", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 151, name: "Pulsera", fullCode: "002176261661548185", code: "161", price: 9.00, stock: 0, category: "Pulseras" },
-            { id: 152, name: "Pulsera", fullCode: "002176261661587991", code: "167", price: 12.00, stock: 0, category: "Pulseras" },
-            { id: 153, name: "Pulsera", fullCode: "198", code: "198", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 154, name: "Pulsera", fullCode: "78917664204712900", code: "9789", price: 8.00, stock: 1, category: "Pulseras" },
-            { id: 155, name: "Pulsera", fullCode: "78917664204717611", code: "8967", price: 7.00, stock: 1, category: "Pulseras" },
-            { id: 156, name: "Pulsera", fullCode: "L910023817667846502061", code: "1250", price: 5.50, stock: 0, category: "Pulseras" },
-            { id: 157, name: "Pulsera", fullCode: "RELOJES01176937472419514", code: "01126", price: 10.00, stock: 2, category: "Pulseras" },
-            { id: 158, name: "Pulsera", fullCode: "PEDIDO317694374238630", code: "02221", price: 10.50, stock: 3, category: "Pulseras" },
-            { id: 159, name: "Pulsera", fullCode: "PEDIDO317694374239962", code: "02223", price: 10.00, stock: 1, category: "Pulseras" },
-            { id: 160, name: "Pulsera", fullCode: "PEDIDO317694377272620", code: "03331", price: 12.00, stock: 1, category: "Pulseras" },
-            { id: 161, name: "Pulsera", fullCode: "PEDIDO317694377273431", code: "03332", price: 12.00, stock: 1, category: "Pulseras" },
-            { id: 162, name: "Pulsera", fullCode: "2001", code: "2001", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 163, name: "Pulsera Ajustable", fullCode: "01176255048642117", code: "018", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 164, name: "Pulsera Basica", fullCode: "01176255048731129", code: "030", price: 6.00, stock: 1, category: "Pulseras" },
-            { id: 165, name: "Pulsera cartier", fullCode: "01176255048749431", code: "032", price: 10.00, stock: 0, category: "Pulseras" },
-            { id: 166, name: "Pulsera Cartier", fullCode: "01176255048745830", code: "031", price: 11.00, stock: 0, category: "Pulseras" },
-            { id: 167, name: "Pulsera de Trebol", fullCode: "RELOJES0117693747221617", code: "01118", price: 12.00, stock: 1, category: "Pulseras" },
-            { id: 168, name: "Van Cleef", fullCode: "01176255048896449", code: "050", price: 12.00, stock: 0, category: "Pulseras" },
+            { id: 137, name: "Bracelet", fullCode: "01176255048821240", code: "041", price: 7.00, stock: 0, category: "Pulseras" },
+            { id: 138, name: "Brasalet", fullCode: "01176255048799337", code: "038", price: 10.00, stock: 0, category: "Pulseras" },
+            { id: 139, name: "Pulsera", fullCode: "01176255048824741", code: "042", price: 5.00, stock: 1, category: "Pulseras" },
+            { id: 140, name: "Pulsera", fullCode: "01176255048840642", code: "043", price: 7.00, stock: 2, category: "Pulseras" },
+            { id: 141, name: "Pulsera", fullCode: "01176255048844943", code: "044", price: 10.00, stock: 1, category: "Pulseras" },
+            { id: 142, name: "Pulsera", fullCode: "01176255049053663", code: "064", price: 6.00, stock: 0, category: "Pulseras" },
+            { id: 143, name: "Pulsera", fullCode: "002176261661187727", code: "103", price: 12.00, stock: 0, category: "Pulseras" },
+            { id: 144, name: "Pulsera", fullCode: "002176261661203929", code: "105", price: 12.99, stock: 1, category: "Pulseras" },
+            { id: 145, name: "Pulsera", fullCode: "002176261661209330", code: "106", price: 10.00, stock: 0, category: "Pulseras" },
+            { id: 146, name: "Pulsera", fullCode: "002176261661252436", code: "112", price: 10.00, stock: 0, category: "Pulseras" },
+            { id: 147, name: "Pulsera", fullCode: "002176261661462170", code: "146", price: 12.00, stock: 1, category: "Pulseras" },
+            { id: 148, name: "Pulsera", fullCode: "002176261661535783", code: "159", price: 13.00, stock: 3, category: "Pulseras" },
+            { id: 149, name: "Pulsera", fullCode: "002176261661543784", code: "160", price: 10.00, stock: 0, category: "Pulseras" },
+            { id: 150, name: "Pulsera", fullCode: "002176261661548185", code: "161", price: 9.00, stock: 0, category: "Pulseras" },
+            { id: 151, name: "Pulsera", fullCode: "002176261661587991", code: "167", price: 12.00, stock: 0, category: "Pulseras" },
+            { id: 152, name: "Pulsera", fullCode: "198", code: "198", price: 10.00, stock: 0, category: "Pulseras" },
+            { id: 153, name: "Pulsera", fullCode: "78917664204712900", code: "9789", price: 8.00, stock: 1, category: "Pulseras" },
+            { id: 154, name: "Pulsera", fullCode: "78917664204717611", code: "8967", price: 7.00, stock: 1, category: "Pulseras" },
+            { id: 155, name: "Pulsera", fullCode: "L910023817667846502061", code: "1250", price: 5.50, stock: 0, category: "Pulseras" },
+            { id: 156, name: "Pulsera", fullCode: "RELOJES01176937472419514", code: "01126", price: 10.00, stock: 2, category: "Pulseras" },
+            { id: 157, name: "Pulsera", fullCode: "PEDIDO317694374238630", code: "02221", price: 10.50, stock: 3, category: "Pulseras" },
+            { id: 158, name: "Pulsera", fullCode: "PEDIDO317694374239962", code: "02223", price: 10.00, stock: 1, category: "Pulseras" },
+            { id: 159, name: "Pulsera", fullCode: "PEDIDO317694377272620", code: "03331", price: 12.00, stock: 1, category: "Pulseras" },
+            { id: 160, name: "Pulsera", fullCode: "PEDIDO317694377273431", code: "03332", price: 12.00, stock: 1, category: "Pulseras" },
+            { id: 161, name: "Pulsera", fullCode: "2001", code: "2001", price: 10.00, stock: 0, category: "Pulseras" },
+            { id: 162, name: "Pulsera Ajustable", fullCode: "01176255048642117", code: "018", price: 10.00, stock: 0, category: "Pulseras" },
+            { id: 163, name: "Pulsera Basica", fullCode: "01176255048731129", code: "030", price: 6.00, stock: 1, category: "Pulseras" },
+            { id: 164, name: "Pulsera cartier", fullCode: "01176255048749431", code: "032", price: 10.00, stock: 0, category: "Pulseras" },
+            { id: 165, name: "Pulsera Cartier", fullCode: "01176255048745830", code: "031", price: 11.00, stock: 0, category: "Pulseras" },
+            { id: 166, name: "Pulsera de Trebol", fullCode: "RELOJES0117693747221617", code: "01118", price: 12.00, stock: 1, category: "Pulseras" },
+            { id: 167, name: "Van Cleef", fullCode: "01176255048896449", code: "050", price: 12.00, stock: 0, category: "Pulseras" },
 
             // RELOJES (25 productos)
-            { id: 169, name: "Reloj", fullCode: "RELOJES0117693747192350", code: "01111", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 170, name: "Reloj", fullCode: "RELOJES01176937472392113", code: "01125", price: 20.00, stock: 2, category: "Relojes" },
-            { id: 171, name: "Reloj", fullCode: "PEDIDO317694377274102", code: "03333", price: 16.00, stock: 1, category: "Relojes" },
-            { id: 172, name: "Reloj", fullCode: "PEDIDO317694377274623", code: "03334", price: 25.00, stock: 1, category: "Relojes" },
-            { id: 173, name: "Reloj", fullCode: "PEDIDO317694377275074", code: "03335", price: 16.00, stock: 1, category: "Relojes" },
-            { id: 174, name: "Reloj", fullCode: "PEDIDO317694377275455", code: "03336", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 175, name: "Reloj", fullCode: "PEDIDO317694377276216", code: "03337", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 176, name: "Reloj", fullCode: "PEDIDO317694377276477", code: "03338", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 177, name: "Reloj", fullCode: "PEDIDO317694377277228", code: "03339", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 178, name: "Reloj", fullCode: "PEDIDO317694377277439", code: "033340", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 179, name: "Reloj", fullCode: "PEDIDO3176943772778110", code: "033341", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 180, name: "Reloj", fullCode: "PEDIDO3176943772783611", code: "033342", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 181, name: "Reloj", fullCode: "PEDIDO3176943772788812", code: "033343", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 182, name: "Reloj", fullCode: "PEDIDO3176943772796213", code: "033344", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 183, name: "Reloj", fullCode: "PEDIDO3176943772808914", code: "033345", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 184, name: "Reloj", fullCode: "PEDIDO3176943772820315", code: "033346", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 185, name: "Reloj", fullCode: "PEDIDO3176943772827216", code: "033347", price: 25.00, stock: 1, category: "Relojes" },
-            { id: 186, name: "Reloj", fullCode: "PEDIDO3176943772835517", code: "033348", price: 30.00, stock: 1, category: "Relojes" },
-            { id: 187, name: "Reloj", fullCode: "PEDIDO3176943772847418", code: "033349", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 188, name: "Reloj", fullCode: "PEDIDO3176943772853019", code: "033350", price: 18.00, stock: 2, category: "Relojes" },
-            { id: 189, name: "Reloj Blanco", fullCode: "RELOJES0117693747208443", code: "011144", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 190, name: "Reloj de Acero Inoxidable", fullCode: "RELOJES0117693747218916", code: "01117", price: 15.00, stock: 2, category: "Relojes" },
-            { id: 191, name: "Reloj de Acero Inoxidable", fullCode: "RELOJES01176937472335611", code: "01123", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 192, name: "Reloj Dorado Waterproof", fullCode: "RELOJES01176937472302310", code: "01122", price: 20.00, stock: 1, category: "Relojes" },
-            { id: 193, name: "Reloj Negro", fullCode: "RELOJES0117693747202302", code: "01113", price: 15.00, stock: 1, category: "Relojes" },
-            { id: 194, name: "Reloj Old Moeny", fullCode: "RELOJES01176937472362712", code: "01124", price: 15.00, stock: 2, category: "Relojes" },
-            { id: 195, name: "Reloj Rojo", fullCode: "RELOJES0117693747224248", code: "01119", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 168, name: "Reloj", fullCode: "RELOJES0117693747192350", code: "01111", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 169, name: "Reloj", fullCode: "RELOJES01176937472392113", code: "01125", price: 20.00, stock: 2, category: "Relojes" },
+            { id: 170, name: "Reloj", fullCode: "PEDIDO317694377274102", code: "03333", price: 16.00, stock: 1, category: "Relojes" },
+            { id: 171, name: "Reloj", fullCode: "PEDIDO317694377274623", code: "03334", price: 25.00, stock: 1, category: "Relojes" },
+            { id: 172, name: "Reloj", fullCode: "PEDIDO317694377275074", code: "03335", price: 16.00, stock: 1, category: "Relojes" },
+            { id: 173, name: "Reloj", fullCode: "PEDIDO317694377275455", code: "03336", price: 20.00, stock: 1, category: "Relojes" },
+            { id: 174, name: "Reloj", fullCode: "PEDIDO317694377276216", code: "03337", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 175, name: "Reloj", fullCode: "PEDIDO317694377276477", code: "03338", price: 20.00, stock: 1, category: "Relojes" },
+            { id: 176, name: "Reloj", fullCode: "PEDIDO317694377277228", code: "03339", price: 20.00, stock: 1, category: "Relojes" },
+            { id: 177, name: "Reloj", fullCode: "PEDIDO317694377277439", code: "033340", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 178, name: "Reloj", fullCode: "PEDIDO3176943772778110", code: "033341", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 179, name: "Reloj", fullCode: "PEDIDO3176943772783611", code: "033342", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 180, name: "Reloj", fullCode: "PEDIDO3176943772788812", code: "033343", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 181, name: "Reloj", fullCode: "PEDIDO3176943772796213", code: "033344", price: 20.00, stock: 1, category: "Relojes" },
+            { id: 182, name: "Reloj", fullCode: "PEDIDO3176943772808914", code: "033345", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 183, name: "Reloj", fullCode: "PEDIDO3176943772820315", code: "033346", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 184, name: "Reloj", fullCode: "PEDIDO3176943772827216", code: "033347", price: 25.00, stock: 1, category: "Relojes" },
+            { id: 185, name: "Reloj", fullCode: "PEDIDO3176943772835517", code: "033348", price: 30.00, stock: 1, category: "Relojes" },
+            { id: 186, name: "Reloj", fullCode: "PEDIDO3176943772847418", code: "033349", price: 20.00, stock: 1, category: "Relojes" },
+            { id: 187, name: "Reloj", fullCode: "PEDIDO3176943772853019", code: "033350", price: 18.00, stock: 2, category: "Relojes" },
+            { id: 188, name: "Reloj Blanco", fullCode: "RELOJES0117693747208443", code: "011144", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 189, name: "Reloj de Acero Inoxidable", fullCode: "RELOJES0117693747218916", code: "01117", price: 15.00, stock: 2, category: "Relojes" },
+            { id: 190, name: "Reloj de Acero Inoxidable", fullCode: "RELOJES01176937472335611", code: "01123", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 191, name: "Reloj Dorado Waterproof", fullCode: "RELOJES01176937472302310", code: "01122", price: 20.00, stock: 1, category: "Relojes" },
+            { id: 192, name: "Reloj Negro", fullCode: "RELOJES0117693747202302", code: "01113", price: 15.00, stock: 1, category: "Relojes" },
+            { id: 193, name: "Reloj Old Moeny", fullCode: "RELOJES01176937472362712", code: "01124", price: 15.00, stock: 2, category: "Relojes" },
+            { id: 194, name: "Reloj Rojo", fullCode: "RELOJES0117693747224248", code: "01119", price: 15.00, stock: 1, category: "Relojes" },
 
             // ANILLOS (8 productos)
-            { id: 196, name: "Anillo", fullCode: "0117625504832811", code: "02", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 197, name: "Anillo", fullCode: "0117625504844273", code: "04", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 198, name: "Anillo", fullCode: "0117625504854877", code: "08", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 199, name: "Anillo", fullCode: "01176255048626716", code: "017", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 200, name: "Anillo", fullCode: "01176255048668520", code: "021", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 201, name: "Anillo", fullCode: "01176255048852244", code: "045", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 202, name: "Anillo", fullCode: "01176255048962856", code: "057", price: 10.00, stock: 1, category: "Anillos" },
-            { id: 203, name: "Anilo", fullCode: "01176255048979558", code: "059", price: 10.00, stock: 1, category: "Anillos" },
+            { id: 195, name: "Anillo", fullCode: "0117625504832811", code: "02", price: 10.00, stock: 1, category: "Anillos" },
+            { id: 196, name: "Anillo", fullCode: "0117625504844273", code: "04", price: 10.00, stock: 1, category: "Anillos" },
+            { id: 197, name: "Anillo", fullCode: "0117625504854877", code: "08", price: 10.00, stock: 1, category: "Anillos" },
+            { id: 198, name: "Anillo", fullCode: "01176255048626716", code: "017", price: 10.00, stock: 1, category: "Anillos" },
+            { id: 199, name: "Anillo", fullCode: "01176255048668520", code: "021", price: 10.00, stock: 1, category: "Anillos" },
+            { id: 200, name: "Anillo", fullCode: "01176255048852244", code: "045", price: 10.00, stock: 1, category: "Anillos" },
+            { id: 201, name: "Anillo", fullCode: "01176255048962856", code: "057", price: 10.00, stock: 1, category: "Anillos" },
+            { id: 202, name: "Anilo", fullCode: "01176255048979558", code: "059", price: 10.00, stock: 1, category: "Anillos" },
 
             // LENTES DE SOL (2 productos)
-            { id: 204, name: "Lentes", fullCode: "01176255048619214", code: "015", price: 7.50, stock: 1, category: "Lentes de sol" },
-            { id: 205, name: "Lentes Negros", fullCode: "01176255048795836", code: "037", price: 5.75, stock: 1, category: "Lentes de sol" },
+            { id: 203, name: "Lentes", fullCode: "01176255048619214", code: "015", price: 7.50, stock: 1, category: "Lentes de sol" },
+            { id: 204, name: "Lentes Negros", fullCode: "01176255048795836", code: "037", price: 5.75, stock: 1, category: "Lentes de sol" },
 
             // ACCESORIOS PARA EL CABELLO (1 producto)
-            { id: 206, name: "Accesorios", fullCode: "002176261661405161", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello" },
+            { id: 205, name: "Accesorios", fullCode: "002176261661405161", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello" },
 
             // OTROS (3 productos)
-            { id: 207, name: "Cereza", fullCode: "002176261661319246", code: "122", price: 5.25, stock: 4, category: "Otros" },
-            { id: 208, name: "Tarjetas Navideñas", fullCode: "002176261661507078", code: "154", price: 0.00, stock: 121, category: "Otros" }
+            { id: 206, name: "Cereza", fullCode: "002176261661319246", code: "122", price: 5.25, stock: 4, category: "Otros" },
+            { id: 207, name: "Tarjetas Navideñas", fullCode: "002176261661507078", code: "154", price: 0.00, stock: 121, category: "Otros" }
         ];
 
         let cart = [];
@@ -932,9 +1000,23 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
+            // Ordenar productos: disponibles primero, agotados al final
+            sortProductsByStock();
             renderProducts(products);
             startMessageRotation();
         });
+
+        // Ordenar productos para que los agotados vayan al final
+        function sortProductsByStock() {
+            products.sort((a, b) => {
+                // Si a está agotado y b no, b va primero
+                if (a.stock === 0 && b.stock > 0) return 1;
+                // Si b está agotado y a no, a va primero
+                if (b.stock === 0 && a.stock > 0) return -1;
+                // Si ambos tienen el mismo estado de stock, mantener orden original por ID
+                return a.id - b.id;
+            });
+        }
 
         // Rotación de mensajes cada 2 segundos
         function startMessageRotation() {
@@ -1030,12 +1112,19 @@
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
             const category = document.getElementById('category-filter').value;
             
-            const filtered = products.filter(product => {
+            let filtered = products.filter(product => {
                 const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
                                     product.code.toLowerCase().includes(searchTerm) ||
                                     product.fullCode.toLowerCase().includes(searchTerm);
                 const matchesCategory = category === 'all' || product.category === category;
                 return matchesSearch && matchesCategory;
+            });
+            
+            // Reordenar los filtrados también
+            filtered.sort((a, b) => {
+                if (a.stock === 0 && b.stock > 0) return 1;
+                if (b.stock === 0 && a.stock > 0) return -1;
+                return a.id - b.id;
             });
             
             renderProducts(filtered);
@@ -1098,6 +1187,16 @@
             updateCartUI();
         }
 
+        function clearCart() {
+            if (cart.length === 0) return;
+            
+            if (confirm('¿Estás segura de que quieres vaciar el carrito?')) {
+                cart = [];
+                saveCart();
+                updateCartUI();
+            }
+        }
+
         function updateQuantity(productId, change) {
             const item = cart.find(item => item.id === productId);
             const product = products.find(p => p.id === productId);
@@ -1131,6 +1230,10 @@
         function updateCartUI() {
             const count = cart.reduce((sum, item) => sum + item.quantity, 0);
             document.getElementById('cart-count').textContent = count;
+            
+            // Mostrar/ocultar botón de vaciar carrito
+            const clearBtn = document.getElementById('clear-cart-btn');
+            clearBtn.style.display = cart.length > 0 ? 'flex' : 'none';
             
             const cartItems = document.getElementById('cart-items');
             
@@ -1182,7 +1285,9 @@
                 message += `• ${item.name} (Cód: ${item.fullCode}) x${item.quantity} - ${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}\n`;
             });
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `\n💰 Total: ${CONFIG.CURRENCY}${total.toFixed(2)}\n\n¡Gracias! 😊`;
+            message += `\n💰 Total: ${CONFIG.CURRENCY}${total.toFixed(2)}`;
+            message += `\n🚚 Envío: $3.75 a todo el país`;
+            message += `\n\n¡Gracias! 😊`;
             
             window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
         }

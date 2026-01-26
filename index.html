@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Klohesv</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .cart-icon span {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        /* Filtros */
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .filters input, .filters select {
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filters input:focus, .filters select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Grid de Productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2d3436;
+        }
+
+        .product-description {
+            color: #636e72;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: #dfe6e9;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #2d3436;
+            margin-bottom: 1rem;
+            text-transform: capitalize;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart:hover {
+            background: #5568d3;
+        }
+
+        /* Modal del Carrito */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #636e72;
+        }
+
+        .close:hover {
+            color: #2d3436;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #dfe6e9;
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-price {
+            color: #667eea;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: #dfe6e9;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-item {
+            color: #ff4757;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        .cart-total {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid #dfe6e9;
+            text-align: center;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #25d366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #128c7e;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #636e72;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            background: #2d3436;
+            color: white;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .admin-panel h3 {
+            margin-bottom: 1rem;
+        }
+
+        .admin-form {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .admin-form input, .admin-form select {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .admin-btn {
+            background: #00b894;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .admin-btn:hover {
+            background: #00cec9;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .toggle-admin {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2d3436;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-store"></i> Tienda Klohesv</h1>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Panel de Administración (Oculto por defecto) -->
+        <div id="admin-panel" class="admin-panel hidden">
+            <h3><i class="fas fa-cog"></i> Administrar Productos</h3>
+            <div class="admin-form">
+                <input type="text" id="admin-name" placeholder="Nombre del producto">
+                <input type="text" id="admin-desc" placeholder="Descripción">
+                <input type="number" id="admin-price" placeholder="Precio" step="0.01">
+                <select id="admin-category">
+                    <option value="ropa">Ropa</option>
+                    <option value="accesorios">Accesorios</option>
+                    <option value="calzado">Calzado</option>
+                    <option value="otros">Otros</option>
+                </select>
+                <input type="text" id="admin-image" placeholder="Nombre de la imagen (ej: foto1.jpg)">
+                <button class="admin-btn" onclick="addProduct()">
+                    <i class="fas fa-plus"></i> Agregar Producto
+                </button>
+            </div>
+            <button class="admin-btn" onclick="exportProducts()" style="background: #0984e3;">
+                <i class="fas fa-download"></i> Exportar JSON (para GitHub)
+            </button>
+            <div id="json-output" style="margin-top: 1rem; background: #636e72; padding: 1rem; border-radius: 4px; font-family: monospace; font-size: 0.8rem; max-height: 200px; overflow-y: auto;"></div>
+        </div>
+
+        <div class="filters">
+            <input type="text" id="search-input" placeholder="Buscar productos..." onkeyup="filterProducts()">
+            <select id="category-filter" onchange="filterProducts()">
+                <option value="all">Todas las categorías</option>
+                <option value="ropa">Ropa</option>
+                <option value="accesorios">Accesorios</option>
+                <option value="calzado">Calzado</option>
+                <option value="otros">Otros</option>
+            </select>
+        </div>
+
+        <div id="products-grid" class="products-grid">
+            <!-- Los productos se cargarán aquí -->
+        </div>
+    </main>
+
+    <!-- Botón para mostrar panel admin -->
+    <button class="toggle-admin" onclick="toggleAdmin()" title="Panel de Administración">
+        <i class="fas fa-lock"></i>
+    </button>
+
+    <!-- Modal del Carrito -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleCart()">&times;</span>
+            <h2><i class="fas fa-shopping-cart"></i> Tu Carrito</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <h3>Total: $<span id="cart-total">0.00</span></h3>
+                <button class="checkout-btn" onclick="checkout()">
+                    <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURACIÓN - EDITAR ESTOS VALORES
+        // ==========================================
+        const CONFIG = {
+            // Tu usuario de GitHub
+            GITHUB_USER: 'TU_USUARIO_GITHUB',
+            // Nombre del repositorio
+            REPO_NAME: 'tiendaklohesv',
+            // Tu número de WhatsApp (sin +, solo números)
+            WHATSAPP_NUMBER: '503XXXXXXXX',
+            // Moneda
+            CURRENCY: '$'
+        };
+
+        // ==========================================
+        // DATOS DE PRODUCTOS (Aquí agregas tus productos)
+        // ==========================================
+        let products = [
+            {
+                id: 1,
+                name: "Camiseta Estilo Urbano",
+                description: "Camiseta 100% algodón con diseño exclusivo",
+                price: 15.99,
+                category: "ropa",
+                image: "camiseta1.jpg"
+            },
+            {
+                id: 2,
+                name: "Jeans Slim Fit",
+                description: "Jeans moderno, disponible en varios colores",
+                price: 29.99,
+                category: "ropa",
+                image: "jeans1.jpg"
+            },
+            {
+                id: 3,
+                name: "Zapatillas Deportivas",
+                description: "Zapatillas cómodas para el día a día",
+                price: 35.00,
+                category: "calzado",
+                image: "zapatillas1.jpg"
+            },
+            {
+                id: 4,
+                name: "Reloj Minimalista",
+                description: "Reloj elegante con correa de cuero",
+                price: 24.50,
+                category: "accesorios",
+                image: "reloj1.jpg"
+            }
+        ];
+
+        // Carrito
+        let cart = [];
+
+        // ==========================================
+        // FUNCIONES PRINCIPALES
+        // ==========================================
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+            renderProducts(products);
+        });
+
+        // Obtener URL completa de imagen
+        function getImageUrl(imageName) {
+            if (imageName.startsWith('http')) {
+                return imageName;
+            }
+            return `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}/main/images/${imageName}`;
+        }
+
+        // Renderizar productos
+        function renderProducts(productsToRender) {
+            const grid = document.getElementById('products-grid');
+            
+            if (productsToRender.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem;">No se encontraron productos</div>';
+                return;
+            }
+            
+            grid.innerHTML = productsToRender.map(product => `
+                <div class="product-card" data-id="${product.id}">
+                    <img src="${getImageUrl(product.image)}" 
+                         alt="${product.name}" 
+                         class="product-image"
+                         onerror="this.src='https://via.placeholder.com/300x250?text=Imagen+no+disponible'">
+                    <div class="product-info">
+                        <span class="product-category">${product.category}</span>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">${CONFIG.CURRENCY}${product.price.toFixed(2)}</div>
+                        <button class="add-to-cart" onclick="addToCart(${product.id})">
+                            <i class="fas fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filtrar productos
+        function filterProducts() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const category = document.getElementById('category-filter').value;
+            
+            const filtered = products.filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
+                                    product.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = category === 'all' || product.category === category;
+                
+                return matchesSearch && matchesCategory;
+            });
+            
+            renderProducts(filtered);
+        }
+
+        // ==========================================
+        // CARRITO DE COMPRAS
+        // ==========================================
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            saveCart();
+            updateCartUI();
+            
+            // Animación
+            const btn = document.querySelector(`[data-id="${productId}"] .add-to-cart`);
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> ¡Agregado!';
+            btn.style.background = '#2ed573';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 1500);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartUI();
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    saveCart();
+                    updateCartUI();
+                }
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('tiendaklohesv_cart', JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            const saved = localStorage.getItem('tiendaklohesv_cart');
+            if (saved) {
+                cart = JSON.parse(saved);
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+            
+            const cartItems = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-basket" style="font-size: 3rem; color: #dfe6e9;"></i><p>Tu carrito está vacío</p></div>';
+                document.getElementById('cart-total').textContent = '0.00';
+                return;
+            }
+            
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${getImageUrl(item.image)}" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('cart-total').textContent = total.toFixed(2);
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            let message = '¡Hola! Quiero hacer un pedido de:\n\n';
+            
+            cart.forEach(item => {
+                message += `• ${item.name} x${item.quantity} - ${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `\n*Total: ${CONFIG.CURRENCY}${total.toFixed(2)}*`;
+            
+            const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // ==========================================
+        // PANEL DE ADMINISTRACIÓN
+        // ==========================================
+
+        function toggleAdmin() {
+            const panel = document.getElementById('admin-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        function addProduct() {
+            const name = document.getElementById('admin-name').value;
+            const desc = document.getElementById('admin-desc').value;
+            const price = parseFloat(document.getElementById('admin-price').value);
+            const category = document.getElementById('admin-category').value;
+            const image = document.getElementById('admin-image').value;
+
+            if (!name || !price || !image) {
+                alert('Por favor completa al menos el nombre, precio e imagen');
+                return;
+            }
+
+            const newProduct = {
+                id: Date.now(),
+                name: name,
+                description: desc || 'Sin descripción',
+                price: price,
+                category: category,
+                image: image
+            };
+
+            products.push(newProduct);
+            renderProducts(products);
+            
+            // Limpiar formulario
+            document.getElementById('admin-name').value = '';
+            document.getElementById('admin-desc').value = '';
+            document.getElementById('admin-price').value = '';
+            document.getElementById('admin-image').value = '';
+            
+            // Actualizar JSON exportado
+            exportProducts();
+            
+            alert('Producto agregado. Recuerda actualizar el código fuente con el nuevo JSON exportado.');
+        }
+
+        function exportProducts() {
+            const jsonStr = JSON.stringify(products, null, 4);
+            document.getElementById('json-output').textContent = jsonStr;
+            
+            // Copiar al portapapeles
+            navigator.clipboard.writeText(jsonStr).then(() => {
+                console.log('JSON copiado al portapapeles');
+            });
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('cart-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

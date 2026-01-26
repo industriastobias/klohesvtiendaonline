@@ -1672,7 +1672,7 @@
                     <i class="fas fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
                 </div>
                 <div class="faq-answer">
-                    2-5 días hábiles. Envío gratis en compras mayores a $25.
+                    2-5 días hábiles. Envío gratis en compras mayores a $45.
                 </div>
             </div>
             <div class="faq-item">
@@ -1851,18 +1851,22 @@
             { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba", product: "Reloj Corazón", stars: 5 }
         ];
 
-        // Función para determinar el material del producto
-        function getProductMaterial(name, code, category) {
-            // Productos de plata específicos
-            if (name.toLowerCase().includes('plata') || code.startsWith('02224')) {
-                return 'Plata italiana 925';
-            }
-            // Joyería en general (aritos, collares, pulseras, anillos)
-            if (['Aritos', 'Collares', 'Pulseras', 'Anillos'].includes(category)) {
-                return 'Acero inoxidable resistente a salpicaduras de agua';
-            }
-            return null;
-        }
+       // Función para determinar el material del producto
+function getProductMaterial(name, code, category) {
+    // Excluir código 02222 de cualquier material
+    if (code === '02222') {
+        return null;
+    }
+    // Productos de plata específicos
+    if (name.toLowerCase().includes('plata') || code.startsWith('02224')) {
+        return 'Plata italiana 925';
+    }
+    // Joyería en general (aritos, collares, pulseras, anillos)
+    if (['Aritos', 'Collares', 'Pulseras', 'Anillos'].includes(category)) {
+        return 'Acero inoxidable resistente a salpicaduras de agua';
+    }
+    return null;
+}
 
         // TODOS LOS 228 PRODUCTOS DEL INVENTARIO
         const realProducts = [

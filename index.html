@@ -414,16 +414,6 @@
             color: #dfe6e9;
         }
 
-        /* Debug info */
-        .debug-info {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-
         footer {
             background: #2d3436;
             color: white;
@@ -469,18 +459,6 @@
     </header>
 
     <main class="container">
-        <!-- Información de debug (quitar después de probar) -->
-        <div class="debug-info" id="debug-info">
-            <strong>🔧 Modo de prueba:</strong> Si las imágenes no aparecen, verifica que:
-            <ul style="margin-left: 20px; margin-top: 5px;">
-                <li>GitHub Pages esté activado en Settings → Pages</li>
-                <li>Las imágenes estén en la carpeta <code>klohe_imagenes/</code></li>
-                <li>Los nombres de archivos coincidan exactamente (03.jpg, 033.jpg, etc.)</li>
-            </ul>
-            <button onclick="testImage()" style="margin-top: 10px; padding: 5px 10px; cursor: pointer;">Probar carga de imagen</button>
-            <div id="test-result" style="margin-top: 10px;"></div>
-        </div>
-
         <div class="filters">
             <input type="text" id="search-input" placeholder="🔍 Buscar productos..." onkeyup="filterProducts()">
             <select id="category-filter" onchange="filterProducts()">
@@ -492,7 +470,6 @@
                 <option value="anillo">💍 Anillos</option>
                 <option value="billetera">👛 Billeteras</option>
                 <option value="bolso">🎒 Bolsos</option>
-                <option value="tarjeta">💌 Tarjetas</option>
             </select>
         </div>
 
@@ -529,10 +506,10 @@
         // CONFIGURACIÓN - EDITAR ESTOS VALORES
         // ==========================================
         const CONFIG = {
-            // Tu usuario de GitHub (ejemplo: if tu URL es github.com/maria123, pon "maria123")
-            GITHUB_USER: 'TU_USUARIO_AQUI',
+            // Tu usuario de GitHub (ejemplo: 'maria123')
+            GITHUB_USER: 'TU_USUARIO_GITHUB',
             
-            // Nombre del repositorio (ejemplo: "tiendaklohesv")
+            // Nombre del repositorio (ejemplo: 'tiendaklohesv')
             REPO_NAME: 'tiendaklohesv',
             
             // Nombre de la carpeta de imágenes
@@ -544,10 +521,10 @@
         };
 
         // ==========================================
-        // LISTA COMPLETA DE PRODUCTOS
+        // LISTA COMPLETA DE PRODUCTOS (96 productos, sin tarjetas)
         // ==========================================
         let products = [
-            // CARTERAS
+            // CARTERAS (34)
             { id: 1, name: "Cartera Elegante", code: "03", price: 12.50, category: "cartera" },
             { id: 2, name: "Cartera Moderna", code: "033", price: 10.99, category: "cartera" },
             { id: 3, name: "Cartera Clásica", code: "051", price: 20.00, category: "cartera" },
@@ -583,11 +560,11 @@
             { id: 33, name: "Cartera", code: "132", price: 14.00, category: "cartera" },
             { id: 34, name: "Cartera", code: "147", price: 14.99, category: "cartera" },
             
-            // BILLETERAS Y BOLSOS
+            // BILLETERAS Y BOLSOS (2)
             { id: 35, name: "Billetera", code: "076", price: 10.00, category: "billetera" },
             { id: 36, name: "Bolso de Mano", code: "088", price: 10.00, category: "bolso" },
             
-            // COLLARES
+            // COLLARES (23)
             { id: 37, name: "Collar Elegante", code: "141", price: 10.00, category: "collar" },
             { id: 38, name: "Set de Collares", code: "142", price: 18.50, category: "collar" },
             { id: 39, name: "Collar", code: "145", price: 12.99, category: "collar" },
@@ -612,7 +589,7 @@
             { id: 58, name: "Collar de Sol", code: "89009", price: 11.00, category: "collar" },
             { id: 59, name: "Collar", code: "1200", price: 10.00, category: "collar" },
             
-            // ARITOS
+            // ARITOS (20)
             { id: 60, name: "Aritos", code: "06", price: 7.00, category: "aritos" },
             { id: 61, name: "Aritos Flor", code: "07", price: 5.00, category: "aritos" },
             { id: 62, name: "Aritos Cuadrados", code: "09", price: 7.00, category: "aritos" },
@@ -634,7 +611,7 @@
             { id: 78, name: "Aritos Corazón Sol", code: "190012", price: 7.00, category: "aritos" },
             { id: 79, name: "Aritos Abanico", code: "1991919", price: 2.00, category: "aritos" },
             
-            // PULSERAS
+            // PULSERAS (16)
             { id: 80, name: "Pulsera Básica", code: "030", price: 6.00, category: "pulsera" },
             { id: 81, name: "Pulsera Cartier", code: "031", price: 11.00, category: "pulsera" },
             { id: 82, name: "Pulsera Cartier", code: "032", price: 10.00, category: "pulsera" },
@@ -652,9 +629,8 @@
             { id: 94, name: "Pulsera de Trébol", code: "01118", price: 12.00, category: "pulsera" },
             { id: 95, name: "Pulsera", code: "01126", price: 10.00, category: "pulsera" },
             
-            // ANILLO Y TARJETA
-            { id: 96, name: "Anillo", code: "02", price: 10.00, category: "anillo" },
-            { id: 97, name: "Tarjetas", code: "154", price: 0.00, category: "tarjeta" }
+            // ANILLO (1)
+            { id: 96, name: "Anillo", code: "02", price: 10.00, category: "anillo" }
         ];
 
         let cart = [];
@@ -668,16 +644,13 @@
             renderProducts(products);
         });
 
-        // Generar URL de imagen usando GitHub Pages (más confiable que raw)
+        // Generar URL de imagen - USA GITHUB PAGES (más confiable)
         function getImageUrl(code) {
-            // Opción 1: GitHub Pages (recomendado)
-            // return `https://${CONFIG.GITHUB_USER}.github.io/${CONFIG.REPO_NAME}/${CONFIG.IMAGES_FOLDER}/${code}.jpg`;
+            // Opción 1: GitHub Pages (RECOMENDADO)
+            return `https://${CONFIG.GITHUB_USER}.github.io/${CONFIG.REPO_NAME}/${CONFIG.IMAGES_FOLDER}/${code}.jpg`;
             
-            // Opción 2: Raw GitHub (alternativa)
+            // Opción 2: Si no funciona, descomenta esta y comenta la de arriba:
             // return `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}/main/${CONFIG.IMAGES_FOLDER}/${code}.jpg`;
-            
-            // Opción 3: JSDelivr CDN (más rápido y confiable)
-            return `https://cdn.jsdelivr.net/gh/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}@main/${CONFIG.IMAGES_FOLDER}/${code}.jpg`;
         }
 
         function renderProducts(productsToRender) {
@@ -698,8 +671,7 @@
                              alt="${product.name}" 
                              class="product-image"
                              onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'no-image\'><i class=\'fas fa-image\'></i><span>Imagen no disponible</span></div>';"
-                             onload="this.style.opacity='1'"
-                             style="opacity: 0; transition: opacity 0.3s;">
+                             loading="lazy">
                     </div>
                     <div class="product-info">
                         <span class="product-category">${product.category}</span>
@@ -711,29 +683,6 @@
                     </div>
                 </div>
             `}).join('');
-        }
-
-        function testImage() {
-            const testCode = '03';
-            const urls = [
-                `https://${CONFIG.GITHUB_USER}.github.io/${CONFIG.REPO_NAME}/${CONFIG.IMAGES_FOLDER}/${testCode}.jpg`,
-                `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}/main/${CONFIG.IMAGES_FOLDER}/${testCode}.jpg`,
-                `https://cdn.jsdelivr.net/gh/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}@main/${CONFIG.IMAGES_FOLDER}/${testCode}.jpg`
-            ];
-            
-            let html = '<strong>Probando URLs:</strong><br>';
-            urls.forEach((url, i) => {
-                html += `<div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
-                    <small>Opción ${i+1}:</small><br>
-                    <code style="font-size: 0.8rem; word-break: break-all;">${url}</code><br>
-                    <img src="${url}" style="max-width: 100px; max-height: 100px; margin-top: 5px; border: 1px solid #ddd;" 
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-                         onload="this.nextElementSibling.style.display='none';">
-                    <span style="color: red; display: none;">❌ Error al cargar</span>
-                </div>`;
-            });
-            
-            document.getElementById('test-result').innerHTML = html;
         }
 
         function filterProducts() {
@@ -821,11 +770,7 @@
             cartItems.innerHTML = cart.map(item => `
                 <div class="cart-item">
                     <img src="${getImageUrl(item.code)}" alt="${item.name}" 
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         style="display: block;">
-                    <div style="display: none; width: 80px; height: 80px; background: #f0f0f0; align-items: center; justify-content: center; border-radius: 12px;">
-                        <i class="fas fa-image" style="color: #ccc;"></i>
-                    </div>
+                         onerror="this.style.display='none'">
                     <div class="cart-item-info">
                         <div class="cart-item-title">${item.name}</div>
                         <div class="cart-item-code">Cód: ${item.code}</div>

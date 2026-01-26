@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Klohesv</title>
+    <title>Klohe - Tienda de Accesorios</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -14,12 +14,13 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: #333;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -28,11 +29,11 @@
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 1rem 0;
+            padding: 1.5rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         header .container {
@@ -41,29 +42,45 @@
             align-items: center;
         }
 
-        header h1 {
-            font-size: 1.8rem;
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .logo i {
+            margin-right: 10px;
         }
 
         .cart-icon {
             position: relative;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            padding: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
         }
 
         .cart-icon span {
             position: absolute;
-            top: -8px;
-            right: -8px;
+            top: -5px;
+            right: -5px;
             background: #ff4757;
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
 
         /* Filtros */
@@ -72,15 +89,20 @@
             gap: 1rem;
             margin: 2rem 0;
             flex-wrap: wrap;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .filters input, .filters select {
-            padding: 0.8rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 1rem;
             flex: 1;
             min-width: 200px;
+            transition: border-color 0.3s;
         }
 
         .filters input:focus, .filters select:focus {
@@ -98,77 +120,103 @@
 
         .product-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background: #f8f9fa;
         }
 
         .product-image {
             width: 100%;
-            height: 250px;
+            height: 100%;
             object-fit: cover;
-            background: #f0f0f0;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-code {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
         }
 
         .product-info {
             padding: 1.5rem;
         }
 
-        .product-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #2d3436;
+        .product-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
         }
 
-        .product-description {
-            color: #636e72;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.4;
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #2d3436;
+            font-weight: 600;
         }
 
         .product-price {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #667eea;
             font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .product-category {
-            display: inline-block;
-            background: #dfe6e9;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #2d3436;
-            margin-bottom: 1rem;
-            text-transform: capitalize;
+            margin: 1rem 0;
         }
 
         .add-to-cart {
             width: 100%;
-            padding: 0.8rem;
-            background: #667eea;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
+            font-size: 1.1rem;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            font-weight: 600;
         }
 
         .add-to-cart:hover {
-            background: #5568d3;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .add-to-cart:active {
+            transform: scale(0.98);
         }
 
         /* Modal del Carrito */
@@ -180,31 +228,53 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             background: white;
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: 12px;
+            margin: 3% auto;
+            padding: 2.5rem;
+            border-radius: 20px;
             width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
+            max-width: 600px;
+            max-height: 85vh;
             overflow-y: auto;
             position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .close {
             position: absolute;
-            right: 1rem;
-            top: 1rem;
-            font-size: 1.5rem;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 2rem;
             cursor: pointer;
             color: #636e72;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
         }
 
         .close:hover {
+            background: #f1f2f6;
             color: #2d3436;
         }
 
@@ -212,15 +282,16 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid #dfe6e9;
+            padding: 1.2rem 0;
+            border-bottom: 2px solid #f1f2f6;
         }
 
         .cart-item img {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .cart-item-info {
@@ -228,30 +299,49 @@
         }
 
         .cart-item-title {
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .cart-item-code {
+            color: #636e72;
+            font-size: 0.85rem;
         }
 
         .cart-item-price {
             color: #667eea;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
         .cart-item-quantity {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            background: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 25px;
         }
 
         .quantity-btn {
-            background: #dfe6e9;
-            border: none;
-            width: 25px;
-            height: 25px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
         }
 
         .remove-item {
@@ -259,156 +349,155 @@
             cursor: pointer;
             background: none;
             border: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            padding: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .remove-item:hover {
+            transform: scale(1.2);
         }
 
         .cart-total {
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 2px solid #dfe6e9;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 3px solid #667eea;
             text-align: center;
+        }
+
+        .cart-total h3 {
+            font-size: 1.8rem;
+            color: #2d3436;
+            margin-bottom: 1rem;
         }
 
         .checkout-btn {
             width: 100%;
-            padding: 1rem;
-            background: #25d366;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
             cursor: pointer;
-            margin-top: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            transition: background 0.3s;
+            gap: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
 
         .checkout-btn:hover {
-            background: #128c7e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
 
         .empty-cart {
             text-align: center;
             color: #636e72;
+            padding: 3rem;
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #dfe6e9;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3436;
+            color: white;
+            text-align: center;
             padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.3rem;
+            .logo {
+                font-size: 1.8rem;
             }
             
             .products-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 1rem;
+                gap: 1.5rem;
+            }
+
+            .modal-content {
+                margin: 5% auto;
+                padding: 1.5rem;
             }
         }
 
-        /* Admin Panel */
-        .admin-panel {
-            background: #2d3436;
-            color: white;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-        }
-
-        .admin-panel h3 {
-            margin-bottom: 1rem;
-        }
-
-        .admin-form {
-            display: grid;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .admin-form input, .admin-form select {
-            padding: 0.5rem;
-            border-radius: 4px;
-            border: none;
-        }
-
-        .admin-btn {
-            background: #00b894;
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .admin-btn:hover {
-            background: #00cec9;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .toggle-admin {
+        /* Notificación */
+        .notification {
             position: fixed;
-            bottom: 20px;
+            top: 100px;
             right: 20px;
-            background: #2d3436;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 99;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            animation: slideInRight 0.3s ease;
+            z-index: 1001;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1><i class="fas fa-store"></i> Tienda Klohesv</h1>
+            <h1 class="logo"><i class="fas fa-gem"></i> KLOHE</h1>
             <div class="cart-icon" onclick="toggleCart()">
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-shopping-bag"></i>
                 <span id="cart-count">0</span>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <!-- Panel de Administración (Oculto por defecto) -->
-        <div id="admin-panel" class="admin-panel hidden">
-            <h3><i class="fas fa-cog"></i> Administrar Productos</h3>
-            <div class="admin-form">
-                <input type="text" id="admin-name" placeholder="Nombre del producto">
-                <input type="text" id="admin-desc" placeholder="Descripción">
-                <input type="number" id="admin-price" placeholder="Precio" step="0.01">
-                <select id="admin-category">
-                    <option value="ropa">Ropa</option>
-                    <option value="accesorios">Accesorios</option>
-                    <option value="calzado">Calzado</option>
-                    <option value="otros">Otros</option>
-                </select>
-                <input type="text" id="admin-image" placeholder="Nombre de la imagen (ej: foto1.jpg)">
-                <button class="admin-btn" onclick="addProduct()">
-                    <i class="fas fa-plus"></i> Agregar Producto
-                </button>
-            </div>
-            <button class="admin-btn" onclick="exportProducts()" style="background: #0984e3;">
-                <i class="fas fa-download"></i> Exportar JSON (para GitHub)
-            </button>
-            <div id="json-output" style="margin-top: 1rem; background: #636e72; padding: 1rem; border-radius: 4px; font-family: monospace; font-size: 0.8rem; max-height: 200px; overflow-y: auto;"></div>
-        </div>
-
         <div class="filters">
-            <input type="text" id="search-input" placeholder="Buscar productos..." onkeyup="filterProducts()">
+            <input type="text" id="search-input" placeholder="🔍 Buscar productos..." onkeyup="filterProducts()">
             <select id="category-filter" onchange="filterProducts()">
-                <option value="all">Todas las categorías</option>
-                <option value="ropa">Ropa</option>
-                <option value="accesorios">Accesorios</option>
-                <option value="calzado">Calzado</option>
-                <option value="otros">Otros</option>
+                <option value="all">📋 Todas las categorías</option>
+                <option value="cartera">👜 Carteras</option>
+                <option value="collar">📿 Collares</option>
+                <option value="aritos">💎 Aritos/Aretes</option>
+                <option value="pulsera">✨ Pulseras</option>
+                <option value="anillo">💍 Anillos</option>
+                <option value="billetera">👛 Billeteras</option>
+                <option value="bolso">🎒 Bolsos</option>
+                <option value="tarjeta">💌 Tarjetas</option>
             </select>
         </div>
 
@@ -417,16 +506,24 @@
         </div>
     </main>
 
-    <!-- Botón para mostrar panel admin -->
-    <button class="toggle-admin" onclick="toggleAdmin()" title="Panel de Administración">
-        <i class="fas fa-lock"></i>
-    </button>
+    <footer>
+        <p>&copy; 2025 Klohe - Accesorios con estilo</p>
+        <div class="social-links">
+            <a href="https://wa.me/50366711569" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+    </footer>
+
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i> Producto agregado al carrito
+    </div>
 
     <!-- Modal del Carrito -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="toggleCart()">&times;</span>
-            <h2><i class="fas fa-shopping-cart"></i> Tu Carrito</h2>
+            <h2><i class="fas fa-shopping-bag"></i> Tu Carrito</h2>
             <div id="cart-items"></div>
             <div class="cart-total">
                 <h3>Total: $<span id="cart-total">0.00</span></h3>
@@ -439,97 +536,171 @@
 
     <script>
         // ==========================================
-        // CONFIGURACIÓN - EDITAR ESTOS VALORES
+        // CONFIGURACIÓN
         // ==========================================
         const CONFIG = {
-            // Tu usuario de GitHub
-            GITHUB_USER: 'TU_USUARIO_GITHUB',
-            // Nombre del repositorio
-            REPO_NAME: 'tiendaklohesv',
-            // Tu número de WhatsApp (sin +, solo números)
-            WHATSAPP_NUMBER: '503XXXXXXXX',
-            // Moneda
+            GITHUB_USER: 'TU_USUARIO_GITHUB',  // CAMBIA ESTO
+            REPO_NAME: 'tiendaklohesv',        // CAMBIA ESTO
+            WHATSAPP_NUMBER: '50366711569',    // Tu número
             CURRENCY: '$'
         };
 
         // ==========================================
-        // DATOS DE PRODUCTOS (Aquí agregas tus productos)
+        // TODOS LOS PRODUCTOS DE KLOHE
         // ==========================================
         let products = [
-            {
-                id: 1,
-                name: "Camiseta Estilo Urbano",
-                description: "Camiseta 100% algodón con diseño exclusivo",
-                price: 15.99,
-                category: "ropa",
-                image: "camiseta1.jpg"
-            },
-            {
-                id: 2,
-                name: "Jeans Slim Fit",
-                description: "Jeans moderno, disponible en varios colores",
-                price: 29.99,
-                category: "ropa",
-                image: "jeans1.jpg"
-            },
-            {
-                id: 3,
-                name: "Zapatillas Deportivas",
-                description: "Zapatillas cómodas para el día a día",
-                price: 35.00,
-                category: "calzado",
-                image: "zapatillas1.jpg"
-            },
-            {
-                id: 4,
-                name: "Reloj Minimalista",
-                description: "Reloj elegante con correa de cuero",
-                price: 24.50,
-                category: "accesorios",
-                image: "reloj1.jpg"
-            }
+            // CARTERAS (Página 1-3)
+            { id: 1, name: "Cartera Elegante", code: "03", price: 12.50, category: "cartera", image: "03.jpg" },
+            { id: 2, name: "Cartera Moderna", code: "033", price: 10.99, category: "cartera", image: "033.jpg" },
+            { id: 3, name: "Cartera Clásica", code: "051", price: 20.00, category: "cartera", image: "051.jpg" },
+            { id: 4, name: "Cartera Casual", code: "014", price: 12.00, category: "cartera", image: "014.jpg" },
+            { id: 5, name: "Cartera Premium", code: "035", price: 16.50, category: "cartera", image: "035.jpg" },
+            { id: 6, name: "Cartera Vino", code: "053", price: 18.00, category: "cartera", image: "053.jpg" },
+            { id: 7, name: "Cartera Blanca", code: "022", price: 13.00, category: "cartera", image: "022.jpg" },
+            { id: 8, name: "Cartera Negra", code: "047", price: 10.99, category: "cartera", image: "047.jpg" },
+            { id: 9, name: "Cartera Morada", code: "054", price: 10.99, category: "cartera", image: "054.jpg" },
+            { id: 10, name: "Cartera Rosada", code: "023", price: 9.50, category: "cartera", image: "023.jpg" },
+            { id: 11, name: "Cartera Blanca", code: "049", price: 10.99, category: "cartera", image: "049.jpg" },
+            { id: 12, name: "Cartera Blanca", code: "058", price: 10.99, category: "cartera", image: "058.jpg" },
+            { id: 13, name: "Cartera Clásica", code: "061", price: 12.50, category: "cartera", image: "061.jpg" },
+            { id: 14, name: "Cartera", code: "073", price: 10.00, category: "cartera", image: "073.jpg" },
+            { id: 15, name: "Cartera", code: "077", price: 13.50, category: "cartera", image: "077.jpg" },
+            { id: 16, name: "Cartera Blanca", code: "063", price: 10.50, category: "cartera", image: "063.jpg" },
+            { id: 17, name: "Cartera Roja", code: "074", price: 13.50, category: "cartera", image: "074.jpg" },
+            { id: 18, name: "Cartera", code: "086", price: 18.50, category: "cartera", image: "086.jpg" },
+            { id: 19, name: "Cartera Beige", code: "068", price: 10.50, category: "cartera", image: "068.jpg" },
+            { id: 20, name: "Cartera Blanca", code: "075", price: 13.50, category: "cartera", image: "075.jpg" },
+            { id: 21, name: "Cartera", code: "087", price: 18.50, category: "cartera", image: "087.jpg" },
+            { id: 22, name: "Cartera", code: "071", price: 15.00, category: "cartera", image: "071.jpg" },
+            { id: 23, name: "Cartera", code: "089", price: 14.99, category: "cartera", image: "089.jpg" },
+            { id: 24, name: "Cartera", code: "096", price: 14.99, category: "cartera", image: "096.jpg" },
+            { id: 25, name: "Cartera", code: "097", price: 14.99, category: "cartera", image: "097.jpg" },
+            { id: 26, name: "Cartera", code: "098", price: 24.00, category: "cartera", image: "098.jpg" },
+            { id: 27, name: "Cartera", code: "099", price: 14.99, category: "cartera", image: "099.jpg" },
+            { id: 28, name: "Cartera", code: "114", price: 14.99, category: "cartera", image: "114.jpg" },
+            { id: 29, name: "Cartera", code: "127", price: 12.00, category: "cartera", image: "127.jpg" },
+            { id: 30, name: "Cartera", code: "128", price: 13.99, category: "cartera", image: "128.jpg" },
+            { id: 31, name: "Cartera", code: "129", price: 13.99, category: "cartera", image: "129.jpg" },
+            { id: 32, name: "Cartera", code: "130", price: 15.00, category: "cartera", image: "130.jpg" },
+            { id: 33, name: "Cartera", code: "132", price: 14.00, category: "cartera", image: "132.jpg" },
+            { id: 34, name: "Cartera", code: "147", price: 14.99, category: "cartera", image: "147.jpg" },
+
+            // BILLETERAS Y BOLSOS
+            { id: 35, name: "Billetera", code: "076", price: 10.00, category: "billetera", image: "076.jpg" },
+            { id: 36, name: "Bolso de Mano", code: "088", price: 10.00, category: "bolso", image: "088.jpg" },
+
+            // COLLARES (Página 4-5)
+            { id: 37, name: "Collar Elegante", code: "141", price: 10.00, category: "collar", image: "141.jpg" },
+            { id: 38, name: "Set de Collares", code: "142", price: 18.50, category: "collar", image: "142.jpg" },
+            { id: 39, name: "Collar", code: "145", price: 12.99, category: "collar", image: "145.jpg" },
+            { id: 40, name: "Collar", code: "155", price: 10.00, category: "collar", image: "155.jpg" },
+            { id: 41, name: "Collar", code: "163", price: 12.00, category: "collar", image: "163.jpg" },
+            { id: 42, name: "Collar", code: "164", price: 12.00, category: "collar", image: "164.jpg" },
+            { id: 43, name: "Collar", code: "165", price: 12.00, category: "collar", image: "165.jpg" },
+            { id: 44, name: "Collar", code: "171", price: 12.00, category: "collar", image: "171.jpg" },
+            { id: 45, name: "Collar", code: "172", price: 15.00, category: "collar", image: "172.jpg" },
+            { id: 46, name: "Collar", code: "173", price: 12.00, category: "collar", image: "173.jpg" },
+            { id: 47, name: "Collar", code: "175", price: 12.00, category: "collar", image: "175.jpg" },
+            { id: 48, name: "Collar", code: "183", price: 10.00, category: "collar", image: "183.jpg" },
+            { id: 49, name: "Collar", code: "184", price: 10.00, category: "collar", image: "184.jpg" },
+            { id: 50, name: "Collar", code: "987", price: 10.00, category: "collar", image: "987.jpg" },
+            { id: 51, name: "Collar", code: "01116", price: 12.00, category: "collar", image: "01116.jpg" },
+            { id: 52, name: "Collar Mariposa", code: "200", price: 10.00, category: "collar", image: "200.jpg" },
+            { id: 53, name: "Collar", code: "17801", price: 10.00, category: "collar", image: "17801.jpg" },
+            { id: 54, name: "Collar", code: "01127", price: 10.00, category: "collar", image: "01127.jpg" },
+            { id: 55, name: "Collar", code: "10199191", price: 9.50, category: "collar", image: "10199191.jpg" },
+            { id: 56, name: "Collar de Plata", code: "18065", price: 5.00, category: "collar", image: "18065.jpg" },
+            { id: 57, name: "Collar", code: "01129", price: 10.00, category: "collar", image: "01129.jpg" },
+            { id: 58, name: "Collar de Sol", code: "89009", price: 11.00, category: "collar", image: "89009.jpg" },
+            { id: 59, name: "Collar", code: "1200", price: 10.00, category: "collar", image: "1200.jpg" },
+
+            // ARITOS/ARETES (Página 6-7)
+            { id: 60, name: "Aritos", code: "06", price: 7.00, category: "aritos", image: "06.jpg" },
+            { id: 61, name: "Aritos Flor", code: "07", price: 5.00, category: "aritos", image: "07.jpg" },
+            { id: 62, name: "Aritos Cuadrados", code: "09", price: 7.00, category: "aritos", image: "09.jpg" },
+            { id: 63, name: "Aritos con Perla", code: "011", price: 7.00, category: "aritos", image: "011.jpg" },
+            { id: 64, name: "Aritos", code: "013", price: 7.00, category: "aritos", image: "013.jpg" },
+            { id: 65, name: "Aritos de Estrella", code: "019", price: 3.00, category: "aritos", image: "019.jpg" },
+            { id: 66, name: "Aritos Concha", code: "036", price: 3.50, category: "aritos", image: "036.jpg" },
+            { id: 67, name: "Aritos Abeja", code: "046", price: 3.50, category: "aritos", image: "046.jpg" },
+            { id: 68, name: "Aretes de Corazón", code: "056", price: 4.50, category: "aritos", image: "056.jpg" },
+            { id: 69, name: "Aretes Espiral", code: "060", price: 7.00, category: "aritos", image: "060.jpg" },
+            { id: 70, name: "Aritos Triángulo", code: "079", price: 5.00, category: "aritos", image: "079.jpg" },
+            { id: 71, name: "Aritos Cisne", code: "080", price: 4.00, category: "aritos", image: "080.jpg" },
+            { id: 72, name: "Aritos", code: "081", price: 6.00, category: "aritos", image: "081.jpg" },
+            { id: 73, name: "Aritos Rojos", code: "178", price: 8.50, category: "aritos", image: "178.jpg" },
+            { id: 74, name: "Aritos", code: "028393992", price: 6.00, category: "aritos", image: "028393992.jpg" },
+            { id: 75, name: "Aritos Pez", code: "177", price: 8.50, category: "aritos", image: "177.jpg" },
+            { id: 76, name: "Aritos Klohe", code: "19009", price: 5.00, category: "aritos", image: "19009.jpg" },
+            { id: 77, name: "Aretas", code: "179", price: 8.50, category: "aritos", image: "179.jpg" },
+            { id: 78, name: "Aritos Corazón Sol", code: "190012", price: 7.00, category: "aritos", image: "190012.jpg" },
+            { id: 79, name: "Aritos Abanico", code: "1991919", price: 2.00, category: "aritos", image: "1991919.jpg" },
+
+            // PULSERAS (Página 7-8)
+            { id: 80, name: "Pulsera Básica", code: "030", price: 6.00, category: "pulsera", image: "030.jpg" },
+            { id: 81, name: "Pulsera Cartier", code: "031", price: 11.00, category: "pulsera", image: "031.jpg" },
+            { id: 82, name: "Pulsera Cartier", code: "032", price: 10.00, category: "pulsera", image: "032.jpg" },
+            { id: 83, name: "Pulsera Ajustable", code: "018", price: 10.00, category: "pulsera", image: "018.jpg" },
+            { id: 84, name: "Brazalete", code: "038", price: 10.00, category: "pulsera", image: "038.jpg" },
+            { id: 85, name: "Pulsera", code: "160", price: 10.00, category: "pulsera", image: "160.jpg" },
+            { id: 86, name: "Pulsera", code: "161", price: 9.00, category: "pulsera", image: "161.jpg" },
+            { id: 87, name: "Pulsera", code: "167", price: 12.00, category: "pulsera", image: "167.jpg" },
+            { id: 88, name: "Pulsera", code: "198", price: 10.00, category: "pulsera", image: "198.jpg" },
+            { id: 89, name: "Pulsera", code: "2001", price: 10.00, category: "pulsera", image: "2001.jpg" },
+            { id: 90, name: "Pulsera Glenda", code: "1090009", price: 9.50, category: "pulsera", image: "1090009.jpg" },
+            { id: 91, name: "Pulsera", code: "9789", price: 8.00, category: "pulsera", image: "9789.jpg" },
+            { id: 92, name: "Pulsera", code: "8967", price: 7.00, category: "pulsera", image: "8967.jpg" },
+            { id: 93, name: "Pulsera", code: "1250", price: 5.50, category: "pulsera", image: "1250.jpg" },
+            { id: 94, name: "Pulsera de Trébol", code: "01118", price: 12.00, category: "pulsera", image: "01118.jpg" },
+            { id: 95, name: "Pulsera", code: "01126", price: 10.00, category: "pulsera", image: "01126.jpg" },
+
+            // ANILLOS
+            { id: 96, name: "Anillo", code: "02", price: 10.00, category: "anillo", image: "02.jpg" },
+
+            // TARJETAS
+            { id: 97, name: "Tarjetas", code: "154", price: 0.00, category: "tarjeta", image: "154.jpg" }
         ];
 
         // Carrito
         let cart = [];
 
         // ==========================================
-        // FUNCIONES PRINCIPALES
+        // FUNCIONES
         // ==========================================
 
-        // Inicializar
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
             renderProducts(products);
         });
 
-        // Obtener URL completa de imagen
         function getImageUrl(imageName) {
             if (imageName.startsWith('http')) {
                 return imageName;
             }
-            return `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}/main/images/${imageName}`;
+            // Las imágenes están en la carpeta klohe_imagenes con los nombres de código
+            return `https://raw.githubusercontent.com/${CONFIG.GITHUB_USER}/${CONFIG.REPO_NAME}/main/klohe_imagenes/${imageName}`;
         }
 
-        // Renderizar productos
         function renderProducts(productsToRender) {
             const grid = document.getElementById('products-grid');
             
             if (productsToRender.length === 0) {
-                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem;">No se encontraron productos</div>';
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; font-size: 1.2rem; color: #636e72;"><i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>No se encontraron productos</div>';
                 return;
             }
             
             grid.innerHTML = productsToRender.map(product => `
                 <div class="product-card" data-id="${product.id}">
-                    <img src="${getImageUrl(product.image)}" 
-                         alt="${product.name}" 
-                         class="product-image"
-                         onerror="this.src='https://via.placeholder.com/300x250?text=Imagen+no+disponible'">
+                    <div class="product-image-container">
+                        <span class="product-code">Cód: ${product.code}</span>
+                        <img src="${getImageUrl(product.image)}" 
+                             alt="${product.name}" 
+                             class="product-image"
+                             onerror="this.src='https://via.placeholder.com/300x300?text=${product.code}'">
+                    </div>
                     <div class="product-info">
                         <span class="product-category">${product.category}</span>
                         <h3 class="product-title">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
                         <div class="product-price">${CONFIG.CURRENCY}${product.price.toFixed(2)}</div>
                         <button class="add-to-cart" onclick="addToCart(${product.id})">
                             <i class="fas fa-cart-plus"></i> Agregar al carrito
@@ -539,14 +710,13 @@
             `).join('');
         }
 
-        // Filtrar productos
         function filterProducts() {
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
             const category = document.getElementById('category-filter').value;
             
             const filtered = products.filter(product => {
                 const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
-                                    product.description.toLowerCase().includes(searchTerm);
+                                    product.code.toLowerCase().includes(searchTerm);
                 const matchesCategory = category === 'all' || product.category === category;
                 
                 return matchesSearch && matchesCategory;
@@ -554,10 +724,6 @@
             
             renderProducts(filtered);
         }
-
-        // ==========================================
-        // CARRITO DE COMPRAS
-        // ==========================================
 
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
@@ -573,17 +739,15 @@
             
             saveCart();
             updateCartUI();
-            
-            // Animación
-            const btn = document.querySelector(`[data-id="${productId}"] .add-to-cart`);
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> ¡Agregado!';
-            btn.style.background = '#2ed573';
-            
+            showNotification();
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
             setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.background = '';
-            }, 1500);
+                notification.style.display = 'none';
+            }, 2000);
         }
 
         function removeFromCart(productId) {
@@ -606,11 +770,11 @@
         }
 
         function saveCart() {
-            localStorage.setItem('tiendaklohesv_cart', JSON.stringify(cart));
+            localStorage.setItem('klohe_cart', JSON.stringify(cart));
         }
 
         function loadCart() {
-            const saved = localStorage.getItem('tiendaklohesv_cart');
+            const saved = localStorage.getItem('klohe_cart');
             if (saved) {
                 cart = JSON.parse(saved);
                 updateCartUI();
@@ -624,16 +788,22 @@
             const cartItems = document.getElementById('cart-items');
             
             if (cart.length === 0) {
-                cartItems.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-basket" style="font-size: 3rem; color: #dfe6e9;"></i><p>Tu carrito está vacío</p></div>';
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-basket"></i>
+                        <p>Tu carrito está vacío</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">¡Agrega algunos productos!</p>
+                    </div>`;
                 document.getElementById('cart-total').textContent = '0.00';
                 return;
             }
             
             cartItems.innerHTML = cart.map(item => `
                 <div class="cart-item">
-                    <img src="${getImageUrl(item.image)}" alt="${item.name}">
+                    <img src="${getImageUrl(item.image)}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80x80?text=${item.code}'">
                     <div class="cart-item-info">
                         <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-code">Cód: ${item.code}</div>
                         <div class="cart-item-price">${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}</div>
                     </div>
                     <div class="cart-item-quantity">
@@ -642,7 +812,7 @@
                         <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
                     </div>
                     <button class="remove-item" onclick="removeFromCart(${item.id})">
-                        <i class="fas fa-trash"></i>
+                        <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>
             `).join('');
@@ -659,75 +829,19 @@
         function checkout() {
             if (cart.length === 0) return;
             
-            let message = '¡Hola! Quiero hacer un pedido de:\n\n';
+            let message = '¡Hola Klohe! 👋\n\nQuiero hacer un pedido de:\n\n';
             
             cart.forEach(item => {
-                message += `• ${item.name} x${item.quantity} - ${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}\n`;
+                message += `• ${item.name} (Cód: ${item.code}) x${item.quantity} - ${CONFIG.CURRENCY}${(item.price * item.quantity).toFixed(2)}\n`;
             });
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `\n*Total: ${CONFIG.CURRENCY}${total.toFixed(2)}*`;
+            message += `\n💰 *Total: ${CONFIG.CURRENCY}${total.toFixed(2)}*\n\n¡Gracias! 😊`;
             
             const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
-        // ==========================================
-        // PANEL DE ADMINISTRACIÓN
-        // ==========================================
-
-        function toggleAdmin() {
-            const panel = document.getElementById('admin-panel');
-            panel.classList.toggle('hidden');
-        }
-
-        function addProduct() {
-            const name = document.getElementById('admin-name').value;
-            const desc = document.getElementById('admin-desc').value;
-            const price = parseFloat(document.getElementById('admin-price').value);
-            const category = document.getElementById('admin-category').value;
-            const image = document.getElementById('admin-image').value;
-
-            if (!name || !price || !image) {
-                alert('Por favor completa al menos el nombre, precio e imagen');
-                return;
-            }
-
-            const newProduct = {
-                id: Date.now(),
-                name: name,
-                description: desc || 'Sin descripción',
-                price: price,
-                category: category,
-                image: image
-            };
-
-            products.push(newProduct);
-            renderProducts(products);
-            
-            // Limpiar formulario
-            document.getElementById('admin-name').value = '';
-            document.getElementById('admin-desc').value = '';
-            document.getElementById('admin-price').value = '';
-            document.getElementById('admin-image').value = '';
-            
-            // Actualizar JSON exportado
-            exportProducts();
-            
-            alert('Producto agregado. Recuerda actualizar el código fuente con el nuevo JSON exportado.');
-        }
-
-        function exportProducts() {
-            const jsonStr = JSON.stringify(products, null, 4);
-            document.getElementById('json-output').textContent = jsonStr;
-            
-            // Copiar al portapapeles
-            navigator.clipboard.writeText(jsonStr).then(() => {
-                console.log('JSON copiado al portapapeles');
-            });
-        }
-
-        // Cerrar modal al hacer clic fuera
         window.onclick = function(event) {
             const modal = document.getElementById('cart-modal');
             if (event.target === modal) {

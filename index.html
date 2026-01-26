@@ -37,15 +37,21 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
         }
 
-        /* Header Minimalista */
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Header Compacto */
         header {
             background: var(--blanco);
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -62,10 +68,10 @@
 
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 400;
             color: var(--texto);
-            letter-spacing: 0.3em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
         }
 
@@ -110,60 +116,41 @@
             font-weight: 500;
         }
 
-        /* Hero Minimalista */
+        /* Hero Compacto */
         .hero {
             text-align: center;
-            padding: 6rem 0 4rem;
+            padding: 3rem 0 2rem;
             background: var(--crema);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--rosa-suave) 0%, transparent 70%);
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
         .hero h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
+            font-size: 1.8rem;
             font-weight: 300;
             color: var(--texto);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             letter-spacing: 0.05em;
-            position: relative;
-            z-index: 1;
         }
 
         .hero p {
             color: var(--texto-claro);
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 300;
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
-        /* Filtros Minimalistas */
+        /* Filtros Compactos */
         .filters-container {
             background: transparent;
-            padding: 2rem 0;
-            margin: 2rem 0;
+            padding: 1rem 0;
+            margin: 1rem 0;
             border-bottom: 1px solid var(--crema);
         }
 
         .filters {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
@@ -172,16 +159,16 @@
         .search-container {
             position: relative;
             flex: 1;
-            min-width: 250px;
-            max-width: 350px;
+            min-width: 200px;
+            max-width: 300px;
         }
 
         .search-container input {
             width: 100%;
-            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            padding: 0.7rem 1rem 0.7rem 2.2rem;
             border: 1px solid var(--rosa-suave);
             border-radius: 0;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             background: transparent;
             color: var(--texto);
             transition: var(--transicion);
@@ -195,18 +182,18 @@
 
         .search-container i {
             position: absolute;
-            left: 1rem;
+            left: 0.8rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--texto-claro);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .filters select {
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 2rem 0.7rem 1rem;
             border: 1px solid var(--rosa-suave);
             border-radius: 0;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             background: transparent;
             color: var(--texto);
             cursor: pointer;
@@ -215,8 +202,7 @@
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B6B6B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem;
+            background-position: right 0.8rem center;
         }
 
         .filters select:focus {
@@ -227,9 +213,9 @@
         .filter-checkbox {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--texto-claro);
             font-weight: 400;
         }
@@ -242,32 +228,39 @@
             cursor: pointer;
         }
 
-        /* Grid de Productos Minimalista */
+        /* Grid de Productos - CORREGIDO PARA MÓVIL */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            margin-bottom: 4rem;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
         }
 
         @media (min-width: 640px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 3rem;
+                gap: 2rem;
             }
         }
 
         @media (min-width: 1024px) {
             .products-grid {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 4rem;
+                gap: 2rem;
             }
         }
 
         @media (min-width: 1280px) {
             .products-grid {
                 grid-template-columns: repeat(5, 1fr);
-                gap: 3rem;
+                gap: 2rem;
             }
         }
 
@@ -278,10 +271,12 @@
             position: relative;
             border: none;
             box-shadow: none;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         .product-card.agotado {
@@ -296,22 +291,22 @@
             transform: translate(-50%, -50%);
             background: var(--texto);
             color: white;
-            padding: 0.5rem 1.5rem;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
+            padding: 0.4rem 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             font-weight: 400;
         }
 
         .category-badge {
             position: absolute;
-            top: 1rem;
-            left: 1rem;
-            padding: 0.3rem 0.8rem;
+            top: 0.5rem;
+            left: 0.5rem;
+            padding: 0.2rem 0.6rem;
             background: var(--blanco);
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
             z-index: 10;
             color: var(--texto-claro);
             border: 1px solid var(--rosa-suave);
@@ -320,14 +315,14 @@
 
         .badge-nuevo {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 0.5rem;
+            right: 0.5rem;
             background: var(--rosa-oscuro);
             color: white;
-            padding: 0.3rem 0.8rem;
-            font-size: 0.65rem;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
             z-index: 10;
             font-weight: 400;
         }
@@ -339,7 +334,7 @@
             overflow: hidden;
             background: var(--crema);
             cursor: pointer;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .product-image {
@@ -356,25 +351,28 @@
         .product-info {
             padding: 0;
             text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-category {
             display: block;
             color: var(--texto-claro);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.3rem;
             font-weight: 400;
         }
 
         .product-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
             color: var(--texto);
             font-weight: 400;
-            line-height: 1.4;
+            line-height: 1.3;
             height: auto;
             overflow: visible;
             display: block;
@@ -384,15 +382,15 @@
             background: transparent;
             border-radius: 0;
             padding: 0;
-            margin-bottom: 1rem;
-            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.7rem;
             border: none;
             color: var(--texto-claro);
         }
 
         .detail-row {
             display: inline;
-            margin: 0 0.5rem;
+            margin: 0 0.3rem;
         }
 
         .detail-label {
@@ -402,7 +400,7 @@
         .detail-value {
             color: var(--texto-claro);
             font-weight: 400;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             letter-spacing: 0.05em;
         }
 
@@ -410,20 +408,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            margin: 1rem 0;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
         }
 
         .product-price {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--rosa-oscuro);
             font-weight: 400;
             font-family: 'Cormorant Garamond', serif;
         }
 
         .quick-view-btn-inline {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border: 1px solid var(--rosa-suave);
             background: transparent;
             border-radius: 50%;
@@ -433,7 +431,7 @@
             cursor: pointer;
             transition: var(--transicion);
             color: var(--texto-claro);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
         .quick-view-btn-inline:hover {
@@ -445,8 +443,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            margin: 1rem 0;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
         }
 
         .qty-btn {
@@ -459,10 +457,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 300;
-            font-size: 1rem;
+            font-weight: 400;
+            font-size: 0.9rem;
             transition: var(--transicion);
             color: var(--texto);
+            flex-shrink: 0;
         }
 
         .qty-btn:hover {
@@ -470,27 +469,32 @@
         }
 
         .qty-display {
-            min-width: 30px;
+            min-width: 24px;
             text-align: center;
             font-weight: 400;
             font-size: 0.9rem;
             color: var(--texto);
         }
 
+        /* BOTÓN AGREGAR UNIFICADO */
         .add-to-cart {
             width: 100%;
-            padding: 0.9rem;
+            padding: 0.7rem;
             background: var(--texto);
             color: white;
             border: none;
             border-radius: 0;
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             transition: var(--transicion);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             font-weight: 400;
-            margin-top: 0.5rem;
+            margin-top: auto;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .add-to-cart:hover:not(:disabled) {
@@ -498,28 +502,28 @@
         }
 
         .add-to-cart:disabled {
-            opacity: 0.3;
+            opacity: 0.4;
             cursor: not-allowed;
             background: var(--texto-claro);
         }
 
         .load-more-container {
             text-align: center;
-            padding: 4rem 0;
+            padding: 2rem 0;
         }
 
         .load-more-btn {
             background: transparent;
             color: var(--texto);
             border: 1px solid var(--texto);
-            padding: 1rem 3rem;
+            padding: 0.8rem 2rem;
             border-radius: 0;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 400;
             cursor: pointer;
             transition: var(--transicion);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
         }
 
         .load-more-btn:hover {
@@ -528,19 +532,19 @@
         }
 
         .load-more-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.4;
             cursor: not-allowed;
         }
 
         .products-count {
             text-align: center;
             color: var(--texto-claro);
-            font-size: 0.85rem;
-            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            margin-top: 1rem;
             letter-spacing: 0.05em;
         }
 
-        /* Modal vista rápida minimalista */
+        /* Modal vista rápida */
         .quick-view-modal {
             display: none;
             position: fixed;
@@ -549,10 +553,10 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(250, 249, 246, 0.95);
+            background: rgba(250, 249, 246, 0.98);
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            padding: 1rem;
             backdrop-filter: blur(10px);
         }
 
@@ -564,8 +568,8 @@
             overflow-y: auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            padding: 4rem;
+            gap: 3rem;
+            padding: 2rem;
             position: relative;
             border: 1px solid var(--crema);
             box-shadow: 0 20px 60px var(--sombra-suave);
@@ -574,8 +578,8 @@
         @media (max-width: 768px) {
             .quick-view-content {
                 grid-template-columns: 1fr;
-                padding: 2rem;
-                gap: 2rem;
+                padding: 1.5rem;
+                gap: 1.5rem;
             }
         }
 
@@ -589,16 +593,16 @@
         .quick-view-info h2 {
             font-family: 'Cormorant Garamond', serif;
             color: var(--texto);
-            margin-bottom: 1rem;
-            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
             font-weight: 300;
         }
 
         .quick-view-price {
-            font-size: 1.5rem !important;
+            font-size: 1.4rem !important;
             color: var(--rosa-oscuro) !important;
             font-weight: 400;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
             font-family: 'Cormorant Garamond', serif;
         }
 
@@ -616,39 +620,40 @@
         }
 
         .image-modal-content {
-            max-width: 80%;
-            max-height: 80%;
+            max-width: 90%;
+            max-height: 90%;
             object-fit: contain;
         }
 
         .image-modal-close {
             position: absolute;
-            top: 2rem;
-            right: 2rem;
+            top: 1rem;
+            right: 1rem;
             color: var(--texto);
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid var(--rosa-suave);
             border-radius: 50%;
             transition: var(--transicion);
+            background: var(--blanco);
         }
 
         .image-modal-close:hover {
             background: var(--rosa-suave);
         }
 
-        /* Mini carrito minimalista */
+        /* Mini carrito */
         .mini-cart {
             position: fixed;
             top: 0;
             right: -100%;
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             height: 100vh;
             background: var(--blanco);
             box-shadow: -10px 0 40px var(--sombra-suave);
@@ -664,7 +669,7 @@
         }
 
         .mini-cart-header {
-            padding: 2rem;
+            padding: 1.5rem;
             border-bottom: 1px solid var(--crema);
             display: flex;
             justify-content: space-between;
@@ -675,7 +680,7 @@
         .mini-cart-header h3 {
             font-family: 'Cormorant Garamond', serif;
             color: var(--texto);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 400;
             letter-spacing: 0.1em;
         }
@@ -683,11 +688,11 @@
         .mini-cart-body {
             flex: 1;
             overflow-y: auto;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .mini-cart-footer {
-            padding: 2rem;
+            padding: 1.5rem;
             border-top: 1px solid var(--crema);
             background: var(--crema);
         }
@@ -710,17 +715,17 @@
             opacity: 1;
         }
 
-        /* Envío minimalista */
+        /* Envío */
         .shipping-compact {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
+            gap: 0.8rem;
+            padding: 0.8rem;
             background: var(--blanco);
             border: 1px solid var(--rosa-suave);
             cursor: pointer;
             transition: var(--transicion);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .shipping-compact.selected {
@@ -729,8 +734,8 @@
         }
 
         .shipping-compact input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             accent-color: var(--rosa-oscuro);
             cursor: pointer;
         }
@@ -743,38 +748,38 @@
         }
 
         .shipping-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 400;
         }
 
         .shipping-text small {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--texto-claro);
             font-weight: 300;
-            margin-top: 0.2rem;
+            margin-top: 0.1rem;
         }
 
         .shipping-price {
             color: var(--rosa-oscuro);
             font-weight: 400;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-family: 'Cormorant Garamond', serif;
         }
 
-        /* Descuento minimalista */
+        /* Descuento */
         .discount-compact {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .discount-compact input {
             flex: 1;
-            padding: 0.8rem;
+            padding: 0.7rem;
             border: 1px solid var(--rosa-suave);
             border-radius: 0;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: var(--transicion);
             background: var(--blanco);
         }
@@ -788,11 +793,11 @@
             background: var(--texto);
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.2rem;
             border-radius: 0;
             cursor: pointer;
             font-weight: 400;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             transition: var(--transicion);
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -802,11 +807,11 @@
             background: var(--rosa-oscuro);
         }
 
-        /* Totales minimalistas */
+        /* Totales */
         .cart-totals-compact {
             background: transparent;
-            padding: 1rem 0;
-            margin-bottom: 1rem;
+            padding: 0.8rem 0;
+            margin-bottom: 0.8rem;
             border-top: 1px solid var(--rosa-suave);
             border-bottom: 1px solid var(--rosa-suave);
         }
@@ -814,8 +819,8 @@
         .total-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
             color: var(--texto-claro);
         }
 
@@ -824,67 +829,67 @@
         }
 
         .total-row.final {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 400;
             color: var(--texto);
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
+            margin-top: 0.6rem;
+            padding-top: 0.6rem;
             border-top: 1px solid var(--rosa-suave);
             font-family: 'Cormorant Garamond', serif;
         }
 
         .checkout-btn {
             width: 100%;
-            padding: 1.2rem;
+            padding: 1rem;
             background: var(--texto);
             color: white;
             border: none;
             border-radius: 0;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 0.6rem;
             font-weight: 400;
             transition: var(--transicion);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
         }
 
         .checkout-btn:hover {
             background: var(--rosa-oscuro);
         }
 
-        /* Sección de comentarios minimalista */
+        /* Reviews */
         .reviews-section {
             background: var(--crema);
-            padding: 6rem 0;
-            margin: 4rem 0;
+            padding: 3rem 0;
+            margin: 2rem 0;
         }
 
         .reviews-section h3 {
             font-family: 'Cormorant Garamond', serif;
             text-align: center;
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--texto);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             font-weight: 300;
             letter-spacing: 0.1em;
         }
 
         .reviews-container {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             position: relative;
-            height: 180px;
+            height: 150px;
             overflow: hidden;
         }
 
         .review-card {
             background: var(--blanco);
             border: 1px solid var(--rosa-suave);
-            padding: 2rem;
+            padding: 1.5rem;
             position: absolute;
             width: 100%;
             opacity: 0;
@@ -900,8 +905,8 @@
 
         .review-stars {
             color: var(--rosa-medio);
-            margin-bottom: 1rem;
-            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
             letter-spacing: 0.2em;
         }
 
@@ -909,32 +914,31 @@
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             color: var(--texto);
-            margin-bottom: 1rem;
-            line-height: 1.8;
-            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+            font-size: 1rem;
             font-weight: 400;
         }
 
         .review-author {
             font-weight: 400;
             color: var(--rosa-oscuro);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
         }
 
         .review-product {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--texto-claro);
-            margin-top: 0.5rem;
-            letter-spacing: 0.05em;
+            margin-top: 0.3rem;
         }
 
-        /* Testimonios minimalistas */
+        /* Testimonios */
         .testimonials {
             background: var(--blanco);
-            padding: 6rem 0;
-            margin: 4rem 0;
+            padding: 3rem 0;
+            margin: 2rem 0;
             text-align: center;
             border-top: 1px solid var(--crema);
             border-bottom: 1px solid var(--crema);
@@ -942,13 +946,13 @@
 
         .testimonial-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-style: italic;
             color: var(--texto);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+            margin-bottom: 1rem;
+            line-height: 1.5;
             font-weight: 300;
-            max-width: 700px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -956,14 +960,14 @@
         .testimonial-author {
             color: var(--rosa-oscuro);
             font-weight: 400;
-            font-size: 0.9rem;
-            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
         }
 
-        /* Social feed minimalista */
+        /* Social */
         .social-feed {
-            padding: 4rem 0;
+            padding: 3rem 0;
             text-align: center;
             background: var(--crema);
         }
@@ -972,8 +976,8 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1px;
-            margin-top: 3rem;
-            max-width: 800px;
+            margin-top: 2rem;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             background: var(--rosa-suave);
@@ -1030,26 +1034,26 @@
         }
 
         .social-overlay i {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .tiktok-section {
-            margin-top: 4rem;
-            padding: 3rem;
+            margin-top: 3rem;
+            padding: 2rem;
             background: var(--texto);
             color: white;
-            max-width: 600px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .tiktok-section h3 {
             color: white;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 300;
             letter-spacing: 0.1em;
+            font-size: 1.2rem;
         }
 
         .tiktok-link {
@@ -1058,15 +1062,15 @@
             gap: 0.5rem;
             background: transparent;
             color: white;
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem;
             border: 1px solid white;
             text-decoration: none;
             font-weight: 400;
             transition: var(--transicion);
             margin-top: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            font-size: 0.7rem;
         }
 
         .tiktok-link:hover {
@@ -1074,20 +1078,19 @@
             color: var(--texto);
         }
 
-        /* Newsletter minimalista */
+        /* Newsletter */
         .newsletter {
             background: var(--rosa-oscuro);
-            padding: 5rem 0;
+            padding: 3rem 0;
             text-align: center;
-            margin: 4rem 0;
+            margin: 2rem 0;
             color: white;
-            position: relative;
         }
 
         .newsletter h3 {
             font-family: 'Cormorant Garamond', serif;
-            margin-bottom: 0.5rem;
-            font-size: 2rem;
+            margin-bottom: 0.3rem;
+            font-size: 1.5rem;
             font-weight: 300;
             letter-spacing: 0.1em;
         }
@@ -1095,18 +1098,18 @@
         .newsletter-form {
             display: flex;
             gap: 0;
-            max-width: 450px;
-            margin: 2rem auto 0;
-            padding: 0 2rem;
+            max-width: 400px;
+            margin: 1.5rem auto 0;
+            padding: 0 1rem;
         }
 
         .newsletter-form input {
             flex: 1;
-            padding: 1rem 1.5rem;
+            padding: 0.8rem 1rem;
             border: none;
             border-radius: 0;
-            font-size: 0.9rem;
-            background: rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.15);
             color: white;
             font-family: 'Inter', sans-serif;
         }
@@ -1119,32 +1122,32 @@
             background: white;
             color: var(--rosa-oscuro);
             border: none;
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 0;
             cursor: pointer;
             font-weight: 400;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             transition: var(--transicion);
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
         }
 
         .newsletter-form button:hover {
             background: var(--crema);
         }
 
-        /* FAQ minimalista */
+        /* FAQ */
         .faq-section {
-            padding: 4rem 0;
-            max-width: 700px;
+            padding: 2rem 0;
+            max-width: 600px;
             margin: 0 auto;
         }
 
         .faq-section h3 {
             font-family: 'Cormorant Garamond', serif;
             text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
             color: var(--texto);
             font-weight: 300;
             letter-spacing: 0.1em;
@@ -1158,13 +1161,13 @@
         }
 
         .faq-question {
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 400;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--texto);
             transition: var(--transicion);
         }
@@ -1178,14 +1181,14 @@
             max-height: 0;
             overflow: hidden;
             transition: all 0.4s ease;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--texto-claro);
-            line-height: 1.8;
+            line-height: 1.6;
             font-weight: 300;
         }
 
         .faq-item.active .faq-answer {
-            padding: 0 0 1.5rem 0;
+            padding: 0 0 1rem 0;
             max-height: 200px;
         }
 
@@ -1193,22 +1196,22 @@
             color: var(--rosa-oscuro);
         }
 
-        /* Chat minimalista */
+        /* Chat */
         .chat-widget {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1.5rem;
+            right: 1.5rem;
             z-index: 999;
         }
 
         .chat-button {
-            width: 56px;
-            height: 56px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: var(--texto);
             color: white;
             border: none;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             box-shadow: 0 4px 20px var(--sombra-suave);
             transition: var(--transicion);
@@ -1224,10 +1227,10 @@
 
         .chat-window {
             position: absolute;
-            bottom: 70px;
+            bottom: 60px;
             right: 0;
-            width: 340px;
-            height: 450px;
+            width: 300px;
+            height: 400px;
             background: var(--blanco);
             border-radius: 0;
             box-shadow: 0 10px 40px var(--sombra-suave);
@@ -1244,11 +1247,11 @@
         .chat-header {
             background: var(--crema);
             color: var(--texto);
-            padding: 1.5rem;
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 400;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -1256,13 +1259,13 @@
 
         .chat-body {
             flex: 1;
-            padding: 1.5rem;
+            padding: 1rem;
             overflow-y: auto;
             background: var(--blanco);
         }
 
         .chat-input {
-            padding: 1rem;
+            padding: 0.8rem;
             border-top: 1px solid var(--crema);
             display: flex;
             gap: 0.5rem;
@@ -1271,10 +1274,10 @@
 
         .chat-input input {
             flex: 1;
-            padding: 0.8rem;
+            padding: 0.7rem;
             border: 1px solid var(--rosa-suave);
             border-radius: 0;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-family: 'Inter', sans-serif;
         }
 
@@ -1287,8 +1290,8 @@
             background: var(--texto);
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 0;
             cursor: pointer;
             transition: var(--transicion);
@@ -1298,7 +1301,7 @@
             background: var(--rosa-oscuro);
         }
 
-        /* Navegación inferior minimalista */
+        /* Navegación inferior */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -1306,7 +1309,7 @@
             right: 0;
             background: var(--blanco);
             border-top: 1px solid var(--crema);
-            padding: 1rem 2rem;
+            padding: 0.6rem 1rem;
             display: none;
             justify-content: space-around;
             z-index: 100;
@@ -1316,10 +1319,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.2rem;
             color: var(--texto-claro);
             text-decoration: none;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             transition: var(--transicion);
             font-weight: 400;
             letter-spacing: 0.05em;
@@ -1330,7 +1333,7 @@
         }
 
         .bottom-nav-item i {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
@@ -1338,14 +1341,11 @@
                 display: flex;
             }
             body {
-                padding-bottom: 80px;
-            }
-            .hero h2 {
-                font-size: 2rem;
+                padding-bottom: 60px;
             }
         }
 
-        /* Notificaciones minimalistas */
+        /* Notificaciones */
         .notification {
             position: fixed;
             top: 50%;
@@ -1353,20 +1353,20 @@
             transform: translate(-50%, -50%);
             background: var(--texto);
             color: white;
-            padding: 2rem 3rem;
+            padding: 1rem 2rem;
             border-radius: 0;
             display: none;
             z-index: 1002;
             font-weight: 400;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.2);
             text-align: center;
-            min-width: 300px;
+            min-width: 250px;
             letter-spacing: 0.1em;
             text-transform: uppercase;
         }
 
-        /* Modal error minimalista */
+        /* Modal error */
         .error-modal {
             display: none;
             position: fixed;
@@ -1383,18 +1383,18 @@
 
         .error-content {
             background: white;
-            padding: 3rem;
+            padding: 2rem;
             border-radius: 0;
             text-align: center;
-            max-width: 350px;
+            max-width: 300px;
             box-shadow: 0 20px 60px var(--sombra-suave);
             border: 1px solid var(--crema);
         }
 
         .error-content i {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--rosa-oscuro);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .error-content h3 {
@@ -1402,12 +1402,12 @@
             margin-bottom: 0.5rem;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
 
         .error-content button {
-            margin-top: 2rem;
-            padding: 1rem 2.5rem;
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
             background: var(--texto);
             color: white;
             border: none;
@@ -1416,7 +1416,7 @@
             font-weight: 400;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             transition: var(--transicion);
         }
 
@@ -1424,25 +1424,25 @@
             background: var(--rosa-oscuro);
         }
 
-        /* Footer minimalista */
+        /* Footer */
         footer {
             background: var(--texto);
             color: rgba(255,255,255,0.8);
             text-align: center;
-            padding: 4rem 2rem;
-            margin-top: 4rem;
+            padding: 2rem;
+            margin-top: 2rem;
             font-weight: 300;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 0.05em;
         }
 
         footer a {
             color: var(--rosa-suave);
             text-decoration: none;
-            margin: 0 1rem;
+            margin: 0 0.8rem;
             font-weight: 400;
             transition: var(--transicion);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
@@ -1459,10 +1459,10 @@
             background: var(--texto);
             color: white;
             text-align: center;
-            padding: 1rem;
+            padding: 0.6rem;
             z-index: 10000;
             display: none;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 400;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -1478,25 +1478,18 @@
         }
 
         .product-card {
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        /* Rotating message header minimalista */
-        .rotating-message-header {
-            display: none;
+            animation: fadeIn 0.5s ease forwards;
         }
     </style>
 </head>
 <body>
     <div class="offline-indicator" id="offline-indicator">
-        <i class="fas fa-wifi-slash"></i> Sin conexión
+        Sin conexión
     </div>
 
     <header>
         <div class="container">
-            <div class="logo-section">
-                <h1 class="logo">KLO<span>HE</span></h1>
-            </div>
+            <h1 class="logo">KLO<span>HE</span></h1>
             <div class="cart-icon" onclick="toggleMiniCart()">
                 <i class="fas fa-shopping-bag"></i>
                 <span id="cart-count">0</span>
@@ -1516,7 +1509,7 @@
             <div class="filters">
                 <div class="search-container" id="search-container">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Buscar..." onkeyup="filterProducts()" onclick="expandSearch()">
+                    <input type="text" id="search-input" placeholder="Buscar..." onkeyup="filterProducts()">
                 </div>
                 
                 <select id="category-filter" onchange="filterProducts()">
@@ -1558,15 +1551,15 @@
 
     <section class="social-feed">
         <div class="container">
-            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--texto); font-weight: 300; letter-spacing: 0.1em;">
+            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--texto); font-weight: 300; letter-spacing: 0.1em;">
                 @Klohesv
             </h3>
-            <p style="color: var(--texto-claro); margin-top: 0.5rem; font-size: 0.9rem;">Síguenos en nuestras redes</p>
+            <p style="color: var(--texto-claro); margin-top: 0.5rem; font-size: 0.85rem;">Síguenos en nuestras redes</p>
             <div class="social-grid" id="instagram-grid"></div>
             
             <div class="tiktok-section">
                 <h3><i class="fab fa-tiktok"></i> TikTok</h3>
-                <p style="font-size: 0.9rem; opacity: 0.8;">Descubre nuestros últimos diseños</p>
+                <p style="font-size: 0.85rem; opacity: 0.8;">Descubre nuestros últimos diseños</p>
                 <a href="https://www.tiktok.com/@klohesv" target="_blank" class="tiktok-link">
                     <i class="fab fa-tiktok"></i> @klohesv
                 </a>
@@ -1588,7 +1581,7 @@
     <section class="newsletter">
         <div class="container">
             <h3>Únete al Club Klohe</h3>
-            <p style="font-size: 1rem; opacity: 0.9; font-weight: 300;">15% de descuento en tu primera compra</p>
+            <p style="font-size: 0.9rem; opacity: 0.9; font-weight: 300;">15% de descuento en tu primera compra</p>
             <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
                 <input type="email" placeholder="Tu correo electrónico" required>
                 <button type="submit">Suscribirse</button>
@@ -1622,7 +1615,7 @@
 
     <footer>
         <p>&copy; 2025 Klohe — Hecho con amor en El Salvador</p>
-        <p style="margin-top: 1.5rem;">
+        <p style="margin-top: 1rem;">
             <a href="https://wa.me/50366711569"><i class="fab fa-whatsapp"></i> WhatsApp</a>
             <a href="https://www.instagram.com/klohesv" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
             <a href="https://www.tiktok.com/@klohesv" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
@@ -1696,14 +1689,14 @@
 
     <div id="quick-view-modal" class="quick-view-modal" onclick="closeQuickView(event)">
         <div class="quick-view-content" onclick="event.stopPropagation()">
-            <button onclick="closeQuickView()" style="position: absolute; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--texto); z-index: 10;">&times;</button>
+            <button onclick="closeQuickView()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--texto); z-index: 10;">&times;</button>
             <img id="quick-view-image" class="quick-view-image" src="" alt="">
             <div class="quick-view-info">
                 <span id="quick-view-category" style="color: var(--texto-claro); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 400;"></span>
                 <h2 id="quick-view-title"></h2>
                 <div id="quick-view-price" class="quick-view-price"></div>
-                <p id="quick-view-description" style="color: var(--texto-claro); line-height: 1.8; font-size: 1rem; font-weight: 300;"></p>
-                <button class="checkout-btn" onclick="addToCartFromQuickView()" style="margin-top: 2rem;">
+                <p id="quick-view-description" style="color: var(--texto-claro); line-height: 1.8; font-size: 0.95rem; font-weight: 300;"></p>
+                <button class="checkout-btn" onclick="addToCartFromQuickView()" style="margin-top: 1.5rem;">
                     Agregar al carrito
                 </button>
             </div>
@@ -1721,7 +1714,7 @@
                 <button onclick="toggleChat()" style="background: none; border: none; color: var(--texto); cursor: pointer; font-size: 1.2rem;">&times;</button>
             </div>
             <div class="chat-body" id="chat-body">
-                <p style="background: var(--crema); padding: 1rem; margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.6;">¡Hola! ¿En qué podemos ayudarte?</p>
+                <p style="background: var(--crema); padding: 0.8rem; margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.5;">¡Hola! ¿En qué podemos ayudarte?</p>
             </div>
             <div class="chat-input">
                 <input type="text" id="chat-message" placeholder="Escribe tu mensaje..." onkeypress="handleChatKey(event)">
@@ -1738,7 +1731,7 @@
             <i class="fas fa-home"></i>
             Inicio
         </a>
-        <a href="#" class="bottom-nav-item" onclick="expandSearch(); return false;">
+        <a href="#" class="bottom-nav-item" onclick="document.getElementById('search-input').focus(); return false;">
             <i class="fas fa-search"></i>
             Buscar
         </a>
@@ -1756,7 +1749,7 @@
         const CONFIG = {
             WHATSAPP_NUMBER: '50366711569',
             SHIPPING_COST: 3.75,
-            PRODUCTS_PER_PAGE: 25
+            PRODUCTS_PER_PAGE: 20
         };
 
         let products = [];
@@ -1772,8 +1765,7 @@
             "Colección San Valentín",
             "Piezas únicas para momentos inolvidables",
             "Regala amor, regala Klohe",
-            "Elegancia en cada detalle",
-            "Descubre nuestra selección especial"
+            "Elegancia en cada detalle"
         ];
 
         const customerReviews = [
@@ -1781,46 +1773,256 @@
             { name: "Carlos M.", text: "Llegó justo a tiempo para el 14 de febrero", product: "Collar Amor", stars: 5 },
             { name: "Ana L.", text: "La pulsera es preciosa, muy delicada", product: "Pulsera Corazón", stars: 5 },
             { name: "Pedro S.", text: "Servicio excelente y envío rápido", product: "Cartera Elegante", stars: 5 },
-            { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba", product: "Reloj Corazón", stars: 5 },
-            { name: "Juan D.", text: "Calidad excepcional en todos los productos", product: "Anillo Corazón", stars: 5 },
-            { name: "Sofía H.", text: "Los lentes tienen muy buen estilo", product: "Lentes Corazón", stars: 5 },
-            { name: "Miguel A.", text: "Mi esposa quedó encantada con el collar", product: "Collar Estrella", stars: 5 },
-            { name: "Valentina P.", text: "Ya compré varias veces, siempre satisfecha", product: "Aritos Plata 925", stars: 5 },
-            { name: "Andrés C.", text: "El empaque es muy elegante, ideal para regalo", product: "Pulsera Amor", stars: 5 }
+            { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba", product: "Reloj Corazón", stars: 5 }
         ];
 
+        // TODOS LOS 228 PRODUCTOS DEL INVENTARIO
         const realProducts = [
+            // CARTERAS (Páginas 1-6) - Código 077 cambiado a 00000
             { id: 1, name: "Billetera", code: "076", price: 10.00, stock: 0, category: "Carteras", isNew: false },
             { id: 2, name: "Bolso de Mano", code: "088", price: 10.00, stock: 1, category: "Carteras", isNew: false },
-            { id: 3, name: "Cartera Elegante", code: "03", price: 12.50, stock: 1, category: "Carteras", isNew: false },
-            { id: 4, name: "Cartera Classic", code: "014", price: 12.00, stock: 1, category: "Carteras", isNew: false },
-            { id: 5, name: "Cartera Moderna", code: "033", price: 10.99, stock: 1, category: "Carteras", isNew: false },
-            { id: 6, name: "Cartera Premium", code: "035", price: 16.50, stock: 0, category: "Carteras", isNew: false },
-            { id: 7, name: "Cartera Luxury", code: "071", price: 15.00, stock: 0, category: "Carteras", isNew: false },
-            { id: 8, name: "Cartera Chic", code: "073", price: 10.00, stock: 1, category: "Carteras", isNew: false },
-            { id: 9, name: "Cartera Trendy", code: "077", price: 13.50, stock: 0, category: "Carteras", isNew: false },
-            { id: 10, name: "Cartera Fashion", code: "086", price: 18.50, stock: 1, category: "Carteras", isNew: false },
-            { id: 25, name: "Cartera Corazón", code: "149", price: 15.99, stock: 1, category: "Carteras", isNew: true },
-            { id: 26, name: "Cartera Amor", code: "150", price: 15.99, stock: 1, category: "Carteras", isNew: true },
-            { id: 46, name: "Aritos Corazón", code: "046", price: 3.50, stock: 1, category: "Aritos", isNew: true },
-            { id: 47, name: "Aretas Elegantes", code: "179", price: 8.50, stock: 1, category: "Aritos", isNew: false },
-            { id: 48, name: "Arete Classic", code: "060", price: 7.00, stock: 1, category: "Aritos", isNew: false },
-            { id: 49, name: "Aretes Premium", code: "174", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 3, name: "Cartera", code: "03", price: 12.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 4, name: "Cartera", code: "014", price: 12.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 5, name: "Cartera", code: "033", price: 10.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 6, name: "Cartera", code: "035", price: 16.50, stock: 0, category: "Carteras", isNew: false },
+            { id: 7, name: "Cartera", code: "071", price: 15.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 8, name: "Cartera", code: "073", price: 10.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 9, name: "Cartera", code: "00000", price: 13.50, stock: 0, category: "Carteras", isNew: false }, // CAMBIADO DE 077 A 00000
+            { id: 10, name: "Cartera", code: "086", price: 18.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 11, name: "Cartera", code: "087", price: 18.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 12, name: "Cartera", code: "089", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 13, name: "Cartera", code: "096", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 14, name: "Cartera", code: "097", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 15, name: "Cartera", code: "098", price: 24.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 16, name: "Cartera", code: "099", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 17, name: "Cartera", code: "114", price: 14.99, stock: 0, category: "Carteras", isNew: false },
+            { id: 18, name: "Cartera", code: "127", price: 12.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 19, name: "Cartera", code: "128", price: 13.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 20, name: "Cartera", code: "129", price: 13.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 21, name: "Cartera", code: "130", price: 15.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 22, name: "Cartera", code: "132", price: 14.00, stock: 2, category: "Carteras", isNew: false },
+            { id: 23, name: "Cartera", code: "147", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 24, name: "Cartera", code: "148", price: 14.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 25, name: "Cartera", code: "149", price: 15.99, stock: 1, category: "Carteras", isNew: true },
+            { id: 26, name: "Cartera", code: "150", price: 15.99, stock: 1, category: "Carteras", isNew: true },
+            { id: 27, name: "Cartera", code: "151", price: 13.50, stock: 0, category: "Carteras", isNew: false },
+            { id: 28, name: "Cartera", code: "152", price: 14.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 29, name: "Cartera", code: "153", price: 14.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 30, name: "Cartera Beige", code: "068", price: 10.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 31, name: "Cartera Blanca", code: "022", price: 13.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 32, name: "Cartera Blanca", code: "049", price: 10.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 33, name: "Cartera Blanca", code: "058", price: 10.99, stock: 0, category: "Carteras", isNew: false },
+            { id: 34, name: "Cartera Blanca", code: "063", price: 10.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 35, name: "Cartera Blanca", code: "075", price: 13.50, stock: 0, category: "Carteras", isNew: false },
+            { id: 36, name: "Cartera Blanca", code: "190", price: 10.99, stock: 0, category: "Carteras", isNew: false },
+            { id: 37, name: "Cartera Café", code: "899", price: 17.75, stock: 0, category: "Carteras", isNew: false },
+            { id: 38, name: "Cartera Clásica", code: "051", price: 20.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 39, name: "Cartera Clásica", code: "061", price: 12.50, stock: 0, category: "Carteras", isNew: false },
+            { id: 40, name: "Cartera Morada", code: "054", price: 10.99, stock: 0, category: "Carteras", isNew: false },
+            { id: 41, name: "Cartera Negra", code: "047", price: 10.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 42, name: "Cartera Roja", code: "074", price: 13.50, stock: 0, category: "Carteras", isNew: false },
+            { id: 43, name: "Cartera Rosada", code: "023", price: 9.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 44, name: "Cartera Vino", code: "053", price: 18.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 45, name: "Carteras", code: "181", price: 10.00, stock: 1, category: "Carteras", isNew: false },
+            
+            // ARITOS (Páginas 6-11)
+            { id: 46, name: "Aritos", code: "046", price: 3.50, stock: 1, category: "Aritos", isNew: true },
+            { id: 47, name: "Aretas", code: "179", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 48, name: "Arete", code: "060", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 49, name: "Aretes", code: "174", price: 8.50, stock: 1, category: "Aritos", isNew: false },
             { id: 50, name: "Aretes de Corazón", code: "056", price: 4.50, stock: 0, category: "Aritos", isNew: true },
+            { id: 51, name: "Aritos", code: "028393992", price: 6.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 52, name: "Aritos", code: "06", price: 7.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 53, name: "Aritos", code: "07", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 54, name: "Aritos", code: "09", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 55, name: "Aritos", code: "011", price: 7.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 56, name: "Aritos", code: "013", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 57, name: "Aritos", code: "036", price: 3.50, stock: 0, category: "Aritos", isNew: false },
+            { id: 58, name: "Aritos", code: "079", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 59, name: "Aritos", code: "080", price: 4.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 60, name: "Aritos", code: "081", price: 6.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 61, name: "Aritos", code: "082", price: 6.50, stock: 0, category: "Aritos", isNew: false },
+            { id: 62, name: "Aritos", code: "085", price: 8.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 63, name: "Aritos", code: "092", price: 3.50, stock: 0, category: "Aritos", isNew: false },
+            { id: 64, name: "Aritos", code: "100", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 65, name: "Aritos", code: "101", price: 5.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 66, name: "Aritos", code: "102", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 67, name: "Aritos", code: "107", price: 8.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 68, name: "Aritos", code: "108", price: 7.99, stock: 0, category: "Aritos", isNew: false },
+            { id: 69, name: "Aritos", code: "115", price: 6.99, stock: 1, category: "Aritos", isNew: false },
+            { id: 70, name: "Aritos", code: "116", price: 6.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 71, name: "Aritos", code: "117", price: 7.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 72, name: "Aritos", code: "118", price: 8.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 73, name: "Aritos", code: "119", price: 6.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 74, name: "Aritos", code: "124", price: 4.00, stock: 7, category: "Aritos", isNew: false },
+            { id: 75, name: "Aritos", code: "140", price: 5.50, stock: 0, category: "Aritos", isNew: false },
+            { id: 76, name: "Aritos", code: "156", price: 7.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 77, name: "Aritos", code: "157", price: 8.99, stock: 1, category: "Aritos", isNew: false },
+            { id: 78, name: "Aritos", code: "158", price: 8.99, stock: 1, category: "Aritos", isNew: false },
+            { id: 79, name: "Aritos", code: "166", price: 7.00, stock: 3, category: "Aritos", isNew: false },
+            { id: 80, name: "Aritos", code: "168", price: 5.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 81, name: "Aritos", code: "169", price: 6.50, stock: 0, category: "Aritos", isNew: false },
+            { id: 82, name: "Aritos", code: "170", price: 7.50, stock: 2, category: "Aritos", isNew: false },
+            { id: 83, name: "Aritos", code: "176", price: 6.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 84, name: "Aritos", code: "178", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 85, name: "Aritos", code: "177", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 86, name: "Aritos", code: "19009", price: 5.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 87, name: "Aritos", code: "190012", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 88, name: "Aritos", code: "1991919", price: 2.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 89, name: "Aritos de Estrella", code: "019", price: 3.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 90, name: "Aritos de Plata", code: "02222", price: 5.00, stock: 1, category: "Aritos", isNew: true },
+            { id: 91, name: "Aritos de Plata", code: "02224", price: 5.00, stock: 1, category: "Aritos", isNew: true },
+            { id: 92, name: "Aritos de Plata", code: "02226", price: 5.00, stock: 1, category: "Aritos", isNew: true },
+            { id: 93, name: "Aritos de Plata", code: "02227", price: 5.00, stock: 1, category: "Aritos", isNew: true },
+            { id: 94, name: "Aritos de Plata", code: "02228", price: 5.00, stock: 1, category: "Aritos", isNew: true },
+            
+            // COLLARES (Páginas 11-18)
             { id: 95, name: "Collar Playa", code: "029", price: 5.50, stock: 0, category: "Collares", isNew: false },
             { id: 96, name: "Collar de Playa", code: "066", price: 12.75, stock: 1, category: "Collares", isNew: false },
+            { id: 97, name: "Collar", code: "10199191", price: 9.50, stock: 1, category: "Collares", isNew: false },
+            { id: 98, name: "Collar", code: "17801", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 99, name: "Collar", code: "024", price: 12.00, stock: 0, category: "Collares", isNew: false },
+            { id: 100, name: "Collar", code: "025", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 101, name: "Collar", code: "028", price: 8.00, stock: 3, category: "Collares", isNew: false },
+            { id: 102, name: "Collar", code: "034", price: 15.00, stock: 1, category: "Collares", isNew: false },
+            { id: 103, name: "Collar", code: "039", price: 11.50, stock: 1, category: "Collares", isNew: false },
+            { id: 104, name: "Collar", code: "040", price: 10.00, stock: 0, category: "Collares", isNew: false },
+            { id: 105, name: "Collar", code: "070", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 106, name: "Collar", code: "072", price: 11.50, stock: 1, category: "Collares", isNew: false },
+            { id: 107, name: "Collar", code: "077", price: 13.50, stock: 1, category: "Collares", isNew: false }, // ESTE ES EL DE COLLARES, NO CARTERAS
+            { id: 108, name: "Collar", code: "083", price: 0.00, stock: 0, category: "Collares", isNew: false },
+            { id: 109, name: "Collar", code: "084", price: 13.00, stock: 1, category: "Collares", isNew: false },
+            { id: 110, name: "Collar", code: "090", price: 12.50, stock: 1, category: "Collares", isNew: false },
+            { id: 111, name: "Collar", code: "091", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 112, name: "Collar", code: "093", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 113, name: "Collar", code: "094", price: 12.00, stock: 0, category: "Collares", isNew: false },
+            { id: 114, name: "Collar", code: "095", price: 12.00, stock: 0, category: "Collares", isNew: false },
+            { id: 115, name: "Collar", code: "104", price: 15.00, stock: 1, category: "Collares", isNew: false },
+            { id: 116, name: "Collar", code: "109", price: 11.00, stock: 0, category: "Collares", isNew: false },
+            { id: 117, name: "Collar", code: "110", price: 13.99, stock: 1, category: "Collares", isNew: false },
+            { id: 118, name: "Collar", code: "111", price: 14.99, stock: 1, category: "Collares", isNew: false },
+            { id: 119, name: "Collar", code: "113", price: 12.00, stock: 0, category: "Collares", isNew: false },
+            { id: 120, name: "Collar", code: "126", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 121, name: "Collar", code: "133", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 122, name: "Collar", code: "134", price: 12.00, stock: 2, category: "Collares", isNew: false },
+            { id: 123, name: "Collar", code: "135", price: 15.00, stock: 1, category: "Collares", isNew: false },
+            { id: 124, name: "Collar", code: "136", price: 15.00, stock: 1, category: "Collares", isNew: false },
+            { id: 125, name: "Collar", code: "139", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 126, name: "Collar", code: "141", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 127, name: "Collar", code: "145", price: 12.99, stock: 1, category: "Collares", isNew: false },
+            { id: 128, name: "Collar", code: "155", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 129, name: "Collar", code: "163", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 130, name: "Collar", code: "164", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 131, name: "Collar", code: "165", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 132, name: "Collar", code: "171", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 133, name: "Collar", code: "172", price: 15.00, stock: 1, category: "Collares", isNew: false },
+            { id: 134, name: "Collar", code: "173", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 135, name: "Collar", code: "175", price: 12.00, stock: 3, category: "Collares", isNew: false },
+            { id: 136, name: "Collar", code: "183", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 137, name: "Collar", code: "184", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 138, name: "Collar", code: "1200", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 139, name: "Collar", code: "01116", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 140, name: "Collar", code: "01127", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 141, name: "Collar", code: "01129", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 142, name: "Collar Clásico", code: "020", price: 10.00, stock: 2, category: "Collares", isNew: false },
             { id: 143, name: "Collar Corazón Negro", code: "062", price: 10.00, stock: 1, category: "Collares", isNew: true },
+            { id: 144, name: "Collar Cruz Redondo", code: "016", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 145, name: "Collar Flor", code: "055", price: 10.50, stock: 1, category: "Collares", isNew: false },
+            { id: 146, name: "Collar Flor", code: "065", price: 11.50, stock: 1, category: "Collares", isNew: false },
+            { id: 147, name: "Collar Perlas", code: "048", price: 13.50, stock: 0, category: "Collares", isNew: false },
+            { id: 148, name: "Collar Sol", code: "89009", price: 11.00, stock: 0, category: "Collares", isNew: false },
+            { id: 149, name: "Collar Doble", code: "010", price: 15.00, stock: 0, category: "Collares", isNew: false },
+            { id: 150, name: "Collar Doble", code: "027", price: 15.00, stock: 1, category: "Collares", isNew: false },
             { id: 151, name: "Collar Doble Corazón", code: "067", price: 14.00, stock: 0, category: "Collares", isNew: true },
+            { id: 152, name: "Collar Mariposa", code: "200", price: 10.00, stock: 0, category: "Collares", isNew: false },
+            { id: 153, name: "Set Collar", code: "142", price: 18.50, stock: 1, category: "Collares", isNew: false },
+            { id: 154, name: "Set de Collar", code: "078", price: 13.50, stock: 1, category: "Collares", isNew: false },
+            
+            // LENTES (Página 18)
             { id: 155, name: "Lentes de Sol", code: "015", price: 7.50, stock: 1, category: "Lentes de sol", isNew: false },
             { id: 156, name: "Lentes Negros", code: "037", price: 5.75, stock: 1, category: "Lentes de sol", isNew: false },
+            
+            // PULSERAS (Páginas 18-21)
             { id: 157, name: "Bracelet", code: "041", price: 7.00, stock: 0, category: "Pulseras", isNew: false },
             { id: 158, name: "Brasalet", code: "038", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 159, name: "Pulsera 042", code: "042", price: 5.00, stock: 1, category: "Pulseras", isNew: false },
-            { id: 188, name: "Reloj 01111", code: "01111", price: 15.00, stock: 1, category: "Relojes", isNew: false },
-            { id: 189, name: "Reloj 01125", code: "01125", price: 20.00, stock: 2, category: "Relojes", isNew: false },
-            { id: 218, name: "Anillo 02", code: "02", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 219, name: "Anillo 04", code: "04", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-            { id: 226, name: "Accesorios Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: false }
+            { id: 159, name: "Pulsera", code: "042", price: 5.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 160, name: "Pulsera", code: "043", price: 7.00, stock: 2, category: "Pulseras", isNew: false },
+            { id: 161, name: "Pulsera", code: "044", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 162, name: "Pulsera", code: "064", price: 6.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 163, name: "Pulsera", code: "103", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 164, name: "Pulsera", code: "105", price: 12.99, stock: 1, category: "Pulseras", isNew: false },
+            { id: 165, name: "Pulsera", code: "106", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 166, name: "Pulsera", code: "112", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 167, name: "Pulsera", code: "146", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 168, name: "Pulsera", code: "159", price: 13.00, stock: 3, category: "Pulseras", isNew: false },
+            { id: 169, name: "Pulsera", code: "160", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 170, name: "Pulsera", code: "161", price: 9.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 171, name: "Pulsera", code: "167", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 172, name: "Pulsera", code: "198", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 173, name: "Pulsera", code: "9789", price: 8.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 174, name: "Pulsera", code: "8967", price: 7.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 175, name: "Pulsera", code: "1250", price: 5.50, stock: 0, category: "Pulseras", isNew: false },
+            { id: 176, name: "Pulsera", code: "01126", price: 10.00, stock: 2, category: "Pulseras", isNew: false },
+            { id: 177, name: "Pulsera", code: "02221", price: 10.50, stock: 3, category: "Pulseras", isNew: false },
+            { id: 178, name: "Pulsera", code: "02223", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 179, name: "Pulsera", code: "03331", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 180, name: "Pulsera", code: "03332", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 181, name: "Pulsera", code: "2001", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 182, name: "Pulsera Ajustable", code: "018", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 183, name: "Pulsera Básica", code: "030", price: 6.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 184, name: "Pulsera Cartier", code: "032", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 185, name: "Pulsera Cartier", code: "031", price: 11.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 186, name: "Pulsera Trébol", code: "01118", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 187, name: "Van Cleef", code: "050", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
+            
+            // RELOJES (Páginas 22-25)
+            { id: 188, name: "Reloj", code: "01111", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 189, name: "Reloj", code: "01125", price: 20.00, stock: 2, category: "Relojes", isNew: false },
+            { id: 190, name: "Reloj", code: "03333", price: 16.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 191, name: "Reloj", code: "03334", price: 25.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 192, name: "Reloj", code: "03335", price: 16.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 193, name: "Reloj", code: "03336", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 194, name: "Reloj", code: "03337", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 195, name: "Reloj", code: "03338", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 196, name: "Reloj", code: "03339", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 197, name: "Reloj", code: "033340", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 198, name: "Reloj", code: "033341", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 199, name: "Reloj", code: "033342", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 200, name: "Reloj", code: "033343", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 201, name: "Reloj", code: "033344", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 202, name: "Reloj", code: "033345", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 203, name: "Reloj", code: "033346", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 204, name: "Reloj", code: "033347", price: 25.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 205, name: "Reloj", code: "033348", price: 30.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 206, name: "Reloj", code: "033349", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 207, name: "Reloj", code: "033350", price: 18.00, stock: 2, category: "Relojes", isNew: false },
+            { id: 208, name: "Reloj Blanco", code: "011144", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 209, name: "Reloj Acero", code: "01117", price: 15.00, stock: 2, category: "Relojes", isNew: false },
+            { id: 210, name: "Reloj Acero", code: "01123", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 211, name: "Reloj Dorado Waterproof", code: "01122", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 212, name: "Reloj Negro", code: "01113", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 213, name: "Reloj Old Money", code: "01124", price: 15.00, stock: 2, category: "Relojes", isNew: false },
+            { id: 214, name: "Reloj Rojo", code: "01119", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 215, name: "Reloj Rojo", code: "01121", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 216, name: "Set Reloj y Pulsera", code: "01115", price: 14.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 217, name: "Set Reloj", code: "01112", price: 40.00, stock: 1, category: "Relojes", isNew: false },
+            
+            // ANILLOS (Páginas 25-26)
+            { id: 218, name: "Anillo", code: "02", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            { id: 219, name: "Anillo", code: "04", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            { id: 220, name: "Anillo", code: "08", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            { id: 221, name: "Anillo", code: "017", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            { id: 222, name: "Anillo", code: "021", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            { id: 223, name: "Anillo", code: "045", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            { id: 224, name: "Anillo", code: "057", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            { id: 225, name: "Anillo", code: "059", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            
+            // ACCESORIOS CABELLO (Página 26)
+            { id: 226, name: "Accesorios Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: false },
+            
+            // OTROS (Página 26)
+            { id: 227, name: "Cereza", code: "122", price: 5.25, stock: 4, category: "Otros", isNew: false },
+            { id: 228, name: "Tarjetas Navideñas", code: "154", price: 0.00, stock: 121, category: "Otros", isNew: false }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -2021,12 +2223,6 @@
             sortProducts();
             currentPage = 0;
             renderProducts();
-        }
-
-        function expandSearch() {
-            if (window.innerWidth <= 768) {
-                document.getElementById('search-input').focus();
-            }
         }
 
         function updateGridQty(id, change) {
@@ -2293,12 +2489,12 @@
             if (!msg) return;
             
             const body = document.getElementById('chat-body');
-            body.innerHTML += `<p style="text-align: right; margin-bottom: 1rem;"><span style="background: var(--rosa-suave); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">${msg}</span></p>`;
+            body.innerHTML += `<p style="text-align: right; margin-bottom: 0.8rem;"><span style="background: var(--rosa-suave); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">${msg}</span></p>`;
             input.value = '';
             body.scrollTop = body.scrollHeight;
             
             setTimeout(() => {
-                body.innerHTML += `<p style="margin-bottom: 1rem;"><span style="background: var(--crema); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">Gracias por tu mensaje. Te responderemos pronto.</span></p>`;
+                body.innerHTML += `<p style="margin-bottom: 0.8rem;"><span style="background: var(--crema); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">Gracias por tu mensaje. Te responderemos pronto.</span></p>`;
                 body.scrollTop = body.scrollHeight;
             }, 1000);
         }

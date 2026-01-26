@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLOHE | San Valentín</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#E74C3C">
+    <title>Klohe - Accesorios | San Valentín</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a1a1a;
-            --accent: #d4a5a5;
-            --accent-dark: #b88a8a;
-            --bg: #fafafa;
-            --card-bg: #ffffff;
-            --text: #2c2c2c;
-            --text-light: #666;
-            --border: #e8e8e8;
-            --success: #4a7c59;
-            --error: #c0392b;
+            --blanco-hueso: #FFF5F5;
+            --rosa-palido: #FFE4E1;
+            --rosa-medio: #FFB6C1;
+            --rosa-oscuro: #E74C3C;
+            --rosa-intenso: #C0392B;
+            --dorado: #D4AF37;
+            --texto: #2C3E50;
+            --texto-claro: #7F8C8D;
+            --agotado: #e74c3c;
+            --exito: #27ae60;
+            --nuevo: #f39c12;
+            --sombra: rgba(231, 76, 60, 0.15);
         }
 
         * {
@@ -27,67 +30,77 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: 'Lato', sans-serif;
+            background-color: var(--blanco-hueso);
+            color: var(--texto);
             line-height: 1.6;
-            font-weight: 400;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        /* Header Minimalista */
+        /* Header */
         header {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border);
-            padding: 1.2rem 0;
+            background: linear-gradient(135deg, #fff 0%, var(--rosa-palido) 100%);
+            border-bottom: 2px solid var(--rosa-medio);
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 20px var(--sombra);
         }
 
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .brand-section {
+        .logo-section {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1rem;
+            flex: 1;
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 600;
-            color: var(--primary);
-            letter-spacing: 4px;
-            text-transform: uppercase;
+            color: #000000;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        .rotating-message {
+        .logo span {
+            color: var(--rosa-oscuro);
+        }
+
+        /* Mensaje rotativo al lado del logo */
+        .rotating-message-header {
             font-size: 0.85rem;
-            color: var(--text-light);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-left: 1px solid var(--border);
-            padding-left: 2rem;
+            color: var(--rosa-oscuro);
+            font-weight: 600;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+            padding: 0.3rem 0.8rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 20px;
+            border: 1px solid var(--rosa-medio);
         }
 
-        .rotating-message::before {
-            content: '♥';
-            color: var(--accent-dark);
-            font-size: 0.7rem;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .cart-icon {
@@ -95,26 +108,27 @@
             cursor: pointer;
             width: 45px;
             height: 45px;
-            border: 1px solid var(--border);
+            border: 2px solid var(--rosa-oscuro);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            background: transparent;
-            color: var(--primary);
+            background: white;
+            color: var(--rosa-oscuro);
         }
 
         .cart-icon:hover {
-            border-color: var(--accent);
-            color: var(--accent-dark);
+            background: var(--rosa-oscuro);
+            color: white;
+            transform: scale(1.1);
         }
 
         .cart-icon span {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: var(--accent-dark);
+            background: var(--dorado);
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -123,38 +137,136 @@
             align-items: center;
             justify-content: center;
             font-size: 0.7rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         /* Hero */
         .hero {
             text-align: center;
-            padding: 4rem 0 2rem;
-            background: linear-gradient(to bottom, #fff 0%, var(--bg) 100%);
+            padding: 2rem 0;
+            background: linear-gradient(135deg, var(--rosa-palido) 0%, var(--rosa-medio) 50%, var(--blanco-hueso) 100%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 300;
-            color: var(--primary);
+        .hero::before {
+            content: '❤';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '❤';
+            position: absolute;
+            bottom: 10%;
+            right: 10%;
+            font-size: 1.5rem;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--rosa-intenso);
             margin-bottom: 0.5rem;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .hero p {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            font-weight: 300;
+            color: var(--texto-claro);
+            font-size: 0.95rem;
+            font-weight: 400;
         }
 
-        /* Filtros */
+        /* Búsqueda */
+        .search-container {
+            position: relative;
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .search-container.expanded {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            max-width: 100%;
+            width: 100%;
+            z-index: 1000;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-container.expanded input {
+            font-size: 1.2rem;
+            padding: 1rem 1rem 1rem 3rem;
+            height: 50px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 2px solid var(--rosa-medio);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            background: white;
+            color: var(--texto);
+            transition: all 0.3s;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--rosa-oscuro);
+            box-shadow: 0 0 0 3px var(--sombra);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--rosa-oscuro);
+            font-size: 1rem;
+        }
+
+        .close-search {
+            display: none;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--texto-claro);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .search-container.expanded .close-search {
+            display: block;
+        }
+
         .filters-container {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            border: 1px solid var(--border);
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px var(--sombra);
+            border: 1px solid var(--rosa-palido);
         }
 
         .filters {
@@ -165,50 +277,20 @@
             align-items: center;
         }
 
-        .search-container {
-            position: relative;
-            flex: 1;
-            min-width: 250px;
-            max-width: 400px;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 0.9rem 1rem 0.9rem 2.8rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            background: var(--bg);
-            color: var(--text);
-            transition: all 0.3s;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .search-container input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: white;
-        }
-
-        .search-container i {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
         .filters select {
-            padding: 0.9rem 1.2rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--rosa-medio);
+            border-radius: 25px;
             font-size: 0.9rem;
-            background: var(--bg);
-            color: var(--text);
+            background: white;
+            color: var(--texto);
             cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            min-width: 180px;
+            transition: all 0.3s;
+        }
+
+        .filters select:focus {
+            border-color: var(--rosa-oscuro);
+            outline: none;
         }
 
         .filter-checkbox {
@@ -217,22 +299,21 @@
             gap: 0.5rem;
             cursor: pointer;
             font-size: 0.9rem;
-            color: var(--text);
-            font-weight: 500;
+            color: var(--texto);
         }
 
         .filter-checkbox input[type="checkbox"] {
             width: 18px;
             height: 18px;
-            accent-color: var(--accent-dark);
+            accent-color: var(--rosa-oscuro);
         }
 
-        /* Grid 5 columnas */
+        /* Grid de 5 productos por fila en desktop */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
         }
 
         @media (min-width: 640px) {
@@ -254,18 +335,19 @@
         }
 
         .product-card {
-            background: var(--card-bg);
-            border-radius: 12px;
+            background: white;
+            border-radius: 16px;
             overflow: hidden;
             transition: all 0.3s ease;
-            border: 1px solid var(--border);
+            border: 2px solid transparent;
             position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px var(--sombra);
+            border-color: var(--rosa-medio);
         }
 
         .product-card.agotado {
@@ -278,36 +360,52 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(44, 44, 44, 0.9);
+            background: rgba(231, 76, 60, 0.9);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.75rem;
+            font-weight: 700;
+            font-size: 0.85rem;
             letter-spacing: 2px;
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+            background: var(--rosa-oscuro);
+            color: white;
         }
 
         .badge-nuevo {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--accent-dark);
+            top: 10px;
+            right: 10px;
+            background: var(--dorado);
             color: white;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.65rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
             z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         .product-image-container {
             position: relative;
             width: 100%;
-            aspect-ratio: 1;
+            height: 180px;
             overflow: hidden;
-            background: var(--bg);
+            background: linear-gradient(135deg, var(--blanco-hueso) 0%, var(--rosa-palido) 100%);
+            cursor: pointer;
         }
 
         .product-image {
@@ -318,252 +416,318 @@
         }
 
         .product-card:hover .product-image {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .product-info {
-            padding: 1.2rem;
+            padding: 1rem;
         }
 
         .product-category {
+            display: inline-block;
+            color: var(--rosa-oscuro);
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--accent-dark);
             margin-bottom: 0.3rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .product-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.4rem;
-            color: var(--primary);
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        .product-code {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            margin-bottom: 0.8rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: var(--texto);
             font-weight: 500;
+            line-height: 1.3;
+            height: 2.6rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
-        .price-quickview {
+        .product-details {
+            background: var(--blanco-hueso);
+            border-radius: 8px;
+            padding: 0.6rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            border: 1px solid var(--rosa-palido);
+        }
+
+        .detail-row {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 0.2rem;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            color: var(--texto-claro);
+        }
+
+        .detail-value {
+            color: var(--texto);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        /* Precio y ojo en la misma línea */
+        .price-row {
+            display: flex;
             align-items: center;
-            margin-bottom: 1rem;
+            justify-content: space-between;
+            margin: 0.6rem 0;
         }
 
         .product-price {
-            font-size: 1.25rem;
-            color: var(--primary);
-            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--rosa-oscuro);
+            font-weight: 800;
         }
 
-        .quick-view-btn {
-            width: 36px;
-            height: 36px;
-            background: transparent;
-            border: 1px solid var(--border);
+        .product-price::before {
+            content: '❤ ';
+            font-size: 0.8rem;
+        }
+
+        .quick-view-btn-inline {
+            width: 35px;
+            height: 35px;
+            border: 2px solid var(--rosa-medio);
+            background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--text-light);
-            font-size: 0.9rem;
+            transition: all 0.3s;
+            color: var(--rosa-oscuro);
+            font-size: 1rem;
         }
 
-        .quick-view-btn:hover {
-            background: var(--primary);
+        .quick-view-btn-inline:hover {
+            background: var(--rosa-oscuro);
             color: white;
-            border-color: var(--primary);
+            border-color: var(--rosa-oscuro);
+            transform: scale(1.1);
         }
 
         .quantity-selector {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            margin-bottom: 1rem;
+            gap: 0.6rem;
+            margin: 0.6rem 0;
         }
 
         .qty-btn {
-            width: 32px;
-            height: 32px;
-            border: 1px solid var(--border);
-            background: transparent;
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--rosa-medio);
+            background: white;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 500;
+            font-weight: 700;
+            font-size: 0.9rem;
             transition: all 0.2s;
-            color: var(--primary);
+            color: var(--rosa-oscuro);
         }
 
         .qty-btn:hover {
-            background: var(--primary);
+            background: var(--rosa-oscuro);
             color: white;
-            border-color: var(--primary);
+            border-color: var(--rosa-oscuro);
         }
 
         .qty-display {
             min-width: 30px;
             text-align: center;
-            font-weight: 600;
-            font-size: 0.95rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--texto);
         }
 
         .add-to-cart {
             width: 100%;
-            padding: 0.9rem;
-            background: var(--primary);
+            padding: 0.8rem;
+            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 0.85rem;
             transition: all 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
         }
 
         .add-to-cart:hover:not(:disabled) {
-            background: var(--accent-dark);
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
         }
 
         .add-to-cart:disabled {
-            opacity: 0.4;
+            opacity: 0.5;
             cursor: not-allowed;
-            background: var(--text-light);
+            background: #ccc;
+            box-shadow: none;
         }
 
-        /* Testimonios Automáticos */
-        .testimonials-section {
-            background: white;
-            padding: 4rem 0;
-            margin: 3rem 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .testimonials-header {
+        .load-more-container {
             text-align: center;
-            margin-bottom: 2rem;
+            padding: 2rem 0;
         }
 
-        .testimonials-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 400;
-            color: var(--primary);
+        .load-more-btn {
+            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        .load-more-btn::before {
+            content: '❤ ';
+        }
+
+        .load-more-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .products-count {
+            text-align: center;
+            color: var(--texto-claro);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Modal vista rápida */
+        .quick-view-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .quick-view-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            position: relative;
+            border: 3px solid var(--rosa-medio);
+        }
+
+        @media (max-width: 600px) {
+            .quick-view-content {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
+        }
+
+        .quick-view-image {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 2px solid var(--rosa-palido);
+        }
+
+        .quick-view-info h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--rosa-intenso);
             margin-bottom: 0.5rem;
         }
 
-        .testimonials-header p {
-            color: var(--text-light);
-            font-size: 0.9rem;
+        .quick-view-price {
+            font-size: 1.8rem !important;
+            color: var(--rosa-oscuro) !important;
+            font-weight: 800;
+            margin: 1rem 0;
         }
 
-        .testimonial-box {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--bg);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            min-height: 150px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonial-item {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.5s ease;
-            position: absolute;
-            width: 100%;
-            left: 0;
-            padding: 0 2rem;
-        }
-
-        .testimonial-item.active {
-            opacity: 1;
-            transform: translateY(0);
-            position: relative;
-        }
-
-        .testimonial-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            font-style: italic;
-            color: var(--text);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-            text-align: center;
-        }
-
-        .testimonial-author {
-            color: var(--accent-dark);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .testimonial-counter {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-
-        /* Mini Cart */
-        .cart-overlay {
+        .image-modal {
+            display: none;
             position: fixed;
-            top: 0;
+            z-index: 2000;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 1000;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.95);
+            justify-content: center;
+            align-items: center;
         }
 
-        .cart-overlay.active {
-            display: block;
-            opacity: 1;
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+            border: 3px solid var(--rosa-medio);
         }
 
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Mini carrito */
         .mini-cart {
             position: fixed;
             top: 0;
             right: -100%;
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             height: 100vh;
             background: white;
-            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+            box-shadow: -5px 0 30px var(--sombra);
             z-index: 1001;
             transition: right 0.3s ease;
             display: flex;
             flex-direction: column;
+            border-left: 3px solid var(--rosa-medio);
         }
 
         .mini-cart.open {
@@ -572,42 +736,61 @@
 
         .mini-cart-header {
             padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid var(--rosa-palido);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: linear-gradient(135deg, var(--rosa-palido) 0%, white 100%);
         }
 
         .mini-cart-header h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+            color: var(--rosa-intenso);
+            font-size: 1.4rem;
         }
 
         .mini-cart-body {
             flex: 1;
             overflow-y: auto;
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .mini-cart-footer {
             padding: 1.5rem;
-            border-top: 1px solid var(--border);
-            background: var(--bg);
+            border-top: 2px solid var(--rosa-palido);
+            background: var(--blanco-hueso);
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cart-overlay.active {
+            display: block;
+            opacity: 1;
         }
 
         .shipping-option {
-            background: white;
+            background: linear-gradient(135deg, var(--rosa-palido) 0%, white 100%);
             padding: 1rem;
-            border-radius: 8px;
+            border-radius: 12px;
             margin-bottom: 1rem;
-            border: 1px solid var(--border);
+            border: 2px solid transparent;
             transition: all 0.3s;
         }
 
         .shipping-option.selected {
-            border-color: var(--accent-dark);
-            background: #fdf8f8;
+            border-color: var(--rosa-oscuro);
+            background: white;
         }
 
         .shipping-option-header {
@@ -620,7 +803,31 @@
         .shipping-option input[type="checkbox"] {
             width: 20px;
             height: 20px;
-            accent-color: var(--accent-dark);
+            accent-color: var(--rosa-oscuro);
+        }
+
+        .shipping-option-content {
+            flex: 1;
+        }
+
+        .shipping-option-title {
+            font-weight: 700;
+            color: var(--texto);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .shipping-option-price {
+            color: var(--rosa-oscuro);
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .shipping-option-desc {
+            font-size: 0.8rem;
+            color: var(--texto-claro);
         }
 
         .discount-code {
@@ -632,206 +839,362 @@
         .discount-code input {
             flex: 1;
             padding: 0.8rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            border: 2px solid var(--rosa-medio);
+            border-radius: 10px;
             font-size: 0.9rem;
-            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .discount-code input:focus {
+            outline: none;
+            border-color: var(--rosa-oscuro);
         }
 
         .discount-code button {
-            background: var(--primary);
+            background: var(--rosa-oscuro);
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .discount-code button:hover {
-            background: var(--accent-dark);
+            background: var(--rosa-intenso);
+            transform: translateY(-2px);
         }
 
         .checkout-btn {
             width: 100%;
             padding: 1rem;
-            background: var(--success);
+            background: linear-gradient(135deg, var(--exito) 0%, #229954 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 30px;
             font-size: 1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-top: 1rem;
             transition: all 0.3s;
-            font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
         }
 
         .checkout-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
         }
 
-        /* Modal Error Simple */
-        .error-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        /* Sección de comentarios */
+        .reviews-section {
             background: white;
-            padding: 2rem 3rem;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            z-index: 2000;
+            padding: 3rem 0;
+            margin: 2rem 0;
+            border-top: 3px solid var(--rosa-medio);
+            border-bottom: 3px solid var(--rosa-medio);
+        }
+
+        .reviews-section h3 {
+            font-family: 'Playfair Display', serif;
             text-align: center;
-            border: 1px solid var(--border);
-            min-width: 300px;
+            font-size: 1.8rem;
+            color: var(--rosa-intenso);
+            margin-bottom: 2rem;
         }
 
-        .error-modal.show {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translate(-50%, -40%); }
-            to { opacity: 1; transform: translate(-50%, -50%); }
-        }
-
-        .error-modal i {
-            font-size: 3rem;
-            color: var(--error);
-            margin-bottom: 1rem;
-        }
-
-        .error-modal h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        .error-modal p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .error-modal button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1999;
-        }
-
-        .modal-overlay.show {
-            display: block;
-        }
-
-        /* Quick View */
-        .quick-view-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .quick-view-content {
-            background: white;
-            border-radius: 16px;
+        .reviews-container {
             max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 2rem;
+            margin: 0 auto;
             position: relative;
+            height: 200px;
+            overflow: hidden;
         }
 
-        @media (max-width: 640px) {
-            .quick-view-content {
-                grid-template-columns: 1fr;
-                padding: 1.5rem;
+        .review-card {
+            background: linear-gradient(135deg, var(--blanco-hueso) 0%, white 100%);
+            border: 2px solid var(--rosa-palido);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px var(--sombra);
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .review-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .review-stars {
+            color: var(--dorado);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--texto);
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: var(--rosa-oscuro);
+            font-size: 0.9rem;
+        }
+
+        .review-product {
+            font-size: 0.8rem;
+            color: var(--texto-claro);
+            margin-top: 0.3rem;
+        }
+
+        /* Testimonios */
+        .testimonials {
+            background: linear-gradient(135deg, white 0%, var(--rosa-palido) 100%);
+            padding: 3rem 0;
+            margin: 2rem 0;
+            text-align: center;
+            border-top: 3px solid var(--rosa-medio);
+            border-bottom: 3px solid var(--rosa-medio);
+        }
+
+        .testimonial-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--texto);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--rosa-oscuro);
+            line-height: 0;
+            vertical-align: middle;
+            margin-right: 0.3rem;
+        }
+
+        .testimonial-author {
+            color: var(--rosa-oscuro);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Social feed */
+        .social-feed {
+            padding: 2rem 0;
+            text-align: center;
+            background: white;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 768px) {
+            .social-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
-        .quick-view-image {
-            width: 100%;
-            border-radius: 12px;
-            object-fit: cover;
+        .social-item {
             aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--rosa-palido) 0%, var(--rosa-medio) 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid var(--rosa-medio);
         }
 
-        .quick-view-info h2 {
-            font-family: 'Cormorant Garamond', serif;
+        .social-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px var(--sombra);
+        }
+
+        .social-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .social-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .social-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(231, 76, 60, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: white;
+        }
+
+        .social-item:hover .social-overlay {
+            opacity: 1;
+        }
+
+        .social-overlay i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-            color: var(--primary);
         }
 
-        .quick-view-price {
+        .tiktok-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            border-radius: 20px;
+            color: white;
+        }
+
+        .tiktok-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .tiktok-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fe2c55;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .tiktok-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(254, 44, 85, 0.4);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
+            padding: 3rem 0;
+            text-align: center;
+            margin: 2rem 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '❤';
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            font-size: 4rem;
+            opacity: 0.1;
+        }
+
+        .newsletter::after {
+            content: '❤';
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        .newsletter h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
             font-size: 1.8rem;
-            color: var(--accent-dark);
-            font-weight: 600;
-            margin: 1rem 0;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.8rem;
+            max-width: 400px;
+            margin: 1.5rem auto 0;
+            padding: 0 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .newsletter-form button {
+            background: var(--dorado);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
         /* FAQ */
         .faq-section {
-            padding: 4rem 0;
-            max-width: 700px;
+            padding: 2rem 0;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .faq-section h3 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             text-align: center;
             margin-bottom: 2rem;
-            font-size: 2rem;
-            font-weight: 400;
-            color: var(--primary);
+            font-size: 1.8rem;
+            color: var(--rosa-intenso);
         }
 
         .faq-item {
             background: white;
-            border-radius: 8px;
+            border-radius: 15px;
             margin-bottom: 1rem;
             overflow: hidden;
-            border: 1px solid var(--border);
+            box-shadow: 0 4px 15px var(--sombra);
+            border: 1px solid var(--rosa-palido);
         }
 
         .faq-question {
@@ -840,14 +1203,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--texto);
             transition: all 0.3s;
         }
 
         .faq-question:hover {
-            background: var(--bg);
+            background: var(--rosa-palido);
         }
 
         .faq-answer {
@@ -855,8 +1218,8 @@
             max-height: 0;
             overflow: hidden;
             transition: all 0.3s;
-            font-size: 0.9rem;
-            color: var(--text-light);
+            font-size: 0.95rem;
+            color: var(--texto-claro);
             line-height: 1.6;
         }
 
@@ -865,69 +1228,297 @@
             max-height: 200px;
         }
 
-        /* Footer */
-        footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 4rem;
+        .faq-item.active .faq-question {
+            color: var(--rosa-oscuro);
         }
 
-        footer p {
-            opacity: 0.8;
+        /* Chat */
+        .chat-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--sombra);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 320px;
+            height: 400px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--sombra);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid var(--rosa-medio);
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: var(--blanco-hueso);
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 2px solid var(--rosa-palido);
+            display: flex;
+            gap: 0.5rem;
+            background: white;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid var(--rosa-medio);
+            border-radius: 25px;
             font-size: 0.9rem;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--rosa-oscuro);
+        }
+
+        .chat-input button {
+            background: var(--rosa-oscuro);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chat-input button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Navegación inferior */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid var(--rosa-medio);
+            padding: 0.8rem;
+            display: none;
+            justify-content: space-around;
+            z-index: 100;
+            box-shadow: 0 -2px 20px var(--sombra);
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--texto-claro);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--rosa-oscuro);
+        }
+
+        .bottom-nav-item i {
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .bottom-nav {
+                display: flex;
+            }
+            body {
+                padding-bottom: 70px;
+            }
+            .rotating-message-header {
+                display: none;
+            }
+        }
+
+        /* Notificaciones */
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, var(--rosa-oscuro) 0%, var(--rosa-intenso) 100%);
+            color: white;
+            padding: 1.5rem 2.5rem;
+            border-radius: 20px;
+            display: none;
+            z-index: 1002;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 15px 50px rgba(231, 76, 60, 0.4);
+            text-align: center;
+            min-width: 280px;
+            border: 2px solid white;
+        }
+
+        .notification i {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        /* Modal error */
+        .error-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .error-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 300px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .error-content i {
+            font-size: 3rem;
+            color: var(--agotado);
             margin-bottom: 1rem;
         }
 
+        .error-content h3 {
+            color: var(--texto);
+            margin-bottom: 0.5rem;
+        }
+
+        .error-content button {
+            margin-top: 1rem;
+            padding: 0.8rem 2rem;
+            background: var(--rosa-oscuro);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--texto) 0%, #1a252f 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
         footer a {
-            color: var(--accent);
+            color: var(--rosa-medio);
             text-decoration: none;
             margin: 0 1rem;
-            font-weight: 500;
-            transition: color 0.3s;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
         footer a:hover {
-            color: white;
+            color: var(--dorado);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .brand-section {
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: flex-start;
-            }
+        .offline-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--agotado);
+            color: white;
+            text-align: center;
+            padding: 0.8rem;
+            z-index: 10000;
+            display: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
 
-            .rotating-message {
-                border-left: none;
-                padding-left: 0;
-                font-size: 0.75rem;
-            }
+        .offline-indicator.show {
+            display: block;
+        }
 
-            .hero h1 {
-                font-size: 2rem;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-            .filters {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .search-container {
-                max-width: 100%;
-                width: 100%;
-            }
+        .product-card {
+            animation: fadeIn 0.5s ease forwards;
         }
     </style>
 </head>
 <body>
+    <div class="offline-indicator" id="offline-indicator">
+        <i class="fas fa-wifi-slash"></i> Sin conexión - Modo offline activo
+    </div>
+
     <header>
         <div class="container">
-            <div class="brand-section">
-                <div class="logo">KLOHE</div>
-                <div class="rotating-message" id="rotating-message">Colección San Valentín 2025</div>
+            <div class="logo-section">
+                <h1 class="logo">KLO<span>HE</span></h1>
+                <span class="rotating-message-header" id="rotating-message-header">❤️ Regala amor, regala Klohe</span>
             </div>
             <div class="cart-icon" onclick="toggleMiniCart()">
                 <i class="fas fa-shopping-bag"></i>
@@ -938,54 +1529,97 @@
 
     <section class="hero">
         <div class="container">
-            <h1>Elegancia Minimalista</h1>
-            <p>Descubre nuestra colección exclusiva para San Valentín</p>
+            <h2 id="hero-title">Regala amor, regala Klohe</h2>
+            <p id="hero-subtitle">Accesorios únicos para momentos inolvidables 💕</p>
         </div>
     </section>
 
     <main class="container">
         <div class="filters-container">
             <div class="filters">
-                <div class="search-container">
+                <div class="search-container" id="search-container">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Buscar productos..." onkeyup="filterProducts()">
+                    <input type="text" id="search-input" placeholder="Buscar productos..." onkeyup="filterProducts()" onclick="expandSearch()">
+                    <button class="close-search" onclick="collapseSearch()"><i class="fas fa-times"></i></button>
                 </div>
                 
                 <select id="category-filter" onchange="filterProducts()">
-                    <option value="all">Todas las categorías</option>
-                    <option value="Carteras">Carteras</option>
-                    <option value="Aritos">Aritos</option>
-                    <option value="Collares">Collares</option>
-                    <option value="Pulseras">Pulseras</option>
-                    <option value="Relojes">Relojes</option>
-                    <option value="Anillos">Anillos</option>
+                    <option value="all">💝 Todas las categorías</option>
+                    <option value="Carteras">👜 Carteras</option>
+                    <option value="Aritos">💎 Aritos</option>
+                    <option value="Collares">📿 Collares</option>
+                    <option value="Pulseras">✨ Pulseras</option>
+                    <option value="Relojes">⌚ Relojes</option>
+                    <option value="Anillos">💍 Anillos</option>
+                    <option value="Lentes de sol">🕶️ Lentes</option>
+                    <option value="Accesorios para el cabello">🎀 Cabello</option>
+                    <option value="Otros">🎁 Otros</option>
                 </select>
 
                 <label class="filter-checkbox">
                     <input type="checkbox" id="stock-filter" onchange="filterProducts()">
-                    <span>Solo disponibles</span>
+                    <span>Solo disponibles 💕</span>
                 </label>
             </div>
         </div>
 
         <div id="products-grid" class="products-grid"></div>
+        
+        <div class="load-more-container" id="load-more-container">
+            <button class="load-more-btn" id="load-more-btn" onclick="loadMoreProducts()">
+                Cargar más productos
+            </button>
+            <div class="products-count" id="products-count"></div>
+        </div>
     </main>
 
-    <section class="testimonials-section">
+    <!-- Sección de comentarios/reviews -->
+    <section class="reviews-section">
         <div class="container">
-            <div class="testimonials-header">
-                <h2>Lo que dicen nuestros clientes</h2>
-                <p>Experiencias reales de compra</p>
+            <h3>💕 Lo que dicen nuestros clientes 💕</h3>
+            <div class="reviews-container" id="reviews-container">
+                <!-- Los comentarios se generan con JS -->
             </div>
-            <div class="testimonial-box" id="testimonial-box">
-                <div class="testimonial-item active" id="testimonial-item">
-                    <div class="testimonial-text" id="testimonial-text">"La calidad de los accesorios es excepcional, superó mis expectativas"</div>
-                    <div class="testimonial-author" id="testimonial-author">— María G.</div>
+        </div>
+    </section>
+
+    <section class="social-feed">
+        <div class="container">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--rosa-intenso);">
+                <i class="fab fa-instagram"></i> @Klohesv
+            </h3>
+            <p style="color: var(--texto-claro); margin-top: 0.5rem;">Síguenos en nuestras redes sociales</p>
+            <div class="social-grid" id="instagram-grid"></div>
+            
+            <div class="tiktok-section">
+                <h3><i class="fab fa-tiktok"></i> Síguenos en TikTok</h3>
+                <p>Descubre los últimos trends y novedades</p>
+                <a href="https://www.tiktok.com/@klohesv?is_from_webapp=1&sender_device=pc" target="_blank" class="tiktok-link">
+                    <i class="fab fa-tiktok"></i> @klohesv
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonial-slider" id="testimonial-slider">
+                <div class="testimonial-item active">
+                    <div class="testimonial-text">"El detalle perfecto para San Valentín, mi novia quedó encantada"</div>
+                    <div class="testimonial-author">- Carlos M. ❤️</div>
                 </div>
             </div>
-            <div class="testimonial-counter">
-                <span id="current-testimonial">1</span> / 35
-            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h3>💕 Únete al Club Klohe 💕</h3>
+            <p style="font-size: 1.1rem;">15% de descuento en tu primera compra de San Valentín</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit">¡Quiero mi descuento!</button>
+            </form>
         </div>
     </section>
 
@@ -994,66 +1628,66 @@
             <h3>Preguntas Frecuentes</h3>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    ¿Cuál es el tiempo de entrega?
+                    ¿Cuánto tarda el envío para San Valentín?
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    El tiempo de entrega es de 2 a 5 días hábiles en todo el país. Para San Valentín recomendamos hacer el pedido con anticipación.
+                    2-5 días hábiles. ¡Haz tu pedido antes del 10 de febrero para asegurar entrega a tiempo! Costo $3.75 o gratis en compras mayores a $25.
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    ¿Los productos son de plata real?
+                    ¿Hacen envíos a todo El Salvador?
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    Sí, nuestra línea de plata está fabricada en plata italiana 925 con certificado de autenticidad incluido.
+                    Sí, realizamos envíos a todo el territorio nacional a través de correos privados y mensajería express en la gran San Salvador.
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    ¿Puedo cambiar el tamaño de los anillos?
+                    ¿Los productos son de buena calidad?
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    Ofrecemos ajuste de talla gratuito en nuestra tienda física dentro de los primeros 15 días de compra.
+                    Todos nuestros productos son seleccionados cuidadosamente. La joyería de plata es italiana 925 y los accesorios de acero inoxidable son resistentes al agua.
                 </div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    ¿Hacen envíos internacionales?
+                    ¿Puedo cambiar mi pedido después de hacerlo?
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    Actualmente solo realizamos envíos dentro del territorio nacional. Próximamente expandiremos a Centroamérica.
+                    Puedes solicitar cambios dentro de las primeras 2 horas después de tu pedido contactándonos por WhatsApp. Después de ese tiempo, el pedido ya está en proceso de envío.
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 KLOHE. Todos los derechos reservados.</p>
-        <p>
-            <a href="#"><i class="fab fa-instagram"></i> @klohe</a>
-            <a href="#"><i class="fab fa-whatsapp"></i> Contacto</a>
+        <p>&copy; 2025 Klohe - Hecho con ❤️ en El Salvador</p>
+        <p style="margin-top: 1rem;">
+            <a href="https://wa.me/50366711569"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://www.instagram.com/klohesv" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.tiktok.com/@klohesv" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
         </p>
     </footer>
 
-    <!-- Modal Error Código -->
-    <div class="modal-overlay" id="error-overlay" onclick="closeErrorModal()"></div>
-    <div class="error-modal" id="error-modal">
-        <i class="fas fa-times-circle"></i>
-        <h4>Código Inválido</h4>
-        <p>El código ingresado no es válido o ha expirado.</p>
-        <button onclick="closeErrorModal()">Entendido</button>
+    <!-- Modal de error para código inválido -->
+    <div class="error-modal" id="error-modal" onclick="closeErrorModal(event)">
+        <div class="error-content" onclick="event.stopPropagation()">
+            <i class="fas fa-times-circle"></i>
+            <h3>CÓDIGO INVÁLIDO</h3>
+            <button onclick="closeErrorModal()">Aceptar</button>
+        </div>
     </div>
 
-    <!-- Mini Cart -->
     <div class="cart-overlay" id="cart-overlay" onclick="toggleMiniCart()"></div>
     <div class="mini-cart" id="mini-cart">
         <div class="mini-cart-header">
-            <h3>Tu Carrito</h3>
-            <button onclick="toggleMiniCart()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary);">&times;</button>
+            <h3>Tu Carrito ❤️</h3>
+            <button onclick="toggleMiniCart()" style="background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--rosa-intenso);">&times;</button>
         </div>
         
         <div class="mini-cart-body" id="mini-cart-body"></div>
@@ -1062,9 +1696,13 @@
             <div class="shipping-option" id="shipping-option">
                 <label class="shipping-option-header">
                     <input type="checkbox" id="shipping-checkbox" onchange="toggleShipping()">
-                    <div style="flex: 1;">
-                        <div style="font-weight: 600; font-size: 0.95rem;">Envío a domicilio</div>
-                        <div style="font-size: 0.8rem; color: var(--text-light);">$3.75 (Gratis en compras +$25)</div>
+                    <div class="shipping-option-content">
+                        <div class="shipping-option-title">
+                            <i class="fas fa-truck"></i>
+                            Envío a domicilio
+                        </div>
+                        <div class="shipping-option-price">$3.75</div>
+                        <div class="shipping-option-desc">Gratis en compras +$25</div>
                     </div>
                 </label>
             </div>
@@ -1074,19 +1712,19 @@
                 <button onclick="applyDiscount()">Aplicar</button>
             </div>
 
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
-                <span style="color: var(--text-light);">Subtotal:</span>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 1rem;">
+                <span>Subtotal:</span>
                 <strong>$<span id="cart-subtotal">0.00</span></strong>
             </div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; display: none;" id="shipping-row">
-                <span style="color: var(--text-light);">Envío:</span>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--texto-claro); font-size: 0.95rem; display: none;" id="shipping-row">
+                <span>Envío:</span>
                 <strong>+$<span id="cart-shipping">0.00</span></strong>
             </div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--success); display: none;" id="discount-row">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--exito); font-size: 0.95rem; display: none;" id="discount-row">
                 <span>Descuento:</span>
                 <strong>-$<span id="cart-discount">0.00</span></strong>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 600; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+            <div style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 800; color: var(--rosa-oscuro);">
                 <span>Total:</span>
                 <span>$<span id="cart-total">0.00</span></span>
             </div>
@@ -1096,192 +1734,430 @@
         </div>
     </div>
 
-    <!-- Quick View Modal -->
+    <div id="image-modal" class="image-modal" onclick="closeImageModal()">
+        <span class="image-modal-close">&times;</span>
+        <img id="modal-image" class="image-modal-content" src="" alt="Producto">
+    </div>
+
     <div id="quick-view-modal" class="quick-view-modal" onclick="closeQuickView(event)">
         <div class="quick-view-content" onclick="event.stopPropagation()">
-            <button onclick="closeQuickView()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary);">&times;</button>
+            <button onclick="closeQuickView()" style="position: absolute; top: 1rem; right: 1rem; background: var(--rosa-oscuro); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10;">&times;</button>
             <img id="quick-view-image" class="quick-view-image" src="" alt="">
             <div class="quick-view-info">
-                <span id="quick-view-category" style="color: var(--accent-dark); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; font-weight: 600;"></span>
+                <span id="quick-view-category" style="color: var(--rosa-oscuro); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; font-weight: 700;"></span>
                 <h2 id="quick-view-title"></h2>
                 <div id="quick-view-price" class="quick-view-price"></div>
-                <p id="quick-view-description" style="color: var(--text-light); line-height: 1.8; margin-bottom: 2rem;"></p>
-                <button class="checkout-btn" onclick="addToCartFromQuickView()" style="margin: 0;">
-                    Agregar al carrito
+                <p id="quick-view-description" style="color: var(--texto-claro); line-height: 1.8; font-size: 1rem;"></p>
+                <button class="checkout-btn" onclick="addToCartFromQuickView()" style="margin-top: 1.5rem;">
+                    <i class="fas fa-heart"></i> Agregar al carrito
                 </button>
             </div>
         </div>
     </div>
 
+    <div id="notification" class="notification">
+        <i class="fas fa-heart"></i>
+        <div>¡Agregado al carrito!</div>
+    </div>
+
+    <div class="chat-widget">
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <span><i class="fas fa-headset"></i> Klohe 💕</span>
+                <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem;">&times;</button>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <p style="background: white; padding: 0.8rem; border-radius: 15px; margin-bottom: 0.8rem; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">¡Hola! ¿Buscas el regalo perfecto para San Valentín? 💕 Te ayudo a elegir</p>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-message" placeholder="Escribe tu mensaje..." onkeypress="handleChatKey(event)">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button class="chat-button" onclick="toggleChat()">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" class="bottom-nav-item active" onclick="resetFilters(); return false;">
+            <i class="fas fa-home"></i>
+            Inicio
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="expandSearch(); return false;">
+            <i class="fas fa-search"></i>
+            Buscar
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="toggleMiniCart(); return false;">
+            <i class="fas fa-shopping-bag"></i>
+            Carrito
+        </a>
+    </nav>
+
+    <audio id="success-sound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        // Datos de productos (ejemplo con 25 productos)
-        const products = [
-            { id: 1, name: "Collar Corazón Minimal", code: "V001", price: 25.00, stock: 5, category: "Collares", isNew: true },
-            { id: 2, name: "Aritos Perla Natural", code: "V002", price: 18.50, stock: 8, category: "Aritos", isNew: false },
-            { id: 3, name: "Pulsera Plata 925", code: "V003", price: 32.00, stock: 3, category: "Pulseras", isNew: true },
-            { id: 4, name: "Anillo Compromiso", code: "V004", price: 45.00, stock: 2, category: "Anillos", isNew: true },
-            { id: 5, name: "Cartera Nude", code: "V005", price: 28.00, stock: 0, category: "Carteras", isNew: false },
-            { id: 6, name: "Reloj Rose Gold", code: "V006", price: 55.00, stock: 4, category: "Relojes", isNew: false },
-            { id: 7, name: "Collar Inicial", code: "V007", price: 22.00, stock: 12, category: "Collares", isNew: false },
-            { id: 8, name: "Aritos Aro Gold", code: "V008", price: 15.00, stock: 0, category: "Aritos", isNew: false },
-            { id: 9, name: "Pulsera Pareja", code: "V009", price: 35.00, stock: 6, category: "Pulseras", isNew: true },
-            { id: 10, name: "Anillo Midi Set", code: "V010", price: 20.00, stock: 15, category: "Anillos", isNew: false },
-            { id: 11, name: "Cartera Mini", code: "V011", price: 24.00, stock: 7, category: "Carteras", isNew: false },
-            { id: 12, name: "Reloj Clásico", code: "V012", price: 48.00, stock: 3, category: "Relojes", isNew: false },
-            { id: 13, name: "Collar Layered", code: "V013", price: 30.00, stock: 4, category: "Collares", isNew: true },
-            { id: 14, name: "Aritos Statement", code: "V014", price: 28.00, stock: 5, category: "Aritos", isNew: false },
-            { id: 15, name: "Pulsera Charms", code: "V015", price: 38.00, stock: 0, category: "Pulseras", isNew: false },
-            { id: 16, name: "Anillo Signet", code: "V016", price: 42.00, stock: 2, category: "Anillos", isNew: true },
-            { id: 17, name: "Cartera Crossbody", code: "V017", price: 35.00, stock: 8, category: "Carteras", isNew: false },
-            { id: 18, name: "Reloj Mesh", code: "V018", price: 52.00, stock: 4, category: "Relojes", isNew: false },
-            { id: 19, name: "Collar Locket", code: "V019", price: 40.00, stock: 3, category: "Collares", isNew: true },
-            { id: 20, name: "Aritos Stud", code: "V020", price: 12.00, stock: 20, category: "Aritos", isNew: false },
-            { id: 21, name: "Pulsera Tennis", code: "V021", price: 65.00, stock: 2, category: "Pulseras", isNew: true },
-            { id: 22, name: "Anillo Eternity", code: "V022", price: 58.00, stock: 0, category: "Anillos", isNew: false },
-            { id: 23, name: "Cartera Tote", code: "V023", price: 45.00, stock: 6, category: "Carteras", isNew: false },
-            { id: 24, name: "Reloj Minimal", code: "V024", price: 49.00, stock: 5, category: "Relojes", isNew: false },
-            { id: 25, name: "Collar Barra", code: "V025", price: 27.00, stock: 9, category: "Collares", isNew: false }
-        ];
+        const CONFIG = {
+            WHATSAPP_NUMBER: '50366711569',
+            SHIPPING_COST: 3.75,
+            PRODUCTS_PER_PAGE: 25
+        };
 
-        // 35 Testimonios
-        const testimonials = [
-            { text: "La calidad de los accesorios es excepcional, superó mis expectativas", author: "María G." },
-            { text: "El empaque es tan hermoso que no necesitas envoltorio de regalo", author: "Carlos R." },
-            { text: "Mi novia quedó encantada con el collar, definitivamente volveré a comprar", author: "Andrés M." },
-            { text: "Atención al cliente impecable, resolvieron todas mis dudas al instante", author: "Laura P." },
-            { text: "Los aretes de plata son exactamente como se ven en las fotos", author: "Sofía L." },
-            { text: "Entrega súper rápida, llegó justo a tiempo para la cena de aniversario", author: "Diego H." },
-            { text: "Excelente relación calidad-precio, se nota que son materiales premium", author: "Valentina N." },
-            { text: "La pulsera de pareja es perfecta, a mi esposo le encantó", author: "Camila S." },
-            { text: "Desde que descubrí Klohe no compro accesorios en otro lugar", author: "Isabella T." },
-            { text: "El reloj minimalista combina con todo mi guardarropa", author: "Fernanda A." },
-            { text: "Me sorprendió lo delicados que son los detalles de cada pieza", author: "Luciana M." },
-            { text: "El proceso de compra fue muy sencillo y seguro", author: "Gabriel C." },
-            { text: "Llevo 3 meses usando mi collar y sigue como nuevo", author: "Victoria R." },
-            { text: "Los códigos de descuento reales, no como otras tiendas", author: "Daniela F." },
-            { text: "El servicio de WhatsApp es muy práctico para consultar stock", author: "Martín G." },
-            { text: "Mi madre no se quitó el anillo en toda la cena de Navidad", author: "Julián P." },
-            { text: "La plata 925 realmente no causa alergias, lo he comprobado", author: "Renata V." },
-            { text: "Diseños únicos que no encuentras en tiendas comunes", author: "Paula H." },
-            { text: "El seguimiento de envío es muy preciso y actualizado", author: "Tomás S." },
-            { text: "Me ayudaron a elegir el regalo perfecto para mi aniversario", author: "Natalia B." },
-            { text: "La caja de regalo incluida es muy elegante y sobria", author: "Elena M." },
-            { text: "Los productos llegan muy bien protegidos, sin riesgo de daños", author: "Joaquín L." },
-            { text: "Amo que tengan opciones para todos los presupuestos", author: "Antonella R." },
-            { text: "El contraste entre minimalismo y elegancia es perfecto", author: "Mariana C." },
-            { text: "Siempre recibo cumplidos cuando uso mis accesorios de Klohe", author: "Bianca D." },
-            { text: "La garantía de 30 días me dio confianza para mi primera compra", author: "Ignacio A." },
-            { text: "El personal de tienda física es muy amable y conocedor", author: "Catalina N." },
-            { text: "Los sets de anillos son ideales para regalar en San Valentín", author: "Emilia S." },
-            { text: "Me encanta la filosofía de diseño limpio y atemporal", author: "Francisco P." },
-            { text: "La actualización de stock en tiempo real es muy útil", author: "Agustina V." },
-            { text: "El newsletter tiene descuentos exclusivos reales", author: "Constanza M." },
-            { text: "La devolución fue sencilla cuando necesité cambiar talla", author: "Sebastián R." },
-            { text: "Los materiales son exactamente los descritos en la web", author: "Josefina T." },
-            { text: "La experiencia de unboxing es memorable", author: "Maximiliano G." },
-            { text: "Klohe se ha convertido en mi marca de accesorios favorita", author: "Dominga F." }
-        ];
-
+        let products = [];
         let cart = [];
         let currentDiscount = 0;
         let shippingSelected = false;
         let currentQuickViewId = null;
-        let currentTestimonial = 0;
-        let filteredProducts = [...products];
+        let currentPage = 0;
+        let filteredProducts = [];
+        let displayedProducts = [];
 
-        // Mensajes rotativos
-        const messages = [
-            "Colección San Valentín 2025",
-            "Envío gratis en compras +$25",
-            "Nuevos ingresos cada semana",
-            "Plata Italiana 925 certificada",
-            "Regalos que enamoran"
+        // 60 mensajes rotativos
+        const valentineMessages = [
+            "❤️ Regala amor, regala Klohe",
+            "💕 El detalle perfecto para San Valentín",
+            "🌹 Joyería que enamora",
+            "💝 Sorpresas desde $3.50",
+            "✨ Haz que este 14 de febrero sea inolvidable",
+            "💎 La joya perfecta para tu corazón perfecto",
+            "🎁 Regalos que conquistan",
+            "❤️ Más que un regalo, un recuerdo eterno",
+            "💕 Accesorios que hablan de amor",
+            "🌹 Detalles que roban suspiros",
+            "💝 Porque el amor se demuestra con hechos",
+            "✨ Brilla tanto como tu amor",
+            "💎 Elegancia que enamora",
+            "❤️ El complemento perfecto para tu cita",
+            "💕 Deslumbra a esa persona especial",
+            "🌹 Joyería que guarda historias de amor",
+            "💝 Regalos con alma para almas gemelas",
+            "✨ Diseños exclusivos para momentos únicos",
+            "💎 La belleza de amar y ser amado",
+            "❤️ Tu amor merece lo mejor: Klohe",
+            "💕 Accesorios que laten con tu corazón",
+            "🌹 Detalles que dicen lo que las palabras no pueden",
+            "💝 Celebra el amor con estilo",
+            "✨ Cada pieza cuenta una historia de amor",
+            "💎 Joyas que perduran como el amor verdadero",
+            "❤️ El regalo que siempre recordará",
+            "💕 Para el amor de tu vida, lo mejor",
+            "🌹 Romance en cada detalle",
+            "💝 Sorprende con un detalle único",
+            "✨ Amor a primera vista con Klohe",
+            "💎 La joyería más romántica del año",
+            "❤️ Conquista su corazón hoy",
+            "💕 Detalles que enamoran al instante",
+            "🌹 El arte de regalar con amor",
+            "💝 Cada amor merece ser celebrado",
+            "✨ Elegancia que roba corazones",
+            "💎 Simboliza tu amor infinito",
+            "❤️ El detalle que hará que se enamore más",
+            "💕 Accesorios para un amor sin igual",
+            "🌹 La magia del amor en cada pieza",
+            "💝 Regala sonrisas, regala Klohe",
+            "✨ Brillen juntos esta temporada",
+            "💎 La perfección existe aquí",
+            "❤️ Amor, pasión y estilo",
+            "💕 El regalo que dice 'eres especial'",
+            "🌹 Celebra el amor en todas sus formas",
+            "💝 Un San Valentín inolvidable",
+            "✨ Detalles que hacen latir el corazón",
+            "💎 El lujo de amar y ser amado",
+            "❤️ Tu amor + Klohe = Perfecto",
+            "💕 Accesorios con secretos de amor",
+            "🌹 El regalo más esperado del 14",
+            "💝 Piezas únicas para amores únicos",
+            "✨ Donde el amor encuentra su forma",
+            "💎 Joyas que susurran 'te amo'",
+            "❤️ El detalle que cambiará todo",
+            "💕 El idioma universal del amor",
+            "🌹 El amor se lleva y se regala",
+            "💝 Tu historia de amor merece joyas hermosas",
+            "✨ Descubre el poder de un detalle con amor"
+        ];
+
+        // 35 comentarios de clientes
+        const customerReviews = [
+            { name: "María G.", text: "Los aretes de corazón son hermosos, mi novio quedó fascinado con el detalle", product: "Aritos Corazón", stars: 5 },
+            { name: "Carlos M.", text: "Excelente calidad, llegó justo a tiempo para San Valentín", product: "Collar Amor", stars: 5 },
+            { name: "Ana L.", text: "La pulsera es preciosa, muy delicada y elegante", product: "Pulsera Corazón", stars: 5 },
+            { name: "Pedro S.", text: "Me encantó el servicio, muy atentos y el envío fue rápido", product: "Cartera Elegante", stars: 5 },
+            { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba para regalar", product: "Reloj Corazón", stars: 5 },
+            { name: "Juan D.", text: "Calidad excepcional, se nota que son productos seleccionados", product: "Anillo Corazón", stars: 5 },
+            { name: "Sofía H.", text: "Los lentes son divinos, muy buen estilo y calidad", product: "Lentes Corazón", stars: 5 },
+            { name: "Miguel A.", text: "Mi esposa quedó encantada con el collar, gracias Klohe", product: "Collar Estrella", stars: 5 },
+            { name: "Valentina P.", text: "Hermosos accesorios, ya compré 3 veces y siempre satisfecha", product: "Aritos Plata 925", stars: 5 },
+            { name: "Andrés C.", text: "El empaque es muy bonito, ideal para regalo", product: "Pulsera Amor", stars: 5 },
+            { name: "Camila T.", text: "Me sorprendió la calidad por el precio, súper recomendado", product: "Cartera Chic", stars: 5 },
+            { name: "Diego F.", text: "Excelente atención al cliente, resolvieron todas mis dudas", product: "Reloj Amor", stars: 5 },
+            { name: "Isabella M.", text: "Los detalles son preciosos, muy femeninos y elegantes", product: "Collar Luna", stars: 5 },
+            { name: "Fernando L.", text: "Llegó antes de lo esperado, perfecto para el 14 de febrero", product: "Anillo Amor", stars: 5 },
+            { name: "Daniela S.", text: "Amo mis nuevos aretes, son exactamente como en la foto", product: "Aritos Estrella", stars: 5 },
+            { name: "Ricardo G.", text: "Muy buena experiencia de compra, volveré por más", product: "Pulsera Estrella", stars: 5 },
+            { name: "Paula V.", text: "El color es hermoso, muy delicado y bien hecho", product: "Cartera Rosa", stars: 5 },
+            { name: "Alejandro B.", text: "Regalé el set completo y mi novia lloró de la emoción", product: "Set San Valentín", stars: 5 },
+            { name: "Mariana C.", text: "La plata es auténtica, se nota la calidad italiana", product: "Aritos Plata 925", stars: 5 },
+            { name: "Gabriel N.", text: "Precios accesibles y productos de lujo, la mejor combinación", product: "Reloj Dorado", stars: 5 },
+            { name: "Victoria A.", text: "Me encanta que tengan envío gratis en compras grandes", product: "Collar Flor", stars: 5 },
+            { name: "Hugo P.", text: "El seguimiento del envío fue excelente, muy profesionales", product: "Cartera Moderna", stars: 5 },
+            { name: "Natalia E.", text: "Los diseños son únicos, no los encuentro en otro lugar", product: "Pulsera Luna", stars: 5 },
+            { name: "Martín R.", text: "Perfecto para el día de los enamorados, muy romántico", product: "Collar Corazón", stars: 5 },
+            { name: "Carolina D.", text: "La garantía me dio confianza, pero no la necesité, todo perfecto", product: "Anillo Estrella", stars: 5 },
+            { name: "José M.", text: "Mi madre quedó encantada con su regalo, gracias por todo", product: "Aritos Perla", stars: 5 },
+            { name: "Fernanda L.", text: "El empaque de regalo es divino, no necesité envolver nada", product: "Pulsera Flor", stars: 5 },
+            { name: "Luis H.", text: "Compré 5 productos y todos llegaron en perfecto estado", product: "Varios productos", stars: 5 },
+            { name: "Elena B.", text: "El chat de ayuda respondió al instante, muy buen servicio", product: "Reloj Plata", stars: 5 },
+            { name: "Antonio K.", text: "Los códigos de descuento funcionan perfecto, buenos precios", product: "Collar Sol", stars: 5 },
+            { name: "Patricia W.", text: "Me sorprendió la variedad de productos, hay para todos los gustos", product: "Cartera VIP", stars: 5 },
+            { name: "Roberto Z.", text: "La pulsera ajustable quedó perfecta en mi muñeca", product: "Pulsera Ajustable", stars: 5 },
+            { name: "Carmen X.", text: "El detalle del moño en el empaque fue un toque especial", product: "Aritos Mariposa", stars: 5 },
+            { name: "Francisco Y.", text: "Recomiendo 100%, ya somos clientes frecuentes en casa", product: "Collar Mariposa", stars: 5 },
+            { name: "Adriana Q.", text: "La calidad superó mis expectativas, volveré por más regalos", product: "Set Completo", stars: 5 }
+        ];
+
+        const realProducts = [
+            { id: 1, name: "Billetera", code: "076", price: 10.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 2, name: "Bolso de Mano", code: "088", price: 10.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 3, name: "Cartera Elegante", code: "03", price: 12.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 4, name: "Cartera Classic", code: "014", price: 12.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 5, name: "Cartera Moderna", code: "033", price: 10.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 6, name: "Cartera Premium", code: "035", price: 16.50, stock: 0, category: "Carteras", isNew: false },
+            { id: 7, name: "Cartera Luxury", code: "071", price: 15.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 8, name: "Cartera Chic", code: "073", price: 10.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 9, name: "Cartera Trendy", code: "077", price: 13.50, stock: 0, category: "Carteras", isNew: false },
+            { id: 10, name: "Cartera Fashion", code: "086", price: 18.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 11, name: "Cartera Style", code: "087", price: 18.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 12, name: "Cartera Glamour", code: "089", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 13, name: "Cartera Deluxe", code: "096", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 14, name: "Cartera VIP", code: "097", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 15, name: "Cartera Exclusive", code: "098", price: 24.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 16, name: "Cartera Special", code: "099", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 17, name: "Cartera Unique", code: "114", price: 14.99, stock: 0, category: "Carteras", isNew: false },
+            { id: 18, name: "Cartera Beige", code: "127", price: 12.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 19, name: "Cartera Rosa", code: "128", price: 13.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 20, name: "Cartera Negra", code: "129", price: 13.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 21, name: "Cartera Roja", code: "130", price: 15.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 22, name: "Cartera Blanca", code: "132", price: 14.00, stock: 2, category: "Carteras", isNew: false },
+            { id: 23, name: "Cartera Dorada", code: "147", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+            { id: 24, name: "Cartera Plateada", code: "148", price: 14.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 25, name: "Cartera Corazón", code: "149", price: 15.99, stock: 1, category: "Carteras", isNew: true },
+            { id: 26, name: "Cartera Amor", code: "150", price: 15.99, stock: 1, category: "Carteras", isNew: true },
+            { id: 27, name: "Cartera Romance", code: "151", price: 13.50, stock: 0, category: "Carteras", isNew: false },
+            { id: 28, name: "Cartera Pasión", code: "152", price: 14.00, stock: 1, category: "Carteras", isNew: false },
+            { id: 29, name: "Cartera Encanto", code: "153", price: 14.00, stock: 0, category: "Carteras", isNew: false },
+            { id: 30, name: "Cartera Sueño", code: "068", price: 10.50, stock: 1, category: "Carteras", isNew: false },
+            { id: 31, name: "Aritos Corazón", code: "046", price: 3.50, stock: 1, category: "Aritos", isNew: true },
+            { id: 32, name: "Aritos Amor", code: "179", price: 8.50, stock: 1, category: "Aritos", isNew: true },
+            { id: 33, name: "Aritos Estrella", code: "060", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 34, name: "Aritos Luna", code: "174", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+            { id: 35, name: "Aritos Flor", code: "056", price: 4.50, stock: 0, category: "Aritos", isNew: false },
+            { id: 36, name: "Aritos Mariposa", code: "06", price: 7.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 37, name: "Aritos Perla", code: "07", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 38, name: "Aritos Cristal", code: "09", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 39, name: "Aritos Diamante", code: "011", price: 7.00, stock: 0, category: "Aritos", isNew: false },
+            { id: 40, name: "Aritos Rubí", code: "013", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+            { id: 41, name: "Collar Corazón", code: "029", price: 5.50, stock: 0, category: "Collares", isNew: true },
+            { id: 42, name: "Collar Amor", code: "066", price: 12.75, stock: 1, category: "Collares", isNew: true },
+            { id: 43, name: "Collar Estrella", code: "10199191", price: 9.50, stock: 1, category: "Collares", isNew: false },
+            { id: 44, name: "Collar Luna", code: "17801", price: 10.00, stock: 1, category: "Collares", isNew: false },
+            { id: 45, name: "Collar Sol", code: "024", price: 12.00, stock: 0, category: "Collares", isNew: false },
+            { id: 46, name: "Collar Flor", code: "025", price: 12.00, stock: 1, category: "Collares", isNew: false },
+            { id: 47, name: "Collar Mariposa", code: "028", price: 8.00, stock: 3, category: "Collares", isNew: false },
+            { id: 48, name: "Pulsera Corazón", code: "041", price: 7.00, stock: 0, category: "Pulseras", isNew: true },
+            { id: 49, name: "Pulsera Amor", code: "038", price: 10.00, stock: 0, category: "Pulseras", isNew: true },
+            { id: 50, name: "Pulsera Estrella", code: "042", price: 5.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 51, name: "Pulsera Luna", code: "043", price: 7.00, stock: 2, category: "Pulseras", isNew: false },
+            { id: 52, name: "Pulsera Sol", code: "044", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
+            { id: 53, name: "Pulsera Flor", code: "064", price: 6.00, stock: 0, category: "Pulseras", isNew: false },
+            { id: 54, name: "Reloj Corazón", code: "01111", price: 15.00, stock: 1, category: "Relojes", isNew: true },
+            { id: 55, name: "Reloj Amor", code: "01125", price: 20.00, stock: 2, category: "Relojes", isNew: true },
+            { id: 56, name: "Reloj Estrella", code: "03333", price: 16.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 57, name: "Reloj Luna", code: "03334", price: 25.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 58, name: "Reloj Sol", code: "03335", price: 16.00, stock: 1, category: "Relojes", isNew: false },
+            { id: 59, name: "Anillo Corazón", code: "02", price: 10.00, stock: 1, category: "Anillos", isNew: true },
+            { id: 60, name: "Anillo Amor", code: "04", price: 10.00, stock: 1, category: "Anillos", isNew: true },
+            { id: 61, name: "Anillo Estrella", code: "08", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+            { id: 62, name: "Lentes Corazón", code: "015", price: 7.50, stock: 1, category: "Lentes de sol", isNew: true },
+            { id: 63, name: "Lentes Amor", code: "037", price: 5.75, stock: 1, category: "Lentes de sol", isNew: true },
+            { id: 64, name: "Pinza Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: true },
+            { id: 65, name: "Set San Valentín", code: "122", price: 25.00, stock: 5, category: "Otros", isNew: true }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+            products = [...realProducts];
+            filteredProducts = [...products];
+            sortProducts();
             renderProducts();
             initRotatingMessages();
-            initTestimonials();
+            initReviews();
+            generateInstagramFeed();
+            initOfflineDetection();
         });
 
+        function sortProducts() {
+            filteredProducts.sort((a, b) => {
+                if (a.stock === 0 && b.stock > 0) return 1;
+                if (b.stock === 0 && a.stock > 0) return -1;
+                if (a.isNew && !b.isNew) return -1;
+                if (!a.isNew && b.isNew) return 1;
+                return 0;
+            });
+        }
+
         function initRotatingMessages() {
-            const el = document.getElementById('rotating-message');
-            let idx = 0;
+            const messageEl = document.getElementById('rotating-message-header');
+            let index = 0;
+            
             setInterval(() => {
-                idx = (idx + 1) % messages.length;
-                el.style.opacity = '0';
+                index = (index + 1) % valentineMessages.length;
+                messageEl.style.opacity = '0';
                 setTimeout(() => {
-                    el.textContent = messages[idx];
-                    el.style.opacity = '1';
+                    messageEl.textContent = valentineMessages[index];
+                    messageEl.style.opacity = '1';
                 }, 300);
             }, 4000);
         }
 
-        function initTestimonials() {
-            updateTestimonial();
+        function initReviews() {
+            const container = document.getElementById('reviews-container');
+            let currentIndex = 0;
+
+            // Crear elementos de reviews
+            container.innerHTML = customerReviews.map((review, index) => `
+                <div class="review-card" id="review-${index}" style="${index === 0 ? 'opacity:1;transform:translateY(0)' : ''}">
+                    <div class="review-stars">${'★'.repeat(review.stars)}</div>
+                    <div class="review-text">"${review.text}"</div>
+                    <div class="review-author">- ${review.name}</div>
+                    <div class="review-product">Compró: ${review.product}</div>
+                </div>
+            `).join('');
+
+            // Rotar reviews cada 5 segundos
             setInterval(() => {
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                updateTestimonial();
+                document.getElementById(`review-${currentIndex}`).classList.remove('active');
+                currentIndex = (currentIndex + 1) % customerReviews.length;
+                document.getElementById(`review-${currentIndex}`).classList.add('active');
             }, 5000);
         }
 
-        function updateTestimonial() {
-            const item = document.getElementById('testimonial-item');
-            const text = document.getElementById('testimonial-text');
-            const author = document.getElementById('testimonial-author');
-            const counter = document.getElementById('current-testimonial');
+        function generateInstagramFeed() {
+            const grid = document.getElementById('instagram-grid');
             
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(10px)';
+            const images = [
+                'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400',
+                'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400',
+                'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400',
+                'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=400'
+            ];
             
-            setTimeout(() => {
-                text.textContent = `"${testimonials[currentTestimonial].text}"`;
-                author.textContent = `— ${testimonials[currentTestimonial].author}`;
-                counter.textContent = currentTestimonial + 1;
-                
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }, 300);
+            grid.innerHTML = images.map((img, i) => `
+                <div class="social-item" onclick="window.open('https://www.instagram.com/klohesv', '_blank')">
+                    <img src="${img}" alt="Klohesv" loading="lazy">
+                    <div class="social-overlay">
+                        <i class="fab fa-instagram"></i>
+                        <span>Ver más</span>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function renderProducts() {
+        function renderProducts(append = false) {
             const grid = document.getElementById('products-grid');
-            grid.innerHTML = filteredProducts.map(p => {
+            const start = currentPage * CONFIG.PRODUCTS_PER_PAGE;
+            const end = start + CONFIG.PRODUCTS_PER_PAGE;
+            const toShow = filteredProducts.slice(start, end);
+            
+            if (!append) {
+                grid.innerHTML = '';
+                displayedProducts = [];
+            }
+            
+            displayedProducts = [...displayedProducts, ...toShow];
+            
+            const html = toShow.map((p, index) => {
                 const isAgotado = p.stock === 0;
+                
                 return `
-                    <div class="product-card ${isAgotado ? 'agotado' : ''}">
-                        ${p.isNew ? '<div class="badge-nuevo">Nuevo</div>' : ''}
-                        <div class="product-image-container">
-                            <img src="https://via.placeholder.com/300x300/d4a5a5/ffffff?text=${p.code}" 
-                                 alt="${p.name}" class="product-image">
+                    <div class="product-card ${isAgotado ? 'agotado' : ''}" style="animation-delay: ${index * 0.05}s">
+                        ${p.isNew ? '<div class="badge-nuevo">❤️ Nuevo</div>' : ''}
+                        <div class="category-badge">${p.category}</div>
+                        
+                        <div class="product-image-container" onclick="openImageModal('https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg')">
+                            <img src="https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg" 
+                                 alt="${p.name}" 
+                                 class="product-image" 
+                                 loading="lazy"
+                                 onerror="this.src='https://via.placeholder.com/300x280?text=${p.code}'">
                         </div>
+                        
                         <div class="product-info">
-                            <div class="product-category">${p.category}</div>
+                            <span class="product-category">${p.category}</span>
                             <h3 class="product-title">${p.name}</h3>
-                            <div class="product-code">Cód: ${p.code}</div>
                             
-                            <div class="price-quickview">
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Código:</span>
+                                    <span class="detail-value">${p.code}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Stock:</span>
+                                    <span class="detail-value">${p.stock} u</span>
+                                </div>
+                            </div>
+                            
+                            <div class="price-row">
                                 <div class="product-price">$${p.price.toFixed(2)}</div>
-                                <button class="quick-view-btn" onclick="openQuickView(${p.id})">
+                                <button class="quick-view-btn-inline" onclick="event.stopPropagation(); openQuickView(${p.id})">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                             
                             ${!isAgotado ? `
                                 <div class="quantity-selector">
-                                    <button class="qty-btn" onclick="updateQty(${p.id}, -1)">-</button>
+                                    <button class="qty-btn" onclick="event.stopPropagation(); updateGridQty(${p.id}, -1)">-</button>
                                     <span class="qty-display" id="qty-${p.id}">1</span>
-                                    <button class="qty-btn" onclick="updateQty(${p.id}, 1)">+</button>
+                                    <button class="qty-btn" onclick="event.stopPropagation(); updateGridQty(${p.id}, 1)">+</button>
                                 </div>
                             ` : ''}
                             
                             <button class="add-to-cart" onclick="addToCart(${p.id})" ${isAgotado ? 'disabled' : ''}>
-                                ${isAgotado ? 'Agotado' : 'Agregar al carrito'}
+                                ${isAgotado ? '💔 AGOTADO' : '❤️ Agregar'}
                             </button>
                         </div>
                     </div>
                 `;
             }).join('');
+            
+            if (append) {
+                grid.innerHTML += html;
+            } else {
+                grid.innerHTML = html;
+            }
+            
+            updateLoadMoreButton();
+        }
+
+        function updateLoadMoreButton() {
+            const btn = document.getElementById('load-more-btn');
+            const count = document.getElementById('products-count');
+            const remaining = filteredProducts.length - displayedProducts.length;
+            
+            if (remaining <= 0) {
+                btn.style.display = 'none';
+            } else {
+                btn.style.display = 'inline-block';
+                btn.textContent = `Cargar más productos (${remaining} restantes)`;
+            }
+            
+            count.textContent = `Mostrando ${displayedProducts.length} de ${filteredProducts.length} productos`;
+        }
+
+        function loadMoreProducts() {
+            currentPage++;
+            renderProducts(true);
         }
 
         function filterProducts() {
@@ -1290,15 +2166,42 @@
             const onlyAvailable = document.getElementById('stock-filter').checked;
             
             filteredProducts = products.filter(p => {
-                const matchSearch = p.name.toLowerCase().includes(search) || p.code.toLowerCase().includes(search);
+                const matchSearch = p.name.toLowerCase().includes(search) || 
+                                  p.category.toLowerCase().includes(search) ||
+                                  p.code.includes(search);
                 const matchCategory = category === 'all' || p.category === category;
                 const matchStock = !onlyAvailable || p.stock > 0;
+                
                 return matchSearch && matchCategory && matchStock;
             });
+            
+            sortProducts();
+            currentPage = 0;
             renderProducts();
         }
 
-        function updateQty(id, change) {
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('category-filter').value = 'all';
+            document.getElementById('stock-filter').checked = false;
+            filteredProducts = [...products];
+            sortProducts();
+            currentPage = 0;
+            renderProducts();
+        }
+
+        function expandSearch() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('search-container').classList.add('expanded');
+                document.getElementById('search-input').focus();
+            }
+        }
+
+        function collapseSearch() {
+            document.getElementById('search-container').classList.remove('expanded');
+        }
+
+        function updateGridQty(id, change) {
             const display = document.getElementById(`qty-${id}`);
             if (!display) return;
             let val = parseInt(display.textContent) + change;
@@ -1311,13 +2214,18 @@
         function openQuickView(id) {
             const p = products.find(x => x.id === id);
             if (!p) return;
+            
             currentQuickViewId = id;
-            document.getElementById('quick-view-image').src = `https://via.placeholder.com/400x400/d4a5a5/ffffff?text=${p.code}`;
+            
+            document.getElementById('quick-view-image').src = `https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg`;
             document.getElementById('quick-view-category').textContent = p.category;
             document.getElementById('quick-view-title').textContent = p.name;
             document.getElementById('quick-view-price').textContent = '$' + p.price.toFixed(2);
             document.getElementById('quick-view-description').innerHTML = 
-                `Código: ${p.code}<br>Stock: ${p.stock} unidades<br><br>Diseño minimalista perfecto para cualquier ocasión.`;
+                `<strong>💕 Código:</strong> ${p.code}<br>
+                 <strong>📦 Stock:</strong> ${p.stock} unidades<br>
+                 <strong>🏷️ Categoría:</strong> ${p.category}`;
+            
             document.getElementById('quick-view-modal').style.display = 'flex';
         }
 
@@ -1334,6 +2242,15 @@
             }
         }
 
+        function openImageModal(src) {
+            document.getElementById('modal-image').src = src;
+            document.getElementById('image-modal').style.display = 'flex';
+        }
+
+        function closeImageModal() {
+            document.getElementById('image-modal').style.display = 'none';
+        }
+
         function addToCart(id) {
             const product = products.find(p => p.id === id);
             if (!product || product.stock === 0) return;
@@ -1345,15 +2262,31 @@
                 if (existing.quantity + qty <= product.stock) {
                     existing.quantity += qty;
                 } else {
-                    showErrorModal();
+                    alert('💔 No hay suficiente stock disponible');
                     return;
                 }
             } else {
                 cart.push({ ...product, quantity: qty });
             }
             
+            saveCart();
             updateCartUI();
-            showNotification('Agregado al carrito');
+            showNotification('¡Agregado al carrito! ❤️');
+            playSound();
+        }
+
+        function toggleShipping() {
+            const checkbox = document.getElementById('shipping-checkbox');
+            const option = document.getElementById('shipping-option');
+            shippingSelected = checkbox.checked;
+            
+            if (shippingSelected) {
+                option.classList.add('selected');
+            } else {
+                option.classList.remove('selected');
+            }
+            
+            updateCartTotals();
         }
 
         function toggleMiniCart() {
@@ -1380,31 +2313,34 @@
             
             if (cart.length === 0) {
                 body.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; color: var(--text-light);">
-                        <i class="fas fa-shopping-bag" style="font-size: 3rem; margin-bottom: 1rem; display: block; opacity: 0.3;"></i>
-                        Tu carrito está vacío
+                    <div style="text-align: center; padding: 3rem; color: var(--texto-claro);">
+                        <i class="fas fa-heart-broken" style="font-size: 3rem; margin-bottom: 1rem; display: block; color: var(--rosa-medio);"></i>
+                        Tu carrito está vacío 💔<br>
+                        <small>¡Agrega algo especial!</small>
                     </div>
                 `;
             } else {
                 body.innerHTML = cart.map(item => `
-                    <div style="display: flex; gap: 1rem; padding: 1rem; background: white; border-radius: 8px; margin-bottom: 0.8rem; border: 1px solid var(--border);">
-                        <img src="https://via.placeholder.com/60x60/d4a5a5/ffffff?text=${item.code}" 
-                             style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 12px; margin-bottom: 0.8rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <img src="https://industriastobias.github.io/klohesvtiendaonline/${item.code}.jpg" 
+                             style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px; border: 2px solid var(--rosa-palido);"
+                             onerror="this.src='https://via.placeholder.com/60?text=${item.code}'">
                         <div style="flex: 1;">
-                            <div style="font-weight: 600; font-size: 0.9rem;">${item.name}</div>
-                            <div style="color: var(--accent-dark); font-weight: 600;">$${(item.price * item.quantity).toFixed(2)}</div>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-                                <button onclick="updateCartQty(${item.id}, -1)" style="width: 24px; height: 24px; border: 1px solid var(--border); background: white; border-radius: 50%; cursor: pointer;">-</button>
-                                <span style="font-weight: 600; font-size: 0.9rem;">${item.quantity}</span>
-                                <button onclick="updateCartQty(${item.id}, 1)" style="width: 24px; height: 24px; border: 1px solid var(--border); background: white; border-radius: 50%; cursor: pointer;">+</button>
+                            <div style="font-weight: 700; font-size: 0.9rem; color: var(--texto);">${item.name}</div>
+                            <div style="color: var(--rosa-oscuro); font-weight: 800; font-size: 1rem;">$${(item.price * item.quantity).toFixed(2)}</div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem;">
+                                <button onclick="updateCartQty(${item.id}, -1)" style="width: 26px; height: 26px; border: 2px solid var(--rosa-medio); background: white; border-radius: 50%; cursor: pointer; font-size: 0.9rem; color: var(--rosa-oscuro);">-</button>
+                                <span style="font-weight: 700; min-width: 25px; text-align: center;">${item.quantity}</span>
+                                <button onclick="updateCartQty(${item.id}, 1)" style="width: 26px; height: 26px; border: 2px solid var(--rosa-medio); background: white; border-radius: 50%; cursor: pointer; font-size: 0.9rem; color: var(--rosa-oscuro);">+</button>
                             </div>
                         </div>
-                        <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: var(--error); cursor: pointer; align-self: flex-start;">
-                            <i class="fas fa-times"></i>
+                        <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: var(--agotado); cursor: pointer; font-size: 1.2rem; padding: 0.5rem;">
+                            <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 `).join('');
             }
+            
             updateCartTotals();
         }
 
@@ -1418,27 +2354,21 @@
                 removeFromCart(id);
             } else if (newQty <= product.stock) {
                 item.quantity = newQty;
+                saveCart();
                 updateCartUI();
             }
         }
 
         function removeFromCart(id) {
             cart = cart.filter(i => i.id !== id);
+            saveCart();
             updateCartUI();
-        }
-
-        function toggleShipping() {
-            const checkbox = document.getElementById('shipping-checkbox');
-            const option = document.getElementById('shipping-option');
-            shippingSelected = checkbox.checked;
-            option.classList.toggle('selected', shippingSelected);
-            updateCartTotals();
         }
 
         function updateCartTotals() {
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const discount = subtotal * (currentDiscount / 100);
-            const shipping = (shippingSelected && subtotal < 25) ? 3.75 : 0;
+            const shipping = shippingSelected ? CONFIG.SHIPPING_COST : 0;
             const total = subtotal - discount + shipping;
             
             document.getElementById('cart-subtotal').textContent = subtotal.toFixed(2);
@@ -1455,56 +2385,96 @@
             
             if (validCodes[code]) {
                 currentDiscount = validCodes[code];
+                showNotification(`¡Descuento del ${currentDiscount}% aplicado! 💕`);
                 updateCartTotals();
-                document.getElementById('discount-input').value = '';
-                showNotification(`Descuento ${currentDiscount}% aplicado`);
             } else {
                 showErrorModal();
             }
         }
 
         function showErrorModal() {
-            document.getElementById('error-modal').classList.add('show');
-            document.getElementById('error-overlay').classList.add('show');
+            document.getElementById('error-modal').style.display = 'flex';
         }
 
-        function closeErrorModal() {
-            document.getElementById('error-modal').classList.remove('show');
-            document.getElementById('error-overlay').classList.remove('show');
+        function closeErrorModal(e) {
+            if (!e || e.target.id === 'error-modal') {
+                document.getElementById('error-modal').style.display = 'none';
+            }
         }
 
-        function showNotification(text) {
-            const div = document.createElement('div');
-            div.style.cssText = `
-                position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-                background: var(--primary); color: white; padding: 1rem 2rem;
-                border-radius: 8px; z-index: 3000; font-weight: 500;
-                animation: slideUp 0.3s ease;
-            `;
-            div.textContent = text;
-            document.body.appendChild(div);
-            setTimeout(() => div.remove(), 2000);
+        function saveCart() {
+            localStorage.setItem('klohe_cart', JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            const saved = localStorage.getItem('klohe_cart');
+            if (saved) cart = JSON.parse(saved);
         }
 
         function checkout() {
             if (cart.length === 0) return;
             
-            let msg = '¡Hola! Quiero hacer un pedido de KLOHE:\\n\\n';
+            let msg = '¡Hola Klohe! 💕\n\nQuiero hacer un pedido de San Valentín:\n\n';
             cart.forEach(item => {
-                msg += `${item.name} (Cód: ${item.code}) x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\\n`;
+                msg += `❤️ ${item.name} (Código: ${item.code}) x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
             });
             
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const discount = subtotal * (currentDiscount / 100);
-            const shipping = (shippingSelected && subtotal < 25) ? 3.75 : 0;
+            const shipping = shippingSelected ? CONFIG.SHIPPING_COST : 0;
             const total = subtotal - discount + shipping;
             
-            msg += `\\nSubtotal: $${subtotal.toFixed(2)}`;
-            if (currentDiscount > 0) msg += `\\nDescuento: -$${discount.toFixed(2)}`;
-            if (shipping > 0) msg += `\\nEnvío: $${shipping.toFixed(2)}`;
-            msg += `\\nTotal: $${total.toFixed(2)}`;
+            msg += `\n💰 Subtotal: $${subtotal.toFixed(2)}`;
+            if (currentDiscount > 0) msg += `\n🎁 Descuento: -$${discount.toFixed(2)}`;
+            if (shipping > 0) msg += `\n🚚 Envío: $${shipping.toFixed(2)}`;
+            msg += `\n💵 Total: $${total.toFixed(2)}`;
+            msg += `\n\n💝 ¿Pueden incluir envoltura de regalo especial?`;
             
-            window.open(`https://wa.me/1234567890?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function showNotification(text) {
+            const notif = document.getElementById('notification');
+            notif.querySelector('div').textContent = text;
+            notif.style.display = 'block';
+            
+            setTimeout(() => {
+                notif.style.opacity = '0';
+                setTimeout(() => {
+                    notif.style.display = 'none';
+                    notif.style.opacity = '1';
+                }, 300);
+            }, 2000);
+        }
+
+        function playSound() {
+            const audio = document.getElementById('success-sound');
+            audio.currentTime = 0;
+            audio.play().catch(e => {});
+        }
+
+        function toggleChat() {
+            document.getElementById('chat-window').classList.toggle('active');
+        }
+
+        function handleChatKey(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-message');
+            const msg = input.value.trim();
+            if (!msg) return;
+            
+            const body = document.getElementById('chat-body');
+            body.innerHTML += `<p style="background: var(--rosa-oscuro); color: white; padding: 0.8rem; border-radius: 15px; margin-bottom: 0.8rem; margin-left: 2rem; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">${msg}</p>`;
+            input.value = '';
+            body.scrollTop = body.scrollHeight;
+            
+            setTimeout(() => {
+                body.innerHTML += `<p style="background: white; padding: 0.8rem; border-radius: 15px; margin-bottom: 0.8rem; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">¡Gracias! 💕 Te ayudamos enseguida con tu pedido de San Valentín</p>`;
+                body.scrollTop = body.scrollHeight;
+            }, 1000);
         }
 
         function toggleFaq(element) {
@@ -1512,6 +2482,27 @@
             const isActive = item.classList.contains('active');
             document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
             if (!isActive) item.classList.add('active');
+        }
+
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            showNotification('¡Bienvenida al Club Klohe! 💕 Revisa tu correo');
+            e.target.reset();
+        }
+
+        function initOfflineDetection() {
+            window.addEventListener('online', () => {
+                document.getElementById('offline-indicator').classList.remove('show');
+            });
+            window.addEventListener('offline', () => {
+                document.getElementById('offline-indicator').classList.add('show');
+            });
+        }
+
+        window.onclick = function(e) {
+            if (e.target.classList.contains('quick-view-modal')) {
+                e.target.style.display = 'none';
+            }
         }
     </script>
 </body>

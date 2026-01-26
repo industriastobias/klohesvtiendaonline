@@ -40,10 +40,16 @@
         header {
             background-color: var(--blanco-hueso);
             border-bottom: 1px solid var(--rosa-medio);
-            padding: 2rem 0;
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
 
         header .container {
@@ -52,16 +58,21 @@
             align-items: center;
         }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: var(--texto);
-            letter-spacing: 3px;
+        .logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .logo span {
-            color: var(--rosa-oscuro);
+        .logo {
+            height: 60px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled .logo {
+            height: 40px;
         }
 
         .cart-icon {
@@ -76,6 +87,7 @@
             justify-content: center;
             transition: all 0.3s ease;
             background: white;
+            margin-left: auto;
         }
 
         .cart-icon:hover {
@@ -107,29 +119,32 @@
         /* Hero */
         .hero {
             text-align: center;
-            padding: 4rem 0;
+            padding: 2rem 0;
             background: linear-gradient(135deg, var(--blanco-hueso) 0%, var(--rosa-palido) 100%);
         }
 
         .hero h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-size: 1.2rem;
             font-weight: 400;
             color: var(--texto);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+            min-height: 1.5em;
+            letter-spacing: 1px;
         }
 
         .hero p {
             color: var(--texto-claro);
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 300;
+            min-height: 1.5em;
         }
 
         /* Filtros */
         .filters {
             display: flex;
             gap: 1rem;
-            margin: 3rem 0;
+            margin: 2rem 0;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -500,18 +515,34 @@
             display: none;
             z-index: 1001;
             font-weight: 600;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         @media (max-width: 768px) {
             .products-grid { grid-template-columns: 1fr; }
-            .hero h2 { font-size: 2rem; }
+            .hero h2 { font-size: 1rem; }
+            .logo { height: 50px; }
+            header.scrolled .logo { height: 35px; }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 class="logo">KLO<span>HE</span></h1>
+            <div class="logo-container">
+                <img src="KLOHE.jpeg" alt="KLOHE" class="logo">
+            </div>
             <div class="cart-icon" onclick="toggleCart()">
                 <i class="fas fa-shopping-bag"></i>
                 <span id="cart-count">0</span>
@@ -521,8 +552,8 @@
 
     <section class="hero">
         <div class="container">
-            <h2>Accesorios que inspiran</h2>
-            <p>Elegancia en cada detalle</p>
+            <h2 id="rotating-text">Accesorios que inspiran</h2>
+            <p id="rotating-subtext">Elegancia en cada detalle</p>
         </div>
     </section>
 
@@ -578,6 +609,11 @@
         <i class="fas fa-check"></i> Agregado al carrito
     </div>
 
+    <!-- Audio para el sonido del carrito -->
+    <audio id="cart-sound" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         const CONFIG = {
             GITHUB_USER: 'industriastobias',
@@ -585,6 +621,71 @@
             WHATSAPP_NUMBER: '50366711569',
             CURRENCY: '$'
         };
+
+        // 60 mensajes rotativos
+        const messages = [
+            { title: "DEJA LO ORDINARIO Y CONVIÉRTETE EN EXTRAORDINARIO", subtitle: "Elegancia en cada detalle" },
+            { title: "Accesorios que inspiran", subtitle: "Tu estilo, tu esencia" },
+            { title: "Brilla con cada pieza", subtitle: "Diseños únicos para ti" },
+            { title: "La elegancia está en los detalles", subtitle: "Descubre tu look perfecto" },
+            { title: "Transforma tu estilo hoy", subtitle: "Accesorios que hablan por ti" },
+            { title: "Sé el centro de atención", subtitle: "Piezas que enamoran" },
+            { title: "Tu belleza merece lo mejor", subtitle: "Calidad en cada accesorio" },
+            { title: "Descubre tu lado brillante", subtitle: "Brillo que cautiva" },
+            { title: "Elegancia sin esfuerzo", subtitle: "Estilo natural" },
+            { title: "Cada día es especial", subtitle: "Vístete para brillar" },
+            { title: "El complemento perfecto", subtitle: "Para tu look único" },
+            { title: "Moda que te define", subtitle: "Personalidad en cada pieza" },
+            { title: "Sé auténtica, sé tú", subtitle: "Accesorios con alma" },
+            { title: "Brilla desde dentro", subtitle: "Refleja tu luz exterior" },
+            { title: "Detalles que marcan la diferencia", subtitle: "Distingue tu estilo" },
+            { title: "Tu momento de brillar", subtitle: "Atrévete a destacar" },
+            { title: "Estilo atemporal", subtitle: "Belleza que perdura" },
+            { title: "Crea tu propia tendencia", subtitle: "Sé la inspiración" },
+            { title: "La perfección está en los detalles", subtitle: "Descúbrela aquí" },
+            { title: "Haz que cada día cuente", subtitle: "Con estilo y elegancia" },
+            { title: "Tu mejor versión", subtitle: "Comienza con los accesorios" },
+            { title: "Diseños que cuentan historias", subtitle: "¿Cuál es la tuya?" },
+            { title: "Sofisticación moderna", subtitle: "Para la mujer de hoy" },
+            { title: "El toque final perfecto", subtitle: "Completa tu outfit" },
+            { title: "Belleza en su máxima expresión", subtitle: "Accesorios de ensueño" },
+            { title: "Exprésate sin palabras", subtitle: "Deja que tus accesorios hablen" },
+            { title: "Cada pieza es única", subtitle: "Como tú" },
+            { title: "Descubre tu estilo", subtitle: "Encuentra tu esencia" },
+            { title: "La magia está en los detalles", subtitle: "Encuéntrala aquí" },
+            { title: "Viste tus sueños", subtitle: "Hazlos realidad" },
+            { title: "Elegancia que se siente", subtitle: "Y se ve" },
+            { title: "Tu confianza, tu mejor accesorio", subtitle: "Poténciala" },
+            { title: "Diseños que enamoran", subtitle: "Al primer vistazo" },
+            { title: "Estilo que trasciende", subtitle: "Más allá de las tendencias" },
+            { title: "La belleza de ser diferente", subtitle: "Celebra tu unicidad" },
+            { title: "Accesorios con propósito", subtitle: "Para mujeres con visión" },
+            { title: "Tu look, tu historia", subtitle: "Escríbela con estilo" },
+            { title: "Brillo que no pasa desapercibido", subtitle: "Destaca siempre" },
+            { title: "La elegancia nunca pasa de moda", subtitle: "Invierte en ti" },
+            { title: "Sé la protagonista", subtitle: "De tu propia historia" },
+            { title: "Detalles que enamoran", subtitle: "Piezas de colección" },
+            { title: "Tu estilo, tu firma", subtitle: "Hazlo inolvidable" },
+            { title: "Moda que inspira", subtitle: "Sé la inspiración" },
+            { title: "La perfección existe", subtitle: "La encuentras aquí" },
+            { title: "Cada día es una pasarela", subtitle: "Vístete como tal" },
+            { title: "Tu belleza, tu poder", subtitle: "Exprésalo" },
+            { title: "Diseños que evocan emociones", subtitle: "Siente la magia" },
+            { title: "Estilo consciente", subtitle: "Belleza responsable" },
+            { title: "El arte de vestir bien", subtitle: "Maestría en cada pieza" },
+            { title: "Tu momento es ahora", subtitle: "Brilla sin límites" },
+            { title: "Accesorios que conectan", subtitle: "Con tu esencia" },
+            { title: "La distinción está en ti", subtitle: "Poténciala" },
+            { title: "Crea tu propio destino", subtitle: "Con estilo propio" },
+            { title: "Belleza que trasciende", subtitle: "Más allá de lo superficial" },
+            { title: "Tu esencia, tu marca", subtitle: "Hazla brillar" },
+            { title: "Elegancia para cada ocasión", subtitle: "Siempre perfecta" },
+            { title: "Sé memorable", subtitle: "Deja huella" },
+            { title: "La moda pasa, el estilo permanece", subtitle: "Invierte en eterno" },
+            { title: "Tu mejor inversión", subtitle: "Eres tú misma" }
+        ];
+
+        let currentMessageIndex = 0;
 
         // Productos actualizados desde el inventario (228 productos)
         let products = [
@@ -597,7 +698,7 @@
             { id: 6, name: "Cartera", fullCode: "01176255048777034", code: "035", price: 16.50, stock: 0, category: "Carteras" },
             { id: 7, name: "Cartera", fullCode: "01176255049117469", code: "071", price: 15.00, stock: 0, category: "Carteras" },
             { id: 8, name: "Cartera", fullCode: "01176255049145271", code: "073", price: 10.00, stock: 1, category: "Carteras" },
-            { id: 9, name: "Cartera", fullCode: "01176255049186675", code: "077", price: 13.50, stock: 1, category: "Carteras" },
+            { id: 9, name: "Cartera", fullCode: "01176255049186675", code: "077", price: 13.50, stock: 0, category: "Carteras" },
             { id: 10, name: "Cartera", fullCode: "00217626166105179", code: "086", price: 18.50, stock: 1, category: "Carteras" },
             { id: 11, name: "Cartera", fullCode: "002176261661059510", code: "087", price: 18.50, stock: 1, category: "Carteras" },
             { id: 12, name: "Cartera", fullCode: "002176261661069012", code: "089", price: 14.99, stock: 1, category: "Carteras" },
@@ -820,7 +921,42 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
             renderProducts(products);
+            startMessageRotation();
+            
+            // Scroll listener para header sticky
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
         });
+
+        function startMessageRotation() {
+            const titleEl = document.getElementById('rotating-text');
+            const subtitleEl = document.getElementById('rotating-subtext');
+            
+            setInterval(() => {
+                currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+                
+                // Fade out
+                titleEl.style.opacity = '0';
+                subtitleEl.style.opacity = '0';
+                
+                setTimeout(() => {
+                    titleEl.textContent = messages[currentMessageIndex].title;
+                    subtitleEl.textContent = messages[currentMessageIndex].subtitle;
+                    
+                    // Fade in
+                    titleEl.style.transition = 'opacity 0.5s ease';
+                    subtitleEl.style.transition = 'opacity 0.5s ease';
+                    titleEl.style.opacity = '1';
+                    subtitleEl.style.opacity = '1';
+                }, 300);
+            }, 60000); // Cambia cada minuto
+        }
 
         function getImageUrl(code) {
             return `https://industriastobias.github.io/klohesvtiendaonline/${code}.jpg`;
@@ -903,6 +1039,12 @@
             renderProducts(filtered);
         }
 
+        function playCartSound() {
+            const audio = document.getElementById('cart-sound');
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log('Error reproduciendo sonido:', e));
+        }
+
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             if (!product || product.stock === 0) return;
@@ -918,6 +1060,9 @@
             } else {
                 cart.push({ ...product, quantity: 1 });
             }
+            
+            // Reproducir sonido
+            playCartSound();
             
             saveCart();
             updateCartUI();
@@ -974,8 +1119,8 @@
             
             if (cart.length === 0) {
                 cartItems.innerHTML = `
-                    <div class="empty-cart">
-                        <i class="fas fa-shopping-bag"></i>
+                    <div class="empty-cart" style="text-align: center; padding: 2rem; color: var(--texto-claro);">
+                        <i class="fas fa-shopping-bag" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
                         <p>Tu carrito está vacío</p>
                     </div>`;
                 document.getElementById('cart-total').textContent = '0.00';

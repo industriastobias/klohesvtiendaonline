@@ -30,7 +30,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -424,7 +423,43 @@
             color: var(--texto);
         }
 
-        /* BOTÓN AGREGAR SIN SELECTOR DE CANTIDAD */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--rosa-suave);
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 400;
+            font-size: 0.9rem;
+            transition: var(--transicion);
+            color: var(--texto);
+            flex-shrink: 0;
+        }
+
+        .qty-btn:hover {
+            background: var(--rosa-suave);
+        }
+
+        .qty-display {
+            min-width: 24px;
+            text-align: center;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--texto);
+        }
+
         .add-to-cart {
             width: 100%;
             padding: 0.7rem;
@@ -443,7 +478,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
         }
 
         .add-to-cart:hover:not(:disabled) {
@@ -491,43 +525,6 @@
             font-size: 0.8rem;
             margin-top: 1rem;
             letter-spacing: 0.05em;
-        }
-
-        /* TOAST NOTIFICATION CENTRADO */
-        .toast {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            background: var(--texto);
-            color: white;
-            padding: 20px 32px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 11000;
-            white-space: nowrap;
-            flex-direction: column;
-            text-align: center;
-            min-width: 280px;
-        }
-
-        .toast i {
-            font-size: 2rem;
-            color: var(--rosa-suave);
-        }
-
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
         }
 
         /* Modal vista rápida */
@@ -719,19 +716,67 @@
             background: var(--rosa-oscuro);
         }
 
-        /* CARRITO COMPACTO */
+        /* Mini carrito */
+        .mini-cart {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--blanco);
+            box-shadow: -10px 0 40px var(--sombra-suave);
+            z-index: 1001;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--crema);
+        }
+
+        .mini-cart.open {
+            right: 0;
+        }
+
+        .mini-cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--crema);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        .mini-cart-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--texto);
+            font-size: 1.3rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+        }
+
+        .mini-cart-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .mini-cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--crema);
+            background: var(--crema);
+        }
+
         .cart-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.2);
             z-index: 1000;
             display: none;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
         }
 
         .cart-overlay.active {
@@ -739,563 +784,150 @@
             opacity: 1;
         }
 
-        .mini-cart {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 420px;
-            height: 100dvh;
-            height: 100vh;
-            background: var(--blanco);
-            z-index: 1001;
-            transition: right 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-            display: flex;
-            flex-direction: column;
-            box-shadow: -10px 0 40px rgba(0,0,0,0.15);
-            will-change: transform;
-        }
-
-        @media (max-width: 480px) {
-            .mini-cart {
-                max-width: 100%;
-                border-radius: 20px 20px 0 0;
-                top: auto;
-                bottom: 0;
-                right: 0;
-                height: 85vh;
-                transform: translateY(100%);
-                transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-            }
-            .mini-cart.open {
-                right: 0;
-                transform: translateY(0);
-            }
-        }
-
-        .mini-cart.open {
-            right: 0;
-        }
-
-        .cart-handle {
-            display: none;
-            width: 40px;
-            height: 4px;
-            background: var(--rosa-suave);
-            border-radius: 2px;
-            margin: 12px auto;
-            flex-shrink: 0;
-        }
-
-        @media (max-width: 480px) {
-            .cart-handle {
-                display: block;
-            }
-        }
-
-        .mini-cart-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--crema);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--blanco);
-            flex-shrink: 0;
-        }
-
-        .mini-cart-header h3 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--texto);
-            font-size: 1.4rem;
-            font-weight: 400;
-            letter-spacing: 0.1em;
+        /* Envío */
+        .shipping-compact {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .cart-badge-count {
-            background: var(--rosa-oscuro);
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-        }
-
-        .close-cart-btn {
-            width: 36px;
-            height: 36px;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            background: var(--blanco);
             border: 1px solid var(--rosa-suave);
-            border-radius: 50%;
-            background: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
-            color: var(--texto);
-            font-size: 1.2rem;
             transition: var(--transicion);
+            margin-bottom: 0.8rem;
         }
 
-        .close-cart-btn:active {
-            background: var(--rosa-suave);
-            transform: scale(0.95);
-        }
-
-        .mini-cart-body {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
-
-        .cart-empty-state {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .cart-empty-state.active {
-            display: flex;
-        }
-
-        .empty-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--crema);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--rosa-medio);
-            margin-bottom: 16px;
-        }
-
-        .empty-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            color: var(--texto);
-            margin-bottom: 8px;
-        }
-
-        .empty-text {
-            color: var(--texto-claro);
-            font-size: 0.9rem;
-            margin-bottom: 24px;
-        }
-
-        .browse-products-btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: var(--rosa-oscuro);
-            color: white;
-            text-decoration: none;
-            border-radius: 0;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: var(--transicion);
-            border: none;
-            cursor: pointer;
-        }
-
-        .browse-products-btn:hover {
-            background: var(--texto);
-        }
-
-        /* ITEMS DEL CARRITO COMPACTOS */
-        .cart-item-list {
-            padding: 0;
-        }
-
-        .cart-item-compact {
-            display: flex;
-            gap: 12px;
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--crema);
-            align-items: center;
-            background: var(--blanco);
-        }
-
-        .cart-item-image-compact {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 8px;
-            background: var(--crema);
-            flex-shrink: 0;
-        }
-
-        .cart-item-info-compact {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .cart-item-name-compact {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem;
-            color: var(--texto);
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.2;
-        }
-
-        .cart-item-details-compact {
-            font-size: 0.75rem;
-            color: var(--texto-claro);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .variant-dot-compact {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            border: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .cart-item-controls-compact {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 2px;
-        }
-
-        .qty-btn-compact {
-            width: 24px;
-            height: 24px;
-            border: 1px solid var(--rosa-suave);
-            background: var(--blanco);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.7rem;
-            color: var(--texto);
-            transition: all 0.2s;
-        }
-
-        .qty-btn-compact:active {
-            background: var(--rosa-suave);
-            transform: scale(0.9);
-        }
-
-        .qty-display-compact {
-            font-size: 0.85rem;
-            font-weight: 600;
-            min-width: 20px;
-            text-align: center;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .cart-item-price-compact {
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 4px;
-        }
-
-        .price-compact {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            color: var(--rosa-oscuro);
-            font-weight: 600;
-            line-height: 1;
-        }
-
-        .remove-btn-compact {
-            width: 24px;
-            height: 24px;
-            border: none;
-            background: transparent;
-            color: var(--texto-claro);
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.2s;
-        }
-
-        .remove-btn-compact:active {
-            background: rgba(231, 76, 60, 0.1);
-            color: #e74c3c;
-        }
-
-        .cart-extras {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--crema);
-        }
-
-        .accordion-item-cart {
-            border: 1px solid var(--rosa-suave);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            background: var(--blanco);
-        }
-
-        .accordion-header-cart {
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--texto);
-            transition: background 0.2s;
-        }
-
-        .accordion-header-cart:active {
-            background: var(--crema);
-        }
-
-        .accordion-header-cart i:first-child {
-            margin-right: 10px;
-            color: var(--rosa-oscuro);
-        }
-
-        .accordion-content-cart {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: var(--crema);
-        }
-
-        .accordion-item-cart.open .accordion-content-cart {
-            max-height: 200px;
-        }
-
-        .accordion-item-cart.open .fa-chevron-down {
-            transform: rotate(180deg);
-        }
-
-        .accordion-inner {
-            padding: 12px;
-        }
-
-        .coupon-input-wrapper {
-            display: flex;
-            gap: 8px;
-        }
-
-        .coupon-input {
-            flex: 1;
-            padding: 10px 12px;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-family: inherit;
-        }
-
-        .coupon-input:focus {
-            outline: none;
+        .shipping-compact.selected {
             border-color: var(--rosa-oscuro);
+            background: var(--rosa-suave);
         }
 
-        .apply-coupon-btn {
-            padding: 10px 16px;
-            background: var(--texto);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            font-size: 0.75rem;
-            transition: var(--transicion);
-        }
-
-        .apply-coupon-btn:active {
-            background: var(--rosa-oscuro);
-        }
-
-        .coupon-applied {
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(166, 123, 123, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px dashed var(--rosa-medio);
-            margin-top: 8px;
-        }
-
-        .coupon-applied.show {
-            display: flex;
-        }
-
-        .coupon-tag {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--rosa-oscuro);
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .remove-coupon-btn {
-            background: none;
-            border: none;
-            color: var(--texto-claro);
-            cursor: pointer;
-            padding: 4px;
-        }
-
-        .mini-cart-footer {
-            padding: 16px 20px;
-            background: var(--blanco);
-            border-top: 1px solid var(--crema);
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
-            flex-shrink: 0;
-        }
-
-        @supports (padding-bottom: env(safe-area-inset-bottom)) {
-            .mini-cart-footer {
-                padding-bottom: max(16px, env(safe-area-inset-bottom));
-            }
-        }
-
-        .shipping-option-modern {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: var(--crema);
-            border-radius: 10px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 2px solid transparent;
-        }
-
-        .shipping-option-modern.selected {
-            border-color: var(--rosa-oscuro);
-            background: rgba(166, 123, 123, 0.05);
-        }
-
-        .shipping-checkbox-modern {
-            width: 18px;
-            height: 18px;
+        .shipping-compact input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
             accent-color: var(--rosa-oscuro);
             cursor: pointer;
         }
 
-        .shipping-details-modern {
+        .shipping-info {
             flex: 1;
-        }
-
-        .shipping-title-modern {
-            font-weight: 500;
-            color: var(--texto);
-            font-size: 0.85rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 6px;
         }
 
-        .shipping-subtitle-modern {
-            font-size: 0.75rem;
+        .shipping-text {
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .shipping-text small {
+            display: block;
+            font-size: 0.7rem;
             color: var(--texto-claro);
-            margin-top: 2px;
+            font-weight: 300;
+            margin-top: 0.1rem;
         }
 
-        .shipping-price-modern {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+        .shipping-price {
             color: var(--rosa-oscuro);
-            font-weight: 600;
+            font-weight: 400;
+            font-size: 0.95rem;
+            font-family: 'Cormorant Garamond', serif;
         }
 
-        .cart-totals-modern {
-            margin-bottom: 12px;
-            padding: 12px 0;
+        /* Descuento */
+        .discount-compact {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .discount-compact input {
+            flex: 1;
+            padding: 0.7rem;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 0;
+            font-size: 0.8rem;
+            transition: var(--transicion);
+            background: var(--blanco);
+        }
+
+        .discount-compact input:focus {
+            outline: none;
+            border-color: var(--rosa-oscuro);
+        }
+
+        .discount-compact button {
+            background: var(--texto);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 400;
+            font-size: 0.7rem;
+            transition: var(--transicion);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .discount-compact button:hover {
+            background: var(--rosa-oscuro);
+        }
+
+        /* Totales */
+        .cart-totals-compact {
+            background: transparent;
+            padding: 0.8rem 0;
+            margin-bottom: 0.8rem;
             border-top: 1px solid var(--rosa-suave);
             border-bottom: 1px solid var(--rosa-suave);
         }
 
-        .total-line-modern {
+        .total-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 6px;
+            margin-bottom: 0.4rem;
             font-size: 0.85rem;
             color: var(--texto-claro);
-            align-items: center;
         }
 
-        .total-line-modern.discount {
-            color: #27ae60;
+        .total-row.discount {
+            color: var(--rosa-oscuro);
         }
 
-        .total-line-modern.discount strong {
-            color: #27ae60;
-        }
-
-        .total-line-modern.final {
+        .total-row.final {
             font-size: 1.1rem;
+            font-weight: 400;
             color: var(--texto);
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            margin-top: 6px;
-            padding-top: 6px;
+            margin-top: 0.6rem;
+            padding-top: 0.6rem;
             border-top: 1px solid var(--rosa-suave);
-            margin-bottom: 0;
+            font-family: 'Cormorant Garamond', serif;
         }
 
-        .checkout-btn-modern {
+        .checkout-btn {
             width: 100%;
-            padding: 14px 20px;
+            padding: 1rem;
             background: var(--texto);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-weight: 600;
+            border-radius: 0;
+            font-size: 0.75rem;
             cursor: pointer;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            letter-spacing: 0.02em;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
+            justify-content: center;
+            gap: 0.6rem;
+            font-weight: 400;
+            transition: var(--transicion);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
         }
 
-        .checkout-btn-modern:active {
-            transform: scale(0.98);
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-        }
-
-        .checkout-text {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checkout-amount {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+        .checkout-btn:hover {
+            background: var(--rosa-oscuro);
         }
 
         /* Reviews */
@@ -1924,12 +1556,6 @@
         Sin conexión
     </div>
 
-    <!-- TOAST NOTIFICATION CENTRADO -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span>Producto agregado al carrito</span>
-    </div>
-
     <!-- MODAL DE STOCK INSUFICIENTE -->
     <div class="stock-modal-overlay" id="stock-modal-overlay" onclick="closeStockModal()">
         <div class="stock-modal-content" onclick="event.stopPropagation()">
@@ -2085,111 +1711,52 @@
 
     <div class="cart-overlay" id="cart-overlay" onclick="toggleMiniCart()"></div>
     
-    <!-- CARRITO COMPACTO -->
     <div class="mini-cart" id="mini-cart">
-        <div class="cart-handle" onclick="toggleMiniCart()"></div>
-        
         <div class="mini-cart-header">
-            <h3>
-                Tu Carrito
-                <span class="cart-badge-count" id="cart-count-header">0</span>
-            </h3>
-            <button class="close-cart-btn" onclick="toggleMiniCart()">
-                <i class="fas fa-times"></i>
-            </button>
+            <h3>Tu Carrito</h3>
+            <button onclick="toggleMiniCart()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--texto);">&times;</button>
         </div>
-
-        <div class="mini-cart-body" id="mini-cart-body">
-            <!-- Estado vacío -->
-            <div class="cart-empty-state" id="empty-cart-state">
-                <div class="empty-icon">
-                    <i class="fas fa-shopping-bag"></i>
-                </div>
-                <h4 class="empty-title">Tu carrito está vacío</h4>
-                <p class="empty-text">Descubre nuestras piezas únicas para San Valentín</p>
-                <button class="browse-products-btn" onclick="toggleMiniCart()">Explorar ahora</button>
-            </div>
-
-            <!-- Lista de items -->
-            <div class="cart-item-list" id="cart-item-list"></div>
-
-            <!-- Extras -->
-            <div class="cart-extras" id="cart-extras" style="display: none;">
-                <div class="accordion-item-cart" id="coupon-accordion">
-                    <div class="accordion-header-cart" onclick="toggleCartAccordion('coupon-accordion')">
-                        <span><i class="fas fa-tag"></i> ¿Tienes un cupón?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content-cart">
-                        <div class="accordion-inner">
-                            <div class="coupon-input-wrapper">
-                                <input type="text" class="coupon-input" id="discount-input" placeholder="CÓDIGO">
-                                <button class="apply-coupon-btn" onclick="applyDiscount()">Aplicar</button>
-                            </div>
-                            <div class="coupon-applied" id="applied-coupon-display">
-                                <div class="coupon-tag">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span id="applied-code">AMOR20</span>
-                                </div>
-                                <button class="remove-coupon-btn" onclick="removeDiscount()">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item-cart">
-                    <div class="accordion-header-cart" onclick="toggleCartAccordion(this)">
-                        <span><i class="fas fa-gift"></i> Notas de regalo</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content-cart">
-                        <div class="accordion-inner">
-                            <textarea style="width: 100%; padding: 12px; border: 1px solid var(--rosa-suave); border-radius: 8px; resize: none; height: 80px; font-family: inherit;" placeholder="Escribe un mensaje especial..."></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        <div class="mini-cart-body" id="mini-cart-body"></div>
 
         <div class="mini-cart-footer">
-            <label class="shipping-option-modern" id="shipping-option" onclick="toggleShippingOption()">
-                <input type="checkbox" class="shipping-checkbox-modern" id="shipping-checkbox" onchange="toggleShipping()">
-                <div class="shipping-details-modern">
-                    <div class="shipping-title-modern">
-                        <i class="fas fa-truck"></i> Envío a domicilio
+            <div class="shipping-compact" id="shipping-option" onclick="document.getElementById('shipping-checkbox').click()">
+                <input type="checkbox" id="shipping-checkbox" onchange="toggleShipping()" onclick="event.stopPropagation()">
+                <div class="shipping-info">
+                    <div class="shipping-text">
+                        <i class="fas fa-truck" style="color: var(--rosa-oscuro);"></i> Envío a domicilio
+                        <small>Gratis en compras +$25</small>
                     </div>
-                    <div class="shipping-subtitle-modern">Entrega en 2-5 días hábiles</div>
+                    <div class="shipping-price">$3.75</div>
                 </div>
-                <div class="shipping-price-modern">$3.75</div>
-            </label>
+            </div>
 
-            <div class="cart-totals-modern">
-                <div class="total-line-modern">
+            <div class="discount-compact">
+                <input type="text" id="discount-input" placeholder="Código de descuento">
+                <button onclick="applyDiscount()">Aplicar</button>
+            </div>
+
+            <div class="cart-totals-compact">
+                <div class="total-row">
                     <span>Subtotal</span>
-                    <strong id="cart-subtotal">$0.00</strong>
+                    <strong>$<span id="cart-subtotal">0.00</span></strong>
                 </div>
-                <div class="total-line-modern" id="shipping-row-modern" style="display: none;">
+                <div class="total-row" id="shipping-row" style="display: none;">
                     <span>Envío</span>
-                    <strong style="color: var(--rosa-oscuro);" id="cart-shipping">$3.75</strong>
+                    <strong>+$<span id="cart-shipping">0.00</span></strong>
                 </div>
-                <div class="total-line-modern discount" id="discount-row-modern" style="display: none;">
-                    <span>Descuento aplicado</span>
-                    <strong id="cart-discount">-$0.00</strong>
+                <div class="total-row discount" id="discount-row" style="display: none;">
+                    <span>Descuento</span>
+                    <strong>-$<span id="cart-discount">0.00</span></strong>
                 </div>
-                <div class="total-line-modern final">
-                    <span>Total a pagar</span>
-                    <span id="cart-total">$0.00</span>
+                <div class="total-row final">
+                    <span>Total</span>
+                    <span>$<span id="cart-total">0.00</span></span>
                 </div>
             </div>
             
-            <button class="checkout-btn-modern" onclick="checkout()">
-                <span class="checkout-text">
-                    <i class="fab fa-whatsapp"></i>
-                    Comprar ahora
-                </span>
-                <span class="checkout-amount" id="checkout-btn-amount">$0.00</span>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
             </button>
         </div>
     </div>
@@ -2260,261 +1827,5 @@
 
     <!-- Aquí enlazas el archivo de productos -->
     <script src="productos.js"></script>
-    
-    <!-- Script para funcionalidades del carrito -->
-    <script>
-        // VARIABLES GLOBALES DEL CARRITO
-        let cart = [];
-        let shippingCost = 0;
-        let discountAmount = 0;
-        const SHIPPING_PRICE = 3.75;
-
-        // Mostrar Toast CENTRADO por 3 segundos
-        function showToast(message = 'Producto agregado al carrito') {
-            const toast = document.getElementById('toast');
-            toast.querySelector('span').textContent = message;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Agregar al carrito (función mejorada)
-        function addToCart(product) {
-            // Verificar si ya existe
-            const existingItem = cart.find(item => item.id === product.id);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                    image: product.image,
-                    variant: product.variant || 'Estándar',
-                    color: product.color || '#F5F1ED',
-                    quantity: 1
-                });
-            }
-            
-            updateCartUI();
-            showToast();
-            
-            // Sonido opcional
-            const audio = document.getElementById('success-sound');
-            if (audio) audio.play().catch(e => {});
-        }
-
-        // Actualizar cantidad en carrito
-        function updateQuantity(itemId, change) {
-            const item = cart.find(item => item.id === itemId);
-            if (!item) return;
-            
-            item.quantity += change;
-            
-            if (item.quantity <= 0) {
-                removeFromCart(itemId);
-            } else {
-                updateCartUI();
-            }
-        }
-
-        // Eliminar del carrito
-        function removeFromCart(itemId) {
-            cart = cart.filter(item => item.id !== itemId);
-            updateCartUI();
-        }
-
-        // Calcular totales CORREGIDO
-        function calculateTotals() {
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = document.getElementById('shipping-checkbox').checked ? SHIPPING_PRICE : 0;
-            const discount = discountAmount || 0;
-            const total = subtotal + shipping - discount;
-            
-            return { subtotal, shipping, discount, total };
-        }
-
-        // Actualizar UI del carrito
-        function updateCartUI() {
-            const cartList = document.getElementById('cart-item-list');
-            const emptyState = document.getElementById('empty-cart-state');
-            const cartExtras = document.getElementById('cart-extras');
-            const totals = calculateTotals();
-            
-            // Actualizar contadores
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cart-count').textContent = totalItems;
-            document.getElementById('cart-count-header').textContent = totalItems;
-            
-            // Mostrar/ocultar estado vacío
-            if (cart.length === 0) {
-                emptyState.classList.add('active');
-                cartList.innerHTML = '';
-                cartExtras.style.display = 'none';
-            } else {
-                emptyState.classList.remove('active');
-                cartExtras.style.display = 'block';
-                
-                // Renderizar items compactos
-                cartList.innerHTML = cart.map(item => `
-                    <div class="cart-item-compact">
-                        <img src="${item.image}" class="cart-item-image-compact" alt="${item.name}">
-                        <div class="cart-item-info-compact">
-                            <div class="cart-item-name-compact">${item.name}</div>
-                            <div class="cart-item-details-compact">
-                                <span class="variant-dot-compact" style="background: ${item.color}"></span>
-                                ${item.variant}
-                            </div>
-                            <div class="cart-item-controls-compact">
-                                <button class="qty-btn-compact" onclick="updateQuantity(${item.id}, -1)">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <span class="qty-display-compact">${item.quantity}</span>
-                                <button class="qty-btn-compact" onclick="updateQuantity(${item.id}, 1)">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="cart-item-price-compact">
-                            <button class="remove-btn-compact" onclick="removeFromCart(${item.id})">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                            <div class="price-compact">$${(item.price * item.quantity).toFixed(2)}</div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-            
-            // Actualizar totales CORREGIDO
-            document.getElementById('cart-subtotal').textContent = `$${totals.subtotal.toFixed(2)}`;
-            document.getElementById('cart-total').textContent = `$${totals.total.toFixed(2)}`;
-            document.getElementById('checkout-btn-amount').textContent = `$${totals.total.toFixed(2)}`;
-            
-            // Actualizar envío
-            if (totals.shipping > 0) {
-                document.getElementById('shipping-row-modern').style.display = 'flex';
-                document.getElementById('cart-shipping').textContent = `$${totals.shipping.toFixed(2)}`;
-            } else {
-                document.getElementById('shipping-row-modern').style.display = 'none';
-            }
-            
-            // Actualizar descuento
-            if (totals.discount > 0) {
-                document.getElementById('discount-row-modern').style.display = 'flex';
-                document.getElementById('cart-discount').textContent = `-$${totals.discount.toFixed(2)}`;
-            } else {
-                document.getElementById('discount-row-modern').style.display = 'none';
-            }
-        }
-
-        // Toggle carrito
-        function toggleMiniCart() {
-            const cart = document.getElementById('mini-cart');
-            const overlay = document.getElementById('cart-overlay');
-            
-            if (cart.classList.contains('open')) {
-                cart.classList.remove('open');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            } else {
-                cart.classList.add('open');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                updateCartUI();
-            }
-        }
-
-        // Toggle shipping
-        function toggleShippingOption() {
-            const checkbox = document.getElementById('shipping-checkbox');
-            checkbox.checked = !checkbox.checked;
-            toggleShipping();
-        }
-
-        function toggleShipping() {
-            const checkbox = document.getElementById('shipping-checkbox');
-            const option = document.getElementById('shipping-option');
-            
-            if (checkbox.checked) {
-                option.classList.add('selected');
-            } else {
-                option.classList.remove('selected');
-            }
-            
-            updateCartUI();
-        }
-
-        // Toggle accordion
-        function toggleCartAccordion(id) {
-            const item = typeof id === 'string' ? document.getElementById(id) : id.closest('.accordion-item-cart');
-            item.classList.toggle('open');
-        }
-
-        // Aplicar descuento
-        function applyDiscount() {
-            const input = document.getElementById('discount-input');
-            const code = input.value.trim().toUpperCase();
-            
-            if (code === 'AMOR20') {
-                const subtotal = calculateTotals().subtotal;
-                discountAmount = subtotal * 0.20;
-                document.getElementById('applied-coupon-display').classList.add('show');
-                document.getElementById('applied-code').textContent = code;
-                input.value = '';
-                updateCartUI();
-            } else {
-                alert('Código inválido');
-            }
-        }
-
-        function removeDiscount() {
-            discountAmount = 0;
-            document.getElementById('applied-coupon-display').classList.remove('show');
-            updateCartUI();
-        }
-
-        // Checkout con mensaje de WhatsApp con EMOJIS
-        function checkout() {
-            if (cart.length === 0) return;
-            
-            const totals = calculateTotals();
-            
-            // Mensaje con emojis y formato bonito
-            let message = '💎✨ *¡Hola! Quiero realizar un pedido:* ✨💎%0A%0A';
-            message += '🛍️ *Productos:*%0A';
-            message += '─────────────────%0A';
-            
-            cart.forEach((item, index) => {
-                message += `%0A${index + 1}. *${item.name}*%0A`;
-                message += `   🎨 ${item.variant}%0A`;
-                message += `   📦 Cantidad: ${item.quantity}%0A`;
-                message += `   💵 $${(item.price * item.quantity).toFixed(2)}%0A`;
-            });
-            
-            message += '%0A─────────────────%0A';
-            message += `%0A💰 *Subtotal:* $${totals.subtotal.toFixed(2)}`;
-            
-            if (totals.shipping > 0) {
-                message += `%0A🚚 *Envío:* $${totals.shipping.toFixed(2)}`;
-            }
-            
-            if (totals.discount > 0) {
-                message += `%0A🏷️ *Descuento:* -$${totals.discount.toFixed(2)}`;
-            }
-            
-            message += `%0A%0A💳 *TOTAL:* $${totals.total.toFixed(2)}`;
-            message += '%0A%0A🙏 ¡Gracias! Espero su confirmación. 💕';
-            
-            window.open(`https://wa.me/50366711569?text=${message}`, '_blank');
-        }
-
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCartUI();
-        });
-    </script>
 </body>
 </html>

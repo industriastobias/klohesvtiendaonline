@@ -1,9 +1,14 @@
 const products = [
+  // CARTERAS (44 productos)
+  { name: "BILLETERA", price: 10.00, stock: 0, barcode: "076" },
   { name: "BOLSO DE MANO", price: 10.00, stock: 1, barcode: "088" },
   { name: "CARTERA", price: 12.50, stock: 1, barcode: "03" },
   { name: "CARTERA", price: 12.00, stock: 1, barcode: "014" },
   { name: "CARTERA", price: 10.99, stock: 1, barcode: "033" },
+  { name: "CARTERA", price: 16.50, stock: 0, barcode: "035" },
+  { name: "CARTERA", price: 15.00, stock: 0, barcode: "071" },
   { name: "CARTERA", price: 10.00, stock: 1, barcode: "073" },
+  { name: "CARTERA", price: 13.50, stock: 0, barcode: "077" },
   { name: "CARTERA", price: 18.50, stock: 1, barcode: "086" },
   { name: "CARTERA", price: 18.50, stock: 1, barcode: "087" },
   { name: "CARTERA", price: 14.99, stock: 1, barcode: "089" },
@@ -11,40 +16,73 @@ const products = [
   { name: "CARTERA", price: 14.99, stock: 1, barcode: "097" },
   { name: "CARTERA", price: 24.00, stock: 1, barcode: "098" },
   { name: "CARTERA", price: 14.99, stock: 1, barcode: "099" },
+  { name: "CARTERA", price: 14.99, stock: 0, barcode: "114" },
   { name: "CARTERA", price: 12.00, stock: 1, barcode: "127" },
   { name: "CARTERA", price: 13.99, stock: 1, barcode: "128" },
   { name: "CARTERA", price: 13.99, stock: 1, barcode: "129" },
+  { name: "CARTERA", price: 15.00, stock: 0, barcode: "130" },
   { name: "CARTERA", price: 14.00, stock: 2, barcode: "132" },
   { name: "CARTERA", price: 14.99, stock: 1, barcode: "147" },
   { name: "CARTERA", price: 14.00, stock: 1, barcode: "148" },
   { name: "CARTERA", price: 15.99, stock: 1, barcode: "149" },
   { name: "CARTERA", price: 15.99, stock: 1, barcode: "150" },
+  { name: "CARTERA", price: 13.50, stock: 0, barcode: "151" },
   { name: "CARTERA", price: 14.00, stock: 1, barcode: "152" },
+  { name: "CARTERA", price: 14.00, stock: 0, barcode: "153" },
   { name: "CARTERA BEIG", price: 10.50, stock: 1, barcode: "068" },
+  { name: "CARTERA BLANCA", price: 13.00, stock: 0, barcode: "022" },
   { name: "CARTERA BLANCA", price: 10.99, stock: 1, barcode: "049" },
+  { name: "CARTERA BLANCA", price: 10.99, stock: 0, barcode: "058" },
   { name: "CARTERA BLANCA", price: 10.50, stock: 1, barcode: "063" },
+  { name: "CARTERA BLANCA", price: 13.50, stock: 0, barcode: "075" },
+  { name: "Cartera blanca", price: 10.99, stock: 0, barcode: "190" },
+  { name: "CARTERA CAFE", price: 17.75, stock: 0, barcode: "899" },
+  { name: "CARTERA CLASICA", price: 20.00, stock: 0, barcode: "051" },
+  { name: "CARTERA CLASICA", price: 12.50, stock: 0, barcode: "061" },
+  { name: "CARTERA MORADA", price: 10.99, stock: 0, barcode: "054" },
   { name: "CARTERA NEGRA", price: 10.99, stock: 1, barcode: "047" },
+  { name: "CARTERA ROJA", price: 13.50, stock: 0, barcode: "074" },
   { name: "CARTERA ROSADA", price: 9.50, stock: 1, barcode: "023" },
+  { name: "CARTERA VINO", price: 18.00, stock: 0, barcode: "053" },
   { name: "Carteras", price: 10.00, stock: 1, barcode: "181" },
-  { name: "01176255048869645", price: 3.50, stock: 1, barcode: "046" },
+  
+  // ARITOS Y ARETES (49 productos)
+  { name: "ARITOS", price: 3.50, stock: 1, barcode: "046" },
   { name: "ARETAS", price: 8.50, stock: 1, barcode: "179" },
   { name: "ARETE", price: 7.00, stock: 1, barcode: "060" },
   { name: "ARETES", price: 8.50, stock: 1, barcode: "174" },
+  { name: "ARETES DE CORAZON", price: 4.50, stock: 0, barcode: "056" },
+  { name: "aritos", price: 6.00, stock: 0, barcode: "028393992" },
+  { name: "ARITOS", price: 7.00, stock: 0, barcode: "06" },
+  { name: "ARITOS", price: 5.00, stock: 0, barcode: "07" },
   { name: "ARITOS", price: 7.00, stock: 1, barcode: "09" },
+  { name: "ARITOS", price: 7.00, stock: 0, barcode: "011" },
   { name: "ARITOS", price: 7.00, stock: 1, barcode: "013" },
+  { name: "ARITOS", price: 3.50, stock: 0, barcode: "036" },
+  { name: "ARITOS", price: 5.00, stock: 0, barcode: "079" },
+  { name: "ARITOS", price: 4.00, stock: 0, barcode: "080" },
+  { name: "ARITOS", price: 6.00, stock: 0, barcode: "081" },
+  { name: "ARITOS", price: 6.50, stock: 0, barcode: "082" },
   { name: "ARITOS", price: 8.00, stock: 1, barcode: "085" },
+  { name: "ARITOS", price: 3.50, stock: 0, barcode: "092" },
+  { name: "ARITOS", price: 5.00, stock: 0, barcode: "100" },
   { name: "ARITOS", price: 5.50, stock: 1, barcode: "101" },
+  { name: "ARITOS", price: 5.00, stock: 0, barcode: "102" },
   { name: "ARITOS", price: 8.00, stock: 1, barcode: "107" },
+  { name: "ARITOS", price: 7.99, stock: 0, barcode: "108" },
   { name: "ARITOS", price: 6.99, stock: 1, barcode: "115" },
   { name: "ARITOS", price: 6.50, stock: 1, barcode: "116" },
   { name: "ARITOS", price: 7.50, stock: 1, barcode: "117" },
   { name: "ARITOS", price: 8.00, stock: 1, barcode: "118" },
+  { name: "ARITOS", price: 6.00, stock: 0, barcode: "119" },
   { name: "ARITOS", price: 4.00, stock: 7, barcode: "124" },
+  { name: "ARITOS", price: 5.50, stock: 0, barcode: "140" },
   { name: "ARITOS", price: 7.50, stock: 1, barcode: "156" },
   { name: "ARITOS", price: 8.99, stock: 1, barcode: "157" },
   { name: "ARITOS", price: 8.99, stock: 1, barcode: "158" },
   { name: "ARITOS", price: 7.00, stock: 3, barcode: "166" },
   { name: "ARITOS", price: 5.50, stock: 1, barcode: "168" },
+  { name: "ARITOS", price: 6.50, stock: 0, barcode: "169" },
   { name: "ARITOS", price: 7.50, stock: 2, barcode: "170" },
   { name: "ARITOS", price: 6.50, stock: 1, barcode: "176" },
   { name: "ARITOS", price: 8.50, stock: 1, barcode: "178" },
@@ -52,28 +90,39 @@ const products = [
   { name: "ARITOS", price: 5.00, stock: 1, barcode: "19009" },
   { name: "ARITOS", price: 7.00, stock: 1, barcode: "190012" },
   { name: "Aritos", price: 2.00, stock: 1, barcode: "1991919" },
+  { name: "ARITOS DE ESTRELLA", price: 3.00, stock: 0, barcode: "019" },
   { name: "ARITOS DE PLATA", price: 5.00, stock: 1, barcode: "02222" },
   { name: "ARITOS DE PLATA", price: 5.00, stock: 1, barcode: "02224" },
   { name: "ARITOS DE PLATA", price: 5.00, stock: 1, barcode: "02226" },
   { name: "ARITOS DE PLATA", price: 5.00, stock: 1, barcode: "02227" },
   { name: "ARITOS DE PLATA", price: 5.00, stock: 1, barcode: "02228" },
+  
+  // COLLARES (52 productos)
+  { name: "Aritos", price: 5.50, stock: 0, barcode: "029" },
   { name: "COLLA DE PLAYA", price: 12.75, stock: 1, barcode: "066" },
   { name: "Collar", price: 9.50, stock: 1, barcode: "10199191" },
   { name: "Collar", price: 10.00, stock: 1, barcode: "17801" },
+  { name: "COLLAR", price: 12.00, stock: 0, barcode: "024" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "025" },
   { name: "COLLAR", price: 8.00, stock: 3, barcode: "028" },
   { name: "COLLAR", price: 15.00, stock: 1, barcode: "034" },
   { name: "COLLAR", price: 11.50, stock: 1, barcode: "039" },
+  { name: "COLLAR", price: 10.00, stock: 0, barcode: "040" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "070" },
   { name: "COLLAR", price: 11.50, stock: 1, barcode: "072" },
   { name: "COLLAR", price: 13.50, stock: 1, barcode: "077" },
+  { name: "COLLAR", price: 0.00, stock: 0, barcode: "083" },
   { name: "COLLAR", price: 13.00, stock: 1, barcode: "084" },
   { name: "COLLAR", price: 12.50, stock: 1, barcode: "090" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "091" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "093" },
+  { name: "COLLAR", price: 12.00, stock: 0, barcode: "094" },
+  { name: "COLLAR", price: 12.00, stock: 0, barcode: "095" },
   { name: "COLLAR", price: 15.00, stock: 1, barcode: "104" },
+  { name: "COLLAR", price: 11.00, stock: 0, barcode: "109" },
   { name: "COLLAR", price: 13.99, stock: 1, barcode: "110" },
   { name: "COLLAR", price: 14.99, stock: 1, barcode: "111" },
+  { name: "COLLAR", price: 12.00, stock: 0, barcode: "113" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "126" },
   { name: "COLLAR", price: 10.00, stock: 1, barcode: "133" },
   { name: "COLLAR", price: 12.00, stock: 2, barcode: "134" },
@@ -101,26 +150,53 @@ const products = [
   { name: "COLLAR DE CRUZ REDONDO", price: 12.00, stock: 1, barcode: "016" },
   { name: "COLLAR DE FLOR", price: 10.50, stock: 1, barcode: "055" },
   { name: "COLLAR DE FLOR", price: 11.50, stock: 1, barcode: "065" },
+  { name: "COLLAR DE PERLAS", price: 13.50, stock: 0, barcode: "048" },
+  { name: "collar de sol", price: 11.00, stock: 0, barcode: "89009" },
+  { name: "COLLAR DOBLE", price: 15.00, stock: 0, barcode: "010" },
   { name: "COLLAR DOBLE", price: 15.00, stock: 1, barcode: "027" },
+  { name: "COLLAR DOBLE DE CORAZON", price: 14.00, stock: 0, barcode: "067" },
+  { name: "Collar mariposa", price: 10.00, stock: 0, barcode: "200" },
   { name: "SET", price: 18.50, stock: 1, barcode: "142" },
   { name: "SET DE COLLAR", price: 13.50, stock: 1, barcode: "078" },
+  
+  // LENTES (2 productos)
   { name: "LENTES", price: 7.50, stock: 1, barcode: "015" },
   { name: "LENTES NEGROS", price: 5.75, stock: 1, barcode: "037" },
+  
+  // PULSERAS (32 productos)
+  { name: "BRACELET", price: 7.00, stock: 0, barcode: "041" },
+  { name: "BRASALET", price: 10.00, stock: 0, barcode: "038" },
   { name: "PULSERA", price: 5.00, stock: 1, barcode: "042" },
   { name: "PULSERA", price: 7.00, stock: 2, barcode: "043" },
   { name: "PULSERA", price: 10.00, stock: 1, barcode: "044" },
+  { name: "PULSERA", price: 6.00, stock: 0, barcode: "064" },
+  { name: "PULSERA", price: 12.00, stock: 0, barcode: "103" },
   { name: "PULSERA", price: 12.99, stock: 1, barcode: "105" },
+  { name: "PULSERA", price: 10.00, stock: 0, barcode: "106" },
+  { name: "PULSERA", price: 10.00, stock: 0, barcode: "112" },
   { name: "PULSERA", price: 12.00, stock: 1, barcode: "146" },
   { name: "PULSERA", price: 13.00, stock: 3, barcode: "159" },
+  { name: "PULSERA", price: 10.00, stock: 0, barcode: "160" },
+  { name: "PULSERA", price: 9.00, stock: 0, barcode: "161" },
+  { name: "PULSERA", price: 12.00, stock: 0, barcode: "167" },
+  { name: "PULSERA", price: 10.00, stock: 0, barcode: "198" },
   { name: "PULSERA", price: 8.00, stock: 1, barcode: "9789" },
   { name: "PULSERA", price: 7.00, stock: 1, barcode: "8967" },
+  { name: "PULSERA", price: 5.50, stock: 0, barcode: "1250" },
   { name: "PULSERA", price: 10.00, stock: 2, barcode: "01126" },
   { name: "PULSERA", price: 10.50, stock: 3, barcode: "02221" },
   { name: "PULSERA", price: 10.00, stock: 1, barcode: "02223" },
   { name: "PULSERA", price: 12.00, stock: 1, barcode: "03331" },
   { name: "PULSERA", price: 12.00, stock: 1, barcode: "03332" },
+  { name: "PULSERA", price: 10.00, stock: 0, barcode: "2001" },
+  { name: "PULSERA AJUSTABLE", price: 10.00, stock: 0, barcode: "018" },
   { name: "PULSERA BASICA", price: 6.00, stock: 1, barcode: "030" },
+  { name: "PULSERA cartier", price: 10.00, stock: 0, barcode: "032" },
+  { name: "PULSERA CARTIER", price: 11.00, stock: 0, barcode: "031" },
   { name: "PULSERA DE TREBOL", price: 12.00, stock: 1, barcode: "01118" },
+  { name: "VAN CLEEF", price: 12.00, stock: 0, barcode: "050" },
+  
+  // RELOJES (30 productos)
   { name: "RELOJ", price: 15.00, stock: 1, barcode: "01111" },
   { name: "RELOJ", price: 20.00, stock: 2, barcode: "01125" },
   { name: "RELOJ", price: 16.00, stock: 1, barcode: "03333" },
@@ -151,6 +227,8 @@ const products = [
   { name: "RELOJ ROJO", price: 15.00, stock: 1, barcode: "01121" },
   { name: "SEET DE RELOJ Y PULSERA", price: 14.00, stock: 1, barcode: "01115" },
   { name: "SET", price: 40.00, stock: 1, barcode: "01112" },
+  
+  // ANILLOS (9 productos)
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "02" },
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "04" },
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "08" },
@@ -159,50 +237,9 @@ const products = [
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "045" },
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "057" },
   { name: "ANILO", price: 10.00, stock: 1, barcode: "059" },
+  
+  // OTROS (3 productos)
   { name: "ACCESORIOS", price: 0.25, stock: 20, barcode: "137" },
   { name: "CEREZA", price: 5.25, stock: 4, barcode: "122" },
-  { name: "TARJETAS NAVIDEÑAS", price: 0.00, stock: 121, barcode: "154" }
-];const cart = [];
-const cartList = document.getElementById("cart-list");
-const totalEl = document.getElementById("total");
-const whatsappBtn = document.getElementById("whatsapp-btn");
-
-function renderProducts() {
-  const container = document.getElementById("products");
-  products.forEach((prod, index) => {
-    const div = document.createElement("div");
-    div.className = "product";
-    div.innerHTML = `
-      <img src="${prod.barcode}.jpg" alt="${prod.name}" onerror="this.style.display='none'" />
-      <h3>${prod.name}</h3>
-      <p>Precio: $${prod.price.toFixed(2)}</p>
-      <p>Stock: ${prod.stock}</p>
-      <button onclick="addToCart(${index})">Agregar</button>
-    `;
-    container.appendChild(div);
-  });
-}
-
-function addToCart(index) {
-  const product = products[index];
-  if (product.stock > 0) {
-    cart.push(product);
-    product.stock--;
-    renderCart();
-  }
-}
-
-function renderCart() {
-  cartList.innerHTML = "";
-  let total = 0;
-  cart.forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-    cartList.appendChild(li);
-    total += item.price;
-  });
-  totalEl.textContent = `Total: $${total.toFixed(2)}`;
-  whatsappBtn.href = `https://wa.me/66711569?text=Hola, quiero comprar: ${cart.map(p => p.name).join(", ")}. Total: $${total.toFixed(2)}`;
-}
-
-renderProducts();
+  { name: "TARJETAS NAVIDEÑAS", price: 0.00, stock: 121, barcode: "154" }
+];

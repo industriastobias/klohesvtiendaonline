@@ -8,7 +8,7 @@ const products = [
   { name: "CARTERA", price: 16.50, stock: 0, barcode: "035", category: "Carteras" },
   { name: "CARTERA", price: 15.00, stock: 0, barcode: "071", category: "Carteras" },
   { name: "CARTERA", price: 10.00, stock: 1, barcode: "073", category: "Carteras" },
-  { name: "CARTERA", price: 13.50, stock: 0, barcode: "077", category: "Carteras" },
+  { name: "CARTERA", price: 13.50, stock: 0, barcode: "00000", category: "Carteras" },
   { name: "CARTERA", price: 18.50, stock: 1, barcode: "086", category: "Carteras" },
   { name: "CARTERA", price: 18.50, stock: 1, barcode: "087", category: "Carteras" },
   { name: "CARTERA", price: 14.99, stock: 1, barcode: "089", category: "Carteras" },
@@ -226,7 +226,7 @@ const products = [
   { name: "RELOJ ROJO", price: 15.00, stock: 1, barcode: "01119", category: "Relojes" },
   { name: "RELOJ ROJO", price: 15.00, stock: 1, barcode: "01121", category: "Relojes" },
   { name: "SEET DE RELOJ Y PULSERA", price: 14.00, stock: 1, barcode: "01115", category: "Relojes" },
-  { name: "SET", price: 40.00, stock: 1, barcode: "01112", category: "Relojes" },
+  { name: "RELOJ SET", price: 40.00, stock: 1, barcode: "01112", category: "Relojes" },
   
   // ANILLOS (9 productos)
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "02", category: "Anillos" },

@@ -1,21 +1,21 @@
-// Configuración general
-export const CONFIG = {
+// ==========================================
+// producto.js - Datos y configuración de productos
+// ==========================================
+
+const PRODUCT_CONFIG = {
     WHATSAPP_NUMBER: '50366711569',
     SHIPPING_COST: 3.75,
     PRODUCTS_PER_PAGE: 20
 };
 
 // Función para determinar el material del producto
-export function getProductMaterial(name, code, category) {
-    // Excluir código 02222 de cualquier material
+function getProductMaterial(name, code, category) {
     if (code === '02222') {
         return null;
     }
-    // Productos de plata específicos
     if (name.toLowerCase().includes('plata') || code.startsWith('02224')) {
         return 'Aguja de Plata italiana 925';
     }
-    // Joyería en general (aritos, collares, pulseras, anillos)
     if (['Aritos', 'Collares', 'Pulseras', 'Anillos'].includes(category)) {
         return 'Acero inoxidable resistente a salpicaduras de agua';
     }
@@ -23,7 +23,7 @@ export function getProductMaterial(name, code, category) {
 }
 
 // Inventario completo de productos (228 productos)
-export const realProducts = [
+const realProducts = [
     // CARTERAS (45 productos)
     { id: 1, name: "Billetera", code: "076", price: 10.00, stock: 0, category: "Carteras", isNew: false },
     { id: 2, name: "Bolso de Mano", code: "088", price: 10.00, stock: 1, category: "Carteras", isNew: false },
@@ -269,4 +269,43 @@ export const realProducts = [
     // OTROS (2 productos)
     { id: 227, name: "Cereza", code: "122", price: 5.25, stock: 4, category: "Otros", isNew: false },
     { id: 228, name: "Tarjetas Navideñas", code: "154", price: 0.00, stock: 121, category: "Otros", isNew: false }
+];
+
+// Mensajes y reseñas (también se pueden mover aquí si quieres)
+const valentineMessages = [
+    "Colección San Valentín",
+    "Piezas únicas para momentos inolvidables",
+    "Regala amor, regala Klohe",
+    "Elegancia en cada detalle"
+];
+
+const customerReviews = [
+    { name: "María G.", text: "Los aretes son hermosos, excelente calidad", product: "Aritos Corazón", stars: 5 },
+    { name: "Carlos M.", text: "Llegó justo a tiempo para el 14 de febrero", product: "Collar Amor", stars: 5 },
+    { name: "Ana L.", text: "La pulsera es preciosa, muy delicada", product: "Pulsera Corazón", stars: 5 },
+    { name: "Pedro S.", text: "Servicio excelente y envío rápido", product: "Cartera Elegante", stars: 5 },
+    { id: 225, name: "Anillo", code: "059", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+    
+    // ACCESORIOS CABELLO (1 producto)
+    { id: 226, name: "Accesorios Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: false },
+    
+    // OTROS (2 productos)
+    { id: 227, name: "Cereza", code: "122", price: 5.25, stock: 4, category: "Otros", isNew: false },
+    { id: 228, name: "Tarjetas Navideñas", code: "154", price: 0.00, stock: 121, category: "Otros", isNew: false }
+];
+
+// Mensajes y reseñas (también se pueden mover aquí si quieres)
+const valentineMessages = [
+    "Colección San Valentín",
+    "Piezas únicas para momentos inolvidables",
+    "Regala amor, regala Klohe",
+    "Elegancia en cada detalle"
+];
+
+const customerReviews = [
+    { name: "María G.", text: "Los aretes son hermosos, excelente calidad", product: "Aritos Corazón", stars: 5 },
+    { name: "Carlos M.", text: "Llegó justo a tiempo para el 14 de febrero", product: "Collar Amor", stars: 5 },
+    { name: "Ana L.", text: "La pulsera es preciosa, muy delicada", product: "Pulsera Corazón", stars: 5 },
+    { name: "Pedro S.", text: "Servicio excelente y envío rápido", product: "Cartera Elegante", stars: 5 },
+    { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba", product: "Reloj Corazón", stars: 5 }
 ];

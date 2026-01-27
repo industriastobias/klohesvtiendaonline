@@ -493,37 +493,41 @@
             letter-spacing: 0.05em;
         }
 
-        /* TOAST NOTIFICATION */
+        /* TOAST NOTIFICATION CENTRADO */
         .toast {
             position: fixed;
-            bottom: 100px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%) translateY(20px);
+            transform: translate(-50%, -50%) scale(0.9);
             background: var(--texto);
             color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 0.9rem;
+            padding: 20px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            gap: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 11000;
             white-space: nowrap;
+            flex-direction: column;
+            text-align: center;
+            min-width: 280px;
+        }
+
+        .toast i {
+            font-size: 2rem;
+            color: var(--rosa-suave);
         }
 
         .toast.show {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .toast i {
-            color: var(--rosa-suave);
+            transform: translate(-50%, -50%) scale(1);
         }
 
         /* Modal vista rápida */
@@ -715,10 +719,7 @@
             background: var(--rosa-oscuro);
         }
 
-        /* ==========================================
-           CARRITO COMPACTO Y FUNCIONAL
-           ========================================== */
-        
+        /* CARRITO COMPACTO */
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -1923,7 +1924,7 @@
         Sin conexión
     </div>
 
-    <!-- TOAST NOTIFICATION -->
+    <!-- TOAST NOTIFICATION CENTRADO -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
         <span>Producto agregado al carrito</span>
@@ -2268,7 +2269,7 @@
         let discountAmount = 0;
         const SHIPPING_PRICE = 3.75;
 
-        // Mostrar Toast
+        // Mostrar Toast CENTRADO por 3 segundos
         function showToast(message = 'Producto agregado al carrito') {
             const toast = document.getElementById('toast');
             toast.querySelector('span').textContent = message;
@@ -2276,7 +2277,7 @@
             
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 2000);
+            }, 3000);
         }
 
         // Agregar al carrito (función mejorada)
@@ -2326,7 +2327,7 @@
             updateCartUI();
         }
 
-        // Calcular totales
+        // Calcular totales CORREGIDO
         function calculateTotals() {
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const shipping = document.getElementById('shipping-checkbox').checked ? SHIPPING_PRICE : 0;
@@ -2387,7 +2388,7 @@
                 `).join('');
             }
             
-            // Actualizar totales
+            // Actualizar totales CORREGIDO
             document.getElementById('cart-subtotal').textContent = `$${totals.subtotal.toFixed(2)}`;
             document.getElementById('cart-total').textContent = `$${totals.total.toFixed(2)}`;
             document.getElementById('checkout-btn-amount').textContent = `$${totals.total.toFixed(2)}`;
@@ -2458,7 +2459,8 @@
             const code = input.value.trim().toUpperCase();
             
             if (code === 'AMOR20') {
-                discountAmount = calculateTotals().subtotal * 0.20;
+                const subtotal = calculateTotals().subtotal;
+                discountAmount = subtotal * 0.20;
                 document.getElementById('applied-coupon-display').classList.add('show');
                 document.getElementById('applied-code').textContent = code;
                 input.value = '';
@@ -2474,21 +2476,37 @@
             updateCartUI();
         }
 
-        // Checkout
+        // Checkout con mensaje de WhatsApp con EMOJIS
         function checkout() {
             if (cart.length === 0) return;
             
             const totals = calculateTotals();
-            let message = '¡Hola! Quiero comprar:%0A%0A';
             
-            cart.forEach(item => {
-                message += `• ${item.name} (${item.variant}) x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}%0A`;
+            // Mensaje con emojis y formato bonito
+            let message = '💎✨ *¡Hola! Quiero realizar un pedido:* ✨💎%0A%0A';
+            message += '🛍️ *Productos:*%0A';
+            message += '─────────────────%0A';
+            
+            cart.forEach((item, index) => {
+                message += `%0A${index + 1}. *${item.name}*%0A`;
+                message += `   🎨 ${item.variant}%0A`;
+                message += `   📦 Cantidad: ${item.quantity}%0A`;
+                message += `   💵 $${(item.price * item.quantity).toFixed(2)}%0A`;
             });
             
-            message += `%0ASubtotal: $${totals.subtotal.toFixed(2)}%0A`;
-            if (totals.shipping > 0) message += `Envío: $${totals.shipping.toFixed(2)}%0A`;
-            if (totals.discount > 0) message += `Descuento: -$${totals.discount.toFixed(2)}%0A`;
-            message += `%0A*Total: $${totals.total.toFixed(2)}*`;
+            message += '%0A─────────────────%0A';
+            message += `%0A💰 *Subtotal:* $${totals.subtotal.toFixed(2)}`;
+            
+            if (totals.shipping > 0) {
+                message += `%0A🚚 *Envío:* $${totals.shipping.toFixed(2)}`;
+            }
+            
+            if (totals.discount > 0) {
+                message += `%0A🏷️ *Descuento:* -$${totals.discount.toFixed(2)}`;
+            }
+            
+            message += `%0A%0A💳 *TOTAL:* $${totals.total.toFixed(2)}`;
+            message += '%0A%0A🙏 ¡Gracias! Espero su confirmación. 💕';
             
             window.open(`https://wa.me/50366711569?text=${message}`, '_blank');
         }

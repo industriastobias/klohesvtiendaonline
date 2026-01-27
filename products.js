@@ -225,7 +225,7 @@ const products = [
   { name: "RELOJ OLD MOENY", price: 15.00, stock: 2, barcode: "01124" },
   { name: "RELOJ ROJO", price: 15.00, stock: 1, barcode: "01119" },
   { name: "RELOJ ROJO", price: 15.00, stock: 1, barcode: "01121" },
-  { name: "SEET DE RELOJ Y PULSERA", price: 14.00, stock: 1, barcode: "01115" },
+  { name: "RELOJ SET", price: 14.00, stock: 1, barcode: "01115" },
   { name: "SET", price: 40.00, stock: 1, barcode: "01112" },
   
   // ANILLOS (9 productos)

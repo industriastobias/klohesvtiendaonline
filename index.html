@@ -1656,20 +1656,56 @@
         </div>
     </header>
 
-    <!-- Menú de Categorías -->
+    <!-- Menú de Categorías - 15 CATEGORÍAS EXACTAS DE TU IMAGEN -->
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="categories-menu" id="categoriesMenu">
         <button class="close-menu" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
         <h3>Categorías</h3>
-        <button class="category-btn active" onclick="filterProducts('todos')">Todos</button>
-        <button class="category-btn" onclick="filterProducts('reloj')">Relojes</button>
-        <button class="category-btn" onclick="filterProducts('cartera')">Carteras</button>
-        <button class="category-btn" onclick="filterProducts('collar')">Collares</button>
-        <button class="category-btn" onclick="filterProducts('aritos')">Aritos</button>
-        <button class="category-btn" onclick="filterProducts('pulsera')">Pulseras</button>
+        
+        <!-- 1. TODOS -->
+        <button class="category-btn active" onclick="filterProducts('todos')">Todas</button>
+        
+        <!-- 2. ACCESORIOS PARA EL CABELLO -->
+        <button class="category-btn" onclick="filterProducts('accesorios-cabello')">Accesorios para el cabello</button>
+        
+        <!-- 3. ANILLOS -->
         <button class="category-btn" onclick="filterProducts('anillo')">Anillos</button>
-        <button class="category-btn" onclick="filterProducts('lentes')">Lentes</button>
-        <button class="category-btn" onclick="filterProducts('arete')">Aretes</button>
+        
+        <!-- 4. ARITOS -->
+        <button class="category-btn" onclick="filterProducts('aritos')">Aritos</button>
+        
+        <!-- 5. BILLETERAS -->
+        <button class="category-btn" onclick="filterProducts('billetera')">Billeteras</button>
+        
+        <!-- 6. CARTERAS -->
+        <button class="category-btn" onclick="filterProducts('cartera')">Carteras</button>
+        
+        <!-- 7. CASE AUDÍFONOS -->
+        <button class="category-btn" onclick="filterProducts('case-audifonos')">Case audífonos</button>
+        
+        <!-- 8. CASE TELÉFONOS -->
+        <button class="category-btn" onclick="filterProducts('case-telefonos')">Case teléfonos</button>
+        
+        <!-- 9. CHOKERS -->
+        <button class="category-btn" onclick="filterProducts('choker')">Chokers</button>
+        
+        <!-- 10. COLLARES -->
+        <button class="category-btn" onclick="filterProducts('collar')">Collares</button>
+        
+        <!-- 11. GENERAL -->
+        <button class="category-btn" onclick="filterProducts('general')">General</button>
+        
+        <!-- 12. LENTES DE SOL -->
+        <button class="category-btn" onclick="filterProducts('lentes-sol')">Lentes de sol</button>
+        
+        <!-- 13. OTROS -->
+        <button class="category-btn" onclick="filterProducts('otros')">Otros</button>
+        
+        <!-- 14. PULSERAS -->
+        <button class="category-btn" onclick="filterProducts('pulsera')">Pulseras</button>
+        
+        <!-- 15. RELOJES -->
+        <button class="category-btn" onclick="filterProducts('reloj')">Relojes</button>
     </div>
 
     <!-- Hero Section -->
@@ -1702,7 +1738,7 @@
     <section class="products">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" id="categoryTitle">Todos los Productos</h2>
+                <h2 class="section-title" id="categoryTitle">Todas</h2>
                 <span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span>
             </div>
             <div class="products-grid" id="productsContainer">
@@ -1832,7 +1868,7 @@
     <div class="newsletter-popup" id="newsletterPopup">
         <button class="newsletter-close" onclick="closeNewsletter()"><i class="fas fa-times"></i></button>
         <h3>¡Bienvenido!</h3>
-        <p>Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín</p>
+        <p>Obtén un <strong>15% de descuento</strong> en tu primera compra de San Valentín</p>
         <div class="newsletter-code">AMOR15</div>
         <p style="font-size: 0.8rem; color: var(--rosa-oscuro);">Usa este código al momento de pagar</p>
     </div>
@@ -1851,7 +1887,7 @@
                 <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()"></div>
             </div>
             <div class="shipping-price" id="shippingPrice" style="display: none;">+$3.75</div>
-            <div class="shipping-desc">Entrega en 2-5 días hábiles</div>
+            <div class="shipping-desc">Entrega en 2-3 días hábiles</div>
         </div>
 
         <div id="cartItems">
@@ -2130,16 +2166,23 @@
             if (searchTerm !== '') {
                 document.getElementById('categoryTitle').textContent = `Búsqueda: "${term}"`;
             } else {
+                // 15 CATEGORÍAS - TÍTULOS PARA BÚSQUEDA
                 const titles = {
-                    'todos': 'Todos los Productos',
-                    'reloj': 'Relojes',
-                    'cartera': 'Carteras',
-                    'collar': 'Collares',
-                    'aritos': 'Aritos',
-                    'pulsera': 'Pulseras',
+                    'todos': 'Todas',
+                    'accesorios-cabello': 'Accesorios para el cabello',
                     'anillo': 'Anillos',
-                    'lentes': 'Lentes',
-                    'arete': 'Aretes'
+                    'aritos': 'Aritos',
+                    'billetera': 'Billeteras',
+                    'cartera': 'Carteras',
+                    'case-audifonos': 'Case audífonos',
+                    'case-telefonos': 'Case teléfonos',
+                    'choker': 'Chokers',
+                    'collar': 'Collares',
+                    'general': 'General',
+                    'lentes-sol': 'Lentes de sol',
+                    'otros': 'Otros',
+                    'pulsera': 'Pulseras',
+                    'reloj': 'Relojes'
                 };
                 document.getElementById('categoryTitle').textContent = titles[currentFilter] || currentFilter;
             }
@@ -2230,16 +2273,23 @@
             });
             event.target.classList.add('active');
             
+            // 15 CATEGORÍAS - TÍTULOS PARA FILTRADO
             const titles = {
-                'todos': 'Todos los Productos',
-                'reloj': 'Relojes',
-                'cartera': 'Carteras',
-                'collar': 'Collares',
-                'aritos': 'Aritos',
-                'pulsera': 'Pulseras',
+                'todos': 'Todas',
+                'accesorios-cabello': 'Accesorios para el cabello',
                 'anillo': 'Anillos',
-                'lentes': 'Lentes',
-                'arete': 'Aretes'
+                'aritos': 'Aritos',
+                'billetera': 'Billeteras',
+                'cartera': 'Carteras',
+                'case-audifonos': 'Case audífonos',
+                'case-telefonos': 'Case teléfonos',
+                'choker': 'Chokers',
+                'collar': 'Collares',
+                'general': 'General',
+                'lentes-sol': 'Lentes de sol',
+                'otros': 'Otros',
+                'pulsera': 'Pulseras',
+                'reloj': 'Relojes'
             };
             document.getElementById('categoryTitle').textContent = titles[category] || category;
             

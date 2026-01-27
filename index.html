@@ -286,7 +286,7 @@
         /* Hero Section - Romántico y minimalista */
         .hero {
             background: linear-gradient(135deg, var(--blanco) 0%, var(--rosa-nude) 100%);
-            padding: 4rem 0;
+            padding: 3rem 0;
             text-align: center;
             position: relative;
             border-bottom: 1px solid var(--rosa-suave);
@@ -310,7 +310,7 @@
         }
 
         .hero-content {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -332,12 +332,76 @@
             font-weight: 300;
             letter-spacing: 2px;
             font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ✨ VERSÍCULO DIARIO */
+        .daily-verse-container {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--rosa-medio);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 0 auto 2rem;
+            max-width: 700px;
+            position: relative;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .verse-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--rosa-viejo);
+            font-weight: 600;
+        }
+
+        .verse-header i {
+            color: var(--dorado);
+        }
+
+        .verse-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--chocolate);
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .verse-reference {
+            font-size: 0.8rem;
+            color: var(--bordo);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .verse-date {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--bordo);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            border-radius: 20px;
+            letter-spacing: 1px;
         }
 
         /* Buscador */
         .search-container {
             max-width: 600px;
-            margin: 2.5rem auto 0;
+            margin: 0 auto;
             position: relative;
         }
 
@@ -1487,11 +1551,20 @@
             }
 
             .hero {
-                padding: 3rem 0;
+                padding: 2rem 0;
             }
 
             .hero h1 {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
+            }
+
+            .daily-verse-container {
+                margin: 0 1rem 1.5rem;
+                padding: 1.2rem;
+            }
+
+            .verse-text {
+                font-size: 1rem;
             }
 
             .products-grid {
@@ -1535,6 +1608,10 @@
         @media (max-width: 480px) {
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .daily-verse-container {
+                padding: 1rem;
             }
         }
 
@@ -1601,6 +1678,17 @@
             <div class="hero-content">
                 <h1>Colección San Valentín</h1>
                 <p>Regalos que hablan desde el corazón</p>
+                
+                <!-- ✨ VERSÍCULO DIARIO -->
+                <div class="daily-verse-container" id="dailyVerseContainer">
+                    <div class="verse-date" id="verseDate"></div>
+                    <div class="verse-header">
+                        <i class="fas fa-book-open"></i>
+                        <span>Versículo de Hoy</span>
+                    </div>
+                    <div class="verse-text" id="verseText"></div>
+                    <div class="verse-reference" id="verseReference"></div>
+                </div>
                 
                 <div class="search-container">
                     <i class="fas fa-search search-icon"></i>
@@ -1744,7 +1832,7 @@
     <div class="newsletter-popup" id="newsletterPopup">
         <button class="newsletter-close" onclick="closeNewsletter()"><i class="fas fa-times"></i></button>
         <h3>¡Bienvenido!</h3>
-        <p>Obtén un <strong>15% de descuento</strong> en tu primera compra de San Valentín</p>
+        <p>Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín</p>
         <div class="newsletter-code">AMOR15</div>
         <p style="font-size: 0.8rem; color: var(--rosa-oscuro);">Usa este código al momento de pagar</p>
     </div>
@@ -1763,7 +1851,7 @@
                 <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()"></div>
             </div>
             <div class="shipping-price" id="shippingPrice" style="display: none;">+$3.75</div>
-            <div class="shipping-desc">Entrega en 2-3 días hábiles</div>
+            <div class="shipping-desc">Entrega en 2-5 días hábiles</div>
         </div>
 
         <div id="cartItems">
@@ -1796,6 +1884,164 @@
     <script src="products.js"></script>
     
     <script>
+        // 📖 ARRAY DE 31 VERSÍCULOS (uno por cada día del mes)
+        const dailyVerses = [
+            {
+                text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.",
+                reference: "1 Corintios 13:4"
+            },
+            {
+                text: "No me mandes lejos de ti, no me quites tu santo espíritu. Vuélveme el gozo de tu salvación.",
+                reference: "Salmo 51:11-12"
+            },
+            {
+                text: "Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.",
+                reference: "Jeremías 29:11"
+            },
+            {
+                text: "El Señor es mi pastor, nada me faltará. En verdes pastos me hace descansar.",
+                reference: "Salmo 23:1-2"
+            },
+            {
+                text: "Todo lo puedo en Cristo que me fortalece.",
+                reference: "Filipenses 4:13"
+            },
+            {
+                text: "Confía en el Señor de todo corazón, y no en tu propia inteligencia.",
+                reference: "Proverbios 3:5"
+            },
+            {
+                text: "Pues donde esté tu tesoro, allí estará también tu corazón.",
+                reference: "Mateo 6:21"
+            },
+            {
+                text: "El Señor peleará por ustedes; ustedes solo tengan tranquilidad.",
+                reference: "Éxodo 14:14"
+            },
+            {
+                text: "Encomienda al Señor tu camino; confía en él, y él actuará.",
+                reference: "Salmo 37:5"
+            },
+            {
+                text: "El gozo del Señor es tu fortaleza.",
+                reference: "Nehemías 8:10"
+            },
+            {
+                text: "Bendeciré al Señor en todo momento; su alabanza estará siempre en mis labios.",
+                reference: "Salmo 34:1"
+            },
+            {
+                text: "Pero los que esperan en el Señor renovarán sus fuerzas; levantarán alas como las águilas.",
+                reference: "Isaías 40:31"
+            },
+            {
+                text: "Gracias sean dadas a Dios, que nos da la victoria por medio de nuestro Señor Jesucristo.",
+                reference: "1 Corintios 15:57"
+            },
+            {
+                text: "El Señor es mi luz y mi salvación; ¿de quién temeré?",
+                reference: "Salmo 27:1"
+            },
+            {
+                text: "Si Dios está por nosotros, ¿quién estará contra nosotros?",
+                reference: "Romanos 8:31"
+            },
+            {
+                text: "Porque el salario del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús.",
+                reference: "Romanos 6:23"
+            },
+            {
+                text: "Vengan a mí todos los que están cansados y agobiados, y yo les daré descanso.",
+                reference: "Mateo 11:28"
+            },
+            {
+                text: "Dios es nuestro amparo y nuestra fortaleza, nuestra ayuda segura en momentos de angustia.",
+                reference: "Salmo 46:1"
+            },
+            {
+                text: "Porque somos hechura de Dios, creados en Cristo Jesús para buenas obras.",
+                reference: "Efesios 2:10"
+            },
+            {
+                text: "No te preocupes por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias.",
+                reference: "Filipenses 4:6"
+            },
+            {
+                text: "El Señor es bueno; es su refugio en el día de la angustia, y protege a los que en él confían.",
+                reference: "Nahúm 1:7"
+            },
+            {
+                text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree no se pierda, mas tenga vida eterna.",
+                reference: "Juan 3:16"
+            },
+            {
+                text: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios.",
+                reference: "Isaías 41:10"
+            },
+            {
+                text: "Buscad primero el reino de Dios y su justicia, y todas estas cosas os serán añadidas.",
+                reference: "Mateo 6:33"
+            },
+            {
+                text: "Grande es el Señor y digno de toda alabanza; su grandeza es insondable.",
+                reference: "Salmo 145:3"
+            },
+            {
+                text: "El amor nunca deja de ser. Las profecías desaparecerán, los dones de lenguas cesarán, el conocimiento pasará.",
+                reference: "1 Corintios 13:8"
+            },
+            {
+                text: "Porque el Espíritu que Dios nos ha dado no nos hace tímidos, sino que nos da poder, amor y dominio propio.",
+                reference: "2 Timoteo 1:7"
+            },
+            {
+                text: "En paz me acuesto y enseguida me duermo, porque tú solo, Señor, me haces vivir confiado.",
+                reference: "Salmo 4:8"
+            },
+            {
+                text: "Pero espero en el Señor; esperaré al Dios de mi salvación. El Dios mío me oirá.",
+                reference: "Miqueas 7:7"
+            },
+            {
+                text: "El Señor cumplirá su propósito en mí. Tu amor, Señor, es eterno; no abandones la obra de tus manos.",
+                reference: "Salmo 138:8"
+            },
+            {
+                text: "Cántenle, canten salmos a él; hablen de todas sus maravillas.",
+                reference: "1 Crónicas 16:9"
+            }
+        ];
+
+        // 📅 FUNCIÓN PARA OBTENER EL VERSÍCULO DEL DÍA
+        function getDailyVerse() {
+            const today = new Date();
+            const dayOfMonth = today.getDate(); // Obtiene el día del mes (1-31)
+            const month = today.toLocaleString('es-ES', { month: 'long' });
+            const year = today.getFullYear();
+            
+            // Ajustar índice (array empieza en 0, días en 1)
+            const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
+            const verse = dailyVerses[verseIndex];
+            
+            // Formatear fecha
+            const formattedDate = `${dayOfMonth} de ${month} de ${year}`;
+            
+            return {
+                ...verse,
+                date: formattedDate,
+                dayNumber: dayOfMonth
+            };
+        }
+
+        // 🎯 MOSTRAR VERSÍCULO EN LA PÁGINA
+        function displayDailyVerse() {
+            const verse = getDailyVerse();
+            
+            document.getElementById('verseDate').textContent = verse.date;
+            document.getElementById('verseText').textContent = verse.text;
+            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
+        }
+
         let currentFilter = 'todos';
         let cart = [];
         let currentPage = 0;
@@ -1825,6 +2071,9 @@
         ];
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar versículo del día
+            displayDailyVerse();
+            
             initTestimonials();
             filteredProducts = [...products];
             renderProducts();

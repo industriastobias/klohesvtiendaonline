@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KLOHE -Valentine’s Day </title>
+    <title>KLOHE - Valentine's Day Collection</title>
     
     <!-- 💗 Corazón creciente -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- ... resto de tu head ... -->
-</head>
+    
     <style>
         * {
             margin: 0;
@@ -21,32 +20,45 @@
         }
 
         :root {
-            --blanco: #ffffff;
-            --gris-fondo: #f8f8f8;
-            --gris-suave: #e5e5e5;
-            --gris-medio: #cccccc;
-            --gris-texto: #666666;
-            --gris-oscuro: #2a2a2a;
-            --negro: #1a1a1a;
-            --acento: #8b7355;
+            /* Paleta Valentine's Minimalista */
+            --blanco: #FDF8F6;
+            --rosa-nude: #F5E6E0;
+            --rosa-suave: #E8D5D0;
+            --rosa-medio: #D4A59A;
+            --rosa-viejo: #B5838D;
+            --rosa-oscuro: #9B6B7F;
+            --bordo: #6D435A;
+            --chocolate: #4A3B3A;
+            --negro-suave: #2C2424;
+            --dorado: #C9A87C;
+            
+            /* Variables originales mapeadas a la nueva paleta */
+            --gris-fondo: var(--blanco);
+            --gris-suave: var(--rosa-nude);
+            --gris-medio: var(--rosa-suave);
+            --gris-texto: var(--rosa-oscuro);
+            --gris-oscuro: var(--chocolate);
+            --negro: var(--negro-suave);
+            --acento: var(--dorado);
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--blanco);
-            color: var(--negro);
+            color: var(--negro-suave);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Header */
+        /* Header - Elegante y limpio */
         header {
-            background: var(--blanco);
+            background: rgba(253, 248, 246, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1.2rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid var(--gris-suave);
+            border-bottom: 1px solid var(--rosa-suave);
         }
 
         .container {
@@ -62,13 +74,29 @@
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--bordo);
             text-decoration: none;
-            font-weight: 500;
-            letter-spacing: 6px;
+            font-weight: 600;
+            letter-spacing: 8px;
             text-transform: uppercase;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '♥';
+            position: absolute;
+            top: -5px;
+            right: -20px;
+            font-size: 0.8rem;
+            color: var(--rosa-viejo);
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
         }
 
         .nav-right {
@@ -77,7 +105,7 @@
             gap: 1.5rem;
         }
 
-        /* Redes Sociales en Header */
+        /* Redes Sociales */
         .social-header {
             display: flex;
             gap: 0.8rem;
@@ -89,21 +117,21 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border: 1px solid var(--gris-medio);
+            border: 1px solid var(--rosa-medio);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: var(--gris-oscuro);
+            color: var(--rosa-oscuro);
             font-size: 0.9rem;
             transition: all 0.3s ease;
             background: transparent;
         }
 
         .social-btn:hover {
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
-            border-color: var(--negro);
+            border-color: var(--bordo);
             transform: translateY(-2px);
         }
 
@@ -127,7 +155,7 @@
         .menu-toggle span {
             width: 22px;
             height: 2px;
-            background: var(--negro);
+            background: var(--bordo);
             transition: all 0.3s ease;
             display: block;
         }
@@ -156,7 +184,7 @@
             padding: 5rem 2rem 2rem;
             transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
-            border-right: 2px solid var(--gris-suave);
+            border-right: 2px solid var(--rosa-suave);
         }
 
         .categories-menu.active {
@@ -164,14 +192,14 @@
         }
 
         .categories-menu h3 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+            color: var(--bordo);
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
             font-weight: 500;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            border-bottom: 1px solid var(--gris-suave);
+            border-bottom: 1px solid var(--rosa-suave);
             padding-bottom: 0.8rem;
         }
 
@@ -182,11 +210,11 @@
             margin-bottom: 0.3rem;
             background: transparent;
             border: none;
-            border-bottom: 1px solid var(--gris-suave);
+            border-bottom: 1px solid var(--rosa-suave);
             text-align: left;
             font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 400;
@@ -196,9 +224,9 @@
 
         .category-btn:hover,
         .category-btn.active {
-            color: var(--negro);
+            color: var(--bordo);
             padding-left: 1rem;
-            border-bottom-color: var(--negro);
+            border-bottom-color: var(--bordo);
         }
 
         .close-menu {
@@ -209,7 +237,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--negro);
+            color: var(--bordo);
             width: 40px;
             height: 40px;
             display: flex;
@@ -228,21 +256,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--gris-medio);
+            border: 1px solid var(--rosa-medio);
             border-radius: 50%;
+            color: var(--bordo);
         }
 
         .cart-icon:hover {
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
-            border-color: var(--negro);
+            border-color: var(--bordo);
         }
 
         .cart-count {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
             border-radius: 50%;
             width: 18px;
@@ -254,41 +283,61 @@
             font-weight: 600;
         }
 
-        /* Hero Section - Más compacto y elegante */
+        /* Hero Section - Romántico y minimalista */
         .hero {
-            background: var(--gris-fondo);
-            padding: 2.5rem 0;
+            background: linear-gradient(135deg, var(--blanco) 0%, var(--rosa-nude) 100%);
+            padding: 4rem 0;
             text-align: center;
             position: relative;
-            border-bottom: 1px solid var(--gris-suave);
+            border-bottom: 1px solid var(--rosa-suave);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,165,154,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .hero-content {
             max-width: 600px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            color: var(--negro);
-            margin-bottom: 0.3rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--bordo);
+            margin-bottom: 0.5rem;
             font-weight: 400;
             letter-spacing: 4px;
             text-transform: uppercase;
         }
 
         .hero p {
-            font-size: 0.85rem;
-            color: var(--gris-texto);
+            font-size: 0.9rem;
+            color: var(--rosa-oscuro);
             font-weight: 300;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-style: italic;
         }
 
-        /* 🔍 Buscador */
+        /* Buscador */
         .search-container {
             max-width: 600px;
-            margin: 2rem auto 0;
+            margin: 2.5rem auto 0;
             position: relative;
         }
 
@@ -296,25 +345,26 @@
             width: 100%;
             padding: 1rem 1.5rem;
             padding-left: 3rem;
-            border: 1px solid var(--gris-suave);
-            background: var(--blanco);
+            border: 1px solid var(--rosa-medio);
+            background: rgba(255,255,255,0.8);
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             transition: all 0.3s ease;
-            border-radius: 0;
+            border-radius: 30px;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--negro);
+            border-color: var(--bordo);
+            box-shadow: 0 0 0 3px rgba(157, 107, 127, 0.1);
         }
 
         .search-icon {
             position: absolute;
-            left: 1rem;
+            left: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
         }
 
         /* Products Section */
@@ -329,13 +379,13 @@
             align-items: center;
             margin-bottom: 2.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--gris-suave);
+            border-bottom: 1px solid var(--rosa-suave);
         }
 
         .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--bordo);
             font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -343,7 +393,7 @@
 
         .products-count {
             font-size: 0.8rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             font-weight: 400;
             letter-spacing: 1px;
         }
@@ -351,29 +401,31 @@
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .product-card {
             background: var(--blanco);
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             position: relative;
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--gris-suave);
+            border: 1px solid var(--rosa-suave);
+            border-radius: 4px;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(157, 107, 127, 0.15);
+            border-color: var(--rosa-medio);
         }
 
         .product-image-container {
             position: relative;
             width: 100%;
             aspect-ratio: 1/1;
-            background: var(--gris-fondo);
+            background: var(--rosa-nude);
             overflow: hidden;
             cursor: pointer;
         }
@@ -382,39 +434,40 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.6s ease;
         }
 
         .product-card:hover .product-image {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         .stock-badge {
             position: absolute;
             top: 0.8rem;
             right: 0.8rem;
-            background: var(--blanco);
-            color: var(--negro);
-            padding: 0.3rem 0.6rem;
+            background: rgba(255,255,255,0.95);
+            color: var(--bordo);
+            padding: 0.3rem 0.8rem;
             font-size: 0.7rem;
             font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
-            border: 1px solid var(--gris-medio);
+            border: 1px solid var(--rosa-medio);
+            border-radius: 20px;
         }
 
         .product-info {
-            padding: 1rem;
+            padding: 1.2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            border-top: 1px solid var(--gris-suave);
+            border-top: 1px solid var(--rosa-suave);
         }
 
         .product-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--negro-suave);
             margin-bottom: 0.3rem;
             text-transform: capitalize;
             line-height: 1.3;
@@ -424,13 +477,12 @@
 
         .product-barcode {
             font-size: 0.75rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             margin-bottom: 0.8rem;
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
         }
 
-        /* Fila de precio y ojo */
         .product-row {
             display: flex;
             justify-content: space-between;
@@ -438,12 +490,12 @@
             margin-top: auto;
             margin-bottom: 0.8rem;
             padding-top: 0.8rem;
-            border-top: 1px solid var(--gris-suave);
+            border-top: 1px solid var(--rosa-suave);
         }
 
         .product-price {
-            font-size: 1.1rem;
-            color: var(--negro);
+            font-size: 1.2rem;
+            color: var(--bordo);
             font-weight: 600;
             letter-spacing: 1px;
         }
@@ -452,7 +504,7 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            border: 1px solid var(--gris-medio);
+            border: 1px solid var(--rosa-medio);
             background: transparent;
             cursor: pointer;
             display: flex;
@@ -460,19 +512,19 @@
             justify-content: center;
             font-size: 0.9rem;
             transition: all 0.3s ease;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
         }
 
         .eye-btn:hover {
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
-            border-color: var(--negro);
+            border-color: var(--bordo);
         }
 
         .btn-add-cart {
             width: 100%;
-            padding: 0.8rem;
-            background: var(--negro);
+            padding: 0.9rem;
+            background: var(--bordo);
             color: white;
             border: none;
             cursor: pointer;
@@ -482,15 +534,16 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
+            border-radius: 0 0 4px 4px;
         }
 
         .btn-add-cart:hover {
-            background: var(--gris-oscuro);
+            background: var(--rosa-viejo);
         }
 
         .btn-add-cart:disabled {
-            background: var(--gris-suave);
-            color: var(--gris-texto);
+            background: var(--rosa-suave);
+            color: var(--rosa-oscuro);
             cursor: not-allowed;
         }
 
@@ -499,14 +552,14 @@
             text-align: center;
             margin-top: 3rem;
             padding-top: 2rem;
-            border-top: 1px solid var(--gris-suave);
+            border-top: 1px solid var(--rosa-suave);
         }
 
         .btn-load-more {
             padding: 1rem 3rem;
             background: transparent;
-            color: var(--negro);
-            border: 1px solid var(--negro);
+            color: var(--bordo);
+            border: 1px solid var(--bordo);
             cursor: pointer;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -514,19 +567,20 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
+            border-radius: 30px;
         }
 
         .btn-load-more:hover {
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
         }
 
-        /* Sección de Testimonios - Carrusel */
+        /* Sección de Testimonios */
         .testimonials-section {
-            background: var(--gris-fondo);
+            background: linear-gradient(to bottom, var(--rosa-nude), var(--blanco));
             padding: 4rem 0;
-            border-top: 1px solid var(--gris-suave);
-            border-bottom: 1px solid var(--gris-suave);
+            border-top: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--rosa-suave);
         }
 
         .testimonials-header {
@@ -535,9 +589,9 @@
         }
 
         .testimonials-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--bordo);
             font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -545,9 +599,10 @@
         }
 
         .testimonials-header p {
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             font-size: 0.9rem;
             letter-spacing: 1px;
+            font-style: italic;
         }
 
         .testimonial-carousel {
@@ -569,13 +624,27 @@
 
         .testimonial-card {
             background: var(--blanco);
-            padding: 2rem;
-            border: 1px solid var(--gris-suave);
+            padding: 2.5rem;
+            border: 1px solid var(--rosa-suave);
             text-align: center;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--rosa-suave);
+            opacity: 0.5;
+            line-height: 1;
         }
 
         .testimonial-stars {
-            color: var(--acento);
+            color: var(--dorado);
             font-size: 1.1rem;
             margin-bottom: 1rem;
             letter-spacing: 2px;
@@ -583,7 +652,7 @@
 
         .testimonial-text {
             font-size: 0.95rem;
-            color: var(--gris-oscuro);
+            color: var(--chocolate);
             line-height: 1.8;
             margin-bottom: 1.5rem;
             font-style: italic;
@@ -591,14 +660,14 @@
 
         .testimonial-author {
             font-weight: 600;
-            color: var(--negro);
+            color: var(--bordo);
             font-size: 0.9rem;
             letter-spacing: 1px;
         }
 
         .testimonial-date {
             font-size: 0.75rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             margin-top: 0.3rem;
         }
 
@@ -613,20 +682,20 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            border: 1px solid var(--gris-medio);
+            border: 1px solid var(--rosa-medio);
             background: transparent;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
         }
 
         .carousel-btn:hover {
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
-            border-color: var(--negro);
+            border-color: var(--bordo);
         }
 
         .carousel-dots {
@@ -640,29 +709,30 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--gris-medio);
+            background: var(--rosa-medio);
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .dot.active {
-            background: var(--negro);
+            background: var(--bordo);
             transform: scale(1.2);
         }
 
         /* Caja de Comentarios */
         .comment-box {
             background: var(--blanco);
-            padding: 2rem;
-            border: 1px solid var(--gris-suave);
+            padding: 2.5rem;
+            border: 1px solid var(--rosa-suave);
             max-width: 600px;
             margin: 0 auto;
+            border-radius: 4px;
         }
 
         .comment-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--bordo);
             margin-bottom: 1.5rem;
             text-align: center;
             letter-spacing: 2px;
@@ -683,7 +753,7 @@
 
         .form-group label {
             font-size: 0.8rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -692,18 +762,20 @@
         .form-group textarea,
         .form-group select {
             padding: 0.8rem;
-            border: 1px solid var(--gris-suave);
+            border: 1px solid var(--rosa-suave);
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
             background: transparent;
+            border-radius: 4px;
         }
 
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--negro);
+            border-color: var(--bordo);
+            box-shadow: 0 0 0 3px rgba(157, 107, 127, 0.1);
         }
 
         .form-group textarea {
@@ -713,7 +785,7 @@
 
         .btn-submit {
             padding: 1rem;
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
             border: none;
             cursor: pointer;
@@ -723,10 +795,11 @@
             font-size: 0.8rem;
             transition: all 0.3s;
             margin-top: 0.5rem;
+            border-radius: 30px;
         }
 
         .btn-submit:hover {
-            background: var(--gris-oscuro);
+            background: var(--rosa-viejo);
         }
 
         /* Modal de Vista Previa */
@@ -737,7 +810,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.98);
+            background: rgba(253, 248, 246, 0.98);
             z-index: 3000;
             padding: 2rem;
             overflow-y: auto;
@@ -758,7 +831,9 @@
             gap: 3rem;
             position: relative;
             padding: 2rem;
-            border: 1px solid var(--gris-suave);
+            border: 1px solid var(--rosa-suave);
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(157, 107, 127, 0.2);
         }
 
         .preview-close {
@@ -769,7 +844,7 @@
             border: none;
             font-size: 2rem;
             cursor: pointer;
-            color: var(--negro);
+            color: var(--bordo);
             width: 44px;
             height: 44px;
             display: flex;
@@ -780,10 +855,11 @@
 
         .preview-image-container {
             aspect-ratio: 1/1;
-            background: var(--gris-fondo);
+            background: var(--rosa-nude);
             overflow: hidden;
-            border: 1px solid var(--gris-suave);
+            border: 1px solid var(--rosa-suave);
             cursor: zoom-in;
+            border-radius: 4px;
         }
 
         .preview-image-container.zoomed {
@@ -809,9 +885,9 @@
         }
 
         .preview-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--bordo);
             margin-bottom: 0.5rem;
             font-weight: 500;
             letter-spacing: 2px;
@@ -819,20 +895,21 @@
 
         .preview-barcode {
             font-size: 0.9rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             margin-bottom: 1.5rem;
             font-family: 'Courier New', monospace;
             letter-spacing: 2px;
             padding: 0.4rem 0.8rem;
-            background: var(--gris-fondo);
+            background: var(--rosa-nude);
             display: inline-block;
-            border: 1px solid var(--gris-suave);
+            border: 1px solid var(--rosa-suave);
             width: fit-content;
+            border-radius: 4px;
         }
 
         .preview-price {
-            font-size: 1.8rem;
-            color: var(--negro);
+            font-size: 2rem;
+            color: var(--bordo);
             font-weight: 600;
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
@@ -840,7 +917,7 @@
 
         .preview-stock {
             font-size: 0.85rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             margin-bottom: 2rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -848,7 +925,7 @@
 
         .preview-add-btn {
             padding: 1rem 2rem;
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
             border: none;
             cursor: pointer;
@@ -859,15 +936,16 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             width: fit-content;
+            border-radius: 30px;
         }
 
         .preview-add-btn:hover {
-            background: var(--gris-oscuro);
+            background: var(--rosa-viejo);
         }
 
         .preview-add-btn:disabled {
-            background: var(--gris-suave);
-            color: var(--gris-texto);
+            background: var(--rosa-suave);
+            color: var(--rosa-oscuro);
             cursor: not-allowed;
         }
 
@@ -884,7 +962,7 @@
             padding: 2rem;
             overflow-y: auto;
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 2px solid var(--gris-suave);
+            border-left: 2px solid var(--rosa-suave);
         }
 
         .cart-modal.active {
@@ -898,12 +976,12 @@
             align-items: center;
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--gris-suave);
+            border-bottom: 1px solid var(--rosa-suave);
         }
 
         .cart-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+            color: var(--bordo);
             font-size: 1.5rem;
             font-weight: 500;
             letter-spacing: 2px;
@@ -915,7 +993,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--negro);
+            color: var(--bordo);
             width: 40px;
             height: 40px;
             display: flex;
@@ -925,10 +1003,11 @@
 
         /* Opción de Envío */
         .shipping-option {
-            background: var(--gris-fondo);
+            background: var(--rosa-nude);
             padding: 1.2rem;
             margin-bottom: 1.5rem;
-            border: 1px solid var(--gris-suave);
+            border: 1px solid var(--rosa-suave);
+            border-radius: 4px;
         }
 
         .shipping-header {
@@ -941,7 +1020,7 @@
         .shipping-title {
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--negro);
+            color: var(--bordo);
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -950,14 +1029,14 @@
             position: relative;
             width: 50px;
             height: 26px;
-            background: var(--gris-medio);
+            background: var(--rosa-medio);
             border-radius: 13px;
             cursor: pointer;
             transition: background 0.3s;
         }
 
         .shipping-toggle.active {
-            background: var(--negro);
+            background: var(--bordo);
         }
 
         .shipping-toggle::after {
@@ -978,13 +1057,13 @@
 
         .shipping-price {
             font-size: 1.1rem;
-            color: var(--negro);
+            color: var(--bordo);
             font-weight: 600;
         }
 
         .shipping-desc {
             font-size: 0.8rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             margin-top: 0.3rem;
         }
 
@@ -993,17 +1072,18 @@
             gap: 1rem;
             margin-bottom: 1.2rem;
             padding-bottom: 1.2rem;
-            border-bottom: 1px solid var(--gris-suave);
+            border-bottom: 1px solid var(--rosa-suave);
             align-items: center;
         }
 
         .cart-item-image {
             width: 70px;
             height: 70px;
-            background: var(--gris-fondo);
+            background: var(--rosa-nude);
             overflow: hidden;
             flex-shrink: 0;
-            border: 1px solid var(--gris-suave);
+            border: 1px solid var(--rosa-suave);
+            border-radius: 4px;
         }
 
         .cart-item-image img {
@@ -1017,8 +1097,8 @@
         }
 
         .cart-item-details h4 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+            color: var(--bordo);
             margin-bottom: 0.2rem;
             font-size: 1rem;
             font-weight: 500;
@@ -1027,13 +1107,13 @@
 
         .cart-item-code {
             font-size: 0.75rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             font-family: 'Courier New', monospace;
             margin-bottom: 0.3rem;
         }
 
         .cart-item-details p {
-            color: var(--negro);
+            color: var(--bordo);
             font-weight: 500;
             font-size: 0.9rem;
         }
@@ -1041,7 +1121,7 @@
         .remove-item {
             background: none;
             border: none;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             cursor: pointer;
             font-size: 1rem;
             padding: 0.4rem;
@@ -1054,12 +1134,12 @@
         }
 
         .remove-item:hover {
-            color: #dc3545;
+            color: var(--bordo);
         }
 
         .cart-empty {
             text-align: center;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             padding: 3rem 0;
             font-style: italic;
         }
@@ -1067,7 +1147,7 @@
         .cart-summary {
             margin-top: 1.5rem;
             padding-top: 1rem;
-            border-top: 1px solid var(--gris-suave);
+            border-top: 1px solid var(--rosa-suave);
         }
 
         .summary-row {
@@ -1075,16 +1155,16 @@
             justify-content: space-between;
             margin-bottom: 0.8rem;
             font-size: 0.9rem;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
         }
 
         .cart-total {
             margin-top: 1rem;
             padding-top: 1rem;
-            border-top: 2px solid var(--negro);
+            border-top: 2px solid var(--bordo);
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--negro);
+            color: var(--bordo);
             display: flex;
             justify-content: space-between;
             margin-bottom: 1.5rem;
@@ -1094,7 +1174,7 @@
         .btn-whatsapp {
             width: 100%;
             padding: 1.1rem;
-            background: #25d366;
+            background: var(--bordo);
             color: white;
             border: none;
             cursor: pointer;
@@ -1109,10 +1189,11 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
+            border-radius: 30px;
         }
 
         .btn-whatsapp:hover {
-            background: #128c7e;
+            background: var(--rosa-viejo);
         }
 
         .overlay {
@@ -1122,7 +1203,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
+            background: rgba(44, 36, 36, 0.4);
             z-index: 1500;
             backdrop-filter: blur(2px);
         }
@@ -1138,7 +1219,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
+            background: rgba(44, 36, 36, 0.4);
             z-index: 1400;
             backdrop-filter: blur(2px);
         }
@@ -1147,14 +1228,14 @@
             display: block;
         }
 
-        /* 💬 WhatsApp Flotante */
+        /* WhatsApp Flotante */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
             right: 30px;
             width: 60px;
             height: 60px;
-            background: #25d366;
+            background: var(--bordo);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1163,20 +1244,21 @@
             font-size: 1.8rem;
             cursor: pointer;
             z-index: 9999;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 12px rgba(157, 107, 127, 0.4);
             transition: all 0.3s ease;
             text-decoration: none;
         }
 
         .whatsapp-float:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            box-shadow: 0 6px 20px rgba(157, 107, 127, 0.6);
+            background: var(--rosa-viejo);
         }
 
         .whatsapp-tooltip {
             position: absolute;
             right: 70px;
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 4px;
@@ -1194,7 +1276,7 @@
             right: 75px;
         }
 
-        /* 📧 Newsletter Popup */
+        /* Newsletter Popup */
         .newsletter-popup {
             position: fixed;
             top: 50%;
@@ -1202,7 +1284,7 @@
             transform: translate(-50%, -50%) scale(0.9);
             background: var(--blanco);
             padding: 2.5rem;
-            border: 2px solid var(--negro);
+            border: 2px solid var(--rosa-medio);
             z-index: 5000;
             max-width: 400px;
             width: 90%;
@@ -1210,7 +1292,8 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(157, 107, 127, 0.3);
+            border-radius: 8px;
         }
 
         .newsletter-popup.active {
@@ -1220,31 +1303,32 @@
         }
 
         .newsletter-popup h3 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--negro);
+            color: var(--bordo);
             margin-bottom: 0.5rem;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .newsletter-popup p {
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
             line-height: 1.6;
         }
 
         .newsletter-code {
-            background: var(--gris-fondo);
-            border: 2px dashed var(--negro);
+            background: var(--rosa-nude);
+            border: 2px dashed var(--bordo);
             padding: 1rem;
             font-family: 'Courier New', monospace;
             font-size: 1.2rem;
             font-weight: bold;
-            color: var(--negro);
+            color: var(--bordo);
             margin: 1rem 0;
             letter-spacing: 2px;
+            border-radius: 4px;
         }
 
         .newsletter-close {
@@ -1255,7 +1339,7 @@
             border: none;
             font-size: 1.2rem;
             cursor: pointer;
-            color: var(--gris-texto);
+            color: var(--rosa-oscuro);
             width: 30px;
             height: 30px;
             display: flex;
@@ -1269,7 +1353,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(44, 36, 36, 0.5);
             z-index: 4999;
             opacity: 0;
             visibility: hidden;
@@ -1283,7 +1367,7 @@
 
         /* Footer */
         footer {
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
             padding: 4rem 0 1.5rem;
         }
@@ -1296,7 +1380,7 @@
         }
 
         .footer-section h4 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             color: white;
             margin-bottom: 1.2rem;
             font-size: 1.1rem;
@@ -1309,7 +1393,7 @@
 
         .footer-section p,
         .footer-section a {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
             font-size: 0.85rem;
             line-height: 2;
@@ -1337,11 +1421,12 @@
             justify-content: center;
             font-size: 1rem;
             transition: all 0.3s;
+            color: white;
         }
 
         .social-footer a:hover {
             background: white;
-            color: var(--negro);
+            color: var(--bordo);
             border-color: white;
             transform: translateY(-2px);
         }
@@ -1350,7 +1435,7 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 1.5rem;
             text-align: center;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.6);
             font-size: 0.8rem;
             letter-spacing: 1px;
         }
@@ -1360,7 +1445,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--negro);
+            background: var(--bordo);
             color: white;
             padding: 1rem 2rem;
             z-index: 4000;
@@ -1371,7 +1456,8 @@
             font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
-            border-left: 3px solid var(--acento);
+            border-left: 3px solid var(--dorado);
+            border-radius: 4px;
         }
 
         .notification.show {
@@ -1392,8 +1478,8 @@
             }
 
             .logo {
-                font-size: 1.6rem;
-                letter-spacing: 3px;
+                font-size: 1.8rem;
+                letter-spacing: 4px;
             }
 
             .social-header {
@@ -1401,14 +1487,13 @@
             }
 
             .hero {
-                padding: 2rem 0;
+                padding: 3rem 0;
             }
 
             .hero h1 {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
             }
 
-            /* DOS FILAS EN MÓVIL - COMO PEDISTE */
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
@@ -1448,7 +1533,6 @@
         }
 
         @media (max-width: 480px) {
-            /* Mantener 2 columnas incluso en pantallas muy pequeñas */
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1469,7 +1553,6 @@
             <nav>
                 <a href="#" class="logo">KLOHE</a>
                 <div class="nav-right">
-                    <!-- Redes Sociales con Iconos Reales -->
                     <div class="social-header">
                         <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram">
                             <i class="fab fa-instagram"></i>
@@ -1512,17 +1595,16 @@
         <button class="category-btn" onclick="filterProducts('arete')">Aretes</button>
     </div>
 
-    <!-- Hero Section Compacto -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Colección Exclusiva</h1>
-                <p>Descubre piezas únicas seleccionadas para ti</p>
+                <h1>Colección San Valentín</h1>
+                <p>Regalos que hablan desde el corazón</p>
                 
-                <!-- 🔍 Buscador -->
                 <div class="search-container">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar por nombre o código de producto..." oninput="searchProducts(this.value)">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar el regalo perfecto..." oninput="searchProducts(this.value)">
                 </div>
             </div>
         </div>
@@ -1546,12 +1628,12 @@
         </div>
     </section>
 
-    <!-- Sección de Testimonios - Carrusel -->
+    <!-- Sección de Testimonios -->
     <section class="testimonials-section">
         <div class="container">
             <div class="testimonials-header">
-                <h2>Lo que dicen nuestros clientes</h2>
-                <p>Experiencias reales de quienes confían en nosotros</p>
+                <h2>Historias de Amor</h2>
+                <p>Lo que nuestros clientes comparten</p>
             </div>
             
             <div class="testimonial-carousel">
@@ -1565,9 +1647,8 @@
                 <div class="carousel-dots" id="carouselDots"></div>
             </div>
 
-            <!-- Caja de Comentarios -->
             <div class="comment-box">
-                <h3>Deja tu comentario</h3>
+                <h3>Comparte tu historia</h3>
                 <form class="comment-form" onsubmit="submitComment(event)">
                     <div class="form-group">
                         <label>Nombre</label>
@@ -1588,8 +1669,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Tu comentario</label>
-                        <textarea required placeholder="Cuéntanos tu experiencia..."></textarea>
+                        <label>Tu experiencia</label>
+                        <textarea required placeholder="Cuéntanos sobre tu regalo especial..."></textarea>
                     </div>
                     <button type="submit" class="btn-submit">Enviar comentario</button>
                 </form>
@@ -1647,25 +1728,25 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 KLOHE. Todos los derechos reservados.</p>
+                <p>&copy; 2026 KLOHE. Hecho con ♥ en El Salvador</p>
             </div>
         </div>
     </footer>
 
-    <!-- 💬 WhatsApp Flotante -->
+    <!-- WhatsApp Flotante -->
     <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
     </a>
 
-    <!-- 📧 Newsletter Popup -->
+    <!-- Newsletter Popup -->
     <div class="newsletter-overlay" id="newsletterOverlay" onclick="closeNewsletter()"></div>
     <div class="newsletter-popup" id="newsletterPopup">
         <button class="newsletter-close" onclick="closeNewsletter()"><i class="fas fa-times"></i></button>
         <h3>¡Bienvenido!</h3>
-        <p>Obtén un <strong>15% de descuento</strong> en tu primera compra</p>
-        <div class="newsletter-code">BIENVENIDO15</div>
-        <p style="font-size: 0.8rem; color: var(--gris-texto);">Usa este código al momento de pagar</p>
+        <p>Obtén un <strong>15% de descuento</strong> en tu primera compra de San Valentín</p>
+        <div class="newsletter-code">AMOR15</div>
+        <p style="font-size: 0.8rem; color: var(--rosa-oscuro);">Usa este código al momento de pagar</p>
     </div>
 
     <!-- Cart Modal -->
@@ -1676,7 +1757,6 @@
             <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
         </div>
         
-        <!-- Opción de Envío -->
         <div class="shipping-option">
             <div class="shipping-header">
                 <span class="shipping-title">Envío a todo el país</span>
@@ -1713,7 +1793,6 @@
     <!-- Notificación -->
     <div class="notification" id="notification">Producto agregado</div>
 
-    <!-- Script de Productos -->
     <script src="products.js"></script>
     
     <script>
@@ -1727,23 +1806,22 @@
         let currentTestimonial = 0;
         let searchTerm = '';
 
-        // 15 Testimonios
         const testimonials = [
-            { name: "María Fernanda L.", text: "La calidad de los accesorios es increíble. Mi collar llegó en perfectas condiciones y el empaque era hermoso.", date: "15 Ene 2026", stars: "★★★★★" },
-            { name: "Carlos Mendoza", text: "Excelente servicio al cliente. Me ayudaron a elegir el regalo perfecto para mi esposa. 100% recomendado.", date: "12 Ene 2026", stars: "★★★★★" },
-            { name: "Ana Lucía R.", text: "Los aretes son exactamente como se ven en las fotos. Material de primera calidad y diseño único.", date: "10 Ene 2026", stars: "★★★★★" },
-            { name: "Diego Hernández", text: "Compré un reloj y superó mis expectativas. Elegante, preciso y a muy buen precio.", date: "8 Ene 2026", stars: "★★★★★" },
-            { name: "Sofia Castellanos", text: "La entrega fue rápida y el producto llegó muy bien protegido. Volveré a comprar sin duda.", date: "5 Ene 2026", stars: "★★★★★" },
-            { name: "Juan Pablo G.", text: "Gran variedad de productos. Encontré exactamente lo que buscaba para regalar.", date: "3 Ene 2026", stars: "★★★★★" },
-            { name: "Laura Michelle", text: "Los collares son divinos! He recibido muchos cumplidos. Gracias KLOHE.", date: "1 Ene 2026", stars: "★★★★★" },
-            { name: "Roberto Carlos", text: "Atención personalizada y productos de lujo a precios accesibles. Mi tienda favorita.", date: "28 Dic 2025", stars: "★★★★★" },
-            { name: "Daniela Fuentes", text: "La pulsera que compré es hermosa. Detalles impecables y muy delicada.", date: "25 Dic 2025", stars: "★★★★★" },
+            { name: "María Fernanda L.", text: "El collar que compré para San Valentín fue el regalo perfecto. La calidad es excepcional y llegó en una caja hermosa.", date: "15 Ene 2026", stars: "★★★★★" },
+            { name: "Carlos Mendoza", text: "Excelente servicio. Me ayudaron a elegir algo especial para mi esposa y quedó fascinada. Gracias KLOHE!", date: "12 Ene 2026", stars: "★★★★★" },
+            { name: "Ana Lucía R.", text: "Los aretes son exactamente como se ven en las fotos. Mi novio los eligió y son perfectos.", date: "10 Ene 2026", stars: "★★★★★" },
+            { name: "Diego Hernández", text: "Compré un reloj para regalar y superó mis expectativas. Elegante y romántico.", date: "8 Ene 2026", stars: "★★★★★" },
+            { name: "Sofia Castellanos", text: "La entrega fue rápida y el empaque era divino. Perfecto para regalar en esta temporada.", date: "5 Ene 2026", stars: "★★★★★" },
+            { name: "Juan Pablo G.", text: "Gran variedad de opciones para regalar. Encontré exactamente lo que buscaba.", date: "3 Ene 2026", stars: "★★★★★" },
+            { name: "Laura Michelle", text: "Los collares son divinos! He recibido muchos cumplidos. Ideal para San Valentín.", date: "1 Ene 2026", stars: "★★★★★" },
+            { name: "Roberto Carlos", text: "Atención personalizada y productos de lujo. Mi tienda favorita para regalos especiales.", date: "28 Dic 2025", stars: "★★★★★" },
+            { name: "Daniela Fuentes", text: "La pulsera que compré es hermosa. Detalles delicados y muy romántica.", date: "25 Dic 2025", stars: "★★★★★" },
             { name: "Andrea Morales", text: "Me encanta que tengan opciones para todos los gustos. Desde lo clásico hasta lo moderno.", date: "22 Dic 2025", stars: "★★★★★" },
-            { name: "Luis Fernando", text: "Compré varios artículos para regalos corporativos y quedaron fascinados. Excelente presentación.", date: "20 Dic 2025", stars: "★★★★★" },
+            { name: "Luis Fernando", text: "Compré varios artículos para regalos y quedaron fascinados. Excelente presentación.", date: "20 Dic 2025", stars: "★★★★★" },
             { name: "Camila Serrano", text: "El anillo es precioso, talla perfecta y brillo excepcional. Mil gracias!", date: "18 Dic 2025", stars: "★★★★★" },
-            { name: "Pedro Antonio", text: "Servicio confiable y productos auténticos. KLOHE se ha ganado mi confianza.", date: "15 Dic 2025", stars: "★★★★★" },
+            { name: "Pedro Antonio", text: "Servicio confiable y productos auténticos. KLOHE es sinónimo de calidad.", date: "15 Dic 2025", stars: "★★★★★" },
             { name: "Valentina Ruiz", text: "Las carteras son de cuero genuino y excelente terminación. Muy satisfecha.", date: "12 Dic 2025", stars: "★★★★★" },
-            { name: "Gabriel Alejandro", text: "Desde que descubrí KLOHE no compro accesorios en otro lugar. Calidad garantizada.", date: "10 Dic 2025", stars: "★★★★★" }
+            { name: "Gabriel Alejandro", text: "Desde que descubrí KLOHE no compro accesorios en otro lugar. Recomendado!", date: "10 Dic 2025", stars: "★★★★★" }
         ];
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1762,13 +1840,11 @@
             
             menuOverlay.addEventListener('click', toggleMenu);
 
-            // 📧 Mostrar Newsletter después de 5 segundos
             setTimeout(() => {
                 showNewsletter();
             }, 5000);
         });
 
-        // 📧 Newsletter Functions
         function showNewsletter() {
             document.getElementById('newsletterPopup').classList.add('active');
             document.getElementById('newsletterOverlay').classList.add('active');
@@ -1779,7 +1855,6 @@
             document.getElementById('newsletterOverlay').classList.remove('active');
         }
 
-        // 🔍 Buscador en tiempo real
         function searchProducts(term) {
             searchTerm = term.toLowerCase().trim();
             currentPage = 0;
@@ -1803,7 +1878,6 @@
             renderProducts();
             updateProductsCount();
             
-            // Actualizar título
             if (searchTerm !== '') {
                 document.getElementById('categoryTitle').textContent = `Búsqueda: "${term}"`;
             } else {
@@ -1822,7 +1896,6 @@
             }
         }
 
-        // Carrusel de Testimonios
         function initTestimonials() {
             const track = document.getElementById('testimonialTrack');
             const dotsContainer = document.getElementById('carouselDots');
@@ -1869,7 +1942,6 @@
             updateCarousel();
         }
 
-        // Auto-play cada 5 segundos
         setInterval(nextTestimonial, 5000);
 
         function submitComment(e) {
@@ -1964,7 +2036,7 @@
                     <img src="${imageName}.jpg" alt="${product.name}" 
                          class="product-image"
                          loading="lazy"
-                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23f8f8f8%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%231a1a1a%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                     <span class="stock-badge">${product.stock} disp.</span>
                 </div>
                 <div class="product-info">
@@ -2010,7 +2082,6 @@
                 `Mostrando ${shown} de ${filteredProducts.length}`;
         }
 
-        // Modal de Vista Previa con Zoom
         function openPreview(index) {
             const product = products[index];
             currentPreviewIndex = index;
@@ -2053,7 +2124,6 @@
             }
         }
 
-        // Envío
         function toggleShipping() {
             shippingEnabled = !shippingEnabled;
             const toggle = document.getElementById('shippingToggle');
@@ -2128,7 +2198,7 @@
                     <div class="cart-item">
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23f8f8f8%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%231a1a1a%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
@@ -2156,7 +2226,7 @@
             
             const shippingText = shippingEnabled ? '%0A%0AEnvío a todo el país: $3.75' : '';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text=Hola! Quiero comprar:%0A%0A${message}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text=¡Hola! Quiero comprar:%0A%0A${message}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
         }
 
         function toggleCart() {
@@ -2178,7 +2248,7 @@
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
             notification.textContent = message;
-            notification.style.background = type === 'error' ? '#dc3545' : 'var(--negro)';
+            notification.style.background = type === 'error' ? '#dc3545' : 'var(--bordo)';
             notification.classList.add('show');
             
             setTimeout(() => {

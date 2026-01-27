@@ -13,6 +13,11 @@ let currentPage = 0;
 let filteredProducts = [];
 let displayedProducts = [];
 
+/* ===== DETECCIÓN PARA iOS: PRIMER TOQUE/CLICK DEL USUARIO ===== */
+let userInteracted = false;
+document.addEventListener('touchstart', () => { userInteracted = true; }, { once: true });
+document.addEventListener('click', () => { userInteracted = true; }, { once: true });
+
 const valentineMessages = [
     "Colección San Valentín",
     "Piezas únicas para momentos inolvidables",
@@ -28,23 +33,15 @@ const customerReviews = [
     { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba", product: "Reloj Corazón", stars: 5 }
 ];
 
-// Función para determinar el material del producto
 function getProductMaterial(name, code, category) {
-    if (code === '02222') {
-        return null;
-    }
-    if (name.toLowerCase().includes('plata') || code.startsWith('02224')) {
-        return 'Aguja de Plata italiana 925';
-    }
-    if (['Aritos', 'Collares', 'Pulseras', 'Anillos'].includes(category)) {
-        return 'Acero inoxidable resistente a salpicaduras de agua';
-    }
+    if (code === '02222') return null;
+    if (name.toLowerCase().includes('plata') || code.startsWith('02224')) return 'Aguja de Plata italiana 925';
+    if (['Aritos', 'Collares', 'Pulseras', 'Anillos'].includes(category)) return 'Acero inoxidable resistente a salpicaduras de agua';
     return null;
 }
 
-// TODOS LOS 228 PRODUCTOS DEL INVENTARIO
 const realProducts = [
-    // CARTERAS (45 productos)
+    /* ---------- CARTERAS (45) ---------- */
     { id: 1, name: "Billetera", code: "076", price: 10.00, stock: 0, category: "Carteras", isNew: false },
     { id: 2, name: "Bolso de Mano", code: "088", price: 10.00, stock: 1, category: "Carteras", isNew: false },
     { id: 3, name: "Cartera", code: "03", price: 12.50, stock: 1, category: "Carteras", isNew: false },
@@ -90,8 +87,8 @@ const realProducts = [
     { id: 43, name: "Cartera Rosada", code: "023", price: 9.50, stock: 1, category: "Carteras", isNew: false },
     { id: 44, name: "Cartera Vino", code: "053", price: 18.00, stock: 0, category: "Carteras", isNew: false },
     { id: 45, name: "Carteras", code: "181", price: 10.00, stock: 1, category: "Carteras", isNew: false },
-    
-    // ARITOS (49 productos)
+
+    /* ---------- ARITOS (49) ---------- */
     { id: 46, name: "Aritos", code: "046", price: 3.50, stock: 1, category: "Aritos", isNew: true },
     { id: 47, name: "Aretas", code: "179", price: 8.50, stock: 1, category: "Aritos", isNew: false },
     { id: 48, name: "Arete", code: "060", price: 7.00, stock: 1, category: "Aritos", isNew: false },
@@ -141,8 +138,8 @@ const realProducts = [
     { id: 92, name: "Aritos de Plata", code: "02226", price: 6.00, stock: 1, category: "Aritos", isNew: true },
     { id: 93, name: "Aritos de Plata", code: "02227", price: 6.00, stock: 1, category: "Aritos", isNew: true },
     { id: 94, name: "Aritos de Plata", code: "02228", price: 6.00, stock: 1, category: "Aritos", isNew: true },
-    
-    // COLLARES (60 productos)
+
+    /* ---------- COLLARES (60) ---------- */
     { id: 95, name: "Collar Playa", code: "029", price: 5.50, stock: 0, category: "Collares", isNew: false },
     { id: 96, name: "Collar de Playa", code: "066", price: 12.75, stock: 1, category: "Collares", isNew: false },
     { id: 97, name: "Collar", code: "10199191", price: 9.50, stock: 1, category: "Collares", isNew: false },
@@ -203,12 +200,12 @@ const realProducts = [
     { id: 152, name: "Collar Mariposa", code: "200", price: 10.00, stock: 0, category: "Collares", isNew: false },
     { id: 153, name: "Set Collar", code: "142", price: 18.50, stock: 1, category: "Collares", isNew: false },
     { id: 154, name: "Set de Collar", code: "078", price: 13.50, stock: 1, category: "Collares", isNew: false },
-    
-    // LENTES (2 productos)
+
+    /* ---------- LENTES (2) ---------- */
     { id: 155, name: "Lentes de Sol", code: "015", price: 7.50, stock: 1, category: "Lentes de sol", isNew: false },
     { id: 156, name: "Lentes Negros", code: "037", price: 5.75, stock: 1, category: "Lentes de sol", isNew: false },
-    
-    // PULSERAS (31 productos)
+
+    /* ---------- PULSERAS (31) ---------- */
     { id: 157, name: "Bracelet", code: "041", price: 7.00, stock: 0, category: "Pulseras", isNew: false },
     { id: 158, name: "Brasalet", code: "038", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
     { id: 159, name: "Pulsera", code: "042", price: 5.00, stock: 1, category: "Pulseras", isNew: false },
@@ -240,8 +237,8 @@ const realProducts = [
     { id: 185, name: "Pulsera Cartier", code: "031", price: 11.00, stock: 0, category: "Pulseras", isNew: false },
     { id: 186, name: "Pulsera Trébol", code: "01118", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
     { id: 187, name: "Van Cleef", code: "050", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
-    
-    // RELOJES (30 productos)
+
+    /* ---------- RELOJES (30) ---------- */
     { id: 188, name: "Reloj", code: "01111", price: 15.00, stock: 1, category: "Relojes", isNew: false },
     { id: 189, name: "Reloj", code: "01125", price: 20.00, stock: 2, category: "Relojes", isNew: false },
     { id: 190, name: "Reloj", code: "03333", price: 16.00, stock: 1, category: "Relojes", isNew: false },
@@ -272,8 +269,8 @@ const realProducts = [
     { id: 215, name: "Reloj Rojo", code: "01121", price: 15.00, stock: 1, category: "Relojes", isNew: false },
     { id: 216, name: "Set Reloj y Pulsera", code: "01115", price: 14.00, stock: 1, category: "Relojes", isNew: false },
     { id: 217, name: "Set Reloj", code: "01112", price: 40.00, stock: 1, category: "Relojes", isNew: false },
-    
-    // ANILLOS (8 productos)
+
+    /* ---------- ANILLOS (8) ---------- */
     { id: 218, name: "Anillo", code: "02", price: 10.00, stock: 1, category: "Anillos", isNew: false },
     { id: 219, name: "Anillo", code: "04", price: 10.00, stock: 1, category: "Anillos", isNew: false },
     { id: 220, name: "Anillo", code: "08", price: 10.00, stock: 1, category: "Anillos", isNew: false },
@@ -282,15 +279,18 @@ const realProducts = [
     { id: 223, name: "Anillo", code: "045", price: 10.00, stock: 1, category: "Anillos", isNew: false },
     { id: 224, name: "Anillo", code: "057", price: 10.00, stock: 1, category: "Anillos", isNew: false },
     { id: 225, name: "Anillo", code: "059", price: 10.00, stock: 1, category: "Anillos", isNew: false },
-    
-    // ACCESORIOS CABELLO (1 producto)
+
+    /* ---------- ACCESORIOS CABELLO (1) ---------- */
     { id: 226, name: "Accesorios Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: false },
-    
-    // OTROS (2 productos)
+
+    /* ---------- OTROS (2) ---------- */
     { id: 227, name: "Cereza", code: "122", price: 5.25, stock: 4, category: "Otros", isNew: false },
     { id: 228, name: "Tarjetas Navideñas", code: "154", price: 0.00, stock: 121, category: "Otros", isNew: false }
 ];
 
+/* ============================================================
+   INICIALIZACIÓN
+   ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
     loadCart();
     products = [...realProducts];
@@ -303,6 +303,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initOfflineDetection();
 });
 
+/* ============================================================
+   FUNCIONES DE ORDEN Y FILTRADO
+   ============================================================ */
 function sortProducts() {
     filteredProducts.sort((a, b) => {
         if (a.stock === 0 && b.stock > 0) return 1;
@@ -313,10 +316,12 @@ function sortProducts() {
     });
 }
 
+/* ============================================================
+   CABECERA DINÁMICA
+   ============================================================ */
 function initRotatingMessages() {
     const titleEl = document.getElementById('hero-title');
     let index = 0;
-    
     setInterval(() => {
         index = (index + 1) % valentineMessages.length;
         titleEl.style.opacity = '0';
@@ -327,10 +332,12 @@ function initRotatingMessages() {
     }, 5000);
 }
 
+/* ============================================================
+   REVIEWS ROTATIVAS
+   ============================================================ */
 function initReviews() {
     const container = document.getElementById('reviews-container');
     let currentIndex = 0;
-
     container.innerHTML = customerReviews.map((review, index) => `
         <div class="review-card" id="review-${index}" style="${index === 0 ? 'opacity:1;transform:translateY(0)' : ''}">
             <div class="review-stars">${'★'.repeat(review.stars)}</div>
@@ -347,16 +354,17 @@ function initReviews() {
     }, 6000);
 }
 
+/* ============================================================
+   FEED DE INSTAGRAM
+   ============================================================ */
 function generateInstagramFeed() {
     const grid = document.getElementById('instagram-grid');
-    
     const images = [
         'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400',
         'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400',
         'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400',
         'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=400'
     ];
-    
     grid.innerHTML = images.map((img, i) => `
         <div class="social-item" onclick="window.open('https://www.instagram.com/klohesv', '_blank')">
             <img src="${img}" alt="Klohesv" loading="lazy">
@@ -367,55 +375,47 @@ function generateInstagramFeed() {
     `).join('');
 }
 
+/* ============================================================
+   RENDERIZADO DE PRODUCTOS
+   ============================================================ */
 function renderProducts(append = false) {
     const grid = document.getElementById('products-grid');
     const start = currentPage * CONFIG.PRODUCTS_PER_PAGE;
     const end = start + CONFIG.PRODUCTS_PER_PAGE;
     const toShow = filteredProducts.slice(start, end);
-    
+
     if (!append) {
         grid.innerHTML = '';
         displayedProducts = [];
     }
-    
     displayedProducts = [...displayedProducts, ...toShow];
-    
+
     const html = toShow.map((p, index) => {
         const isAgotado = p.stock === 0;
         const material = getProductMaterial(p.name, p.code, p.category);
-        
         return `
             <div class="product-card ${isAgotado ? 'agotado' : ''}" style="animation-delay: ${index * 0.05}s">
                 ${p.isNew ? '<div class="badge-nuevo">Nuevo</div>' : ''}
-                
                 <div class="product-image-container" onclick="openImageModal('https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg')">
-                    <img src="https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg" 
-                         alt="${p.name}" 
-                         class="product-image" 
+                    <img src="https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg"
+                         alt="${p.name}"
+                         class="product-image"
                          loading="lazy"
                          onerror="this.src='https://via.placeholder.com/300x280?text=${p.code}'">
                 </div>
-                
                 <div class="product-info">
                     <h3 class="product-title">${p.name}</h3>
                     ${material ? `<div class="product-material">${material}</div>` : ''}
-                    
                     <div class="product-details">
-                        <span class="detail-row">
-                            <span class="detail-value">Código ${p.code}</span>
-                        </span>
-                        <span class="detail-row">
-                            <span class="detail-value">${p.stock} disponibles</span>
-                        </span>
+                        <span class="detail-row"><span class="detail-value">Código ${p.code}</span></span>
+                        <span class="detail-row"><span class="detail-value">${p.stock} disponibles</span></span>
                     </div>
-                    
                     <div class="price-row">
                         <div class="product-price">$${p.price.toFixed(2)}</div>
                         <button class="quick-view-btn-inline" onclick="event.stopPropagation(); openQuickView(${p.id})">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
-                    
                     ${!isAgotado ? `
                         <div class="quantity-selector">
                             <button class="qty-btn" onclick="event.stopPropagation(); updateGridQty(${p.id}, -1)">−</button>
@@ -423,7 +423,6 @@ function renderProducts(append = false) {
                             <button class="qty-btn" onclick="event.stopPropagation(); updateGridQty(${p.id}, 1)">+</button>
                         </div>
                     ` : ''}
-                    
                     <button class="add-to-cart" onclick="addToCart(${p.id})" ${isAgotado ? 'disabled' : ''}>
                         ${isAgotado ? 'Agotado' : 'Agregar'}
                     </button>
@@ -431,51 +430,37 @@ function renderProducts(append = false) {
             </div>
         `;
     }).join('');
-    
-    if (append) {
-        grid.innerHTML += html;
-    } else {
-        grid.innerHTML = html;
-    }
-    
+
+    if (append) grid.innerHTML += html;
+    else grid.innerHTML = html;
     updateLoadMoreButton();
 }
 
-function updateLoadMoreButton() {
-    const btn = document.getElementById('load-more-btn');
-    const count = document.getElementById('products-count');
-    const remaining = filteredProducts.length - displayedProducts.length;
-    
-    if (remaining <= 0) {
-        btn.style.display = 'none';
-    } else {
-        btn.style.display = 'inline-block';
-        btn.textContent = `Ver más (${remaining})`;
-    }
-    
-    count.textContent = `${displayedProducts.length} de ${filteredProducts.length} productos`;
-}
-
+/* ============================================================
+   CARGAR MÁS PRODUCTOS
+   ============================================================ */
 function loadMoreProducts() {
     currentPage++;
     renderProducts(true);
 }
 
+/* ============================================================
+   FILTRADO
+   ============================================================ */
 function filterProducts() {
     const search = document.getElementById('search-input').value.toLowerCase();
     const category = document.getElementById('category-filter').value;
     const onlyAvailable = document.getElementById('stock-filter').checked;
-    
+
     filteredProducts = products.filter(p => {
-        const matchSearch = p.name.toLowerCase().includes(search) || 
+        const matchSearch = p.name.toLowerCase().includes(search) ||
                           p.category.toLowerCase().includes(search) ||
                           p.code.includes(search);
         const matchCategory = category === 'all' || p.category === category;
         const matchStock = !onlyAvailable || p.stock > 0;
-        
         return matchSearch && matchCategory && matchStock;
     });
-    
+
     sortProducts();
     currentPage = 0;
     renderProducts();
@@ -491,6 +476,9 @@ function resetFilters() {
     renderProducts();
 }
 
+/* ============================================================
+   CANTIDAD EN GRID
+   ============================================================ */
 function updateGridQty(id, change) {
     const display = document.getElementById(`qty-${id}`);
     if (!display) return;
@@ -501,23 +489,23 @@ function updateGridQty(id, change) {
     display.textContent = val;
 }
 
+/* ============================================================
+   VISTA RÁPIDA
+   ============================================================ */
 function openQuickView(id) {
     const p = products.find(x => x.id === id);
     if (!p) return;
-    
     currentQuickViewId = id;
     const material = getProductMaterial(p.name, p.code, p.category);
-    
     document.getElementById('quick-view-image').src = `https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg`;
     document.getElementById('quick-view-category').textContent = p.category;
     document.getElementById('quick-view-title').textContent = p.name;
     document.getElementById('quick-view-material').textContent = material || '';
     document.getElementById('quick-view-price').textContent = '$' + p.price.toFixed(2);
-    document.getElementById('quick-view-description').innerHTML = 
+    document.getElementById('quick-view-description').innerHTML =
         `<strong>Código:</strong> ${p.code}<br>
          <strong>Stock:</strong> ${p.stock} unidades<br>
          <strong>Categoría:</strong> ${p.category}`;
-    
     document.getElementById('quick-view-modal').style.display = 'flex';
     document.body.classList.add('modal-open');
 }
@@ -536,6 +524,9 @@ function addToCartFromQuickView() {
     }
 }
 
+/* ============================================================
+   MODAL DE IMAGEN
+   ============================================================ */
 function openImageModal(src) {
     document.getElementById('modal-image').src = src;
     document.getElementById('image-modal').style.display = 'flex';
@@ -547,6 +538,9 @@ function closeImageModal() {
     document.body.classList.remove('modal-open');
 }
 
+/* ============================================================
+   MODAL DE STOCK
+   ============================================================ */
 function showStockModal() {
     const modal = document.getElementById('stock-modal-overlay');
     modal.classList.add('active');
@@ -559,13 +553,14 @@ function closeStockModal() {
     document.body.classList.remove('modal-open');
 }
 
+/* ============================================================
+   CARRITO: AÑADIR / ACTUALIZAR / ELIMINAR
+   ============================================================ */
 function addToCart(id) {
     const product = products.find(p => p.id === id);
     if (!product || product.stock === 0) return;
-    
     const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || 1);
     const existing = cart.find(item => item.id === id);
-    
     if (existing) {
         if (existing.quantity + qty <= product.stock) {
             existing.quantity += qty;
@@ -576,88 +571,16 @@ function addToCart(id) {
     } else {
         cart.push({ ...product, quantity: qty });
     }
-    
     saveCart();
     updateCartUI();
     showNotification('Agregado al carrito');
-    playSound();
-}
-
-function toggleShipping() {
-    const checkbox = document.getElementById('shipping-checkbox');
-    const option = document.getElementById('shipping-option');
-    shippingSelected = checkbox.checked;
-    
-    if (shippingSelected) {
-        option.classList.add('selected');
-    } else {
-        option.classList.remove('selected');
-    }
-    
-    updateCartTotals();
-}
-
-function toggleMiniCart() {
-    const cartEl = document.getElementById('mini-cart');
-    const overlay = document.getElementById('cart-overlay');
-    const isOpen = cartEl.classList.contains('open');
-    
-    if (isOpen) {
-        cartEl.classList.remove('open');
-        overlay.classList.remove('active');
-        document.body.classList.remove('modal-open');
-    } else {
-        cartEl.classList.add('open');
-        overlay.classList.add('active');
-        document.body.classList.add('modal-open');
-        updateCartUI();
-    }
-}
-
-function updateCartUI() {
-    const body = document.getElementById('mini-cart-body');
-    const count = document.getElementById('cart-count');
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    count.textContent = totalItems;
-    
-    if (cart.length === 0) {
-        body.innerHTML = `
-            <div style="text-align: center; padding: 4rem 2rem; color: var(--texto-claro);">
-                <i class="fas fa-shopping-bag" style="font-size: 2rem; margin-bottom: 1rem; display: block; color: var(--rosa-suave);"></i>
-                Tu carrito está vacío
-            </div>
-        `;
-    } else {
-        body.innerHTML = cart.map(item => `
-            <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--crema);">
-                <img src="https://industriastobias.github.io/klohesvtiendaonline/${item.code}.jpg" 
-                     style="width: 60px; height: 60px; object-fit: cover; border: 1px solid var(--rosa-suave);"
-                     onerror="this.src='https://via.placeholder.com/60?text=${item.code}'">
-                <div style="flex: 1;">
-                    <div style="font-weight: 400; font-size: 0.9rem; color: var(--texto); margin-bottom: 0.2rem;">${item.name}</div>
-                    <div style="color: var(--rosa-oscuro); font-weight: 400; font-size: 1rem; font-family: 'Cormorant Garamond', serif;">$${(item.price * item.quantity).toFixed(2)}</div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-                        <button onclick="updateCartQty(${item.id}, -1)" style="width: 24px; height: 24px; border: 1px solid var(--rosa-suave); background: transparent; border-radius: 0; cursor: pointer; font-size: 0.8rem; color: var(--texto);">−</button>
-                        <span style="font-weight: 400; min-width: 20px; text-align: center; font-size: 0.9rem;">${item.quantity}</span>
-                        <button onclick="updateCartQty(${item.id}, 1)" style="width: 24px; height: 24px; border: 1px solid var(--rosa-suave); background: transparent; border-radius: 0; cursor: pointer; font-size: 0.8rem; color: var(--texto);">+</button>
-                    </div>
-                </div>
-                <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: var(--texto-claro); cursor: pointer; font-size: 1rem; padding: 0.5rem;">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `).join('');
-    }
-    
-    updateCartTotals();
+    playSound(); // Sonido corregido para iOS
 }
 
 function updateCartQty(id, change) {
     const item = cart.find(i => i.id === id);
     const product = products.find(p => p.id === id);
     if (!item) return;
-    
     const newQty = item.quantity + change;
     if (newQty <= 0) {
         removeFromCart(id);
@@ -676,12 +599,86 @@ function removeFromCart(id) {
     updateCartUI();
 }
 
+/* ============================================================
+   SONIDO: REPRODUCCIÓN COMPATIBLE CON iOS
+   ============================================================ */
+function playSound() {
+    if (!userInteracted) return; // iOS: esperar interacción
+    const audio = document.getElementById('success-sound');
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play()
+        .then(() => { /* éxito */ })
+        .catch(() => { /* iOS bloqueó o error */ });
+}
+
+/* ============================================================
+   CARRITO: UI / TOTALES / ENVÍO / DESCUENTO
+   ============================================================ */
+function toggleShipping() {
+    const checkbox = document.getElementById('shipping-checkbox');
+    const option = document.getElementById('shipping-option');
+    shippingSelected = checkbox.checked;
+    option.classList.toggle('selected', shippingSelected);
+    updateCartTotals();
+}
+
+function toggleMiniCart() {
+    const cartEl = document.getElementById('mini-cart');
+    const overlay = document.getElementById('cart-overlay');
+    const isOpen = cartEl.classList.contains('open');
+    if (isOpen) {
+        cartEl.classList.remove('open');
+        overlay.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    } else {
+        cartEl.classList.add('open');
+        overlay.classList.add('active');
+        document.body.classList.add('modal-open');
+        updateCartUI();
+    }
+}
+
+function updateCartUI() {
+    const body = document.getElementById('mini-cart-body');
+    const count = document.getElementById('cart-count');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    count.textContent = totalItems;
+
+    if (cart.length === 0) {
+        body.innerHTML = `
+            <div style="text-align:center;padding:4rem 2rem;color:var(--texto-claro)">
+                <i class="fas fa-shopping-bag" style="font-size:2rem;margin-bottom:1rem;display:block;color:var(--rosa-suave)"></i>
+                Tu carrito está vacío
+            </div>`;
+    } else {
+        body.innerHTML = cart.map(item => `
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--crema)">
+                <img src="https://industriastobias.github.io/klohesvtiendaonline/${item.code}.jpg"
+                     style="width:60px;height:60px;object-fit:cover;border:1px solid var(--rosa-suave)"
+                     onerror="this.src='https://via.placeholder.com/60?text=${item.code}'">
+                <div style="flex:1">
+                    <div style="font-weight:400;font-size:0.9rem;color:var(--texto);margin-bottom:0.2rem">${item.name}</div>
+                    <div style="color:var(--rosa-oscuro);font-weight:400;font-size:1rem;font-family:'Cormorant Garamond',serif">$${(item.price * item.quantity).toFixed(2)}</div>
+                    <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem">
+                        <button onclick="updateCartQty(${item.id},-1)" style="width:24px;height:24px;border:1px solid var(--rosa-suave);background:transparent;border-radius:0;cursor:pointer;font-size:0.8rem;color:var(--texto)">−</button>
+                        <span style="font-weight:400;min-width:20px;text-align:center;font-size:0.9rem">${item.quantity}</span>
+                        <button onclick="updateCartQty(${item.id},1)" style="width:24px;height:24px;border:1px solid var(--rosa-suave);background:transparent;border-radius:0;cursor:pointer;font-size:0.8rem;color:var(--texto)">+</button>
+                    </div>
+                </div>
+                <button onclick="removeFromCart(${item.id})" style="background:none;border:none;color:var(--texto-claro);cursor:pointer;font-size:1rem;padding:0.5rem"><i class="fas fa-times"></i></button>
+            </div>
+        `).join('');
+    }
+    updateCartTotals();
+}
+
 function updateCartTotals() {
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const discount = subtotal * (currentDiscount / 100);
     const shipping = shippingSelected ? CONFIG.SHIPPING_COST : 0;
     const total = subtotal - discount + shipping;
-    
+
     document.getElementById('cart-subtotal').textContent = subtotal.toFixed(2);
     document.getElementById('cart-shipping').textContent = shipping.toFixed(2);
     document.getElementById('shipping-row').style.display = shipping > 0 ? 'flex' : 'none';
@@ -693,7 +690,6 @@ function updateCartTotals() {
 function applyDiscount() {
     const code = document.getElementById('discount-input').value.toUpperCase();
     const validCodes = { 'KLOHE10': 10, 'SANVALENTIN': 15, 'AMOR20': 20, 'CORAZON': 25 };
-    
     if (validCodes[code]) {
         currentDiscount = validCodes[code];
         showNotification(`Descuento ${currentDiscount}% aplicado`);
@@ -715,6 +711,9 @@ function closeErrorModal(e) {
     }
 }
 
+/* ============================================================
+   PERSISTENCIA DEL CARRITO
+   ============================================================ */
 function saveCart() {
     localStorage.setItem('klohe_cart', JSON.stringify(cart));
 }
@@ -724,32 +723,33 @@ function loadCart() {
     if (saved) cart = JSON.parse(saved);
 }
 
+/* ============================================================
+   CHECKOUT WHATSAPP
+   ============================================================ */
 function checkout() {
     if (cart.length === 0) return;
-    
     let msg = '¡Hola Klohe!\\n\\nQuiero hacer un pedido:\\n\\n';
     cart.forEach(item => {
         msg += `• ${item.name} (Código: ${item.code}) x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\\n`;
     });
-    
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const discount = subtotal * (currentDiscount / 100);
     const shipping = shippingSelected ? CONFIG.SHIPPING_COST : 0;
     const total = subtotal - discount + shipping;
-    
     msg += `\\nSubtotal: $${subtotal.toFixed(2)}`;
     if (currentDiscount > 0) msg += `\\nDescuento: -$${discount.toFixed(2)}`;
     if (shipping > 0) msg += `\\nEnvío: $${shipping.toFixed(2)}`;
     msg += `\\nTotal: $${total.toFixed(2)}`;
-    
     window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
+/* ============================================================
+   NOTIFICACIONES
+   ============================================================ */
 function showNotification(text) {
     const notif = document.getElementById('notification');
     notif.textContent = text;
     notif.style.display = 'block';
-    
     setTimeout(() => {
         notif.style.opacity = '0';
         setTimeout(() => {
@@ -759,12 +759,9 @@ function showNotification(text) {
     }, 2000);
 }
 
-function playSound() {
-    const audio = document.getElementById('success-sound');
-    audio.currentTime = 0;
-    audio.play().catch(e => {});
-}
-
+/* ============================================================
+   CHAT
+   ============================================================ */
 function toggleChat() {
     document.getElementById('chat-window').classList.toggle('active');
 }
@@ -777,40 +774,45 @@ function sendMessage() {
     const input = document.getElementById('chat-message');
     const msg = input.value.trim();
     if (!msg) return;
-    
     const body = document.getElementById('chat-body');
-    body.innerHTML += `<p style="text-align: right; margin-bottom: 0.8rem;"><span style="background: var(--rosa-suave); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">${msg}</span></p>`;
+    body.innerHTML += `<p style="text-align:right;margin-bottom:0.8rem"><span style="background:var(--rosa-suave);padding:0.8rem;display:inline-block;font-size:0.9rem">${msg}</span></p>`;
     input.value = '';
     body.scrollTop = body.scrollHeight;
-    
     setTimeout(() => {
-        body.innerHTML += `<p style="margin-bottom: 0.8rem;"><span style="background: var(--crema); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">Gracias por tu mensaje. Te responderemos pronto.</span></p>`;
+        body.innerHTML += `<p style="margin-bottom:0.8rem"><span style="background:var(--crema);padding:0.8rem;display:inline-block;font-size:0.9rem">Gracias por tu mensaje. Te responderemos pronto.</span></p>`;
         body.scrollTop = body.scrollHeight;
     }, 1000);
 }
 
+/* ============================================================
+   FAQ
+   ============================================================ */
 function toggleFaq(element) {
     const item = element.parentElement;
     const isActive = item.classList.contains('active');
     const icon = element.querySelector('i');
-    
     document.querySelectorAll('.faq-item').forEach(i => {
         i.classList.remove('active');
         i.querySelector('i').style.transform = 'rotate(0deg)';
     });
-    
     if (!isActive) {
         item.classList.add('active');
         icon.style.transform = 'rotate(180deg)';
     }
 }
 
+/* ============================================================
+   NEWSLETTER
+   ============================================================ */
 function subscribeNewsletter(e) {
     e.preventDefault();
     showNotification('Bienvenida al Club Klohe');
     e.target.reset();
 }
 
+/* ============================================================
+   DETECCIÓN OFFLINE
+   ============================================================ */
 function initOfflineDetection() {
     window.addEventListener('online', () => {
         document.getElementById('offline-indicator').classList.remove('show');
@@ -820,8 +822,9 @@ function initOfflineDetection() {
     });
 }
 
-window.onclick = function(e) {
-    if (e.target.classList.contains('quick-view-modal')) {
-        closeQuickView(e);
-    }
-}
+/* ============================================================
+   CIERRE DE MODALES AL HACER CLICK FUERA
+   ============================================================ */
+window.onclick = function (e) {
+    if (e.target.classList.contains('quick-view-modal')) closeQuickView(e);
+};

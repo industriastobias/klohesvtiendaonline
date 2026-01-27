@@ -2,50 +2,50 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLOHE - San Valentín ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KLOHE - Tienda Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
-            --rosa-empolvado: #e8d5d5;
-            --rosa-suave: #f0e6e6;
-            --beige: #f5f0eb;
             --blanco: #ffffff;
-            --cafe-suave: #8b7355;
-            --cafe-oscuro: #5c4a3d;
-            --texto: #4a4a4a;
-            --dorado: #d4af37;
+            --gris-fondo: #f5f5f5;
+            --gris-suave: #e8e8e8;
+            --gris-medio: #d0d0d0;
+            --gris-texto: #666666;
+            --gris-oscuro: #2a2a2a;
+            --negro: #1a1a1a;
+            --acento: #8b7355;
         }
 
         body {
-            font-family: 'Lato', sans-serif;
-            background-color: var(--beige);
-            color: var(--texto);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--blanco);
+            color: var(--negro);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Header */
         header {
             background: var(--blanco);
-            padding: 1rem 0;
+            padding: 1.5rem 0;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 20px rgba(139, 115, 85, 0.1);
-            border-bottom: 2px solid var(--rosa-empolvado);
+            z-index: 1000;
+            border-bottom: 2px solid var(--gris-suave);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 4rem;
         }
 
         nav {
@@ -55,18 +55,49 @@
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--cafe-oscuro);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            color: var(--negro);
             text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 3px;
+            font-weight: 500;
+            letter-spacing: 8px;
+            text-transform: uppercase;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 2rem;
+        }
+
+        /* Redes Sociales en Header */
+        .social-header {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-right: 1rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--gris-medio);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--gris-oscuro);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .social-btn:hover {
+            background: var(--negro);
+            color: white;
+            border-color: var(--negro);
+            transform: translateY(-2px);
         }
 
         /* Menú Hamburguesa */
@@ -77,16 +108,21 @@
             padding: 0.5rem;
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            z-index: 200;
+            gap: 6px;
+            z-index: 2000;
+            position: relative;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--cafe-suave);
+            width: 24px;
+            height: 2px;
+            background: var(--negro);
             transition: all 0.3s ease;
-            border-radius: 2px;
+            display: block;
         }
 
         .menu-toggle.active span:nth-child(1) {
@@ -98,7 +134,7 @@
         }
 
         .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
         /* Menú de Categorías */
@@ -106,14 +142,14 @@
             position: fixed;
             top: 0;
             left: -100%;
-            width: 280px;
+            width: 350px;
             height: 100vh;
             background: var(--blanco);
-            box-shadow: 5px 0 30px rgba(0,0,0,0.1);
-            z-index: 150;
-            padding: 6rem 2rem 2rem;
-            transition: left 0.3s ease;
+            z-index: 1500;
+            padding: 6rem 2.5rem 2rem;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
+            border-right: 3px solid var(--gris-suave);
         }
 
         .categories-menu.active {
@@ -121,35 +157,41 @@
         }
 
         .categories-menu h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--cafe-suave);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            border-bottom: 2px solid var(--rosa-empolvado);
-            padding-bottom: 0.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--negro);
+            margin-bottom: 2rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--gris-suave);
+            padding-bottom: 1rem;
         }
 
         .category-btn {
             display: block;
             width: 100%;
-            padding: 1rem;
+            padding: 1.2rem 0;
             margin-bottom: 0.5rem;
-            background: var(--rosa-suave);
+            background: transparent;
             border: none;
-            border-radius: 10px;
+            border-bottom: 1px solid var(--gris-suave);
             text-align: left;
-            font-family: 'Lato', sans-serif;
-            font-size: 1rem;
-            color: var(--texto);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gris-texto);
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .category-btn:hover,
         .category-btn.active {
-            background: var(--cafe-suave);
-            color: white;
-            transform: translateX(5px);
+            color: var(--negro);
+            padding-left: 1.5rem;
+            border-bottom-color: var(--negro);
         }
 
         .close-menu {
@@ -158,32 +200,42 @@
             right: 1.5rem;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            color: var(--texto);
+            color: var(--negro);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .cart-icon {
             position: relative;
             cursor: pointer;
             font-size: 1.3rem;
-            background: var(--rosa-suave);
             padding: 0.6rem;
-            border-radius: 50%;
             transition: all 0.3s ease;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--gris-medio);
+            border-radius: 50%;
         }
 
         .cart-icon:hover {
-            background: var(--cafe-suave);
+            background: var(--negro);
             color: white;
-            transform: scale(1.1);
+            border-color: var(--negro);
         }
 
         .cart-count {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: var(--cafe-suave);
+            background: var(--negro);
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -195,352 +247,564 @@
             font-weight: 600;
         }
 
-        /* Hero Section - San Valentín */
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--rosa-suave) 0%, var(--beige) 50%, var(--rosa-empolvado) 100%);
-            padding: 3rem 0;
+            background: var(--gris-fondo);
+            padding: 6rem 0;
             text-align: center;
             position: relative;
-            overflow: hidden;
-            border-bottom: 3px solid var(--dorado);
+            border-bottom: 3px solid var(--gris-suave);
         }
 
-        .hero::before {
-            content: '❤️';
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            font-size: 2rem;
-            opacity: 0.3;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '💕';
-            position: absolute;
-            bottom: 10%;
-            right: 10%;
-            font-size: 2rem;
-            opacity: 0.3;
-            animation: float 6s ease-in-out infinite 2s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .hero h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            color: var(--cafe-oscuro);
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-subtitle {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            color: var(--cafe-suave);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            color: var(--negro);
             margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 6px;
+            text-transform: uppercase;
         }
 
         .hero p {
-            font-size: 0.95rem;
-            color: var(--texto);
+            font-size: 1.1rem;
+            color: var(--gris-texto);
             font-weight: 300;
-            opacity: 0.8;
-        }
-
-        .valentine-badge {
-            display: inline-block;
-            background: var(--dorado);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            font-weight: 500;
-        }
-
-        /* Redes Sociales */
-        .social-bar {
-            background: var(--blanco);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--rosa-empolvado);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            color: var(--cafe-suave);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-        }
-
-        .social-link:hover {
-            background: var(--rosa-suave);
-            color: var(--cafe-oscuro);
-            transform: translateY(-3px);
-        }
-
-        .social-link i {
-            font-size: 1.2rem;
+            letter-spacing: 2px;
         }
 
         /* Products Section */
         .products {
-            padding: 2rem 0 4rem;
+            padding: 5rem 0;
+            background: var(--blanco);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--gris-suave);
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
-            color: var(--cafe-oscuro);
-            margin-bottom: 2rem;
-            position: relative;
+            color: var(--negro);
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
         }
 
-        .section-title::after {
-            content: '❤️';
-            display: block;
-            margin-top: 0.5rem;
-            font-size: 1.5rem;
+        .products-count {
+            font-size: 0.9rem;
+            color: var(--gris-texto);
+            font-weight: 400;
+            letter-spacing: 1px;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
         }
 
         .product-card {
             background: var(--blanco);
-            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 3px 15px rgba(139, 115, 85, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             position: relative;
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--rosa-empolvado);
+            border: 2px solid transparent;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(139, 115, 85, 0.15);
+            transform: translateY(-8px);
+            border-color: var(--gris-suave);
+        }
+
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: var(--gris-fondo);
+            overflow: hidden;
+            cursor: pointer;
         }
 
         .product-image {
             width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, var(--rosa-suave) 0%, var(--beige) 100%);
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        /* Ojo en overlay */
+        .preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.85);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+        .product-card:hover .preview-overlay {
+            opacity: 1;
         }
 
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
+        .preview-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--negro);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .preview-btn:hover {
+            transform: scale(1.1);
+            background: var(--gris-oscuro);
         }
 
         .stock-badge {
             position: absolute;
-            top: 0.8rem;
-            right: 0.8rem;
-            background: var(--cafe-suave);
-            color: white;
-            padding: 0.3rem 0.7rem;
-            border-radius: 15px;
+            top: 1rem;
+            right: 1rem;
+            background: var(--blanco);
+            color: var(--negro);
+            padding: 0.5rem 1rem;
             font-size: 0.75rem;
             font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px solid var(--gris-medio);
         }
 
         .product-info {
-            padding: 1.2rem;
+            padding: 1.5rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            border-top: 2px solid var(--gris-suave);
         }
 
         .product-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: var(--texto);
-            margin-bottom: 0.3rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--negro);
+            margin-bottom: 0.5rem;
             text-transform: capitalize;
-            line-height: 1.3;
+            line-height: 1.4;
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
         .product-barcode {
             font-size: 0.8rem;
-            color: #aaa;
-            margin-bottom: 0.5rem;
+            color: var(--gris-texto);
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        /* Fila de precio y ojo */
+        .product-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gris-suave);
         }
 
         .product-price {
-            font-size: 1.2rem;
-            color: var(--cafe-suave);
+            font-size: 1.3rem;
+            color: var(--negro);
             font-weight: 600;
-            margin-bottom: 1rem;
-            margin-top: auto;
+            letter-spacing: 1px;
+        }
+
+        .eye-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--gris-medio);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            color: var(--gris-texto);
+        }
+
+        .eye-btn:hover {
+            background: var(--negro);
+            color: white;
+            border-color: var(--negro);
         }
 
         .btn-add-cart {
             width: 100%;
-            padding: 0.8rem;
-            background: var(--rosa-empolvado);
-            color: var(--cafe-oscuro);
+            padding: 1.1rem;
+            background: var(--negro);
+            color: white;
             border: none;
-            border-radius: 10px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.3s ease;
-            font-family: 'Lato', sans-serif;
-            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
         }
 
         .btn-add-cart:hover {
-            background: var(--cafe-suave);
-            color: white;
+            background: var(--gris-oscuro);
+            transform: translateY(-2px);
         }
 
         .btn-add-cart:disabled {
-            background: #e0e0e0;
-            color: #999;
+            background: var(--gris-suave);
+            color: var(--gris-texto);
             cursor: not-allowed;
+            transform: none;
         }
 
-        /* Testimonios */
-        .testimonials {
-            background: var(--blanco);
-            padding: 4rem 0;
-            border-top: 2px solid var(--rosa-empolvado);
-            border-bottom: 2px solid var(--rosa-empolvado);
+        /* Botón Cargar Más */
+        .load-more-container {
+            text-align: center;
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 2px solid var(--gris-suave);
+        }
+
+        .btn-load-more {
+            padding: 1.3rem 4rem;
+            background: transparent;
+            color: var(--negro);
+            border: 2px solid var(--negro);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .btn-load-more:hover {
+            background: var(--negro);
+            color: white;
+        }
+
+        /* Sección de Comentarios */
+        .testimonials-section {
+            background: var(--gris-fondo);
+            padding: 6rem 0;
+            border-top: 3px solid var(--gris-suave);
+            border-bottom: 3px solid var(--gris-suave);
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .testimonials-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--negro);
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .testimonials-header p {
+            color: var(--gris-texto);
+            font-size: 1rem;
+            letter-spacing: 1px;
         }
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
 
         .testimonial-card {
-            background: var(--beige);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border-left: 4px solid var(--dorado);
-            position: relative;
+            background: var(--blanco);
+            padding: 2rem;
+            border: 2px solid var(--gris-suave);
+            transition: all 0.3s ease;
         }
 
-        .testimonial-card::before {
-            content: '"';
-            font-size: 3rem;
-            color: var(--rosa-empolvado);
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            font-family: serif;
+        .testimonial-card:hover {
+            border-color: var(--gris-medio);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-stars {
+            color: var(--acento);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
         }
 
         .testimonial-text {
+            font-size: 0.95rem;
+            color: var(--gris-oscuro);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
             font-style: italic;
-            color: var(--texto);
-            margin-bottom: 1rem;
-            padding-left: 1rem;
         }
 
         .testimonial-author {
             font-weight: 600;
-            color: var(--cafe-suave);
-            text-align: right;
+            color: var(--negro);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
-        .stars {
-            color: var(--dorado);
-            margin-bottom: 0.5rem;
+        .testimonial-date {
+            font-size: 0.8rem;
+            color: var(--gris-texto);
+            margin-top: 0.3rem;
         }
 
         /* Caja de Comentarios */
-        .comments-section {
-            background: linear-gradient(135deg, var(--rosa-suave) 0%, var(--beige) 100%);
-            padding: 4rem 0;
+        .comment-box {
+            background: var(--blanco);
+            padding: 3rem;
+            border: 2px solid var(--gris-suave);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .comment-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--negro);
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .comment-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--blanco);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--cafe-oscuro);
-            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--gris-texto);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .form-group input,
         .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid var(--rosa-empolvado);
-            border-radius: 10px;
-            font-family: 'Lato', sans-serif;
+            padding: 1rem;
+            border: 2px solid var(--gris-suave);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
             transition: border-color 0.3s;
+            background: transparent;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--cafe-suave);
+            border-color: var(--negro);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
         }
 
         .btn-submit {
-            width: 100%;
-            padding: 1rem;
-            background: var(--cafe-suave);
+            padding: 1.2rem;
+            background: var(--negro);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
             cursor: pointer;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
             transition: all 0.3s;
         }
 
         .btn-submit:hover {
-            background: var(--cafe-oscuro);
+            background: var(--gris-oscuro);
             transform: translateY(-2px);
+        }
+
+        /* Modal de Vista Previa */
+        .preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.95);
+            z-index: 3000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .preview-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-content {
+            background: var(--blanco);
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            position: relative;
+            padding: 3rem;
+            border: 3px solid var(--gris-suave);
+        }
+
+        .preview-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: var(--negro);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .preview-image-container {
+            aspect-ratio: 1/1;
+            background: var(--gris-fondo);
+            overflow: hidden;
+            border: 2px solid var(--gris-suave);
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .preview-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--negro);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .preview-barcode {
+            font-size: 1rem;
+            color: var(--gris-texto);
+            margin-bottom: 2rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+            padding: 0.5rem 1rem;
+            background: var(--gris-fondo);
+            display: inline-block;
+            border: 1px solid var(--gris-suave);
+        }
+
+        .preview-price {
+            font-size: 2rem;
+            color: var(--negro);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .preview-stock {
+            font-size: 0.9rem;
+            color: var(--gris-texto);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .preview-add-btn {
+            padding: 1.3rem 2rem;
+            background: var(--negro);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .preview-add-btn:hover {
+            background: var(--gris-oscuro);
+            transform: translateY(-2px);
+        }
+
+        .preview-add-btn:disabled {
+            background: var(--gris-suave);
+            color: var(--gris-texto);
+            cursor: not-allowed;
         }
 
         /* Cart Modal */
@@ -548,81 +812,69 @@
             display: none;
             position: fixed;
             top: 0;
-            right: 0;
-            width: 380px;
+            right: -100%;
+            width: 450px;
             height: 100%;
             background: var(--blanco);
-            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
-            z-index: 1000;
-            padding: 1.5rem;
+            z-index: 2000;
+            padding: 2.5rem;
             overflow-y: auto;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid var(--gris-suave);
         }
 
         .cart-modal.active {
             display: block;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
+            right: 0;
         }
 
         .cart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--rosa-empolvado);
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gris-suave);
         }
 
         .cart-header h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--cafe-oscuro);
-            font-size: 1.3rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--negro);
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
 
         .close-cart {
-            background: var(--rosa-suave);
+            background: none;
             border: none;
-            font-size: 1.1rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            color: var(--texto);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+            color: var(--negro);
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .close-cart:hover {
-            background: var(--cafe-suave);
-            color: white;
         }
 
         .cart-item {
             display: flex;
-            gap: 0.8rem;
-            margin-bottom: 1rem;
-            padding: 0.8rem;
-            background: var(--beige);
-            border-radius: 12px;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gris-suave);
             align-items: center;
         }
 
         .cart-item-image {
-            width: 50px;
-            height: 50px;
-            background: var(--rosa-suave);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 90px;
+            height: 90px;
+            background: var(--gris-fondo);
             overflow: hidden;
             flex-shrink: 0;
+            border: 2px solid var(--gris-suave);
         }
 
         .cart-item-image img {
@@ -636,68 +888,86 @@
         }
 
         .cart-item-details h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--texto);
-            margin-bottom: 0.2rem;
-            font-size: 0.9rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--negro);
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .cart-item-code {
+            font-size: 0.8rem;
+            color: var(--gris-texto);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
         }
 
         .cart-item-details p {
-            color: var(--cafe-suave);
-            font-weight: 600;
-            font-size: 0.9rem;
+            color: var(--negro);
+            font-weight: 500;
+            font-size: 1rem;
         }
 
         .remove-item {
             background: none;
             border: none;
-            color: #e74c3c;
+            color: var(--gris-texto);
             cursor: pointer;
-            font-size: 1rem;
-            padding: 0.3rem;
-            transition: transform 0.2s;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: color 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .remove-item:hover {
-            transform: scale(1.2);
+            color: #dc3545;
         }
 
         .cart-empty {
             text-align: center;
-            color: #bbb;
-            padding: 3rem 0;
+            color: var(--gris-texto);
+            padding: 4rem 0;
             font-style: italic;
+            font-size: 1.1rem;
         }
 
         .cart-total {
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 2px solid var(--rosa-empolvado);
-            font-size: 1.2rem;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--negro);
+            font-size: 1.3rem;
             font-weight: 600;
-            color: var(--cafe-oscuro);
+            color: var(--negro);
             display: flex;
             justify-content: space-between;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
         }
 
         .btn-whatsapp {
             width: 100%;
-            padding: 0.9rem;
+            padding: 1.3rem;
             background: #25d366;
             color: white;
             border: none;
-            border-radius: 10px;
-            font-weight: 600;
             cursor: pointer;
-            font-family: 'Lato', sans-serif;
-            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
+            gap: 0.8rem;
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .btn-whatsapp:hover {
@@ -713,8 +983,8 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.4);
-            z-index: 140;
-            backdrop-filter: blur(2px);
+            z-index: 1500;
+            backdrop-filter: blur(3px);
         }
 
         .overlay.active {
@@ -728,8 +998,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.3);
-            z-index: 140;
+            background: rgba(0,0,0,0.4);
+            z-index: 1400;
+            backdrop-filter: blur(3px);
         }
 
         .menu-overlay.active {
@@ -738,85 +1009,95 @@
 
         /* Footer */
         footer {
-            background: var(--cafe-oscuro);
-            color: var(--beige);
-            padding: 3rem 0 1rem;
-            text-align: center;
+            background: var(--negro);
+            color: white;
+            padding: 5rem 0 2rem;
         }
 
         .footer-content {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            margin-bottom: 4rem;
         }
 
         .footer-section h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--dorado);
-            margin-bottom: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 1rem;
         }
 
+        .footer-section p,
         .footer-section a {
-            color: var(--beige);
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
-            display: block;
-            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            line-height: 2;
             transition: color 0.3s;
+            letter-spacing: 1px;
         }
 
         .footer-section a:hover {
-            color: var(--dorado);
+            color: white;
         }
 
         .social-footer {
             display: flex;
             gap: 1rem;
-            justify-content: center;
             margin-top: 1rem;
         }
 
         .social-footer a {
-            width: 40px;
-            height: 40px;
-            background: var(--cafe-suave);
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-size: 1.2rem;
             transition: all 0.3s;
         }
 
         .social-footer a:hover {
-            background: var(--dorado);
+            background: white;
+            color: var(--negro);
+            border-color: white;
             transform: translateY(-3px);
         }
 
         .copyright {
-            border-top: 1px solid var(--cafe-suave);
-            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
             font-size: 0.85rem;
-            opacity: 0.8;
+            letter-spacing: 2px;
         }
 
         /* Notificación */
         .notification {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--cafe-suave);
+            bottom: 30px;
+            right: 30px;
+            background: var(--negro);
             color: white;
-            padding: 0.8rem 1.2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            z-index: 2000;
+            padding: 1.5rem 2.5rem;
+            z-index: 4000;
             transform: translateY(100px);
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-left: 4px solid var(--acento);
         }
 
         .notification.show {
@@ -825,42 +1106,100 @@
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
             .logo {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
+                letter-spacing: 4px;
+            }
+
+            .social-header {
+                display: none;
+            }
+
+            .hero {
+                padding: 4rem 0;
             }
 
             .hero h1 {
                 font-size: 2.2rem;
             }
 
-            .social-links {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: center;
-            }
-
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .product-image-container {
+                aspect-ratio: 3/4;
+            }
+
+            .section-header {
+                flex-direction: column;
                 gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .preview-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
             }
 
             .testimonials-grid {
                 grid-template-columns: 1fr;
             }
 
-            .cart-modal {
-                width: 100%;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
             }
 
-            .categories-menu {
-                width: 260px;
+            .social-footer {
+                justify-content: center;
+            }
+
+            .cart-modal {
+                width: 100%;
             }
         }
 
         @media (max-width: 480px) {
             .products-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .comment-box {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            .cart-modal, .preview-modal {
+                padding-bottom: env(safe-area-inset-bottom);
             }
         }
     </style>
@@ -873,12 +1212,19 @@
             <nav>
                 <a href="#" class="logo">KLOHE</a>
                 <div class="nav-right">
-                    <button class="menu-toggle" onclick="toggleMenu()" id="menuBtn">
+                    <!-- Redes Sociales -->
+                    <div class="social-header">
+                        <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram">📷</a>
+                        <a href="https://tiktok.com/@klohesv" target="_blank" class="social-btn" title="TikTok">🎵</a>
+                        <a href="https://facebook.com/klohejewelry" target="_blank" class="social-btn" title="Facebook">f</a>
+                    </div>
+                    
+                    <button class="menu-toggle" id="menuBtn" aria-label="Menú">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
-                    <div class="cart-icon" onclick="toggleCart()">
+                    <div class="cart-icon" onclick="toggleCart()" aria-label="Carrito">
                         🛒
                         <span class="cart-count" id="cartBadge" style="display: none;">0</span>
                     </div>
@@ -888,7 +1234,7 @@
     </header>
 
     <!-- Menú de Categorías -->
-    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="menu-overlay" id="menuOverlay"></div>
     <div class="categories-menu" id="categoriesMenu">
         <button class="close-menu" onclick="toggleMenu()">✕</button>
         <h3>Categorías</h3>
@@ -906,29 +1252,9 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>San Valentín</h1>
-            <p class="hero-subtitle">El regalo perfecto para esa persona especial</p>
-            <p>Descubre nuestra colección de accesorios con amor</p>
-            <span class="valentine-badge">❤️ Edición Especial ❤️</span>
-        </div>
-    </section>
-
-    <!-- Redes Sociales -->
-    <section class="social-bar">
-        <div class="container">
-            <div class="social-links">
-                <a href="https://instagram.com/klohesv" target="_blank" class="social-link">
-                    <i class="fab fa-instagram"></i>
-                    <span>@klohesv</span>
-                </a>
-                <a href="https://tiktok.com/@klohesv" target="_blank" class="social-link">
-                    <i class="fab fa-tiktok"></i>
-                    <span>@klohesv</span>
-                </a>
-                <a href="https://facebook.com/klohejewelry" target="_blank" class="social-link">
-                    <i class="fab fa-facebook"></i>
-                    <span>Klohe Jewelry</span>
-                </a>
+            <div class="hero-content">
+                <h1>Colección Exclusiva</h1>
+                <p>Descubre piezas únicas seleccionadas para ti</p>
             </div>
         </div>
     </section>
@@ -936,147 +1262,110 @@
     <!-- Products Section -->
     <section class="products">
         <div class="container">
-            <h2 class="section-title">Nuestra Colección</h2>
+            <div class="section-header">
+                <h2 class="section-title" id="categoryTitle">Todos los Productos</h2>
+                <span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span>
+            </div>
             <div class="products-grid" id="productsContainer">
                 <!-- Los productos se cargan dinámicamente -->
             </div>
-        </div>
-    </section>
-
-    <!-- Testimonios -->
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Los productos son de excelente calidad, mi novia quedó encantada con el collar que le regalé. ¡Definitivamente volveré a comprar!</p>
-                    <p class="testimonial-author">- María G.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">El servicio al cliente es increíble, me ayudaron a elegir el regalo perfecto para San Valentín. Envío rápido y muy bien empacado.</p>
-                    <p class="testimonial-author">- Carlos R.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Compré una pulsera y unos aretes, la calidad superó mis expectativas. Precios muy accesibles para la calidad que ofrecen.</p>
-                    <p class="testimonial-author">- Ana L.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Mi esposa amó su reloj, se ve muy elegante y de buena calidad. KLOHE se convirtió en mi tienda favorita de accesorios.</p>
-                    <p class="testimonial-author">- Pedro M.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Hermosos diseños, únicos y delicados. He comprado varias veces y siempre quedo satisfecha. Muy recomendados.</p>
-                    <p class="testimonial-author">- Laura S.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">El set de collar y aretes que compré fue el regalo perfecto para mi mamá. Excelente atención y productos bellísimos.</p>
-                    <p class="testimonial-author">- Daniela H.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Me encanta que tengan opciones para todos los gustos y bolsillos. La cartera que compré es hermosa y resistente.</p>
-                    <p class="testimonial-author">- Sofía T.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Compré por WhatsApp y fue muy fácil. Me enviaron fotos de los productos y me ayudaron a elegir. ¡10 de 10!</p>
-                    <p class="testimonial-author">- Javier K.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Los anillos son preciosos, talla perfecta y brillantes. Mi prometida no se quitó el suyo ni para dormir. Gracias KLOHE.</p>
-                    <p class="testimonial-author">- Roberto N.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Increíble variedad de collares, encontré exactamente lo que buscaba para regalar. Empaque muy bonito y cuidadoso.</p>
-                    <p class="testimonial-author">- Carmen V.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Lentes de excelente calidad, el estilo es único y moderno. Me preguntan dónde los compré cada vez que los uso.</p>
-                    <p class="testimonial-author">- Fernanda P.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Las pulseras son delicadas y elegantes, perfectas para regalar o auto-regalarse. El servicio es rápido y confiable.</p>
-                    <p class="testimonial-author">- Isabel M.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">KLOHE tiene los mejores precios del mercado sin sacrificar calidad. He comparado con otras tiendas y no hay igual.</p>
-                    <p class="testimonial-author">- Andrés L.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Mi mejor amiga quedó fascinada con los aretes que le regalé. Dijo que son los más bonitos que tiene. ¡Gracias!</p>
-                    <p class="testimonial-author">- Natalia C.</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">Recomiendo KLOHE al 100%. Productos hermosos, atención personalizada y entrega puntual. Mi tienda de confianza.</p>
-                    <p class="testimonial-author">- Valentina R.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Caja de Comentarios -->
-    <section class="comments-section">
-        <div class="container">
-            <h2 class="section-title">Déjanos tu mensaje de amor ❤️</h2>
-            <div class="comment-form">
-                <div class="form-group">
-                    <label for="name">Tu nombre</label>
-                    <input type="text" id="name" placeholder="Escribe tu nombre">
-                </div>
-                <div class="form-group">
-                    <label for="email">Tu correo</label>
-                    <input type="email" id="email" placeholder="tu@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="message">Tu mensaje</label>
-                    <textarea id="message" rows="4" placeholder="Cuéntanos tu experiencia o envía un mensaje de amor..."></textarea>
-                </div>
-                <button class="btn-submit" onclick="submitComment()">
-                    <i class="fas fa-heart"></i> Enviar mensaje
+            <div class="load-more-container" id="loadMoreContainer">
+                <button class="btn-load-more" id="loadMoreBtn" onclick="loadMoreProducts()">
+                    Cargar más productos
                 </button>
             </div>
         </div>
     </section>
+
+    <!-- Sección de Testimonios -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2>Lo que dicen nuestros clientes</h2>
+                <p>Experiencias reales de quienes confían en nosotros</p>
+            </div>
+            
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- Testimonios se cargan dinámicamente -->
+            </div>
+
+            <!-- Caja de Comentarios -->
+            <div class="comment-box">
+                <h3>Deja tu comentario</h3>
+                <form class="comment-form" onsubmit="submitComment(event)">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Calificación</label>
+                        <select style="padding: 1rem; border: 2px solid var(--gris-suave); font-family: 'Inter', sans-serif;">
+                            <option>⭐⭐⭐⭐⭐ (5 estrellas)</option>
+                            <option>⭐⭐⭐⭐ (4 estrellas)</option>
+                            <option>⭐⭐⭐ (3 estrellas)</option>
+                            <option>⭐⭐ (2 estrellas)</option>
+                            <option>⭐ (1 estrella)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tu comentario</label>
+                        <textarea required placeholder="Cuéntanos tu experiencia..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Enviar comentario</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Vista Previa -->
+    <div class="preview-modal" id="previewModal" onclick="closePreview(event)">
+        <div class="preview-content" onclick="event.stopPropagation()">
+            <button class="preview-close" onclick="closePreview()">✕</button>
+            <div class="preview-image-container">
+                <img src="" alt="" class="preview-image" id="previewImage">
+            </div>
+            <div class="preview-details">
+                <h3 class="preview-name" id="previewName"></h3>
+                <p class="preview-barcode" id="previewBarcode"></p>
+                <p class="preview-price" id="previewPrice"></p>
+                <p class="preview-stock" id="previewStock"></p>
+                <button class="preview-add-btn" id="previewAddBtn">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>KLOHE</h4>
-                    <p>Accesorios con amor desde 2024</p>
+                    <h4>Contacto</h4>
+                    <p>WhatsApp: 66711569</p>
+                    <p>Email: info@klohe.com</p>
+                    <p>San Salvador, El Salvador</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociales</h4>
+                    <p>Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
-                        <a href="https://instagram.com/klohesv" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram">📷</a>
+                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok">🎵</a>
+                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook">f</a>
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Contacto</h4>
-                    <a href="https://wa.me/66711569">WhatsApp: 66711569</a>
-                    <a href="mailto:info@klohe.com">info@klohe.com</a>
-                </div>
-                <div class="footer-section">
-                    <h4>San Valentín</h4>
-                    <p>❤️ Edición Especial 2026</p>
-                    <p>Regala amor con KLOHE</p>
+                    <h4>Horario</h4>
+                    <p>Lunes - Viernes: 9:00 - 18:00</p>
+                    <p>Sábado: 10:00 - 14:00</p>
+                    <p>Domingo: Cerrado</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 KLOHE. Todos los derechos reservados. ❤️ Hecho con amor</p>
+                <p>&copy; 2026 KLOHE. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -1109,64 +1398,92 @@
     <script>
         let currentFilter = 'todos';
         let cart = [];
+        let currentPage = 0;
+        const productsPerPage = 25;
+        let filteredProducts = [];
+        let currentPreviewIndex = null;
+
+        // 15 Testimonios predefinidos
+        const testimonials = [
+            { name: "María Fernanda L.", text: "La calidad de los accesorios es increíble. Mi collar llegó en perfectas condiciones y el empaque era hermoso.", date: "15 Ene 2026", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Carlos Mendoza", text: "Excelente servicio al cliente. Me ayudaron a elegir el regalo perfecto para mi esposa. 100% recomendado.", date: "12 Ene 2026", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Ana Lucía R.", text: "Los aretes son exactamente como se ven en las fotos. Material de primera calidad y diseño único.", date: "10 Ene 2026", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Diego Hernández", text: "Compré un reloj y superó mis expectativas. Elegante, preciso y a muy buen precio.", date: "8 Ene 2026", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Sofia Castellanos", text: "La entrega fue rápida y el producto llegó muy bien protegido. Volveré a comprar sin duda.", date: "5 Ene 2026", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Juan Pablo G.", text: "Gran variedad de productos. Encontré exactamente lo que buscaba para regalar.", date: "3 Ene 2026", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Laura Michelle", text: "Los collares son divinos! He recibido muchos cumplidos. Gracias KLOHE.", date: "1 Ene 2026", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Roberto Carlos", text: "Atención personalizada y productos de lujo a precios accesibles. Mi tienda favorita.", date: "28 Dic 2025", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Daniela Fuentes", text: "La pulsera que compré es hermosa. Detalles impecables y muy delicada.", date: "25 Dic 2025", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Andrea Morales", text: "Me encanta que tengan opciones para todos los gustos. Desde lo clásico hasta lo moderno.", date: "22 Dic 2025", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Luis Fernando", text: "Compré varios artículos para regalos corporativos y quedaron fascinados. Excelente presentación.", date: "20 Dic 2025", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Camila Serrano", text: "El anillo es precioso, talla perfecta y brillo excepcional. Mil gracias!", date: "18 Dic 2025", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Pedro Antonio", text: "Servicio confiable y productos auténticos. KLOHE se ha ganado mi confianza.", date: "15 Dic 2025", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Valentina Ruiz", text: "Las carteras son de cuero genuino y excelente terminación. Muy satisfecha.", date: "12 Dic 2025", stars: "⭐⭐⭐⭐⭐" },
+            { name: "Gabriel Alejandro", text: "Desde que descubrí KLOHE no compro accesorios en otro lugar. Calidad garantizada.", date: "10 Dic 2025", stars: "⭐⭐⭐⭐⭐" }
+        ];
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Renderizar testimonios
+            renderTestimonials();
+            
+            // Inicializar productos
+            filteredProducts = [...products];
             renderProducts();
+            updateProductsCount();
+            
+            // Event listeners
+            const menuBtn = document.getElementById('menuBtn');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMenu();
+            });
+            
+            menuOverlay.addEventListener('click', toggleMenu);
         });
+
+        function renderTestimonials() {
+            const container = document.getElementById('testimonialsGrid');
+            container.innerHTML = testimonials.map(t => `
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">${t.stars}</div>
+                    <p class="testimonial-text">"${t.text}"</p>
+                    <div class="testimonial-author">${t.name}</div>
+                    <div class="testimonial-date">${t.date}</div>
+                </div>
+            `).join('');
+        }
+
+        function submitComment(e) {
+            e.preventDefault();
+            showNotification('¡Gracias por tu comentario!');
+            e.target.reset();
+        }
 
         function toggleMenu() {
             const menu = document.getElementById('categoriesMenu');
             const overlay = document.getElementById('menuOverlay');
             const btn = document.getElementById('menuBtn');
             
-            menu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            btn.classList.toggle('active');
-        }
-
-        function renderProducts() {
-            const container = document.getElementById('productsContainer');
-            container.innerHTML = '';
-
-            products.forEach((product, index) => {
-                if (currentFilter !== 'todos') {
-                    const name = product.name.toLowerCase();
-                    if (!name.includes(currentFilter)) return;
-                }
-
-                const card = createProductCard(product, index);
-                container.appendChild(card);
-            });
-        }
-
-        function createProductCard(product, index) {
-            const card = document.createElement('div');
-            card.className = 'product-card';
+            const isActive = menu.classList.contains('active');
             
-            const imageName = product.barcode;
-            const hasStock = product.stock > 0;
-
-            card.innerHTML = `
-                <div class="product-image">
-                    <img src="${imageName}.jpg" alt="${product.name}" 
-                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23f0e6e6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 fill=%22%238b7355%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
-                    <span class="stock-badge">${product.stock} disp.</span>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">${product.name}</h3>
-                    <p class="product-barcode">Cod: ${product.barcode}</p>
-                    <p class="product-price">$${product.price.toFixed(2)}</p>
-                    <button class="btn-add-cart" onclick="addToCart(${index})" ${!hasStock ? 'disabled' : ''}>
-                        ${hasStock ? '❤️ Agregar' : 'Agotado'}
-                    </button>
-                </div>
-            `;
-            
-            return card;
+            if (isActive) {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                btn.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                menu.classList.add('active');
+                overlay.classList.add('active');
+                btn.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         function filterProducts(category) {
             currentFilter = category;
+            currentPage = 0;
             
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -1174,7 +1491,7 @@
             event.target.classList.add('active');
             
             const titles = {
-                'todos': 'Nuestra Colección',
+                'todos': 'Todos los Productos',
                 'reloj': 'Relojes',
                 'cartera': 'Carteras',
                 'collar': 'Collares',
@@ -1184,10 +1501,131 @@
                 'lentes': 'Lentes',
                 'arete': 'Aretes'
             };
-            document.querySelector('.section-title').textContent = titles[category] || category;
+            document.getElementById('categoryTitle').textContent = titles[category] || category;
             
+            if (category === 'todos') {
+                filteredProducts = [...products];
+            } else {
+                filteredProducts = products.filter(product => 
+                    product.name.toLowerCase().includes(category)
+                );
+            }
+            
+            document.getElementById('productsContainer').innerHTML = '';
             renderProducts();
+            updateProductsCount();
+            updateLoadMoreButton();
             toggleMenu();
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            const start = currentPage * productsPerPage;
+            const end = start + productsPerPage;
+            const productsToShow = filteredProducts.slice(start, end);
+            
+            productsToShow.forEach((product, index) => {
+                const card = createProductCard(product, start + index);
+                container.appendChild(card);
+            });
+            
+            updateLoadMoreButton();
+        }
+
+        function createProductCard(product, index) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            const imageName = product.barcode;
+            const hasStock = product.stock > 0;
+            const realIndex = products.indexOf(product);
+
+            card.innerHTML = `
+                <div class="product-image-container" onclick="openPreview(${realIndex})">
+                    <img src="${imageName}.jpg" alt="${product.name}" 
+                         class="product-image"
+                         loading="lazy"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23f5f5f5%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%231a1a1a%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                    <div class="preview-overlay">
+                        <button class="preview-btn" onclick="event.stopPropagation(); openPreview(${realIndex})">👁</button>
+                    </div>
+                    <span class="stock-badge">${product.stock} disp.</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-barcode">COD: ${product.barcode}</p>
+                    <div class="product-row">
+                        <span class="product-price">$${product.price.toFixed(2)}</span>
+                        <button class="eye-btn" onclick="openPreview(${realIndex})" title="Vista rápida">👁</button>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''}>
+                        ${hasStock ? 'Agregar al carrito' : 'Agotado'}
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function loadMoreProducts() {
+            currentPage++;
+            renderProducts();
+            updateProductsCount();
+        }
+
+        function updateLoadMoreButton() {
+            const btn = document.getElementById('loadMoreBtn');
+            const container = document.getElementById('loadMoreContainer');
+            const totalShown = (currentPage + 1) * productsPerPage;
+            
+            if (totalShown >= filteredProducts.length) {
+                container.style.display = 'none';
+            } else {
+                container.style.display = 'block';
+                btn.textContent = `Cargar más productos (${filteredProducts.length - totalShown} restantes)`;
+            }
+        }
+
+        function updateProductsCount() {
+            const shown = Math.min((currentPage + 1) * productsPerPage, filteredProducts.length);
+            document.getElementById('productsCount').textContent = 
+                `Mostrando ${shown} de ${filteredProducts.length} productos`;
+        }
+
+        function openPreview(index) {
+            const product = products[index];
+            currentPreviewIndex = index;
+            
+            document.getElementById('previewImage').src = `${product.barcode}.jpg`;
+            document.getElementById('previewImage').alt = product.name;
+            document.getElementById('previewName').textContent = product.name;
+            document.getElementById('previewBarcode').textContent = `CÓDIGO: ${product.barcode}`;
+            document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('previewStock').textContent = `${product.stock} unidades disponibles`;
+            
+            const addBtn = document.getElementById('previewAddBtn');
+            if (product.stock > 0) {
+                addBtn.disabled = false;
+                addBtn.textContent = 'Agregar al carrito';
+                addBtn.onclick = () => {
+                    addToCart(index);
+                    closePreview();
+                };
+            } else {
+                addBtn.disabled = true;
+                addBtn.textContent = 'Agotado';
+            }
+            
+            document.getElementById('previewModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview(event) {
+            if (!event || event.target.id === 'previewModal' || event.target.classList.contains('preview-close')) {
+                document.getElementById('previewModal').classList.remove('active');
+                document.body.style.overflow = '';
+                currentPreviewIndex = null;
+            }
         }
 
         function addToCart(index) {
@@ -1212,7 +1650,7 @@
             }
 
             updateCart();
-            showNotification('❤️ Agregado al carrito');
+            showNotification('Producto agregado al carrito');
         }
 
         function removeFromCart(barcode) {
@@ -1231,7 +1669,7 @@
             cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
 
             if (cart.length === 0) {
-                cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío ❤️</div>';
+                cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>';
                 whatsappBtn.style.display = 'none';
             } else {
                 cartItems.innerHTML = '';
@@ -1245,21 +1683,25 @@
                         <div class="cart-item">
                             <div class="cart-item-image">
                                 <img src="${item.barcode}.jpg" alt="${item.name}" 
-                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect width=%2260%22 height=%2260%22 fill=%22%23f0e6e6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2220%22 fill=%22%238b7355%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2290%22 height=%2290%22%3E%3Crect width=%2290%22 height=%2290%22 fill=%22%23f5f5f5%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 fill=%22%231a1a1a%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                             </div>
                             <div class="cart-item-details">
                                 <h4>${item.name}</h4>
+                                <p class="cart-item-code">COD: ${item.barcode}</p>
                                 <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
                             </div>
-                            <button class="remove-item" onclick="removeFromCart('${item.barcode}')">🗑️</button>
+                            <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar">🗑️</button>
                         </div>
                     `;
                 });
 
                 cartTotal.textContent = `$${total.toFixed(2)}`;
                 
-                const message = cart.map(item => `${item.name} (${item.quantity})`).join(', ');
-                whatsappBtn.href = `https://wa.me/66711569?text=❤️ Hola! Quiero comprar para San Valentín: ${message}. Total: $${total.toFixed(2)}`;
+                const message = cart.map(item => 
+                    `• ${item.name} (COD: ${item.barcode}) - Cant: ${item.quantity}`
+                ).join('%0A');
+                
+                whatsappBtn.href = `https://wa.me/66711569?text=Hola! Quiero comprar:%0A%0A${message}%0A%0ATotal: $${total.toFixed(2)}`;
                 whatsappBtn.style.display = 'flex';
             }
         }
@@ -1267,14 +1709,23 @@
         function toggleCart() {
             const modal = document.getElementById('cartModal');
             const overlay = document.getElementById('overlay');
-            modal.classList.toggle('active');
-            overlay.classList.toggle('active');
+            const isActive = modal.classList.contains('active');
+            
+            if (isActive) {
+                modal.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                modal.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
             notification.textContent = message;
-            notification.style.background = type === 'error' ? '#e74c3c' : 'var(--cafe-suave)';
+            notification.style.background = type === 'error' ? '#dc3545' : 'var(--negro)';
             notification.classList.add('show');
             
             setTimeout(() => {
@@ -1282,21 +1733,20 @@
             }, 2500);
         }
 
-        function submitComment() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (!name || !email || !message) {
-                showNotification('Por favor completa todos los campos', 'error');
-                return;
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                const menu = document.getElementById('categoriesMenu');
+                const overlay = document.getElementById('menuOverlay');
+                const btn = document.getElementById('menuBtn');
+                
+                if (menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    btn.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
             }
-            
-            showNotification('❤️ ¡Gracias por tu mensaje!');
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('message').value = '';
-        }
+        });
     </script>
 
 </body>

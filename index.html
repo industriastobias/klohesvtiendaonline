@@ -279,6 +279,38 @@
             letter-spacing: 1px;
         }
 
+        /* 🔍 Buscador */
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-left: 3rem;
+            border: 1px solid var(--gris-suave);
+            background: var(--blanco);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--negro);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gris-texto);
+        }
+
         /* Products Section */
         .products {
             padding: 3rem 0;
@@ -1109,6 +1141,140 @@
             display: block;
         }
 
+        /* 💬 WhatsApp Flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            background: var(--negro);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 75px;
+        }
+
+        /* 📧 Newsletter Popup */
+        .newsletter-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: var(--blanco);
+            padding: 2.5rem;
+            border: 2px solid var(--negro);
+            z-index: 5000;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .newsletter-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .newsletter-popup h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--negro);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .newsletter-popup p {
+            color: var(--gris-texto);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-code {
+            background: var(--gris-fondo);
+            border: 2px dashed var(--negro);
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--negro);
+            margin: 1rem 0;
+            letter-spacing: 2px;
+        }
+
+        .newsletter-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--gris-texto);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .newsletter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 4999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Footer */
         footer {
             background: var(--negro);
@@ -1236,6 +1402,7 @@
                 font-size: 1.4rem;
             }
 
+            /* DOS FILAS EN MÓVIL - COMO PEDISTE */
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
@@ -1260,11 +1427,24 @@
             .cart-modal {
                 width: 100%;
             }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .whatsapp-tooltip {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
+            /* Mantener 2 columnas incluso en pantallas muy pequeñas */
             .products-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1332,6 +1512,12 @@
             <div class="hero-content">
                 <h1>Colección Exclusiva</h1>
                 <p>Descubre piezas únicas seleccionadas para ti</p>
+                
+                <!-- 🔍 Buscador -->
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar por nombre o código de producto..." oninput="searchProducts(this.value)">
+                </div>
             </div>
         </div>
     </section>
@@ -1428,7 +1614,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Contacto</h4>
-                    <p>WhatsApp: 66711569</p>
+                    <p>WhatsApp: +503 66711569</p>
                     <p>Email: <a href="mailto:industriastobias@gmail.com">industriastobias@gmail.com</a></p>
                     <p>San Salvador, El Salvador</p>
                 </div>
@@ -1448,10 +1634,10 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Horario</h4>
-                    <p>Lunes - Viernes: 9:00 - 18:00</p>
-                    <p>Sábado: 10:00 - 14:00</p>
-                    <p>Domingo: Cerrado</p>
+                    <h4>🕐 Horarios</h4>
+                    <p>Lunes a Domingo</p>
+                    <p>7:00 AM - 10:00 PM</p>
+                    <p>Siempre abiertos para ti</p>
                 </div>
             </div>
             <div class="copyright">
@@ -1459,6 +1645,22 @@
             </div>
         </div>
     </footer>
+
+    <!-- 💬 WhatsApp Flotante -->
+    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
+    </a>
+
+    <!-- 📧 Newsletter Popup -->
+    <div class="newsletter-overlay" id="newsletterOverlay" onclick="closeNewsletter()"></div>
+    <div class="newsletter-popup" id="newsletterPopup">
+        <button class="newsletter-close" onclick="closeNewsletter()"><i class="fas fa-times"></i></button>
+        <h3>¡Bienvenido!</h3>
+        <p>Obtén un <strong>15% de descuento</strong> en tu primera compra</p>
+        <div class="newsletter-code">BIENVENIDO15</div>
+        <p style="font-size: 0.8rem; color: var(--gris-texto);">Usa este código al momento de pagar</p>
+    </div>
 
     <!-- Cart Modal -->
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
@@ -1517,6 +1719,7 @@
         let currentPreviewIndex = null;
         let shippingEnabled = false;
         let currentTestimonial = 0;
+        let searchTerm = '';
 
         // 15 Testimonios
         const testimonials = [
@@ -1552,7 +1755,66 @@
             });
             
             menuOverlay.addEventListener('click', toggleMenu);
+
+            // 📧 Mostrar Newsletter después de 5 segundos
+            setTimeout(() => {
+                showNewsletter();
+            }, 5000);
         });
+
+        // 📧 Newsletter Functions
+        function showNewsletter() {
+            document.getElementById('newsletterPopup').classList.add('active');
+            document.getElementById('newsletterOverlay').classList.add('active');
+        }
+
+        function closeNewsletter() {
+            document.getElementById('newsletterPopup').classList.remove('active');
+            document.getElementById('newsletterOverlay').classList.remove('active');
+        }
+
+        // 🔍 Buscador en tiempo real
+        function searchProducts(term) {
+            searchTerm = term.toLowerCase().trim();
+            currentPage = 0;
+            
+            if (searchTerm === '') {
+                if (currentFilter === 'todos') {
+                    filteredProducts = [...products];
+                } else {
+                    filteredProducts = products.filter(product => 
+                        product.name.toLowerCase().includes(currentFilter)
+                    );
+                }
+            } else {
+                filteredProducts = products.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm) || 
+                    product.barcode.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            document.getElementById('productsContainer').innerHTML = '';
+            renderProducts();
+            updateProductsCount();
+            
+            // Actualizar título
+            if (searchTerm !== '') {
+                document.getElementById('categoryTitle').textContent = `Búsqueda: "${term}"`;
+            } else {
+                const titles = {
+                    'todos': 'Todos los Productos',
+                    'reloj': 'Relojes',
+                    'cartera': 'Carteras',
+                    'collar': 'Collares',
+                    'aritos': 'Aritos',
+                    'pulsera': 'Pulseras',
+                    'anillo': 'Anillos',
+                    'lentes': 'Lentes',
+                    'arete': 'Aretes'
+                };
+                document.getElementById('categoryTitle').textContent = titles[currentFilter] || currentFilter;
+            }
+        }
 
         // Carrusel de Testimonios
         function initTestimonials() {
@@ -1633,6 +1895,8 @@
         function filterProducts(category) {
             currentFilter = category;
             currentPage = 0;
+            searchTerm = '';
+            document.getElementById('searchInput').value = '';
             
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -1886,7 +2150,7 @@
             
             const shippingText = shippingEnabled ? '%0A%0AEnvío a todo el país: $3.75' : '';
             
-            whatsappBtn.href = `https://wa.me/66711569?text=Hola! Quiero comprar:%0A%0A${message}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text=Hola! Quiero comprar:%0A%0A${message}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
         }
 
         function toggleCart() {

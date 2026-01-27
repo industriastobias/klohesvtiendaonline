@@ -1,1834 +1,827 @@
-CARRITO 
+const CONFIG = {
+    WHATSAPP_NUMBER: '50366711569',
+    SHIPPING_COST: 3.75,
+    PRODUCTS_PER_PAGE: 20
+};
 
+let products = [];
+let cart = [];
+let currentDiscount = 0;
+let shippingSelected = false;
+let currentQuickViewId = null;
+let currentPage = 0;
+let filteredProducts = [];
+let displayedProducts = [];
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#E8D5C4">
+const valentineMessages = [
+    "Colección San Valentín",
+    "Piezas únicas para momentos inolvidables",
+    "Regala amor, regala Klohe",
+    "Elegancia en cada detalle"
+];
+
+const customerReviews = [
+    { name: "María G.", text: "Los aretes son hermosos, excelente calidad", product: "Aritos Corazón", stars: 5 },
+    { name: "Carlos M.", text: "Llegó justo a tiempo para el 14 de febrero", product: "Collar Amor", stars: 5 },
+    { name: "Ana L.", text: "La pulsera es preciosa, muy delicada", product: "Pulsera Corazón", stars: 5 },
+    { name: "Pedro S.", text: "Servicio excelente y envío rápido", product: "Cartera Elegante", stars: 5 },
+    { name: "Lucía R.", text: "El reloj es hermoso, justo lo que buscaba", product: "Reloj Corazón", stars: 5 }
+];
+
+// Función para determinar el material del producto
+function getProductMaterial(name, code, category) {
+    if (code === '02222') {
+        return null;
+    }
+    if (name.toLowerCase().includes('plata') || code.startsWith('02224')) {
+        return 'Aguja de Plata italiana 925';
+    }
+    if (['Aritos', 'Collares', 'Pulseras', 'Anillos'].includes(category)) {
+        return 'Acero inoxidable resistente a salpicaduras de agua';
+    }
+    return null;
+}
+
+// TODOS LOS 228 PRODUCTOS DEL INVENTARIO
+const realProducts = [
+    // CARTERAS (45 productos)
+    { id: 1, name: "Billetera", code: "076", price: 10.00, stock: 0, category: "Carteras", isNew: false },
+    { id: 2, name: "Bolso de Mano", code: "088", price: 10.00, stock: 1, category: "Carteras", isNew: false },
+    { id: 3, name: "Cartera", code: "03", price: 12.50, stock: 1, category: "Carteras", isNew: false },
+    { id: 4, name: "Cartera", code: "014", price: 12.00, stock: 1, category: "Carteras", isNew: false },
+    { id: 5, name: "Cartera", code: "033", price: 10.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 6, name: "Cartera", code: "035", price: 16.50, stock: 0, category: "Carteras", isNew: false },
+    { id: 7, name: "Cartera", code: "071", price: 15.00, stock: 0, category: "Carteras", isNew: false },
+    { id: 8, name: "Cartera", code: "073", price: 10.00, stock: 1, category: "Carteras", isNew: false },
+    { id: 9, name: "Cartera", code: "00000", price: 13.50, stock: 0, category: "Carteras", isNew: false },
+    { id: 10, name: "Cartera", code: "086", price: 18.50, stock: 1, category: "Carteras", isNew: false },
+    { id: 11, name: "Cartera", code: "087", price: 18.50, stock: 1, category: "Carteras", isNew: false },
+    { id: 12, name: "Cartera", code: "089", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 13, name: "Cartera", code: "096", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 14, name: "Cartera", code: "097", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 15, name: "Cartera", code: "098", price: 24.00, stock: 1, category: "Carteras", isNew: false },
+    { id: 16, name: "Cartera", code: "099", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 17, name: "Cartera", code: "114", price: 14.99, stock: 0, category: "Carteras", isNew: false },
+    { id: 18, name: "Cartera", code: "127", price: 12.00, stock: 1, category: "Carteras", isNew: false },
+    { id: 19, name: "Cartera", code: "128", price: 13.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 20, name: "Cartera", code: "129", price: 13.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 21, name: "Cartera", code: "130", price: 15.00, stock: 0, category: "Carteras", isNew: false },
+    { id: 22, name: "Cartera", code: "132", price: 14.00, stock: 2, category: "Carteras", isNew: false },
+    { id: 23, name: "Cartera", code: "147", price: 14.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 24, name: "Cartera", code: "148", price: 14.00, stock: 1, category: "Carteras", isNew: false },
+    { id: 25, name: "Cartera", code: "149", price: 15.99, stock: 1, category: "Carteras", isNew: true },
+    { id: 26, name: "Cartera", code: "150", price: 15.99, stock: 1, category: "Carteras", isNew: true },
+    { id: 27, name: "Cartera", code: "151", price: 13.50, stock: 0, category: "Carteras", isNew: false },
+    { id: 28, name: "Cartera", code: "152", price: 14.00, stock: 1, category: "Carteras", isNew: false },
+    { id: 29, name: "Cartera", code: "153", price: 14.00, stock: 0, category: "Carteras", isNew: false },
+    { id: 30, name: "Cartera Beige", code: "068", price: 10.50, stock: 1, category: "Carteras", isNew: false },
+    { id: 31, name: "Cartera Blanca", code: "022", price: 13.00, stock: 0, category: "Carteras", isNew: false },
+    { id: 32, name: "Cartera Blanca", code: "049", price: 10.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 33, name: "Cartera Blanca", code: "058", price: 10.99, stock: 0, category: "Carteras", isNew: false },
+    { id: 34, name: "Cartera Blanca", code: "063", price: 10.50, stock: 1, category: "Carteras", isNew: false },
+    { id: 35, name: "Cartera Blanca", code: "075", price: 13.50, stock: 0, category: "Carteras", isNew: false },
+    { id: 36, name: "Cartera Blanca", code: "190", price: 10.99, stock: 0, category: "Carteras", isNew: false },
+    { id: 37, name: "Cartera Café", code: "899", price: 17.75, stock: 0, category: "Carteras", isNew: false },
+    { id: 38, name: "Cartera Clásica", code: "051", price: 20.00, stock: 0, category: "Carteras", isNew: false },
+    { id: 39, name: "Cartera Clásica", code: "061", price: 12.50, stock: 0, category: "Carteras", isNew: false },
+    { id: 40, name: "Cartera Morada", code: "054", price: 10.99, stock: 0, category: "Carteras", isNew: false },
+    { id: 41, name: "Cartera Negra", code: "047", price: 10.99, stock: 1, category: "Carteras", isNew: false },
+    { id: 42, name: "Cartera Roja", code: "074", price: 13.50, stock: 0, category: "Carteras", isNew: false },
+    { id: 43, name: "Cartera Rosada", code: "023", price: 9.50, stock: 1, category: "Carteras", isNew: false },
+    { id: 44, name: "Cartera Vino", code: "053", price: 18.00, stock: 0, category: "Carteras", isNew: false },
+    { id: 45, name: "Carteras", code: "181", price: 10.00, stock: 1, category: "Carteras", isNew: false },
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path fill='%23A67B7B' d='M16 28.8l-1.5-1.4C7.6 20.8 3 16.6 3 11.5 3 7.3 6.3 4 10.5 4c2.4 0 4.7 1.1 6 2.9C17.8 5.1 20.1 4 22.5 4 26.7 4 30 7.3 30 11.5c0 5.1-4.6 9.3-11.5 15.9L16 28.8z'/></svg>">
+    // ARITOS (49 productos)
+    { id: 46, name: "Aritos", code: "046", price: 3.50, stock: 1, category: "Aritos", isNew: true },
+    { id: 47, name: "Aretas", code: "179", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 48, name: "Arete", code: "060", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+    { id: 49, name: "Aretes", code: "174", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 50, name: "Aretes de Corazón", code: "056", price: 4.50, stock: 0, category: "Aritos", isNew: true },
+    { id: 51, name: "Aritos", code: "028393992", price: 6.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 52, name: "Aritos", code: "06", price: 7.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 53, name: "Aritos", code: "07", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 54, name: "Aritos", code: "09", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+    { id: 55, name: "Aritos", code: "011", price: 7.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 56, name: "Aritos", code: "013", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+    { id: 57, name: "Aritos", code: "036", price: 3.50, stock: 0, category: "Aritos", isNew: false },
+    { id: 58, name: "Aritos", code: "079", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 59, name: "Aritos", code: "080", price: 4.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 60, name: "Aritos", code: "081", price: 6.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 61, name: "Aritos", code: "082", price: 6.50, stock: 0, category: "Aritos", isNew: false },
+    { id: 62, name: "Aritos", code: "085", price: 8.00, stock: 1, category: "Aritos", isNew: false },
+    { id: 63, name: "Aritos", code: "092", price: 3.50, stock: 0, category: "Aritos", isNew: false },
+    { id: 64, name: "Aritos", code: "100", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 65, name: "Aritos", code: "101", price: 5.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 66, name: "Aritos", code: "102", price: 5.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 67, name: "Aritos", code: "107", price: 8.00, stock: 1, category: "Aritos", isNew: false },
+    { id: 68, name: "Aritos", code: "108", price: 7.99, stock: 0, category: "Aritos", isNew: false },
+    { id: 69, name: "Aritos", code: "115", price: 6.99, stock: 1, category: "Aritos", isNew: false },
+    { id: 70, name: "Aritos", code: "116", price: 6.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 71, name: "Aritos", code: "117", price: 7.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 72, name: "Aritos", code: "118", price: 8.00, stock: 1, category: "Aritos", isNew: false },
+    { id: 73, name: "Aritos", code: "119", price: 6.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 74, name: "Aritos", code: "124", price: 4.00, stock: 7, category: "Aritos", isNew: false },
+    { id: 75, name: "Aritos", code: "140", price: 5.50, stock: 0, category: "Aritos", isNew: false },
+    { id: 76, name: "Aritos", code: "156", price: 7.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 77, name: "Aritos", code: "157", price: 8.99, stock: 1, category: "Aritos", isNew: false },
+    { id: 78, name: "Aritos", code: "158", price: 8.99, stock: 1, category: "Aritos", isNew: false },
+    { id: 79, name: "Aritos", code: "166", price: 7.00, stock: 3, category: "Aritos", isNew: false },
+    { id: 80, name: "Aritos", code: "168", price: 5.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 81, name: "Aritos", code: "169", price: 6.50, stock: 0, category: "Aritos", isNew: false },
+    { id: 82, name: "Aritos", code: "170", price: 7.50, stock: 2, category: "Aritos", isNew: false },
+    { id: 83, name: "Aritos", code: "176", price: 6.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 84, name: "Aritos", code: "178", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 85, name: "Aritos", code: "177", price: 8.50, stock: 1, category: "Aritos", isNew: false },
+    { id: 86, name: "Aritos", code: "19009", price: 5.00, stock: 1, category: "Aritos", isNew: false },
+    { id: 87, name: "Aritos", code: "190012", price: 7.00, stock: 1, category: "Aritos", isNew: false },
+    { id: 88, name: "Aritos", code: "1991919", price: 2.00, stock: 1, category: "Aritos", isNew: false },
+    { id: 89, name: "Aritos de Estrella", code: "019", price: 3.00, stock: 0, category: "Aritos", isNew: false },
+    { id: 90, name: "Aritos", code: "02222", price: 5.00, stock: 1, category: "Aritos", isNew: true },
+    { id: 91, name: "Aritos de Plata", code: "02224", price: 6.00, stock: 1, category: "Aritos", isNew: true },
+    { id: 92, name: "Aritos de Plata", code: "02226", price: 6.00, stock: 1, category: "Aritos", isNew: true },
+    { id: 93, name: "Aritos de Plata", code: "02227", price: 6.00, stock: 1, category: "Aritos", isNew: true },
+    { id: 94, name: "Aritos de Plata", code: "02228", price: 6.00, stock: 1, category: "Aritos", isNew: true },
     
-    <title>Klohe - Accesorios | San Valentín</title>
+    // COLLARES (60 productos)
+    { id: 95, name: "Collar Playa", code: "029", price: 5.50, stock: 0, category: "Collares", isNew: false },
+    { id: 96, name: "Collar de Playa", code: "066", price: 12.75, stock: 1, category: "Collares", isNew: false },
+    { id: 97, name: "Collar", code: "10199191", price: 9.50, stock: 1, category: "Collares", isNew: false },
+    { id: 98, name: "Collar", code: "17801", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 99, name: "Collar", code: "024", price: 12.00, stock: 0, category: "Collares", isNew: false },
+    { id: 100, name: "Collar", code: "025", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 101, name: "Collar", code: "028", price: 8.00, stock: 3, category: "Collares", isNew: false },
+    { id: 102, name: "Collar", code: "034", price: 15.00, stock: 1, category: "Collares", isNew: false },
+    { id: 103, name: "Collar", code: "039", price: 11.50, stock: 1, category: "Collares", isNew: false },
+    { id: 104, name: "Collar", code: "040", price: 10.00, stock: 0, category: "Collares", isNew: false },
+    { id: 105, name: "Collar", code: "070", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 106, name: "Collar", code: "072", price: 11.50, stock: 1, category: "Collares", isNew: false },
+    { id: 107, name: "Collar", code: "077", price: 13.50, stock: 1, category: "Collares", isNew: false },
+    { id: 108, name: "Collar", code: "083", price: 0.00, stock: 0, category: "Collares", isNew: false },
+    { id: 109, name: "Collar", code: "084", price: 13.00, stock: 1, category: "Collares", isNew: false },
+    { id: 110, name: "Collar", code: "090", price: 12.50, stock: 1, category: "Collares", isNew: false },
+    { id: 111, name: "Collar", code: "091", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 112, name: "Collar", code: "093", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 113, name: "Collar", code: "094", price: 12.00, stock: 0, category: "Collares", isNew: false },
+    { id: 114, name: "Collar", code: "095", price: 12.00, stock: 0, category: "Collares", isNew: false },
+    { id: 115, name: "Collar", code: "104", price: 15.00, stock: 1, category: "Collares", isNew: false },
+    { id: 116, name: "Collar", code: "109", price: 11.00, stock: 0, category: "Collares", isNew: false },
+    { id: 117, name: "Collar", code: "110", price: 13.99, stock: 1, category: "Collares", isNew: false },
+    { id: 118, name: "Collar", code: "111", price: 14.99, stock: 1, category: "Collares", isNew: false },
+    { id: 119, name: "Collar", code: "113", price: 12.00, stock: 0, category: "Collares", isNew: false },
+    { id: 120, name: "Collar", code: "126", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 121, name: "Collar", code: "133", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 122, name: "Collar", code: "134", price: 12.00, stock: 2, category: "Collares", isNew: false },
+    { id: 123, name: "Collar", code: "135", price: 15.00, stock: 1, category: "Collares", isNew: false },
+    { id: 124, name: "Collar", code: "136", price: 15.00, stock: 1, category: "Collares", isNew: false },
+    { id: 125, name: "Collar", code: "139", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 126, name: "Collar", code: "141", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 127, name: "Collar", code: "145", price: 12.99, stock: 1, category: "Collares", isNew: false },
+    { id: 128, name: "Collar", code: "155", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 129, name: "Collar", code: "163", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 130, name: "Collar", code: "164", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 131, name: "Collar", code: "165", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 132, name: "Collar", code: "171", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 133, name: "Collar", code: "172", price: 15.00, stock: 1, category: "Collares", isNew: false },
+    { id: 134, name: "Collar", code: "173", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 135, name: "Collar", code: "175", price: 12.00, stock: 3, category: "Collares", isNew: false },
+    { id: 136, name: "Collar", code: "183", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 137, name: "Collar", code: "184", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 138, name: "Collar", code: "1200", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 139, name: "Collar", code: "01116", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 140, name: "Collar", code: "01127", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 141, name: "Collar", code: "01129", price: 10.00, stock: 1, category: "Collares", isNew: false },
+    { id: 142, name: "Collar Clásico", code: "020", price: 10.00, stock: 2, category: "Collares", isNew: false },
+    { id: 143, name: "Collar Corazón Negro", code: "062", price: 10.00, stock: 1, category: "Collares", isNew: true },
+    { id: 144, name: "Collar Cruz Redondo", code: "016", price: 12.00, stock: 1, category: "Collares", isNew: false },
+    { id: 145, name: "Collar Flor", code: "055", price: 10.50, stock: 1, category: "Collares", isNew: false },
+    { id: 146, name: "Collar Flor", code: "065", price: 11.50, stock: 1, category: "Collares", isNew: false },
+    { id: 147, name: "Collar Perlas", code: "048", price: 13.50, stock: 0, category: "Collares", isNew: false },
+    { id: 148, name: "Collar Sol", code: "89009", price: 11.00, stock: 0, category: "Collares", isNew: false },
+    { id: 149, name: "Collar Doble", code: "010", price: 15.00, stock: 0, category: "Collares", isNew: false },
+    { id: 150, name: "Collar Doble", code: "027", price: 15.00, stock: 1, category: "Collares", isNew: false },
+    { id: 151, name: "Collar Doble Corazón", code: "067", price: 14.00, stock: 0, category: "Collares", isNew: true },
+    { id: 152, name: "Collar Mariposa", code: "200", price: 10.00, stock: 0, category: "Collares", isNew: false },
+    { id: 153, name: "Set Collar", code: "142", price: 18.50, stock: 1, category: "Collares", isNew: false },
+    { id: 154, name: "Set de Collar", code: "078", price: 13.50, stock: 1, category: "Collares", isNew: false },
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --blanco: #FAF9F6;
-            --crema: #F5F1ED;
-            --rosa-suave: #E8D5C4;
-            --rosa-medio: #D4A5A5;
-            --rosa-oscuro: #A67B7B;
-            --texto: #2C2C2C;
-            --texto-claro: #6B6B6B;
-            --acento: #C9B8A8;
-            --sombra-suave: rgba(0, 0, 0, 0.04);
-            --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--blanco);
-            color: var(--texto);
-            line-height: 1.6;
-            font-weight: 300;
-            letter-spacing: 0.02em;
-        }
-
-        body.modal-open {
-            overflow: hidden;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                padding: 0 2rem;
-            }
-        }
-
-        /* Header Compacto */
-        header {
-            background: var(--blanco);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--crema);
-            backdrop-filter: blur(10px);
-            background-color: rgba(250, 249, 246, 0.95);
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--texto);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
-
-        .logo span {
-            font-weight: 300;
-            color: var(--rosa-oscuro);
-        }
-
-        .cart-icon {
-            position: relative;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 50%;
-            transition: var(--transicion);
-            background: transparent;
-            color: var(--texto);
-        }
-
-        .cart-icon:hover {
-            background: var(--rosa-suave);
-            border-color: var(--rosa-medio);
-        }
-
-        .cart-icon span {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--rosa-oscuro);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.65rem;
-            font-weight: 500;
-        }
-
-        /* Hero Compacto */
-        .hero {
-            text-align: center;
-            padding: 3rem 0 2rem;
-            background: var(--crema);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 300;
-            color: var(--texto);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
-        }
-
-        .hero p {
-            color: var(--texto-claro);
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
-
-        /* Filtros Compactos */
-        .filters-container {
-            background: transparent;
-            padding: 1rem 0;
-            margin: 1rem 0;
-            border-bottom: 1px solid var(--crema);
-        }
-
-        .filters {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .search-container {
-            position: relative;
-            flex: 1;
-            min-width: 200px;
-            max-width: 300px;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 0.7rem 1rem 0.7rem 2.2rem;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 0;
-            font-size: 0.85rem;
-            background: transparent;
-            color: var(--texto);
-            transition: var(--transicion);
-            font-family: 'Inter', sans-serif;
-        }
-
-        .search-container input:focus {
-            outline: none;
-            border-color: var(--rosa-oscuro);
-        }
-
-        .search-container i {
-            position: absolute;
-            left: 0.8rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--texto-claro);
-            font-size: 0.85rem;
-        }
-
-        .filters select {
-            padding: 0.7rem 2rem 0.7rem 1rem;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 0;
-            font-size: 0.85rem;
-            background: transparent;
-            color: var(--texto);
-            cursor: pointer;
-            transition: var(--transicion);
-            font-family: 'Inter', sans-serif;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B6B6B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.8rem center;
-        }
-
-        .filters select:focus {
-            border-color: var(--rosa-oscuro);
-            outline: none;
-        }
-
-        .filter-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            cursor: pointer;
-            font-size: 0.85rem;
-            color: var(--texto-claro);
-            font-weight: 400;
-        }
-
-        .filter-checkbox input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            border: 1px solid var(--rosa-suave);
-            accent-color: var(--rosa-oscuro);
-            cursor: pointer;
-        }
-
-        /* Grid de Productos */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (min-width: 480px) {
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-        }
-
-        @media (min-width: 640px) {
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .products-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 2rem;
-            }
-        }
-
-        @media (min-width: 1280px) {
-            .products-grid {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 2rem;
-            }
-        }
-
-        .product-card {
-            background: transparent;
-            overflow: hidden;
-            transition: var(--transicion);
-            position: relative;
-            border: none;
-            box-shadow: none;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .product-card.agotado {
-            opacity: 0.5;
-        }
-
-        .product-card.agotado .product-image-container::after {
-            content: 'Agotado';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--texto);
-            color: white;
-            padding: 0.4rem 1rem;
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            font-weight: 400;
-        }
-
-        .badge-nuevo {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: var(--rosa-oscuro);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            z-index: 10;
-            font-weight: 400;
-        }
-
-        .product-image-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1;
-            overflow: hidden;
-            background: var(--crema);
-            cursor: pointer;
-            margin-bottom: 0.8rem;
-        }
-
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .product-card:hover .product-image {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            padding: 0;
-            text-align: center;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem;
-            margin-bottom: 0.3rem;
-            color: var(--texto);
-            font-weight: 400;
-            line-height: 1.3;
-        }
-
-        .product-material {
-            font-size: 0.7rem;
-            color: var(--rosa-oscuro);
-            margin-bottom: 0.3rem;
-            font-style: italic;
-        }
-
-        .product-details {
-            background: transparent;
-            border-radius: 0;
-            padding: 0;
-            margin-bottom: 0.5rem;
-            font-size: 0.7rem;
-            border: none;
-            color: var(--texto-claro);
-        }
-
-        .detail-row {
-            display: inline;
-            margin: 0 0.3rem;
-        }
-
-        .detail-value {
-            color: var(--texto-claro);
-            font-weight: 400;
-            font-size: 0.7rem;
-            letter-spacing: 0.05em;
-        }
-
-        .price-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            margin: 0.5rem 0;
-        }
-
-        .product-price {
-            font-size: 1rem;
-            color: var(--rosa-oscuro);
-            font-weight: 400;
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        .quick-view-btn-inline {
-            width: 28px;
-            height: 28px;
-            border: 1px solid var(--rosa-suave);
-            background: transparent;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transicion);
-            color: var(--texto-claro);
-            font-size: 0.8rem;
-        }
-
-        .quick-view-btn-inline:hover {
-            background: var(--rosa-suave);
-            color: var(--texto);
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            margin: 0.5rem 0;
-        }
-
-        .qty-btn {
-            width: 28px;
-            height: 28px;
-            border: 1px solid var(--rosa-suave);
-            background: transparent;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 400;
-            font-size: 0.9rem;
-            transition: var(--transicion);
-            color: var(--texto);
-            flex-shrink: 0;
-        }
-
-        .qty-btn:hover {
-            background: var(--rosa-suave);
-        }
-
-        .qty-display {
-            min-width: 24px;
-            text-align: center;
-            font-weight: 400;
-            font-size: 0.9rem;
-            color: var(--texto);
-        }
-
-        .add-to-cart {
-            width: 100%;
-            padding: 0.7rem;
-            background: var(--texto);
-            color: white;
-            border: none;
-            border-radius: 0;
-            cursor: pointer;
-            font-size: 0.7rem;
-            transition: var(--transicion);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 400;
-            margin-top: auto;
-            min-height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .add-to-cart:hover:not(:disabled) {
-            background: var(--rosa-oscuro);
-        }
-
-        .add-to-cart:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            background: var(--texto-claro);
-        }
-
-        .load-more-container {
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        .load-more-btn {
-            background: transparent;
-            color: var(--texto);
-            border: 1px solid var(--texto);
-            padding: 0.8rem 2rem;
-            border-radius: 0;
-            font-size: 0.75rem;
-            font-weight: 400;
-            cursor: pointer;
-            transition: var(--transicion);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-        }
-
-        .load-more-btn:hover {
-            background: var(--texto);
-            color: white;
-        }
-
-        .load-more-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .products-count {
-            text-align: center;
-            color: var(--texto-claro);
-            font-size: 0.8rem;
-            margin-top: 1rem;
-            letter-spacing: 0.05em;
-        }
-
-        /* Modal vista rápida */
-        .quick-view-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(250, 249, 246, 0.98);
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .quick-view-content {
-            background: white;
-            max-width: 900px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            padding: 2rem;
-            position: relative;
-            border: 1px solid var(--crema);
-            box-shadow: 0 20px 60px var(--sombra-suave);
-        }
-
-        @media (max-width: 768px) {
-            .quick-view-content {
-                grid-template-columns: 1fr;
-                padding: 1.5rem;
-                gap: 1.5rem;
-            }
-        }
-
-        .quick-view-image {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            border: none;
-        }
-
-        .quick-view-info h2 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--texto);
-            margin-bottom: 0.5rem;
-            font-size: 1.8rem;
-            font-weight: 300;
-        }
-
-        .quick-view-material {
-            font-size: 0.85rem;
-            color: var(--rosa-oscuro);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .quick-view-price {
-            font-size: 1.4rem !important;
-            color: var(--rosa-oscuro) !important;
-            font-weight: 400;
-            margin: 1rem 0;
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(250, 249, 246, 0.98);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .image-modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-
-        .image-modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            color: var(--texto);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 50%;
-            transition: var(--transicion);
-            background: var(--blanco);
-        }
-
-        .image-modal-close:hover {
-            background: var(--rosa-suave);
-        }
-
-        /* MODAL DE STOCK */
-        .stock-modal-overlay {
-            display: none;
-            position: fixed;
-            z-index: 5000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(250, 249, 246, 0.8);
-            backdrop-filter: blur(4px);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .stock-modal-overlay.active {
-            display: flex;
-        }
-
-        .stock-modal-content {
-            background: var(--rosa-suave);
-            padding: 2rem;
-            border-radius: 0;
-            text-align: center;
-            max-width: 320px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            border: 1px solid var(--rosa-medio);
-            animation: modalSlideIn 0.3s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .stock-modal-content i {
-            font-size: 2.5rem;
-            color: var(--rosa-oscuro);
-            margin-bottom: 1rem;
-        }
-
-        .stock-modal-content h3 {
-            color: var(--texto);
-            margin-bottom: 0.5rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-            font-size: 1.3rem;
-        }
-
-        .stock-modal-content p {
-            color: var(--texto-claro);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .stock-modal-content button {
-            padding: 0.8rem 2rem;
-            background: var(--texto);
-            color: white;
-            border: none;
-            border-radius: 0;
-            cursor: pointer;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            transition: var(--transicion);
-        }
-
-        .stock-modal-content button:hover {
-            background: var(--rosa-oscuro);
-        }
-
-        /* Mini carrito */
-        .mini-cart {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            background: var(--blanco);
-            box-shadow: -10px 0 40px var(--sombra-suave);
-            z-index: 1001;
-            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            border-left: 1px solid var(--crema);
-        }
-
-        .mini-cart.open {
-            right: 0;
-        }
-
-        .mini-cart-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--crema);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: transparent;
-        }
-
-        .mini-cart-header h3 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--texto);
-            font-size: 1.3rem;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-        }
-
-        .mini-cart-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-        }
-
-        .mini-cart-footer {
-            padding: 1.5rem;
-            border-top: 1px solid var(--crema);
-            background: var(--crema);
-        }
-
-        .cart-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.2);
-            z-index: 1000;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .cart-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
-        /* Envío */
-        .shipping-compact {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.8rem;
-            background: var(--blanco);
-            border: 1px solid var(--rosa-suave);
-            cursor: pointer;
-            transition: var(--transicion);
-            margin-bottom: 0.8rem;
-        }
-
-        .shipping-compact.selected {
-            border-color: var(--rosa-oscuro);
-            background: var(--rosa-suave);
-        }
-
-        .shipping-compact input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: var(--rosa-oscuro);
-            cursor: pointer;
-        }
-
-        .shipping-info {
-            flex: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .shipping-text {
-            font-size: 0.85rem;
-            font-weight: 400;
-        }
-
-        .shipping-text small {
-            display: block;
-            font-size: 0.7rem;
-            color: var(--texto-claro);
-            font-weight: 300;
-            margin-top: 0.1rem;
-        }
-
-        .shipping-price {
-            color: var(--rosa-oscuro);
-            font-weight: 400;
-            font-size: 0.95rem;
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        /* Descuento */
-        .discount-compact {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .discount-compact input {
-            flex: 1;
-            padding: 0.7rem;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 0;
-            font-size: 0.8rem;
-            transition: var(--transicion);
-            background: var(--blanco);
-        }
-
-        .discount-compact input:focus {
-            outline: none;
-            border-color: var(--rosa-oscuro);
-        }
-
-        .discount-compact button {
-            background: var(--texto);
-            color: white;
-            border: none;
-            padding: 0.7rem 1.2rem;
-            border-radius: 0;
-            cursor: pointer;
-            font-weight: 400;
-            font-size: 0.7rem;
-            transition: var(--transicion);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .discount-compact button:hover {
-            background: var(--rosa-oscuro);
-        }
-
-        /* Totales */
-        .cart-totals-compact {
-            background: transparent;
-            padding: 0.8rem 0;
-            margin-bottom: 0.8rem;
-            border-top: 1px solid var(--rosa-suave);
-            border-bottom: 1px solid var(--rosa-suave);
-        }
-
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.4rem;
-            font-size: 0.85rem;
-            color: var(--texto-claro);
-        }
-
-        .total-row.discount {
-            color: var(--rosa-oscuro);
-        }
-
-        .total-row.final {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: var(--texto);
-            margin-top: 0.6rem;
-            padding-top: 0.6rem;
-            border-top: 1px solid var(--rosa-suave);
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--texto);
-            color: white;
-            border: none;
-            border-radius: 0;
-            font-size: 0.75rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            font-weight: 400;
-            transition: var(--transicion);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-        }
-
-        .checkout-btn:hover {
-            background: var(--rosa-oscuro);
-        }
-
-        /* Reviews */
-        .reviews-section {
-            background: var(--crema);
-            padding: 3rem 0;
-            margin: 2rem 0;
-        }
-
-        .reviews-section h3 {
-            font-family: 'Cormorant Garamond', serif;
-            text-align: center;
-            font-size: 1.5rem;
-            color: var(--texto);
-            margin-bottom: 2rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-        }
-
-        .reviews-container {
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-            height: 150px;
-            overflow: hidden;
-        }
-
-        .review-card {
-            background: var(--blanco);
-            border: 1px solid var(--rosa-suave);
-            padding: 1.5rem;
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-            text-align: center;
-        }
-
-        .review-card.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .review-stars {
-            color: var(--rosa-medio);
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-            letter-spacing: 0.2em;
-        }
-
-        .review-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            color: var(--texto);
-            margin-bottom: 0.8rem;
-            line-height: 1.6;
-            font-size: 1rem;
-            font-weight: 400;
-        }
-
-        .review-author {
-            font-weight: 400;
-            color: var(--rosa-oscuro);
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .review-product {
-            font-size: 0.7rem;
-            color: var(--texto-claro);
-            margin-top: 0.3rem;
-        }
-
-        /* Testimonios */
-        .testimonials {
-            background: var(--blanco);
-            padding: 3rem 0;
-            margin: 2rem 0;
-            text-align: center;
-            border-top: 1px solid var(--crema);
-            border-bottom: 1px solid var(--crema);
-        }
-
-        .testimonial-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--texto);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-            font-weight: 300;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .testimonial-author {
-            color: var(--rosa-oscuro);
-            font-weight: 400;
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        /* Social */
-        .social-feed {
-            padding: 3rem 0;
-            text-align: center;
-            background: var(--crema);
-        }
-
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1px;
-            margin-top: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            background: var(--rosa-suave);
-        }
-
-        @media (min-width: 768px) {
-            .social-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .social-item {
-            aspect-ratio: 1;
-            background: var(--crema);
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            transition: var(--transicion);
-        }
-
-        .social-item:hover {
-            opacity: 0.8;
-        }
-
-        .social-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .social-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .social-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(166, 123, 123, 0.9);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-            color: white;
-        }
-
-        .social-item:hover .social-overlay {
-            opacity: 1;
-        }
-
-        .social-overlay i {
-            font-size: 1.2rem;
-        }
-
-        .tiktok-section {
-            margin-top: 3rem;
-            padding: 2rem;
-            background: var(--texto);
-            color: white;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .tiktok-section h3 {
-            color: white;
-            margin-bottom: 0.5rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            font-size: 1.2rem;
-        }
-
-        .tiktok-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: transparent;
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: 1px solid white;
-            text-decoration: none;
-            font-weight: 400;
-            transition: var(--transicion);
-            margin-top: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-size: 0.7rem;
-        }
-
-        .tiktok-link:hover {
-            background: white;
-            color: var(--texto);
-        }
-
-        /* Newsletter */
-        .newsletter {
-            background: var(--rosa-oscuro);
-            padding: 3rem 0;
-            text-align: center;
-            margin: 2rem 0;
-            color: white;
-        }
-
-        .newsletter h3 {
-            font-family: 'Cormorant Garamond', serif;
-            margin-bottom: 0.3rem;
-            font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-        }
-
-        .newsletter-form {
-            display: flex;
-            gap: 0;
-            max-width: 400px;
-            margin: 1.5rem auto 0;
-            padding: 0 1rem;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 0;
-            font-size: 0.85rem;
-            background: rgba(255,255,255,0.15);
-            color: white;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
-
-        .newsletter-form button {
-            background: white;
-            color: var(--rosa-oscuro);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 0;
-            cursor: pointer;
-            font-weight: 400;
-            font-size: 0.7rem;
-            transition: var(--transicion);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .newsletter-form button:hover {
-            background: var(--crema);
-        }
-
-        /* FAQ */
-        .faq-section {
-            padding: 2rem 0;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .faq-section h3 {
-            font-family: 'Cormorant Garamond', serif;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.5rem;
-            color: var(--texto);
-            font-weight: 300;
-            letter-spacing: 0.1em;
-        }
-
-        .faq-item {
-            background: transparent;
-            border-bottom: 1px solid var(--crema);
-            margin-bottom: 0;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 1rem 0;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 400;
-            font-size: 0.9rem;
-            color: var(--texto);
-            transition: var(--transicion);
-        }
-
-        .faq-question:hover {
-            color: var(--rosa-oscuro);
-        }
-
-        .faq-answer {
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            font-size: 0.85rem;
-            color: var(--texto-claro);
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 0 1rem 0;
-            max-height: 200px;
-        }
-
-        .faq-item.active .faq-question {
-            color: var(--rosa-oscuro);
-        }
-
-        /* Chat */
-        .chat-widget {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            z-index: 999;
-        }
-
-        .chat-button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--texto);
-            color: white;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 4px 20px var(--sombra-suave);
-            transition: var(--transicion);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chat-button:hover {
-            transform: scale(1.1);
-            background: var(--rosa-oscuro);
-        }
-
-        .chat-window {
-            position: absolute;
-            bottom: 60px;
-            right: 0;
-            width: 300px;
-            height: 400px;
-            background: var(--blanco);
-            border-radius: 0;
-            box-shadow: 0 10px 40px var(--sombra-suave);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            border: 1px solid var(--crema);
-        }
-
-        .chat-window.active {
-            display: flex;
-        }
-
-        .chat-header {
-            background: var(--crema);
-            color: var(--texto);
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .chat-body {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            background: var(--blanco);
-        }
-
-        .chat-input {
-            padding: 0.8rem;
-            border-top: 1px solid var(--crema);
-            display: flex;
-            gap: 0.5rem;
-            background: var(--blanco);
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 0.7rem;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 0;
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .chat-input input:focus {
-            outline: none;
-            border-color: var(--rosa-oscuro);
-        }
-
-        .chat-input button {
-            background: var(--texto);
-            color: white;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 0;
-            cursor: pointer;
-            transition: var(--transicion);
-        }
-
-        .chat-input button:hover {
-            background: var(--rosa-oscuro);
-        }
-
-        /* Navegación inferior */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--blanco);
-            border-top: 1px solid var(--crema);
-            padding: 0.6rem 1rem;
-            display: none;
-            justify-content: space-around;
-            z-index: 100;
-        }
-
-        .bottom-nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.2rem;
-            color: var(--texto-claro);
-            text-decoration: none;
-            font-size: 0.65rem;
-            transition: var(--transicion);
-            font-weight: 400;
-            letter-spacing: 0.05em;
-        }
-
-        .bottom-nav-item.active {
-            color: var(--rosa-oscuro);
-        }
-
-        .bottom-nav-item i {
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .bottom-nav {
-                display: flex;
-            }
-            body {
-                padding-bottom: 60px;
-            }
-        }
-
-        /* Notificaciones */
-        .notification {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--texto);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 0;
-            display: none;
-            z-index: 1002;
-            font-weight: 400;
-            font-size: 0.8rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            text-align: center;
-            min-width: 250px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        /* Modal error */
-        .error-modal {
-            display: none;
-            position: fixed;
-            z-index: 3000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(250, 249, 246, 0.95);
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        .error-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 0;
-            text-align: center;
-            max-width: 300px;
-            box-shadow: 0 20px 60px var(--sombra-suave);
-            border: 1px solid var(--crema);
-        }
-
-        .error-content i {
-            font-size: 2rem;
-            color: var(--rosa-oscuro);
-            margin-bottom: 1rem;
-        }
-
-        .error-content h3 {
-            color: var(--texto);
-            margin-bottom: 0.5rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-            font-size: 1.3rem;
-        }
-
-        .error-content button {
-            margin-top: 1.5rem;
-            padding: 0.8rem 2rem;
-            background: var(--texto);
-            color: white;
-            border: none;
-            border-radius: 0;
-            cursor: pointer;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            transition: var(--transicion);
-        }
-
-        .error-content button:hover {
-            background: var(--rosa-oscuro);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--texto);
-            color: rgba(255,255,255,0.8);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-            font-weight: 300;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-        }
-
-        footer a {
-            color: var(--rosa-suave);
-            text-decoration: none;
-            margin: 0 0.8rem;
-            font-weight: 400;
-            transition: var(--transicion);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        footer a:hover {
-            color: white;
-        }
-
-        .offline-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--texto);
-            color: white;
-            text-align: center;
-            padding: 0.6rem;
-            z-index: 10000;
-            display: none;
-            font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .offline-indicator.show {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .product-card {
-            animation: fadeIn 0.5s ease forwards;
-        }
-    </style>
-</head>
-<body>
-    <div class="offline-indicator" id="offline-indicator">
-        Sin conexión
-    </div>
-
-    <!-- MODAL DE STOCK INSUFICIENTE -->
-    <div class="stock-modal-overlay" id="stock-modal-overlay" onclick="closeStockModal()">
-        <div class="stock-modal-content" onclick="event.stopPropagation()">
-            <i class="fas fa-exclamation-circle"></i>
-            <h3>Stock insuficiente</h3>
-            <p>No hay suficiente stock disponible</p>
-            <button onclick="closeStockModal()">Entendido</button>
+    // LENTES (2 productos)
+    { id: 155, name: "Lentes de Sol", code: "015", price: 7.50, stock: 1, category: "Lentes de sol", isNew: false },
+    { id: 156, name: "Lentes Negros", code: "037", price: 5.75, stock: 1, category: "Lentes de sol", isNew: false },
+    
+    // PULSERAS (31 productos)
+    { id: 157, name: "Bracelet", code: "041", price: 7.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 158, name: "Brasalet", code: "038", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 159, name: "Pulsera", code: "042", price: 5.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 160, name: "Pulsera", code: "043", price: 7.00, stock: 2, category: "Pulseras", isNew: false },
+    { id: 161, name: "Pulsera", code: "044", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 162, name: "Pulsera", code: "064", price: 6.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 163, name: "Pulsera", code: "103", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 164, name: "Pulsera", code: "105", price: 12.99, stock: 1, category: "Pulseras", isNew: false },
+    { id: 165, name: "Pulsera", code: "106", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 166, name: "Pulsera", code: "112", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 167, name: "Pulsera", code: "146", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 168, name: "Pulsera", code: "159", price: 13.00, stock: 3, category: "Pulseras", isNew: false },
+    { id: 169, name: "Pulsera", code: "160", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 170, name: "Pulsera", code: "161", price: 9.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 171, name: "Pulsera", code: "167", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 172, name: "Pulsera", code: "198", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 173, name: "Pulsera", code: "9789", price: 8.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 174, name: "Pulsera", code: "8967", price: 7.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 175, name: "Pulsera", code: "1250", price: 5.50, stock: 0, category: "Pulseras", isNew: false },
+    { id: 176, name: "Pulsera", code: "01126", price: 10.00, stock: 2, category: "Pulseras", isNew: false },
+    { id: 177, name: "Pulsera", code: "02221", price: 10.50, stock: 3, category: "Pulseras", isNew: false },
+    { id: 178, name: "Pulsera", code: "02223", price: 10.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 179, name: "Pulsera", code: "03331", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 180, name: "Pulsera", code: "03332", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 181, name: "Pulsera", code: "2001", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 182, name: "Pulsera Ajustable", code: "018", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 183, name: "Pulsera Básica", code: "030", price: 6.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 184, name: "Pulsera Cartier", code: "032", price: 10.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 185, name: "Pulsera Cartier", code: "031", price: 11.00, stock: 0, category: "Pulseras", isNew: false },
+    { id: 186, name: "Pulsera Trébol", code: "01118", price: 12.00, stock: 1, category: "Pulseras", isNew: false },
+    { id: 187, name: "Van Cleef", code: "050", price: 12.00, stock: 0, category: "Pulseras", isNew: false },
+    
+    // RELOJES (30 productos)
+    { id: 188, name: "Reloj", code: "01111", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 189, name: "Reloj", code: "01125", price: 20.00, stock: 2, category: "Relojes", isNew: false },
+    { id: 190, name: "Reloj", code: "03333", price: 16.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 191, name: "Reloj", code: "03334", price: 25.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 192, name: "Reloj", code: "03335", price: 16.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 193, name: "Reloj", code: "03336", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 194, name: "Reloj", code: "03337", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 195, name: "Reloj", code: "03338", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 196, name: "Reloj", code: "03339", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 197, name: "Reloj", code: "033340", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 198, name: "Reloj", code: "033341", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 199, name: "Reloj", code: "033342", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 200, name: "Reloj", code: "033343", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 201, name: "Reloj", code: "033344", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 202, name: "Reloj", code: "033345", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 203, name: "Reloj", code: "033346", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 204, name: "Reloj", code: "033347", price: 25.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 205, name: "Reloj", code: "033348", price: 30.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 206, name: "Reloj", code: "033349", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 207, name: "Reloj", code: "033350", price: 18.00, stock: 2, category: "Relojes", isNew: false },
+    { id: 208, name: "Reloj Blanco", code: "011144", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 209, name: "Reloj Acero", code: "01117", price: 15.00, stock: 2, category: "Relojes", isNew: false },
+    { id: 210, name: "Reloj Acero", code: "01123", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 211, name: "Reloj Dorado Waterproof", code: "01122", price: 20.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 212, name: "Reloj Negro", code: "01113", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 213, name: "Reloj Old Money", code: "01124", price: 15.00, stock: 2, category: "Relojes", isNew: false },
+    { id: 214, name: "Reloj Rojo", code: "01119", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 215, name: "Reloj Rojo", code: "01121", price: 15.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 216, name: "Set Reloj y Pulsera", code: "01115", price: 14.00, stock: 1, category: "Relojes", isNew: false },
+    { id: 217, name: "Set Reloj", code: "01112", price: 40.00, stock: 1, category: "Relojes", isNew: false },
+    
+    // ANILLOS (8 productos)
+    { id: 218, name: "Anillo", code: "02", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+    { id: 219, name: "Anillo", code: "04", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+    { id: 220, name: "Anillo", code: "08", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+    { id: 221, name: "Anillo", code: "017", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+    { id: 222, name: "Anillo", code: "021", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+    { id: 223, name: "Anillo", code: "045", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+    { id: 224, name: "Anillo", code: "057", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+    { id: 225, name: "Anillo", code: "059", price: 10.00, stock: 1, category: "Anillos", isNew: false },
+    
+    // ACCESORIOS CABELLO (1 producto)
+    { id: 226, name: "Accesorios Cabello", code: "137", price: 0.25, stock: 20, category: "Accesorios para el cabello", isNew: false },
+    
+    // OTROS (2 productos)
+    { id: 227, name: "Cereza", code: "122", price: 5.25, stock: 4, category: "Otros", isNew: false },
+    { id: 228, name: "Tarjetas Navideñas", code: "154", price: 0.00, stock: 121, category: "Otros", isNew: false }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadCart();
+    products = [...realProducts];
+    filteredProducts = [...products];
+    sortProducts();
+    renderProducts();
+    initRotatingMessages();
+    initReviews();
+    generateInstagramFeed();
+    initOfflineDetection();
+});
+
+function sortProducts() {
+    filteredProducts.sort((a, b) => {
+        if (a.stock === 0 && b.stock > 0) return 1;
+        if (b.stock === 0 && a.stock > 0) return -1;
+        if (a.isNew && !b.isNew) return -1;
+        if (!a.isNew && b.isNew) return 1;
+        return 0;
+    });
+}
+
+function initRotatingMessages() {
+    const titleEl = document.getElementById('hero-title');
+    let index = 0;
+    
+    setInterval(() => {
+        index = (index + 1) % valentineMessages.length;
+        titleEl.style.opacity = '0';
+        setTimeout(() => {
+            titleEl.textContent = valentineMessages[index];
+            titleEl.style.opacity = '1';
+        }, 300);
+    }, 5000);
+}
+
+function initReviews() {
+    const container = document.getElementById('reviews-container');
+    let currentIndex = 0;
+
+    container.innerHTML = customerReviews.map((review, index) => `
+        <div class="review-card" id="review-${index}" style="${index === 0 ? 'opacity:1;transform:translateY(0)' : ''}">
+            <div class="review-stars">${'★'.repeat(review.stars)}</div>
+            <div class="review-text">"${review.text}"</div>
+            <div class="review-author">${review.name}</div>
+            <div class="review-product">${review.product}</div>
         </div>
-    </div>
+    `).join('');
 
-    <header>
-        <div class="container">
-            <h1 class="logo">KLO<span>HE</span></h1>
-            <div class="cart-icon" onclick="toggleMiniCart()">
-                <i class="fas fa-shopping-bag"></i>
-                <span id="cart-count">0</span>
+    setInterval(() => {
+        document.getElementById(`review-${currentIndex}`).classList.remove('active');
+        currentIndex = (currentIndex + 1) % customerReviews.length;
+        document.getElementById(`review-${currentIndex}`).classList.add('active');
+    }, 6000);
+}
+
+function generateInstagramFeed() {
+    const grid = document.getElementById('instagram-grid');
+    
+    const images = [
+        'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400',
+        'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400',
+        'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400',
+        'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=400'
+    ];
+    
+    grid.innerHTML = images.map((img, i) => `
+        <div class="social-item" onclick="window.open('https://www.instagram.com/klohesv', '_blank')">
+            <img src="${img}" alt="Klohesv" loading="lazy">
+            <div class="social-overlay">
+                <i class="fab fa-instagram"></i>
             </div>
         </div>
-    </header>
+    `).join('');
+}
 
-    <section class="hero">
-        <div class="container">
-            <h2 id="hero-title">Colección San Valentín</h2>
-            <p id="hero-subtitle">Piezas únicas para momentos inolvidables</p>
-        </div>
-    </section>
-
-    <main class="container">
-        <div class="filters-container">
-            <div class="filters">
-                <div class="search-container" id="search-container">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Buscar..." onkeyup="filterProducts()">
+function renderProducts(append = false) {
+    const grid = document.getElementById('products-grid');
+    const start = currentPage * CONFIG.PRODUCTS_PER_PAGE;
+    const end = start + CONFIG.PRODUCTS_PER_PAGE;
+    const toShow = filteredProducts.slice(start, end);
+    
+    if (!append) {
+        grid.innerHTML = '';
+        displayedProducts = [];
+    }
+    
+    displayedProducts = [...displayedProducts, ...toShow];
+    
+    const html = toShow.map((p, index) => {
+        const isAgotado = p.stock === 0;
+        const material = getProductMaterial(p.name, p.code, p.category);
+        
+        return `
+            <div class="product-card ${isAgotado ? 'agotado' : ''}" style="animation-delay: ${index * 0.05}s">
+                ${p.isNew ? '<div class="badge-nuevo">Nuevo</div>' : ''}
+                
+                <div class="product-image-container" onclick="openImageModal('https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg')">
+                    <img src="https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg" 
+                         alt="${p.name}" 
+                         class="product-image" 
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/300x280?text=${p.code}'">
                 </div>
                 
-                <select id="category-filter" onchange="filterProducts()">
-                    <option value="all">Todas las categorías</option>
-                    <option value="Carteras">Carteras</option>
-                    <option value="Aritos">Aritos</option>
-                    <option value="Collares">Collares</option>
-                    <option value="Pulseras">Pulseras</option>
-                    <option value="Relojes">Relojes</option>
-                    <option value="Anillos">Anillos</option>
-                    <option value="Lentes de sol">Lentes</option>
-                    <option value="Accesorios para el cabello">Cabello</option>
-                    <option value="Otros">Otros</option>
-                </select>
-
-                <label class="filter-checkbox">
-                    <input type="checkbox" id="stock-filter" onchange="filterProducts()">
-                    <span>Solo disponibles</span>
-                </label>
-            </div>
-        </div>
-
-        <div id="products-grid" class="products-grid"></div>
-        
-        <div class="load-more-container" id="load-more-container">
-            <button class="load-more-btn" id="load-more-btn" onclick="loadMoreProducts()">
-                Ver más productos
-            </button>
-            <div class="products-count" id="products-count"></div>
-        </div>
-    </main>
-
-    <section class="reviews-section">
-        <div class="container">
-            <h3>Opiniones de clientes</h3>
-            <div class="reviews-container" id="reviews-container"></div>
-        </div>
-    </section>
-
-    <section class="social-feed">
-        <div class="container">
-            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--texto); font-weight: 300; letter-spacing: 0.1em;">
-                @Klohesv
-            </h3>
-            <p style="color: var(--texto-claro); margin-top: 0.5rem; font-size: 0.85rem;">Síguenos en nuestras redes</p>
-            <div class="social-grid" id="instagram-grid"></div>
-            
-            <div class="tiktok-section">
-                <h3><i class="fab fa-tiktok"></i> TikTok</h3>
-                <p style="font-size: 0.85rem; opacity: 0.8;">Descubre nuestros últimos diseños</p>
-                <a href="https://www.tiktok.com/@klohesv" target="_blank" class="tiktok-link">
-                    <i class="fab fa-tiktok"></i> @klohesv
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="container">
-            <div class="testimonial-slider" id="testimonial-slider">
-                <div class="testimonial-item active">
-                    <div class="testimonial-text">"El detalle perfecto para San Valentín"</div>
-                    <div class="testimonial-author">— Carlos M.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="newsletter">
-        <div class="container">
-            <h3>Únete al Club Klohe</h3>
-            <p style="font-size: 0.9rem; opacity: 0.9; font-weight: 300;">5% de descuento en tu primera compra</p>
-            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-                <input type="email" placeholder="Tu correo electrónico" required>
-                <button type="submit">Suscribirse</button>
-            </form>
-        </div>
-    </section>
-
-    <section class="faq-section">
-        <div class="container">
-            <h3>Preguntas Frecuentes</h3>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    ¿Cuánto tarda el envío?
-                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
-                </div>
-                <div class="faq-answer">
-                    2-5 días hábiles. Envío gratis en compras mayores a $45.
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    ¿Hacen envíos a todo El Salvador?
-                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; transition: transform 0.3s;"></i>
-                </div>
-                <div class="faq-answer">
-                    Sí, realizamos envíos a todo el territorio nacional.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Klohe — Hecho con amor en El Salvador</p>
-        <p style="margin-top: 1rem;">
-            <a href="https://wa.me/50366711569"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="https://www.instagram.com/klohesv" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            <a href="https://www.tiktok.com/@klohesv" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-        </p>
-    </footer>
-
-    <div class="error-modal" id="error-modal" onclick="closeErrorModal(event)">
-        <div class="error-content" onclick="event.stopPropagation()">
-            <i class="fas fa-times-circle"></i>
-            <h3>Código inválido</h3>
-            <button onclick="closeErrorModal()">Aceptar</button>
-        </div>
-    </div>
-
-    <div class="cart-overlay" id="cart-overlay" onclick="toggleMiniCart()"></div>
-    
-    <div class="mini-cart" id="mini-cart">
-        <div class="mini-cart-header">
-            <h3>Tu Carrito</h3>
-            <button onclick="toggleMiniCart()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--texto);">&times;</button>
-        </div>
-        
-        <div class="mini-cart-body" id="mini-cart-body"></div>
-
-        <div class="mini-cart-footer">
-            <div class="shipping-compact" id="shipping-option" onclick="document.getElementById('shipping-checkbox').click()">
-                <input type="checkbox" id="shipping-checkbox" onchange="toggleShipping()" onclick="event.stopPropagation()">
-                <div class="shipping-info">
-                    <div class="shipping-text">
-                        <i class="fas fa-truck" style="color: var(--rosa-oscuro);"></i> Envío a domicilio
-                        <small>Gratis en compras +$25</small>
+                <div class="product-info">
+                    <h3 class="product-title">${p.name}</h3>
+                    ${material ? `<div class="product-material">${material}</div>` : ''}
+                    
+                    <div class="product-details">
+                        <span class="detail-row">
+                            <span class="detail-value">Código ${p.code}</span>
+                        </span>
+                        <span class="detail-row">
+                            <span class="detail-value">${p.stock} disponibles</span>
+                        </span>
                     </div>
-                    <div class="shipping-price">$3.75</div>
+                    
+                    <div class="price-row">
+                        <div class="product-price">$${p.price.toFixed(2)}</div>
+                        <button class="quick-view-btn-inline" onclick="event.stopPropagation(); openQuickView(${p.id})">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    
+                    ${!isAgotado ? `
+                        <div class="quantity-selector">
+                            <button class="qty-btn" onclick="event.stopPropagation(); updateGridQty(${p.id}, -1)">−</button>
+                            <span class="qty-display" id="qty-${p.id}">1</span>
+                            <button class="qty-btn" onclick="event.stopPropagation(); updateGridQty(${p.id}, 1)">+</button>
+                        </div>
+                    ` : ''}
+                    
+                    <button class="add-to-cart" onclick="addToCart(${p.id})" ${isAgotado ? 'disabled' : ''}>
+                        ${isAgotado ? 'Agotado' : 'Agregar'}
+                    </button>
                 </div>
             </div>
+        `;
+    }).join('');
+    
+    if (append) {
+        grid.innerHTML += html;
+    } else {
+        grid.innerHTML = html;
+    }
+    
+    updateLoadMoreButton();
+}
 
-            <div class="discount-compact">
-                <input type="text" id="discount-input" placeholder="Código de descuento">
-                <button onclick="applyDiscount()">Aplicar</button>
+function updateLoadMoreButton() {
+    const btn = document.getElementById('load-more-btn');
+    const count = document.getElementById('products-count');
+    const remaining = filteredProducts.length - displayedProducts.length;
+    
+    if (remaining <= 0) {
+        btn.style.display = 'none';
+    } else {
+        btn.style.display = 'inline-block';
+        btn.textContent = `Ver más (${remaining})`;
+    }
+    
+    count.textContent = `${displayedProducts.length} de ${filteredProducts.length} productos`;
+}
+
+function loadMoreProducts() {
+    currentPage++;
+    renderProducts(true);
+}
+
+function filterProducts() {
+    const search = document.getElementById('search-input').value.toLowerCase();
+    const category = document.getElementById('category-filter').value;
+    const onlyAvailable = document.getElementById('stock-filter').checked;
+    
+    filteredProducts = products.filter(p => {
+        const matchSearch = p.name.toLowerCase().includes(search) || 
+                          p.category.toLowerCase().includes(search) ||
+                          p.code.includes(search);
+        const matchCategory = category === 'all' || p.category === category;
+        const matchStock = !onlyAvailable || p.stock > 0;
+        
+        return matchSearch && matchCategory && matchStock;
+    });
+    
+    sortProducts();
+    currentPage = 0;
+    renderProducts();
+}
+
+function resetFilters() {
+    document.getElementById('search-input').value = '';
+    document.getElementById('category-filter').value = 'all';
+    document.getElementById('stock-filter').checked = false;
+    filteredProducts = [...products];
+    sortProducts();
+    currentPage = 0;
+    renderProducts();
+}
+
+function updateGridQty(id, change) {
+    const display = document.getElementById(`qty-${id}`);
+    if (!display) return;
+    let val = parseInt(display.textContent) + change;
+    if (val < 1) val = 1;
+    const product = products.find(p => p.id === id);
+    if (val > product.stock) val = product.stock;
+    display.textContent = val;
+}
+
+function openQuickView(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+    
+    currentQuickViewId = id;
+    const material = getProductMaterial(p.name, p.code, p.category);
+    
+    document.getElementById('quick-view-image').src = `https://industriastobias.github.io/klohesvtiendaonline/${p.code}.jpg`;
+    document.getElementById('quick-view-category').textContent = p.category;
+    document.getElementById('quick-view-title').textContent = p.name;
+    document.getElementById('quick-view-material').textContent = material || '';
+    document.getElementById('quick-view-price').textContent = '$' + p.price.toFixed(2);
+    document.getElementById('quick-view-description').innerHTML = 
+        `<strong>Código:</strong> ${p.code}<br>
+         <strong>Stock:</strong> ${p.stock} unidades<br>
+         <strong>Categoría:</strong> ${p.category}`;
+    
+    document.getElementById('quick-view-modal').style.display = 'flex';
+    document.body.classList.add('modal-open');
+}
+
+function closeQuickView(e) {
+    if (!e || e.target.id === 'quick-view-modal') {
+        document.getElementById('quick-view-modal').style.display = 'none';
+        document.body.classList.remove('modal-open');
+    }
+}
+
+function addToCartFromQuickView() {
+    if (currentQuickViewId) {
+        addToCart(currentQuickViewId);
+        closeQuickView();
+    }
+}
+
+function openImageModal(src) {
+    document.getElementById('modal-image').src = src;
+    document.getElementById('image-modal').style.display = 'flex';
+    document.body.classList.add('modal-open');
+}
+
+function closeImageModal() {
+    document.getElementById('image-modal').style.display = 'none';
+    document.body.classList.remove('modal-open');
+}
+
+function showStockModal() {
+    const modal = document.getElementById('stock-modal-overlay');
+    modal.classList.add('active');
+    document.body.classList.add('modal-open');
+}
+
+function closeStockModal() {
+    const modal = document.getElementById('stock-modal-overlay');
+    modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
+}
+
+function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    if (!product || product.stock === 0) return;
+    
+    const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || 1);
+    const existing = cart.find(item => item.id === id);
+    
+    if (existing) {
+        if (existing.quantity + qty <= product.stock) {
+            existing.quantity += qty;
+        } else {
+            showStockModal();
+            return;
+        }
+    } else {
+        cart.push({ ...product, quantity: qty });
+    }
+    
+    saveCart();
+    updateCartUI();
+    showNotification('Agregado al carrito');
+    playSound();
+}
+
+function toggleShipping() {
+    const checkbox = document.getElementById('shipping-checkbox');
+    const option = document.getElementById('shipping-option');
+    shippingSelected = checkbox.checked;
+    
+    if (shippingSelected) {
+        option.classList.add('selected');
+    } else {
+        option.classList.remove('selected');
+    }
+    
+    updateCartTotals();
+}
+
+function toggleMiniCart() {
+    const cartEl = document.getElementById('mini-cart');
+    const overlay = document.getElementById('cart-overlay');
+    const isOpen = cartEl.classList.contains('open');
+    
+    if (isOpen) {
+        cartEl.classList.remove('open');
+        overlay.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    } else {
+        cartEl.classList.add('open');
+        overlay.classList.add('active');
+        document.body.classList.add('modal-open');
+        updateCartUI();
+    }
+}
+
+function updateCartUI() {
+    const body = document.getElementById('mini-cart-body');
+    const count = document.getElementById('cart-count');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    count.textContent = totalItems;
+    
+    if (cart.length === 0) {
+        body.innerHTML = `
+            <div style="text-align: center; padding: 4rem 2rem; color: var(--texto-claro);">
+                <i class="fas fa-shopping-bag" style="font-size: 2rem; margin-bottom: 1rem; display: block; color: var(--rosa-suave);"></i>
+                Tu carrito está vacío
             </div>
-
-            <div class="cart-totals-compact">
-                <div class="total-row">
-                    <span>Subtotal</span>
-                    <strong>$<span id="cart-subtotal">0.00</span></strong>
+        `;
+    } else {
+        body.innerHTML = cart.map(item => `
+            <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--crema);">
+                <img src="https://industriastobias.github.io/klohesvtiendaonline/${item.code}.jpg" 
+                     style="width: 60px; height: 60px; object-fit: cover; border: 1px solid var(--rosa-suave);"
+                     onerror="this.src='https://via.placeholder.com/60?text=${item.code}'">
+                <div style="flex: 1;">
+                    <div style="font-weight: 400; font-size: 0.9rem; color: var(--texto); margin-bottom: 0.2rem;">${item.name}</div>
+                    <div style="color: var(--rosa-oscuro); font-weight: 400; font-size: 1rem; font-family: 'Cormorant Garamond', serif;">$${(item.price * item.quantity).toFixed(2)}</div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+                        <button onclick="updateCartQty(${item.id}, -1)" style="width: 24px; height: 24px; border: 1px solid var(--rosa-suave); background: transparent; border-radius: 0; cursor: pointer; font-size: 0.8rem; color: var(--texto);">−</button>
+                        <span style="font-weight: 400; min-width: 20px; text-align: center; font-size: 0.9rem;">${item.quantity}</span>
+                        <button onclick="updateCartQty(${item.id}, 1)" style="width: 24px; height: 24px; border: 1px solid var(--rosa-suave); background: transparent; border-radius: 0; cursor: pointer; font-size: 0.8rem; color: var(--texto);">+</button>
+                    </div>
                 </div>
-                <div class="total-row" id="shipping-row" style="display: none;">
-                    <span>Envío</span>
-                    <strong>+$<span id="cart-shipping">0.00</span></strong>
-                </div>
-                <div class="total-row discount" id="discount-row" style="display: none;">
-                    <span>Descuento</span>
-                    <strong>-$<span id="cart-discount">0.00</span></strong>
-                </div>
-                <div class="total-row final">
-                    <span>Total</span>
-                    <span>$<span id="cart-total">0.00</span></span>
-                </div>
-            </div>
-            
-            <button class="checkout-btn" onclick="checkout()">
-                <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
-            </button>
-        </div>
-    </div>
-
-    <div id="image-modal" class="image-modal" onclick="closeImageModal()">
-        <span class="image-modal-close">&times;</span>
-        <img id="modal-image" class="image-modal-content" src="" alt="Producto">
-    </div>
-
-    <div id="quick-view-modal" class="quick-view-modal" onclick="closeQuickView(event)">
-        <div class="quick-view-content" onclick="event.stopPropagation()">
-            <button onclick="closeQuickView()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--texto); z-index: 10;">&times;</button>
-            <img id="quick-view-image" class="quick-view-image" src="" alt="">
-            <div class="quick-view-info">
-                <span id="quick-view-category" style="color: var(--texto-claro); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 400;"></span>
-                <h2 id="quick-view-title"></h2>
-                <div id="quick-view-material" class="quick-view-material"></div>
-                <div id="quick-view-price" class="quick-view-price"></div>
-                <p id="quick-view-description" style="color: var(--texto-claro); line-height: 1.8; font-size: 0.95rem; font-weight: 300;"></p>
-                <button class="checkout-btn" onclick="addToCartFromQuickView()" style="margin-top: 1.5rem;">
-                    Agregar al carrito
+                <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: var(--texto-claro); cursor: pointer; font-size: 1rem; padding: 0.5rem;">
+                    <i class="fas fa-times"></i>
                 </button>
             </div>
-        </div>
-    </div>
+        `).join('');
+    }
+    
+    updateCartTotals();
+}
 
-    <div id="notification" class="notification">
-        Agregado al carrito
-    </div>
+function updateCartQty(id, change) {
+    const item = cart.find(i => i.id === id);
+    const product = products.find(p => p.id === id);
+    if (!item) return;
+    
+    const newQty = item.quantity + change;
+    if (newQty <= 0) {
+        removeFromCart(id);
+    } else if (newQty <= product.stock) {
+        item.quantity = newQty;
+        saveCart();
+        updateCartUI();
+    } else {
+        showStockModal();
+    }
+}
 
-    <div class="chat-widget">
-        <div class="chat-window" id="chat-window">
-            <div class="chat-header">
-                <span><i class="fas fa-headset"></i> Klohe</span>
-                <button onclick="toggleChat()" style="background: none; border: none; color: var(--texto); cursor: pointer; font-size: 1.2rem;">&times;</button>
-            </div>
-            <div class="chat-body" id="chat-body">
-                <p style="background: var(--crema); padding: 0.8rem; margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.5;">¡Hola! ¿En qué podemos ayudarte?</p>
-            </div>
-            <div class="chat-input">
-                <input type="text" id="chat-message" placeholder="Escribe tu mensaje..." onkeypress="handleChatKey(event)">
-                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-        <button class="chat-button" onclick="toggleChat()">
-            <i class="fas fa-comment-dots"></i>
-        </button>
-    </div>
+function removeFromCart(id) {
+    cart = cart.filter(i => i.id !== id);
+    saveCart();
+    updateCartUI();
+}
 
-    <nav class="bottom-nav">
-        <a href="#" class="bottom-nav-item active" onclick="resetFilters(); return false;">
-            <i class="fas fa-home"></i>
-            Inicio
-        </a>
-        <a href="#" class="bottom-nav-item" onclick="document.getElementById('search-input').focus(); return false;">
-            <i class="fas fa-search"></i>
-            Buscar
-        </a>
-        <a href="#" class="bottom-nav-item" onclick="toggleMiniCart(); return false;">
-            <i class="fas fa-shopping-bag"></i>
-            Carrito
-        </a>
-    </nav>
+function updateCartTotals() {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const discount = subtotal * (currentDiscount / 100);
+    const shipping = shippingSelected ? CONFIG.SHIPPING_COST : 0;
+    const total = subtotal - discount + shipping;
+    
+    document.getElementById('cart-subtotal').textContent = subtotal.toFixed(2);
+    document.getElementById('cart-shipping').textContent = shipping.toFixed(2);
+    document.getElementById('shipping-row').style.display = shipping > 0 ? 'flex' : 'none';
+    document.getElementById('cart-discount').textContent = discount.toFixed(2);
+    document.getElementById('discount-row').style.display = currentDiscount > 0 ? 'flex' : 'none';
+    document.getElementById('cart-total').textContent = total.toFixed(2);
+}
 
-    <audio id="success-sound" preload="auto">
-        <source src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3" type="audio/mpeg">
-    </audio>
+function applyDiscount() {
+    const code = document.getElementById('discount-input').value.toUpperCase();
+    const validCodes = { 'KLOHE10': 10, 'SANVALENTIN': 15, 'AMOR20': 20, 'CORAZON': 25 };
+    
+    if (validCodes[code]) {
+        currentDiscount = validCodes[code];
+        showNotification(`Descuento ${currentDiscount}% aplicado`);
+        updateCartTotals();
+    } else {
+        showErrorModal();
+    }
+}
 
-    <!-- Aquí enlazas el archivo de productos -->
-    <script src="productos.js"></script>
-</body>
-</html>
+function showErrorModal() {
+    document.getElementById('error-modal').style.display = 'flex';
+    document.body.classList.add('modal-open');
+}
+
+function closeErrorModal(e) {
+    if (!e || e.target.id === 'error-modal') {
+        document.getElementById('error-modal').style.display = 'none';
+        document.body.classList.remove('modal-open');
+    }
+}
+
+function saveCart() {
+    localStorage.setItem('klohe_cart', JSON.stringify(cart));
+}
+
+function loadCart() {
+    const saved = localStorage.getItem('klohe_cart');
+    if (saved) cart = JSON.parse(saved);
+}
+
+function checkout() {
+    if (cart.length === 0) return;
+    
+    let msg = '¡Hola Klohe!\\n\\nQuiero hacer un pedido:\\n\\n';
+    cart.forEach(item => {
+        msg += `• ${item.name} (Código: ${item.code}) x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\\n`;
+    });
+    
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const discount = subtotal * (currentDiscount / 100);
+    const shipping = shippingSelected ? CONFIG.SHIPPING_COST : 0;
+    const total = subtotal - discount + shipping;
+    
+    msg += `\\nSubtotal: $${subtotal.toFixed(2)}`;
+    if (currentDiscount > 0) msg += `\\nDescuento: -$${discount.toFixed(2)}`;
+    if (shipping > 0) msg += `\\nEnvío: $${shipping.toFixed(2)}`;
+    msg += `\\nTotal: $${total.toFixed(2)}`;
+    
+    window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function showNotification(text) {
+    const notif = document.getElementById('notification');
+    notif.textContent = text;
+    notif.style.display = 'block';
+    
+    setTimeout(() => {
+        notif.style.opacity = '0';
+        setTimeout(() => {
+            notif.style.display = 'none';
+            notif.style.opacity = '1';
+        }, 300);
+    }, 2000);
+}
+
+function playSound() {
+    const audio = document.getElementById('success-sound');
+    audio.currentTime = 0;
+    audio.play().catch(e => {});
+}
+
+function toggleChat() {
+    document.getElementById('chat-window').classList.toggle('active');
+}
+
+function handleChatKey(e) {
+    if (e.key === 'Enter') sendMessage();
+}
+
+function sendMessage() {
+    const input = document.getElementById('chat-message');
+    const msg = input.value.trim();
+    if (!msg) return;
+    
+    const body = document.getElementById('chat-body');
+    body.innerHTML += `<p style="text-align: right; margin-bottom: 0.8rem;"><span style="background: var(--rosa-suave); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">${msg}</span></p>`;
+    input.value = '';
+    body.scrollTop = body.scrollHeight;
+    
+    setTimeout(() => {
+        body.innerHTML += `<p style="margin-bottom: 0.8rem;"><span style="background: var(--crema); padding: 0.8rem; display: inline-block; font-size: 0.9rem;">Gracias por tu mensaje. Te responderemos pronto.</span></p>`;
+        body.scrollTop = body.scrollHeight;
+    }, 1000);
+}
+
+function toggleFaq(element) {
+    const item = element.parentElement;
+    const isActive = item.classList.contains('active');
+    const icon = element.querySelector('i');
+    
+    document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('active');
+        i.querySelector('i').style.transform = 'rotate(0deg)';
+    });
+    
+    if (!isActive) {
+        item.classList.add('active');
+        icon.style.transform = 'rotate(180deg)';
+    }
+}
+
+function subscribeNewsletter(e) {
+    e.preventDefault();
+    showNotification('Bienvenida al Club Klohe');
+    e.target.reset();
+}
+
+function initOfflineDetection() {
+    window.addEventListener('online', () => {
+        document.getElementById('offline-indicator').classList.remove('show');
+    });
+    window.addEventListener('offline', () => {
+        document.getElementById('offline-indicator').classList.add('show');
+    });
+}
+
+window.onclick = function(e) {
+    if (e.target.classList.contains('quick-view-modal')) {
+        closeQuickView(e);
+    }
+}

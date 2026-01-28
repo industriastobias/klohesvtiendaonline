@@ -48,7 +48,7 @@ const products = [
   
   // ARITOS Y ARETES (49 productos)
   { name: "ARITOS", price: 3.50, stock: 1, barcode: "046", category: "Aritos" },
-  { name: "ARITOS", price: 8.50, stock: 1, barcode: "179", category: "Aritos" },
+  { name: "ARITOS", price: 8.50, stock: 0, barcode: "179", category: "Aritos" },
   { name: "ARITOS", price: 7.00, stock: 1, barcode: "060", category: "Aritos" },
   { name: "ARITOSS", price: 8.50, stock: 1, barcode: "174", category: "Aritos" },
   { name: "ARITOS DE CORAZON", price: 4.50, stock: 0, barcode: "056", category: "Aritos" },
@@ -135,7 +135,7 @@ const products = [
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "163", category: "Collares" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "164", category: "Collares" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "165", category: "Collares" },
-  { name: "COLLAR", price: 12.00, stock: 1, barcode: "171", category: "Collares" },
+  { name: "COLLAR", price: 12.00, stock: 0, barcode: "171", category: "Collares" },
   { name: "COLLAR", price: 15.00, stock: 1, barcode: "172", category: "Collares" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "173", category: "Collares" },
   { name: "COLLAR", price: 12.00, stock: 3, barcode: "175", category: "Collares" },
@@ -240,6 +240,6 @@ const products = [
   
   // OTROS (3 productos)
   { name: "ACCESORIOS", price: 0.25, stock: 20, barcode: "137", category: "Accesorios para el cabello" },
-  { name: "CEREZA", price: 5.25, stock: 4, barcode: "122", category: "Otros" },
+  { name: "CEREZA", price: 5.25, stock: 3, barcode: "122", category: "Otros" },
   { name: "TARJETAS NAVIDEÑAS", price: 0.00, stock: 121, barcode: "154", category: "Otros" }
 ];

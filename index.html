@@ -1656,21 +1656,55 @@
         </div>
     </header>
 
-    <!-- Menú de Categorías - SOLO CATEGORÍAS EXISTENTES EN TU ARRAY -->
+    <!-- Menú de Categorías - TODAS LAS 15 CATEGORÍAS ORIGINALES -->
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="categories-menu" id="categoriesMenu">
         <button class="close-menu" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
         <h3>Categorías</h3>
         
+        <!-- 1. TODOS -->
         <button class="category-btn active" onclick="filterProducts('todos', this)">Todas</button>
+        
+        <!-- 2. ACCESORIOS PARA EL CABELLO -->
         <button class="category-btn" onclick="filterProducts('accesorios-cabello', this)">Accesorios para el cabello</button>
+        
+        <!-- 3. ANILLOS -->
         <button class="category-btn" onclick="filterProducts('anillo', this)">Anillos</button>
+        
+        <!-- 4. ARITOS -->
         <button class="category-btn" onclick="filterProducts('aritos', this)">Aritos</button>
+        
+        <!-- 5. BILLETERAS -->
+        <button class="category-btn" onclick="filterProducts('billetera', this)">Billeteras</button>
+        
+        <!-- 6. CARTERAS -->
         <button class="category-btn" onclick="filterProducts('cartera', this)">Carteras</button>
+        
+        <!-- 7. CASE AUDÍFONOS -->
+        <button class="category-btn" onclick="filterProducts('case-audifonos', this)">Case audífonos</button>
+        
+        <!-- 8. CASE TELÉFONOS -->
+        <button class="category-btn" onclick="filterProducts('case-telefonos', this)">Case teléfonos</button>
+        
+        <!-- 9. CHOKERS -->
+        <button class="category-btn" onclick="filterProducts('choker', this)">Chokers</button>
+        
+        <!-- 10. COLLARES -->
         <button class="category-btn" onclick="filterProducts('collar', this)">Collares</button>
+        
+        <!-- 11. GENERAL -->
+        <button class="category-btn" onclick="filterProducts('general', this)">General</button>
+        
+        <!-- 12. LENTES DE SOL -->
         <button class="category-btn" onclick="filterProducts('lentes-sol', this)">Lentes de sol</button>
+        
+        <!-- 13. OTROS -->
         <button class="category-btn" onclick="filterProducts('otros', this)">Otros</button>
+        
+        <!-- 14. PULSERAS -->
         <button class="category-btn" onclick="filterProducts('pulsera', this)">Pulseras</button>
+        
+        <!-- 15. RELOJES -->
         <button class="category-btn" onclick="filterProducts('reloj', this)">Relojes</button>
     </div>
 
@@ -1886,53 +1920,156 @@
     <script src="products.js"></script>
     
     <script>
-        // 📖 ARRAY DE 31 VERSÍCULOS
+        // 📖 ARRAY DE 31 VERSÍCULOS (uno por cada día del mes)
         const dailyVerses = [
-            { text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.", reference: "1 Corintios 13:4" },
-            { text: "No me mandes lejos de ti, no me quites tu santo espíritu. Vuélveme el gozo de tu salvación.", reference: "Salmo 51:11-12" },
-            { text: "Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.", reference: "Jeremías 29:11" },
-            { text: "El Señor es mi pastor, nada me faltará. En verdes pastos me hace descansar.", reference: "Salmo 23:1-2" },
-            { text: "Todo lo puedo en Cristo que me fortalece.", reference: "Filipenses 4:13" },
-            { text: "Confía en el Señor de todo corazón, y no en tu propia inteligencia.", reference: "Proverbios 3:5" },
-            { text: "Pues donde esté tu tesoro, allí estará también tu corazón.", reference: "Mateo 6:21" },
-            { text: "El Señor peleará por ustedes; ustedes solo tengan tranquilidad.", reference: "Éxodo 14:14" },
-            { text: "Encomienda al Señor tu camino; confía en él, y él actuará.", reference: "Salmo 37:5" },
-            { text: "El gozo del Señor es tu fortaleza.", reference: "Nehemías 8:10" },
-            { text: "Bendeciré al Señor en todo tiempo; su alabanza estará siempre en mis labios.", reference: "Salmo 34:1" },
-            { text: "Pero los que esperan en el Señor renovarán sus fuerzas; levantarán alas como las águilas.", reference: "Isaías 40:31" },
-            { text: "Gracias sean dadas a Dios, que nos da la victoria por medio de nuestro Señor Jesucristo.", reference: "1 Corintios 15:57" },
-            { text: "El Señor es mi luz y mi salvación; ¿de quién temeré?", reference: "Salmo 27:1" },
-            { text: "Si Dios está por nosotros, ¿quién estará contra nosotros?", reference: "Romanos 8:31" },
-            { text: "Porque el salario del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús.", reference: "Romanos 6:23" },
-            { text: "Vengan a mí todos los que están cansados y agobiados, y yo les daré descanso.", reference: "Mateo 11:28" },
-            { text: "Dios es nuestro amparo y nuestra fortaleza, nuestra ayuda segura en momentos de angustia.", reference: "Salmo 46:1" },
-            { text: "Porque somos hechura de Dios, creados en Cristo Jesús para buenas obras.", reference: "Efesios 2:10" },
-            { text: "No te preocupes por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias.", reference: "Filipenses 4:6" },
-            { text: "El Señor es bueno; es su refugio en el día de la angustia, y protege a los que en él confían.", reference: "Nahúm 1:7" },
-            { text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree no se pierda, mas tenga vida eterna.", reference: "Juan 3:16" },
-            { text: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios.", reference: "Isaías 41:10" },
-            { text: "Buscad primero el reino de Dios y su justicia, y todas estas cosas os serán añadidas.", reference: "Mateo 6:33" },
-            { text: "Grande es el Señor y digno de toda alabanza; su grandeza es insondable.", reference: "Salmo 145:3" },
-            { text: "El amor nunca deja de ser. Las profecías desaparecerán, los dones de lenguas cesarán, el conocimiento pasará.", reference: "1 Corintios 13:8" },
-            { text: "Porque el Espíritu que Dios nos ha dado no nos hace tímidos, sino que nos da poder, amor y dominio propio.", reference: "2 Timoteo 1:7" },
-            { text: "En paz me acuesto y enseguida me duermo, porque tú solo, Señor, me haces vivir confiado.", reference: "Salmo 4:8" },
-            { text: "Pero espero en el Señor; esperaré al Dios de mi salvación. El Dios mío me oirá.", reference: "Miqueas 7:7" },
-            { text: "El Señor cumplirá su propósito en mí. Tu amor, Señor, es eterno; no abandones la obra de tus manos.", reference: "Salmo 138:8" },
-            { text: "Cántenle, canten salmos a él; hablen de todas sus maravillas.", reference: "1 Crónicas 16:9" }
+            {
+                text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.",
+                reference: "1 Corintios 13:4"
+            },
+            {
+                text: "No me mandes lejos de ti, no me quites tu santo espíritu. Vuélveme el gozo de tu salvación.",
+                reference: "Salmo 51:11-12"
+            },
+            {
+                text: "Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.",
+                reference: "Jeremías 29:11"
+            },
+            {
+                text: "El Señor es mi pastor, nada me faltará. En verdes pastos me hace descansar.",
+                reference: "Salmo 23:1-2"
+            },
+            {
+                text: "Todo lo puedo en Cristo que me fortalece.",
+                reference: "Filipenses 4:13"
+            },
+            {
+                text: "Confía en el Señor de todo corazón, y no en tu propia inteligencia.",
+                reference: "Proverbios 3:5"
+            },
+            {
+                text: "Pues donde esté tu tesoro, allí estará también tu corazón.",
+                reference: "Mateo 6:21"
+            },
+            {
+                text: "El Señor peleará por ustedes; ustedes solo tengan tranquilidad.",
+                reference: "Éxodo 14:14"
+            },
+            {
+                text: "Encomienda al Señor tu camino; confía en él, y él actuará.",
+                reference: "Salmo 37:5"
+            },
+            {
+                text: "El gozo del Señor es tu fortaleza.",
+                reference: "Nehemías 8:10"
+            },
+            {
+                text: "Bendeciré al Señor en todo tiempo; su alabanza estará siempre en mis labios.",
+                reference: "Salmo 34:1"
+            },
+            {
+                text: "Pero los que esperan en el Señor renovarán sus fuerzas; levantarán alas como las águilas.",
+                reference: "Isaías 40:31"
+            },
+            {
+                text: "Gracias sean dadas a Dios, que nos da la victoria por medio de nuestro Señor Jesucristo.",
+                reference: "1 Corintios 15:57"
+            },
+            {
+                text: "El Señor es mi luz y mi salvación; ¿de quién temeré?",
+                reference: "Salmo 27:1"
+            },
+            {
+                text: "Si Dios está por nosotros, ¿quién estará contra nosotros?",
+                reference: "Romanos 8:31"
+            },
+            {
+                text: "Porque el salario del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús.",
+                reference: "Romanos 6:23"
+            },
+            {
+                text: "Vengan a mí todos los que están cansados y agobiados, y yo les daré descanso.",
+                reference: "Mateo 11:28"
+            },
+            {
+                text: "Dios es nuestro amparo y nuestra fortaleza, nuestra ayuda segura en momentos de angustia.",
+                reference: "Salmo 46:1"
+            },
+            {
+                text: "Porque somos hechura de Dios, creados en Cristo Jesús para buenas obras.",
+                reference: "Efesios 2:10"
+            },
+            {
+                text: "No te preocupes por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias.",
+                reference: "Filipenses 4:6"
+            },
+            {
+                text: "El Señor es bueno; es su refugio en el día de la angustia, y protege a los que en él confían.",
+                reference: "Nahúm 1:7"
+            },
+            {
+                text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree no se pierda, mas tenga vida eterna.",
+                reference: "Juan 3:16"
+            },
+            {
+                text: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios.",
+                reference: "Isaías 41:10"
+            },
+            {
+                text: "Buscad primero el reino de Dios y su justicia, y todas estas cosas os serán añadidas.",
+                reference: "Mateo 6:33"
+            },
+            {
+                text: "Grande es el Señor y digno de toda alabanza; su grandeza es insondable.",
+                reference: "Salmo 145:3"
+            },
+            {
+                text: "El amor nunca deja de ser. Las profecías desaparecerán, los dones de lenguas cesarán, el conocimiento pasará.",
+                reference: "1 Corintios 13:8"
+            },
+            {
+                text: "Porque el Espíritu que Dios nos ha dado no nos hace tímidos, sino que nos da poder, amor y dominio propio.",
+                reference: "2 Timoteo 1:7"
+            },
+            {
+                text: "En paz me acuesto y enseguida me duermo, porque tú solo, Señor, me haces vivir confiado.",
+                reference: "Salmo 4:8"
+            },
+            {
+                text: "Pero espero en el Señor; esperaré al Dios de mi salvación. El Dios mío me oirá.",
+                reference: "Miqueas 7:7"
+            },
+            {
+                text: "El Señor cumplirá su propósito en mí. Tu amor, Señor, es eterno; no abandones la obra de tus manos.",
+                reference: "Salmo 138:8"
+            },
+            {
+                text: "Cántenle, canten salmos a él; hablen de todas sus maravillas.",
+                reference: "1 Crónicas 16:9"
+            }
         ];
 
+        // 📅 FUNCIÓN PARA OBTENER EL VERSÍCULO DEL DÍA
         function getDailyVerse() {
             const today = new Date();
-            const dayOfMonth = today.getDate();
+            const dayOfMonth = today.getDate(); // Obtiene el día del mes (1-31)
             const month = today.toLocaleString('es-ES', { month: 'long' });
             const year = today.getFullYear();
+            
+            // Ajustar índice (array empieza en 0, días en 1)
             const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
             const verse = dailyVerses[verseIndex];
+            
+            // Formatear fecha
             const formattedDate = `${dayOfMonth} de ${month} de ${year}`;
             
-            return { ...verse, date: formattedDate, dayNumber: dayOfMonth };
+            return {
+                ...verse,
+                date: formattedDate,
+                dayNumber: dayOfMonth
+            };
         }
 
+        // 🎯 MOSTRAR VERSÍCULO EN LA PÁGINA
         function displayDailyVerse() {
             const verse = getDailyVerse();
             document.getElementById('verseDate').textContent = verse.date;
@@ -1945,6 +2082,7 @@
         let currentPage = 0;
         const productsPerPage = 25;
         let filteredProducts = [];
+        let currentPreviewIndex = null;
         let shippingEnabled = false;
         let currentTestimonial = 0;
         let searchTerm = '';
@@ -1961,16 +2099,23 @@
             'otros': 'Otros',
             'pulsera': 'Pulseras',
             'reloj': 'Relojes'
+            // Nota: billetera, case-audifonos, case-telefonos, choker, general 
+            // no están en el array de productos actual
         };
 
-        // TÍTULOS PARA MOSTRAR
+        // TÍTULOS PARA MOSTRAR EN EL HEADER
         const categoryTitles = {
             'todos': 'Todas',
             'accesorios-cabello': 'Accesorios para el cabello',
             'anillo': 'Anillos',
             'aritos': 'Aritos',
+            'billetera': 'Billeteras',
             'cartera': 'Carteras',
+            'case-audifonos': 'Case audífonos',
+            'case-telefonos': 'Case teléfonos',
+            'choker': 'Chokers',
             'collar': 'Collares',
+            'general': 'General',
             'lentes-sol': 'Lentes de sol',
             'otros': 'Otros',
             'pulsera': 'Pulseras',
@@ -2036,9 +2181,16 @@
                     filteredProducts = [...products];
                 } else {
                     const targetCategory = categoryMap[currentFilter];
-                    filteredProducts = products.filter(product => 
-                        product.category === targetCategory
-                    );
+                    if (targetCategory) {
+                        filteredProducts = products.filter(product => 
+                            product.category === targetCategory
+                        );
+                    } else {
+                        // Si la categoría no está en el mapa, mostrar vacío o buscar por nombre como fallback
+                        filteredProducts = products.filter(product => 
+                            product.name.toLowerCase().includes(currentFilter)
+                        );
+                    }
                 }
             } else {
                 filteredProducts = products.filter(product => 
@@ -2155,9 +2307,19 @@
                 filteredProducts = [...products];
             } else {
                 const targetCategory = categoryMap[category];
-                filteredProducts = products.filter(product => 
-                    product.category === targetCategory  // ✅ AHORA SÍ COMPARA CON category
-                );
+                if (targetCategory) {
+                    // Si existe en el mapa, filtrar por category exacta
+                    filteredProducts = products.filter(product => 
+                        product.category === targetCategory
+                    );
+                } else {
+                    // Si no está en el mapa (como billetera, case-audifonos, etc.)
+                    // Buscar por nombre o mostrar vacío
+                    filteredProducts = products.filter(product => 
+                        product.name.toLowerCase().includes(category.toLowerCase()) ||
+                        product.category.toLowerCase().includes(category.toLowerCase())
+                    );
+                }
             }
             
             document.getElementById('productsContainer').innerHTML = '';

@@ -111,7 +111,7 @@ const products = [
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "070", category: "Collares" },
   { name: "COLLAR", price: 11.50, stock: 1, barcode: "072", category: "Collares" },
   { name: "COLLAR", price: 13.50, stock: 1, barcode: "077", category: "Collares" },
-  { name: "COLLAR", price: 0.00, stock: 0, barcode: "083", category: "Collares" },
+  { name: "COLLAR", price: 12.00, stock: 0, barcode: "083", category: "Collares" },
   { name: "COLLAR", price: 13.00, stock: 1, barcode: "084", category: "Collares" },
   { name: "COLLAR", price: 12.50, stock: 1, barcode: "090", category: "Collares" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "091", category: "Collares" },

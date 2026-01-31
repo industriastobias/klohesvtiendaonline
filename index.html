@@ -93,6 +93,20 @@
             animation: spin 0.8s linear infinite;
         }
 
+        .error-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--rosa-oscuro);
+        }
+
+        .error-message i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+            color: #dc3545;
+        }
+
         .scroll-sentinel {
             height: 20px;
             margin: 2rem 0;
@@ -154,7 +168,6 @@
             gap: 1rem;
         }
 
-        /* Language Switcher Styles */
         .language-switcher {
             position: relative;
             margin-right: 0.5rem;
@@ -183,10 +196,6 @@
             border-color: var(--bordo);
         }
 
-        .lang-btn i {
-            font-size: 0.9rem;
-        }
-
         .lang-dropdown {
             position: absolute;
             top: 100%;
@@ -201,7 +210,7 @@
             transform: translateY(-10px);
             transition: all 0.3s ease;
             z-index: 1001;
-            min-width: 120px;
+            min-width: 140px;
         }
 
         .lang-dropdown.active {
@@ -237,6 +246,7 @@
         .lang-option.active {
             color: var(--bordo);
             font-weight: 600;
+            background: var(--rosa-nude);
         }
 
         .social-header {
@@ -1371,7 +1381,6 @@
             display: block;
         }
 
-        /* WHATSAPP FLOAT - Tooltip a la IZQUIERDA */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -1398,10 +1407,9 @@
             background: var(--rosa-viejo);
         }
 
-        /* CAMBIO: Tooltip a la IZQUIERDA del botón */
         .whatsapp-tooltip {
             position: absolute;
-            left: 70px; /* Cambiado de right a left */
+            left: 70px;
             background: var(--bordo);
             color: white;
             padding: 0.5rem 1rem;
@@ -1414,14 +1422,13 @@
             letter-spacing: 0.5px;
         }
 
-        /* Flecha del tooltip apuntando al botón (ahora desde la derecha) */
         .whatsapp-tooltip::after {
             content: '';
             position: absolute;
-            right: -5px; /* Cambiado de left a right */
+            right: -5px;
             top: 50%;
             transform: translateY(-50%);
-            border-width: 5px 0 5px 5px; /* Invertida la dirección de la flecha */
+            border-width: 5px 0 5px 5px;
             border-style: solid;
             border-color: transparent transparent transparent var(--bordo);
         }
@@ -1429,7 +1436,7 @@
         .whatsapp-float:hover .whatsapp-tooltip {
             opacity: 1;
             visibility: visible;
-            left: 75px; /* Cambiado de right a left */
+            left: 75px;
         }
 
         .newsletter-popup {
@@ -1717,7 +1724,6 @@
                 right: 20px;
             }
 
-            /* En móvil, el tooltip se muestra abajo para no salirse de la pantalla */
             .whatsapp-tooltip {
                 left: 50%;
                 top: 70px;
@@ -1846,31 +1852,31 @@
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="categories-menu" id="categoriesMenu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
         <button class="close-menu" onclick="toggleMenu()" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
-        <h3 id="menuTitle" data-i18n="categories">Categorías</h3>
+        <h3 id="menuTitle">Categorías</h3>
         
-        <button class="category-btn active" onclick="filterProducts('todos', this)" data-i18n="all">Todas</button>
-        <button class="category-btn" onclick="filterProducts('accesorios-cabello', this)" data-i18n="hairAccessories">Accesorios para el cabello</button>
-        <button class="category-btn" onclick="filterProducts('anillo', this)" data-i18n="rings">Anillos</button>
-        <button class="category-btn" onclick="filterProducts('aritos', this)" data-i18n="earrings">Aritos</button>
-        <button class="category-btn" onclick="filterProducts('cartera', this)" data-i18n="bags">Carteras</button>
-        <button class="category-btn" onclick="filterProducts('collar', this)" data-i18n="necklaces">Collares</button>
-        <button class="category-btn" onclick="filterProducts('lentes-sol', this)" data-i18n="sunglasses">Lentes de sol</button>
-        <button class="category-btn" onclick="filterProducts('otros', this)" data-i18n="others">Otros</button>
-        <button class="category-btn" onclick="filterProducts('pulsera', this)" data-i18n="bracelets">Pulseras</button>
-        <button class="category-btn" onclick="filterProducts('reloj', this)" data-i18n="watches">Relojes</button>
+        <button class="category-btn active" onclick="filterProducts('todos', this)">Todas</button>
+        <button class="category-btn" onclick="filterProducts('accesorios-cabello', this)">Accesorios para el cabello</button>
+        <button class="category-btn" onclick="filterProducts('anillo', this)">Anillos</button>
+        <button class="category-btn" onclick="filterProducts('aritos', this)">Aritos</button>
+        <button class="category-btn" onclick="filterProducts('cartera', this)">Carteras</button>
+        <button class="category-btn" onclick="filterProducts('collar', this)">Collares</button>
+        <button class="category-btn" onclick="filterProducts('lentes-sol', this)">Lentes de sol</button>
+        <button class="category-btn" onclick="filterProducts('otros', this)">Otros</button>
+        <button class="category-btn" onclick="filterProducts('pulsera', this)">Pulseras</button>
+        <button class="category-btn" onclick="filterProducts('reloj', this)">Relojes</button>
     </div>
 
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 data-i18n="valentineCollection">Colección San Valentín</h1>
-                <p data-i18n="giftsFromHeart">Regalos que hablan desde el corazón</p>
+                <h1 id="heroTitle">Colección San Valentín</h1>
+                <p id="heroSubtitle">Regalos que hablan desde el corazón</p>
                 
                 <div class="daily-verse-container" id="dailyVerseContainer">
                     <div class="verse-date" id="verseDate"></div>
                     <div class="verse-header">
                         <i class="fas fa-book-open"></i>
-                        <span data-i18n="verseOfDay">Versículo de Hoy</span>
+                        <span id="verseLabel">Versículo de Hoy</span>
                     </div>
                     <div class="verse-text" id="verseText"></div>
                     <div class="verse-reference" id="verseReference"></div>
@@ -1878,7 +1884,7 @@
                 
                 <div class="search-container">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar el regalo perfecto..." aria-label="Buscar productos" data-i18n-placeholder="searchPlaceholder">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar el regalo perfecto..." aria-label="Buscar productos">
                 </div>
             </div>
         </div>
@@ -1887,14 +1893,14 @@
     <section class="products">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" id="categoryTitle" data-i18n="all">Todas</h2>
-                <span class="products-count" id="productsCount" data-i18n="showing">Mostrando 0 de 0 productos</span>
+                <h2 class="section-title" id="categoryTitle">Todas</h2>
+                <span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span>
             </div>
             <div class="products-grid" id="productsContainer"></div>
             <div class="scroll-sentinel" id="scrollSentinel"></div>
             <div class="loading-spinner" id="loadingSpinner" style="display: none;">
                 <div class="spinner"></div>
-                <span data-i18n="loadingMore">Cargando más productos...</span>
+                <span id="loadingText">Cargando más productos...</span>
             </div>
         </div>
     </section>
@@ -1902,45 +1908,45 @@
     <section class="testimonials-section">
         <div class="container">
             <div class="testimonials-header">
-                <h2 data-i18n="loveStories">Historias de Amor</h2>
-                <p data-i18n="whatCustomersShare">Lo que nuestros clientes comparten</p>
+                <h2 id="testimonialsTitle">Historias de Amor</h2>
+                <p id="testimonialsSubtitle">Lo que nuestros clientes comparten</p>
             </div>
             
             <div class="testimonial-carousel">
                 <div class="testimonial-track" id="testimonialTrack"></div>
                 <div class="carousel-controls">
-                    <button class="carousel-btn" onclick="prevTestimonial()" aria-label="Testimonio anterior"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-btn" onclick="nextTestimonial()" aria-label="Siguiente testimonio"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-btn" onclick="prevTestimonial()" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn" onclick="nextTestimonial()" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="carousel-dots" id="carouselDots"></div>
             </div>
 
             <div class="comment-box">
-                <h3 data-i18n="shareYourStory">Comparte tu historia</h3>
+                <h3 id="commentTitle">Comparte tu historia</h3>
                 <form class="comment-form" onsubmit="submitComment(event)">
                     <div class="form-group">
-                        <label for="commentName" data-i18n="name">Nombre</label>
-                        <input type="text" id="commentName" required placeholder="Tu nombre" autocomplete="name" data-i18n-placeholder="yourName">
+                        <label for="commentName" id="labelName">Nombre</label>
+                        <input type="text" id="commentName" required placeholder="Tu nombre" autocomplete="name">
                     </div>
                     <div class="form-group">
-                        <label for="commentEmail" data-i18n="email">Email</label>
-                        <input type="email" id="commentEmail" required placeholder="tu@email.com" autocomplete="email" data-i18n-placeholder="yourEmail">
+                        <label for="commentEmail" id="labelEmail">Email</label>
+                        <input type="email" id="commentEmail" required placeholder="tu@email.com" autocomplete="email">
                     </div>
                     <div class="form-group">
-                        <label for="commentRating" data-i18n="rating">Calificación</label>
+                        <label for="commentRating" id="labelRating">Calificación</label>
                         <select id="commentRating">
-                            <option>⭐⭐⭐⭐⭐ (5 <span data-i18n="stars">estrellas</span>)</option>
-                            <option>⭐⭐⭐⭐ (4 <span data-i18n="stars">estrellas</span>)</option>
-                            <option>⭐⭐⭐ (3 <span data-i18n="stars">estrellas</span>)</option>
-                            <option>⭐⭐ (2 <span data-i18n="stars">estrellas</span>)</option>
-                            <option>⭐ (1 <span data-i18n="star">estrella</span>)</option>
+                            <option value="5">⭐⭐⭐⭐⭐ (5 estrellas)</option>
+                            <option value="4">⭐⭐⭐⭐ (4 estrellas)</option>
+                            <option value="3">⭐⭐⭐ (3 estrellas)</option>
+                            <option value="2">⭐⭐ (2 estrellas)</option>
+                            <option value="1">⭐ (1 estrella)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="commentText" data-i18n="yourExperience">Tu experiencia</label>
-                        <textarea id="commentText" required placeholder="Cuéntanos sobre tu regalo especial..." data-i18n-placeholder="tellUsExperience"></textarea>
+                        <label for="commentText" id="labelExperience">Tu experiencia</label>
+                        <textarea id="commentText" required placeholder="Cuéntanos sobre tu regalo especial..."></textarea>
                     </div>
-                    <button type="submit" class="btn-submit" data-i18n="sendComment">Enviar comentario</button>
+                    <button type="submit" class="btn-submit" id="btnSubmit">Enviar comentario</button>
                 </form>
             </div>
         </div>
@@ -1956,7 +1962,7 @@
                 <p class="preview-barcode" id="previewBarcode"></p>
                 <p class="preview-price" id="previewPrice"></p>
                 <p class="preview-stock" id="previewStock"></p>
-                <button class="preview-add-btn" id="previewAddBtn" data-i18n="addToCart">Agregar al carrito</button>
+                <button class="preview-add-btn" id="previewAddBtn">Agregar al carrito</button>
             </div>
         </div>
     </div>
@@ -1965,14 +1971,14 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4 data-i18n="contact">Contacto</h4>
+                    <h4 id="footerContact">Contacto</h4>
                     <p>WhatsApp: +503 66711569</p>
                     <p>Email: <a href="mailto:industriastobias@gmail.com">industriastobias@gmail.com</a></p>
-                    <p data-i18n="location">San Salvador, El Salvador</p>
+                    <p id="footerLocation">San Salvador, El Salvador</p>
                 </div>
                 <div class="footer-section">
-                    <h4 data-i18n="socialMedia">Redes Sociales</h4>
-                    <p data-i18n="followUs">Síguenos y descubre las últimas novedades</p>
+                    <h4 id="footerSocial">Redes Sociales</h4>
+                    <p id="footerFollow">Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
                         <a href="https://instagram.com/klohesv" target="_blank" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
@@ -1986,80 +1992,91 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4 data-i18n="hours">🕐 Horarios</h4>
-                    <p data-i18n="mondayToSunday">Lunes a Domingo</p>
+                    <h4 id="footerHours">🕐 Horarios</h4>
+                    <p id="footerDays">Lunes a Domingo</p>
                     <p>7:00 AM - 10:00 PM</p>
-                    <p data-i18n="alwaysOpen">Siempre abiertos para ti</p>
+                    <p id="footerAlways">Siempre abiertos para ti</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 KLOHE. <span data-i18n="madeWithLove">Hecho con ♥ en El Salvador</span></p>
+                <p>&copy; 2026 KLOHE. <span id="footerMadeWith">Hecho con ♥ en El Salvador</span></p>
             </div>
         </div>
     </footer>
 
-    <!-- WHATSAPP TOOLTIP AHORA A LA IZQUIERDA -->
-    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-tooltip" data-i18n="needHelp">¿Necesitas ayuda?</span>
+        <span class="whatsapp-tooltip" id="whatsappTooltip">¿Necesitas ayuda?</span>
     </a>
 
     <div class="newsletter-overlay" id="newsletterOverlay" onclick="closeNewsletter()"></div>
     <div class="newsletter-popup" id="newsletterPopup" role="dialog" aria-modal="true">
         <button class="newsletter-close" onclick="closeNewsletter()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
-        <h3 data-i18n="welcome">¡Bienvenido!</h3>
-        <p data-i18n="discountText">Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín</p>
+        <h3 id="newsletterTitle">¡Bienvenido!</h3>
+        <p id="newsletterText">Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín</p>
         <div class="newsletter-code">KLOHELOVER</div>
-        <p style="font-size: 0.8rem; color: var(--rosa-oscuro);" data-i18n="useCode">Usa este código al momento de pagar</p>
+        <p style="font-size: 0.8rem; color: var(--rosa-oscuro);" id="newsletterCode">Usa este código al momento de pagar</p>
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
     <div class="cart-modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
         <div class="cart-header">
-            <h2 id="cartTitle" data-i18n="yourCart">Tu Carrito</h2>
-            <button class="close-cart" onclick="toggleCart()" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
+            <h2 id="cartTitle">Tu Carrito</h2>
+            <button class="close-cart" onclick="toggleCart()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
         </div>
         
         <div class="shipping-option">
             <div class="shipping-header">
-                <span class="shipping-title" data-i18n="nationwideShipping">Envío a todo el país</span>
+                <span class="shipping-title" id="shippingTitle">Envío a todo el país</span>
                 <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()" role="switch" aria-checked="false" tabindex="0"></div>
             </div>
             <div class="shipping-price" id="shippingPrice" style="display: none;">+$3.75</div>
-            <div class="shipping-desc" data-i18n="deliveryTime">Entrega en 2-3 días hábiles</div>
+            <div class="shipping-desc" id="shippingDesc">Entrega en 2-3 días hábiles</div>
         </div>
 
         <div id="cartItems">
-            <div class="cart-empty" data-i18n="emptyCart">Tu carrito está vacío</div>
+            <div class="cart-empty" id="emptyCartMsg">Tu carrito está vacío</div>
         </div>
         
         <div class="cart-summary" id="cartSummary" style="display: none;">
             <div class="summary-row">
-                <span data-i18n="subtotal">Subtotal:</span>
+                <span id="subtotalLabel">Subtotal:</span>
                 <span id="cartSubtotal">$0.00</span>
             </div>
             <div class="summary-row" id="shippingRow" style="display: none;">
-                <span data-i18n="shipping">Envío:</span>
+                <span id="shippingLabel">Envío:</span>
                 <span>$3.75</span>
             </div>
         </div>
         
         <div class="cart-total">
-            <span data-i18n="total">Total:</span>
+            <span id="totalLabel">Total:</span>
             <span id="cartTotal">$0.00</span>
         </div>
         <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp"></i> <span data-i18n="buyOnWhatsApp">Comprar por WhatsApp</span>
+            <i class="fab fa-whatsapp"></i> <span id="buyWhatsApp">Comprar por WhatsApp</span>
         </a>
     </div>
 
-    <div class="notification" id="notification" role="status" aria-live="polite" data-i18n="addedToCart">Producto agregado</div>
+    <div class="notification" id="notification" role="status" aria-live="polite">Producto agregado</div>
 
+    <!-- CARGAR PRODUCTS.JS PRIMERO -->
     <script src="products.js"></script>
     
     <script>
-        // Sistema de Traducciones
-        const translations = {
+        // DEBUG: Verificar si products.js cargó
+        console.log('Script iniciado');
+        console.log('¿Products definido?', typeof products !== 'undefined');
+        console.log('¿Es array?', Array.isArray(products));
+        
+        // Configuración
+        const CONFIG = {
+            productsPerPage: 12,
+            preloadOffset: '200px',
+        };
+
+        // Traducciones
+        const texts = {
             es: {
                 categories: "Categorías",
                 all: "Todas",
@@ -2082,22 +2099,17 @@
                 whatCustomersShare: "Lo que nuestros clientes comparten",
                 shareYourStory: "Comparte tu historia",
                 name: "Nombre",
-                yourName: "Tu nombre",
                 email: "Email",
-                yourEmail: "tu@email.com",
                 rating: "Calificación",
-                stars: "estrellas",
-                star: "estrella",
                 yourExperience: "Tu experiencia",
-                tellUsExperience: "Cuéntanos sobre tu regalo especial...",
                 sendComment: "Enviar comentario",
                 addToCart: "Agregar al carrito",
                 addToCartBtn: "Agregar al carrito",
                 outOfStock: "Agotado",
                 quickView: "Vista rápida",
-                available: "disponibles",
-                code: "CÓDIGO",
-                units: "unidades",
+                available: "disp.",
+                code: "COD",
+                units: "unid.",
                 contact: "Contacto",
                 location: "San Salvador, El Salvador",
                 socialMedia: "Redes Sociales",
@@ -2148,20 +2160,15 @@
                 whatCustomersShare: "What our customers share",
                 shareYourStory: "Share your story",
                 name: "Name",
-                yourName: "Your name",
                 email: "Email",
-                yourEmail: "your@email.com",
                 rating: "Rating",
-                stars: "stars",
-                star: "star",
                 yourExperience: "Your experience",
-                tellUsExperience: "Tell us about your special gift...",
                 sendComment: "Send comment",
                 addToCart: "Add to cart",
                 addToCartBtn: "Add to cart",
                 outOfStock: "Out of stock",
                 quickView: "Quick view",
-                available: "available",
+                available: "avail.",
                 code: "CODE",
                 units: "units",
                 contact: "Contact",
@@ -2194,23 +2201,7 @@
             }
         };
 
-        // Versículos en inglés
-        const dailyVersesEN = [
-            { text: "Love is patient, love is kind. It does not envy, it does not boast, it is not proud.", reference: "1 Corinthians 13:4" },
-            { text: "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you.", reference: "Jeremiah 29:11" },
-            { text: "I can do all this through him who gives me strength.", reference: "Philippians 4:13" },
-            { text: "Trust in the Lord with all your heart and lean not on your own understanding.", reference: "Proverbs 3:5" },
-            { text: "For where your treasure is, there your heart will be also.", reference: "Matthew 6:21" },
-            { text: "The Lord will fight for you; you need only to be still.", reference: "Exodus 14:14" },
-            { text: "For God so loved the world that he gave his one and only Son.", reference: "John 3:16" },
-            { text: "So do not fear, for I am with you; do not be dismayed, for I am your God.", reference: "Isaiah 41:10" }
-        ];
-
-        const CONFIG = {
-            productsPerPage: 12,
-            preloadOffset: '200px',
-        };
-
+        // Estado
         const AppState = {
             currentFilter: 'todos',
             cart: [],
@@ -2224,197 +2215,20 @@
             currentLang: localStorage.getItem('klohe_lang') || 'es'
         };
 
-        // Funciones de idioma
-        function toggleLanguageDropdown() {
-            const dropdown = document.getElementById('langDropdown');
-            dropdown.classList.toggle('active');
-        }
-
-        function changeLanguage(lang) {
-            AppState.currentLang = lang;
-            localStorage.setItem('klohe_lang', lang);
-            
-            // Actualizar UI
-            document.getElementById('currentLang').textContent = lang.toUpperCase();
-            document.querySelectorAll('.lang-option').forEach(opt => {
-                opt.classList.toggle('active', opt.dataset.lang === lang);
-            });
-            
-            // Cerrar dropdown
-            document.getElementById('langDropdown').classList.remove('active');
-            
-            // Actualizar textos
-            updatePageLanguage();
-            
-            // Actualizar versículo si es inglés
-            if (lang === 'en') {
-                displayDailyVerseEN();
-            } else {
-                displayDailyVerse();
-            }
-        }
-
-        function t(key, replacements = {}) {
-            let text = translations[AppState.currentLang][key] || key;
-            Object.keys(replacements).forEach(k => {
-                text = text.replace(`{${k}}`, replacements[k]);
-            });
-            return text;
-        }
-
-        function updatePageLanguage() {
-            // Actualizar elementos con data-i18n
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.dataset.i18n;
-                if (translations[AppState.currentLang][key]) {
-                    // Si contiene HTML (como <strong>), preservarlo
-                    if (key === 'discountText') {
-                        el.innerHTML = t(key);
-                    } else {
-                        el.textContent = t(key);
-                    }
-                }
-            });
-
-            // Actualizar placeholders
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                const key = el.dataset.i18nPlaceholder;
-                if (translations[AppState.currentLang][key]) {
-                    el.placeholder = t(key);
-                }
-            });
-
-            // Actualizar título de categoría si no es búsqueda
-            if (!AppState.searchTerm) {
-                document.getElementById('categoryTitle').textContent = t(AppState.currentFilter === 'todos' ? 'all' : AppState.currentFilter);
-            }
-
-            // Actualizar contador de productos
-            updateProductsCount();
-
-            // Actualizar botones de categoría
-            document.querySelectorAll('.category-btn').forEach((btn, index) => {
-                const keys = ['all', 'hairAccessories', 'rings', 'earrings', 'bags', 'necklaces', 'sunglasses', 'others', 'bracelets', 'watches'];
-                if (keys[index]) {
-                    btn.textContent = t(keys[index]);
-                }
-            });
-
-            // Recargar testimonios según idioma
-            initTestimonials();
-        }
-
-        function displayDailyVerseEN() {
-            const today = new Date();
-            const dayOfMonth = today.getDate();
-            const month = today.toLocaleString('en-US', { month: 'long' });
-            const year = today.getFullYear();
-            const verseIndex = (dayOfMonth - 1) % dailyVersesEN.length;
-            const verse = dailyVersesEN[verseIndex];
-            
-            document.getElementById('verseDate').textContent = `${month} ${dayOfMonth}, ${year}`;
-            document.getElementById('verseText').textContent = verse.text;
-            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
-        }
-
-        // Intersection Observers y funciones originales
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    const src = img.dataset.src;
-                    if (src) {
-                        const preloadImg = new Image();
-                        preloadImg.onload = () => {
-                            img.src = src;
-                            img.classList.add('loaded');
-                            img.removeAttribute('data-src');
-                        };
-                        preloadImg.src = src;
-                    }
-                    imageObserver.unobserve(img);
-                }
-            });
-        }, { rootMargin: '50px 0px', threshold: 0.01 });
-
-        let scrollObserver;
-
-        function initInfiniteScroll() {
-            const sentinel = document.getElementById('scrollSentinel');
-            scrollObserver = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting && !AppState.isLoading && AppState.hasMoreProducts) {
-                    loadMoreProducts();
-                }
-            }, { rootMargin: CONFIG.preloadOffset, threshold: 0.1 });
-            scrollObserver.observe(sentinel);
-        }
-
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => { clearTimeout(timeout); func(...args); };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        function validateAndCleanCart() {
-            try {
-                const rawCart = JSON.parse(localStorage.getItem('klohe_cart')) || [];
-                let cleaned = [];
-                
-                if (typeof products === 'undefined' || !Array.isArray(products)) {
-                    return [];
-                }
-
-                rawCart.forEach(item => {
-                    if (!item || !item.barcode) return;
-                    const existsInCatalog = products.some(p => p.barcode === item.barcode);
-                    if (existsInCatalog) {
-                        cleaned.push(item);
-                    }
-                });
-
-                if (cleaned.length !== rawCart.length) {
-                    localStorage.setItem('klohe_cart', JSON.stringify(cleaned));
-                }
-
-                return cleaned;
-            } catch (e) {
-                console.error('Error validating cart:', e);
-                return [];
-            }
-        }
-
+        // Versículos
         const dailyVerses = [
             { text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.", reference: "1 Corintios 13:4" },
-            { text: "Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.", reference: "Jeremías 29:11" },
+            { text: "Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad.", reference: "Jeremías 29:11" },
             { text: "Todo lo puedo en Cristo que me fortalece.", reference: "Filipenses 4:13" },
-            { text: "Confía en el Señor de todo corazón, y no en tu propia inteligencia.", reference: "Proverbios 3:5" },
-            { text: "Pues donde esté tu tesoro, allí estará también tu corazón.", reference: "Mateo 6:21" },
-            { text: "El Señor peleará por ustedes; ustedes solo tengan tranquilidad.", reference: "Éxodo 14:14" },
-            { text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito.", reference: "Juan 3:16" },
-            { text: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios.", reference: "Isaías 41:10" }
+            { text: "Confía en el Señor de todo corazón, y no en tu propia inteligencia.", reference: "Proverbios 3:5" }
         ];
 
-        function getDailyVerse() {
-            const today = new Date();
-            const dayOfMonth = today.getDate();
-            const month = today.toLocaleString('es-ES', { month: 'long' });
-            const year = today.getFullYear();
-            const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
-            return {
-                ...dailyVerses[verseIndex],
-                date: `${dayOfMonth} de ${month} de ${year}`
-            };
-        }
-
-        function displayDailyVerse() {
-            const verse = getDailyVerse();
-            document.getElementById('verseDate').textContent = verse.date;
-            document.getElementById('verseText').textContent = verse.text;
-            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
-        }
+        const dailyVersesEN = [
+            { text: "Love is patient, love is kind. It does not envy, it does not boast, it is not proud.", reference: "1 Corinthians 13:4" },
+            { text: "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you.", reference: "Jeremiah 29:11" },
+            { text: "I can do all this through him who gives me strength.", reference: "Philippians 4:13" },
+            { text: "Trust in the Lord with all your heart and lean not on your own understanding.", reference: "Proverbs 3:5" }
+        ];
 
         const categoryMap = {
             'todos': null,
@@ -2429,238 +2243,298 @@
             'reloj': 'Relojes'
         };
 
-        const categoryMapEN = {
-            'todos': null,
-            'accesorios-cabello': 'Hair Accessories',
-            'anillo': 'Rings',
-            'aritos': 'Earrings',
-            'cartera': 'Bags',
-            'collar': 'Necklaces',
-            'lentes-sol': 'Sunglasses',
-            'otros': 'Others',
-            'pulsera': 'Bracelets',
-            'reloj': 'Watches'
-        };
-
         const testimonials = [
-            { 
-                name: "María Fernanda L.", 
-                text: "El collar que compré para San Valentín fue el regalo perfecto. La calidad es excepcional y llegó en una caja hermosa.", 
-                textEN: "The necklace I bought for Valentine's Day was the perfect gift. The quality is exceptional and it arrived in a beautiful box.",
-                date: "15 Ene 2026", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Carlos Mendoza", 
-                text: "Excelente servicio. Me ayudaron a elegir algo especial para mi esposa y quedó fascinada. Gracias KLOHE!", 
-                textEN: "Excellent service. They helped me choose something special for my wife and she was fascinated. Thank you KLOHE!",
-                date: "12 Ene 2026", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Ana Lucía R.", 
-                text: "Los aretes son exactamente como se ven en las fotos. Mi novio los eligió y son perfectos.", 
-                textEN: "The earrings look exactly like the photos. My boyfriend chose them and they are perfect.",
-                date: "10 Ene 2026", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Diego Hernández", 
-                text: "Compré un reloj para regalar y superó mis expectativas. Elegante y romántico.", 
-                textEN: "I bought a watch as a gift and it exceeded my expectations. Elegant and romantic.",
-                date: "8 Ene 2026", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Sofia Castellanos", 
-                text: "La entrega fue rápida y el empaque era divino. Perfecto para regalar en esta temporada.", 
-                textEN: "The delivery was fast and the packaging was divine. Perfect for gifting this season.",
-                date: "5 Ene 2026", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Juan Pablo G.", 
-                text: "Gran variedad de opciones para regalar. Encontré exactamente lo que buscaba.", 
-                textEN: "Great variety of gift options. I found exactly what I was looking for.",
-                date: "3 Ene 2026", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Laura Michelle", 
-                text: "Los collares son divinos! He recibido muchos cumplidos. Ideal para San Valentín.", 
-                textEN: "The necklaces are divine! I've received many compliments. Ideal for Valentine's Day.",
-                date: "1 Ene 2026", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Roberto Carlos", 
-                text: "Atención personalizada y productos de lujo. Mi tienda favorita para regalos especiales.", 
-                textEN: "Personalized attention and luxury products. My favorite store for special gifts.",
-                date: "28 Dic 2025", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Daniela Fuentes", 
-                text: "La pulsera que compré es hermosa. Detalles delicados y muy romántica.", 
-                textEN: "The bracelet I bought is beautiful. Delicate details and very romantic.",
-                date: "25 Dic 2025", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Andrea Morales", 
-                text: "Me encanta que tengan opciones para todos los gustos. Desde lo clásico hasta lo moderno.", 
-                textEN: "I love that they have options for all tastes. From classic to modern.",
-                date: "22 Dic 2025", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Luis Fernando", 
-                text: "Compré varios artículos para regalos y quedaron fascinados. Excelente presentación.", 
-                textEN: "I bought several items for gifts and they were fascinated. Excellent presentation.",
-                date: "20 Dic 2025", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Camila Serrano", 
-                text: "El anillo es precioso, talla perfecta y brillo excepcional. Mil gracias!", 
-                textEN: "The ring is beautiful, perfect size and exceptional shine. Thank you so much!",
-                date: "18 Dic 2025", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Pedro Antonio", 
-                text: "Servicio confiable y productos auténticos. KLOHE es sinónimo de calidad.", 
-                textEN: "Reliable service and authentic products. KLOHE is synonymous with quality.",
-                date: "15 Dic 2025", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Valentina Ruiz", 
-                text: "Las carteras son de cuero genuino y excelente terminación. Muy satisfecha.", 
-                textEN: "The bags are genuine leather and excellent finish. Very satisfied.",
-                date: "12 Dic 2025", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Gabriel Alejandro", 
-                text: "Desde que descubrí KLOHE no compro accesorios en otro lugar. Recomendado!", 
-                textEN: "Since I discovered KLOHE I don't buy accessories anywhere else. Recommended!",
-                date: "10 Dic 2025", 
-                stars: "★★★★★" 
-            }
+            { name: "María Fernanda L.", text: "El collar que compré para San Valentín fue el regalo perfecto.", textEN: "The necklace I bought for Valentine's Day was the perfect gift.", date: "15 Ene 2026", stars: "★★★★★" },
+            { name: "Carlos Mendoza", text: "Excelente servicio. Me ayudaron a elegir algo especial para mi esposa.", textEN: "Excellent service. They helped me choose something special for my wife.", date: "12 Ene 2026", stars: "★★★★★" },
+            { name: "Ana Lucía R.", text: "Los aretes son exactamente como se ven en las fotos.", textEN: "The earrings look exactly like the photos.", date: "10 Ene 2026", stars: "★★★★★" }
         ];
 
+        // Funciones de utilidad
+        function t(key, replacements = {}) {
+            let text = texts[AppState.currentLang][key] || key;
+            Object.keys(replacements).forEach(k => {
+                text = text.replace(`{${k}}`, replacements[k]);
+            });
+            return text;
+        }
+
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            AppState.currentLang = lang;
+            localStorage.setItem('klohe_lang', lang);
+            
+            document.getElementById('currentLang').textContent = lang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.lang === lang);
+            });
+            
+            document.getElementById('langDropdown').classList.remove('active');
+            
+            updateAllTexts();
+            
+            if (lang === 'en') {
+                displayVerseEN();
+            } else {
+                displayVerse();
+            }
+        }
+
+        function updateAllTexts() {
+            // Actualizar todos los elementos con data-i18n o IDs específicos
+            const elements = {
+                'menuTitle': 'categories',
+                'heroTitle': 'valentineCollection',
+                'heroSubtitle': 'giftsFromHeart',
+                'verseLabel': 'verseOfDay',
+                'categoryTitle': AppState.currentFilter === 'todos' ? 'all' : AppState.currentFilter,
+                'productsCount': 'showing',
+                'loadingText': 'loadingMore',
+                'testimonialsTitle': 'loveStories',
+                'testimonialsSubtitle': 'whatCustomersShare',
+                'commentTitle': 'shareYourStory',
+                'labelName': 'name',
+                'labelEmail': 'email',
+                'labelRating': 'rating',
+                'labelExperience': 'yourExperience',
+                'btnSubmit': 'sendComment',
+                'previewAddBtn': 'addToCartBtn',
+                'footerContact': 'contact',
+                'footerLocation': 'location',
+                'footerSocial': 'socialMedia',
+                'footerFollow': 'followUs',
+                'footerHours': 'hours',
+                'footerDays': 'mondayToSunday',
+                'footerAlways': 'alwaysOpen',
+                'footerMadeWith': 'madeWithLove',
+                'whatsappTooltip': 'needHelp',
+                'newsletterTitle': 'welcome',
+                'newsletterText': 'discountText',
+                'newsletterCode': 'useCode',
+                'cartTitle': 'yourCart',
+                'emptyCartMsg': 'emptyCart',
+                'shippingTitle': 'nationwideShipping',
+                'shippingDesc': 'deliveryTime',
+                'subtotalLabel': 'subtotal',
+                'shippingLabel': 'shipping',
+                'totalLabel': 'total',
+                'buyWhatsApp': 'buyOnWhatsApp'
+            };
+
+            Object.keys(elements).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const text = t(elements[id]);
+                    if (id === 'newsletterText' || id === 'previewAddBtn') {
+                        el.innerHTML = text; // Preservar HTML
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+
+            // Placeholders
+            document.getElementById('searchInput').placeholder = t('searchPlaceholder');
+            document.getElementById('commentName').placeholder = t('name');
+            document.getElementById('commentEmail').placeholder = AppState.currentLang === 'en' ? 'your@email.com' : 'tu@email.com';
+            document.getElementById('commentText').placeholder = t('yourExperience');
+
+            // Botones de categoría
+            const catButtons = document.querySelectorAll('.category-btn');
+            const keys = ['all', 'hairAccessories', 'rings', 'earrings', 'bags', 'necklaces', 'sunglasses', 'others', 'bracelets', 'watches'];
+            catButtons.forEach((btn, idx) => {
+                if (keys[idx]) btn.textContent = t(keys[idx]);
+            });
+
+            updateProductCount();
+        }
+
+        function displayVerse() {
+            const today = new Date();
+            const dayOfMonth = today.getDate();
+            const month = today.toLocaleString('es-ES', { month: 'long' });
+            const year = today.getFullYear();
+            const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
+            const verse = dailyVerses[verseIndex];
+            
+            document.getElementById('verseDate').textContent = `${dayOfMonth} de ${month} de ${year}`;
+            document.getElementById('verseText').textContent = verse.text;
+            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
+        }
+
+        function displayVerseEN() {
+            const today = new Date();
+            const dayOfMonth = today.getDate();
+            const month = today.toLocaleString('en-US', { month: 'long' });
+            const year = today.getFullYear();
+            const verseIndex = (dayOfMonth - 1) % dailyVersesEN.length;
+            const verse = dailyVersesEN[verseIndex];
+            
+            document.getElementById('verseDate').textContent = `${month} ${dayOfMonth}, ${year}`;
+            document.getElementById('verseText').textContent = verse.text;
+            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
+        }
+
+        // Funciones de productos
         function renderSkeletons(count = 8) {
             const container = document.getElementById('productsContainer');
             container.innerHTML = '';
             for (let i = 0; i < count; i++) {
-                const skeletonCard = document.createElement('div');
-                skeletonCard.className = 'product-card loading';
-                skeletonCard.style.opacity = '0.7';
-                skeletonCard.innerHTML = `
+                const div = document.createElement('div');
+                div.className = 'product-card';
+                div.style.opacity = '0.7';
+                div.innerHTML = `
                     <div class="product-image-container">
                         <div class="skeleton" style="width: 100%; height: 100%;"></div>
                     </div>
                     <div class="product-info">
                         <div class="skeleton" style="width: 80%; height: 1.2rem; margin-bottom: 0.5rem;"></div>
                         <div class="skeleton" style="width: 40%; height: 0.75rem; margin-bottom: 0.8rem;"></div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; margin-bottom: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--rosa-suave);">
-                            <div class="skeleton" style="width: 30%; height: 1.2rem;"></div>
-                            <div class="skeleton" style="width: 32px; height: 32px; border-radius: 50%;"></div>
-                        </div>
+                        <div class="skeleton" style="width: 30%; height: 1.2rem; margin-bottom: 1rem;"></div>
                         <div class="skeleton" style="height: 44px; width: 100%;"></div>
                     </div>
                 `;
-                container.appendChild(skeletonCard);
+                container.appendChild(div);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            AppState.cart = validateAndCleanCart();
+        function createProductCard(product, index) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.style.animationDelay = `${index * 0.05}s`;
             
-            // Inicializar idioma
-            if (AppState.currentLang === 'en') {
-                document.getElementById('currentLang').textContent = 'EN';
-                document.querySelector('.lang-option[data-lang="en"]').classList.add('active');
-                document.querySelector('.lang-option[data-lang="es"]').classList.remove('active');
-                displayDailyVerseEN();
-            } else {
-                displayDailyVerse();
+            const hasStock = product.stock > 0;
+            const placeholder = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            
+            card.innerHTML = `
+                <div class="product-image-container" onclick="openPreview(${index})">
+                    <img data-src="${product.barcode}.jpg" 
+                         alt="${product.name}" 
+                         class="product-image blur-up"
+                         src="${placeholder}"
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                    <span class="stock-badge">${product.stock} ${t('available')}</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-barcode">${t('code')}: ${product.barcode}</p>
+                    <div class="product-row">
+                        <span class="product-price">$${product.price.toFixed(2)}</span>
+                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${index})" aria-label="${t('quickView')}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart(${index})" ${!hasStock ? 'disabled' : ''}>
+                        ${hasStock ? t('addToCartBtn') : t('outOfStock')}
+                    </button>
+                </div>
+            `;
+            
+            // Lazy loading
+            const img = card.querySelector('img[data-src]');
+            if (img) {
+                new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const src = img.dataset.src;
+                            const preload = new Image();
+                            preload.onload = () => {
+                                img.src = src;
+                                img.classList.add('loaded');
+                            };
+                            preload.src = src;
+                            img.removeAttribute('data-src');
+                            imageObserver.disconnect();
+                        }
+                    });
+                }, { rootMargin: '50px' }).observe(img);
             }
             
-            updatePageLanguage();
+            return card;
+        }
+
+        function renderProducts() {
+            console.log('Renderizando productos...', AppState.filteredProducts.length);
+            const container = document.getElementById('productsContainer');
+            const start = AppState.currentPage * CONFIG.productsPerPage;
+            const end = start + CONFIG.productsPerPage;
+            const toShow = AppState.filteredProducts.slice(start, end);
             
-            if (typeof products !== 'undefined' && Array.isArray(products)) {
-                AppState.filteredProducts = [...products];
-                setTimeout(() => {
-                    document.getElementById('productsContainer').innerHTML = '';
-                    renderProducts();
-                    updateProductsCount();
-                    initInfiniteScroll();
-                    updateCart();
-                }, 600);
-            } else {
-                document.getElementById('productsContainer').innerHTML = 
-                    '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">' +
-                    '<i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>' +
-                    (AppState.currentLang === 'en' ? 'Could not load products. Please reload the page.' : 'No pudimos cargar los productos. Por favor, recarga la página.') +
-                    '</div>';
+            if (toShow.length === 0 && AppState.currentPage === 0) {
+                container.innerHTML = `<div class="error-message" style="color: var(--rosa-oscuro);">
+                    ${AppState.currentLang === 'en' ? 'No products found' : 'No se encontraron productos'}
+                </div>`;
+                AppState.hasMoreProducts = false;
+                return;
             }
             
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', debounce((e) => {
-                searchProducts(e.target.value);
-            }, 300));
-
-            const menuBtn = document.getElementById('menuBtn');
-            const menuOverlay = document.getElementById('menuOverlay');
-            
-            menuBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                toggleMenu();
+            toShow.forEach((product, idx) => {
+                const realIndex = products.indexOf(product);
+                container.appendChild(createProductCard(product, realIndex));
             });
             
-            menuOverlay.addEventListener('click', toggleMenu);
+            AppState.hasMoreProducts = end < AppState.filteredProducts.length;
+            updateProductCount();
+            
+            if (!AppState.hasMoreProducts) {
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }
+        }
 
-            // Cerrar dropdown de idioma al hacer clic fuera
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.language-switcher')) {
-                    document.getElementById('langDropdown').classList.remove('active');
-                }
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeAllModals();
-            });
-
+        function loadMoreProducts() {
+            if (AppState.isLoading || !AppState.hasMoreProducts) return;
+            
+            AppState.isLoading = true;
+            document.getElementById('loadingSpinner').style.display = 'flex';
+            
             setTimeout(() => {
-                if (!sessionStorage.getItem('newsletterShown')) {
-                    showNewsletter();
-                }
-            }, 5000);
-        });
-
-        function showNewsletter() {
-            document.getElementById('newsletterPopup').classList.add('active');
-            document.getElementById('newsletterOverlay').classList.add('active');
-            sessionStorage.setItem('newsletterShown', 'true');
+                AppState.currentPage++;
+                renderProducts();
+                AppState.isLoading = false;
+            }, 400);
         }
 
-        function closeNewsletter() {
-            document.getElementById('newsletterPopup').classList.remove('active');
-            document.getElementById('newsletterOverlay').classList.remove('active');
-        }
-
-        function closeAllModals() {
-            const menu = document.getElementById('categoriesMenu');
-            const cart = document.getElementById('cartModal');
-            const preview = document.getElementById('previewModal');
+        function updateProductCount() {
+            const shown = Math.min((AppState.currentPage + 1) * CONFIG.productsPerPage, AppState.filteredProducts.length);
+            const total = AppState.filteredProducts.length;
             
-            if (menu.classList.contains('active')) toggleMenu();
-            if (cart.classList.contains('active')) toggleCart();
-            if (preview.classList.contains('active')) closePreview();
-            if (document.getElementById('newsletterPopup').classList.contains('active')) closeNewsletter();
-            document.getElementById('langDropdown').classList.remove('active');
+            const el = document.getElementById('productsCount');
+            if (el) el.textContent = t('showing', { shown, total });
+        }
+
+        function filterProducts(category, btn) {
+            console.log('Filtrando:', category);
+            AppState.currentFilter = category;
+            AppState.currentPage = 0;
+            AppState.searchTerm = '';
+            AppState.hasMoreProducts = true;
+            
+            document.getElementById('searchInput').value = '';
+            
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            
+            document.getElementById('categoryTitle').textContent = t(category === 'todos' ? 'all' : category);
+            
+            // Filtrar
+            if (category === 'todos') {
+                AppState.filteredProducts = [...products];
+            } else {
+                const catName = categoryMap[category];
+                AppState.filteredProducts = products.filter(p => p.category === catName);
+            }
+            
+            document.getElementById('productsContainer').innerHTML = '';
+            renderSkeletons(4);
+            
+            setTimeout(() => {
+                document.getElementById('productsContainer').innerHTML = '';
+                renderProducts();
+                toggleMenu();
+            }, 300);
         }
 
         function searchProducts(term) {
@@ -2668,40 +2542,223 @@
             AppState.currentPage = 0;
             AppState.hasMoreProducts = true;
             
-            document.getElementById('productsContainer').innerHTML = '';
-            renderSkeletons(4);
+            if (AppState.searchTerm === '') {
+                AppState.filteredProducts = [...products];
+            } else {
+                AppState.filteredProducts = products.filter(p => 
+                    p.name.toLowerCase().includes(AppState.searchTerm) || 
+                    p.barcode.toLowerCase().includes(AppState.searchTerm)
+                );
+            }
             
-            setTimeout(() => {
-                if (AppState.searchTerm === '') {
-                    if (AppState.currentFilter === 'todos') {
-                        AppState.filteredProducts = [...products];
-                    } else {
-                        const targetCategory = categoryMap[AppState.currentFilter];
-                        AppState.filteredProducts = targetCategory 
-                            ? products.filter(p => p.category === targetCategory)
-                            : [...products];
-                    }
+            document.getElementById('productsContainer').innerHTML = '';
+            renderProducts();
+            
+            if (AppState.searchTerm) {
+                document.getElementById('categoryTitle').textContent = t('searchResults', { term: AppState.searchTerm });
+            } else {
+                document.getElementById('categoryTitle').textContent = t('all');
+            }
+        }
+
+        // Carrito y otros
+        function addToCart(index) {
+            const product = products[index];
+            if (!product || product.stock <= 0) {
+                showNotification('noStock', true);
+                return;
+            }
+
+            const existing = AppState.cart.find(item => item.barcode === product.barcode);
+            
+            if (existing) {
+                if (existing.quantity < product.stock) {
+                    existing.quantity++;
                 } else {
-                    AppState.filteredProducts = products.filter(product => 
-                        product.name.toLowerCase().includes(AppState.searchTerm) || 
-                        product.barcode.toLowerCase().includes(AppState.searchTerm)
-                    );
+                    showNotification('maxStock', true);
+                    return;
                 }
+            } else {
+                AppState.cart.push({ 
+                    barcode: product.barcode,
+                    name: product.name,
+                    price: product.price,
+                    quantity: 1 
+                });
+            }
+
+            saveCart();
+            updateCartUI();
+            showNotification('addedToCart');
+        }
+
+        function removeFromCart(barcode) {
+            AppState.cart = AppState.cart.filter(item => item.barcode !== barcode);
+            saveCart();
+            updateCartUI();
+            showNotification('removed');
+        }
+
+        function saveCart() {
+            localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
+        }
+
+        function updateCartUI() {
+            const cartItems = document.getElementById('cartItems');
+            const badge = document.getElementById('cartBadge');
+            const totalEl = document.getElementById('cartTotal');
+            
+            const totalItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.textContent = totalItems;
+            badge.style.display = totalItems > 0 ? 'flex' : 'none';
+            
+            if (AppState.cart.length === 0) {
+                cartItems.innerHTML = `<div class="cart-empty">${t('emptyCart')}</div>`;
+                document.getElementById('cartSummary').style.display = 'none';
+                document.getElementById('whatsappBtn').style.display = 'none';
+                totalEl.textContent = '$0.00';
+                return;
+            }
+            
+            let html = '';
+            let subtotal = 0;
+            
+            AppState.cart.forEach(item => {
+                const total = item.price * item.quantity;
+                subtotal += total;
                 
-                document.getElementById('productsContainer').innerHTML = '';
-                renderProducts();
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-image">
+                            <img src="${item.barcode}.jpg" alt="${item.name}" 
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3C/svg%3E'">
+                        </div>
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p class="cart-item-code">${t('code')}: ${item.barcode}</p>
+                            <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = html;
+            
+            const shipping = AppState.shippingEnabled ? 3.75 : 0;
+            const total = subtotal + shipping;
+            
+            document.getElementById('cartSubtotal').textContent = `$${subtotal.toFixed(2)}`;
+            totalEl.textContent = `$${total.toFixed(2)}`;
+            document.getElementById('cartSummary').style.display = 'block';
+            document.getElementById('whatsappBtn').style.display = 'flex';
+            
+            const msg = AppState.cart.map(item => 
+                `• ${item.name} (${t('code')}: ${item.barcode}) - Qty: ${item.quantity}`
+            ).join('%0A');
+            
+            const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';
+            
+            document.getElementById('whatsappBtn').href = 
+                `https://wa.me/50366711569?text=${AppState.currentLang === 'en' ? 'Hello' : 'Hola'}! ${t('buyOnWhatsApp')}:%0A%0A${msg}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            const overlay = document.getElementById('overlay');
+            
+            if (modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                // Limpiar carrito de productos inválidos
+                const validBarcodes = products.map(p => p.barcode);
+                AppState.cart = AppState.cart.filter(item => validBarcodes.includes(item.barcode));
+                saveCart();
+                updateCartUI();
                 
-                if (AppState.searchTerm !== '') {
-                    document.getElementById('categoryTitle').textContent = t('searchResults', { term: AppState.searchTerm });
-                } else {
-                    document.getElementById('categoryTitle').textContent = t(AppState.currentFilter === 'todos' ? 'all' : AppState.currentFilter);
-                }
-            }, 300);
+                modal.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function toggleShipping() {
+            AppState.shippingEnabled = !AppState.shippingEnabled;
+            const toggle = document.getElementById('shippingToggle');
+            toggle.classList.toggle('active');
+            toggle.setAttribute('aria-checked', AppState.shippingEnabled);
+            
+            document.getElementById('shippingPrice').style.display = AppState.shippingEnabled ? 'block' : 'none';
+            document.getElementById('shippingRow').style.display = AppState.shippingEnabled ? 'flex' : 'none';
+            
+            updateCartUI();
+        }
+
+        function openPreview(index) {
+            const product = products[index];
+            currentPreviewIndex = index;
+            
+            document.getElementById('previewImage').src = `${product.barcode}.jpg`;
+            document.getElementById('previewName').textContent = product.name;
+            document.getElementById('previewBarcode').textContent = `${t('code')}: ${product.barcode}`;
+            document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('previewStock').textContent = `${product.stock} ${t('units')} ${t('available')}`;
+            
+            const btn = document.getElementById('previewAddBtn');
+            if (product.stock > 0) {
+                btn.disabled = false;
+                btn.textContent = t('addToCartBtn');
+                btn.onclick = () => { addToCart(index); closePreview(); };
+            } else {
+                btn.disabled = true;
+                btn.textContent = t('outOfStock');
+            }
+            
+            document.getElementById('previewModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.getElementById('previewModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('categoriesMenu');
+            const overlay = document.getElementById('menuOverlay');
+            const btn = document.getElementById('menuBtn');
+            
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                btn.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            } else {
+                menu.classList.add('active');
+                overlay.classList.add('active');
+                btn.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function showNotification(key, isError = false) {
+            const notif = document.getElementById('notification');
+            notif.textContent = t(key);
+            notif.style.background = isError ? '#dc3545' : 'var(--bordo)';
+            notif.classList.add('show');
+            setTimeout(() => notif.classList.remove('show'), 2500);
         }
 
         function initTestimonials() {
             const track = document.getElementById('testimonialTrack');
-            const dotsContainer = document.getElementById('carouselDots');
+            const dots = document.getElementById('carouselDots');
             
             track.innerHTML = testimonials.map((t, i) => `
                 <div class="testimonial-slide">
@@ -2714,8 +2771,8 @@
                 </div>
             `).join('');
             
-            dotsContainer.innerHTML = testimonials.map((_, i) => 
-                `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})" role="button" tabindex="0" aria-label="Testimonial ${i + 1}"></div>`
+            dots.innerHTML = testimonials.map((_, i) => 
+                `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})"></div>`
             ).join('');
             
             updateCarousel();
@@ -2724,6 +2781,7 @@
         function updateCarousel() {
             const track = document.getElementById('testimonialTrack');
             track.style.transform = `translateX(-${AppState.currentTestimonial * 100}%)`;
+            
             document.querySelectorAll('.dot').forEach((dot, i) => {
                 dot.classList.toggle('active', i === AppState.currentTestimonial);
             });
@@ -2744,406 +2802,109 @@
             updateCarousel();
         }
 
-        setInterval(nextTestimonial, 5000);
-
         function submitComment(e) {
             e.preventDefault();
             showNotification('thankYouComment');
             e.target.reset();
         }
 
-        function toggleMenu() {
-            const menu = document.getElementById('categoriesMenu');
-            const overlay = document.getElementById('menuOverlay');
-            const btn = document.getElementById('menuBtn');
+        function showNewsletter() {
+            document.getElementById('newsletterPopup').classList.add('active');
+            document.getElementById('newsletterOverlay').classList.add('active');
+            sessionStorage.setItem('newsletterShown', 'true');
+        }
+
+        function closeNewsletter() {
+            document.getElementById('newsletterPopup').classList.remove('active');
+            document.getElementById('newsletterOverlay').classList.remove('active');
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM cargado');
             
-            const isActive = menu.classList.contains('active');
-            
-            if (isActive) {
-                menu.classList.remove('active');
-                overlay.classList.remove('active');
-                btn.classList.remove('active');
-                btn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            } else {
-                menu.classList.add('active');
-                overlay.classList.add('active');
-                btn.classList.add('active');
-                btn.setAttribute('aria-expanded', 'true');
-                document.body.style.overflow = 'hidden';
+            // Restaurar carrito
+            try {
+                const saved = JSON.parse(localStorage.getItem('klohe_cart')) || [];
+                AppState.cart = saved;
+            } catch(e) {
+                console.error('Error cargando carrito:', e);
+                AppState.cart = [];
             }
-        }
-
-        function filterProducts(category, btnElement) {
-            AppState.currentFilter = category;
-            AppState.currentPage = 0;
-            AppState.searchTerm = '';
-            AppState.hasMoreProducts = true;
-            document.getElementById('searchInput').value = '';
             
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            if (btnElement) btnElement.classList.add('active');
+            // Configurar idioma
+            if (AppState.currentLang === 'en') {
+                document.getElementById('currentLang').textContent = 'EN';
+                document.querySelector('.lang-option[data-lang="en"]').classList.add('active');
+                document.querySelector('.lang-option[data-lang="es"]').classList.remove('active');
+                displayVerseEN();
+            } else {
+                displayVerse();
+            }
             
-            document.getElementById('categoryTitle').textContent = t(category === 'todos' ? 'all' : category);
-            
-            document.getElementById('productsContainer').innerHTML = '';
-            renderSkeletons(4);
-            
-            setTimeout(() => {
-                if (category === 'todos') {
-                    AppState.filteredProducts = [...products];
-                } else {
-                    const targetCategory = categoryMap[category];
-                    AppState.filteredProducts = targetCategory 
-                        ? products.filter(p => p.category === targetCategory)
-                        : products.filter(p => 
-                            p.name.toLowerCase().includes(category.toLowerCase()) ||
-                            p.category.toLowerCase().includes(category.toLowerCase())
-                        );
-                }
-                
-                document.getElementById('productsContainer').innerHTML = '';
-                renderProducts();
-                toggleMenu();
-            }, 300);
-        }
-
-        function renderProducts() {
-            const container = document.getElementById('productsContainer');
-            const start = AppState.currentPage * CONFIG.productsPerPage;
-            const end = start + CONFIG.productsPerPage;
-            const productsToShow = AppState.filteredProducts.slice(start, end);
-            
-            if (productsToShow.length === 0 && AppState.currentPage === 0) {
-                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">' + 
-                    (AppState.currentLang === 'en' ? 'No products found' : 'No se encontraron productos') + 
-                    '</div>';
-                AppState.hasMoreProducts = false;
+            // VERIFICAR QUE PRODUCTS EXISTE
+            if (typeof products === 'undefined' || !Array.isArray(products) || products.length === 0) {
+                console.error('ERROR: products.js no cargó o está vacío');
+                document.getElementById('productsContainer').innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Error cargando productos. Verifica que products.js esté en la misma carpeta.</p>
+                        <p style="font-size: 0.8rem; margin-top: 1rem;">¿El archivo products.js existe y tiene formato correcto?</p>
+                    </div>
+                `;
                 return;
             }
             
-            productsToShow.forEach((product, index) => {
-                const card = createProductCard(product, start + index);
-                container.appendChild(card);
-            });
+            console.log('Productos cargados:', products.length);
             
-            AppState.hasMoreProducts = end < AppState.filteredProducts.length;
-            updateProductsCount();
-            
-            if (!AppState.hasMoreProducts) {
-                document.getElementById('loadingSpinner').style.display = 'none';
-            }
-        }
-
-        function findProductIndex(product) {
-            return products.findIndex(p => p.barcode === product.barcode);
-        }
-
-        function createProductCard(product, index) {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.style.animationDelay = `${index * 0.05}s`;
-            
-            const imageName = product.barcode;
-            const hasStock = product.stock > 0;
-            const realIndex = findProductIndex(product);
-            
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
-
-            card.innerHTML = `
-                <div class="product-image-container" onclick="openPreview(${realIndex})">
-                    <img data-src="${imageName}.jpg" 
-                         alt="${product.name}" 
-                         class="product-image blur-up"
-                         src="${placeholderSvg}"
-                         loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
-                    <span class="stock-badge">${product.stock} ${t('available')}</span>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">${product.name}</h3>
-                    <p class="product-barcode">COD: ${product.barcode}</p>
-                    <div class="product-row">
-                        <span class="product-price">$${product.price.toFixed(2)}</span>
-                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${realIndex})" title="${t('quickView')}" aria-label="${t('quickView')} ${product.name}">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                    <button class="btn-add-cart" onclick="addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''} aria-label="${hasStock ? t('addToCartBtn') : t('outOfStock')}">
-                        ${hasStock ? t('addToCartBtn') : t('outOfStock')}
-                    </button>
-                </div>
-            `;
-            
-            const img = card.querySelector('img[data-src]');
-            if (img) imageObserver.observe(img);
-            
-            return card;
-        }
-
-        function loadMoreProducts() {
-            if (AppState.isLoading || !AppState.hasMoreProducts) return;
-            
-            AppState.isLoading = true;
-            document.getElementById('loadingSpinner').style.display = 'flex';
+            // Inicializar todo
+            AppState.filteredProducts = [...products];
+            renderSkeletons(8);
             
             setTimeout(() => {
-                AppState.currentPage++;
+                document.getElementById('productsContainer').innerHTML = '';
                 renderProducts();
-                AppState.isLoading = false;
+                updateCartUI();
+                initTestimonials();
+                updateAllTexts();
                 
-                if (!AppState.hasMoreProducts) {
-                    document.getElementById('loadingSpinner').style.display = 'none';
+                // Infinite scroll
+                new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) loadMoreProducts();
+                }, { rootMargin: '200px' }).observe(document.getElementById('scrollSentinel'));
+                
+            }, 600);
+            
+            // Event listeners
+            document.getElementById('searchInput').addEventListener('input', 
+                debounce((e) => searchProducts(e.target.value), 300)
+            );
+            
+            document.getElementById('menuBtn').addEventListener('click', toggleMenu);
+            document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
+            
+            // Cerrar dropdown lang al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.language-switcher')) {
+                    document.getElementById('langDropdown').classList.remove('active');
                 }
-            }, 400);
-        }
+            });
+            
+            // Newsletter
+            if (!sessionStorage.getItem('newsletterShown')) {
+                setTimeout(showNewsletter, 5000);
+            }
+        });
 
-        function updateProductsCount() {
-            const shown = Math.min((AppState.currentPage + 1) * CONFIG.productsPerPage, AppState.filteredProducts.length);
-            const total = AppState.filteredProducts.length;
-            document.getElementById('productsCount').textContent = t('showing', { shown, total });
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
         }
 
         let currentPreviewIndex = null;
-
-        function openPreview(index) {
-            if (index < 0 || index >= products.length) {
-                showNotification('invalidProduct', 'error');
-                return;
-            }
-            
-            const product = products[index];
-            currentPreviewIndex = index;
-            
-            const img = document.getElementById('previewImage');
-            img.src = `${product.barcode}.jpg`;
-            img.classList.remove('loaded');
-            img.onload = () => img.classList.add('loaded');
-            
-            document.getElementById('previewImage').alt = product.name;
-            document.getElementById('previewName').textContent = product.name;
-            document.getElementById('previewBarcode').textContent = `${t('code')}: ${product.barcode}`;
-            document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
-            document.getElementById('previewStock').textContent = `${product.stock} ${t('units')} ${t('available')}`;
-            
-            const addBtn = document.getElementById('previewAddBtn');
-            if (product.stock > 0) {
-                addBtn.disabled = false;
-                addBtn.textContent = t('addToCartBtn');
-                addBtn.onclick = () => {
-                    addToCart(index);
-                    closePreview();
-                };
-            } else {
-                addBtn.disabled = true;
-                addBtn.textContent = t('outOfStock');
-            }
-            
-            document.getElementById('previewModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePreview(e) {
-            if (e && e.target !== e.currentTarget) return;
-            document.getElementById('previewModal').classList.remove('active');
-            document.body.style.overflow = '';
-            currentPreviewIndex = null;
-        }
-
-        function toggleShipping() {
-            AppState.shippingEnabled = !AppState.shippingEnabled;
-            const toggle = document.getElementById('shippingToggle');
-            const price = document.getElementById('shippingPrice');
-            const row = document.getElementById('shippingRow');
-            
-            toggle.classList.toggle('active', AppState.shippingEnabled);
-            toggle.setAttribute('aria-checked', AppState.shippingEnabled);
-            price.style.display = AppState.shippingEnabled ? 'block' : 'none';
-            row.style.display = AppState.shippingEnabled ? 'flex' : 'none';
-            
-            updateCart();
-        }
-
-        function addToCart(index) {
-            if (index < 0 || index >= products.length) {
-                showNotification('invalidProduct', 'error');
-                return;
-            }
-            
-            const product = products[index];
-            
-            if (!product || product.stock <= 0) {
-                showNotification('noStock', 'error');
-                return;
-            }
-
-            const existingItem = AppState.cart.find(item => item.barcode === product.barcode);
-            
-            if (existingItem) {
-                if (existingItem.quantity < product.stock) {
-                    existingItem.quantity++;
-                } else {
-                    showNotification('maxStock', 'error');
-                    return;
-                }
-            } else {
-                AppState.cart.push({ 
-                    barcode: product.barcode,
-                    name: product.name,
-                    price: product.price,
-                    quantity: 1 
-                });
-            }
-
-            updateCart();
-            showNotification('addedToCart');
-        }
-
-        function removeFromCart(barcode) {
-            if (!barcode) return;
-            
-            const initialLength = AppState.cart.length;
-            AppState.cart = AppState.cart.filter(item => item && item.barcode !== barcode);
-            
-            if (AppState.cart.length < initialLength) {
-                updateCart();
-                showNotification('removed');
-            }
-        }
-
-        function updateCart() {
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            const cartSubtotal = document.getElementById('cartSubtotal');
-            const cartBadge = document.getElementById('cartBadge');
-            const whatsappBtn = document.getElementById('whatsappBtn');
-            const summary = document.getElementById('cartSummary');
-
-            try {
-                localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
-            } catch (e) {
-                console.error('Error saving cart:', e);
-            }
-
-            const totalItems = AppState.cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
-            cartBadge.textContent = totalItems;
-            cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
-
-            if (AppState.cart.length === 0) {
-                cartItems.innerHTML = `<div class="cart-empty">${t('emptyCart')}</div>`;
-                summary.style.display = 'none';
-                whatsappBtn.style.display = 'none';
-                document.getElementById('cartTotal').textContent = '$0.00';
-                return;
-            }
-
-            cartItems.innerHTML = '';
-            let subtotal = 0;
-
-            AppState.cart.forEach(item => {
-                if (!item || !item.barcode) return;
-                
-                const itemTotal = (item.price || 0) * (item.quantity || 0);
-                subtotal += itemTotal;
-
-                cartItems.innerHTML += `
-                    <div class="cart-item" data-barcode="${item.barcode}">
-                        <div class="cart-item-image">
-                            <img src="${item.barcode}.jpg" alt="${item.name || 'Product'}" 
-                                 loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${(item.name || 'P').charAt(0)}%3C/text%3E%3C/svg%3E'">
-                        </div>
-                        <div class="cart-item-details">
-                            <h4>${item.name || 'Product not available'}</h4>
-                            <p class="cart-item-code">COD: ${item.barcode}</p>
-                            <p>$${(item.price || 0).toFixed(2)} x ${item.quantity || 0}</p>
-                        </div>
-                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Remove ${item.name || 'product'}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-            });
-
-            const shippingCost = AppState.shippingEnabled ? 3.75 : 0;
-            const total = subtotal + shippingCost;
-
-            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-            cartTotal.textContent = `$${total.toFixed(2)}`;
-            summary.style.display = 'block';
-            whatsappBtn.style.display = 'flex';
-            
-            const message = AppState.cart.map(item => 
-                `• ${item.name || 'Product'} (COD: ${item.barcode}) - Qty: ${item.quantity || 0}`
-            ).join('%0A');
-            
-            const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';
-            
-            whatsappBtn.href = `https://wa.me/50366711569?text=${AppState.currentLang === 'en' ? 'Hello' : '¡Hola'}! ${AppState.currentLang === 'en' ? 'I want to buy' : 'Quiero comprar'}:%0A%0A${message}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
-        }
-
-        function toggleCart() {
-            const modal = document.getElementById('cartModal');
-            const overlay = document.getElementById('overlay');
-            const isActive = modal.classList.contains('active');
-            
-            if (isActive) {
-                modal.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            } else {
-                AppState.cart = validateAndCleanCart();
-                updateCart();
-                
-                modal.classList.add('active');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function showNotification(messageKey, type = 'success') {
-            const notification = document.getElementById('notification');
-            const message = translations[AppState.currentLang][messageKey] || messageKey;
-            
-            notification.textContent = message;
-            notification.style.background = type === 'error' ? '#dc3545' : 'var(--bordo)';
-            notification.style.borderLeftColor = type === 'error' ? '#ff6b6b' : 'var(--dorado)';
-            notification.classList.add('show');
-            
-            // Remover clase error si existe
-            if (type === 'error') {
-                notification.classList.add('error');
-            } else {
-                notification.classList.remove('error');
-            }
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 2500);
-        }
-
-        window.addEventListener('resize', debounce(() => {
-            if (window.innerWidth > 768) {
-                const menu = document.getElementById('categoriesMenu');
-                const overlay = document.getElementById('menuOverlay');
-                const btn = document.getElementById('menuBtn');
-                
-                if (menu.classList.contains('active')) {
-                    menu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    btn.classList.remove('active');
-                    btn.setAttribute('aria-expanded', 'false');
-                    document.body.style.overflow = '';
-                }
-            }
-        }, 250));
-
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 300) e.preventDefault();
-            lastTouchEnd = now;
-        }, false);
     </script>
 
 </body>

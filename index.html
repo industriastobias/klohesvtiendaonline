@@ -212,6 +212,44 @@
             margin-right: 0.5rem;
         }
 
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--rosa-medio);
+            color: var(--rosa-oscuro);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--bordo);
+            color: var(--bordo);
+        }
+
+        .lang-btn.active {
+            background: var(--bordo);
+            color: white;
+            border-color: var(--bordo);
+        }
+
         .social-btn {
             width: 44px;
             height: 44px;
@@ -1365,10 +1403,11 @@
             display: block;
         }
 
+        /* WHATSAPP FLOAT - AHORA A LA IZQUIERDA */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
-            right: 30px;
+            left: 30px; /* Cambiado de right a left */
             width: 60px;
             height: 60px;
             background: var(--bordo);
@@ -1393,7 +1432,7 @@
 
         .whatsapp-tooltip {
             position: absolute;
-            right: 70px;
+            left: 70px; /* Cambiado de right a left */
             background: var(--bordo);
             color: white;
             padding: 0.5rem 1rem;
@@ -1409,7 +1448,7 @@
         .whatsapp-float:hover .whatsapp-tooltip {
             opacity: 1;
             visibility: visible;
-            right: 75px;
+            left: 75px; /* Cambiado de right a left */
         }
 
         .newsletter-popup {
@@ -1618,6 +1657,15 @@
             .social-header {
                 display: none;
             }
+            
+            .language-switcher {
+                margin-right: 0.2rem;
+            }
+            
+            .lang-btn {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+            }
 
             .hero {
                 padding: 2rem 0;
@@ -1683,12 +1731,13 @@
                 width: 100%;
             }
 
+            /* WhatsApp móvil a la izquierda */
             .whatsapp-float {
                 width: 56px;
                 height: 56px;
                 font-size: 1.5rem;
                 bottom: 20px;
-                right: 20px;
+                left: 20px; /* Cambiado de right a left */
             }
 
             .whatsapp-tooltip {
@@ -1729,6 +1778,10 @@
 
             .product-price {
                 font-size: 1.1rem;
+            }
+            
+            .nav-right {
+                gap: 0.8rem;
             }
         }
 
@@ -1782,6 +1835,16 @@
             <nav>
                 <a href="#" class="logo">KLOHE</a>
                 <div class="nav-right">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="lang-btn active" onclick="switchLanguage('es')" id="btn-es" title="Español">
+                            <span>🇪🇸</span> ES
+                        </button>
+                        <button class="lang-btn" onclick="switchLanguage('en')" id="btn-en" title="English">
+                            <span>🇺🇸</span> EN
+                        </button>
+                    </div>
+                    
                     <div class="social-header">
                         <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
@@ -1811,31 +1874,31 @@
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="categories-menu" id="categoriesMenu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
         <button class="close-menu" onclick="toggleMenu()" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
-        <h3 id="menuTitle">Categorías</h3>
+        <h3 id="menuTitle" data-i18n="categories">Categorías</h3>
         
-        <button class="category-btn active" onclick="filterProducts('todos', this)">Todas</button>
-        <button class="category-btn" onclick="filterProducts('accesorios-cabello', this)">Accesorios para el cabello</button>
-        <button class="category-btn" onclick="filterProducts('anillo', this)">Anillos</button>
-        <button class="category-btn" onclick="filterProducts('aritos', this)">Aritos</button>
-        <button class="category-btn" onclick="filterProducts('cartera', this)">Carteras</button>
-        <button class="category-btn" onclick="filterProducts('collar', this)">Collares</button>
-        <button class="category-btn" onclick="filterProducts('lentes-sol', this)">Lentes de sol</button>
-        <button class="category-btn" onclick="filterProducts('otros', this)">Otros</button>
-        <button class="category-btn" onclick="filterProducts('pulsera', this)">Pulseras</button>
-        <button class="category-btn" onclick="filterProducts('reloj', this)">Relojes</button>
+        <button class="category-btn active" onclick="filterProducts('todos', this)" data-i18n="all">Todas</button>
+        <button class="category-btn" onclick="filterProducts('accesorios-cabello', this)" data-i18n="hair_accessories">Accesorios para el cabello</button>
+        <button class="category-btn" onclick="filterProducts('anillo', this)" data-i18n="rings">Anillos</button>
+        <button class="category-btn" onclick="filterProducts('aritos', this)" data-i18n="earrings">Aritos</button>
+        <button class="category-btn" onclick="filterProducts('cartera', this)" data-i18n="bags">Carteras</button>
+        <button class="category-btn" onclick="filterProducts('collar', this)" data-i18n="necklaces">Collares</button>
+        <button class="category-btn" onclick="filterProducts('lentes-sol', this)" data-i18n="sunglasses">Lentes de sol</button>
+        <button class="category-btn" onclick="filterProducts('otros', this)" data-i18n="others">Otros</button>
+        <button class="category-btn" onclick="filterProducts('pulsera', this)" data-i18n="bracelets">Pulseras</button>
+        <button class="category-btn" onclick="filterProducts('reloj', this)" data-i18n="watches">Relojes</button>
     </div>
 
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Colección San Valentín</h1>
-                <p>Regalos que hablan desde el corazón</p>
+                <h1 data-i18n="valentine_collection">Colección San Valentín</h1>
+                <p data-i18n="gifts_from_heart">Regalos que hablan desde el corazón</p>
                 
                 <div class="daily-verse-container" id="dailyVerseContainer">
                     <div class="verse-date" id="verseDate"></div>
                     <div class="verse-header">
                         <i class="fas fa-book-open"></i>
-                        <span>Versículo de Hoy</span>
+                        <span data-i18n="verse_of_day">Versículo de Hoy</span>
                     </div>
                     <div class="verse-text" id="verseText"></div>
                     <div class="verse-reference" id="verseReference"></div>
@@ -1843,7 +1906,7 @@
                 
                 <div class="search-container">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar el regalo perfecto..." aria-label="Buscar productos">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar el regalo perfecto..." aria-label="Buscar productos" data-i18n-placeholder="search_placeholder">
                 </div>
             </div>
         </div>
@@ -1852,8 +1915,8 @@
     <section class="products">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" id="categoryTitle">Todas</h2>
-                <span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span>
+                <h2 class="section-title" id="categoryTitle" data-i18n="all">Todas</h2>
+                <span class="products-count" id="productsCount" data-i18n="showing_products">Mostrando 0 de 0 productos</span>
             </div>
             <div class="products-grid" id="productsContainer">
                 <!-- Skeleton loading initial state -->
@@ -1862,7 +1925,7 @@
             <div class="scroll-sentinel" id="scrollSentinel"></div>
             <div class="loading-spinner" id="loadingSpinner" style="display: none;">
                 <div class="spinner"></div>
-                <span>Cargando más productos...</span>
+                <span data-i18n="loading_more">Cargando más productos...</span>
             </div>
         </div>
     </section>
@@ -1870,8 +1933,8 @@
     <section class="testimonials-section">
         <div class="container">
             <div class="testimonials-header">
-                <h2>Historias de Amor</h2>
-                <p>Lo que nuestros clientes comparten</p>
+                <h2 data-i18n="love_stories">Historias de Amor</h2>
+                <p data-i18n="what_customers_share">Lo que nuestros clientes comparten</p>
             </div>
             
             <div class="testimonial-carousel">
@@ -1885,31 +1948,31 @@
             </div>
 
             <div class="comment-box">
-                <h3>Comparte tu historia</h3>
+                <h3 data-i18n="share_story">Comparte tu historia</h3>
                 <form class="comment-form" onsubmit="submitComment(event)">
                     <div class="form-group">
-                        <label for="commentName">Nombre</label>
-                        <input type="text" id="commentName" required placeholder="Tu nombre" autocomplete="name">
+                        <label for="commentName" data-i18n="name">Nombre</label>
+                        <input type="text" id="commentName" required placeholder="Tu nombre" autocomplete="name" data-i18n-placeholder="your_name">
                     </div>
                     <div class="form-group">
-                        <label for="commentEmail">Email</label>
-                        <input type="email" id="commentEmail" required placeholder="tu@email.com" autocomplete="email">
+                        <label for="commentEmail" data-i18n="email">Email</label>
+                        <input type="email" id="commentEmail" required placeholder="tu@email.com" autocomplete="email" data-i18n-placeholder="your_email">
                     </div>
                     <div class="form-group">
-                        <label for="commentRating">Calificación</label>
+                        <label for="commentRating" data-i18n="rating">Calificación</label>
                         <select id="commentRating">
-                            <option>⭐⭐⭐⭐⭐ (5 estrellas)</option>
-                            <option>⭐⭐⭐⭐ (4 estrellas)</option>
-                            <option>⭐⭐⭐ (3 estrellas)</option>
-                            <option>⭐⭐ (2 estrellas)</option>
-                            <option>⭐ (1 estrella)</option>
+                            <option>⭐⭐⭐⭐⭐ (5 <span data-i18n="stars">estrellas</span>)</option>
+                            <option>⭐⭐⭐⭐ (4 <span data-i18n="stars">estrellas</span>)</option>
+                            <option>⭐⭐⭐ (3 <span data-i18n="stars">estrellas</span>)</option>
+                            <option>⭐⭐ (2 <span data-i18n="stars">estrellas</span>)</option>
+                            <option>⭐ (1 <span data-i18n="star">estrella</span>)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="commentText">Tu experiencia</label>
-                        <textarea id="commentText" required placeholder="Cuéntanos sobre tu regalo especial..."></textarea>
+                        <label for="commentText" data-i18n="your_experience">Tu experiencia</label>
+                        <textarea id="commentText" required placeholder="Cuéntanos sobre tu regalo especial..." data-i18n-placeholder="tell_experience"></textarea>
                     </div>
-                    <button type="submit" class="btn-submit">Enviar comentario</button>
+                    <button type="submit" class="btn-submit" data-i18n="send_comment">Enviar comentario</button>
                 </form>
             </div>
         </div>
@@ -1925,7 +1988,7 @@
                 <p class="preview-barcode" id="previewBarcode"></p>
                 <p class="preview-price" id="previewPrice"></p>
                 <p class="preview-stock" id="previewStock"></p>
-                <button class="preview-add-btn" id="previewAddBtn">Agregar al carrito</button>
+                <button class="preview-add-btn" id="previewAddBtn" data-i18n="add_to_cart">Agregar al carrito</button>
             </div>
         </div>
     </div>
@@ -1934,14 +1997,14 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>Contacto</h4>
+                    <h4 data-i18n="contact">Contacto</h4>
                     <p>WhatsApp: +503 66711569</p>
                     <p>Email: <a href="mailto:industriastobias@gmail.com">industriastobias@gmail.com</a></p>
-                    <p>San Salvador, El Salvador</p>
+                    <p data-i18n="location">San Salvador, El Salvador</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Redes Sociales</h4>
-                    <p>Síguenos y descubre las últimas novedades</p>
+                    <h4 data-i18n="social_media">Redes Sociales</h4>
+                    <p data-i18n="follow_us">Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
                         <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
@@ -1955,84 +2018,225 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>🕐 Horarios</h4>
-                    <p>Lunes a Domingo</p>
+                    <h4>🕐 <span data-i18n="hours">Horarios</span></h4>
+                    <p data-i18n="monday_sunday">Lunes a Domingo</p>
                     <p>7:00 AM - 10:00 PM</p>
-                    <p>Siempre abiertos para ti</p>
+                    <p data-i18n="always_open">Siempre abiertos para ti</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 KLOHE. Hecho con ♥ en El Salvador</p>
+                <p>&copy; 2026 KLOHE. <span data-i18n="made_with_love">Hecho con ♥ en El Salvador</span></p>
             </div>
         </div>
     </footer>
 
+    <!-- WhatsApp Float - AHORA A LA IZQUIERDA -->
     <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
+        <span class="whatsapp-tooltip" data-i18n="need_help">¿Necesitas ayuda?</span>
     </a>
 
     <div class="newsletter-overlay" id="newsletterOverlay" onclick="closeNewsletter()"></div>
     <div class="newsletter-popup" id="newsletterPopup" role="dialog" aria-modal="true">
         <button class="newsletter-close" onclick="closeNewsletter()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
-        <h3>¡Bienvenido!</h3>
-        <p>Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín</p>
+        <h3 data-i18n="welcome">¡Bienvenido!</h3>
+        <p data-i18n="discount_text">Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín</p>
         <div class="newsletter-code">KLOHELOVER</div>
-        <p style="font-size: 0.8rem; color: var(--rosa-oscuro);">Usa este código al momento de pagar</p>
+        <p style="font-size: 0.8rem; color: var(--rosa-oscuro);" data-i18n="use_code">Usa este código al momento de pagar</p>
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
     <div class="cart-modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
         <div class="cart-header">
-            <h2 id="cartTitle">Tu Carrito</h2>
+            <h2 id="cartTitle" data-i18n="your_cart">Tu Carrito</h2>
             <button class="close-cart" onclick="toggleCart()" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
         </div>
         
         <div class="shipping-option">
             <div class="shipping-header">
-                <span class="shipping-title">Envío a todo el país</span>
+                <span class="shipping-title" data-i18n="nationwide_shipping">Envío a todo el país</span>
                 <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()" role="switch" aria-checked="false" tabindex="0"></div>
             </div>
             <div class="shipping-price" id="shippingPrice" style="display: none;">+$3.75</div>
-            <div class="shipping-desc">Entrega en 2-3 días hábiles</div>
+            <div class="shipping-desc" data-i18n="delivery_time">Entrega en 2-3 días hábiles</div>
         </div>
 
         <div id="cartItems">
-            <div class="cart-empty">Tu carrito está vacío</div>
+            <div class="cart-empty" data-i18n="empty_cart">Tu carrito está vacío</div>
         </div>
         
         <div class="cart-summary" id="cartSummary" style="display: none;">
             <div class="summary-row">
-                <span>Subtotal:</span>
+                <span data-i18n="subtotal">Subtotal:</span>
                 <span id="cartSubtotal">$0.00</span>
             </div>
             <div class="summary-row" id="shippingRow" style="display: none;">
-                <span>Envío:</span>
+                <span data-i18n="shipping">Envío:</span>
                 <span>$3.75</span>
             </div>
         </div>
         
         <div class="cart-total">
-            <span>Total:</span>
+            <span data-i18n="total">Total:</span>
             <span id="cartTotal">$0.00</span>
         </div>
         <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+            <i class="fab fa-whatsapp"></i> <span data-i18n="buy_whatsapp">Comprar por WhatsApp</span>
         </a>
         <button class="btn-clear-cart" onclick="clearCart()" id="clearCartBtn" style="display: none;">
-            <i class="fas fa-trash-alt"></i> Vaciar carrito
+            <i class="fas fa-trash-alt"></i> <span data-i18n="empty_cart_btn">Vaciar carrito</span>
         </button>
     </div>
 
-    <div class="notification" id="notification" role="status" aria-live="polite">Producto agregado</div>
+    <div class="notification" id="notification" role="status" aria-live="polite" data-i18n="added_product">Producto agregado</div>
 
     <script src="products.js"></script>
     
     <script>
+        // Translations Object
+        const translations = {
+            es: {
+                categories: "Categorías",
+                all: "Todas",
+                hair_accessories: "Accesorios para el cabello",
+                rings: "Anillos",
+                earrings: "Aritos",
+                bags: "Carteras",
+                necklaces: "Collares",
+                sunglasses: "Lentes de sol",
+                others: "Otros",
+                bracelets: "Pulseras",
+                watches: "Relojes",
+                valentine_collection: "Colección San Valentín",
+                gifts_from_heart: "Regalos que hablan desde el corazón",
+                verse_of_day: "Versículo de Hoy",
+                search_placeholder: "Buscar el regalo perfecto...",
+                showing_products: "Mostrando {shown} de {total} productos",
+                loading_more: "Cargando más productos...",
+                love_stories: "Historias de Amor",
+                what_customers_share: "Lo que nuestros clientes comparten",
+                share_story: "Comparte tu historia",
+                name: "Nombre",
+                your_name: "Tu nombre",
+                email: "Email",
+                your_email: "tu@email.com",
+                rating: "Calificación",
+                stars: "estrellas",
+                star: "estrella",
+                your_experience: "Tu experiencia",
+                tell_experience: "Cuéntanos sobre tu regalo especial...",
+                send_comment: "Enviar comentario",
+                add_to_cart: "Agregar al carrito",
+                sold_out: "Agotado",
+                quick_view: "Vista rápida",
+                available: "disponibles",
+                code: "COD",
+                contact: "Contacto",
+                location: "San Salvador, El Salvador",
+                social_media: "Redes Sociales",
+                follow_us: "Síguenos y descubre las últimas novedades",
+                hours: "Horarios",
+                monday_sunday: "Lunes a Domingo",
+                always_open: "Siempre abiertos para ti",
+                made_with_love: "Hecho con ♥ en El Salvador",
+                need_help: "¿Necesitas ayuda?",
+                welcome: "¡Bienvenido!",
+                discount_text: "Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín",
+                use_code: "Usa este código al momento de pagar",
+                your_cart: "Tu Carrito",
+                nationwide_shipping: "Envío a todo el país",
+                delivery_time: "Entrega en 2-3 días hábiles",
+                empty_cart: "Tu carrito está vacío",
+                subtotal: "Subtotal:",
+                shipping: "Envío:",
+                total: "Total:",
+                buy_whatsapp: "Comprar por WhatsApp",
+                empty_cart_btn: "Vaciar carrito",
+                added_product: "Producto agregado",
+                removed_products: "Algunos productos ya no están disponibles y fueron removidos",
+                cart_emptied: "El carrito se vació porque los productos ya no están disponibles",
+                cart_cleared: "Carrito vaciado",
+                max_stock: "Stock máximo alcanzado",
+                no_stock: "Sin stock disponible",
+                product_added: "Producto agregado al carrito",
+                thanks_comment: "¡Gracias por tu comentario!",
+                search_results: "Búsqueda: \"{term}\"",
+                units_available: "unidades disponibles"
+            },
+            en: {
+                categories: "Categories",
+                all: "All",
+                hair_accessories: "Hair Accessories",
+                rings: "Rings",
+                earrings: "Earrings",
+                bags: "Bags",
+                necklaces: "Necklaces",
+                sunglasses: "Sunglasses",
+                others: "Others",
+                bracelets: "Bracelets",
+                watches: "Watches",
+                valentine_collection: "Valentine's Day Collection",
+                gifts_from_heart: "Gifts that speak from the heart",
+                verse_of_day: "Verse of the Day",
+                search_placeholder: "Search for the perfect gift...",
+                showing_products: "Showing {shown} of {total} products",
+                loading_more: "Loading more products...",
+                love_stories: "Love Stories",
+                what_customers_share: "What our customers share",
+                share_story: "Share your story",
+                name: "Name",
+                your_name: "Your name",
+                email: "Email",
+                your_email: "your@email.com",
+                rating: "Rating",
+                stars: "stars",
+                star: "star",
+                your_experience: "Your experience",
+                tell_experience: "Tell us about your special gift...",
+                send_comment: "Send comment",
+                add_to_cart: "Add to cart",
+                sold_out: "Sold out",
+                quick_view: "Quick view",
+                available: "available",
+                code: "SKU",
+                contact: "Contact",
+                location: "San Salvador, El Salvador",
+                social_media: "Social Media",
+                follow_us: "Follow us for the latest updates",
+                hours: "Hours",
+                monday_sunday: "Monday to Sunday",
+                always_open: "Always open for you",
+                made_with_love: "Made with ♥ in El Salvador",
+                need_help: "Need help?",
+                welcome: "Welcome!",
+                discount_text: "Get <strong>5% off</strong> on your first Valentine's purchase",
+                use_code: "Use this code at checkout",
+                your_cart: "Your Cart",
+                nationwide_shipping: "Nationwide shipping",
+                delivery_time: "Delivery in 2-3 business days",
+                empty_cart: "Your cart is empty",
+                subtotal: "Subtotal:",
+                shipping: "Shipping:",
+                total: "Total:",
+                buy_whatsapp: "Buy via WhatsApp",
+                empty_cart_btn: "Empty cart",
+                added_product: "Product added",
+                removed_products: "Some products are no longer available and were removed",
+                cart_emptied: "Cart was emptied because products are no longer available",
+                cart_cleared: "Cart cleared",
+                max_stock: "Maximum stock reached",
+                no_stock: "No stock available",
+                product_added: "Product added to cart",
+                thanks_comment: "Thank you for your comment!",
+                search_results: "Search: \"{term}\"",
+                units_available: "units available"
+            }
+        };
+
         // Configuration
         const CONFIG = {
-            productsPerPage: 12, // Reduced for smoother infinite scroll
-            preloadOffset: '200px', // Start loading before reaching bottom
+            productsPerPage: 12,
+            preloadOffset: '200px',
             imageQuality: {
                 low: 'q_10,e_blur:1000',
                 high: 'q_auto,f_auto'
@@ -2049,7 +2253,8 @@
             isLoading: false,
             hasMoreProducts: true,
             currentTestimonial: 0,
-            searchTerm: ''
+            searchTerm: '',
+            currentLang: localStorage.getItem('klohe_lang') || 'es'
         };
 
         // Intersection Observer for Lazy Loading Images
@@ -2060,7 +2265,6 @@
                     const src = img.dataset.src;
                     
                     if (src) {
-                        // Create new image to preload
                         const preloadImg = new Image();
                         preloadImg.onload = () => {
                             img.src = src;
@@ -2109,51 +2313,74 @@
             };
         }
 
+        // Language Switcher Function
+        function switchLanguage(lang) {
+            AppState.currentLang = lang;
+            localStorage.setItem('klohe_lang', lang);
+            
+            // Update buttons
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            
+            // Update all elements with data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+            
+            // Update category title if showing all
+            if (AppState.currentFilter === 'todos' && !AppState.searchTerm) {
+                document.getElementById('categoryTitle').textContent = translations[lang].all;
+            }
+            
+            // Update document language
+            document.documentElement.lang = lang;
+            
+            // Refresh cart to update texts
+            updateCart();
+        }
+
+        // Get translation helper
+        function t(key, replacements = {}) {
+            let text = translations[AppState.currentLang][key] || key;
+            Object.keys(replacements).forEach(key => {
+                text = text.replace(`{${key}}`, replacements[key]);
+            });
+            return text;
+        }
+
         const dailyVerses = [
-            { text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.", reference: "1 Corintios 13:4" },
-            { text: "No me mandes lejos de ti, no me quites tu santo espíritu. Vuélveme el gozo de tu salvación.", reference: "Salmo 51:11-12" },
-            { text: "Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.", reference: "Jeremías 29:11" },
-            { text: "El Señor es mi pastor, nada me faltará. En verdes pastos me hace descansar.", reference: "Salmo 23:1-2" },
-            { text: "Todo lo puedo en Cristo que me fortalece.", reference: "Filipenses 4:13" },
-            { text: "Confía en el Señor de todo corazón, y no en tu propia inteligencia.", reference: "Proverbios 3:5" },
-            { text: "Pues donde esté tu tesoro, allí estará también tu corazón.", reference: "Mateo 6:21" },
-            { text: "El Señor peleará por ustedes; ustedes solo tengan tranquilidad.", reference: "Éxodo 14:14" },
-            { text: "Encomienda al Señor tu camino; confía en él, y él actuará.", reference: "Salmo 37:5" },
-            { text: "El gozo del Señor es tu fortaleza.", reference: "Nehemías 8:10" },
-            { text: "Bendeciré al Señor en todo tiempo; su alabanza estará siempre en mis labios.", reference: "Salmo 34:1" },
-            { text: "Pero los que esperan en el Señor renovarán sus fuerzas; levantarán alas como las águilas.", reference: "Isaías 40:31" },
-            { text: "Gracias sean dadas a Dios, que nos da la victoria por medio de nuestro Señor Jesucristo.", reference: "1 Corintios 15:57" },
-            { text: "El Señor es mi luz y mi salvación; ¿de quién temeré?", reference: "Salmo 27:1" },
-            { text: "Si Dios está por nosotros, ¿quién estará contra nosotros?", reference: "Romanos 8:31" },
-            { text: "Porque el salario del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús.", reference: "Romanos 6:23" },
-            { text: "Vengan a mí todos los que están cansados y agobiados, y yo les daré descanso.", reference: "Mateo 11:28" },
-            { text: "Dios es nuestro amparo y nuestra fortaleza, nuestra ayuda segura en momentos de angustia.", reference: "Salmo 46:1" },
-            { text: "Porque somos hechura de Dios, creados en Cristo Jesús para buenas obras.", reference: "Efesios 2:10" },
-            { text: "No te preocupes por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias.", reference: "Filipenses 4:6" },
-            { text: "El Señor es bueno; es su refugio en el día de la angustia, y protege a los que en él confían.", reference: "Nahúm 1:7" },
-            { text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree no se pierda, mas tenga vida eterna.", reference: "Juan 3:16" },
-            { text: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios.", reference: "Isaías 41:10" },
-            { text: "Buscad primero el reino de Dios y su justicia, y todas estas cosas os serán añadidas.", reference: "Mateo 6:33" },
-            { text: "Grande es el Señor y digno de toda alabanza; su grandeza es insondable.", reference: "Salmo 145:3" },
-            { text: "El amor nunca deja de ser. Las profecías desaparecerán, los dones de lenguas cesarán, el conocimiento pasará.", reference: "1 Corintios 13:8" },
-            { text: "Porque el Espíritu que Dios nos ha dado no nos hace tímidos, sino que nos da poder, amor y dominio propio.", reference: "2 Timoteo 1:7" },
-            { text: "En paz me acuesto y enseguida me duermo, porque tú solo, Señor, me haces vivir confiado.", reference: "Salmo 4:8" },
-            { text: "Pero espero en el Señor; esperaré al Dios de mi salvación. El Dios mío me oirá.", reference: "Miqueas 7:7" },
-            { text: "El Señor cumplirá su propósito en mí. Tu amor, Señor, es eterno; no abandones la obra de tus manos.", reference: "Salmo 138:8" },
-            { text: "Cántenle, canten salmos a él; hablen de todas sus maravillas.", reference: "1 Crónicas 16:9" }
+            { text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.", text_en: "Love is patient, love is kind. It does not envy, it does not boast, it is not proud.", reference: "1 Corintios 13:4", reference_en: "1 Corinthians 13:4" },
+            { text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito.", text_en: "For God so loved the world that he gave his one and only Son.", reference: "Juan 3:16", reference_en: "John 3:16" },
+            { text: "El Señor es mi pastor, nada me faltará.", text_en: "The Lord is my shepherd, I lack nothing.", reference: "Salmo 23:1", reference_en: "Psalm 23:1" },
+            { text: "Todo lo puedo en Cristo que me fortalece.", text_en: "I can do all things through Christ who strengthens me.", reference: "Filipenses 4:13", reference_en: "Philippians 4:13" },
+            { text: "Confía en el Señor de todo corazón.", text_en: "Trust in the Lord with all your heart.", reference: "Proverbios 3:5", reference_en: "Proverbs 3:5" }
         ];
 
         function getDailyVerse() {
             const today = new Date();
             const dayOfMonth = today.getDate();
-            const month = today.toLocaleString('es-ES', { month: 'long' });
+            const month = today.toLocaleString(AppState.currentLang === 'es' ? 'es-ES' : 'en-US', { month: 'long' });
             const year = today.getFullYear();
             const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
             const verse = dailyVerses[verseIndex];
-            const formattedDate = `${dayOfMonth} de ${month} de ${year}`;
+            const formattedDate = AppState.currentLang === 'es' 
+                ? `${dayOfMonth} de ${month} de ${year}`
+                : `${month} ${dayOfMonth}, ${year}`;
             
             return {
-                ...verse,
+                text: AppState.currentLang === 'es' ? verse.text : verse.text_en,
+                reference: AppState.currentLang === 'es' ? verse.reference : verse.reference_en,
                 date: formattedDate,
                 dayNumber: dayOfMonth
             };
@@ -2179,38 +2406,12 @@
             'reloj': 'Relojes'
         };
 
-        const categoryTitles = {
-            'todos': 'Todas',
-            'accesorios-cabello': 'Accesorios para el cabello',
-            'anillo': 'Anillos',
-            'aritos': 'Aritos',
-            'cartera': 'Carteras',
-            'collar': 'Collares',
-            'lentes-sol': 'Lentes de sol',
-            'otros': 'Otros',
-            'pulsera': 'Pulseras',
-            'reloj': 'Relojes'
-        };
-
         const testimonials = [
-            { name: "María Fernanda L.", text: "El collar que compré para San Valentín fue el regalo perfecto. La calidad es excepcional y llegó en una caja hermosa.", date: "15 Ene 2026", stars: "★★★★★" },
-            { name: "Carlos Mendoza", text: "Excelente servicio. Me ayudaron a elegir algo especial para mi esposa y quedó fascinada. Gracias KLOHE!", date: "12 Ene 2026", stars: "★★★★★" },
-            { name: "Ana Lucía R.", text: "Los aretes son exactamente como se ven en las fotos. Mi novio los eligió y son perfectos.", date: "10 Ene 2026", stars: "★★★★★" },
-            { name: "Diego Hernández", text: "Compré un reloj para regalar y superó mis expectativas. Elegante y romántico.", date: "8 Ene 2026", stars: "★★★★★" },
-            { name: "Sofia Castellanos", text: "La entrega fue rápida y el empaque era divino. Perfecto para regalar en esta temporada.", date: "5 Ene 2026", stars: "★★★★★" },
-            { name: "Juan Pablo G.", text: "Gran variedad de opciones para regalar. Encontré exactamente lo que buscaba.", date: "3 Ene 2026", stars: "★★★★★" },
-            { name: "Laura Michelle", text: "Los collares son divinos! He recibido muchos cumplidos. Ideal para San Valentín.", date: "1 Ene 2026", stars: "★★★★★" },
-            { name: "Roberto Carlos", text: "Atención personalizada y productos de lujo. Mi tienda favorita para regalos especiales.", date: "28 Dic 2025", stars: "★★★★★" },
-            { name: "Daniela Fuentes", text: "La pulsera que compré es hermosa. Detalles delicados y muy romántica.", date: "25 Dic 2025", stars: "★★★★★" },
-            { name: "Andrea Morales", text: "Me encanta que tengan opciones para todos los gustos. Desde lo clásico hasta lo moderno.", date: "22 Dic 2025", stars: "★★★★★" },
-            { name: "Luis Fernando", text: "Compré varios artículos para regalos y quedaron fascinados. Excelente presentación.", date: "20 Dic 2025", stars: "★★★★★" },
-            { name: "Camila Serrano", text: "El anillo es precioso, talla perfecta y brillo excepcional. Mil gracias!", date: "18 Dic 2025", stars: "★★★★★" },
-            { name: "Pedro Antonio", text: "Servicio confiable y productos auténticos. KLOHE es sinónimo de calidad.", date: "15 Dic 2025", stars: "★★★★★" },
-            { name: "Valentina Ruiz", text: "Las carteras son de cuero genuino y excelente terminación. Muy satisfecha.", date: "12 Dic 2025", stars: "★★★★★" },
-            { name: "Gabriel Alejandro", text: "Desde que descubrí KLOHE no compro accesorios en otro lugar. Recomendado!", date: "10 Dic 2025", stars: "★★★★★" }
+            { name: "María Fernanda L.", text: "El collar que compré para San Valentín fue el regalo perfecto. La calidad es excepcional.", text_en: "The necklace I bought for Valentine's was the perfect gift. Exceptional quality.", date: "Jan 15, 2026", stars: "★★★★★" },
+            { name: "Carlos Mendoza", text: "Excelente servicio. Me ayudaron a elegir algo especial para mi esposa.", text_en: "Excellent service. They helped me choose something special for my wife.", date: "Jan 12, 2026", stars: "★★★★★" },
+            { name: "Ana Lucía R.", text: "Los aretes son exactamente como se ven en las fotos. Perfectos.", text_en: "The earrings look exactly like the photos. Perfect.", date: "Jan 10, 2026", stars: "★★★★★" }
         ];
 
-        // Initialize Skeleton Loading
         function renderSkeletons(count = 8) {
             const container = document.getElementById('productsContainer');
             container.innerHTML = '';
@@ -2236,65 +2437,51 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize language
+            switchLanguage(AppState.currentLang);
             displayDailyVerse();
             initTestimonials();
             
-            // Show skeletons initially
             renderSkeletons(8);
             
-            // Simulate products loading (replace with actual data loading)
             if (typeof products !== 'undefined') {
                 AppState.filteredProducts = [...products];
                 
-                // ===== CORRECCIÓN DEL CARRITO =====
-                // Validar que los productos en el carrito existan en el catálogo actual
+                // Validate cart
                 const validBarcodes = new Set(products.map(p => p.barcode));
                 const originalCartLength = AppState.cart.length;
                 
-                // Filtrar solo productos que existen en el catálogo actual
                 AppState.cart = AppState.cart.filter(item => {
                     const exists = validBarcodes.has(item.barcode);
-                    if (!exists) {
-                        console.warn(`Producto fantasma eliminado: ${item.name} (${item.barcode})`);
-                    }
                     return exists;
                 });
                 
-                // Sincronizar datos del carrito con el catálogo actual (precios, stock, nombres)
                 AppState.cart = AppState.cart.map(cartItem => {
                     const freshProduct = products.find(p => p.barcode === cartItem.barcode);
                     if (freshProduct) {
-                        // Si el stock cambió, ajustar la cantidad
                         const newQuantity = Math.min(cartItem.quantity, freshProduct.stock);
-                        return {
-                            ...freshProduct,
-                            quantity: newQuantity
-                        };
+                        return { ...freshProduct, quantity: newQuantity };
                     }
                     return cartItem;
                 });
                 
-                // Si se eliminaron productos, actualizar localStorage y notificar
                 if (AppState.cart.length !== originalCartLength) {
                     localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
                     if (AppState.cart.length === 0) {
-                        showNotification('El carrito se vació porque los productos ya no están disponibles');
+                        showNotification(t('cart_emptied'));
                     } else {
-                        showNotification('Algunos productos ya no están disponibles y fueron removidos');
+                        showNotification(t('removed_products'));
                     }
                 }
-                // ===================================
                 
-                // Small delay to show skeleton animation
                 setTimeout(() => {
                     document.getElementById('productsContainer').innerHTML = '';
                     renderProducts();
                     updateProductsCount();
                     initInfiniteScroll();
-                    updateCart(); // Actualizar vista del carrito con datos validados
+                    updateCart();
                 }, 600);
             } else {
-                // Si products.js no carga, limpiar el carrito para evitar errores
                 AppState.cart = [];
                 localStorage.removeItem('klohe_cart');
                 updateCart();
@@ -2302,16 +2489,14 @@
                 document.getElementById('productsContainer').innerHTML = 
                     '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">' +
                     '<i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>' +
-                    'No pudimos cargar los productos. Por favor, recarga la página.</div>';
+                    'Error loading products</div>';
             }
             
-            // Setup search with debounce
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', debounce((e) => {
                 searchProducts(e.target.value);
             }, 300));
 
-            // Setup menu
             const menuBtn = document.getElementById('menuBtn');
             const menuOverlay = document.getElementById('menuOverlay');
             
@@ -2322,7 +2507,6 @@
             
             menuOverlay.addEventListener('click', toggleMenu);
 
-            // Keyboard accessibility
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeAllModals();
@@ -2335,7 +2519,6 @@
         });
 
         function showNewsletter() {
-            // Check if already shown in this session
             if (sessionStorage.getItem('newsletterShown')) return;
             
             document.getElementById('newsletterPopup').classList.add('active');
@@ -2364,11 +2547,9 @@
             AppState.currentPage = 0;
             AppState.hasMoreProducts = true;
             
-            // Show loading state
             document.getElementById('productsContainer').innerHTML = '';
             renderSkeletons(4);
             
-            // Debounced search execution
             setTimeout(() => {
                 if (AppState.searchTerm === '') {
                     if (AppState.currentFilter === 'todos') {
@@ -2393,9 +2574,9 @@
                 updateProductsCount();
                 
                 if (AppState.searchTerm !== '') {
-                    document.getElementById('categoryTitle').textContent = `Búsqueda: "${term}"`;
+                    document.getElementById('categoryTitle').textContent = t('search_results', {term: term});
                 } else {
-                    document.getElementById('categoryTitle').textContent = categoryTitles[AppState.currentFilter] || AppState.currentFilter;
+                    document.getElementById('categoryTitle').textContent = t(AppState.currentFilter === 'todos' ? 'all' : AppState.currentFilter);
                 }
             }, 300);
         }
@@ -2404,7 +2585,12 @@
             const track = document.getElementById('testimonialTrack');
             const dotsContainer = document.getElementById('carouselDots');
             
-            track.innerHTML = testimonials.map(t => `
+            const currentTestimonials = testimonials.map(t => ({
+                ...t,
+                text: AppState.currentLang === 'es' ? t.text : t.text_en
+            }));
+            
+            track.innerHTML = currentTestimonials.map(t => `
                 <div class="testimonial-slide">
                     <div class="testimonial-card">
                         <div class="testimonial-stars">${t.stars}</div>
@@ -2415,8 +2601,8 @@
                 </div>
             `).join('');
             
-            dotsContainer.innerHTML = testimonials.map((_, i) => 
-                `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})" role="button" tabindex="0" aria-label="Ver testimonio ${i + 1}"></div>`
+            dotsContainer.innerHTML = currentTestimonials.map((_, i) => 
+                `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})" role="button" tabindex="0" aria-label="Testimonial ${i + 1}"></div>`
             ).join('');
             
             updateCarousel();
@@ -2446,12 +2632,11 @@
             updateCarousel();
         }
 
-        // Auto-advance testimonials
         setInterval(nextTestimonial, 5000);
 
         function submitComment(e) {
             e.preventDefault();
-            showNotification('¡Gracias por tu comentario!');
+            showNotification(t('thanks_comment'));
             e.target.reset();
         }
 
@@ -2491,9 +2676,8 @@
                 btnElement.classList.add('active');
             }
             
-            document.getElementById('categoryTitle').textContent = categoryTitles[category] || category;
+            document.getElementById('categoryTitle').textContent = t(category === 'todos' ? 'all' : category);
             
-            // Show skeletons while filtering
             document.getElementById('productsContainer').innerHTML = '';
             renderSkeletons(4);
             
@@ -2505,11 +2689,6 @@
                     if (targetCategory) {
                         AppState.filteredProducts = products.filter(product => 
                             product.category === targetCategory
-                        );
-                    } else {
-                        AppState.filteredProducts = products.filter(product => 
-                            product.name.toLowerCase().includes(category.toLowerCase()) ||
-                            product.category.toLowerCase().includes(category.toLowerCase())
                         );
                     }
                 }
@@ -2528,7 +2707,7 @@
             const productsToShow = AppState.filteredProducts.slice(start, end);
             
             if (productsToShow.length === 0 && AppState.currentPage === 0) {
-                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">No se encontraron productos</div>';
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">No products found</div>';
                 AppState.hasMoreProducts = false;
                 return;
             }
@@ -2541,7 +2720,6 @@
             AppState.hasMoreProducts = end < AppState.filteredProducts.length;
             updateProductsCount();
             
-            // Hide spinner if no more products
             if (!AppState.hasMoreProducts) {
                 document.getElementById('loadingSpinner').style.display = 'none';
             }
@@ -2556,7 +2734,6 @@
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             
-            // Create placeholder SVG for blur-up effect
             const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
@@ -2567,24 +2744,23 @@
                          src="${placeholderSvg}"
                          loading="lazy"
                          onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
-                    <span class="stock-badge">${product.stock} disp.</span>
+                    <span class="stock-badge">${product.stock} ${t('available').substring(0, 4)}.</span>
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">${product.name}</h3>
-                    <p class="product-barcode">COD: ${product.barcode}</p>
+                    <p class="product-barcode">${t('code')}: ${product.barcode}</p>
                     <div class="product-row">
                         <span class="product-price">$${product.price.toFixed(2)}</span>
-                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${realIndex})" title="Vista rápida" aria-label="Vista rápida de ${product.name}">
+                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${realIndex})" title="${t('quick_view')}" aria-label="${t('quick_view')} ${product.name}">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
-                    <button class="btn-add-cart" onclick="addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''} aria-label="${hasStock ? 'Agregar al carrito' : 'Agotado'}">
-                        ${hasStock ? 'Agregar al carrito' : 'Agotado'}
+                    <button class="btn-add-cart" onclick="addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''} aria-label="${hasStock ? t('add_to_cart') : t('sold_out')}">
+                        ${hasStock ? t('add_to_cart') : t('sold_out')}
                     </button>
                 </div>
             `;
             
-            // Observe the image for lazy loading
             const img = card.querySelector('img[data-src]');
             if (img) {
                 imageObserver.observe(img);
@@ -2599,7 +2775,6 @@
             AppState.isLoading = true;
             document.getElementById('loadingSpinner').style.display = 'flex';
             
-            // Simulate network delay for smoother UX
             setTimeout(() => {
                 AppState.currentPage++;
                 renderProducts();
@@ -2614,8 +2789,8 @@
         function updateProductsCount() {
             const shown = Math.min((AppState.currentPage + 1) * CONFIG.productsPerPage, AppState.filteredProducts.length);
             const total = AppState.filteredProducts.length;
-            document.getElementById('productsCount').textContent = 
-                `Mostrando ${shown} de ${total} productos`;
+            const countElement = document.getElementById('productsCount');
+            countElement.textContent = t('showing_products', {shown: shown, total: total});
         }
 
         let currentPreviewIndex = null;
@@ -2631,21 +2806,21 @@
             
             document.getElementById('previewImage').alt = product.name;
             document.getElementById('previewName').textContent = product.name;
-            document.getElementById('previewBarcode').textContent = `CÓDIGO: ${product.barcode}`;
+            document.getElementById('previewBarcode').textContent = `${t('code')}: ${product.barcode}`;
             document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
-            document.getElementById('previewStock').textContent = `${product.stock} unidades disponibles`;
+            document.getElementById('previewStock').textContent = `${product.stock} ${t('units_available')}`;
             
             const addBtn = document.getElementById('previewAddBtn');
             if (product.stock > 0) {
                 addBtn.disabled = false;
-                addBtn.textContent = 'Agregar al carrito';
+                addBtn.textContent = t('add_to_cart');
                 addBtn.onclick = () => {
                     addToCart(index);
                     closePreview();
                 };
             } else {
                 addBtn.disabled = true;
-                addBtn.textContent = 'Agotado';
+                addBtn.textContent = t('sold_out');
             }
             
             document.getElementById('previewModal').classList.add('active');
@@ -2653,7 +2828,6 @@
         }
 
         function closePreview(e) {
-            // Only close if clicking the backdrop, not the content
             if (e && e.target !== e.currentTarget) return;
             
             document.getElementById('previewModal').classList.remove('active');
@@ -2679,7 +2853,7 @@
             const product = products[index];
             
             if (product.stock <= 0) {
-                showNotification('Sin stock disponible', 'error');
+                showNotification(t('no_stock'), 'error');
                 return;
             }
 
@@ -2689,7 +2863,7 @@
                 if (existingItem.quantity < product.stock) {
                     existingItem.quantity++;
                 } else {
-                    showNotification('Stock máximo alcanzado', 'error');
+                    showNotification(t('max_stock'), 'error');
                     return;
                 }
             } else {
@@ -2697,7 +2871,7 @@
             }
 
             updateCart();
-            showNotification('Producto agregado al carrito');
+            showNotification(t('product_added'));
         }
 
         function removeFromCart(barcode) {
@@ -2706,11 +2880,11 @@
         }
 
         function clearCart() {
-            if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
+            if (confirm(t('empty_cart_btn') + '?')) {
                 AppState.cart = [];
                 localStorage.removeItem('klohe_cart');
                 updateCart();
-                showNotification('Carrito vaciado');
+                showNotification(t('cart_cleared'));
             }
         }
 
@@ -2723,18 +2897,16 @@
             const summary = document.getElementById('cartSummary');
             const clearBtn = document.getElementById('clearCartBtn');
 
-            // Save to localStorage
             localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
 
             const totalItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
             cartBadge.textContent = totalItems;
             cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
 
-            // Show/hide clear button
             clearBtn.style.display = AppState.cart.length > 0 ? 'block' : 'none';
 
             if (AppState.cart.length === 0) {
-                cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>';
+                cartItems.innerHTML = `<div class="cart-empty">${t('empty_cart')}</div>`;
                 summary.style.display = 'none';
                 whatsappBtn.style.display = 'none';
                 document.getElementById('cartTotal').textContent = '$0.00';
@@ -2757,10 +2929,10 @@
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
-                            <p class="cart-item-code">COD: ${item.barcode}</p>
+                            <p class="cart-item-code">${t('code')}: ${item.barcode}</p>
                             <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
                         </div>
-                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name}">
+                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Remove ${item.name}">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -2776,12 +2948,13 @@
             whatsappBtn.style.display = 'flex';
             
             const message = AppState.cart.map(item => 
-                `• ${item.name} (COD: ${item.barcode}) - Cant: ${item.quantity}`
+                `• ${item.name} (${t('code')}: ${item.barcode}) - Qty: ${item.quantity}`
             ).join('%0A');
             
-            const shippingText = AppState.shippingEnabled ? '%0A%0AEnvío a todo el país: $3.75' : '';
+            const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';
+            const greeting = AppState.currentLang === 'es' ? '¡Hola! Quiero comprar:' : 'Hello! I want to buy:';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text=¡Hola! Quiero comprar:%0A%0A${message}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text=${greeting}%0A%0A${message}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
         }
 
         function toggleCart() {
@@ -2797,7 +2970,7 @@
                 modal.classList.add('active');
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                updateCart(); // Refresh cart display
+                updateCart();
             }
         }
 
@@ -2812,7 +2985,6 @@
             }, 2500);
         }
 
-        // Handle resize
         window.addEventListener('resize', debounce(() => {
             if (window.innerWidth > 768) {
                 const menu = document.getElementById('categoriesMenu');
@@ -2829,7 +3001,6 @@
             }
         }, 250));
 
-        // Prevent zoom on double tap for mobile
         let lastTouchEnd = 0;
         document.addEventListener('touchend', (e) => {
             const now = Date.now();

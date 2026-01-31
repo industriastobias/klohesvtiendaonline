@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KLOHE - Valentine's Day Collection</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
@@ -45,110 +45,6 @@
             color: var(--negro-suave);
             line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        /* SKELETON LOADING STYLES */
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .skeleton {
-            background: linear-gradient(90deg, var(--rosa-nude) 25%, var(--rosa-suave) 50%, var(--rosa-nude) 75%);
-            background-size: 1000px 100%;
-            animation: shimmer 2s infinite linear;
-            border-radius: 4px;
-        }
-
-        .skeleton-text {
-            height: 1em;
-            margin-bottom: 0.5rem;
-            border-radius: 2px;
-        }
-
-        .skeleton-image {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .product-card.loading .product-info {
-            pointer-events: none;
-        }
-
-        .product-card.loading .product-name {
-            width: 80%;
-            height: 1.2rem;
-            background: var(--rosa-nude);
-            border-radius: 2px;
-        }
-
-        .product-card.loading .product-barcode {
-            width: 40%;
-            height: 0.75rem;
-            background: var(--rosa-nude);
-            border-radius: 2px;
-        }
-
-        .product-card.loading .product-price {
-            width: 30%;
-            height: 1.2rem;
-            background: var(--rosa-nude);
-            border-radius: 2px;
-        }
-
-        /* LAZY LOADING STYLES */
-        .blur-up {
-            filter: blur(10px);
-            transition: filter 0.3s ease-out, opacity 0.3s ease-out;
-            opacity: 0;
-        }
-
-        .blur-up.loaded {
-            filter: blur(0);
-            opacity: 1;
-        }
-
-        /* Infinite Scroll Loading Indicator */
-        .loading-spinner {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 3rem 0;
-            gap: 0.5rem;
-            color: var(--bordo);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--rosa-suave);
-            border-top-color: var(--bordo);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* SENTINEL for Infinite Scroll */
-        .scroll-sentinel {
-            height: 20px;
-            margin: 2rem 0;
-            grid-column: 1 / -1;
-            visibility: hidden;
         }
 
         header {
@@ -213,8 +109,8 @@
         }
 
         .social-btn {
-            width: 44px;
-            height: 44px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             border: 1px solid var(--rosa-medio);
             display: flex;
@@ -222,7 +118,7 @@
             justify-content: center;
             text-decoration: none;
             color: var(--rosa-oscuro);
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             background: transparent;
         }
@@ -244,8 +140,8 @@
             gap: 5px;
             z-index: 2000;
             position: relative;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             align-items: center;
             justify-content: center;
         }
@@ -282,7 +178,6 @@
             transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
             border-right: 2px solid var(--rosa-suave);
-            -webkit-overflow-scrolling: touch;
         }
 
         .categories-menu.active {
@@ -318,7 +213,6 @@
             font-weight: 400;
             letter-spacing: 1px;
             text-transform: uppercase;
-            min-height: 44px;
         }
 
         .category-btn:hover,
@@ -337,8 +231,8 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--bordo);
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -350,8 +244,8 @@
             font-size: 1.1rem;
             padding: 0.5rem;
             transition: all 0.3s ease;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -373,12 +267,12 @@
             background: var(--bordo);
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
         }
 
@@ -445,6 +339,11 @@
             animation: fadeIn 1s ease-in;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .verse-header {
             display: flex;
             align-items: center;
@@ -506,7 +405,6 @@
             font-size: 0.9rem;
             transition: all 0.3s ease;
             border-radius: 30px;
-            min-height: 44px;
         }
 
         .search-input:focus {
@@ -526,7 +424,6 @@
         .products {
             padding: 3rem 0;
             background: var(--blanco);
-            min-height: 50vh;
         }
 
         .section-header {
@@ -569,7 +466,6 @@
             flex-direction: column;
             border: 1px solid var(--rosa-suave);
             border-radius: 4px;
-            animation: fadeIn 0.5s ease forwards;
         }
 
         .product-card:hover {
@@ -594,7 +490,7 @@
             transition: transform 0.6s ease;
         }
 
-        .product-card:hover .product-image.loaded {
+        .product-card:hover .product-image {
             transform: scale(1.05);
         }
 
@@ -611,7 +507,6 @@
             text-transform: uppercase;
             border: 1px solid var(--rosa-medio);
             border-radius: 20px;
-            z-index: 2;
         }
 
         .product-info {
@@ -659,8 +554,8 @@
         }
 
         .eye-btn {
-            width: 44px;
-            height: 44px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             border: 1px solid var(--rosa-medio);
             background: transparent;
@@ -668,7 +563,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             color: var(--rosa-oscuro);
         }
@@ -693,7 +588,6 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             border-radius: 0 0 4px 4px;
-            min-height: 44px;
         }
 
         .btn-add-cart:hover {
@@ -706,9 +600,31 @@
             cursor: not-allowed;
         }
 
-        /* Remove load more button styles since we use infinite scroll */
         .load-more-container {
-            display: none;
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--rosa-suave);
+        }
+
+        .btn-load-more {
+            padding: 1rem 3rem;
+            background: transparent;
+            color: var(--bordo);
+            border: 1px solid var(--bordo);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 30px;
+        }
+
+        .btn-load-more:hover {
+            background: var(--bordo);
+            color: white;
         }
 
         .testimonials-section {
@@ -814,8 +730,8 @@
         }
 
         .carousel-btn {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             border: 1px solid var(--rosa-medio);
             background: transparent;
@@ -902,7 +818,6 @@
             transition: all 0.3s;
             background: transparent;
             border-radius: 4px;
-            min-height: 44px;
         }
 
         .form-group input:focus,
@@ -931,13 +846,13 @@
             transition: all 0.3s;
             margin-top: 0.5rem;
             border-radius: 30px;
-            min-height: 44px;
         }
 
         .btn-submit:hover {
             background: var(--rosa-viejo);
         }
 
+        /* Modal de Vista Previa - Estilos actualizados */
         .preview-modal {
             display: none;
             position: fixed;
@@ -949,7 +864,7 @@
             z-index: 3000;
             padding: 2rem;
             overflow-y: auto;
-            cursor: pointer;
+            cursor: pointer; /* Indica que es clickeable */
         }
 
         .preview-modal.active {
@@ -970,8 +885,10 @@
             border: 1px solid var(--rosa-suave);
             border-radius: 8px;
             box-shadow: 0 20px 60px rgba(157, 107, 127, 0.2);
-            cursor: default;
+            cursor: default; /* Evita el cursor de pointer en el contenido */
         }
+
+        /* SE ELIMINÓ EL ESTILO .preview-close (la X) */
 
         .preview-image-container {
             aspect-ratio: 1/1;
@@ -980,7 +897,6 @@
             border: 1px solid var(--rosa-suave);
             border-radius: 4px;
             cursor: pointer;
-            position: relative;
         }
 
         .preview-image {
@@ -1050,7 +966,6 @@
             letter-spacing: 2px;
             width: fit-content;
             border-radius: 30px;
-            min-height: 44px;
         }
 
         .preview-add-btn:hover {
@@ -1076,7 +991,6 @@
             overflow-y: auto;
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-left: 2px solid var(--rosa-suave);
-            -webkit-overflow-scrolling: touch;
         }
 
         .cart-modal.active {
@@ -1108,8 +1022,8 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--bordo);
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1239,8 +1153,8 @@
             font-size: 1rem;
             padding: 0.4rem;
             transition: color 0.3s;
-            width: 44px;
-            height: 44px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1303,7 +1217,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             border-radius: 30px;
-            min-height: 44px;
         }
 
         .btn-whatsapp:hover {
@@ -1452,8 +1365,8 @@
             font-size: 1.2rem;
             cursor: pointer;
             color: var(--rosa-oscuro);
-            width: 44px;
-            height: 44px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1523,8 +1436,8 @@
         }
 
         .social-footer a {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             border: 1px solid rgba(255,255,255,0.3);
             display: flex;
@@ -1575,7 +1488,6 @@
             opacity: 1;
         }
 
-        /* MOBILE OPTIMIZATIONS */
         @media (max-width: 1200px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -1618,24 +1530,10 @@
                 gap: 1rem;
             }
 
-            .product-card {
-                /* Prevent hover effects on mobile for better performance */
-                transform: none !important;
-                box-shadow: none !important;
-            }
-
-            .product-card:active {
-                transform: scale(0.98) !important;
-                transition: transform 0.1s;
-            }
-
             .preview-content {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
                 padding: 1.5rem;
-                margin: 1rem;
-                max-height: 90vh;
-                overflow-y: auto;
             }
 
             .preview-name {
@@ -1661,8 +1559,8 @@
             }
 
             .whatsapp-float {
-                width: 56px;
-                height: 56px;
+                width: 50px;
+                height: 50px;
                 font-size: 1.5rem;
                 bottom: 20px;
                 right: 20px;
@@ -1671,21 +1569,11 @@
             .whatsapp-tooltip {
                 display: none;
             }
-
-            /* Larger touch targets for mobile */
-            .eye-btn, .btn-add-cart, .carousel-btn {
-                min-height: 48px;
-            }
-
-            .category-btn {
-                padding: 1.2rem 0;
-            }
         }
 
         @media (max-width: 480px) {
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
             }
             
             .daily-verse-container {
@@ -1695,58 +1583,10 @@
             .preview-content {
                 padding: 1rem;
             }
-
-            .product-info {
-                padding: 1rem;
-            }
-
-            .product-name {
-                font-size: 1rem;
-            }
-
-            .product-price {
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Touch device optimizations */
-        @media (hover: none) and (pointer: coarse) {
-            .product-card:hover {
-                transform: none;
-                box-shadow: none;
-            }
-
-            .product-card:active {
-                transform: scale(0.98);
-            }
-
-            .eye-btn, .social-btn, .cart-icon {
-                min-width: 48px;
-                min-height: 48px;
-            }
-
-            /* Remove hover-based tooltips on touch */
-            .whatsapp-tooltip {
-                display: none !important;
-            }
-        }
-
-        /* Respect reduced motion preferences */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            
-            .skeleton {
-                animation: none;
-                background: var(--rosa-nude);
-            }
         }
 
         @supports (-webkit-touch-callout: none) {
-            .cart-modal, .preview-modal, .categories-menu {
+            .cart-modal, .preview-modal {
                 padding-bottom: env(safe-area-inset-bottom);
             }
         }
@@ -1760,23 +1600,23 @@
                 <a href="#" class="logo">KLOHE</a>
                 <div class="nav-right">
                     <div class="social-header">
-                        <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv" target="_blank" class="social-btn" title="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry" target="_blank" class="social-btn" title="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
                     
-                    <button class="menu-toggle" id="menuBtn" aria-label="Menú" aria-expanded="false" aria-controls="categoriesMenu">
+                    <button class="menu-toggle" id="menuBtn" aria-label="Menú">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
-                    <div class="cart-icon" onclick="toggleCart()" aria-label="Carrito" role="button" tabindex="0">
+                    <div class="cart-icon" onclick="toggleCart()" aria-label="Carrito">
                         <i class="fas fa-shopping-bag"></i>
                         <span class="cart-count" id="cartBadge" style="display: none;">0</span>
                     </div>
@@ -1786,9 +1626,9 @@
     </header>
 
     <div class="menu-overlay" id="menuOverlay"></div>
-    <div class="categories-menu" id="categoriesMenu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
-        <button class="close-menu" onclick="toggleMenu()" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
-        <h3 id="menuTitle">Categorías</h3>
+    <div class="categories-menu" id="categoriesMenu">
+        <button class="close-menu" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+        <h3>Categorías</h3>
         
         <button class="category-btn active" onclick="filterProducts('todos', this)">Todas</button>
         <button class="category-btn" onclick="filterProducts('accesorios-cabello', this)">Accesorios para el cabello</button>
@@ -1820,7 +1660,7 @@
                 
                 <div class="search-container">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar el regalo perfecto..." aria-label="Buscar productos">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar el regalo perfecto..." oninput="searchProducts(this.value)">
                 </div>
             </div>
         </div>
@@ -1833,13 +1673,11 @@
                 <span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span>
             </div>
             <div class="products-grid" id="productsContainer">
-                <!-- Skeleton loading initial state -->
             </div>
-            <!-- Sentinel for infinite scroll -->
-            <div class="scroll-sentinel" id="scrollSentinel"></div>
-            <div class="loading-spinner" id="loadingSpinner" style="display: none;">
-                <div class="spinner"></div>
-                <span>Cargando más productos...</span>
+            <div class="load-more-container" id="loadMoreContainer">
+                <button class="btn-load-more" id="loadMoreBtn" onclick="loadMoreProducts()">
+                    Cargar más productos
+                </button>
             </div>
         </div>
     </section>
@@ -1855,8 +1693,8 @@
                 <div class="testimonial-track" id="testimonialTrack">
                 </div>
                 <div class="carousel-controls">
-                    <button class="carousel-btn" onclick="prevTestimonial()" aria-label="Testimonio anterior"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-btn" onclick="nextTestimonial()" aria-label="Siguiente testimonio"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-btn" onclick="prevTestimonial()"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn" onclick="nextTestimonial()"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="carousel-dots" id="carouselDots"></div>
             </div>
@@ -1865,16 +1703,16 @@
                 <h3>Comparte tu historia</h3>
                 <form class="comment-form" onsubmit="submitComment(event)">
                     <div class="form-group">
-                        <label for="commentName">Nombre</label>
-                        <input type="text" id="commentName" required placeholder="Tu nombre" autocomplete="name">
+                        <label>Nombre</label>
+                        <input type="text" required placeholder="Tu nombre">
                     </div>
                     <div class="form-group">
-                        <label for="commentEmail">Email</label>
-                        <input type="email" id="commentEmail" required placeholder="tu@email.com" autocomplete="email">
+                        <label>Email</label>
+                        <input type="email" required placeholder="tu@email.com">
                     </div>
                     <div class="form-group">
-                        <label for="commentRating">Calificación</label>
-                        <select id="commentRating">
+                        <label>Calificación</label>
+                        <select>
                             <option>⭐⭐⭐⭐⭐ (5 estrellas)</option>
                             <option>⭐⭐⭐⭐ (4 estrellas)</option>
                             <option>⭐⭐⭐ (3 estrellas)</option>
@@ -1883,8 +1721,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="commentText">Tu experiencia</label>
-                        <textarea id="commentText" required placeholder="Cuéntanos sobre tu regalo especial..."></textarea>
+                        <label>Tu experiencia</label>
+                        <textarea required placeholder="Cuéntanos sobre tu regalo especial..."></textarea>
                     </div>
                     <button type="submit" class="btn-submit">Enviar comentario</button>
                 </form>
@@ -1892,10 +1730,12 @@
         </div>
     </section>
 
-    <div class="preview-modal" id="previewModal" onclick="closePreview(event)" role="dialog" aria-modal="true" aria-labelledby="previewName">
-        <div class="preview-content" onclick="event.stopPropagation()">
+    <!-- Modal de Vista Previa - SIN BOTÓN X Y CIERRA AL HACER CLIC EN CUALQUIER LADO -->
+    <div class="preview-modal" id="previewModal" onclick="closePreview()">
+        <div class="preview-content">
+            <!-- SE ELIMINÓ: <button class="preview-close" onclick="closePreview()"><i class="fas fa-times"></i></button> -->
             <div class="preview-image-container">
-                <img src="" alt="" class="preview-image blur-up" id="previewImage" loading="lazy">
+                <img src="" alt="" class="preview-image" id="previewImage">
             </div>
             <div class="preview-details">
                 <h3 class="preview-name" id="previewName"></h3>
@@ -1920,13 +1760,13 @@
                     <h4>Redes Sociales</h4>
                     <p>Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
-                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -1944,14 +1784,14 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
     </a>
 
     <div class="newsletter-overlay" id="newsletterOverlay" onclick="closeNewsletter()"></div>
-    <div class="newsletter-popup" id="newsletterPopup" role="dialog" aria-modal="true">
-        <button class="newsletter-close" onclick="closeNewsletter()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+    <div class="newsletter-popup" id="newsletterPopup">
+        <button class="newsletter-close" onclick="closeNewsletter()"><i class="fas fa-times"></i></button>
         <h3>¡Bienvenido!</h3>
         <p>Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín</p>
         <div class="newsletter-code">KLOHELOVER</div>
@@ -1959,16 +1799,16 @@
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
-    <div class="cart-modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="cart-modal" id="cartModal">
         <div class="cart-header">
-            <h2 id="cartTitle">Tu Carrito</h2>
-            <button class="close-cart" onclick="toggleCart()" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
+            <h2>Tu Carrito</h2>
+            <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
         </div>
         
         <div class="shipping-option">
             <div class="shipping-header">
                 <span class="shipping-title">Envío a todo el país</span>
-                <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()" role="switch" aria-checked="false" tabindex="0"></div>
+                <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()"></div>
             </div>
             <div class="shipping-price" id="shippingPrice" style="display: none;">+$3.75</div>
             <div class="shipping-desc">Entrega en 2-3 días hábiles</div>
@@ -1993,96 +1833,16 @@
             <span>Total:</span>
             <span id="cartTotal">$0.00</span>
         </div>
-        <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank" rel="noopener noreferrer">
+        <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank">
             <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
         </a>
     </div>
 
-    <div class="notification" id="notification" role="status" aria-live="polite">Producto agregado</div>
+    <div class="notification" id="notification">Producto agregado</div>
 
     <script src="products.js"></script>
     
     <script>
-        // Configuration
-        const CONFIG = {
-            productsPerPage: 12, // Reduced for smoother infinite scroll
-            preloadOffset: '200px', // Start loading before reaching bottom
-            imageQuality: {
-                low: 'q_10,e_blur:1000',
-                high: 'q_auto,f_auto'
-            }
-        };
-
-        // State Management
-        const AppState = {
-            currentFilter: 'todos',
-            cart: JSON.parse(localStorage.getItem('klohe_cart')) || [],
-            currentPage: 0,
-            filteredProducts: [],
-            shippingEnabled: false,
-            isLoading: false,
-            hasMoreProducts: true,
-            currentTestimonial: 0,
-            searchTerm: ''
-        };
-
-        // Intersection Observer for Lazy Loading Images
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    const src = img.dataset.src;
-                    
-                    if (src) {
-                        // Create new image to preload
-                        const preloadImg = new Image();
-                        preloadImg.onload = () => {
-                            img.src = src;
-                            img.classList.add('loaded');
-                            img.removeAttribute('data-src');
-                        };
-                        preloadImg.src = src;
-                    }
-                    
-                    imageObserver.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '50px 0px',
-            threshold: 0.01
-        });
-
-        // Intersection Observer for Infinite Scroll
-        let scrollObserver;
-
-        function initInfiniteScroll() {
-            const sentinel = document.getElementById('scrollSentinel');
-            
-            scrollObserver = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting && !AppState.isLoading && AppState.hasMoreProducts) {
-                    loadMoreProducts();
-                }
-            }, {
-                rootMargin: CONFIG.preloadOffset,
-                threshold: 0.1
-            });
-            
-            scrollObserver.observe(sentinel);
-        }
-
-        // Debounce function for search
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
         const dailyVerses = [
             { text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.", reference: "1 Corintios 13:4" },
             { text: "No me mandes lejos de ti, no me quites tu santo espíritu. Vuélveme el gozo de tu salvación.", reference: "Salmo 51:11-12" },
@@ -2140,6 +1900,15 @@
             document.getElementById('verseReference').textContent = `— ${verse.reference}`;
         }
 
+        let currentFilter = 'todos';
+        let cart = [];
+        let currentPage = 0;
+        const productsPerPage = 25;
+        let filteredProducts = [];
+        let shippingEnabled = false;
+        let currentTestimonial = 0;
+        let searchTerm = '';
+
         const categoryMap = {
             'todos': null,
             'accesorios-cabello': 'Accesorios para el cabello',
@@ -2184,63 +1953,13 @@
             { name: "Gabriel Alejandro", text: "Desde que descubrí KLOHE no compro accesorios en otro lugar. Recomendado!", date: "10 Dic 2025", stars: "★★★★★" }
         ];
 
-        // Initialize Skeleton Loading
-        function renderSkeletons(count = 8) {
-            const container = document.getElementById('productsContainer');
-            container.innerHTML = '';
-            
-            for (let i = 0; i < count; i++) {
-                const skeletonCard = document.createElement('div');
-                skeletonCard.className = 'product-card loading';
-                skeletonCard.innerHTML = `
-                    <div class="product-image-container">
-                        <div class="skeleton skeleton-image"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name skeleton-text"></div>
-                        <div class="product-barcode skeleton-text"></div>
-                        <div class="product-row">
-                            <div class="product-price skeleton-text"></div>
-                        </div>
-                        <div class="skeleton" style="height: 44px; width: 100%;"></div>
-                    </div>
-                `;
-                container.appendChild(skeletonCard);
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
             displayDailyVerse();
             initTestimonials();
+            filteredProducts = [...products];
+            renderProducts();
+            updateProductsCount();
             
-            // Show skeletons initially
-            renderSkeletons(8);
-            
-            // Simulate products loading (replace with actual data loading)
-            if (typeof products !== 'undefined') {
-                AppState.filteredProducts = [...products];
-                // Small delay to show skeleton animation
-                setTimeout(() => {
-                    document.getElementById('productsContainer').innerHTML = '';
-                    renderProducts();
-                    updateProductsCount();
-                    initInfiniteScroll();
-                }, 600);
-            } else {
-                // If products.js fails to load
-                document.getElementById('productsContainer').innerHTML = 
-                    '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">' +
-                    '<i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>' +
-                    'No pudimos cargar los productos. Por favor, recarga la página.</div>';
-            }
-            
-            // Setup search with debounce
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', debounce((e) => {
-                searchProducts(e.target.value);
-            }, 300));
-
-            // Setup menu
             const menuBtn = document.getElementById('menuBtn');
             const menuOverlay = document.getElementById('menuOverlay');
             
@@ -2251,28 +1970,14 @@
             
             menuOverlay.addEventListener('click', toggleMenu);
 
-            // Keyboard accessibility
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeAllModals();
-                }
-            });
-
-            // Restore cart from localStorage
-            updateCart();
-
             setTimeout(() => {
                 showNewsletter();
             }, 5000);
         });
 
         function showNewsletter() {
-            // Check if already shown in this session
-            if (sessionStorage.getItem('newsletterShown')) return;
-            
             document.getElementById('newsletterPopup').classList.add('active');
             document.getElementById('newsletterOverlay').classList.add('active');
-            sessionStorage.setItem('newsletterShown', 'true');
         }
 
         function closeNewsletter() {
@@ -2280,56 +1985,41 @@
             document.getElementById('newsletterOverlay').classList.remove('active');
         }
 
-        function closeAllModals() {
-            const menu = document.getElementById('categoriesMenu');
-            const cart = document.getElementById('cartModal');
-            const preview = document.getElementById('previewModal');
-            
-            if (menu.classList.contains('active')) toggleMenu();
-            if (cart.classList.contains('active')) toggleCart();
-            if (preview.classList.contains('active')) closePreview();
-            if (document.getElementById('newsletterPopup').classList.contains('active')) closeNewsletter();
-        }
-
         function searchProducts(term) {
-            AppState.searchTerm = term.toLowerCase().trim();
-            AppState.currentPage = 0;
-            AppState.hasMoreProducts = true;
+            searchTerm = term.toLowerCase().trim();
+            currentPage = 0;
             
-            // Show loading state
-            document.getElementById('productsContainer').innerHTML = '';
-            renderSkeletons(4);
-            
-            // Debounced search execution
-            setTimeout(() => {
-                if (AppState.searchTerm === '') {
-                    if (AppState.currentFilter === 'todos') {
-                        AppState.filteredProducts = [...products];
+            if (searchTerm === '') {
+                if (currentFilter === 'todos') {
+                    filteredProducts = [...products];
+                } else {
+                    const targetCategory = categoryMap[currentFilter];
+                    if (targetCategory) {
+                        filteredProducts = products.filter(product => 
+                            product.category === targetCategory
+                        );
                     } else {
-                        const targetCategory = categoryMap[AppState.currentFilter];
-                        if (targetCategory) {
-                            AppState.filteredProducts = products.filter(product => 
-                                product.category === targetCategory
-                            );
-                        }
+                        filteredProducts = products.filter(product => 
+                            product.name.toLowerCase().includes(currentFilter)
+                        );
                     }
-                } else {
-                    AppState.filteredProducts = products.filter(product => 
-                        product.name.toLowerCase().includes(AppState.searchTerm) || 
-                        product.barcode.toLowerCase().includes(AppState.searchTerm)
-                    );
                 }
-                
-                document.getElementById('productsContainer').innerHTML = '';
-                renderProducts();
-                updateProductsCount();
-                
-                if (AppState.searchTerm !== '') {
-                    document.getElementById('categoryTitle').textContent = `Búsqueda: "${term}"`;
-                } else {
-                    document.getElementById('categoryTitle').textContent = categoryTitles[AppState.currentFilter] || AppState.currentFilter;
-                }
-            }, 300);
+            } else {
+                filteredProducts = products.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm) || 
+                    product.barcode.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            document.getElementById('productsContainer').innerHTML = '';
+            renderProducts();
+            updateProductsCount();
+            
+            if (searchTerm !== '') {
+                document.getElementById('categoryTitle').textContent = `Búsqueda: "${term}"`;
+            } else {
+                document.getElementById('categoryTitle').textContent = categoryTitles[currentFilter] || currentFilter;
+            }
         }
 
         function initTestimonials() {
@@ -2348,7 +2038,7 @@
             `).join('');
             
             dotsContainer.innerHTML = testimonials.map((_, i) => 
-                `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})" role="button" tabindex="0" aria-label="Ver testimonio ${i + 1}"></div>`
+                `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})"></div>`
             ).join('');
             
             updateCarousel();
@@ -2356,29 +2046,28 @@
 
         function updateCarousel() {
             const track = document.getElementById('testimonialTrack');
-            track.style.transform = `translateX(-${AppState.currentTestimonial * 100}%)`;
+            track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
             
             document.querySelectorAll('.dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === AppState.currentTestimonial);
+                dot.classList.toggle('active', i === currentTestimonial);
             });
         }
 
         function nextTestimonial() {
-            AppState.currentTestimonial = (AppState.currentTestimonial + 1) % testimonials.length;
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
             updateCarousel();
         }
 
         function prevTestimonial() {
-            AppState.currentTestimonial = (AppState.currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
             updateCarousel();
         }
 
         function goToTestimonial(index) {
-            AppState.currentTestimonial = index;
+            currentTestimonial = index;
             updateCarousel();
         }
 
-        // Auto-advance testimonials
         setInterval(nextTestimonial, 5000);
 
         function submitComment(e) {
@@ -2398,22 +2087,19 @@
                 menu.classList.remove('active');
                 overlay.classList.remove('active');
                 btn.classList.remove('active');
-                btn.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             } else {
                 menu.classList.add('active');
                 overlay.classList.add('active');
                 btn.classList.add('active');
-                btn.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden';
             }
         }
 
         function filterProducts(category, btnElement) {
-            AppState.currentFilter = category;
-            AppState.currentPage = 0;
-            AppState.searchTerm = '';
-            AppState.hasMoreProducts = true;
+            currentFilter = category;
+            currentPage = 0;
+            searchTerm = '';
             document.getElementById('searchInput').value = '';
             
             document.querySelectorAll('.category-btn').forEach(btn => {
@@ -2425,80 +2111,57 @@
             
             document.getElementById('categoryTitle').textContent = categoryTitles[category] || category;
             
-            // Show skeletons while filtering
-            document.getElementById('productsContainer').innerHTML = '';
-            renderSkeletons(4);
-            
-            setTimeout(() => {
-                if (category === 'todos') {
-                    AppState.filteredProducts = [...products];
+            if (category === 'todos') {
+                filteredProducts = [...products];
+            } else {
+                const targetCategory = categoryMap[category];
+                if (targetCategory) {
+                    filteredProducts = products.filter(product => 
+                        product.category === targetCategory
+                    );
                 } else {
-                    const targetCategory = categoryMap[category];
-                    if (targetCategory) {
-                        AppState.filteredProducts = products.filter(product => 
-                            product.category === targetCategory
-                        );
-                    } else {
-                        AppState.filteredProducts = products.filter(product => 
-                            product.name.toLowerCase().includes(category.toLowerCase()) ||
-                            product.category.toLowerCase().includes(category.toLowerCase())
-                        );
-                    }
+                    filteredProducts = products.filter(product => 
+                        product.name.toLowerCase().includes(category.toLowerCase()) ||
+                        product.category.toLowerCase().includes(category.toLowerCase())
+                    );
                 }
-                
-                document.getElementById('productsContainer').innerHTML = '';
-                renderProducts();
-                updateProductsCount();
-                toggleMenu();
-            }, 300);
+            }
+            
+            document.getElementById('productsContainer').innerHTML = '';
+            renderProducts();
+            updateProductsCount();
+            updateLoadMoreButton();
+            toggleMenu();
         }
 
         function renderProducts() {
             const container = document.getElementById('productsContainer');
-            const start = AppState.currentPage * CONFIG.productsPerPage;
-            const end = start + CONFIG.productsPerPage;
-            const productsToShow = AppState.filteredProducts.slice(start, end);
-            
-            if (productsToShow.length === 0 && AppState.currentPage === 0) {
-                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">No se encontraron productos</div>';
-                AppState.hasMoreProducts = false;
-                return;
-            }
+            const start = currentPage * productsPerPage;
+            const end = start + productsPerPage;
+            const productsToShow = filteredProducts.slice(start, end);
             
             productsToShow.forEach((product, index) => {
                 const card = createProductCard(product, start + index);
                 container.appendChild(card);
             });
             
-            AppState.hasMoreProducts = end < AppState.filteredProducts.length;
-            updateProductsCount();
-            
-            // Hide spinner if no more products
-            if (!AppState.hasMoreProducts) {
-                document.getElementById('loadingSpinner').style.display = 'none';
-            }
+            updateLoadMoreButton();
         }
 
         function createProductCard(product, index) {
             const card = document.createElement('div');
             card.className = 'product-card';
-            card.style.animationDelay = `${index * 0.05}s`;
             
             const imageName = product.barcode;
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
-            
-            // Create placeholder SVG for blur-up effect
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
-                    <img data-src="${imageName}.jpg" 
-                         alt="${product.name}" 
-                         class="product-image blur-up"
-                         src="${placeholderSvg}"
+                    <img src="${imageName}.jpg" alt="${product.name}" 
+                         class="product-image"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                     <span class="stock-badge">${product.stock} disp.</span>
                 </div>
                 <div class="product-info">
@@ -2506,61 +2169,49 @@
                     <p class="product-barcode">COD: ${product.barcode}</p>
                     <div class="product-row">
                         <span class="product-price">$${product.price.toFixed(2)}</span>
-                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${realIndex})" title="Vista rápida" aria-label="Vista rápida de ${product.name}">
+                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${realIndex})" title="Vista rápida">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
-                    <button class="btn-add-cart" onclick="addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''} aria-label="${hasStock ? 'Agregar al carrito' : 'Agotado'}">
+                    <button class="btn-add-cart" onclick="addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''}>
                         ${hasStock ? 'Agregar al carrito' : 'Agotado'}
                     </button>
                 </div>
             `;
             
-            // Observe the image for lazy loading
-            const img = card.querySelector('img[data-src]');
-            if (img) {
-                imageObserver.observe(img);
-            }
-            
             return card;
         }
 
         function loadMoreProducts() {
-            if (AppState.isLoading || !AppState.hasMoreProducts) return;
+            currentPage++;
+            renderProducts();
+            updateProductsCount();
+        }
+
+        function updateLoadMoreButton() {
+            const btn = document.getElementById('loadMoreBtn');
+            const container = document.getElementById('loadMoreContainer');
+            const totalShown = (currentPage + 1) * productsPerPage;
             
-            AppState.isLoading = true;
-            document.getElementById('loadingSpinner').style.display = 'flex';
-            
-            // Simulate network delay for smoother UX
-            setTimeout(() => {
-                AppState.currentPage++;
-                renderProducts();
-                AppState.isLoading = false;
-                
-                if (!AppState.hasMoreProducts) {
-                    document.getElementById('loadingSpinner').style.display = 'none';
-                }
-            }, 400);
+            if (totalShown >= filteredProducts.length) {
+                container.style.display = 'none';
+            } else {
+                container.style.display = 'block';
+                btn.textContent = `Cargar más (${filteredProducts.length - totalShown})`;
+            }
         }
 
         function updateProductsCount() {
-            const shown = Math.min((AppState.currentPage + 1) * CONFIG.productsPerPage, AppState.filteredProducts.length);
-            const total = AppState.filteredProducts.length;
+            const shown = Math.min((currentPage + 1) * productsPerPage, filteredProducts.length);
             document.getElementById('productsCount').textContent = 
-                `Mostrando ${shown} de ${total} productos`;
+                `Mostrando ${shown} de ${filteredProducts.length}`;
         }
-
-        let currentPreviewIndex = null;
 
         function openPreview(index) {
             const product = products[index];
             currentPreviewIndex = index;
             
-            const img = document.getElementById('previewImage');
-            img.src = `${product.barcode}.jpg`;
-            img.classList.remove('loaded');
-            img.onload = () => img.classList.add('loaded');
-            
+            document.getElementById('previewImage').src = `${product.barcode}.jpg`;
             document.getElementById('previewImage').alt = product.name;
             document.getElementById('previewName').textContent = product.name;
             document.getElementById('previewBarcode').textContent = `CÓDIGO: ${product.barcode}`;
@@ -2584,25 +2235,22 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function closePreview(e) {
-            // Only close if clicking the backdrop, not the content
-            if (e && e.target !== e.currentTarget) return;
-            
+        // FUNCIÓN CORREGIDA - CIERRA EL MODAL AL HACER CLIC EN CUALQUIER LADO
+        function closePreview() {
             document.getElementById('previewModal').classList.remove('active');
             document.body.style.overflow = '';
             currentPreviewIndex = null;
         }
 
         function toggleShipping() {
-            AppState.shippingEnabled = !AppState.shippingEnabled;
+            shippingEnabled = !shippingEnabled;
             const toggle = document.getElementById('shippingToggle');
             const price = document.getElementById('shippingPrice');
             const row = document.getElementById('shippingRow');
             
-            toggle.classList.toggle('active', AppState.shippingEnabled);
-            toggle.setAttribute('aria-checked', AppState.shippingEnabled);
-            price.style.display = AppState.shippingEnabled ? 'block' : 'none';
-            row.style.display = AppState.shippingEnabled ? 'flex' : 'none';
+            toggle.classList.toggle('active', shippingEnabled);
+            price.style.display = shippingEnabled ? 'block' : 'none';
+            row.style.display = shippingEnabled ? 'flex' : 'none';
             
             updateCart();
         }
@@ -2615,7 +2263,7 @@
                 return;
             }
 
-            const existingItem = AppState.cart.find(item => item.barcode === product.barcode);
+            const existingItem = cart.find(item => item.barcode === product.barcode);
             
             if (existingItem) {
                 if (existingItem.quantity < product.stock) {
@@ -2625,7 +2273,7 @@
                     return;
                 }
             } else {
-                AppState.cart.push({ ...product, quantity: 1 });
+                cart.push({ ...product, quantity: 1 });
             }
 
             updateCart();
@@ -2633,7 +2281,7 @@
         }
 
         function removeFromCart(barcode) {
-            AppState.cart = AppState.cart.filter(item => item.barcode !== barcode);
+            cart = cart.filter(item => item.barcode !== barcode);
             updateCart();
         }
 
@@ -2645,14 +2293,11 @@
             const whatsappBtn = document.getElementById('whatsappBtn');
             const summary = document.getElementById('cartSummary');
 
-            // Save to localStorage
-            localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
-
-            const totalItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             cartBadge.textContent = totalItems;
             cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
 
-            if (AppState.cart.length === 0) {
+            if (cart.length === 0) {
                 cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>';
                 summary.style.display = 'none';
                 whatsappBtn.style.display = 'none';
@@ -2663,7 +2308,7 @@
             cartItems.innerHTML = '';
             let subtotal = 0;
 
-            AppState.cart.forEach(item => {
+            cart.forEach(item => {
                 const itemTotal = item.price * item.quantity;
                 subtotal += itemTotal;
 
@@ -2671,7 +2316,6 @@
                     <div class="cart-item">
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
-                                 loading="lazy"
                                  onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
@@ -2679,14 +2323,14 @@
                             <p class="cart-item-code">COD: ${item.barcode}</p>
                             <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
                         </div>
-                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name}">
+                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 `;
             });
 
-            const shippingCost = AppState.shippingEnabled ? 3.75 : 0;
+            const shippingCost = shippingEnabled ? 3.75 : 0;
             const total = subtotal + shippingCost;
 
             cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
@@ -2694,11 +2338,11 @@
             summary.style.display = 'block';
             whatsappBtn.style.display = 'flex';
             
-            const message = AppState.cart.map(item => 
+            const message = cart.map(item => 
                 `• ${item.name} (COD: ${item.barcode}) - Cant: ${item.quantity}`
             ).join('%0A');
             
-            const shippingText = AppState.shippingEnabled ? '%0A%0AEnvío a todo el país: $3.75' : '';
+            const shippingText = shippingEnabled ? '%0A%0AEnvío a todo el país: $3.75' : '';
             
             whatsappBtn.href = `https://wa.me/50366711569?text=¡Hola! Quiero comprar:%0A%0A${message}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
         }
@@ -2716,7 +2360,6 @@
                 modal.classList.add('active');
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                updateCart(); // Refresh cart display
             }
         }
 
@@ -2731,8 +2374,7 @@
             }, 2500);
         }
 
-        // Handle resize
-        window.addEventListener('resize', debounce(() => {
+        window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 const menu = document.getElementById('categoriesMenu');
                 const overlay = document.getElementById('menuOverlay');
@@ -2742,21 +2384,10 @@
                     menu.classList.remove('active');
                     overlay.classList.remove('active');
                     btn.classList.remove('active');
-                    btn.setAttribute('aria-expanded', 'false');
                     document.body.style.overflow = '';
                 }
             }
-        }, 250));
-
-        // Prevent zoom on double tap for mobile
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
+        });
     </script>
 
 </body>

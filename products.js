@@ -228,7 +228,7 @@ const products = [
   { name: "SEET DE RELOJ Y PULSERA", price: 14.00, stock: 1, barcode: "01115", category: "Relojes" },
   { name: "RELOJ SET", price: 40.00, stock: 1, barcode: "01112", category: "Relojes" },
   
-  // ANILLOS (9 productos)
+  // ANILLOS (8 productos)
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "02", category: "Anillos" },
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "04", category: "Anillos" },
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "08", category: "Anillos" },
@@ -243,3 +243,55 @@ const products = [
   { name: "CEREZA", price: 5.25, stock: 3, barcode: "122", category: "Otros" },
   { name: "TARJETAS NAVIDEÑAS", price: 0.00, stock: 121, barcode: "154", category: "Otros" }
 ];
+
+// Función para mezclar array (Fisher-Yates)
+function shuffleArray(array) {
+  const newArray = [...array]; // Crear copia para no modificar el original
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
+
+// Crear versión con primeros 25 mezclados de todas las categorías
+const getShuffledProducts = () => {
+  // Mezclar todo el array
+  const allShuffled = shuffleArray(products);
+  
+  // Tomar primeros 25 (que ahora serán aleatorios de todas las categorías)
+  const first25 = allShuffled.slice(0, 25);
+  
+  // El resto de los productos (del 26 en adelante)
+  const rest = allShuffled.slice(25);
+  
+  // Combinar: primeros 25 mezclados + el resto
+  return [...first25, ...rest];
+};
+
+// Uso:
+const productsWithShuffledFirst25 = getShuffledProducts();
+
+// Si quieres mantener el orden original en el resto (después de los primeros 25):
+const getMixedFirst25 = () => {
+  // Mezclar solo para seleccionar los primeros 25
+  const shuffled = shuffleArray(products);
+  const first25 = shuffled.slice(0, 25);
+  
+  // Crear set de códigos de barras de los primeros 25 para filtrar
+  const first25Barcodes = new Set(first25.map(p => p.barcode));
+  
+  // El resto mantiene el orden original, excluyendo los que ya salieron en los primeros 25
+  const rest = products.filter(p => !first25Barcodes.has(p.barcode));
+  
+  return [...first25, ...rest];
+};
+
+// Ejemplo de uso - descomenta la línea que prefieras:
+// const finalProducts = getShuffledProducts(); // Todo mezclado
+const finalProducts = getMixedFirst25(); // Solo primeros 25 mezclados, resto en orden original
+
+console.log("Primeros 25 productos (mezclados):");
+finalProducts.slice(0, 25).forEach((p, i) => {
+  console.log(`${i + 1}. ${p.name} - ${p.category} ($${p.price})`);
+});

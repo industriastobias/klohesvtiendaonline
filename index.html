@@ -29,14 +29,6 @@
             --chocolate: #4A3B3A;
             --negro-suave: #2C2424;
             --dorado: #C9A87C;
-            
-            --gris-fondo: var(--blanco);
-            --gris-suave: var(--rosa-nude);
-            --gris-medio: var(--rosa-suave);
-            --gris-texto: var(--rosa-oscuro);
-            --gris-oscuro: var(--chocolate);
-            --negro: var(--negro-suave);
-            --acento: var(--dorado);
         }
 
         body {
@@ -47,7 +39,6 @@
             overflow-x: hidden;
         }
 
-        /* SKELETON LOADING STYLES */
         @keyframes shimmer {
             0% { background-position: -1000px 0; }
             100% { background-position: 1000px 0; }
@@ -79,32 +70,6 @@
             left: 0;
         }
 
-        .product-card.loading .product-info {
-            pointer-events: none;
-        }
-
-        .product-card.loading .product-name {
-            width: 80%;
-            height: 1.2rem;
-            background: var(--rosa-nude);
-            border-radius: 2px;
-        }
-
-        .product-card.loading .product-barcode {
-            width: 40%;
-            height: 0.75rem;
-            background: var(--rosa-nude);
-            border-radius: 2px;
-        }
-
-        .product-card.loading .product-price {
-            width: 30%;
-            height: 1.2rem;
-            background: var(--rosa-nude);
-            border-radius: 2px;
-        }
-
-        /* LAZY LOADING STYLES */
         .blur-up {
             filter: blur(10px);
             transition: filter 0.3s ease-out, opacity 0.3s ease-out;
@@ -116,7 +81,6 @@
             opacity: 1;
         }
 
-        /* Infinite Scroll Loading Indicator */
         .loading-spinner {
             grid-column: 1 / -1;
             display: flex;
@@ -143,7 +107,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* SENTINEL for Infinite Scroll */
         .scroll-sentinel {
             height: 20px;
             margin: 2rem 0;
@@ -205,49 +168,41 @@
             gap: 1.5rem;
         }
 
-        .social-header {
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
-            margin-right: 0.5rem;
-        }
-
-        /* Language Switcher */
+        /* SINGLE LANGUAGE BUTTON */
         .language-switcher {
             position: relative;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-right: 0.5rem;
         }
 
         .lang-btn {
             background: transparent;
             border: 1px solid var(--rosa-medio);
             color: var(--rosa-oscuro);
-            padding: 0.4rem 0.8rem;
+            padding: 0.5rem 1rem;
             border-radius: 20px;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 1px;
             transition: all 0.3s ease;
             min-height: 36px;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.5rem;
         }
 
         .lang-btn:hover {
             border-color: var(--bordo);
-            color: var(--bordo);
-        }
-
-        .lang-btn.active {
             background: var(--bordo);
             color: white;
-            border-color: var(--bordo);
+            transform: scale(1.05);
+        }
+
+        .social-header {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            margin-right: 0.5rem;
         }
 
         .social-btn {
@@ -742,11 +697,6 @@
             background: var(--rosa-suave);
             color: var(--rosa-oscuro);
             cursor: not-allowed;
-        }
-
-        /* Remove load more button styles since we use infinite scroll */
-        .load-more-container {
-            display: none;
         }
 
         .testimonials-section {
@@ -1403,11 +1353,11 @@
             display: block;
         }
 
-        /* WHATSAPP FLOAT - AHORA A LA IZQUIERDA */
+        /* WHATSAPP FLOAT - LEFT SIDE */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
-            left: 30px; /* Cambiado de right a left */
+            left: 30px;
             width: 60px;
             height: 60px;
             background: var(--bordo);
@@ -1432,7 +1382,7 @@
 
         .whatsapp-tooltip {
             position: absolute;
-            left: 70px; /* Cambiado de right a left */
+            left: 70px;
             background: var(--bordo);
             color: white;
             padding: 0.5rem 1rem;
@@ -1448,7 +1398,7 @@
         .whatsapp-float:hover .whatsapp-tooltip {
             opacity: 1;
             visibility: visible;
-            left: 75px; /* Cambiado de right a left */
+            left: 75px;
         }
 
         .newsletter-popup {
@@ -1637,7 +1587,6 @@
             opacity: 1;
         }
 
-        /* MOBILE OPTIMIZATIONS */
         @media (max-width: 1200px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -1658,13 +1607,9 @@
                 display: none;
             }
             
-            .language-switcher {
-                margin-right: 0.2rem;
-            }
-            
             .lang-btn {
-                padding: 0.3rem 0.6rem;
-                font-size: 0.7rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
             }
 
             .hero {
@@ -1690,7 +1635,6 @@
             }
 
             .product-card {
-                /* Prevent hover effects on mobile for better performance */
                 transform: none !important;
                 box-shadow: none !important;
             }
@@ -1731,20 +1675,18 @@
                 width: 100%;
             }
 
-            /* WhatsApp móvil a la izquierda */
             .whatsapp-float {
                 width: 56px;
                 height: 56px;
                 font-size: 1.5rem;
                 bottom: 20px;
-                left: 20px; /* Cambiado de right a left */
+                left: 20px;
             }
 
             .whatsapp-tooltip {
                 display: none;
             }
 
-            /* Larger touch targets for mobile */
             .eye-btn, .btn-add-cart, .carousel-btn {
                 min-height: 48px;
             }
@@ -1756,7 +1698,7 @@
 
         @media (max-width: 480px) {
             .products-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columceans: repeat(2, 1fr);
                 gap: 0.8rem;
             }
             
@@ -1785,7 +1727,6 @@
             }
         }
 
-        /* Touch device optimizations */
         @media (hover: none) and (pointer: coarse) {
             .product-card:hover {
                 transform: none;
@@ -1801,13 +1742,11 @@
                 min-height: 48px;
             }
 
-            /* Remove hover-based tooltips on touch */
             .whatsapp-tooltip {
                 display: none !important;
             }
         }
 
-        /* Respect reduced motion preferences */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -1835,13 +1774,10 @@
             <nav>
                 <a href="#" class="logo">KLOHE</a>
                 <div class="nav-right">
-                    <!-- Language Switcher -->
+                    <!-- SINGLE LANGUAGE BUTTON -->
                     <div class="language-switcher">
-                        <button class="lang-btn active" onclick="switchLanguage('es')" id="btn-es" title="Español">
-                            <span>🇪🇸</span> ES
-                        </button>
-                        <button class="lang-btn" onclick="switchLanguage('en')" id="btn-en" title="English">
-                            <span>🇺🇸</span> EN
+                        <button class="lang-btn" onclick="toggleLanguage()" id="langBtn" title="Cambiar idioma / Change language">
+                            <i class="fas fa-globe"></i> <span id="currentLang">ES</span>
                         </button>
                     </div>
                     
@@ -1919,9 +1855,7 @@
                 <span class="products-count" id="productsCount" data-i18n="showing_products">Mostrando 0 de 0 productos</span>
             </div>
             <div class="products-grid" id="productsContainer">
-                <!-- Skeleton loading initial state -->
             </div>
-            <!-- Sentinel for infinite scroll -->
             <div class="scroll-sentinel" id="scrollSentinel"></div>
             <div class="loading-spinner" id="loadingSpinner" style="display: none;">
                 <div class="spinner"></div>
@@ -1941,8 +1875,8 @@
                 <div class="testimonial-track" id="testimonialTrack">
                 </div>
                 <div class="carousel-controls">
-                    <button class="carousel-btn" onclick="prevTestimonial()" aria-label="Testimonio anterior"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-btn" onclick="nextTestimonial()" aria-label="Siguiente testimonio"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-btn" onclick="prevTestimonial()" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn" onclick="nextTestimonial()" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="carousel-dots" id="carouselDots"></div>
             </div>
@@ -2030,8 +1964,7 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Float - AHORA A LA IZQUIERDA -->
-    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip" data-i18n="need_help">¿Necesitas ayuda?</span>
     </a>
@@ -2129,7 +2062,7 @@
                 add_to_cart: "Agregar al carrito",
                 sold_out: "Agotado",
                 quick_view: "Vista rápida",
-                available: "disponibles",
+                available: "disp.",
                 code: "COD",
                 contact: "Contacto",
                 location: "San Salvador, El Salvador",
@@ -2161,7 +2094,8 @@
                 product_added: "Producto agregado al carrito",
                 thanks_comment: "¡Gracias por tu comentario!",
                 search_results: "Búsqueda: \"{term}\"",
-                units_available: "unidades disponibles"
+                units_available: "unidades disponibles",
+                lang_switch: "EN"
             },
             en: {
                 categories: "Categories",
@@ -2197,7 +2131,7 @@
                 add_to_cart: "Add to cart",
                 sold_out: "Sold out",
                 quick_view: "Quick view",
-                available: "available",
+                available: "avail.",
                 code: "SKU",
                 contact: "Contact",
                 location: "San Salvador, El Salvador",
@@ -2229,18 +2163,91 @@
                 product_added: "Product added to cart",
                 thanks_comment: "Thank you for your comment!",
                 search_results: "Search: \"{term}\"",
-                units_available: "units available"
+                units_available: "units available",
+                lang_switch: "ES"
             }
         };
+
+        // Verses with both languages
+        const dailyVerses = [
+            { 
+                text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.", 
+                text_en: "Love is patient, love is kind. It does not envy, it does not boast, it is not proud.",
+                reference: "1 Corintios 13:4", 
+                reference_en: "1 Corinthians 13:4" 
+            },
+            { 
+                text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito.", 
+                text_en: "For God so loved the world that he gave his one and only Son.",
+                reference: "Juan 3:16", 
+                reference_en: "John 3:16" 
+            },
+            { 
+                text: "El Señor es mi pastor, nada me faltará.", 
+                text_en: "The Lord is my shepherd, I lack nothing.",
+                reference: "Salmo 23:1", 
+                reference_en: "Psalm 23:1" 
+            },
+            { 
+                text: "Todo lo puedo en Cristo que me fortalece.", 
+                text_en: "I can do all things through Christ who strengthens me.",
+                reference: "Filipenses 4:13", 
+                reference_en: "Philippians 4:13" 
+            },
+            { 
+                text: "Confía en el Señor de todo corazón.", 
+                text_en: "Trust in the Lord with all your heart.",
+                reference: "Proverbios 3:5", 
+                reference_en: "Proverbs 3:5" 
+            },
+            { 
+                text: "El Señor es mi luz y mi salvación; ¿de quién temeré?", 
+                text_en: "The Lord is my light and my salvation—whom shall I fear?",
+                reference: "Salmo 27:1", 
+                reference_en: "Psalm 27:1" 
+            },
+            { 
+                text: "Buscad primero el reino de Dios y su justicia.", 
+                text_en: "Seek first his kingdom and his righteousness.",
+                reference: "Mateo 6:33", 
+                reference_en: "Matthew 6:33" 
+            },
+            { 
+                text: "No temas, porque yo estoy contigo.", 
+                text_en: "So do not fear, for I am with you.",
+                reference: "Isaías 41:10", 
+                reference_en: "Isaiah 41:10" 
+            },
+            { 
+                text: "Dios es nuestro amparo y nuestra fortaleza.", 
+                text_en: "God is our refuge and strength.",
+                reference: "Salmo 46:1", 
+                reference_en: "Psalm 46:1" 
+            },
+            { 
+                text: "El amor nunca deja de ser.", 
+                text_en: "Love never fails.",
+                reference: "1 Corintios 13:8", 
+                reference_en: "1 Corinthians 13:8" 
+            },
+            { 
+                text: "Grande es el Señor y digno de toda alabanza.", 
+                text_en: "Great is the Lord and most worthy of praise.",
+                reference: "Salmo 145:3", 
+                reference_en: "Psalm 145:3" 
+            },
+            { 
+                text: "Vengan a mí todos los que están cansados.", 
+                text_en: "Come to me, all you who are weary.",
+                reference: "Mateo 11:28", 
+                reference_en: "Matthew 11:28" 
+            }
+        ];
 
         // Configuration
         const CONFIG = {
             productsPerPage: 12,
-            preloadOffset: '200px',
-            imageQuality: {
-                low: 'q_10,e_blur:1000',
-                high: 'q_auto,f_auto'
-            }
+            preloadOffset: '200px'
         };
 
         // State Management
@@ -2282,7 +2289,6 @@
             threshold: 0.01
         });
 
-        // Intersection Observer for Infinite Scroll
         let scrollObserver;
 
         function initInfiniteScroll() {
@@ -2300,7 +2306,6 @@
             scrollObserver.observe(sentinel);
         }
 
-        // Debounce function for search
         function debounce(func, wait) {
             let timeout;
             return function executedFunction(...args) {
@@ -2313,43 +2318,6 @@
             };
         }
 
-        // Language Switcher Function
-        function switchLanguage(lang) {
-            AppState.currentLang = lang;
-            localStorage.setItem('klohe_lang', lang);
-            
-            // Update buttons
-            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-            
-            // Update all elements with data-i18n
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    element.innerHTML = translations[lang][key];
-                }
-            });
-            
-            // Update placeholders
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-                const key = element.getAttribute('data-i18n-placeholder');
-                if (translations[lang][key]) {
-                    element.placeholder = translations[lang][key];
-                }
-            });
-            
-            // Update category title if showing all
-            if (AppState.currentFilter === 'todos' && !AppState.searchTerm) {
-                document.getElementById('categoryTitle').textContent = translations[lang].all;
-            }
-            
-            // Update document language
-            document.documentElement.lang = lang;
-            
-            // Refresh cart to update texts
-            updateCart();
-        }
-
         // Get translation helper
         function t(key, replacements = {}) {
             let text = translations[AppState.currentLang][key] || key;
@@ -2359,13 +2327,58 @@
             return text;
         }
 
-        const dailyVerses = [
-            { text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.", text_en: "Love is patient, love is kind. It does not envy, it does not boast, it is not proud.", reference: "1 Corintios 13:4", reference_en: "1 Corinthians 13:4" },
-            { text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito.", text_en: "For God so loved the world that he gave his one and only Son.", reference: "Juan 3:16", reference_en: "John 3:16" },
-            { text: "El Señor es mi pastor, nada me faltará.", text_en: "The Lord is my shepherd, I lack nothing.", reference: "Salmo 23:1", reference_en: "Psalm 23:1" },
-            { text: "Todo lo puedo en Cristo que me fortalece.", text_en: "I can do all things through Christ who strengthens me.", reference: "Filipenses 4:13", reference_en: "Philippians 4:13" },
-            { text: "Confía en el Señor de todo corazón.", text_en: "Trust in the Lord with all your heart.", reference: "Proverbios 3:5", reference_en: "Proverbs 3:5" }
-        ];
+        // Toggle Language Function (Single Button)
+        function toggleLanguage() {
+            const newLang = AppState.currentLang === 'es' ? 'en' : 'es';
+            AppState.currentLang = newLang;
+            localStorage.setItem('klohe_lang', newLang);
+            
+            // Update button text
+            document.getElementById('currentLang').textContent = t('lang_switch');
+            
+            // Update all elements with data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[newLang][key]) {
+                    if (key === 'discount_text') {
+                        element.innerHTML = translations[newLang][key]; // Keep HTML
+                    } else {
+                        element.textContent = translations[newLang][key];
+                    }
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[newLang][key]) {
+                    element.placeholder = translations[newLang][key];
+                }
+            });
+            
+            // Update category title if showing all
+            if (AppState.currentFilter === 'todos' && !AppState.searchTerm) {
+                document.getElementById('categoryTitle').textContent = t('all');
+            }
+            
+            // Update document language
+            document.documentElement.lang = newLang;
+            
+            // Refresh verse
+            displayDailyVerse();
+            
+            // Refresh testimonials (if they have translations)
+            initTestimonials();
+            
+            // Refresh cart
+            updateCart();
+            
+            // Refresh product grid for stock labels
+            document.getElementById('productsContainer').innerHTML = '';
+            AppState.currentPage = 0;
+            renderProducts();
+            updateProductsCount();
+        }
 
         function getDailyVerse() {
             const today = new Date();
@@ -2374,9 +2387,14 @@
             const year = today.getFullYear();
             const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
             const verse = dailyVerses[verseIndex];
-            const formattedDate = AppState.currentLang === 'es' 
-                ? `${dayOfMonth} de ${month} de ${year}`
-                : `${month} ${dayOfMonth}, ${year}`;
+            
+            let formattedDate;
+            if (AppState.currentLang === 'es') {
+                formattedDate = `${dayOfMonth} de ${month} de ${year}`;
+            } else {
+                const daySuffix = (dayOfMonth > 3 && dayOfMonth < 21) || (dayOfMonth % 10 > 3) ? 'th' : ['st','nd','rd'][dayOfMonth % 10 - 1] || 'th';
+                formattedDate = `${month} ${dayOfMonth}${daySuffix}, ${year}`;
+            }
             
             return {
                 text: AppState.currentLang === 'es' ? verse.text : verse.text_en,
@@ -2407,9 +2425,27 @@
         };
 
         const testimonials = [
-            { name: "María Fernanda L.", text: "El collar que compré para San Valentín fue el regalo perfecto. La calidad es excepcional.", text_en: "The necklace I bought for Valentine's was the perfect gift. Exceptional quality.", date: "Jan 15, 2026", stars: "★★★★★" },
-            { name: "Carlos Mendoza", text: "Excelente servicio. Me ayudaron a elegir algo especial para mi esposa.", text_en: "Excellent service. They helped me choose something special for my wife.", date: "Jan 12, 2026", stars: "★★★★★" },
-            { name: "Ana Lucía R.", text: "Los aretes son exactamente como se ven en las fotos. Perfectos.", text_en: "The earrings look exactly like the photos. Perfect.", date: "Jan 10, 2026", stars: "★★★★★" }
+            { 
+                name: "María Fernanda L.", 
+                text: "El collar que compré para San Valentín fue el regalo perfecto. La calidad es excepcional.", 
+                text_en: "The necklace I bought for Valentine's was the perfect gift. Exceptional quality.", 
+                date: "Jan 15, 2026", 
+                stars: "★★★★★" 
+            },
+            { 
+                name: "Carlos Mendoza", 
+                text: "Excelente servicio. Me ayudaron a elegir algo especial para mi esposa.", 
+                text_en: "Excellent service. They helped me choose something special for my wife.", 
+                date: "Jan 12, 2026", 
+                stars: "★★★★★" 
+            },
+            { 
+                name: "Ana Lucía R.", 
+                text: "Los aretes son exactamente como se ven en las fotos. Perfectos.", 
+                text_en: "The earrings look exactly like the photos. Perfect.", 
+                date: "Jan 10, 2026", 
+                stars: "★★★★★" 
+            }
         ];
 
         function renderSkeletons(count = 8) {
@@ -2437,11 +2473,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize language
-            switchLanguage(AppState.currentLang);
+            // Initialize language button
+            document.getElementById('currentLang').textContent = AppState.currentLang === 'es' ? 'EN' : 'ES';
+            
             displayDailyVerse();
             initTestimonials();
-            
             renderSkeletons(8);
             
             if (typeof products !== 'undefined') {
@@ -2451,10 +2487,7 @@
                 const validBarcodes = new Set(products.map(p => p.barcode));
                 const originalCartLength = AppState.cart.length;
                 
-                AppState.cart = AppState.cart.filter(item => {
-                    const exists = validBarcodes.has(item.barcode);
-                    return exists;
-                });
+                AppState.cart = AppState.cart.filter(item => validBarcodes.has(item.barcode));
                 
                 AppState.cart = AppState.cart.map(cartItem => {
                     const freshProduct = products.find(p => p.barcode === cartItem.barcode);
@@ -2488,7 +2521,6 @@
                 
                 document.getElementById('productsContainer').innerHTML = 
                     '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">' +
-                    '<i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>' +
                     'Error loading products</div>';
             }
             
@@ -2744,7 +2776,7 @@
                          src="${placeholderSvg}"
                          loading="lazy"
                          onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
-                    <span class="stock-badge">${product.stock} ${t('available').substring(0, 4)}.</span>
+                    <span class="stock-badge">${product.stock} ${t('available')}</span>
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">${product.name}</h3>
@@ -2948,7 +2980,7 @@
             whatsappBtn.style.display = 'flex';
             
             const message = AppState.cart.map(item => 
-                `• ${item.name} (${t('code')}: ${item.barcode}) - Qty: ${item.quantity}`
+                `• ${item.name} (${t('code')}: ${item.barcode}) - ${AppState.currentLang === 'es' ? 'Cant' : 'Qty'}: ${item.quantity}`
             ).join('%0A');
             
             const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';

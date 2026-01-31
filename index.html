@@ -29,6 +29,14 @@
             --chocolate: #4A3B3A;
             --negro-suave: #2C2424;
             --dorado: #C9A87C;
+            
+            --gris-fondo: var(--blanco);
+            --gris-suave: var(--rosa-nude);
+            --gris-medio: var(--rosa-suave);
+            --gris-texto: var(--rosa-oscuro);
+            --gris-oscuro: var(--chocolate);
+            --negro: var(--negro-suave);
+            --acento: var(--dorado);
         }
 
         body {
@@ -39,6 +47,7 @@
             overflow-x: hidden;
         }
 
+        /* Animaciones y utilidades */
         @keyframes shimmer {
             0% { background-position: -1000px 0; }
             100% { background-position: 1000px 0; }
@@ -93,20 +102,6 @@
             animation: spin 0.8s linear infinite;
         }
 
-        .error-message {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 3rem;
-            color: var(--rosa-oscuro);
-        }
-
-        .error-message i {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            display: block;
-            color: #dc3545;
-        }
-
         .scroll-sentinel {
             height: 20px;
             margin: 2rem 0;
@@ -114,6 +109,7 @@
             visibility: hidden;
         }
 
+        /* Header y Navegación */
         header {
             background: rgba(253, 248, 246, 0.95);
             backdrop-filter: blur(10px);
@@ -165,88 +161,7 @@
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 1rem;
-        }
-
-        .language-switcher {
-            position: relative;
-            margin-right: 0.5rem;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: 1px solid var(--rosa-medio);
-            color: var(--bordo);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            min-height: 44px;
-        }
-
-        .lang-btn:hover {
-            background: var(--bordo);
-            color: white;
-            border-color: var(--bordo);
-        }
-
-        .lang-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 0.5rem;
-            background: var(--blanco);
-            border: 1px solid var(--rosa-suave);
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            z-index: 1001;
-            min-width: 140px;
-        }
-
-        .lang-dropdown.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .lang-option {
-            padding: 0.8rem 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-            color: var(--negro-suave);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .lang-option:hover {
-            background: var(--rosa-nude);
-            color: var(--bordo);
-        }
-
-        .lang-option:first-child {
-            border-radius: 8px 8px 0 0;
-        }
-
-        .lang-option:last-child {
-            border-radius: 0 0 8px 8px;
-        }
-
-        .lang-option.active {
-            color: var(--bordo);
-            font-weight: 600;
-            background: var(--rosa-nude);
+            gap: 1.5rem;
         }
 
         .social-header {
@@ -426,6 +341,7 @@
             font-weight: 600;
         }
 
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--blanco) 0%, var(--rosa-nude) 100%);
             padding: 3rem 0;
@@ -567,6 +483,7 @@
             color: var(--rosa-oscuro);
         }
 
+        /* Productos */
         .products {
             padding: 3rem 0;
             background: var(--blanco);
@@ -750,6 +667,7 @@
             cursor: not-allowed;
         }
 
+        /* Testimonios */
         .testimonials-section {
             background: linear-gradient(to bottom, var(--rosa-nude), var(--blanco));
             padding: 4rem 0;
@@ -977,6 +895,7 @@
             background: var(--rosa-viejo);
         }
 
+        /* Modales */
         .preview-modal {
             display: none;
             position: fixed;
@@ -1296,6 +1215,19 @@
             font-style: italic;
         }
 
+        .cart-error {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         .cart-summary {
             margin-top: 1.5rem;
             padding-top: 1rem;
@@ -1347,6 +1279,23 @@
 
         .btn-whatsapp:hover {
             background: var(--rosa-viejo);
+        }
+
+        .btn-clear-invalid {
+            background: transparent;
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-clear-invalid:hover {
+            background: #dc3545;
+            color: white;
         }
 
         .overlay {
@@ -1409,7 +1358,7 @@
 
         .whatsapp-tooltip {
             position: absolute;
-            left: 70px;
+            right: 70px;
             background: var(--bordo);
             color: white;
             padding: 0.5rem 1rem;
@@ -1422,21 +1371,10 @@
             letter-spacing: 0.5px;
         }
 
-        .whatsapp-tooltip::after {
-            content: '';
-            position: absolute;
-            right: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            border-width: 5px 0 5px 5px;
-            border-style: solid;
-            border-color: transparent transparent transparent var(--bordo);
-        }
-
         .whatsapp-float:hover .whatsapp-tooltip {
             opacity: 1;
             visibility: visible;
-            left: 75px;
+            right: 75px;
         }
 
         .newsletter-popup {
@@ -1650,15 +1588,6 @@
                 display: none;
             }
 
-            .language-switcher {
-                margin-right: 0.2rem;
-            }
-
-            .lang-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
-
             .hero {
                 padding: 2rem 0;
             }
@@ -1725,25 +1654,7 @@
             }
 
             .whatsapp-tooltip {
-                left: 50%;
-                top: 70px;
-                transform: translateX(-50%);
-                right: auto;
-            }
-
-            .whatsapp-tooltip::after {
-                right: auto;
-                left: 50%;
-                top: -5px;
-                transform: translateX(-50%) rotate(-90deg);
-                border-width: 0 5px 5px 5px;
-                border-color: transparent transparent var(--bordo) transparent;
-            }
-
-            .whatsapp-float:hover .whatsapp-tooltip {
-                left: 50%;
-                top: 75px;
-                right: auto;
+                display: none;
             }
         }
 
@@ -1783,6 +1694,10 @@
             .product-card:active {
                 transform: scale(0.98);
             }
+
+            .whatsapp-tooltip {
+                display: none !important;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1807,22 +1722,6 @@
             <nav>
                 <a href="#" class="logo">KLOHE</a>
                 <div class="nav-right">
-                    <!-- Language Switcher -->
-                    <div class="language-switcher">
-                        <button class="lang-btn" onclick="toggleLanguageDropdown()" aria-label="Cambiar idioma">
-                            <i class="fas fa-globe"></i>
-                            <span id="currentLang">ES</span>
-                        </button>
-                        <div class="lang-dropdown" id="langDropdown">
-                            <div class="lang-option active" onclick="changeLanguage('es')" data-lang="es">
-                                <span>🇪🇸</span> Español
-                            </div>
-                            <div class="lang-option" onclick="changeLanguage('en')" data-lang="en">
-                                <span>🇺🇸</span> English
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="social-header">
                         <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
@@ -1869,14 +1768,14 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 id="heroTitle">Colección San Valentín</h1>
-                <p id="heroSubtitle">Regalos que hablan desde el corazón</p>
+                <h1>Colección San Valentín</h1>
+                <p>Regalos que hablan desde el corazón</p>
                 
                 <div class="daily-verse-container" id="dailyVerseContainer">
                     <div class="verse-date" id="verseDate"></div>
                     <div class="verse-header">
                         <i class="fas fa-book-open"></i>
-                        <span id="verseLabel">Versículo de Hoy</span>
+                        <span>Versículo de Hoy</span>
                     </div>
                     <div class="verse-text" id="verseText"></div>
                     <div class="verse-reference" id="verseReference"></div>
@@ -1900,7 +1799,7 @@
             <div class="scroll-sentinel" id="scrollSentinel"></div>
             <div class="loading-spinner" id="loadingSpinner" style="display: none;">
                 <div class="spinner"></div>
-                <span id="loadingText">Cargando más productos...</span>
+                <span>Cargando más productos...</span>
             </div>
         </div>
     </section>
@@ -1908,45 +1807,45 @@
     <section class="testimonials-section">
         <div class="container">
             <div class="testimonials-header">
-                <h2 id="testimonialsTitle">Historias de Amor</h2>
-                <p id="testimonialsSubtitle">Lo que nuestros clientes comparten</p>
+                <h2>Historias de Amor</h2>
+                <p>Lo que nuestros clientes comparten</p>
             </div>
             
             <div class="testimonial-carousel">
                 <div class="testimonial-track" id="testimonialTrack"></div>
                 <div class="carousel-controls">
-                    <button class="carousel-btn" onclick="prevTestimonial()" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-btn" onclick="nextTestimonial()" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-btn" onclick="prevTestimonial()" aria-label="Testimonio anterior"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn" onclick="nextTestimonial()" aria-label="Siguiente testimonio"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="carousel-dots" id="carouselDots"></div>
             </div>
 
             <div class="comment-box">
-                <h3 id="commentTitle">Comparte tu historia</h3>
+                <h3>Comparte tu historia</h3>
                 <form class="comment-form" onsubmit="submitComment(event)">
                     <div class="form-group">
-                        <label for="commentName" id="labelName">Nombre</label>
+                        <label for="commentName">Nombre</label>
                         <input type="text" id="commentName" required placeholder="Tu nombre" autocomplete="name">
                     </div>
                     <div class="form-group">
-                        <label for="commentEmail" id="labelEmail">Email</label>
+                        <label for="commentEmail">Email</label>
                         <input type="email" id="commentEmail" required placeholder="tu@email.com" autocomplete="email">
                     </div>
                     <div class="form-group">
-                        <label for="commentRating" id="labelRating">Calificación</label>
+                        <label for="commentRating">Calificación</label>
                         <select id="commentRating">
-                            <option value="5">⭐⭐⭐⭐⭐ (5 estrellas)</option>
-                            <option value="4">⭐⭐⭐⭐ (4 estrellas)</option>
-                            <option value="3">⭐⭐⭐ (3 estrellas)</option>
-                            <option value="2">⭐⭐ (2 estrellas)</option>
-                            <option value="1">⭐ (1 estrella)</option>
+                            <option>⭐⭐⭐⭐⭐ (5 estrellas)</option>
+                            <option>⭐⭐⭐⭐ (4 estrellas)</option>
+                            <option>⭐⭐⭐ (3 estrellas)</option>
+                            <option>⭐⭐ (2 estrellas)</option>
+                            <option>⭐ (1 estrella)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="commentText" id="labelExperience">Tu experiencia</label>
+                        <label for="commentText">Tu experiencia</label>
                         <textarea id="commentText" required placeholder="Cuéntanos sobre tu regalo especial..."></textarea>
                     </div>
-                    <button type="submit" class="btn-submit" id="btnSubmit">Enviar comentario</button>
+                    <button type="submit" class="btn-submit">Enviar comentario</button>
                 </form>
             </div>
         </div>
@@ -1971,14 +1870,14 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4 id="footerContact">Contacto</h4>
+                    <h4>Contacto</h4>
                     <p>WhatsApp: +503 66711569</p>
                     <p>Email: <a href="mailto:industriastobias@gmail.com">industriastobias@gmail.com</a></p>
-                    <p id="footerLocation">San Salvador, El Salvador</p>
+                    <p>San Salvador, El Salvador</p>
                 </div>
                 <div class="footer-section">
-                    <h4 id="footerSocial">Redes Sociales</h4>
-                    <p id="footerFollow">Síguenos y descubre las últimas novedades</p>
+                    <h4>Redes Sociales</h4>
+                    <p>Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
                         <a href="https://instagram.com/klohesv" target="_blank" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
@@ -1992,243 +1891,212 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4 id="footerHours">🕐 Horarios</h4>
-                    <p id="footerDays">Lunes a Domingo</p>
+                    <h4>🕐 Horarios</h4>
+                    <p>Lunes a Domingo</p>
                     <p>7:00 AM - 10:00 PM</p>
-                    <p id="footerAlways">Siempre abiertos para ti</p>
+                    <p>Siempre abiertos para ti</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 KLOHE. <span id="footerMadeWith">Hecho con ♥ en El Salvador</span></p>
+                <p>&copy; 2026 KLOHE. Hecho con ♥ en El Salvador</p>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-tooltip" id="whatsappTooltip">¿Necesitas ayuda?</span>
+        <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
     </a>
 
     <div class="newsletter-overlay" id="newsletterOverlay" onclick="closeNewsletter()"></div>
     <div class="newsletter-popup" id="newsletterPopup" role="dialog" aria-modal="true">
         <button class="newsletter-close" onclick="closeNewsletter()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
-        <h3 id="newsletterTitle">¡Bienvenido!</h3>
-        <p id="newsletterText">Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín</p>
+        <h3>¡Bienvenido!</h3>
+        <p>Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín</p>
         <div class="newsletter-code">KLOHELOVER</div>
-        <p style="font-size: 0.8rem; color: var(--rosa-oscuro);" id="newsletterCode">Usa este código al momento de pagar</p>
+        <p style="font-size: 0.8rem; color: var(--rosa-oscuro);">Usa este código al momento de pagar</p>
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
     <div class="cart-modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
         <div class="cart-header">
             <h2 id="cartTitle">Tu Carrito</h2>
-            <button class="close-cart" onclick="toggleCart()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+            <button class="close-cart" onclick="toggleCart()" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
         </div>
         
         <div class="shipping-option">
             <div class="shipping-header">
-                <span class="shipping-title" id="shippingTitle">Envío a todo el país</span>
+                <span class="shipping-title">Envío a todo el país</span>
                 <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()" role="switch" aria-checked="false" tabindex="0"></div>
             </div>
             <div class="shipping-price" id="shippingPrice" style="display: none;">+$3.75</div>
-            <div class="shipping-desc" id="shippingDesc">Entrega en 2-3 días hábiles</div>
+            <div class="shipping-desc">Entrega en 2-3 días hábiles</div>
         </div>
 
         <div id="cartItems">
-            <div class="cart-empty" id="emptyCartMsg">Tu carrito está vacío</div>
+            <div class="cart-empty">Tu carrito está vacío</div>
         </div>
         
         <div class="cart-summary" id="cartSummary" style="display: none;">
             <div class="summary-row">
-                <span id="subtotalLabel">Subtotal:</span>
+                <span>Subtotal:</span>
                 <span id="cartSubtotal">$0.00</span>
             </div>
             <div class="summary-row" id="shippingRow" style="display: none;">
-                <span id="shippingLabel">Envío:</span>
+                <span>Envío:</span>
                 <span>$3.75</span>
             </div>
         </div>
         
         <div class="cart-total">
-            <span id="totalLabel">Total:</span>
+            <span>Total:</span>
             <span id="cartTotal">$0.00</span>
         </div>
         <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp"></i> <span id="buyWhatsApp">Comprar por WhatsApp</span>
+            <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
         </a>
     </div>
 
     <div class="notification" id="notification" role="status" aria-live="polite">Producto agregado</div>
 
-    <!-- CARGAR PRODUCTS.JS PRIMERO -->
     <script src="products.js"></script>
     
     <script>
-        // DEBUG: Verificar si products.js cargó
-        console.log('Script iniciado');
-        console.log('¿Products definido?', typeof products !== 'undefined');
-        console.log('¿Es array?', Array.isArray(products));
-        
         // Configuración
         const CONFIG = {
             productsPerPage: 12,
             preloadOffset: '200px',
         };
 
-        // Traducciones
-        const texts = {
-            es: {
-                categories: "Categorías",
-                all: "Todas",
-                hairAccessories: "Accesorios para el cabello",
-                rings: "Anillos",
-                earrings: "Aritos",
-                bags: "Carteras",
-                necklaces: "Collares",
-                sunglasses: "Lentes de sol",
-                others: "Otros",
-                bracelets: "Pulseras",
-                watches: "Relojes",
-                valentineCollection: "Colección San Valentín",
-                giftsFromHeart: "Regalos que hablan desde el corazón",
-                verseOfDay: "Versículo de Hoy",
-                searchPlaceholder: "Buscar el regalo perfecto...",
-                showing: "Mostrando {shown} de {total} productos",
-                loadingMore: "Cargando más productos...",
-                loveStories: "Historias de Amor",
-                whatCustomersShare: "Lo que nuestros clientes comparten",
-                shareYourStory: "Comparte tu historia",
-                name: "Nombre",
-                email: "Email",
-                rating: "Calificación",
-                yourExperience: "Tu experiencia",
-                sendComment: "Enviar comentario",
-                addToCart: "Agregar al carrito",
-                addToCartBtn: "Agregar al carrito",
-                outOfStock: "Agotado",
-                quickView: "Vista rápida",
-                available: "disp.",
-                code: "COD",
-                units: "unid.",
-                contact: "Contacto",
-                location: "San Salvador, El Salvador",
-                socialMedia: "Redes Sociales",
-                followUs: "Síguenos y descubre las últimas novedades",
-                hours: "🕐 Horarios",
-                mondayToSunday: "Lunes a Domingo",
-                alwaysOpen: "Siempre abiertos para ti",
-                madeWithLove: "Hecho con ♥ en El Salvador",
-                needHelp: "¿Necesitas ayuda?",
-                welcome: "¡Bienvenido!",
-                discountText: "Obtén un <strong>5% de descuento</strong> en tu primera compra de San Valentín",
-                useCode: "Usa este código al momento de pagar",
-                yourCart: "Tu Carrito",
-                emptyCart: "Tu carrito está vacío",
-                nationwideShipping: "Envío a todo el país",
-                deliveryTime: "Entrega en 2-3 días hábiles",
-                subtotal: "Subtotal:",
-                shipping: "Envío:",
-                total: "Total:",
-                buyOnWhatsApp: "Comprar por WhatsApp",
-                addedToCart: "Producto agregado al carrito",
-                removed: "Producto eliminado",
-                maxStock: "Stock máximo alcanzado",
-                noStock: "Sin stock disponible",
-                invalidProduct: "Producto no disponible",
-                thankYouComment: "¡Gracias por tu comentario!",
-                searchResults: "Búsqueda: \"{term}\""
-            },
-            en: {
-                categories: "Categories",
-                all: "All",
-                hairAccessories: "Hair Accessories",
-                rings: "Rings",
-                earrings: "Earrings",
-                bags: "Bags",
-                necklaces: "Necklaces",
-                sunglasses: "Sunglasses",
-                others: "Others",
-                bracelets: "Bracelets",
-                watches: "Watches",
-                valentineCollection: "Valentine's Day Collection",
-                giftsFromHeart: "Gifts that speak from the heart",
-                verseOfDay: "Verse of the Day",
-                searchPlaceholder: "Search for the perfect gift...",
-                showing: "Showing {shown} of {total} products",
-                loadingMore: "Loading more products...",
-                loveStories: "Love Stories",
-                whatCustomersShare: "What our customers share",
-                shareYourStory: "Share your story",
-                name: "Name",
-                email: "Email",
-                rating: "Rating",
-                yourExperience: "Your experience",
-                sendComment: "Send comment",
-                addToCart: "Add to cart",
-                addToCartBtn: "Add to cart",
-                outOfStock: "Out of stock",
-                quickView: "Quick view",
-                available: "avail.",
-                code: "CODE",
-                units: "units",
-                contact: "Contact",
-                location: "San Salvador, El Salvador",
-                socialMedia: "Social Media",
-                followUs: "Follow us for the latest updates",
-                hours: "🕐 Hours",
-                mondayToSunday: "Monday to Sunday",
-                alwaysOpen: "Always open for you",
-                madeWithLove: "Made with ♥ in El Salvador",
-                needHelp: "Need help?",
-                welcome: "Welcome!",
-                discountText: "Get <strong>5% off</strong> on your first Valentine's Day purchase",
-                useCode: "Use this code at checkout",
-                yourCart: "Your Cart",
-                emptyCart: "Your cart is empty",
-                nationwideShipping: "Nationwide shipping",
-                deliveryTime: "Delivery in 2-3 business days",
-                subtotal: "Subtotal:",
-                shipping: "Shipping:",
-                total: "Total:",
-                buyOnWhatsApp: "Buy on WhatsApp",
-                addedToCart: "Product added to cart",
-                removed: "Product removed",
-                maxStock: "Maximum stock reached",
-                noStock: "Out of stock",
-                invalidProduct: "Product not available",
-                thankYouComment: "Thank you for your comment!",
-                searchResults: "Search: \"{term}\""
-            }
-        };
-
-        // Estado
+        // Estado global
         const AppState = {
             currentFilter: 'todos',
-            cart: [],
+            cart: [], // Se inicializará después de validar
             currentPage: 0,
             filteredProducts: [],
             shippingEnabled: false,
             isLoading: false,
             hasMoreProducts: true,
             currentTestimonial: 0,
-            searchTerm: '',
-            currentLang: localStorage.getItem('klohe_lang') || 'es'
+            searchTerm: ''
         };
 
-        // Versículos
+        // Intersection Observer para imágenes
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.dataset.src;
+                    if (src) {
+                        const preloadImg = new Image();
+                        preloadImg.onload = () => {
+                            img.src = src;
+                            img.classList.add('loaded');
+                            img.removeAttribute('data-src');
+                        };
+                        preloadImg.src = src;
+                    }
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, { rootMargin: '50px 0px', threshold: 0.01 });
+
+        let scrollObserver;
+
+        function initInfiniteScroll() {
+            const sentinel = document.getElementById('scrollSentinel');
+            scrollObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !AppState.isLoading && AppState.hasMoreProducts) {
+                    loadMoreProducts();
+                }
+            }, { rootMargin: CONFIG.preloadOffset, threshold: 0.1 });
+            scrollObserver.observe(sentinel);
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => { clearTimeout(timeout); func(...args); };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Función clave: Limpiar carrito de items inválidos
+        function validateAndCleanCart() {
+            try {
+                const rawCart = JSON.parse(localStorage.getItem('klohe_cart')) || [];
+                let cleaned = [];
+                let invalidFound = false;
+                
+                // Verificar que products existe
+                if (typeof products === 'undefined' || !Array.isArray(products)) {
+                    console.error('Products no está definido o no es un array');
+                    return [];
+                }
+
+                rawCart.forEach(item => {
+                    // Verificar que el item tiene barcode
+                    if (!item || !item.barcode) {
+                        invalidFound = true;
+                        return;
+                    }
+                    
+                    // Buscar si el producto existe en el catálogo actual
+                    const existsInCatalog = products.some(p => p.barcode === item.barcode);
+                    
+                    if (existsInCatalog) {
+                        cleaned.push(item);
+                    } else {
+                        invalidFound = true;
+                        console.warn(`Producto ${item.barcode} eliminado del catálogo, removiendo del carrito`);
+                    }
+                });
+
+                if (invalidFound) {
+                    localStorage.setItem('klohe_cart', JSON.stringify(cleaned));
+                    if (cleaned.length === 0) {
+                        showNotification('Algunos productos ya no están disponibles y fueron removidos', 'error');
+                    }
+                }
+
+                return cleaned;
+            } catch (e) {
+                console.error('Error al validar carrito:', e);
+                localStorage.removeItem('klohe_cart');
+                return [];
+            }
+        }
+
         const dailyVerses = [
             { text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.", reference: "1 Corintios 13:4" },
-            { text: "Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad.", reference: "Jeremías 29:11" },
+            { text: "Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.", reference: "Jeremías 29:11" },
             { text: "Todo lo puedo en Cristo que me fortalece.", reference: "Filipenses 4:13" },
-            { text: "Confía en el Señor de todo corazón, y no en tu propia inteligencia.", reference: "Proverbios 3:5" }
+            { text: "Confía en el Señor de todo corazón, y no en tu propia inteligencia.", reference: "Proverbios 3:5" },
+            { text: "Pues donde esté tu tesoro, allí estará también tu corazón.", reference: "Mateo 6:21" },
+            { text: "El Señor peleará por ustedes; ustedes solo tengan tranquilidad.", reference: "Éxodo 14:14" },
+            { text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito.", reference: "Juan 3:16" },
+            { text: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios.", reference: "Isaías 41:10" }
         ];
 
-        const dailyVersesEN = [
-            { text: "Love is patient, love is kind. It does not envy, it does not boast, it is not proud.", reference: "1 Corinthians 13:4" },
-            { text: "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you.", reference: "Jeremiah 29:11" },
-            { text: "I can do all this through him who gives me strength.", reference: "Philippians 4:13" },
-            { text: "Trust in the Lord with all your heart and lean not on your own understanding.", reference: "Proverbs 3:5" }
-        ];
+        function getDailyVerse() {
+            const today = new Date();
+            const dayOfMonth = today.getDate();
+            const month = today.toLocaleString('es-ES', { month: 'long' });
+            const year = today.getFullYear();
+            const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
+            return {
+                ...dailyVerses[verseIndex],
+                date: `${dayOfMonth} de ${month} de ${year}`
+            };
+        }
+
+        function displayDailyVerse() {
+            const verse = getDailyVerse();
+            document.getElementById('verseDate').textContent = verse.date;
+            document.getElementById('verseText').textContent = verse.text;
+            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
+        }
 
         const categoryMap = {
             'todos': null,
@@ -2243,298 +2111,121 @@
             'reloj': 'Relojes'
         };
 
+        const categoryTitles = {
+            'todos': 'Todas',
+            'accesorios-cabello': 'Accesorios para el cabello',
+            'anillo': 'Anillos',
+            'aritos': 'Aritos',
+            'cartera': 'Carteras',
+            'collar': 'Collares',
+            'lentes-sol': 'Lentes de sol',
+            'otros': 'Otros',
+            'pulsera': 'Pulseras',
+            'reloj': 'Relojes'
+        };
+
         const testimonials = [
-            { name: "María Fernanda L.", text: "El collar que compré para San Valentín fue el regalo perfecto.", textEN: "The necklace I bought for Valentine's Day was the perfect gift.", date: "15 Ene 2026", stars: "★★★★★" },
-            { name: "Carlos Mendoza", text: "Excelente servicio. Me ayudaron a elegir algo especial para mi esposa.", textEN: "Excellent service. They helped me choose something special for my wife.", date: "12 Ene 2026", stars: "★★★★★" },
-            { name: "Ana Lucía R.", text: "Los aretes son exactamente como se ven en las fotos.", textEN: "The earrings look exactly like the photos.", date: "10 Ene 2026", stars: "★★★★★" }
+            { name: "María Fernanda L.", text: "El collar que compré para San Valentín fue el regalo perfecto.", date: "15 Ene 2026", stars: "★★★★★" },
+            { name: "Carlos Mendoza", text: "Excelente servicio. Me ayudaron a elegir algo especial para mi esposa.", date: "12 Ene 2026", stars: "★★★★★" },
+            { name: "Ana Lucía R.", text: "Los aretes son exactamente como se ven en las fotos.", date: "10 Ene 2026", stars: "★★★★★" }
         ];
 
-        // Funciones de utilidad
-        function t(key, replacements = {}) {
-            let text = texts[AppState.currentLang][key] || key;
-            Object.keys(replacements).forEach(k => {
-                text = text.replace(`{${k}}`, replacements[k]);
-            });
-            return text;
-        }
-
-        function toggleLanguageDropdown() {
-            const dropdown = document.getElementById('langDropdown');
-            dropdown.classList.toggle('active');
-        }
-
-        function changeLanguage(lang) {
-            AppState.currentLang = lang;
-            localStorage.setItem('klohe_lang', lang);
-            
-            document.getElementById('currentLang').textContent = lang.toUpperCase();
-            document.querySelectorAll('.lang-option').forEach(opt => {
-                opt.classList.toggle('active', opt.dataset.lang === lang);
-            });
-            
-            document.getElementById('langDropdown').classList.remove('active');
-            
-            updateAllTexts();
-            
-            if (lang === 'en') {
-                displayVerseEN();
-            } else {
-                displayVerse();
-            }
-        }
-
-        function updateAllTexts() {
-            // Actualizar todos los elementos con data-i18n o IDs específicos
-            const elements = {
-                'menuTitle': 'categories',
-                'heroTitle': 'valentineCollection',
-                'heroSubtitle': 'giftsFromHeart',
-                'verseLabel': 'verseOfDay',
-                'categoryTitle': AppState.currentFilter === 'todos' ? 'all' : AppState.currentFilter,
-                'productsCount': 'showing',
-                'loadingText': 'loadingMore',
-                'testimonialsTitle': 'loveStories',
-                'testimonialsSubtitle': 'whatCustomersShare',
-                'commentTitle': 'shareYourStory',
-                'labelName': 'name',
-                'labelEmail': 'email',
-                'labelRating': 'rating',
-                'labelExperience': 'yourExperience',
-                'btnSubmit': 'sendComment',
-                'previewAddBtn': 'addToCartBtn',
-                'footerContact': 'contact',
-                'footerLocation': 'location',
-                'footerSocial': 'socialMedia',
-                'footerFollow': 'followUs',
-                'footerHours': 'hours',
-                'footerDays': 'mondayToSunday',
-                'footerAlways': 'alwaysOpen',
-                'footerMadeWith': 'madeWithLove',
-                'whatsappTooltip': 'needHelp',
-                'newsletterTitle': 'welcome',
-                'newsletterText': 'discountText',
-                'newsletterCode': 'useCode',
-                'cartTitle': 'yourCart',
-                'emptyCartMsg': 'emptyCart',
-                'shippingTitle': 'nationwideShipping',
-                'shippingDesc': 'deliveryTime',
-                'subtotalLabel': 'subtotal',
-                'shippingLabel': 'shipping',
-                'totalLabel': 'total',
-                'buyWhatsApp': 'buyOnWhatsApp'
-            };
-
-            Object.keys(elements).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    const text = t(elements[id]);
-                    if (id === 'newsletterText' || id === 'previewAddBtn') {
-                        el.innerHTML = text; // Preservar HTML
-                    } else {
-                        el.textContent = text;
-                    }
-                }
-            });
-
-            // Placeholders
-            document.getElementById('searchInput').placeholder = t('searchPlaceholder');
-            document.getElementById('commentName').placeholder = t('name');
-            document.getElementById('commentEmail').placeholder = AppState.currentLang === 'en' ? 'your@email.com' : 'tu@email.com';
-            document.getElementById('commentText').placeholder = t('yourExperience');
-
-            // Botones de categoría
-            const catButtons = document.querySelectorAll('.category-btn');
-            const keys = ['all', 'hairAccessories', 'rings', 'earrings', 'bags', 'necklaces', 'sunglasses', 'others', 'bracelets', 'watches'];
-            catButtons.forEach((btn, idx) => {
-                if (keys[idx]) btn.textContent = t(keys[idx]);
-            });
-
-            updateProductCount();
-        }
-
-        function displayVerse() {
-            const today = new Date();
-            const dayOfMonth = today.getDate();
-            const month = today.toLocaleString('es-ES', { month: 'long' });
-            const year = today.getFullYear();
-            const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
-            const verse = dailyVerses[verseIndex];
-            
-            document.getElementById('verseDate').textContent = `${dayOfMonth} de ${month} de ${year}`;
-            document.getElementById('verseText').textContent = verse.text;
-            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
-        }
-
-        function displayVerseEN() {
-            const today = new Date();
-            const dayOfMonth = today.getDate();
-            const month = today.toLocaleString('en-US', { month: 'long' });
-            const year = today.getFullYear();
-            const verseIndex = (dayOfMonth - 1) % dailyVersesEN.length;
-            const verse = dailyVersesEN[verseIndex];
-            
-            document.getElementById('verseDate').textContent = `${month} ${dayOfMonth}, ${year}`;
-            document.getElementById('verseText').textContent = verse.text;
-            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
-        }
-
-        // Funciones de productos
         function renderSkeletons(count = 8) {
             const container = document.getElementById('productsContainer');
             container.innerHTML = '';
             for (let i = 0; i < count; i++) {
-                const div = document.createElement('div');
-                div.className = 'product-card';
-                div.style.opacity = '0.7';
-                div.innerHTML = `
+                const skeletonCard = document.createElement('div');
+                skeletonCard.className = 'product-card loading';
+                skeletonCard.style.opacity = '0.7';
+                skeletonCard.innerHTML = `
                     <div class="product-image-container">
                         <div class="skeleton" style="width: 100%; height: 100%;"></div>
                     </div>
                     <div class="product-info">
                         <div class="skeleton" style="width: 80%; height: 1.2rem; margin-bottom: 0.5rem;"></div>
                         <div class="skeleton" style="width: 40%; height: 0.75rem; margin-bottom: 0.8rem;"></div>
-                        <div class="skeleton" style="width: 30%; height: 1.2rem; margin-bottom: 1rem;"></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; margin-bottom: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--rosa-suave);">
+                            <div class="skeleton" style="width: 30%; height: 1.2rem;"></div>
+                            <div class="skeleton" style="width: 32px; height: 32px; border-radius: 50%;"></div>
+                        </div>
                         <div class="skeleton" style="height: 44px; width: 100%;"></div>
                     </div>
                 `;
-                container.appendChild(div);
+                container.appendChild(skeletonCard);
             }
         }
 
-        function createProductCard(product, index) {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.style.animationDelay = `${index * 0.05}s`;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar carrito limpio
+            AppState.cart = validateAndCleanCart();
             
-            const hasStock = product.stock > 0;
-            const placeholder = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            displayDailyVerse();
+            initTestimonials();
+            renderSkeletons(8);
             
-            card.innerHTML = `
-                <div class="product-image-container" onclick="openPreview(${index})">
-                    <img data-src="${product.barcode}.jpg" 
-                         alt="${product.name}" 
-                         class="product-image blur-up"
-                         src="${placeholder}"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
-                    <span class="stock-badge">${product.stock} ${t('available')}</span>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">${product.name}</h3>
-                    <p class="product-barcode">${t('code')}: ${product.barcode}</p>
-                    <div class="product-row">
-                        <span class="product-price">$${product.price.toFixed(2)}</span>
-                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${index})" aria-label="${t('quickView')}">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                    <button class="btn-add-cart" onclick="addToCart(${index})" ${!hasStock ? 'disabled' : ''}>
-                        ${hasStock ? t('addToCartBtn') : t('outOfStock')}
-                    </button>
-                </div>
-            `;
-            
-            // Lazy loading
-            const img = card.querySelector('img[data-src]');
-            if (img) {
-                new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const src = img.dataset.src;
-                            const preload = new Image();
-                            preload.onload = () => {
-                                img.src = src;
-                                img.classList.add('loaded');
-                            };
-                            preload.src = src;
-                            img.removeAttribute('data-src');
-                            imageObserver.disconnect();
-                        }
-                    });
-                }, { rootMargin: '50px' }).observe(img);
+            // Esperar a que products.js cargue
+            if (typeof products !== 'undefined' && Array.isArray(products)) {
+                AppState.filteredProducts = [...products];
+                setTimeout(() => {
+                    document.getElementById('productsContainer').innerHTML = '';
+                    renderProducts();
+                    updateProductsCount();
+                    initInfiniteScroll();
+                    updateCart(); // Actualizar carrito con datos validados
+                }, 600);
+            } else {
+                document.getElementById('productsContainer').innerHTML = 
+                    '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">' +
+                    '<i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>' +
+                    'No pudimos cargar los productos. Por favor, recarga la página.</div>';
             }
             
-            return card;
-        }
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', debounce((e) => {
+                searchProducts(e.target.value);
+            }, 300));
 
-        function renderProducts() {
-            console.log('Renderizando productos...', AppState.filteredProducts.length);
-            const container = document.getElementById('productsContainer');
-            const start = AppState.currentPage * CONFIG.productsPerPage;
-            const end = start + CONFIG.productsPerPage;
-            const toShow = AppState.filteredProducts.slice(start, end);
+            const menuBtn = document.getElementById('menuBtn');
+            const menuOverlay = document.getElementById('menuOverlay');
             
-            if (toShow.length === 0 && AppState.currentPage === 0) {
-                container.innerHTML = `<div class="error-message" style="color: var(--rosa-oscuro);">
-                    ${AppState.currentLang === 'en' ? 'No products found' : 'No se encontraron productos'}
-                </div>`;
-                AppState.hasMoreProducts = false;
-                return;
-            }
-            
-            toShow.forEach((product, idx) => {
-                const realIndex = products.indexOf(product);
-                container.appendChild(createProductCard(product, realIndex));
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMenu();
             });
             
-            AppState.hasMoreProducts = end < AppState.filteredProducts.length;
-            updateProductCount();
-            
-            if (!AppState.hasMoreProducts) {
-                document.getElementById('loadingSpinner').style.display = 'none';
-            }
-        }
+            menuOverlay.addEventListener('click', toggleMenu);
 
-        function loadMoreProducts() {
-            if (AppState.isLoading || !AppState.hasMoreProducts) return;
-            
-            AppState.isLoading = true;
-            document.getElementById('loadingSpinner').style.display = 'flex';
-            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeAllModals();
+            });
+
             setTimeout(() => {
-                AppState.currentPage++;
-                renderProducts();
-                AppState.isLoading = false;
-            }, 400);
+                if (!sessionStorage.getItem('newsletterShown')) {
+                    showNewsletter();
+                }
+            }, 5000);
+        });
+
+        function showNewsletter() {
+            document.getElementById('newsletterPopup').classList.add('active');
+            document.getElementById('newsletterOverlay').classList.add('active');
+            sessionStorage.setItem('newsletterShown', 'true');
         }
 
-        function updateProductCount() {
-            const shown = Math.min((AppState.currentPage + 1) * CONFIG.productsPerPage, AppState.filteredProducts.length);
-            const total = AppState.filteredProducts.length;
-            
-            const el = document.getElementById('productsCount');
-            if (el) el.textContent = t('showing', { shown, total });
+        function closeNewsletter() {
+            document.getElementById('newsletterPopup').classList.remove('active');
+            document.getElementById('newsletterOverlay').classList.remove('active');
         }
 
-        function filterProducts(category, btn) {
-            console.log('Filtrando:', category);
-            AppState.currentFilter = category;
-            AppState.currentPage = 0;
-            AppState.searchTerm = '';
-            AppState.hasMoreProducts = true;
+        function closeAllModals() {
+            const menu = document.getElementById('categoriesMenu');
+            const cart = document.getElementById('cartModal');
+            const preview = document.getElementById('previewModal');
             
-            document.getElementById('searchInput').value = '';
-            
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
-            
-            document.getElementById('categoryTitle').textContent = t(category === 'todos' ? 'all' : category);
-            
-            // Filtrar
-            if (category === 'todos') {
-                AppState.filteredProducts = [...products];
-            } else {
-                const catName = categoryMap[category];
-                AppState.filteredProducts = products.filter(p => p.category === catName);
-            }
-            
-            document.getElementById('productsContainer').innerHTML = '';
-            renderSkeletons(4);
-            
-            setTimeout(() => {
-                document.getElementById('productsContainer').innerHTML = '';
-                renderProducts();
-                toggleMenu();
-            }, 300);
+            if (menu.classList.contains('active')) toggleMenu();
+            if (cart.classList.contains('active')) toggleCart();
+            if (preview.classList.contains('active')) closePreview();
+            if (document.getElementById('newsletterPopup').classList.contains('active')) closeNewsletter();
         }
 
         function searchProducts(term) {
@@ -2542,237 +2233,52 @@
             AppState.currentPage = 0;
             AppState.hasMoreProducts = true;
             
-            if (AppState.searchTerm === '') {
-                AppState.filteredProducts = [...products];
-            } else {
-                AppState.filteredProducts = products.filter(p => 
-                    p.name.toLowerCase().includes(AppState.searchTerm) || 
-                    p.barcode.toLowerCase().includes(AppState.searchTerm)
-                );
-            }
-            
             document.getElementById('productsContainer').innerHTML = '';
-            renderProducts();
+            renderSkeletons(4);
             
-            if (AppState.searchTerm) {
-                document.getElementById('categoryTitle').textContent = t('searchResults', { term: AppState.searchTerm });
-            } else {
-                document.getElementById('categoryTitle').textContent = t('all');
-            }
-        }
-
-        // Carrito y otros
-        function addToCart(index) {
-            const product = products[index];
-            if (!product || product.stock <= 0) {
-                showNotification('noStock', true);
-                return;
-            }
-
-            const existing = AppState.cart.find(item => item.barcode === product.barcode);
-            
-            if (existing) {
-                if (existing.quantity < product.stock) {
-                    existing.quantity++;
+            setTimeout(() => {
+                if (AppState.searchTerm === '') {
+                    if (AppState.currentFilter === 'todos') {
+                        AppState.filteredProducts = [...products];
+                    } else {
+                        const targetCategory = categoryMap[AppState.currentFilter];
+                        AppState.filteredProducts = targetCategory 
+                            ? products.filter(p => p.category === targetCategory)
+                            : [...products];
+                    }
                 } else {
-                    showNotification('maxStock', true);
-                    return;
+                    AppState.filteredProducts = products.filter(product => 
+                        product.name.toLowerCase().includes(AppState.searchTerm) || 
+                        product.barcode.toLowerCase().includes(AppState.searchTerm)
+                    );
                 }
-            } else {
-                AppState.cart.push({ 
-                    barcode: product.barcode,
-                    name: product.name,
-                    price: product.price,
-                    quantity: 1 
-                });
-            }
-
-            saveCart();
-            updateCartUI();
-            showNotification('addedToCart');
-        }
-
-        function removeFromCart(barcode) {
-            AppState.cart = AppState.cart.filter(item => item.barcode !== barcode);
-            saveCart();
-            updateCartUI();
-            showNotification('removed');
-        }
-
-        function saveCart() {
-            localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
-        }
-
-        function updateCartUI() {
-            const cartItems = document.getElementById('cartItems');
-            const badge = document.getElementById('cartBadge');
-            const totalEl = document.getElementById('cartTotal');
-            
-            const totalItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
-            badge.textContent = totalItems;
-            badge.style.display = totalItems > 0 ? 'flex' : 'none';
-            
-            if (AppState.cart.length === 0) {
-                cartItems.innerHTML = `<div class="cart-empty">${t('emptyCart')}</div>`;
-                document.getElementById('cartSummary').style.display = 'none';
-                document.getElementById('whatsappBtn').style.display = 'none';
-                totalEl.textContent = '$0.00';
-                return;
-            }
-            
-            let html = '';
-            let subtotal = 0;
-            
-            AppState.cart.forEach(item => {
-                const total = item.price * item.quantity;
-                subtotal += total;
                 
-                html += `
-                    <div class="cart-item">
-                        <div class="cart-item-image">
-                            <img src="${item.barcode}.jpg" alt="${item.name}" 
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3C/svg%3E'">
-                        </div>
-                        <div class="cart-item-details">
-                            <h4>${item.name}</h4>
-                            <p class="cart-item-code">${t('code')}: ${item.barcode}</p>
-                            <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
-                        </div>
-                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-            });
-            
-            cartItems.innerHTML = html;
-            
-            const shipping = AppState.shippingEnabled ? 3.75 : 0;
-            const total = subtotal + shipping;
-            
-            document.getElementById('cartSubtotal').textContent = `$${subtotal.toFixed(2)}`;
-            totalEl.textContent = `$${total.toFixed(2)}`;
-            document.getElementById('cartSummary').style.display = 'block';
-            document.getElementById('whatsappBtn').style.display = 'flex';
-            
-            const msg = AppState.cart.map(item => 
-                `• ${item.name} (${t('code')}: ${item.barcode}) - Qty: ${item.quantity}`
-            ).join('%0A');
-            
-            const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';
-            
-            document.getElementById('whatsappBtn').href = 
-                `https://wa.me/50366711569?text=${AppState.currentLang === 'en' ? 'Hello' : 'Hola'}! ${t('buyOnWhatsApp')}:%0A%0A${msg}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
-        }
-
-        function toggleCart() {
-            const modal = document.getElementById('cartModal');
-            const overlay = document.getElementById('overlay');
-            
-            if (modal.classList.contains('active')) {
-                modal.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            } else {
-                // Limpiar carrito de productos inválidos
-                const validBarcodes = products.map(p => p.barcode);
-                AppState.cart = AppState.cart.filter(item => validBarcodes.includes(item.barcode));
-                saveCart();
-                updateCartUI();
+                document.getElementById('productsContainer').innerHTML = '';
+                renderProducts();
+                updateProductsCount();
                 
-                modal.classList.add('active');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function toggleShipping() {
-            AppState.shippingEnabled = !AppState.shippingEnabled;
-            const toggle = document.getElementById('shippingToggle');
-            toggle.classList.toggle('active');
-            toggle.setAttribute('aria-checked', AppState.shippingEnabled);
-            
-            document.getElementById('shippingPrice').style.display = AppState.shippingEnabled ? 'block' : 'none';
-            document.getElementById('shippingRow').style.display = AppState.shippingEnabled ? 'flex' : 'none';
-            
-            updateCartUI();
-        }
-
-        function openPreview(index) {
-            const product = products[index];
-            currentPreviewIndex = index;
-            
-            document.getElementById('previewImage').src = `${product.barcode}.jpg`;
-            document.getElementById('previewName').textContent = product.name;
-            document.getElementById('previewBarcode').textContent = `${t('code')}: ${product.barcode}`;
-            document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
-            document.getElementById('previewStock').textContent = `${product.stock} ${t('units')} ${t('available')}`;
-            
-            const btn = document.getElementById('previewAddBtn');
-            if (product.stock > 0) {
-                btn.disabled = false;
-                btn.textContent = t('addToCartBtn');
-                btn.onclick = () => { addToCart(index); closePreview(); };
-            } else {
-                btn.disabled = true;
-                btn.textContent = t('outOfStock');
-            }
-            
-            document.getElementById('previewModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePreview(e) {
-            if (e && e.target !== e.currentTarget) return;
-            document.getElementById('previewModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('categoriesMenu');
-            const overlay = document.getElementById('menuOverlay');
-            const btn = document.getElementById('menuBtn');
-            
-            if (menu.classList.contains('active')) {
-                menu.classList.remove('active');
-                overlay.classList.remove('active');
-                btn.classList.remove('active');
-                btn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            } else {
-                menu.classList.add('active');
-                overlay.classList.add('active');
-                btn.classList.add('active');
-                btn.setAttribute('aria-expanded', 'true');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function showNotification(key, isError = false) {
-            const notif = document.getElementById('notification');
-            notif.textContent = t(key);
-            notif.style.background = isError ? '#dc3545' : 'var(--bordo)';
-            notif.classList.add('show');
-            setTimeout(() => notif.classList.remove('show'), 2500);
+                document.getElementById('categoryTitle').textContent = 
+                    AppState.searchTerm !== '' ? `Búsqueda: "${term}"` : (categoryTitles[AppState.currentFilter] || AppState.currentFilter);
+            }, 300);
         }
 
         function initTestimonials() {
             const track = document.getElementById('testimonialTrack');
-            const dots = document.getElementById('carouselDots');
+            const dotsContainer = document.getElementById('carouselDots');
             
-            track.innerHTML = testimonials.map((t, i) => `
+            track.innerHTML = testimonials.map(t => `
                 <div class="testimonial-slide">
                     <div class="testimonial-card">
                         <div class="testimonial-stars">${t.stars}</div>
-                        <p class="testimonial-text">"${AppState.currentLang === 'en' && t.textEN ? t.textEN : t.text}"</p>
+                        <p class="testimonial-text">"${t.text}"</p>
                         <div class="testimonial-author">${t.name}</div>
                         <div class="testimonial-date">${t.date}</div>
                     </div>
                 </div>
             `).join('');
             
-            dots.innerHTML = testimonials.map((_, i) => 
-                `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})"></div>`
+            dotsContainer.innerHTML = testimonials.map((_, i) => 
+                `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})" role="button" tabindex="0" aria-label="Ver testimonio ${i + 1}"></div>`
             ).join('');
             
             updateCarousel();
@@ -2781,7 +2287,6 @@
         function updateCarousel() {
             const track = document.getElementById('testimonialTrack');
             track.style.transform = `translateX(-${AppState.currentTestimonial * 100}%)`;
-            
             document.querySelectorAll('.dot').forEach((dot, i) => {
                 dot.classList.toggle('active', i === AppState.currentTestimonial);
             });
@@ -2802,109 +2307,412 @@
             updateCarousel();
         }
 
+        setInterval(nextTestimonial, 5000);
+
         function submitComment(e) {
             e.preventDefault();
-            showNotification('thankYouComment');
+            showNotification('¡Gracias por tu comentario!');
             e.target.reset();
         }
 
-        function showNewsletter() {
-            document.getElementById('newsletterPopup').classList.add('active');
-            document.getElementById('newsletterOverlay').classList.add('active');
-            sessionStorage.setItem('newsletterShown', 'true');
-        }
-
-        function closeNewsletter() {
-            document.getElementById('newsletterPopup').classList.remove('active');
-            document.getElementById('newsletterOverlay').classList.remove('active');
-        }
-
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM cargado');
+        function toggleMenu() {
+            const menu = document.getElementById('categoriesMenu');
+            const overlay = document.getElementById('menuOverlay');
+            const btn = document.getElementById('menuBtn');
             
-            // Restaurar carrito
-            try {
-                const saved = JSON.parse(localStorage.getItem('klohe_cart')) || [];
-                AppState.cart = saved;
-            } catch(e) {
-                console.error('Error cargando carrito:', e);
-                AppState.cart = [];
-            }
+            const isActive = menu.classList.contains('active');
             
-            // Configurar idioma
-            if (AppState.currentLang === 'en') {
-                document.getElementById('currentLang').textContent = 'EN';
-                document.querySelector('.lang-option[data-lang="en"]').classList.add('active');
-                document.querySelector('.lang-option[data-lang="es"]').classList.remove('active');
-                displayVerseEN();
+            if (isActive) {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                btn.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
             } else {
-                displayVerse();
+                menu.classList.add('active');
+                overlay.classList.add('active');
+                btn.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
             }
+        }
+
+        function filterProducts(category, btnElement) {
+            AppState.currentFilter = category;
+            AppState.currentPage = 0;
+            AppState.searchTerm = '';
+            AppState.hasMoreProducts = true;
+            document.getElementById('searchInput').value = '';
             
-            // VERIFICAR QUE PRODUCTS EXISTE
-            if (typeof products === 'undefined' || !Array.isArray(products) || products.length === 0) {
-                console.error('ERROR: products.js no cargó o está vacío');
-                document.getElementById('productsContainer').innerHTML = `
-                    <div class="error-message">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <p>Error cargando productos. Verifica que products.js esté en la misma carpeta.</p>
-                        <p style="font-size: 0.8rem; margin-top: 1rem;">¿El archivo products.js existe y tiene formato correcto?</p>
-                    </div>
-                `;
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+            
+            document.getElementById('categoryTitle').textContent = categoryTitles[category] || category;
+            
+            document.getElementById('productsContainer').innerHTML = '';
+            renderSkeletons(4);
+            
+            setTimeout(() => {
+                if (category === 'todos') {
+                    AppState.filteredProducts = [...products];
+                } else {
+                    const targetCategory = categoryMap[category];
+                    AppState.filteredProducts = targetCategory 
+                        ? products.filter(p => p.category === targetCategory)
+                        : products.filter(p => 
+                            p.name.toLowerCase().includes(category.toLowerCase()) ||
+                            p.category.toLowerCase().includes(category.toLowerCase())
+                        );
+                }
+                
+                document.getElementById('productsContainer').innerHTML = '';
+                renderProducts();
+                updateProductsCount();
+                toggleMenu();
+            }, 300);
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            const start = AppState.currentPage * CONFIG.productsPerPage;
+            const end = start + CONFIG.productsPerPage;
+            const productsToShow = AppState.filteredProducts.slice(start, end);
+            
+            if (productsToShow.length === 0 && AppState.currentPage === 0) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">No se encontraron productos</div>';
+                AppState.hasMoreProducts = false;
                 return;
             }
             
-            console.log('Productos cargados:', products.length);
-            
-            // Inicializar todo
-            AppState.filteredProducts = [...products];
-            renderSkeletons(8);
-            
-            setTimeout(() => {
-                document.getElementById('productsContainer').innerHTML = '';
-                renderProducts();
-                updateCartUI();
-                initTestimonials();
-                updateAllTexts();
-                
-                // Infinite scroll
-                new IntersectionObserver((entries) => {
-                    if (entries[0].isIntersecting) loadMoreProducts();
-                }, { rootMargin: '200px' }).observe(document.getElementById('scrollSentinel'));
-                
-            }, 600);
-            
-            // Event listeners
-            document.getElementById('searchInput').addEventListener('input', 
-                debounce((e) => searchProducts(e.target.value), 300)
-            );
-            
-            document.getElementById('menuBtn').addEventListener('click', toggleMenu);
-            document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
-            
-            // Cerrar dropdown lang al hacer clic fuera
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.language-switcher')) {
-                    document.getElementById('langDropdown').classList.remove('active');
-                }
+            productsToShow.forEach((product, index) => {
+                const card = createProductCard(product, start + index);
+                container.appendChild(card);
             });
             
-            // Newsletter
-            if (!sessionStorage.getItem('newsletterShown')) {
-                setTimeout(showNewsletter, 5000);
+            AppState.hasMoreProducts = end < AppState.filteredProducts.length;
+            updateProductsCount();
+            
+            if (!AppState.hasMoreProducts) {
+                document.getElementById('loadingSpinner').style.display = 'none';
             }
-        });
+        }
 
-        function debounce(func, wait) {
-            let timeout;
-            return function(...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), wait);
-            };
+        function findProductIndex(product) {
+            return products.findIndex(p => p.barcode === product.barcode);
+        }
+
+        function createProductCard(product, index) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.style.animationDelay = `${index * 0.05}s`;
+            
+            const imageName = product.barcode;
+            const hasStock = product.stock > 0;
+            const realIndex = findProductIndex(product);
+            
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+
+            card.innerHTML = `
+                <div class="product-image-container" onclick="openPreview(${realIndex})">
+                    <img data-src="${imageName}.jpg" 
+                         alt="${product.name}" 
+                         class="product-image blur-up"
+                         src="${placeholderSvg}"
+                         loading="lazy"
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                    <span class="stock-badge">${product.stock} disp.</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-barcode">COD: ${product.barcode}</p>
+                    <div class="product-row">
+                        <span class="product-price">$${product.price.toFixed(2)}</span>
+                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${realIndex})" title="Vista rápida" aria-label="Vista rápida de ${product.name}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''} aria-label="${hasStock ? 'Agregar al carrito' : 'Agotado'}">
+                        ${hasStock ? 'Agregar al carrito' : 'Agotado'}
+                    </button>
+                </div>
+            `;
+            
+            const img = card.querySelector('img[data-src]');
+            if (img) imageObserver.observe(img);
+            
+            return card;
+        }
+
+        function loadMoreProducts() {
+            if (AppState.isLoading || !AppState.hasMoreProducts) return;
+            
+            AppState.isLoading = true;
+            document.getElementById('loadingSpinner').style.display = 'flex';
+            
+            setTimeout(() => {
+                AppState.currentPage++;
+                renderProducts();
+                AppState.isLoading = false;
+                
+                if (!AppState.hasMoreProducts) {
+                    document.getElementById('loadingSpinner').style.display = 'none';
+                }
+            }, 400);
+        }
+
+        function updateProductsCount() {
+            const shown = Math.min((AppState.currentPage + 1) * CONFIG.productsPerPage, AppState.filteredProducts.length);
+            document.getElementById('productsCount').textContent = 
+                `Mostrando ${shown} de ${AppState.filteredProducts.length} productos`;
         }
 
         let currentPreviewIndex = null;
+
+        function openPreview(index) {
+            if (index < 0 || index >= products.length) {
+                console.error('Índice de producto inválido:', index);
+                return;
+            }
+            
+            const product = products[index];
+            currentPreviewIndex = index;
+            
+            const img = document.getElementById('previewImage');
+            img.src = `${product.barcode}.jpg`;
+            img.classList.remove('loaded');
+            img.onload = () => img.classList.add('loaded');
+            
+            document.getElementById('previewImage').alt = product.name;
+            document.getElementById('previewName').textContent = product.name;
+            document.getElementById('previewBarcode').textContent = `CÓDIGO: ${product.barcode}`;
+            document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('previewStock').textContent = `${product.stock} unidades disponibles`;
+            
+            const addBtn = document.getElementById('previewAddBtn');
+            if (product.stock > 0) {
+                addBtn.disabled = false;
+                addBtn.textContent = 'Agregar al carrito';
+                addBtn.onclick = () => {
+                    addToCart(index);
+                    closePreview();
+                };
+            } else {
+                addBtn.disabled = true;
+                addBtn.textContent = 'Agotado';
+            }
+            
+            document.getElementById('previewModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.getElementById('previewModal').classList.remove('active');
+            document.body.style.overflow = '';
+            currentPreviewIndex = null;
+        }
+
+        function toggleShipping() {
+            AppState.shippingEnabled = !AppState.shippingEnabled;
+            const toggle = document.getElementById('shippingToggle');
+            const price = document.getElementById('shippingPrice');
+            const row = document.getElementById('shippingRow');
+            
+            toggle.classList.toggle('active', AppState.shippingEnabled);
+            toggle.setAttribute('aria-checked', AppState.shippingEnabled);
+            price.style.display = AppState.shippingEnabled ? 'block' : 'none';
+            row.style.display = AppState.shippingEnabled ? 'flex' : 'none';
+            
+            updateCart();
+        }
+
+        function addToCart(index) {
+            if (index < 0 || index >= products.length) {
+                showNotification('Error: Producto no encontrado', 'error');
+                return;
+            }
+            
+            const product = products[index];
+            
+            if (!product || product.stock <= 0) {
+                showNotification('Sin stock disponible', 'error');
+                return;
+            }
+
+            const existingItem = AppState.cart.find(item => item.barcode === product.barcode);
+            
+            if (existingItem) {
+                if (existingItem.quantity < product.stock) {
+                    existingItem.quantity++;
+                } else {
+                    showNotification('Stock máximo alcanzado', 'error');
+                    return;
+                }
+            } else {
+                // Guardar solo datos esenciales para evitar referencias circulares
+                AppState.cart.push({ 
+                    barcode: product.barcode,
+                    name: product.name,
+                    price: product.price,
+                    quantity: 1 
+                });
+            }
+
+            updateCart();
+            showNotification('Producto agregado al carrito');
+        }
+
+        function removeFromCart(barcode) {
+            if (!barcode) return;
+            
+            // Filtrar por barcode (string) en lugar de índice para mayor seguridad
+            const initialLength = AppState.cart.length;
+            AppState.cart = AppState.cart.filter(item => item && item.barcode !== barcode);
+            
+            if (AppState.cart.length < initialLength) {
+                updateCart();
+                showNotification('Producto eliminado');
+            } else {
+                console.warn('No se encontró el producto con barcode:', barcode);
+            }
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartBadge = document.getElementById('cartBadge');
+            const whatsappBtn = document.getElementById('whatsappBtn');
+            const summary = document.getElementById('cartSummary');
+
+            // Guardar en localStorage
+            try {
+                localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
+            } catch (e) {
+                console.error('Error guardando carrito:', e);
+            }
+
+            const totalItems = AppState.cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+            cartBadge.textContent = totalItems;
+            cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+
+            if (AppState.cart.length === 0) {
+                cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>';
+                summary.style.display = 'none';
+                whatsappBtn.style.display = 'none';
+                document.getElementById('cartTotal').textContent = '$0.00';
+                return;
+            }
+
+            cartItems.innerHTML = '';
+            let subtotal = 0;
+            let hasInvalidItems = false;
+
+            AppState.cart.forEach(item => {
+                if (!item || !item.barcode) {
+                    hasInvalidItems = true;
+                    return;
+                }
+                
+                const itemTotal = (item.price || 0) * (item.quantity || 0);
+                subtotal += itemTotal;
+
+                cartItems.innerHTML += `
+                    <div class="cart-item" data-barcode="${item.barcode}">
+                        <div class="cart-item-image">
+                            <img src="${item.barcode}.jpg" alt="${item.name || 'Producto'}" 
+                                 loading="lazy"
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${(item.name || 'P').charAt(0)}%3C/text%3E%3C/svg%3E'">
+                        </div>
+                        <div class="cart-item-details">
+                            <h4>${item.name || 'Producto no disponible'}</h4>
+                            <p class="cart-item-code">COD: ${item.barcode}</p>
+                            <p>$${(item.price || 0).toFixed(2)} x ${item.quantity || 0}</p>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name || 'producto'}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            if (hasInvalidItems) {
+                // Limpiar items inválidos silenciosamente
+                AppState.cart = AppState.cart.filter(item => item && item.barcode);
+                localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
+            }
+
+            const shippingCost = AppState.shippingEnabled ? 3.75 : 0;
+            const total = subtotal + shippingCost;
+
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+            summary.style.display = 'block';
+            whatsappBtn.style.display = 'flex';
+            
+            const message = AppState.cart.map(item => 
+                `• ${item.name || 'Producto'} (COD: ${item.barcode}) - Cant: ${item.quantity || 0}`
+            ).join('%0A');
+            
+            const shippingText = AppState.shippingEnabled ? '%0A%0AEnvío a todo el país: $3.75' : '';
+            
+            whatsappBtn.href = `https://wa.me/50366711569?text=¡Hola! Quiero comprar:%0A%0A${message}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            const overlay = document.getElementById('overlay');
+            const isActive = modal.classList.contains('active');
+            
+            if (isActive) {
+                modal.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                // Validar carrito antes de mostrar
+                AppState.cart = validateAndCleanCart();
+                updateCart();
+                
+                modal.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.background = type === 'error' ? '#dc3545' : 'var(--bordo)';
+            notification.style.borderLeftColor = type === 'error' ? '#ff6b6b' : 'var(--dorado)';
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2500);
+        }
+
+        window.addEventListener('resize', debounce(() => {
+            if (window.innerWidth > 768) {
+                const menu = document.getElementById('categoriesMenu');
+                const overlay = document.getElementById('menuOverlay');
+                const btn = document.getElementById('menuBtn');
+                
+                if (menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                }
+            }
+        }, 250));
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) e.preventDefault();
+            lastTouchEnd = now;
+        }, false);
     </script>
 
 </body>

@@ -1,32 +1,15 @@
 const products = [
-  // PRIMEROS 25 - PATRÓN: Cartera → Aritos → Cartera → Collares → Relojes (x5 ciclos)
+  // CARTERAS (44 productos)
   { name: "BILLETERA", price: 10.00, stock: 0, barcode: "076", category: "Carteras" },
-  { name: "ARITOS", price: 3.50, stock: 1, barcode: "046", category: "Aritos" },
   { name: "BOLSO DE MANO", price: 10.00, stock: 1, barcode: "088", category: "Carteras" },
-  { name: "Aritos", price: 5.50, stock: 0, barcode: "029", category: "Collares" },
-  { name: "RELOJ", price: 15.00, stock: 1, barcode: "01111", category: "Relojes" },
   { name: "CARTERA", price: 12.50, stock: 1, barcode: "03", category: "Carteras" },
-  { name: "ARITOS", price: 8.50, stock: 0, barcode: "179", category: "Aritos" },
   { name: "CARTERA", price: 12.00, stock: 1, barcode: "014", category: "Carteras" },
-  { name: "COLLA DE PLAYA", price: 12.75, stock: 1, barcode: "066", category: "Collares" },
-  { name: "RELOJ", price: 20.00, stock: 2, barcode: "01125", category: "Relojes" },
   { name: "CARTERA", price: 10.99, stock: 1, barcode: "033", category: "Carteras" },
-  { name: "ARITOS", price: 7.00, stock: 1, barcode: "060", category: "Aritos" },
   { name: "CARTERA", price: 16.50, stock: 0, barcode: "035", category: "Carteras" },
-  { name: "Collar", price: 9.50, stock: 1, barcode: "10199191", category: "Collares" },
-  { name: "RELOJ", price: 16.00, stock: 1, barcode: "03333", category: "Relojes" },
   { name: "CARTERA", price: 15.00, stock: 0, barcode: "071", category: "Carteras" },
-  { name: "ARITOSS", price: 8.50, stock: 1, barcode: "174", category: "Aritos" },
   { name: "CARTERA", price: 10.00, stock: 1, barcode: "073", category: "Carteras" },
-  { name: "Collar", price: 10.00, stock: 1, barcode: "17801", category: "Collares" },
-  { name: "RELOJ", price: 25.00, stock: 1, barcode: "03334", category: "Relojes" },
   { name: "CARTERA", price: 13.50, stock: 0, barcode: "00000", category: "Carteras" },
-  { name: "ARITOS DE CORAZON", price: 4.50, stock: 0, barcode: "056", category: "Aritos" },
   { name: "CARTERA", price: 18.50, stock: 1, barcode: "086", category: "Carteras" },
-  { name: "COLLAR", price: 12.00, stock: 0, barcode: "024", category: "Collares" },
-  { name: "RELOJ", price: 16.00, stock: 1, barcode: "03335", category: "Relojes" },
-  
-  // RESTO DE PRODUCTOS EN ORDEN ORIGINAL (203 productos restantes)
   { name: "CARTERA", price: 18.50, stock: 1, barcode: "087", category: "Carteras" },
   { name: "CARTERA", price: 14.99, stock: 1, barcode: "089", category: "Carteras" },
   { name: "CARTERA", price: 14.99, stock: 1, barcode: "096", category: "Carteras" },
@@ -62,6 +45,13 @@ const products = [
   { name: "CARTERA ROSADA", price: 9.50, stock: 1, barcode: "023", category: "Carteras" },
   { name: "CARTERA VINO", price: 18.00, stock: 0, barcode: "053", category: "Carteras" },
   { name: "Carteras", price: 10.00, stock: 1, barcode: "181", category: "Carteras" },
+  
+  // ARITOS Y ARETES (49 productos)
+  { name: "ARITOS", price: 3.50, stock: 1, barcode: "046", category: "Aritos" },
+  { name: "ARITOS", price: 8.50, stock: 0, barcode: "179", category: "Aritos" },
+  { name: "ARITOS", price: 7.00, stock: 1, barcode: "060", category: "Aritos" },
+  { name: "ARITOSS", price: 8.50, stock: 1, barcode: "174", category: "Aritos" },
+  { name: "ARITOS DE CORAZON", price: 4.50, stock: 0, barcode: "056", category: "Aritos" },
   { name: "ARITOS", price: 6.00, stock: 0, barcode: "028393992", category: "Aritos" },
   { name: "ARITOS", price: 7.00, stock: 0, barcode: "06", category: "Aritos" },
   { name: "ARITOS", price: 5.00, stock: 0, barcode: "07", category: "Aritos" },
@@ -106,6 +96,13 @@ const products = [
   { name: "ARITOS DE PLATA", price: 5.00, stock: 1, barcode: "02226", category: "Aritos" },
   { name: "ARITOS DE PLATA", price: 5.00, stock: 1, barcode: "02227", category: "Aritos" },
   { name: "ARITOS DE PLATA", price: 5.00, stock: 1, barcode: "02228", category: "Aritos" },
+  
+  // COLLARES (52 productos)
+  { name: "Aritos", price: 5.50, stock: 0, barcode: "029", category: "Collares" },
+  { name: "COLLA DE PLAYA", price: 12.75, stock: 1, barcode: "066", category: "Collares" },
+  { name: "Collar", price: 9.50, stock: 1, barcode: "10199191", category: "Collares" },
+  { name: "Collar", price: 10.00, stock: 1, barcode: "17801", category: "Collares" },
+  { name: "COLLAR", price: 12.00, stock: 0, barcode: "024", category: "Collares" },
   { name: "COLLAR", price: 12.00, stock: 1, barcode: "025", category: "Collares" },
   { name: "COLLAR", price: 8.00, stock: 3, barcode: "028", category: "Collares" },
   { name: "COLLAR", price: 15.00, stock: 1, barcode: "034", category: "Collares" },
@@ -161,8 +158,12 @@ const products = [
   { name: "Collar mariposa", price: 10.00, stock: 0, barcode: "200", category: "Collares" },
   { name: "SET", price: 18.50, stock: 1, barcode: "142", category: "Collares" },
   { name: "SET DE COLLAR", price: 13.50, stock: 1, barcode: "078", category: "Collares" },
+  
+  // LENTES (2 productos)
   { name: "LENTES", price: 7.50, stock: 1, barcode: "015", category: "Lentes de sol" },
   { name: "LENTES NEGROS", price: 5.75, stock: 1, barcode: "037", category: "Lentes de sol" },
+  
+  // PULSERAS (32 productos)
   { name: "BRACELET", price: 7.00, stock: 0, barcode: "041", category: "Pulseras" },
   { name: "BRASALET", price: 10.00, stock: 0, barcode: "038", category: "Pulseras" },
   { name: "PULSERA", price: 5.00, stock: 1, barcode: "042", category: "Pulseras" },
@@ -194,6 +195,13 @@ const products = [
   { name: "PULSERA CARTIER", price: 11.00, stock: 0, barcode: "031", category: "Pulseras" },
   { name: "PULSERA DE TREBOL", price: 12.00, stock: 3, barcode: "01118", category: "Pulseras" },
   { name: "VAN CLEEF", price: 12.00, stock: 0, barcode: "050", category: "Pulseras" },
+  
+  // RELOJES (30 productos)
+  { name: "RELOJ", price: 15.00, stock: 1, barcode: "01111", category: "Relojes" },
+  { name: "RELOJ", price: 20.00, stock: 2, barcode: "01125", category: "Relojes" },
+  { name: "RELOJ", price: 16.00, stock: 1, barcode: "03333", category: "Relojes" },
+  { name: "RELOJ", price: 25.00, stock: 1, barcode: "03334", category: "Relojes" },
+  { name: "RELOJ", price: 16.00, stock: 1, barcode: "03335", category: "Relojes" },
   { name: "RELOJ", price: 20.00, stock: 1, barcode: "03336", category: "Relojes" },
   { name: "RELOJ", price: 15.00, stock: 1, barcode: "03337", category: "Relojes" },
   { name: "RELOJ", price: 20.00, stock: 1, barcode: "03338", category: "Relojes" },
@@ -219,6 +227,8 @@ const products = [
   { name: "RELOJ ROJO", price: 15.00, stock: 1, barcode: "01121", category: "Relojes" },
   { name: "SEET DE RELOJ Y PULSERA", price: 14.00, stock: 1, barcode: "01115", category: "Relojes" },
   { name: "RELOJ SET", price: 40.00, stock: 1, barcode: "01112", category: "Relojes" },
+  
+  // ANILLOS (9 productos)
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "02", category: "Anillos" },
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "04", category: "Anillos" },
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "08", category: "Anillos" },
@@ -227,9 +237,9 @@ const products = [
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "045", category: "Anillos" },
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "057", category: "Anillos" },
   { name: "ANILO", price: 10.00, stock: 1, barcode: "059", category: "Anillos" },
+  
+  // OTROS (3 productos)
   { name: "ACCESORIOS", price: 0.25, stock: 20, barcode: "137", category: "Accesorios para el cabello" },
   { name: "CEREZA", price: 5.25, stock: 3, barcode: "122", category: "Otros" },
   { name: "TARJETAS NAVIDEÑAS", price: 0.00, stock: 121, barcode: "154", category: "Otros" }
 ];
-
-export default products;

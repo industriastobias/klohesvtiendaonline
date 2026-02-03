@@ -39,6 +39,71 @@
             overflow-x: hidden;
         }
 
+        body.kiosk-mode {
+            overflow: hidden;
+        }
+
+        body.kiosk-mode header,
+        body.kiosk-mode .hero,
+        body.kiosk-mode .testimonials-section,
+        body.kiosk-mode footer,
+        body.kiosk-mode .whatsapp-float,
+        body.kiosk-mode .newsletter-overlay,
+        body.kiosk-mode .newsletter-popup {
+            display: none !important;
+        }
+
+        body.kiosk-mode .products {
+            padding-top: 2rem;
+            min-height: 100vh;
+        }
+
+        body.kiosk-mode .section-header {
+            display: none;
+        }
+
+        body.kiosk-mode .products-grid {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        body.kiosk-mode .product-card {
+            border: 2px solid var(--rosa-medio);
+        }
+
+        body.kiosk-mode .btn-add-cart {
+            font-size: 1rem;
+            padding: 1.2rem;
+        }
+
+        .kiosk-exit {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: var(--bordo);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+
+        .kiosk-exit:hover {
+            opacity: 1;
+        }
+
+        body.kiosk-mode .kiosk-exit {
+            display: flex;
+        }
+
         @keyframes shimmer {
             0% { background-position: -1000px 0; }
             100% { background-position: 1000px 0; }
@@ -1600,6 +1665,22 @@
             transform: translateY(-2px);
         }
 
+        /* Botón disimulado modo kiosko */
+        .kiosk-trigger {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 0 auto;
+            transition: all 0.3s;
+        }
+
+        .kiosk-trigger:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.5);
+        }
+
         .copyright {
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 1.5rem;
@@ -1815,6 +1896,10 @@
 </head>
 <body>
 
+    <button class="kiosk-exit" onclick="toggleKioskMode()" title="Salir del modo kiosko">
+        <i class="fas fa-times"></i>
+    </button>
+
     <header>
         <div class="container">
             <nav>
@@ -2008,6 +2093,8 @@
             </div>
             <div class="copyright">
                 <p>&copy; 2026 KLOHE. <span data-i18n="made_with_love">Hecho con ♥ en El Salvador</span></p>
+                <!-- Botón disimulado para modo kiosko -->
+                <div class="kiosk-trigger" onclick="toggleKioskMode()" title="Modo Kiosko"></div>
             </div>
         </div>
     </footer>
@@ -2312,7 +2399,8 @@
             hasMoreProducts: true,
             currentTestimonial: 0,
             searchTerm: '',
-            currentLang: localStorage.getItem('klohe_lang') || 'es'
+            currentLang: localStorage.getItem('klohe_lang') || 'es',
+            kioskMode: false
         };
 
         // Intersection Observer for Lazy Loading Images
@@ -2552,6 +2640,22 @@
             
             // Iniciar ciclo
             cycle();
+        }
+
+        /**
+         * Función para activar/desactivar modo kiosko
+         */
+        function toggleKioskMode() {
+            AppState.kioskMode = !AppState.kioskMode;
+            document.body.classList.toggle('kiosk-mode', AppState.kioskMode);
+            
+            // Scroll al inicio de productos
+            if (AppState.kioskMode) {
+                document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });
+                showNotification('Modo Kiosko Activado');
+            } else {
+                showNotification('Modo Kiosko Desactivado');
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function() {

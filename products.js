@@ -89,7 +89,7 @@ const products = [
   { name: "ARITOS", price: 8.50, stock: 1, barcode: "177", category: "Aritos" },
   { name: "ARITOS", price: 5.00, stock: 1, barcode: "19009", category: "Aritos" },
   { name: "ARITOS", price: 7.00, stock: 1, barcode: "190012", category: "Aritos" },
-  { name: "Aritos", price: 2.00, stock: 1, barcode: "1991919", category: "Aritos" },
+  { name: "Aritos", price: 2.00, stock: 0, barcode: "1991919", category: "Aritos" },
   { name: "ARITOS DE ESTRELLA", price: 3.00, stock: 0, barcode: "019", category: "Aritos" },
   { name: "ARITOS DE ALEACION", price: 5.00, stock: 1, barcode: "02222", category: "Aritos" },
   { name: "ARITOS DE PLATA", price: 5.00, stock: 1, barcode: "02224", category: "Aritos" },

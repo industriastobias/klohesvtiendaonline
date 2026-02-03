@@ -2199,7 +2199,7 @@
                 your_cart: "Your Cart",
                 nationwide_shipping: "Nationwide shipping",
                 delivery_time: "Delivery in 2-3 business days",
-                empty_cart: "Your carrito is empty",
+                empty_cart: "Your cart is empty",
                 subtotal: "Subtotal:",
                 shipping: "Shipping:",
                 total: "Total:",
@@ -2525,32 +2525,49 @@
             }
         }
 
-        // Función para animar el tooltip de WhatsApp cada 5 minutos
+        /**
+         * Función para animar el tooltip de WhatsApp cada 5 minutos
+         * Primera aparición: 10 segundos después de cargar la página
+         * Duración visible: 4 segundos cada vez que aparece
+         * Intervalo: 5 minutos (300,000 ms)
+         */
         function initWhatsAppTooltipAnimation() {
             const tooltip = document.getElementById('whatsappTooltip');
+            const float = document.getElementById('whatsappFloat');
             let isVisible = false;
+            let animationInterval;
             
-            // Función para alternar la visibilidad
+            // Función para alternar la visibilidad del tooltip
             function toggleTooltip() {
                 isVisible = !isVisible;
-                tooltip.classList.toggle('show-auto', isVisible);
                 
-                // Si se muestra, ocultarlo después de 4 segundos
                 if (isVisible) {
+                    // Mostrar tooltip
+                    tooltip.classList.add('show-auto');
+                    
+                    // Ocultar después de 4 segundos
                     setTimeout(() => {
                         tooltip.classList.remove('show-auto');
                         isVisible = false;
                     }, 4000);
+                } else {
+                    tooltip.classList.remove('show-auto');
                 }
             }
             
-            // Primera aparición después de 10 segundos de carga la página
+            // Primera aparición después de 10 segundos
             setTimeout(() => {
                 toggleTooltip();
                 
-                // Luego cada 5 minutos
-                setInterval(toggleTooltip, CONFIG.whatsappTooltipInterval);
+                // Configurar intervalo de 5 minutos para apariciones siguientes
+                animationInterval = setInterval(toggleTooltip, CONFIG.whatsappTooltipInterval);
             }, 10000);
+            
+            // Limpiar intervalo si el usuario hace hover (para no interferir)
+            float.addEventListener('mouseenter', () => {
+                tooltip.classList.remove('show-auto');
+                isVisible = false;
+            });
         }
 
         document.addEventListener('DOMContentLoaded', function() {

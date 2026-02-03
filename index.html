@@ -634,6 +634,20 @@
             letter-spacing: 1px;
         }
 
+        /* NUEVO: Estilos para la descripción en la tarjeta */
+        .product-description {
+            font-size: 0.85rem;
+            color: var(--rosa-oscuro);
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
         .product-row {
             display: flex;
             justify-content: space-between;
@@ -1006,6 +1020,20 @@
             border: 1px solid var(--rosa-suave);
             width: fit-content;
             border-radius: 4px;
+        }
+
+        /* NUEVO: Estilos para la descripción en el modal */
+        .preview-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--chocolate);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+            border-top: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--rosa-suave);
+            max-height: 150px;
+            overflow-y: auto;
         }
 
         .preview-price {
@@ -1698,7 +1726,7 @@
 
         @media (max-width: 480px) {
             .products-grid {
-                grid-template-columceans: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 gap: 0.8rem;
             }
             
@@ -1912,6 +1940,7 @@
         </div>
     </section>
 
+    <!-- Modal de Vista Previa -->
     <div class="preview-modal" id="previewModal" onclick="closePreview(event)" role="dialog" aria-modal="true" aria-labelledby="previewName">
         <div class="preview-content" onclick="event.stopPropagation()">
             <div class="preview-image-container">
@@ -1920,6 +1949,7 @@
             <div class="preview-details">
                 <h3 class="preview-name" id="previewName"></h3>
                 <p class="preview-barcode" id="previewBarcode"></p>
+                <p class="preview-description" id="previewDescription"></p>
                 <p class="preview-price" id="previewPrice"></p>
                 <p class="preview-stock" id="previewStock"></p>
                 <button class="preview-add-btn" id="previewAddBtn" data-i18n="add_to_cart">Agregar al carrito</button>
@@ -2462,6 +2492,7 @@
                     <div class="product-info">
                         <div class="product-name skeleton-text"></div>
                         <div class="product-barcode skeleton-text"></div>
+                        <div class="product-description skeleton-text" style="height: 3em;"></div>
                         <div class="product-row">
                             <div class="product-price skeleton-text"></div>
                         </div>
@@ -2768,6 +2799,7 @@
             
             const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
+            // MODIFICADO: Agregado product.description a la tarjeta
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
                     <img data-src="${imageName}.jpg" 
@@ -2781,6 +2813,7 @@
                 <div class="product-info">
                     <h3 class="product-name">${product.name}</h3>
                     <p class="product-barcode">${t('code')}: ${product.barcode}</p>
+                    <p class="product-description">${product.description || ''}</p>
                     <div class="product-row">
                         <span class="product-price">$${product.price.toFixed(2)}</span>
                         <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${realIndex})" title="${t('quick_view')}" aria-label="${t('quick_view')} ${product.name}">
@@ -2836,9 +2869,11 @@
             img.classList.remove('loaded');
             img.onload = () => img.classList.add('loaded');
             
+            // MODIFICADO: Agregado product.description al modal
             document.getElementById('previewImage').alt = product.name;
             document.getElementById('previewName').textContent = product.name;
             document.getElementById('previewBarcode').textContent = `${t('code')}: ${product.barcode}`;
+            document.getElementById('previewDescription').textContent = product.description || '';
             document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
             document.getElementById('previewStock').textContent = `${product.stock} ${t('units_available')}`;
             

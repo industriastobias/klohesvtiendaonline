@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>KLOHE - Valentine's Day Collection</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22   viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300  ;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css  ">
     
     <style>
         * {
@@ -1379,7 +1379,7 @@
             display: block;
         }
 
-        /* WHATSAPP FLOAT - LEFT SIDE CON ANIMACIÓN CADA 5 MINUTOS */
+        /* WHATSAPP FLOAT - CON ANIMACIÓN CÍCLICA */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -1396,17 +1396,24 @@
             cursor: pointer;
             z-index: 9999;
             box-shadow: 0 4px 12px rgba(157, 107, 127, 0.4);
-            transition: all 0.3s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease, background 0.3s ease;
             text-decoration: none;
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(157, 107, 127, 0.6);
             background: var(--rosa-viejo);
         }
 
-        /* Tooltip con animación automática cada 5 minutos */
+        .whatsapp-float.hidden-cyclic {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+
         .whatsapp-tooltip {
             position: absolute;
             left: 70px;
@@ -1423,7 +1430,6 @@
             pointer-events: none;
         }
 
-        /* Flecha del tooltip */
         .whatsapp-tooltip::before {
             content: '';
             position: absolute;
@@ -1435,14 +1441,6 @@
             border-color: transparent var(--bordo) transparent transparent;
         }
 
-        /* Clase para mostrar el tooltip automáticamente */
-        .whatsapp-tooltip.show-auto {
-            opacity: 1;
-            visibility: visible;
-            left: 75px;
-        }
-
-        /* Hover sigue funcionando normalmente */
         .whatsapp-float:hover .whatsapp-tooltip {
             opacity: 1;
             visibility: visible;
@@ -1830,13 +1828,13 @@
                     </div>
                     
                     <div class="social-header">
-                        <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv  " target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv  " target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry  " target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -1990,13 +1988,13 @@
                     <h4 data-i18n="social_media">Redes Sociales</h4>
                     <p data-i18n="follow_us">Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
-                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv  " target="_blank" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv  " target="_blank" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry  " target="_blank" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -2014,8 +2012,8 @@
         </div>
     </footer>
 
-    <!-- Botón WhatsApp con tooltip automático cada 5 minutos -->
-    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
+    <!-- Botón WhatsApp con animación cíclica: visible 10s → oculto 3min -->
+    <a href="https://wa.me/50366711569  " target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip" id="whatsappTooltip" data-i18n="need_help">¿Necesitas ayuda?</span>
     </a>
@@ -2299,7 +2297,8 @@
         const CONFIG = {
             productsPerPage: 12,
             preloadOffset: '200px',
-            whatsappTooltipInterval: 300000 // 5 minutos en milisegundos
+            whatsappVisibleDuration: 10000, // 10 segundos
+            whatsappHiddenDuration: 180000 // 3 minutos
         };
 
         // State Management
@@ -2526,56 +2525,41 @@
         }
 
         /**
-         * Función para animar el tooltip de WhatsApp cada 5 minutos
-         * Primera aparición: 10 segundos después de cargar la página
-         * Duración visible: 4 segundos cada vez que aparece
-         * Intervalo: 5 minutos (300,000 ms)
+         * Función para ciclo de animación del botón WhatsApp
+         * Ciclo: visible 10s → fade out + scale down → oculto 3min → fade in + scale up → repetir
          */
-        function initWhatsAppTooltipAnimation() {
-            const tooltip = document.getElementById('whatsappTooltip');
+        function initWhatsAppCyclicAnimation() {
             const float = document.getElementById('whatsappFloat');
-            let isVisible = false;
-            let animationInterval;
+            let isVisible = true;
             
-            // Función para alternar la visibilidad del tooltip
-            function toggleTooltip() {
-                isVisible = !isVisible;
-                
+            function cycle() {
                 if (isVisible) {
-                    // Mostrar tooltip
-                    tooltip.classList.add('show-auto');
-                    
-                    // Ocultar después de 4 segundos
+                    // Después de 10 segundos visible, ocultar
                     setTimeout(() => {
-                        tooltip.classList.remove('show-auto');
+                        float.classList.add('hidden-cyclic');
                         isVisible = false;
-                    }, 4000);
+                        cycle(); // Llamar recursivamente para siguiente fase
+                    }, CONFIG.whatsappVisibleDuration);
                 } else {
-                    tooltip.classList.remove('show-auto');
+                    // Después de 3 minutos oculto, mostrar
+                    setTimeout(() => {
+                        float.classList.remove('hidden-cyclic');
+                        isVisible = true;
+                        cycle(); // Repetir ciclo infinito
+                    }, CONFIG.whatsappHiddenDuration);
                 }
             }
             
-            // Primera aparición después de 10 segundos
-            setTimeout(() => {
-                toggleTooltip();
-                
-                // Configurar intervalo de 5 minutos para apariciones siguientes
-                animationInterval = setInterval(toggleTooltip, CONFIG.whatsappTooltipInterval);
-            }, 10000);
-            
-            // Limpiar intervalo si el usuario hace hover (para no interferir)
-            float.addEventListener('mouseenter', () => {
-                tooltip.classList.remove('show-auto');
-                isVisible = false;
-            });
+            // Iniciar ciclo
+            cycle();
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize language button
             document.getElementById('currentLang').textContent = AppState.currentLang === 'es' ? 'EN' : 'ES';
             
-            // Iniciar animación del tooltip de WhatsApp
-            initWhatsAppTooltipAnimation();
+            // Iniciar animación cíclica del botón WhatsApp
+            initWhatsAppCyclicAnimation();
             
             displayDailyVerse();
             initTestimonials();
@@ -2867,7 +2851,7 @@
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg  ' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -2876,7 +2860,7 @@
                          class="product-image blur-up"
                          src="${placeholderSvg}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22   width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
                     <span class="stock-badge">${product.stock} ${t('available')}</span>
                 </div>
                 <div class="product-info">
@@ -3060,7 +3044,7 @@
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
                                  loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22   width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
@@ -3089,7 +3073,7 @@
             const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';
             const greeting = AppState.currentLang === 'es' ? '¡Hola! Quiero comprar:' : 'Hello! I want to buy:';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text=${greeting}%0A%0A${message}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text=  ${greeting}%0A%0A${message}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
         }
 
         function toggleCart() {

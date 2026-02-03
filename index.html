@@ -634,7 +634,6 @@
             letter-spacing: 1px;
         }
 
-        /* NUEVO: Estilos para la descripción en la tarjeta */
         .product-description {
             font-size: 0.85rem;
             color: var(--rosa-oscuro);
@@ -1022,7 +1021,6 @@
             border-radius: 4px;
         }
 
-        /* NUEVO: Estilos para la descripción en el modal */
         .preview-description {
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
@@ -1381,7 +1379,7 @@
             display: block;
         }
 
-        /* WHATSAPP FLOAT - LEFT SIDE */
+        /* WHATSAPP FLOAT - LEFT SIDE CON ANIMACIÓN CADA 5 MINUTOS */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -1408,6 +1406,7 @@
             background: var(--rosa-viejo);
         }
 
+        /* Tooltip con animación automática cada 5 minutos */
         .whatsapp-tooltip {
             position: absolute;
             left: 70px;
@@ -1419,10 +1418,31 @@
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: opacity 0.5s ease, visibility 0.5s ease, left 0.3s ease;
             letter-spacing: 0.5px;
+            pointer-events: none;
         }
 
+        /* Flecha del tooltip */
+        .whatsapp-tooltip::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 6px 6px 6px 0;
+            border-style: solid;
+            border-color: transparent var(--bordo) transparent transparent;
+        }
+
+        /* Clase para mostrar el tooltip automáticamente */
+        .whatsapp-tooltip.show-auto {
+            opacity: 1;
+            visibility: visible;
+            left: 75px;
+        }
+
+        /* Hover sigue funcionando normalmente */
         .whatsapp-float:hover .whatsapp-tooltip {
             opacity: 1;
             visibility: visible;
@@ -1712,7 +1732,7 @@
             }
 
             .whatsapp-tooltip {
-                display: none;
+                display: none !important;
             }
 
             .eye-btn, .btn-add-cart, .carousel-btn {
@@ -1994,9 +2014,10 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <!-- Botón WhatsApp con tooltip automático cada 5 minutos -->
+    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-tooltip" data-i18n="need_help">¿Necesitas ayuda?</span>
+        <span class="whatsapp-tooltip" id="whatsappTooltip" data-i18n="need_help">¿Necesitas ayuda?</span>
     </a>
 
     <div class="newsletter-overlay" id="newsletterOverlay" onclick="closeNewsletter()"></div>
@@ -2178,7 +2199,7 @@
                 your_cart: "Your Cart",
                 nationwide_shipping: "Nationwide shipping",
                 delivery_time: "Delivery in 2-3 business days",
-                empty_cart: "Your cart is empty",
+                empty_cart: "Your carrito is empty",
                 subtotal: "Subtotal:",
                 shipping: "Shipping:",
                 total: "Total:",
@@ -2277,7 +2298,8 @@
         // Configuration
         const CONFIG = {
             productsPerPage: 12,
-            preloadOffset: '200px'
+            preloadOffset: '200px',
+            whatsappTooltipInterval: 300000 // 5 minutos en milisegundos
         };
 
         // State Management
@@ -2503,9 +2525,40 @@
             }
         }
 
+        // Función para animar el tooltip de WhatsApp cada 5 minutos
+        function initWhatsAppTooltipAnimation() {
+            const tooltip = document.getElementById('whatsappTooltip');
+            let isVisible = false;
+            
+            // Función para alternar la visibilidad
+            function toggleTooltip() {
+                isVisible = !isVisible;
+                tooltip.classList.toggle('show-auto', isVisible);
+                
+                // Si se muestra, ocultarlo después de 4 segundos
+                if (isVisible) {
+                    setTimeout(() => {
+                        tooltip.classList.remove('show-auto');
+                        isVisible = false;
+                    }, 4000);
+                }
+            }
+            
+            // Primera aparición después de 10 segundos de carga la página
+            setTimeout(() => {
+                toggleTooltip();
+                
+                // Luego cada 5 minutos
+                setInterval(toggleTooltip, CONFIG.whatsappTooltipInterval);
+            }, 10000);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize language button
             document.getElementById('currentLang').textContent = AppState.currentLang === 'es' ? 'EN' : 'ES';
+            
+            // Iniciar animación del tooltip de WhatsApp
+            initWhatsAppTooltipAnimation();
             
             displayDailyVerse();
             initTestimonials();
@@ -2799,7 +2852,6 @@
             
             const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
-            // MODIFICADO: Agregado product.description a la tarjeta
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
                     <img data-src="${imageName}.jpg" 
@@ -2869,7 +2921,6 @@
             img.classList.remove('loaded');
             img.onload = () => img.classList.add('loaded');
             
-            // MODIFICADO: Agregado product.description al modal
             document.getElementById('previewImage').alt = product.name;
             document.getElementById('previewName').textContent = product.name;
             document.getElementById('previewBarcode').textContent = `${t('code')}: ${product.barcode}`;

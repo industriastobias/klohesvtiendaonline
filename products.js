@@ -198,7 +198,7 @@ const products = [
   
   // RELOJES (30 productos) - CON DESCRIPCIÓN
   { name: "RELOJ", price: 15.00, stock: 1, barcode: "01111", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ", price: 20.00, stock: 2, barcode: "01125", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ", price: 20.00, stock: 0, barcode: "01125", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 16.00, stock: 1, barcode: "03333", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 25.00, stock: 1, barcode: "03334", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 16.00, stock: 1, barcode: "03335", category: "Relojes", description: "Relojes de acero inoxidable" },
@@ -218,14 +218,14 @@ const products = [
   { name: "RELOJ", price: 20.00, stock: 1, barcode: "033349", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 18.00, stock: 2, barcode: "033350", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ BLANCO", price: 15.00, stock: 1, barcode: "011144", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ DE ACERO INOXIDABLE", price: 15.00, stock: 2, barcode: "01117", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ DE ACERO INOXIDABLE", price: 15.00, stock: 1, barcode: "01123", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ DORADO WATERPROOF", price: 20.00, stock: 1, barcode: "01122", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ DE ACERO INOXIDABLE", price: 15.00, stock: 0, barcode: "01117", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ DE ACERO INOXIDABLE", price: 15.00, stock: 0, barcode: "01123", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ DORADO WATERPROOF", price: 20.00, stock: 0, barcode: "01122", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ NEGRO", price: 15.00, stock: 1, barcode: "01113", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ OLD MOENY", price: 15.00, stock: 2, barcode: "01124", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ OLD MOENY", price: 15.00, stock: 1, barcode: "01124", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ ROJO", price: 15.00, stock: 1, barcode: "01119", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ ROJO", price: 15.00, stock: 1, barcode: "01121", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "SEET DE RELOJ Y PULSERA", price: 14.00, stock: 1, barcode: "01115", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ ROJO", price: 15.00, stock: 0, barcode: "01121", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "SEET DE RELOJ Y PULSERA", price: 14.00, stock: 0, barcode: "01115", category: "Relojes", description: "Reloj de acero fino" },
   { name: "RELOJ SET", price: 40.00, stock: 1, barcode: "01112", category: "Relojes", description: "Relojes de acero inoxidable" },
   
   // ANILLOS (9 productos)

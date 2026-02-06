@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>KLOHE - Valentine's Day Collection</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22   viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300  ;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css  ">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         * {
@@ -1077,6 +1077,95 @@
             cursor: not-allowed;
         }
 
+        /* NUEVOS ESTILOS PARA COMPARTIR */
+        .share-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--rosa-suave);
+        }
+
+        .share-title {
+            font-size: 0.8rem;
+            color: var(--rosa-oscuro);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .share-btn-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .share-btn-instagram:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 39, 67, 0.3);
+        }
+
+        .share-btn-whatsapp {
+            background: #25D366;
+            color: white;
+            border-color: transparent;
+        }
+
+        .share-btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .share-btn-copy {
+            background: var(--rosa-nude);
+            color: var(--bordo);
+            border-color: var(--rosa-medio);
+        }
+
+        .share-btn-copy:hover {
+            background: var(--bordo);
+            color: white;
+            border-color: var(--bordo);
+        }
+
+        .share-btn i {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .share-buttons {
+                justify-content: center;
+            }
+            
+            .share-btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* FIN NUEVOS ESTILOS */
+
         .cart-modal {
             display: none;
             position: fixed;
@@ -1406,12 +1495,6 @@
         .whatsapp-float:hover {
             box-shadow: 0 6px 20px rgba(157, 107, 127, 0.6);
             background: var(--rosa-viejo);
-        }
-
-        .whatsapp-float.hidden-cyclic {
-            opacity: 0;
-            transform: scale(0.8);
-            pointer-events: none;
         }
 
         .whatsapp-tooltip {
@@ -1828,13 +1911,13 @@
                     </div>
                     
                     <div class="social-header">
-                        <a href="https://instagram.com/klohesv  " target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv  " target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv" target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry  " target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry" target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -1971,6 +2054,26 @@
                 <p class="preview-price" id="previewPrice"></p>
                 <p class="preview-stock" id="previewStock"></p>
                 <button class="preview-add-btn" id="previewAddBtn" data-i18n="add_to_cart">Agregar al carrito</button>
+                
+                <!-- NUEVA SECCIÓN DE COMPARTIR -->
+                <div class="share-section">
+                    <div class="share-title" data-i18n="share_product">Compartir producto</div>
+                    <div class="share-buttons">
+                        <button class="share-btn share-btn-instagram" onclick="shareOnInstagram()" title="Compartir en Instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </button>
+                        <button class="share-btn share-btn-whatsapp" onclick="shareOnWhatsApp()" title="Compartir en WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </button>
+                        <button class="share-btn share-btn-copy" onclick="copyProductLink()" title="Copiar enlace">
+                            <i class="fas fa-link"></i>
+                            <span data-i18n="copy_link">Copiar</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- FIN NUEVA SECCIÓN -->
             </div>
         </div>
     </div>
@@ -1988,13 +2091,13 @@
                     <h4 data-i18n="social_media">Redes Sociales</h4>
                     <p data-i18n="follow_us">Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
-                        <a href="https://instagram.com/klohesv  " target="_blank" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv  " target="_blank" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry  " target="_blank" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -2013,7 +2116,7 @@
     </footer>
 
     <!-- Botón WhatsApp con animación cíclica: visible 10s → oculto 3min -->
-    <a href="https://wa.me/50366711569  " target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
+    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip" id="whatsappTooltip" data-i18n="need_help">¿Necesitas ayuda?</span>
     </a>
@@ -2144,7 +2247,13 @@
                 thanks_comment: "¡Gracias por tu comentario!",
                 search_results: "Búsqueda: \"{term}\"",
                 units_available: "unidades disponibles",
-                lang_switch: "EN"
+                lang_switch: "EN",
+                // NUEVAS TRADUCCIONES
+                share_product: "Compartir producto",
+                copy_link: "Copiar",
+                link_copied: "¡Enlace copiado!",
+                share_instagram_text: "¡Mira este producto de KLOHE!",
+                share_whatsapp_text: "¡Hola! Mira este producto de KLOHE:"
             },
             en: {
                 categories: "Categories",
@@ -2213,7 +2322,13 @@
                 thanks_comment: "Thank you for your comment!",
                 search_results: "Search: \"{term}\"",
                 units_available: "units available",
-                lang_switch: "ES"
+                lang_switch: "ES",
+                // NUEVAS TRADUCCIONES
+                share_product: "Share product",
+                copy_link: "Copy",
+                link_copied: "Link copied!",
+                share_instagram_text: "Check out this KLOHE product!",
+                share_whatsapp_text: "Hi! Look at this KLOHE product:"
             }
         };
 
@@ -2312,7 +2427,8 @@
             hasMoreProducts: true,
             currentTestimonial: 0,
             searchTerm: '',
-            currentLang: localStorage.getItem('klohe_lang') || 'es'
+            currentLang: localStorage.getItem('klohe_lang') || 'es',
+            currentProduct: null // NUEVO: para guardar el producto actual en vista previa
         };
 
         // Intersection Observer for Lazy Loading Images
@@ -2740,11 +2856,7 @@
         }
 
         function prevTestimonial() {
-            AppState.currentTestimonial = (AppState.currentTestimonial - 1 + testimonials.length) % testimonials.length;
-            updateCarousel();
-        }
-
-        function goToTestimonial(index) {
+            AppState.currentTestimonial = (AppState.currentTestimonial - 1 + testimonials.length) % testimonials        function goToTestimonial(index) {
             AppState.currentTestimonial = index;
             updateCarousel();
         }
@@ -2851,7 +2963,7 @@
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg  ' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -2860,7 +2972,7 @@
                          class="product-image blur-up"
                          src="${placeholderSvg}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22   width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
                     <span class="stock-badge">${product.stock} ${t('available')}</span>
                 </div>
                 <div class="product-info">
@@ -2916,6 +3028,7 @@
         function openPreview(index) {
             const product = products[index];
             currentPreviewIndex = index;
+            AppState.currentProduct = product; // Guardar producto actual para compartir
             
             const img = document.getElementById('previewImage');
             img.src = `${product.barcode}.jpg`;
@@ -2952,7 +3065,93 @@
             document.getElementById('previewModal').classList.remove('active');
             document.body.style.overflow = '';
             currentPreviewIndex = null;
+            AppState.currentProduct = null; // Limpiar producto actual
         }
+
+        // NUEVAS FUNCIONES PARA COMPARTIR
+        function getProductShareUrl() {
+            if (!AppState.currentProduct) return window.location.href;
+            
+            // Crear URL con parámetro del producto
+            const baseUrl = window.location.origin + window.location.pathname;
+            return `${baseUrl}?product=${AppState.currentProduct.barcode}`;
+        }
+
+        function getProductShareText() {
+            if (!AppState.currentProduct) return '';
+            
+            const product = AppState.currentProduct;
+            const price = product.price.toFixed(2);
+            
+            if (AppState.currentLang === 'es') {
+                return `¡Mira este ${product.name} de KLOHE! Solo $${price} 💗\n\nCódigo: ${product.barcode}`;
+            } else {
+                return `Check out this ${product.name} from KLOHE! Only $${price} 💗\n\nSKU: ${product.barcode}`;
+            }
+        }
+
+        function shareOnInstagram() {
+            if (!AppState.currentProduct) return;
+            
+            const text = getProductShareText();
+            const url = getProductShareUrl();
+            
+            // Instagram no permite compartir directamente desde web, 
+            // así que copiamos el texto para que lo peguen
+            copyToClipboard(`${text}\n\n${url}`);
+            
+            // Abrir Instagram en nueva pestaña
+            window.open('https://instagram.com', '_blank');
+            
+            showNotification(AppState.currentLang === 'es' ? 
+                'Texto copiado. Pégalo en Instagram Stories o feed!' : 
+                'Text copied. Paste it on Instagram Stories or feed!');
+        }
+
+        function shareOnWhatsApp() {
+            if (!AppState.currentProduct) return;
+            
+            const text = getProductShareText();
+            const url = getProductShareUrl();
+            const fullMessage = `${text}\n\n${url}`;
+            
+            // Codificar mensaje para URL
+            const encodedMessage = encodeURIComponent(fullMessage);
+            
+            // Abrir WhatsApp Web o app con mensaje prellenado
+            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+        }
+
+        function copyProductLink() {
+            const url = getProductShareUrl();
+            copyToClipboard(url);
+            showNotification(t('link_copied'));
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                // Usar Clipboard API si está disponible
+                navigator.clipboard.writeText(text);
+            } else {
+                // Fallback para navegadores antiguos
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                } catch (err) {
+                    console.error('Error al copiar:', err);
+                }
+                
+                document.body.removeChild(textArea);
+            }
+        }
+        // FIN NUEVAS FUNCIONES
 
         function toggleShipping() {
             AppState.shippingEnabled = !AppState.shippingEnabled;
@@ -3044,7 +3243,7 @@
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
                                  loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22   width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
@@ -3073,7 +3272,7 @@
             const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';
             const greeting = AppState.currentLang === 'es' ? '¡Hola! Quiero comprar:' : 'Hello! I want to buy:';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text=  ${greeting}%0A%0A${message}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text=${greeting}%0A%0A${message}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
         }
 
         function toggleCart() {
@@ -3128,6 +3327,21 @@
             }
             lastTouchEnd = now;
         }, false);
+
+        // Verificar si hay parámetro de producto en URL al cargar
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productBarcode = urlParams.get('product');
+            
+            if (productBarcode && typeof products !== 'undefined') {
+                const productIndex = products.findIndex(p => p.barcode === productBarcode);
+                if (productIndex !== -1) {
+                    setTimeout(() => {
+                        openPreview(productIndex);
+                    }, 1000);
+                }
+            }
+        });
     </script>
 
 </body>

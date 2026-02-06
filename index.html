@@ -993,8 +993,9 @@
         .preview-details {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 1rem 0;
+            position: relative;
         }
 
         .preview-name {
@@ -1009,7 +1010,7 @@
         .preview-barcode {
             font-size: 0.9rem;
             color: var(--rosa-oscuro);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-family: 'Courier New', monospace;
             letter-spacing: 2px;
             padding: 0.4rem 0.8rem;
@@ -1029,7 +1030,7 @@
             padding: 1rem 0;
             border-top: 1px solid var(--rosa-suave);
             border-bottom: 1px solid var(--rosa-suave);
-            max-height: 150px;
+            max-height: 200px;
             overflow-y: auto;
         }
 
@@ -1044,7 +1045,7 @@
         .preview-stock {
             font-size: 0.85rem;
             color: var(--rosa-oscuro);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -1064,6 +1065,7 @@
             width: fit-content;
             border-radius: 30px;
             min-height: 44px;
+            margin-bottom: 1rem;
         }
 
         .preview-add-btn:hover {
@@ -1076,114 +1078,55 @@
             cursor: not-allowed;
         }
 
-        /* Sección de compartir en historias - NUEVO */
-        .share-stories-section {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--rosa-suave);
-            text-align: center;
-        }
-
-        .share-stories-label {
-            font-size: 0.75rem;
-            color: var(--rosa-oscuro);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .share-stories-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-
-        .share-story-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 1.2rem;
-            background: var(--blanco);
-            border: 2px solid var(--rosa-suave);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 100px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .share-story-btn::before {
-            content: '';
+        /* Botones de compartir en esquina - NUEVO */
+        .share-corner {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            transition: height 0.3s ease;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 10;
         }
 
-        .share-story-btn.instagram-story::before {
-            background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-        }
-
-        .share-story-btn.whatsapp-status::before {
-            background: #25D366;
-        }
-
-        .share-story-btn:hover::before {
-            height: 100%;
-            opacity: 0.1;
-        }
-
-        .share-story-btn i {
-            width: 48px;
-            height: 48px;
+        .share-corner-btn {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            border: none;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1rem;
             color: white;
-            margin-bottom: 0.3rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        .share-story-btn.instagram-story i {
+        .share-corner-btn.instagram {
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         }
 
-        .share-story-btn.whatsapp-status i {
+        .share-corner-btn.whatsapp {
             background: #25D366;
         }
 
-        .share-story-btn span {
-            font-size: 0.8rem;
-            color: var(--negro-suave);
-            font-weight: 600;
-            letter-spacing: 0.5px;
+        .share-corner-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
-        .share-story-btn small {
-            font-size: 0.65rem;
-            color: var(--rosa-oscuro);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .share-story-btn:hover {
-            transform: translateY(-5px);
-            border-color: var(--rosa-medio);
-            box-shadow: 0 10px 30px rgba(157, 107, 127, 0.15);
-        }
-
-        .share-story-btn:active {
+        .share-corner-btn:active {
             transform: scale(0.95);
         }
 
-        /* Modal de historia generada - NUEVO */
+        /* Canvas oculto */
+        #storyCanvas {
+            display: none;
+        }
+
+        /* Modal de historia */
         .story-modal {
             display: none;
             position: fixed;
@@ -1957,6 +1900,15 @@
                 font-size: 1.6rem;
             }
 
+            .preview-description {
+                max-height: 150px;
+            }
+
+            .share-corner {
+                top: -10px;
+                right: -10px;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -1991,22 +1943,6 @@
                 padding: 1.2rem 0;
             }
 
-            /* Responsive para share stories */
-            .share-stories-buttons {
-                gap: 1rem;
-            }
-            
-            .share-story-btn {
-                min-width: 80px;
-                padding: 1rem;
-            }
-            
-            .share-story-btn i {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-            
             .story-modal-content {
                 padding: 1.5rem;
                 margin: 1rem;
@@ -2045,6 +1981,12 @@
             
             .nav-right {
                 gap: 0.8rem;
+            }
+
+            .share-corner-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
             }
         }
 
@@ -2239,37 +2181,30 @@
                 <img src="" alt="" class="preview-image blur-up" id="previewImage" loading="lazy">
             </div>
             <div class="preview-details">
+                <!-- Botones de compartir en esquina superior derecha - NUEVO -->
+                <div class="share-corner">
+                    <button class="share-corner-btn instagram" onclick="generateStoryImage('instagram')" title="Compartir en Instagram" aria-label="Compartir en Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </button>
+                    <button class="share-corner-btn whatsapp" onclick="generateStoryImage('whatsapp')" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
+                </div>
+
                 <h3 class="preview-name" id="previewName"></h3>
                 <p class="preview-barcode" id="previewBarcode"></p>
                 <p class="preview-description" id="previewDescription"></p>
                 <p class="preview-price" id="previewPrice"></p>
                 <p class="preview-stock" id="previewStock"></p>
                 <button class="preview-add-btn" id="previewAddBtn" data-i18n="add_to_cart">Agregar al carrito</button>
-                
-                <!-- Sección de compartir en historias - NUEVO -->
-                <div class="share-stories-section">
-                    <p class="share-stories-label" data-i18n="share_in_stories">Compartir en historias</p>
-                    <div class="share-stories-buttons">
-                        <button class="share-story-btn instagram-story" onclick="generateStoryImage('instagram')" aria-label="Compartir en historia de Instagram">
-                            <i class="fab fa-instagram"></i>
-                            <span>Instagram</span>
-                            <small>Story</small>
-                        </button>
-                        <button class="share-story-btn whatsapp-status" onclick="generateStoryImage('whatsapp')" aria-label="Compartir en estado de WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>WhatsApp</span>
-                            <small>Estado</small>
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Canvas oculto para generar la imagen - NUEVO -->
-    <canvas id="storyCanvas" style="display: none;"></canvas>
+    <!-- Canvas oculto para generar la imagen -->
+    <canvas id="storyCanvas"></canvas>
 
-    <!-- Modal para descargar la imagen generada - NUEVO -->
+    <!-- Modal para descargar la imagen generada -->
     <div class="story-modal" id="storyModal" onclick="closeStoryModal(event)">
         <div class="story-modal-content" onclick="event.stopPropagation()">
             <button class="close-story-modal" onclick="closeStoryModal()"><i class="fas fa-times"></i></button>
@@ -2464,7 +2399,6 @@
                 search_results: "Búsqueda: \"{term}\"",
                 units_available: "unidades disponibles",
                 lang_switch: "EN",
-                // Nuevas traducciones para compartir en historias
                 share_in_stories: "Compartir en historias",
                 your_story_ready: "¡Tu historia está lista!",
                 download_and_share: "Descarga la imagen y súbela a tu historia",
@@ -2540,7 +2474,6 @@
                 search_results: "Search: \"{term}\"",
                 units_available: "units available",
                 lang_switch: "ES",
-                // Nuevas traducciones para compartir en historias
                 share_in_stories: "Share to stories",
                 your_story_ready: "Your story is ready!",
                 download_and_share: "Download the image and upload it to your story",
@@ -3238,7 +3171,17 @@
             document.getElementById('previewImage').alt = product.name;
             document.getElementById('previewName').textContent = product.name;
             document.getElementById('previewBarcode').textContent = `${t('code')}: ${product.barcode}`;
-            document.getElementById('previewDescription').textContent = product.description || '';
+            
+            // Mostrar descripción
+            const descElement = document.getElementById('previewDescription');
+            if (product.description && product.description.trim() !== '') {
+                descElement.textContent = product.description;
+                descElement.style.display = 'block';
+            } else {
+                descElement.textContent = AppState.currentLang === 'es' ? 'No hay descripción disponible.' : 'No description available.';
+                descElement.style.display = 'block';
+            }
+            
             document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
             document.getElementById('previewStock').textContent = `${product.stock} ${t('units_available')}`;
             
@@ -3267,7 +3210,7 @@
             currentPreviewIndex = null;
         }
 
-        // Funciones para generar y compartir historias - NUEVO
+        // Funciones para generar y compartir historias
         function generateStoryImage(platform) {
             if (currentPreviewIndex === null) return;
             
@@ -3580,7 +3523,7 @@
             const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';
             const greeting = AppState.currentLang === 'es' ? '¡Hola! Quiero comprar:' : 'Hello! I want to buy:';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text=${greeting}%0A%0A${message}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent(greeting)}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
         }
 
         function toggleCart() {

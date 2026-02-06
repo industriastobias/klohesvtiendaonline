@@ -168,7 +168,6 @@
             gap: 1.5rem;
         }
 
-        /* SINGLE LANGUAGE BUTTON */
         .language-switcher {
             position: relative;
         }
@@ -1050,87 +1049,6 @@
             letter-spacing: 1px;
         }
 
-        /* NUEVOS ESTILOS PARA BOTONES DE COMPARTIR */
-        .share-section {
-            margin: 1.5rem 0;
-            padding: 1.5rem 0;
-            border-top: 1px solid var(--rosa-suave);
-            border-bottom: 1px solid var(--rosa-suave);
-        }
-
-        .share-label {
-            font-size: 0.8rem;
-            color: var(--rosa-oscuro);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 1rem;
-            display: block;
-            font-weight: 500;
-        }
-
-        .share-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .share-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .share-btn-whatsapp {
-            background: #25D366;
-            color: white;
-            border-color: #25D366;
-        }
-
-        .share-btn-whatsapp:hover {
-            background: #128C7E;
-            border-color: #128C7E;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-        }
-
-        .share-btn-instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white;
-            border-color: transparent;
-        }
-
-        .share-btn-instagram:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(220, 39, 67, 0.3);
-            filter: brightness(1.1);
-        }
-
-        .share-btn i {
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .share-buttons {
-                flex-direction: column;
-            }
-            
-            .share-btn {
-                justify-content: center;
-                width: 100%;
-            }
-        }
-
-        /* FIN NUEVOS ESTILOS */
-
         .preview-add-btn {
             padding: 1rem 2rem;
             background: var(--bordo);
@@ -1156,6 +1074,258 @@
             background: var(--rosa-suave);
             color: var(--rosa-oscuro);
             cursor: not-allowed;
+        }
+
+        /* Sección de compartir en historias - NUEVO */
+        .share-stories-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--rosa-suave);
+            text-align: center;
+        }
+
+        .share-stories-label {
+            font-size: 0.75rem;
+            color: var(--rosa-oscuro);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .share-stories-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .share-story-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 1.2rem;
+            background: var(--blanco);
+            border: 2px solid var(--rosa-suave);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-story-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            transition: height 0.3s ease;
+        }
+
+        .share-story-btn.instagram-story::before {
+            background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .share-story-btn.whatsapp-status::before {
+            background: #25D366;
+        }
+
+        .share-story-btn:hover::before {
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .share-story-btn i {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 0.3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .share-story-btn.instagram-story i {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .share-story-btn.whatsapp-status i {
+            background: #25D366;
+        }
+
+        .share-story-btn span {
+            font-size: 0.8rem;
+            color: var(--negro-suave);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .share-story-btn small {
+            font-size: 0.65rem;
+            color: var(--rosa-oscuro);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .share-story-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--rosa-medio);
+            box-shadow: 0 10px 30px rgba(157, 107, 127, 0.15);
+        }
+
+        .share-story-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Modal de historia generada - NUEVO */
+        .story-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(253, 248, 246, 0.98);
+            z-index: 4000;
+            padding: 2rem;
+            overflow-y: auto;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-modal.active {
+            display: flex;
+        }
+
+        .story-modal-content {
+            background: var(--blanco);
+            max-width: 450px;
+            width: 100%;
+            padding: 2.5rem;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(157, 107, 127, 0.2);
+        }
+
+        .close-story-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--bordo);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .close-story-modal:hover {
+            color: var(--rosa-viejo);
+            transform: rotate(90deg);
+        }
+
+        .story-modal-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--bordo);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .story-instruction {
+            color: var(--rosa-oscuro);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-preview-container {
+            background: linear-gradient(135deg, var(--rosa-nude) 0%, var(--rosa-suave) 100%);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--rosa-medio);
+        }
+
+        .story-preview-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: block;
+        }
+
+        .story-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-download-story,
+        .btn-copy-story {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 30px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-download-story {
+            background: var(--bordo);
+            color: white;
+        }
+
+        .btn-download-story:hover {
+            background: var(--rosa-viejo);
+            transform: translateY(-2px);
+        }
+
+        .btn-copy-story {
+            background: transparent;
+            color: var(--bordo);
+            border: 2px solid var(--bordo);
+        }
+
+        .btn-copy-story:hover {
+            background: var(--bordo);
+            color: white;
+        }
+
+        .btn-copy-story.copied {
+            background: #25D366;
+            border-color: #25D366;
+            color: white;
+        }
+
+        .story-tip {
+            font-size: 0.75rem;
+            color: var(--rosa-oscuro);
+            font-style: italic;
+            padding: 0.8rem;
+            background: var(--rosa-nude);
+            border-radius: 8px;
         }
 
         .cart-modal {
@@ -1460,7 +1630,6 @@
             display: block;
         }
 
-        /* WHATSAPP FLOAT - CON ANIMACIÓN CÍCLICA */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -1821,6 +1990,31 @@
             .category-btn {
                 padding: 1.2rem 0;
             }
+
+            /* Responsive para share stories */
+            .share-stories-buttons {
+                gap: 1rem;
+            }
+            
+            .share-story-btn {
+                min-width: 80px;
+                padding: 1rem;
+            }
+            
+            .share-story-btn i {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .story-modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .story-actions {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1888,7 +2082,7 @@
         }
 
         @supports (-webkit-touch-callout: none) {
-            .cart-modal, .preview-modal, .categories-menu {
+            .cart-modal, .preview-modal, .categories-menu, .story-modal {
                 padding-bottom: env(safe-area-inset-bottom);
             }
         }
@@ -1901,7 +2095,6 @@
             <nav>
                 <a href="#" class="logo">KLOHE</a>
                 <div class="nav-right">
-                    <!-- SINGLE LANGUAGE BUTTON -->
                     <div class="language-switcher">
                         <button class="lang-btn" onclick="toggleLanguage()" id="langBtn" title="Cambiar idioma / Change language">
                             <i class="fas fa-globe"></i> <span id="currentLang">ES</span>
@@ -2039,7 +2232,7 @@
         </div>
     </section>
 
-    <!-- Modal de Vista Previa CON BOTONES DE COMPARTIR -->
+    <!-- Modal de Vista Previa -->
     <div class="preview-modal" id="previewModal" onclick="closePreview(event)" role="dialog" aria-modal="true" aria-labelledby="previewName">
         <div class="preview-content" onclick="event.stopPropagation()">
             <div class="preview-image-container">
@@ -2051,24 +2244,54 @@
                 <p class="preview-description" id="previewDescription"></p>
                 <p class="preview-price" id="previewPrice"></p>
                 <p class="preview-stock" id="previewStock"></p>
+                <button class="preview-add-btn" id="previewAddBtn" data-i18n="add_to_cart">Agregar al carrito</button>
                 
-                <!-- NUEVA SECCIÓN DE COMPARTIR -->
-                <div class="share-section">
-                    <span class="share-label" data-i18n="share_product">Compartir producto</span>
-                    <div class="share-buttons">
-                        <button class="share-btn share-btn-whatsapp" onclick="shareOnWhatsApp()" aria-label="Compartir en WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>WhatsApp</span>
-                        </button>
-                        <button class="share-btn share-btn-instagram" onclick="shareOnInstagram()" aria-label="Compartir en Instagram">
+                <!-- Sección de compartir en historias - NUEVO -->
+                <div class="share-stories-section">
+                    <p class="share-stories-label" data-i18n="share_in_stories">Compartir en historias</p>
+                    <div class="share-stories-buttons">
+                        <button class="share-story-btn instagram-story" onclick="generateStoryImage('instagram')" aria-label="Compartir en historia de Instagram">
                             <i class="fab fa-instagram"></i>
                             <span>Instagram</span>
+                            <small>Story</small>
+                        </button>
+                        <button class="share-story-btn whatsapp-status" onclick="generateStoryImage('whatsapp')" aria-label="Compartir en estado de WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                            <small>Estado</small>
                         </button>
                     </div>
                 </div>
-                
-                <button class="preview-add-btn" id="previewAddBtn" data-i18n="add_to_cart">Agregar al carrito</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Canvas oculto para generar la imagen - NUEVO -->
+    <canvas id="storyCanvas" style="display: none;"></canvas>
+
+    <!-- Modal para descargar la imagen generada - NUEVO -->
+    <div class="story-modal" id="storyModal" onclick="closeStoryModal(event)">
+        <div class="story-modal-content" onclick="event.stopPropagation()">
+            <button class="close-story-modal" onclick="closeStoryModal()"><i class="fas fa-times"></i></button>
+            <h3 data-i18n="your_story_ready">¡Tu historia está lista!</h3>
+            <p class="story-instruction" data-i18n="download_and_share">Descarga la imagen y súbela a tu historia</p>
+            
+            <div class="story-preview-container">
+                <img id="generatedStoryImage" alt="Story preview">
+            </div>
+            
+            <div class="story-actions">
+                <a id="downloadStoryBtn" class="btn-download-story" download="klohe-story.jpg">
+                    <i class="fas fa-download"></i>
+                    <span data-i18n="download_image">Descargar imagen</span>
+                </a>
+                <button class="btn-copy-story" onclick="copyStoryToClipboard()">
+                    <i class="fas fa-copy"></i>
+                    <span data-i18n="copy_image">Copiar imagen</span>
+                </button>
+            </div>
+            
+            <p class="story-tip" data-i18n="story_upload_tip">Abre Instagram/WhatsApp y sube esta imagen a tu historia</p>
         </div>
     </div>
 
@@ -2109,7 +2332,6 @@
         </div>
     </footer>
 
-    <!-- Botón WhatsApp con animación cíclica: visible 10s → oculto 3min -->
     <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip" id="whatsappTooltip" data-i18n="need_help">¿Necesitas ayuda?</span>
@@ -2171,7 +2393,7 @@
 
     <script src="products.js"></script>
     
-    script>
+    <script>
         // Translations Object
         const translations = {
             es: {
@@ -2242,8 +2464,13 @@
                 search_results: "Búsqueda: \"{term}\"",
                 units_available: "unidades disponibles",
                 lang_switch: "EN",
-                share_product: "Compartir producto",
-                share_text: "¡Mira este hermoso producto de KLOHE!"
+                // Nuevas traducciones para compartir en historias
+                share_in_stories: "Compartir en historias",
+                your_story_ready: "¡Tu historia está lista!",
+                download_and_share: "Descarga la imagen y súbela a tu historia",
+                download_image: "Descargar imagen",
+                copy_image: "Copiar imagen",
+                story_upload_tip: "Abre Instagram/WhatsApp y sube esta imagen a tu historia"
             },
             en: {
                 categories: "Categories",
@@ -2313,8 +2540,13 @@
                 search_results: "Search: \"{term}\"",
                 units_available: "units available",
                 lang_switch: "ES",
-                share_product: "Share product",
-                share_text: "Check out this beautiful product from KLOHE!"
+                // Nuevas traducciones para compartir en historias
+                share_in_stories: "Share to stories",
+                your_story_ready: "Your story is ready!",
+                download_and_share: "Download the image and upload it to your story",
+                download_image: "Download image",
+                copy_image: "Copy image",
+                story_upload_tip: "Open Instagram/WhatsApp and upload this image to your story"
             }
         };
 
@@ -2398,8 +2630,8 @@
         const CONFIG = {
             productsPerPage: 12,
             preloadOffset: '200px',
-            whatsappVisibleDuration: 10000, // 10 segundos
-            whatsappHiddenDuration: 180000 // 3 minutos
+            whatsappVisibleDuration: 10000,
+            whatsappHiddenDuration: 180000
         };
 
         // State Management
@@ -2413,8 +2645,7 @@
             hasMoreProducts: true,
             currentTestimonial: 0,
             searchTerm: '',
-            currentLang: localStorage.getItem('klohe_lang') || 'es',
-            currentPreviewProduct: null // Para guardar el producto actual en vista previa
+            currentLang: localStorage.getItem('klohe_lang') || 'es'
         };
 
         // Intersection Observer for Lazy Loading Images
@@ -2480,28 +2711,25 @@
             return text;
         }
 
-        // Toggle Language Function (Single Button)
+        // Toggle Language Function
         function toggleLanguage() {
             const newLang = AppState.currentLang === 'es' ? 'en' : 'es';
             AppState.currentLang = newLang;
             localStorage.setItem('klohe_lang', newLang);
             
-            // Update button text
             document.getElementById('currentLang').textContent = t('lang_switch');
             
-            // Update all elements with data-i18n
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[newLang][key]) {
                     if (key === 'discount_text') {
-                        element.innerHTML = translations[newLang][key]; // Keep HTML
+                        element.innerHTML = translations[newLang][key];
                     } else {
                         element.textContent = translations[newLang][key];
                     }
                 }
             });
             
-            // Update placeholders
             document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
                 const key = element.getAttribute('data-i18n-placeholder');
                 if (translations[newLang][key]) {
@@ -2509,24 +2737,16 @@
                 }
             });
             
-            // Update category title if showing all
             if (AppState.currentFilter === 'todos' && !AppState.searchTerm) {
                 document.getElementById('categoryTitle').textContent = t('all');
             }
             
-            // Update document language
             document.documentElement.lang = newLang;
             
-            // Refresh verse
             displayDailyVerse();
-            
-            // Refresh testimonials (if they have translations)
             initTestimonials();
-            
-            // Refresh cart
             updateCart();
             
-            // Refresh product grid for stock labels
             document.getElementById('productsContainer').innerHTML = '';
             AppState.currentPage = 0;
             renderProducts();
@@ -2626,41 +2846,32 @@
             }
         }
 
-        /**
-         * Función para ciclo de animación del botón WhatsApp
-         * Ciclo: visible 10s → fade out + scale down → oculto 3min → fade in + scale up → repetir
-         */
         function initWhatsAppCyclicAnimation() {
             const float = document.getElementById('whatsappFloat');
             let isVisible = true;
             
             function cycle() {
                 if (isVisible) {
-                    // Después de 10 segundos visible, ocultar
                     setTimeout(() => {
                         float.classList.add('hidden-cyclic');
                         isVisible = false;
-                        cycle(); // Llamar recursivamente para siguiente fase
+                        cycle();
                     }, CONFIG.whatsappVisibleDuration);
                 } else {
-                    // Después de 3 minutos oculto, mostrar
                     setTimeout(() => {
                         float.classList.remove('hidden-cyclic');
                         isVisible = true;
-                        cycle(); // Repetir ciclo infinito
+                        cycle();
                     }, CONFIG.whatsappHiddenDuration);
                 }
             }
             
-            // Iniciar ciclo
             cycle();
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize language button
             document.getElementById('currentLang').textContent = AppState.currentLang === 'es' ? 'EN' : 'ES';
             
-            // Iniciar animación cíclica del botón WhatsApp
             initWhatsAppCyclicAnimation();
             
             displayDailyVerse();
@@ -2670,7 +2881,6 @@
             if (typeof products !== 'undefined') {
                 AppState.filteredProducts = [...products];
                 
-                // Validate cart
                 const validBarcodes = new Set(products.map(p => p.barcode));
                 const originalCartLength = AppState.cart.length;
                 
@@ -2707,8 +2917,7 @@
                 updateCart();
                 
                 document.getElementById('productsContainer').innerHTML = 
-                    '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">' +
-                    'Error loading products</div>';
+                    '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">Error loading products</div>';
             }
             
             const searchInput = document.getElementById('searchInput');
@@ -2754,10 +2963,12 @@
             const menu = document.getElementById('categoriesMenu');
             const cart = document.getElementById('cartModal');
             const preview = document.getElementById('previewModal');
+            const story = document.getElementById('storyModal');
             
             if (menu.classList.contains('active')) toggleMenu();
             if (cart.classList.contains('active')) toggleCart();
             if (preview.classList.contains('active')) closePreview();
+            if (story.classList.contains('active')) closeStoryModal();
             if (document.getElementById('newsletterPopup').classList.contains('active')) closeNewsletter();
         }
 
@@ -3018,7 +3229,6 @@
         function openPreview(index) {
             const product = products[index];
             currentPreviewIndex = index;
-            AppState.currentPreviewProduct = product; // Guardar referencia para compartir
             
             const img = document.getElementById('previewImage');
             img.src = `${product.barcode}.jpg`;
@@ -3055,54 +3265,200 @@
             document.getElementById('previewModal').classList.remove('active');
             document.body.style.overflow = '';
             currentPreviewIndex = null;
-            AppState.currentPreviewProduct = null;
         }
 
-        // NUEVAS FUNCIONES PARA COMPARTIR
-        function shareOnWhatsApp() {
-            const product = AppState.currentPreviewProduct;
-            if (!product) return;
+        // Funciones para generar y compartir historias - NUEVO
+        function generateStoryImage(platform) {
+            if (currentPreviewIndex === null) return;
             
-            const text = `${t('share_text')}\n\n${product.name}\n${t('code')}: ${product.barcode}\n$${product.price.toFixed(2)}\n\nhttps://klohe.com/producto/${product.barcode}`;
-            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
-        }
-
-        function shareOnInstagram() {
-            const product = AppState.currentPreviewProduct;
-            if (!product) return;
+            const product = products[currentPreviewIndex];
+            const canvas = document.getElementById('storyCanvas');
+            const ctx = canvas.getContext('2d');
             
-            // Instagram no permite compartir directamente desde web, así que copiamos al portapapeles
-            const text = `${t('share_text')}\n\n${product.name}\n${t('code')}: ${product.barcode}\n$${product.price.toFixed(2)}\n\n#KLOHE #SanValentin #Joyeria`;
+            // Dimensiones 9:16 para historias (1080x1920)
+            canvas.width = 1080;
+            canvas.height = 1920;
             
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showNotification(AppState.currentLang === 'es' ? '¡Texto copiado! Pégalo en Instagram' : 'Text copied! Paste it on Instagram');
-                }).catch(() => {
-                    // Fallback para móviles
-                    const textArea = document.createElement("textarea");
-                    textArea.value = text;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand("copy");
-                    document.body.removeChild(textArea);
-                    showNotification(AppState.currentLang === 'es' ? '¡Texto copiado! Pégalo en Instagram' : 'Text copied! Paste it on Instagram');
-                });
-            } else {
-                // Fallback
-                const textArea = document.createElement("textarea");
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand("copy");
-                document.body.removeChild(textArea);
-                showNotification(AppState.currentLang === 'es' ? '¡Texto copiado! Pégalo en Instagram' : 'Text copied! Paste it on Instagram');
+            // Fondo degradado romántico
+            const gradient = ctx.createLinearGradient(0, 0, 1080, 1920);
+            gradient.addColorStop(0, '#FDF8F6');
+            gradient.addColorStop(0.5, '#F5E6E0');
+            gradient.addColorStop(1, '#E8D5D0');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1080, 1920);
+            
+            // Patrón de corazones sutiles en fondo
+            ctx.fillStyle = 'rgba(212, 165, 154, 0.1)';
+            for (let i = 0; i < 20; i++) {
+                const x = Math.random() * 1080;
+                const y = Math.random() * 1920;
+                const size = 20 + Math.random() * 40;
+                drawHeart(ctx, x, y, size);
             }
             
-            // Abrir Instagram después de un momento
-            setTimeout(() => {
-                window.open('https://instagram.com', '_blank');
-            }, 500);
+            // Marco decorativo
+            ctx.strokeStyle = '#B5838D';
+            ctx.lineWidth = 8;
+            ctx.strokeRect(60, 60, 960, 1800);
+            
+            // Logo KLOHE
+            ctx.font = 'bold 80px "Playfair Display", serif';
+            ctx.fillStyle = '#6D435A';
+            ctx.textAlign = 'center';
+            ctx.fillText('KLOHE', 540, 200);
+            
+            // Subtítulo
+            ctx.font = '300 40px "Inter", sans-serif';
+            ctx.fillStyle = '#9B6B7F';
+            ctx.fillText('Valentine\'s Collection', 540, 260);
+            
+            // Cargar imagen del producto
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                // Marco de foto
+                ctx.fillStyle = '#FFFFFF';
+                ctx.shadowColor = 'rgba(157, 107, 127, 0.3)';
+                ctx.shadowBlur = 40;
+                ctx.shadowOffsetY = 20;
+                ctx.fillRect(140, 350, 800, 800);
+                ctx.shadowColor = 'transparent';
+                
+                // Imagen del producto (recortada a cuadrado)
+                const scale = Math.max(800 / img.width, 800 / img.height);
+                const x = (img.width * scale - 800) / 2;
+                const y = (img.height * scale - 800) / 2;
+                ctx.drawImage(img, -x, -y, img.width * scale, img.height * scale, 140, 350, 800, 800);
+                
+                // Marco interior
+                ctx.strokeStyle = '#D4A59A';
+                ctx.lineWidth = 4;
+                ctx.strokeRect(160, 370, 760, 760);
+                
+                // Nombre del producto
+                ctx.font = 'bold 60px "Playfair Display", serif';
+                ctx.fillStyle = '#2C2424';
+                ctx.textAlign = 'center';
+                
+                // Texto multilinea para nombre largo
+                const maxWidth = 900;
+                const lineHeight = 80;
+                const words = product.name.split(' ');
+                let line = '';
+                let yPos = 1250;
+                
+                for (let n = 0; n < words.length; n++) {
+                    const testLine = line + words[n] + ' ';
+                    const metrics = ctx.measureText(testLine);
+                    const testWidth = metrics.width;
+                    if (testWidth > maxWidth && n > 0) {
+                        ctx.fillText(line, 540, yPos);
+                        line = words[n] + ' ';
+                        yPos += lineHeight;
+                    } else {
+                        line = testLine;
+                    }
+                }
+                ctx.fillText(line, 540, yPos);
+                
+                // Precio destacado
+                const priceY = yPos + 120;
+                ctx.font = 'bold 100px "Inter", sans-serif';
+                ctx.fillStyle = '#6D435A';
+                ctx.fillText(`$${product.price.toFixed(2)}`, 540, priceY);
+                
+                // Badge de disponibilidad
+                ctx.font = '500 35px "Inter", sans-serif';
+                ctx.fillStyle = product.stock > 0 ? '#25D366' : '#dc3545';
+                ctx.fillText(product.stock > 0 ? (AppState.currentLang === 'es' ? '✓ Disponible' : '✓ Available') : (AppState.currentLang === 'es' ? 'Agotado' : 'Sold Out'), 540, priceY + 80);
+                
+                // Código
+                ctx.font = '400 30px "Courier New", monospace';
+                ctx.fillStyle = '#9B6B7F';
+                ctx.fillText(`${AppState.currentLang === 'es' ? 'COD' : 'SKU'}: ${product.barcode}`, 540, priceY + 140);
+                
+                // Footer con call to action
+                ctx.font = 'italic 400 40px "Cormorant Garamond", serif';
+                ctx.fillStyle = '#6D435A';
+                ctx.fillText(AppState.currentLang === 'es' ? '💗 El regalo perfecto para San Valentín' : '💗 The perfect Valentine\'s gift', 540, 1750);
+                
+                // WhatsApp contacto
+                ctx.font = '500 35px "Inter", sans-serif';
+                ctx.fillStyle = '#25D366';
+                ctx.fillText('WhatsApp: 6671-1569', 540, 1820);
+                
+                // Generar imagen
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                document.getElementById('generatedStoryImage').src = dataUrl;
+                document.getElementById('downloadStoryBtn').href = dataUrl;
+                
+                // Mostrar modal
+                document.getElementById('storyModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Guardar en variable global para copiar
+                window.currentStoryImage = dataUrl;
+            };
+            
+            img.onerror = function() {
+                showNotification('Error cargando imagen', 'error');
+            };
+            
+            img.src = `${product.barcode}.jpg`;
+        }
+
+        // Dibujar corazón decorativo
+        function drawHeart(ctx, x, y, size) {
+            ctx.beginPath();
+            ctx.moveTo(x, y + size / 4);
+            ctx.quadraticCurveTo(x, y, x + size / 4, y);
+            ctx.quadraticCurveTo(x + size / 2, y, x + size / 2, y + size / 4);
+            ctx.quadraticCurveTo(x + size / 2, y, x + size * 3/4, y);
+            ctx.quadraticCurveTo(x + size, y, x + size, y + size / 4);
+            ctx.quadraticCurveTo(x + size, y + size / 2, x + size * 1/2, y + size * 3/4);
+            ctx.quadraticCurveTo(x, y + size / 2, x, y + size / 4);
+            ctx.fill();
+        }
+
+        // Cerrar modal de historia
+        function closeStoryModal(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.getElementById('storyModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Copiar imagen al portapapeles
+        async function copyStoryToClipboard() {
+            const img = document.getElementById('generatedStoryImage');
+            
+            try {
+                const response = await fetch(img.src);
+                const blob = await response.blob();
+                
+                if (navigator.clipboard && window.ClipboardItem) {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            'image/png': blob
+                        })
+                    ]);
+                    
+                    const btn = document.querySelector('.btn-copy-story');
+                    btn.classList.add('copied');
+                    btn.innerHTML = '<i class="fas fa-check"></i><span>¡Copiado!</span>';
+                    
+                    showNotification(AppState.currentLang === 'es' ? '¡Imagen copiada! Pégala en tu historia' : 'Image copied! Paste it in your story');
+                    
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        btn.innerHTML = `<i class="fas fa-copy"></i><span>${t('copy_image')}</span>`;
+                    }, 3000);
+                } else {
+                    showNotification('Tu navegador no soporta copiar imágenes. Descarga la imagen.', 'error');
+                }
+            } catch (err) {
+                console.error('Error copying:', err);
+                showNotification('Error al copiar. Intenta descargar.', 'error');
+            }
         }
 
         function toggleShipping() {

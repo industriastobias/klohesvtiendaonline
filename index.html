@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>KLOHE - Valentine's Day Collection</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22   viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300  ;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css  ">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         * {
@@ -1050,6 +1050,87 @@
             letter-spacing: 1px;
         }
 
+        /* NUEVOS ESTILOS PARA BOTONES DE COMPARTIR */
+        .share-section {
+            margin: 1.5rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--rosa-suave);
+        }
+
+        .share-label {
+            font-size: 0.8rem;
+            color: var(--rosa-oscuro);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .share-btn-whatsapp {
+            background: #25D366;
+            color: white;
+            border-color: #25D366;
+        }
+
+        .share-btn-whatsapp:hover {
+            background: #128C7E;
+            border-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .share-btn-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .share-btn-instagram:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 39, 67, 0.3);
+            filter: brightness(1.1);
+        }
+
+        .share-btn i {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .share-buttons {
+                flex-direction: column;
+            }
+            
+            .share-btn {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+        /* FIN NUEVOS ESTILOS */
+
         .preview-add-btn {
             padding: 1rem 2rem;
             background: var(--bordo);
@@ -1828,13 +1909,13 @@
                     </div>
                     
                     <div class="social-header">
-                        <a href="https://instagram.com/klohesv  " target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv  " target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv" target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry  " target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry" target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -1958,7 +2039,7 @@
         </div>
     </section>
 
-    <!-- Modal de Vista Previa -->
+    <!-- Modal de Vista Previa CON BOTONES DE COMPARTIR -->
     <div class="preview-modal" id="previewModal" onclick="closePreview(event)" role="dialog" aria-modal="true" aria-labelledby="previewName">
         <div class="preview-content" onclick="event.stopPropagation()">
             <div class="preview-image-container">
@@ -1970,6 +2051,22 @@
                 <p class="preview-description" id="previewDescription"></p>
                 <p class="preview-price" id="previewPrice"></p>
                 <p class="preview-stock" id="previewStock"></p>
+                
+                <!-- NUEVA SECCIÓN DE COMPARTIR -->
+                <div class="share-section">
+                    <span class="share-label" data-i18n="share_product">Compartir producto</span>
+                    <div class="share-buttons">
+                        <button class="share-btn share-btn-whatsapp" onclick="shareOnWhatsApp()" aria-label="Compartir en WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </button>
+                        <button class="share-btn share-btn-instagram" onclick="shareOnInstagram()" aria-label="Compartir en Instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </button>
+                    </div>
+                </div>
+                
                 <button class="preview-add-btn" id="previewAddBtn" data-i18n="add_to_cart">Agregar al carrito</button>
             </div>
         </div>
@@ -1988,13 +2085,13 @@
                     <h4 data-i18n="social_media">Redes Sociales</h4>
                     <p data-i18n="follow_us">Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
-                        <a href="https://instagram.com/klohesv  " target="_blank" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv  " target="_blank" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry  " target="_blank" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -2013,7 +2110,7 @@
     </footer>
 
     <!-- Botón WhatsApp con animación cíclica: visible 10s → oculto 3min -->
-    <a href="https://wa.me/50366711569  " target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
+    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip" id="whatsappTooltip" data-i18n="need_help">¿Necesitas ayuda?</span>
     </a>
@@ -2074,7 +2171,7 @@
 
     <script src="products.js"></script>
     
-    <script>
+    script>
         // Translations Object
         const translations = {
             es: {
@@ -2144,7 +2241,9 @@
                 thanks_comment: "¡Gracias por tu comentario!",
                 search_results: "Búsqueda: \"{term}\"",
                 units_available: "unidades disponibles",
-                lang_switch: "EN"
+                lang_switch: "EN",
+                share_product: "Compartir producto",
+                share_text: "¡Mira este hermoso producto de KLOHE!"
             },
             en: {
                 categories: "Categories",
@@ -2213,7 +2312,9 @@
                 thanks_comment: "Thank you for your comment!",
                 search_results: "Search: \"{term}\"",
                 units_available: "units available",
-                lang_switch: "ES"
+                lang_switch: "ES",
+                share_product: "Share product",
+                share_text: "Check out this beautiful product from KLOHE!"
             }
         };
 
@@ -2312,7 +2413,8 @@
             hasMoreProducts: true,
             currentTestimonial: 0,
             searchTerm: '',
-            currentLang: localStorage.getItem('klohe_lang') || 'es'
+            currentLang: localStorage.getItem('klohe_lang') || 'es',
+            currentPreviewProduct: null // Para guardar el producto actual en vista previa
         };
 
         // Intersection Observer for Lazy Loading Images
@@ -2851,7 +2953,7 @@
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg  ' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -2860,7 +2962,7 @@
                          class="product-image blur-up"
                          src="${placeholderSvg}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22   width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
                     <span class="stock-badge">${product.stock} ${t('available')}</span>
                 </div>
                 <div class="product-info">
@@ -2916,6 +3018,7 @@
         function openPreview(index) {
             const product = products[index];
             currentPreviewIndex = index;
+            AppState.currentPreviewProduct = product; // Guardar referencia para compartir
             
             const img = document.getElementById('previewImage');
             img.src = `${product.barcode}.jpg`;
@@ -2952,6 +3055,54 @@
             document.getElementById('previewModal').classList.remove('active');
             document.body.style.overflow = '';
             currentPreviewIndex = null;
+            AppState.currentPreviewProduct = null;
+        }
+
+        // NUEVAS FUNCIONES PARA COMPARTIR
+        function shareOnWhatsApp() {
+            const product = AppState.currentPreviewProduct;
+            if (!product) return;
+            
+            const text = `${t('share_text')}\n\n${product.name}\n${t('code')}: ${product.barcode}\n$${product.price.toFixed(2)}\n\nhttps://klohe.com/producto/${product.barcode}`;
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareOnInstagram() {
+            const product = AppState.currentPreviewProduct;
+            if (!product) return;
+            
+            // Instagram no permite compartir directamente desde web, así que copiamos al portapapeles
+            const text = `${t('share_text')}\n\n${product.name}\n${t('code')}: ${product.barcode}\n$${product.price.toFixed(2)}\n\n#KLOHE #SanValentin #Joyeria`;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification(AppState.currentLang === 'es' ? '¡Texto copiado! Pégalo en Instagram' : 'Text copied! Paste it on Instagram');
+                }).catch(() => {
+                    // Fallback para móviles
+                    const textArea = document.createElement("textarea");
+                    textArea.value = text;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(textArea);
+                    showNotification(AppState.currentLang === 'es' ? '¡Texto copiado! Pégalo en Instagram' : 'Text copied! Paste it on Instagram');
+                });
+            } else {
+                // Fallback
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                showNotification(AppState.currentLang === 'es' ? '¡Texto copiado! Pégalo en Instagram' : 'Text copied! Paste it on Instagram');
+            }
+            
+            // Abrir Instagram después de un momento
+            setTimeout(() => {
+                window.open('https://instagram.com', '_blank');
+            }, 500);
         }
 
         function toggleShipping() {
@@ -3044,7 +3195,7 @@
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
                                  loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22   width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
@@ -3073,7 +3224,7 @@
             const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';
             const greeting = AppState.currentLang === 'es' ? '¡Hola! Quiero comprar:' : 'Hello! I want to buy:';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text=  ${greeting}%0A%0A${message}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text=${greeting}%0A%0A${message}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
         }
 
         function toggleCart() {

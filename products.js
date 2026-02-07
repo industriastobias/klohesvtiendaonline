@@ -193,7 +193,7 @@ const products = [
   { name: "PULSERA BASICA", price: 6.00, stock: 1, barcode: "030", category: "Pulseras" },
   { name: "PULSERA cartier", price: 10.00, stock: 0, barcode: "032", category: "Pulseras" },
   { name: "PULSERA CARTIER", price: 11.00, stock: 0, barcode: "031", category: "Pulseras" },
-  { name: "PULSERA DE TREBOL", price: 12.00, stock: 3, barcode: "01118", category: "Pulseras" },
+  { name: "PULSERA DE TREBOL", price: 12.00, stock: 2, barcode: "01118", category: "Pulseras" },
   { name: "VAN CLEEF", price: 12.00, stock: 0, barcode: "050", category: "Pulseras" },
   
   // RELOJES (30 productos) - CON DESCRIPCIÓN

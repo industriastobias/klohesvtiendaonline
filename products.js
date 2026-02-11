@@ -208,7 +208,6 @@ const products = [
   { name: "Pulsera de Corazón Rosado", price: 12.00, stock: 1, barcode: "40208", category: "Pulseras", description: "Minimalista de Acero Inoxidable 201 en Forma de Corazón" },
   { name: "Pulsera de esfera de números romanos", price: 12.00, stock: 1, barcode: "40106", category: "Pulseras", description: "Chapado En Oro Auténtico Oro De 18 Quilates Color Sólido Acero inoxidable 304 Moda Resistente Al Agua Y Al Deslustre" },
   { name: "Pulsera de Lujo", price: 12.00, stock: 1, barcode: "030101", category: "Pulseras", description: "Acero Titanio Elegante Estilo Clásico Resistente Al Agua Y Al Deslustre" },
-  { name: "Pulsera de oro van cleef", price: 12.00, stock: 2, barcode: "40205", category: "Pulseras", description: "Acero inoxidable 304 Trébol De Cuatro Hoja" },
   { name: "PULSERA", price: 12.00, stock: 1, barcode: "146", category: "Pulseras" },
   { name: "PULSERA", price: 12.00, stock: 1, barcode: "03331", category: "Pulseras" },
   { name: "PULSERA", price: 12.00, stock: 1, barcode: "03332", category: "Pulseras" },

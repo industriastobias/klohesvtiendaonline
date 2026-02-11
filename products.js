@@ -1,4 +1,40 @@
 const products = [
+  // === RELOJES (Mayor precio primero) ===
+  { name: "RELOJ", price: 18.00, stock: 1, barcode: "20204", category: "Relojes", description: "Reloj de acero inoxidable, resistente a salpicaduras de agua" },
+  { name: "RELOJ", price: 18.00, stock: 1, barcode: "20203", category: "Relojes", description: "Reloj de acero inoxidable, resistente a salpicaduras de agua" },
+  { name: "RELOJ", price: 15.00, stock: 1, barcode: "20202", category: "Relojes", description: "Reloj de acero inoxidable" },
+  
+  // === COLLARES ===
+  { name: "COLLAR DE PERLAS", price: 12.00, stock: 1, barcode: "40102", category: "Collares", description: "Collar de perlas, acero inoxidable 304" },
+  
+  // === PULSERAS ($14.00 - $12.00) ===
+  { name: "PULSERA DE CORAZONES", price: 14.00, stock: 1, barcode: "40206", category: "Pulseras", description: "Pulsera elegante de acero inoxidable 304 chapada en oro con circones" },
+  { name: "PULSERA DE ZIRCONIA CORAZÓN", price: 12.00, stock: 1, barcode: "40207", category: "Pulseras", description: "Pulsera elegante de acero inoxidable 304 chapada en oro con zirconia" },
+  { name: "PULSERA DE LUJO", price: 12.00, stock: 1, barcode: "030101", category: "Pulseras", description: "Brazalete de acero titanio elegante estilo clásico, resistente al agua y al deslustre" },
+  { name: "PULSERA ESFERA ROMANOS", price: 12.00, stock: 1, barcode: "40106", category: "Pulseras", description: "Pulsera chapada en oro auténtico 18K, acero inoxidable 304, resistente al agua y deslustre" },
+  { name: "CARTIER PLATEADA", price: 12.00, stock: 1, barcode: "40108", category: "Pulseras", description: "Brazalete chapado en oro 18K con circones" },
+  { name: "ESTRELLA DE MAR CORAZÓN FRESA", price: 12.00, stock: 1, barcode: "40101", category: "Pulseras", description: "Pulsera de acero inoxidable 304 con dijes de estrella de mar, corazón y fresa" },
+  { name: "PULSERA DE CORAZÓN ROSADO", price: 12.00, stock: 1, barcode: "40208", category: "Pulseras", description: "Pulsera minimalista de acero inoxidable 201 en forma de corazón" },
+  
+  // === PULSERAS ($10.00) ===
+  { name: "BRAZALETE PARA MUJER", price: 10.00, stock: 1, barcode: "40209", category: "Pulseras", description: "Brazalete de acero inoxidable 304 bañado en oro, resistente al agua y deslustre con patrón de corazón" },
+  { name: "PERLAS ORO BOLAS DOBLE CADENA", price: 10.00, stock: 1, barcode: "40107", category: "Pulseras", description: "Pulsera de corazón acero titanio básico, estilo simple, resistente al agua y deslustre" },
+  { name: "PULSERA CEREZA FRESA", price: 10.00, stock: 1, barcode: "40201", category: "Pulseras", description: "Pulsera de acero inoxidable chapada en oro ajustable, estilo europeo y americano, diseño pulido de cereza y fresa" },
+  
+  // === ARITOS ===
+  { name: "PENDIENTES ROJOS", price: 6.00, stock: 1, barcode: "40109", category: "Aritos", description: "Pendientes con aguja de plata S925, color vino rojo otoño" },
+  { name: "PERLAS DE AGUA DULCE", price: 6.00, stock: 1, barcode: "40103", category: "Aritos", description: "Aritos de perlas de agua dulce con aguja de plata" },
+  
+  // === PULSERAS ($5.00) ===
+  { name: "PULSERA VINTAGE PERLAS", price: 5.00, stock: 1, barcode: "40203", category: "Pulseras", description: "Pulsera vintage de perlas con piedra preciosa, estilo francés, sensación única de alta gama, material de aleación" },
+  
+  // === ARITOS (Menor precio) ===
+  { name: "PENDIENTES DE COBRE", price: 4.00, stock: 1, barcode: "40204", category: "Aritos", description: "Pendientes de cobre con perla" },
+  
+  // ============================================
+  // PRODUCTOS EXISTENTES (ya ordenados por categoría)
+  // ============================================
+  
   // CARTERAS (44 productos)
   { name: "BILLETERA", price: 10.00, stock: 0, barcode: "076", category: "Carteras" },
   { name: "BOLSO DE MANO", price: 10.00, stock: 1, barcode: "088", category: "Carteras" },
@@ -163,7 +199,7 @@ const products = [
   { name: "LENTES", price: 7.50, stock: 1, barcode: "015", category: "Lentes de sol" },
   { name: "LENTES NEGROS", price: 5.75, stock: 1, barcode: "037", category: "Lentes de sol" },
   
-  // PULSERAS (32 productos)
+  // PULSERAS (32 productos existentes + nuevos arriba)
   { name: "BRACELET", price: 7.00, stock: 0, barcode: "041", category: "Pulseras" },
   { name: "BRASALET", price: 10.00, stock: 0, barcode: "038", category: "Pulseras" },
   { name: "PULSERA", price: 5.00, stock: 1, barcode: "042", category: "Pulseras" },
@@ -196,7 +232,7 @@ const products = [
   { name: "PULSERA DE TREBOL", price: 12.00, stock: 2, barcode: "01118", category: "Pulseras" },
   { name: "VAN CLEEF", price: 12.00, stock: 0, barcode: "050", category: "Pulseras" },
   
-  // RELOJES (30 productos) - CON DESCRIPCIÓN
+  // RELOJES (30 productos existentes + nuevos arriba)
   { name: "RELOJ", price: 15.00, stock: 1, barcode: "01111", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 20.00, stock: 0, barcode: "01125", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 16.00, stock: 1, barcode: "03333", category: "Relojes", description: "Relojes de acero inoxidable" },
@@ -237,26 +273,6 @@ const products = [
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "045", category: "Anillos" },
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "057", category: "Anillos" },
   { name: "ANILO", price: 10.00, stock: 1, barcode: "059", category: "Anillos" },
-
-category: "Pulseras", description: "Pulsera chapada en oro auténtico 18K, acero inoxidable 304, resistente al agua y deslustre" },
-  { name: "CARTIER PLATEADA", price: 12.00, stock: 1, barcode: "40108", category: "Pulseras", description: "Brazalete chapado en oro 18K con circones" },
-  { name: "ESTRELLA DE MAR CORAZÓN FRESA", price: 12.00, stock: 1, barcode: "40101", category: "Pulseras", description: "Pulsera de acero inoxidable 304 con dijes de estrella de mar, corazón y fresa" },
-  { name: "PULSERA DE CORAZÓN ROSADO", price: 12.00, stock: 1, barcode: "40208", category: "Pulseras", description: "Pulsera minimalista de acero inoxidable 201 en forma de corazón" },
-  
-  // === PULSERAS ($10.00) ===
-  { name: "BRAZALETE PARA MUJER", price: 10.00, stock: 1, barcode: "40209", category: "Pulseras", description: "Brazalete de acero inoxidable 304 bañado en oro, resistente al agua y deslustre con patrón de corazón" },
-  { name: "PERLAS ORO BOLAS DOBLE CADENA", price: 10.00, stock: 1, barcode: "40107", category: "Pulseras", description: "Pulsera de corazón acero titanio básico, estilo simple, resistente al agua y deslustre" },
-  { name: "PULSERA CEREZA FRESA", price: 10.00, stock: 1, barcode: "40201", category: "Pulseras", description: "Pulsera de acero inoxidable chapada en oro ajustable, estilo europeo y americano, diseño pulido de cereza y fresa" },
-  
-  // === ARITOS ===
-  { name: "PENDIENTES ROJOS", price: 6.00, stock: 1, barcode: "40109", category: "Aritos", description: "Pendientes con aguja de plata S925, color vino rojo otoño" },
-  { name: "PERLAS DE AGUA DULCE", price: 6.00, stock: 1, barcode: "40103", category: "Aritos", description: "Aritos de perlas de agua dulce con aguja de plata" },
-  
-  // === PULSERAS ($5.00) ===
-  { name: "PULSERA VINTAGE PERLAS", price: 5.00, stock: 1, barcode: "40203", category: "Pulseras", description: "Pulsera vintage de perlas con piedra preciosa, estilo francés, sensación única de alta gama, material de aleación" },
-  
-  // === ARITOS (Menor precio) ===
-  { name: "PENDIENTES DE COBRE", price: 4.00, stock: 1, barcode: "40204", category: "Aritos", description: "Pendientes de cobre con perla" },
   
   // OTROS (3 productos)
   { name: "ACCESORIOS", price: 0.25, stock: 20, barcode: "137", category: "Accesorios para el cabello" },

@@ -46,7 +46,7 @@ const products = [
   { name: "CARTERA VINO", price: 18.00, stock: 0, barcode: "053", category: "Carteras" },
   { name: "Carteras", price: 10.00, stock: 1, barcode: "181", category: "Carteras" },
   
-  // ARITOS Y ARETES (49 productos) - CON DESCRIPCIÓN
+  // ARITOS Y ARETES (49 productos existentes + 2 nuevos = 51)
   { name: "ARITOS", price: 3.50, stock: 1, barcode: "046", category: "Aritos", description: "Aritos de acero inoxidable con laminado de oro de 14K resistentes a salpicaduras de agua, waterproof" },
   { name: "ARITOS", price: 8.50, stock: 0, barcode: "179", category: "Aritos", description: "Aritos de acero inoxidable con laminado de oro de 14K resistentes a salpicaduras de agua, waterproof" },
   { name: "ARITOS", price: 7.00, stock: 1, barcode: "060", category: "Aritos", description: "Aritos de acero inoxidable con laminado de oro de 14K resistentes a salpicaduras de agua, waterproof" },
@@ -97,7 +97,11 @@ const products = [
   { name: "AGUJA PLATA", price: 6.00, stock: 1, barcode: "02227", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K RECOMENDACION NO MOJARLOS" },
   { name: "AGUJA PLATA", price: 6.00, stock: 1, barcode: "02228", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K RECOMENDACION NO MOJARLOS" },
   
-  // COLLARES (52 productos) - CON DESCRIPCIÓN
+  // NUEVOS ARITOS DEL CATÁLOGO 2026
+  { name: "Pendientes rojos", price: 6.00, stock: 1, barcode: "40109", category: "Aritos", description: "aguja de plata S925 Ankela pendientes de oreja roja Clip vino rojo Otoño" },
+  { name: "Perlas de Agua Dulce", price: 6.00, stock: 1, barcode: "40103", category: "Aritos", description: "aguja de plata" },
+  
+  // COLLARES (52 productos existentes + 1 nuevo = 53)
   { name: "Aritos", price: 5.50, stock: 0, barcode: "029", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
   { name: "COLLA DE PLAYA", price: 12.75, stock: 1, barcode: "066", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
   { name: "Collar", price: 9.50, stock: 1, barcode: "10199191", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
@@ -159,11 +163,14 @@ const products = [
   { name: "SET", price: 18.50, stock: 1, barcode: "142", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
   { name: "SET DE COLLAR", price: 13.50, stock: 1, barcode: "078", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
   
+  // NUEVO COLLAR DEL CATÁLOGO 2026
+  { name: "collar de perlas", price: 12.00, stock: 1, barcode: "40102", category: "Collares", description: "Acero Inoxidable 304" },
+  
   // LENTES (2 productos)
   { name: "LENTES", price: 7.50, stock: 1, barcode: "015", category: "Lentes de sol" },
   { name: "LENTES NEGROS", price: 5.75, stock: 1, barcode: "037", category: "Lentes de sol" },
   
-  // PULSERAS (32 productos)
+  // PULSERAS (32 productos existentes + 13 nuevos = 45)
   { name: "BRACELET", price: 7.00, stock: 0, barcode: "041", category: "Pulseras" },
   { name: "BRASALET", price: 10.00, stock: 0, barcode: "038", category: "Pulseras" },
   { name: "PULSERA", price: 5.00, stock: 1, barcode: "042", category: "Pulseras" },
@@ -196,7 +203,22 @@ const products = [
   { name: "PULSERA DE TREBOL", price: 12.00, stock: 2, barcode: "01118", category: "Pulseras" },
   { name: "VAN CLEEF", price: 12.00, stock: 0, barcode: "050", category: "Pulseras" },
   
-  // RELOJES (30 productos) - CON DESCRIPCIÓN
+  // NUEVAS PULSERAS DEL CATÁLOGO 2026
+  { name: "Brazalete para mujer", price: 10.00, stock: 1, barcode: "40209", category: "Pulseras", description: "acero inoxidable 304 bañado en oro, resistente al agua y al deslustre con patrón de corazón" },
+  { name: "cartier plateada", price: 12.00, stock: 1, barcode: "40108", category: "Pulseras", description: "chapados en oro de 18k Circón Brazalete" },
+  { name: "Estrella De Mar Forma De Corazón Fresa", price: 12.00, stock: 1, barcode: "40101", category: "Pulseras", description: "Acero inoxidable 304" },
+  { name: "pendientes de cobre", price: 4.00, stock: 1, barcode: "40204", category: "Pulseras", description: "pendientes de cobre" },
+  { name: "perlas de oro bolas de doble cadena", price: 10.00, stock: 1, barcode: "40107", category: "Pulseras", description: "Corazón Acero Titanio Básico Estilo Simple Resistente Al Agua Y Al Deslustre" },
+  { name: "Pulsera Cereza y Fresa", price: 10.00, stock: 1, barcode: "40201", category: "Pulseras", description: "Acero Inoxidable Chapada en Oro Ajustable Estilo Europeo y Americano Hecha a Mano Diseño Pulido de Cereza y Fresa" },
+  { name: "Pulsera de Zirconia Corazón Redondo", price: 12.00, stock: 1, barcode: "40207", category: "Pulseras", description: "Pulsera de Zirconia Corazón Redondo de Acero Inoxidable 304 Pulsera Elegante Chapada en Oro" },
+  { name: "Pulsera de Corazón Rosado", price: 12.00, stock: 1, barcode: "40208", category: "Pulseras", description: "Minimalista de Acero Inoxidable 201 en Forma de Corazón" },
+  { name: "Pulsera de Corazones", price: 14.00, stock: 1, barcode: "40206", category: "Pulseras", description: "Acero Inoxidable 304 Pulsera Elegante Chapada en Oro" },
+  { name: "Pulsera de esfera de números romanos", price: 12.00, stock: 1, barcode: "40106", category: "Pulseras", description: "Chapado En Oro Auténtico Oro De 18 Quilates Color Sólido Acero inoxidable 304 Moda Resistente Al Agua Y Al Deslustre" },
+  { name: "Pulsera de Lujo", price: 12.00, stock: 1, barcode: "030101", category: "Pulseras", description: "Acero Titanio Elegante Estilo Clásico Resistente Al Agua Y Al Deslustre" },
+  { name: "Pulsera de oro van cleef", price: 12.00, stock: 2, barcode: "40205", category: "Pulseras", description: "Acero inoxidable 304 Trébol De Cuatro Hoja" },
+  { name: "pulsera vintage de perlas", price: 5.00, stock: 1, barcode: "40203", category: "Pulseras", description: "piedra preciosa, estilo francés, sensación única de alta gama, material de aleación" },
+  
+  // RELOJES (30 productos existentes + 3 nuevos = 33)
   { name: "RELOJ", price: 15.00, stock: 1, barcode: "01111", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 20.00, stock: 0, barcode: "01125", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 16.00, stock: 1, barcode: "03333", category: "Relojes", description: "Relojes de acero inoxidable" },
@@ -227,6 +249,11 @@ const products = [
   { name: "RELOJ ROJO", price: 15.00, stock: 0, barcode: "01121", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "SEET DE RELOJ Y PULSERA", price: 14.00, stock: 0, barcode: "01115", category: "Relojes", description: "Reloj de acero fino" },
   { name: "RELOJ SET", price: 40.00, stock: 1, barcode: "01112", category: "Relojes", description: "Relojes de acero inoxidable" },
+  
+  // NUEVOS RELOJES DEL CATÁLOGO 2026
+  { name: "RELOJ", price: 15.00, stock: 1, barcode: "20202", category: "Relojes", description: "Acero Inoxidable" },
+  { name: "RELOJ", price: 18.00, stock: 1, barcode: "20203", category: "Relojes", description: "Acero Inoxidable, RESISTENTE A SALPICADURAS DE AGUA" },
+  { name: "RELOJ", price: 18.00, stock: 1, barcode: "20204", category: "Relojes", description: "Acero Inoxidable, RESISTENTE A SALPICADURAS DE AGUA" },
   
   // ANILLOS (9 productos)
   { name: "ANILLO", price: 10.00, stock: 1, barcode: "02", category: "Anillos" },

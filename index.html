@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>KLOHE - Summer Collection El Salvador</title>
+    <title>KLOHE - Colección Verano</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     
@@ -19,22 +19,22 @@
         }
 
         :root {
-            /* NUEVA PALETA VERANO - Basada en Pantone de la imagen */
-            --blanco: #FDFCF8;
-            --lima-suave: #E8F0D8;
-            --lima-cream: #D4E4C4;
-            --lima-medio: #A8C896;
-            --azul-delicate: #C8E0F0;
-            --azul-suave: #B0D4E8;
-            --azul-medio: #7EB8D4;
-            --lila-snow: #E8D8E8;
-            --lila-suave: #D4C4D8;
-            --lila-medio: #B8A0C4;
-            --coral-playa: #E8A090;
-            --arena: #F0E8D8;
-            --mar-profundo: #2A4050;
-            --negro-suave: #2C2824;
-            --dorado-sol: #E8C880;
+            /* COLORES ORIGINALES SAN VALENTÍN */
+            --blanco: #FDF8F6;
+            --rosa-nude: #F5E6E0;
+            --rosa-suave: #E8D5D0;
+            --rosa-medio: #D4A59A;
+            --rosa-viejo: #B5838D;
+            --rosa-oscuro: #9B6B7F;
+            --bordo: #6D435A;
+            --chocolate: #4A3B3A;
+            --negro-suave: #2C2424;
+            --dorado: #C9A87C;
+            
+            /* COLORES PANTONE VERANO - Añadidos discretamente */
+            --lima-cream: #E8F0D8;
+            --delicate-blue: #C8E0F0;
+            --lilac-snow: #E8D8E8;
         }
 
         body {
@@ -60,14 +60,8 @@
             50% { transform: translateY(-10px); }
         }
 
-        @keyframes wave {
-            0% { transform: translateX(0) translateZ(0) scaleY(1); }
-            50% { transform: translateX(-25%) translateZ(0) scaleY(0.8); }
-            100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
-        }
-
         .skeleton {
-            background: linear-gradient(90deg, var(--lima-suave) 25%, var(--azul-delicate) 50%, var(--lima-suave) 75%);
+            background: linear-gradient(90deg, var(--rosa-nude) 25%, var(--rosa-suave) 50%, var(--rosa-nude) 75%);
             background-size: 1000px 100%;
             animation: shimmer 2s infinite linear;
             border-radius: 4px;
@@ -105,7 +99,7 @@
             align-items: center;
             padding: 3rem 0;
             gap: 0.5rem;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             font-size: 0.9rem;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -114,8 +108,8 @@
         .spinner {
             width: 20px;
             height: 20px;
-            border: 2px solid var(--azul-delicate);
-            border-top-color: var(--mar-profundo);
+            border: 2px solid var(--rosa-suave);
+            border-top-color: var(--bordo);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -132,13 +126,13 @@
         }
 
         header {
-            background: rgba(253, 252, 248, 0.95);
+            background: rgba(253, 248, 246, 0.95);
             backdrop-filter: blur(10px);
             padding: 1.2rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid var(--azul-delicate);
+            border-bottom: 1px solid var(--rosa-suave);
         }
 
         .container {
@@ -156,7 +150,7 @@
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             text-decoration: none;
             font-weight: 600;
             letter-spacing: 8px;
@@ -179,35 +173,6 @@
             gap: 1.5rem;
         }
 
-        .language-switcher {
-            position: relative;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: 1px solid var(--azul-medio);
-            color: var(--mar-profundo);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            min-height: 36px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .lang-btn:hover {
-            border-color: var(--coral-playa);
-            background: var(--coral-playa);
-            color: white;
-            transform: scale(1.05);
-        }
-
         .social-header {
             display: flex;
             gap: 0.8rem;
@@ -219,21 +184,21 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            border: 1px solid var(--azul-medio);
+            border: 1px solid var(--rosa-medio);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: var(--mar-profundo);
+            color: var(--rosa-oscuro);
             font-size: 1rem;
             transition: all 0.3s ease;
             background: transparent;
         }
 
         .social-btn:hover {
-            background: var(--coral-playa);
+            background: var(--bordo);
             color: white;
-            border-color: var(--coral-playa);
+            border-color: var(--bordo);
             transform: translateY(-2px);
         }
 
@@ -256,7 +221,7 @@
         .menu-toggle span {
             width: 22px;
             height: 2px;
-            background: var(--mar-profundo);
+            background: var(--bordo);
             transition: all 0.3s ease;
             display: block;
         }
@@ -284,7 +249,7 @@
             padding: 5rem 2rem 2rem;
             transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
-            border-right: 2px solid var(--azul-delicate);
+            border-right: 2px solid var(--rosa-suave);
             -webkit-overflow-scrolling: touch;
         }
 
@@ -294,13 +259,13 @@
 
         .categories-menu h3 {
             font-family: 'Playfair Display', serif;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
             font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
-            border-bottom: 1px solid var(--azul-delicate);
+            border-bottom: 1px solid var(--rosa-suave);
             padding-bottom: 0.8rem;
         }
 
@@ -311,11 +276,11 @@
             margin-bottom: 0.3rem;
             background: transparent;
             border: none;
-            border-bottom: 1px solid var(--azul-delicate);
+            border-bottom: 1px solid var(--rosa-suave);
             text-align: left;
             font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
-            color: var(--mar-profundo);
+            color: var(--rosa-oscuro);
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 400;
@@ -326,9 +291,9 @@
 
         .category-btn:hover,
         .category-btn.active {
-            color: var(--coral-playa);
+            color: var(--bordo);
             padding-left: 1rem;
-            border-bottom-color: var(--coral-playa);
+            border-bottom-color: var(--bordo);
         }
 
         .close-menu {
@@ -339,7 +304,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             width: 44px;
             height: 44px;
             display: flex;
@@ -358,22 +323,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--azul-medio);
+            border: 1px solid var(--rosa-medio);
             border-radius: 50%;
-            color: var(--mar-profundo);
+            color: var(--bordo);
         }
 
         .cart-icon:hover {
-            background: var(--coral-playa);
+            background: var(--bordo);
             color: white;
-            border-color: var(--coral-playa);
+            border-color: var(--bordo);
         }
 
         .cart-count {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: var(--coral-playa);
+            background: var(--bordo);
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -386,42 +351,31 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 50%, var(--lila-snow) 100%);
+            background: linear-gradient(135deg, var(--blanco) 0%, var(--rosa-nude) 50%, var(--lima-cream) 100%);
             padding: 3rem 0;
             text-align: center;
             position: relative;
-            border-bottom: 1px solid var(--azul-delicate);
+            border-bottom: 1px solid var(--rosa-suave);
             overflow: hidden;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(232, 208, 144, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(200, 224, 240, 0.4) 0%, transparent 50%);
-            animation: pulse 15s ease-in-out infinite;
-        }
-
-        .wave-decoration {
-            position: absolute;
-            bottom: 0;
-            left: 0;
+            top: -50%;
+            left: -50%;
             width: 200%;
-            height: 60px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23FDFCF8' opacity='.25'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' fill='%23FDFCF8' opacity='.5'/%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%23FDFCF8'/%3E%3C/svg%3E") repeat-x;
-            background-size: 50% 100%;
-            animation: wave 20s linear infinite;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, var(--delicate-blue) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, var(--lilac-snow) 0%, transparent 40%);
+            animation: pulse 15s ease-in-out infinite;
             opacity: 0.6;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.1); }
         }
 
         .hero-content {
@@ -434,48 +388,47 @@
         .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             margin-bottom: 0.5rem;
             font-weight: 400;
             letter-spacing: 4px;
             text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
         }
 
         .hero p {
             font-size: 0.9rem;
-            color: var(--coral-playa);
-            font-weight: 500;
+            color: var(--rosa-oscuro);
+            font-weight: 300;
             letter-spacing: 2px;
             font-style: italic;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .summer-vibe {
+        .summer-message {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            color: var(--mar-profundo);
+            font-size: 1.2rem;
+            color: var(--bordo);
             margin-bottom: 1.5rem;
             font-style: italic;
             letter-spacing: 1px;
-            background: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.7);
             padding: 0.8rem 1.5rem;
             border-radius: 30px;
             display: inline-block;
-            border: 1px solid var(--dorado-sol);
+            border: 1px solid var(--dorado);
+            backdrop-filter: blur(5px);
         }
 
         .daily-verse-container {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(5px);
-            border: 1px solid var(--azul-medio);
-            border-radius: 16px;
+            border: 1px solid var(--rosa-medio);
+            border-radius: 12px;
             padding: 1.5rem 2rem;
             margin: 0 auto 2rem;
             max-width: 700px;
             position: relative;
             animation: fadeIn 1s ease-in;
-            box-shadow: 0 8px 32px rgba(42, 64, 80, 0.1);
         }
 
         .verse-header {
@@ -487,18 +440,18 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--azul-medio);
+            color: var(--rosa-viejo);
             font-weight: 600;
         }
 
         .verse-header i {
-            color: var(--dorado-sol);
+            color: var(--dorado);
         }
 
         .verse-text {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
-            color: var(--mar-profundo);
+            color: var(--chocolate);
             line-height: 1.6;
             font-style: italic;
             margin-bottom: 0.5rem;
@@ -506,7 +459,7 @@
 
         .verse-reference {
             font-size: 0.8rem;
-            color: var(--coral-playa);
+            color: var(--bordo);
             font-weight: 600;
             letter-spacing: 1px;
         }
@@ -515,7 +468,7 @@
             position: absolute;
             top: -10px;
             right: 20px;
-            background: var(--coral-playa);
+            background: var(--bordo);
             color: white;
             padding: 0.2rem 0.8rem;
             font-size: 0.7rem;
@@ -533,8 +486,8 @@
             width: 100%;
             padding: 1rem 1.5rem;
             padding-left: 3rem;
-            border: 1px solid var(--azul-medio);
-            background: rgba(255,255,255,0.9);
+            border: 1px solid var(--rosa-medio);
+            background: rgba(255,255,255,0.8);
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             transition: all 0.3s ease;
@@ -544,8 +497,8 @@
 
         .search-input:focus {
             outline: none;
-            border-color: var(--coral-playa);
-            box-shadow: 0 0 0 3px rgba(232, 160, 144, 0.2);
+            border-color: var(--bordo);
+            box-shadow: 0 0 0 3px rgba(157, 107, 127, 0.1);
         }
 
         .search-icon {
@@ -553,7 +506,7 @@
             left: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
         }
 
         .products {
@@ -568,13 +521,13 @@
             align-items: center;
             margin-bottom: 2.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--azul-delicate);
+            border-bottom: 1px solid var(--rosa-suave);
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -582,7 +535,7 @@
 
         .products-count {
             font-size: 0.8rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             font-weight: 400;
             letter-spacing: 1px;
         }
@@ -600,26 +553,24 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--azul-delicate);
-            border-radius: 12px;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 4px;
             animation: fadeIn 0.5s ease forwards;
-            box-shadow: 0 4px 6px rgba(42, 64, 80, 0.05);
         }
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(42, 64, 80, 0.15);
-            border-color: var(--coral-playa);
+            box-shadow: 0 15px 40px rgba(157, 107, 127, 0.15);
+            border-color: var(--rosa-medio);
         }
 
         .product-image-container {
             position: relative;
             width: 100%;
             aspect-ratio: 1/1;
-            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 100%);
+            background: linear-gradient(135deg, var(--rosa-nude) 0%, var(--lima-cream) 100%);
             overflow: hidden;
             cursor: pointer;
-            border-radius: 12px 12px 0 0;
         }
 
         .product-image {
@@ -638,13 +589,13 @@
             top: 0.8rem;
             right: 0.8rem;
             background: rgba(255,255,255,0.95);
-            color: var(--mar-profundo);
+            color: var(--bordo);
             padding: 0.3rem 0.8rem;
             font-size: 0.7rem;
             font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
-            border: 1px solid var(--azul-medio);
+            border: 1px solid var(--rosa-medio);
             border-radius: 20px;
             z-index: 2;
         }
@@ -654,7 +605,7 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            border-top: 1px solid var(--azul-delicate);
+            border-top: 1px solid var(--rosa-suave);
         }
 
         .product-name {
@@ -670,7 +621,7 @@
 
         .product-barcode {
             font-size: 0.75rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             margin-bottom: 0.8rem;
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
@@ -678,7 +629,7 @@
 
         .product-description {
             font-size: 0.85rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             line-height: 1.5;
             margin-bottom: 0.8rem;
             display: -webkit-box;
@@ -696,12 +647,12 @@
             margin-top: auto;
             margin-bottom: 0.8rem;
             padding-top: 0.8rem;
-            border-top: 1px solid var(--azul-delicate);
+            border-top: 1px solid var(--rosa-suave);
         }
 
         .product-price {
             font-size: 1.2rem;
-            color: var(--coral-playa);
+            color: var(--bordo);
             font-weight: 600;
             letter-spacing: 1px;
         }
@@ -710,7 +661,7 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            border: 1px solid var(--azul-medio);
+            border: 1px solid var(--rosa-medio);
             background: transparent;
             cursor: pointer;
             display: flex;
@@ -718,19 +669,19 @@
             justify-content: center;
             font-size: 1rem;
             transition: all 0.3s ease;
-            color: var(--mar-profundo);
+            color: var(--rosa-oscuro);
         }
 
         .eye-btn:hover {
-            background: var(--coral-playa);
+            background: var(--bordo);
             color: white;
-            border-color: var(--coral-playa);
+            border-color: var(--bordo);
         }
 
         .btn-add-cart {
             width: 100%;
             padding: 0.9rem;
-            background: var(--mar-profundo);
+            background: var(--bordo);
             color: white;
             border: none;
             cursor: pointer;
@@ -740,58 +691,53 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            border-radius: 0 0 12px 12px;
+            border-radius: 0 0 4px 4px;
             min-height: 44px;
         }
 
         .btn-add-cart:hover {
-            background: var(--coral-playa);
+            background: var(--rosa-viejo);
         }
 
         .btn-add-cart:disabled {
-            background: var(--azul-delicate);
-            color: var(--azul-medio);
+            background: var(--rosa-suave);
+            color: var(--rosa-oscuro);
             cursor: not-allowed;
         }
 
         .testimonials-section {
-            background: linear-gradient(to bottom, var(--lima-suave), var(--blanco));
+            background: linear-gradient(to bottom, var(--rosa-nude), var(--blanco));
             padding: 4rem 0;
-            border-top: 1px solid var(--azul-delicate);
-            border-bottom: 1px solid var(--azul-delicate);
+            border-top: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--rosa-suave);
             position: relative;
-            overflow: hidden;
         }
 
         .testimonials-section::before {
-            content: '🌴';
+            content: '';
             position: absolute;
-            top: 20px;
-            left: 5%;
-            font-size: 4rem;
-            opacity: 0.2;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .testimonials-section::after {
-            content: '🌊';
-            position: absolute;
-            bottom: 20px;
-            right: 5%;
-            font-size: 4rem;
-            opacity: 0.2;
-            animation: float 6s ease-in-out infinite 1s;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, var(--delicate-blue) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, var(--lilac-snow) 0%, transparent 30%);
+            opacity: 0.4;
+            pointer-events: none;
         }
 
         .testimonials-header {
             text-align: center;
             margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
         }
 
         .testimonials-header h2 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -799,7 +745,7 @@
         }
 
         .testimonials-header p {
-            color: var(--coral-playa);
+            color: var(--rosa-oscuro);
             font-size: 0.9rem;
             letter-spacing: 1px;
             font-style: italic;
@@ -810,6 +756,7 @@
             max-width: 600px;
             margin: 0 auto 3rem;
             overflow: hidden;
+            z-index: 1;
         }
 
         .testimonial-track {
@@ -825,11 +772,10 @@
         .testimonial-card {
             background: var(--blanco);
             padding: 2.5rem;
-            border: 1px solid var(--azul-delicate);
+            border: 1px solid var(--rosa-suave);
             text-align: center;
-            border-radius: 16px;
+            border-radius: 4px;
             position: relative;
-            box-shadow: 0 8px 24px rgba(42, 64, 80, 0.08);
         }
 
         .testimonial-card::before {
@@ -839,13 +785,13 @@
             left: 20px;
             font-family: 'Playfair Display', serif;
             font-size: 4rem;
-            color: var(--azul-delicate);
+            color: var(--rosa-suave);
             opacity: 0.5;
             line-height: 1;
         }
 
         .testimonial-stars {
-            color: var(--dorado-sol);
+            color: var(--dorado);
             font-size: 1.1rem;
             margin-bottom: 1rem;
             letter-spacing: 2px;
@@ -853,7 +799,7 @@
 
         .testimonial-text {
             font-size: 0.95rem;
-            color: var(--mar-profundo);
+            color: var(--chocolate);
             line-height: 1.8;
             margin-bottom: 1.5rem;
             font-style: italic;
@@ -861,14 +807,14 @@
 
         .testimonial-author {
             font-weight: 600;
-            color: var(--coral-playa);
+            color: var(--bordo);
             font-size: 0.9rem;
             letter-spacing: 1px;
         }
 
         .testimonial-date {
             font-size: 0.75rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             margin-top: 0.3rem;
         }
 
@@ -883,20 +829,20 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            border: 1px solid var(--azul-medio);
+            border: 1px solid var(--rosa-medio);
             background: transparent;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
-            color: var(--mar-profundo);
+            color: var(--rosa-oscuro);
         }
 
         .carousel-btn:hover {
-            background: var(--coral-playa);
+            background: var(--bordo);
             color: white;
-            border-color: var(--coral-playa);
+            border-color: var(--bordo);
         }
 
         .carousel-dots {
@@ -910,30 +856,31 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--azul-delicate);
+            background: var(--rosa-medio);
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .dot.active {
-            background: var(--coral-playa);
+            background: var(--bordo);
             transform: scale(1.2);
         }
 
         .comment-box {
             background: var(--blanco);
             padding: 2.5rem;
-            border: 1px solid var(--azul-delicate);
+            border: 1px solid var(--rosa-suave);
             max-width: 600px;
             margin: 0 auto;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(42, 64, 80, 0.08);
+            border-radius: 4px;
+            position: relative;
+            z-index: 1;
         }
 
         .comment-box h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             margin-bottom: 1.5rem;
             text-align: center;
             letter-spacing: 2px;
@@ -954,7 +901,7 @@
 
         .form-group label {
             font-size: 0.8rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -963,12 +910,12 @@
         .form-group textarea,
         .form-group select {
             padding: 0.8rem;
-            border: 1px solid var(--azul-delicate);
+            border: 1px solid var(--rosa-suave);
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             transition: all 0.3s;
             background: transparent;
-            border-radius: 8px;
+            border-radius: 4px;
             min-height: 44px;
         }
 
@@ -976,8 +923,8 @@
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--coral-playa);
-            box-shadow: 0 0 0 3px rgba(232, 160, 144, 0.1);
+            border-color: var(--bordo);
+            box-shadow: 0 0 0 3px rgba(157, 107, 127, 0.1);
         }
 
         .form-group textarea {
@@ -987,7 +934,7 @@
 
         .btn-submit {
             padding: 1rem;
-            background: var(--mar-profundo);
+            background: var(--bordo);
             color: white;
             border: none;
             cursor: pointer;
@@ -1002,7 +949,7 @@
         }
 
         .btn-submit:hover {
-            background: var(--coral-playa);
+            background: var(--rosa-viejo);
         }
 
         .preview-modal {
@@ -1012,7 +959,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(253, 252, 248, 0.98);
+            background: rgba(253, 248, 246, 0.98);
             z-index: 3000;
             padding: 2rem;
             overflow-y: auto;
@@ -1034,18 +981,18 @@
             gap: 3rem;
             position: relative;
             padding: 2rem;
-            border: 1px solid var(--azul-delicate);
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(42, 64, 80, 0.15);
+            border: 1px solid var(--rosa-suave);
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(157, 107, 127, 0.2);
             cursor: default;
         }
 
         .preview-image-container {
             aspect-ratio: 1/1;
-            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 100%);
+            background: linear-gradient(135deg, var(--rosa-nude) 0%, var(--lima-cream) 100%);
             overflow: hidden;
-            border: 1px solid var(--azul-delicate);
-            border-radius: 12px;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 4px;
             cursor: pointer;
             position: relative;
         }
@@ -1068,7 +1015,7 @@
         .preview-name {
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             margin-bottom: 0.5rem;
             font-weight: 500;
             letter-spacing: 2px;
@@ -1076,34 +1023,34 @@
 
         .preview-barcode {
             font-size: 0.9rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             margin-bottom: 1rem;
             font-family: 'Courier New', monospace;
             letter-spacing: 2px;
             padding: 0.4rem 0.8rem;
-            background: var(--lima-suave);
+            background: var(--rosa-nude);
             display: inline-block;
-            border: 1px solid var(--azul-delicate);
+            border: 1px solid var(--rosa-suave);
             width: fit-content;
-            border-radius: 8px;
+            border-radius: 4px;
         }
 
         .preview-description {
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            color: var(--mar-profundo);
+            color: var(--chocolate);
             line-height: 1.7;
             margin-bottom: 1.5rem;
             padding: 1rem 0;
-            border-top: 1px solid var(--azul-delicate);
-            border-bottom: 1px solid var(--azul-delicate);
+            border-top: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--rosa-suave);
             max-height: 200px;
             overflow-y: auto;
         }
 
         .preview-price {
             font-size: 2rem;
-            color: var(--coral-playa);
+            color: var(--bordo);
             font-weight: 600;
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
@@ -1111,7 +1058,7 @@
 
         .preview-stock {
             font-size: 0.85rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -1119,7 +1066,7 @@
 
         .preview-add-btn {
             padding: 1rem 2rem;
-            background: var(--mar-profundo);
+            background: var(--bordo);
             color: white;
             border: none;
             cursor: pointer;
@@ -1136,12 +1083,12 @@
         }
 
         .preview-add-btn:hover {
-            background: var(--coral-playa);
+            background: var(--rosa-viejo);
         }
 
         .preview-add-btn:disabled {
-            background: var(--azul-delicate);
-            color: var(--azul-medio);
+            background: var(--rosa-suave);
+            color: var(--rosa-oscuro);
             cursor: not-allowed;
         }
 
@@ -1198,7 +1145,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(253, 252, 248, 0.98);
+            background: rgba(253, 248, 246, 0.98);
             z-index: 4000;
             padding: 2rem;
             overflow-y: auto;
@@ -1215,11 +1162,11 @@
             max-width: 450px;
             width: 100%;
             padding: 2.5rem;
-            border: 1px solid var(--azul-delicate);
+            border: 1px solid var(--rosa-suave);
             border-radius: 20px;
             text-align: center;
             position: relative;
-            box-shadow: 0 20px 60px rgba(42, 64, 80, 0.15);
+            box-shadow: 0 20px 60px rgba(157, 107, 127, 0.2);
         }
 
         .close-story-modal {
@@ -1230,7 +1177,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             width: 44px;
             height: 44px;
             display: flex;
@@ -1240,30 +1187,30 @@
         }
 
         .close-story-modal:hover {
-            color: var(--coral-playa);
+            color: var(--rosa-viejo);
             transform: rotate(90deg);
         }
 
         .story-modal-content h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
         }
 
         .story-instruction {
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
         }
 
         .story-preview-container {
-            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 100%);
+            background: linear-gradient(135deg, var(--rosa-nude) 0%, var(--rosa-suave) 100%);
             padding: 1.5rem;
             border-radius: 16px;
             margin-bottom: 1.5rem;
-            border: 2px solid var(--azul-medio);
+            border: 2px solid var(--rosa-medio);
         }
 
         .story-preview-container img {
@@ -1300,23 +1247,23 @@
         }
 
         .btn-download-story {
-            background: var(--mar-profundo);
+            background: var(--bordo);
             color: white;
         }
 
         .btn-download-story:hover {
-            background: var(--coral-playa);
+            background: var(--rosa-viejo);
             transform: translateY(-2px);
         }
 
         .btn-copy-story {
             background: transparent;
-            color: var(--mar-profundo);
-            border: 2px solid var(--mar-profundo);
+            color: var(--bordo);
+            border: 2px solid var(--bordo);
         }
 
         .btn-copy-story:hover {
-            background: var(--mar-profundo);
+            background: var(--bordo);
             color: white;
         }
 
@@ -1328,10 +1275,10 @@
 
         .story-tip {
             font-size: 0.75rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             font-style: italic;
             padding: 0.8rem;
-            background: var(--lima-suave);
+            background: var(--rosa-nude);
             border-radius: 8px;
         }
 
@@ -1347,7 +1294,7 @@
             padding: 2rem;
             overflow-y: auto;
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 2px solid var(--azul-delicate);
+            border-left: 2px solid var(--rosa-suave);
             -webkit-overflow-scrolling: touch;
         }
 
@@ -1362,12 +1309,12 @@
             align-items: center;
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--azul-delicate);
+            border-bottom: 1px solid var(--rosa-suave);
         }
 
         .cart-header h2 {
             font-family: 'Playfair Display', serif;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             font-size: 1.5rem;
             font-weight: 500;
             letter-spacing: 2px;
@@ -1379,7 +1326,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             width: 44px;
             height: 44px;
             display: flex;
@@ -1388,11 +1335,11 @@
         }
 
         .shipping-option {
-            background: var(--lima-suave);
+            background: var(--rosa-nude);
             padding: 1.2rem;
             margin-bottom: 1.5rem;
-            border: 1px solid var(--azul-delicate);
-            border-radius: 12px;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 4px;
         }
 
         .shipping-header {
@@ -1405,7 +1352,7 @@
         .shipping-title {
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -1414,14 +1361,14 @@
             position: relative;
             width: 50px;
             height: 26px;
-            background: var(--azul-delicate);
+            background: var(--rosa-medio);
             border-radius: 13px;
             cursor: pointer;
             transition: background 0.3s;
         }
 
         .shipping-toggle.active {
-            background: var(--coral-playa);
+            background: var(--bordo);
         }
 
         .shipping-toggle::after {
@@ -1442,13 +1389,13 @@
 
         .shipping-price {
             font-size: 1.1rem;
-            color: var(--coral-playa);
+            color: var(--bordo);
             font-weight: 600;
         }
 
         .shipping-desc {
             font-size: 0.8rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             margin-top: 0.3rem;
         }
 
@@ -1457,18 +1404,18 @@
             gap: 1rem;
             margin-bottom: 1.2rem;
             padding-bottom: 1.2rem;
-            border-bottom: 1px solid var(--azul-delicate);
+            border-bottom: 1px solid var(--rosa-suave);
             align-items: center;
         }
 
         .cart-item-image {
             width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 100%);
+            background: var(--rosa-nude);
             overflow: hidden;
             flex-shrink: 0;
-            border: 1px solid var(--azul-delicate);
-            border-radius: 8px;
+            border: 1px solid var(--rosa-suave);
+            border-radius: 4px;
         }
 
         .cart-item-image img {
@@ -1483,7 +1430,7 @@
 
         .cart-item-details h4 {
             font-family: 'Playfair Display', serif;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             margin-bottom: 0.2rem;
             font-size: 1rem;
             font-weight: 500;
@@ -1492,13 +1439,13 @@
 
         .cart-item-code {
             font-size: 0.75rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             font-family: 'Courier New', monospace;
             margin-bottom: 0.3rem;
         }
 
         .cart-item-details p {
-            color: var(--coral-playa);
+            color: var(--bordo);
             font-weight: 500;
             font-size: 0.9rem;
         }
@@ -1506,7 +1453,7 @@
         .remove-item {
             background: none;
             border: none;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             cursor: pointer;
             font-size: 1rem;
             padding: 0.4rem;
@@ -1519,12 +1466,12 @@
         }
 
         .remove-item:hover {
-            color: var(--coral-playa);
+            color: var(--bordo);
         }
 
         .cart-empty {
             text-align: center;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             padding: 3rem 0;
             font-style: italic;
         }
@@ -1532,7 +1479,7 @@
         .cart-summary {
             margin-top: 1.5rem;
             padding-top: 1rem;
-            border-top: 1px solid var(--azul-delicate);
+            border-top: 1px solid var(--rosa-suave);
         }
 
         .summary-row {
@@ -1540,16 +1487,16 @@
             justify-content: space-between;
             margin-bottom: 0.8rem;
             font-size: 0.9rem;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
         }
 
         .cart-total {
             margin-top: 1rem;
             padding-top: 1rem;
-            border-top: 2px solid var(--mar-profundo);
+            border-top: 2px solid var(--bordo);
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             display: flex;
             justify-content: space-between;
             margin-bottom: 1.5rem;
@@ -1559,7 +1506,7 @@
         .btn-whatsapp {
             width: 100%;
             padding: 1.1rem;
-            background: var(--mar-profundo);
+            background: var(--bordo);
             color: white;
             border: none;
             cursor: pointer;
@@ -1579,7 +1526,7 @@
         }
 
         .btn-whatsapp:hover {
-            background: var(--coral-playa);
+            background: var(--rosa-viejo);
         }
 
         .btn-clear-cart {
@@ -1587,8 +1534,8 @@
             margin-top: 10px;
             padding: 0.8rem;
             background: transparent;
-            border: 1px solid var(--azul-medio);
-            color: var(--azul-medio);
+            border: 1px solid var(--rosa-medio);
+            color: var(--rosa-oscuro);
             cursor: pointer;
             font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
@@ -1600,9 +1547,9 @@
         }
 
         .btn-clear-cart:hover {
-            background: var(--lima-suave);
-            border-color: var(--coral-playa);
-            color: var(--coral-playa);
+            background: var(--rosa-nude);
+            border-color: var(--bordo);
+            color: var(--bordo);
         }
 
         .overlay {
@@ -1612,7 +1559,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 40, 36, 0.4);
+            background: rgba(44, 36, 36, 0.4);
             z-index: 1500;
             backdrop-filter: blur(2px);
         }
@@ -1628,7 +1575,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 40, 36, 0.4);
+            background: rgba(44, 36, 36, 0.4);
             z-index: 1400;
             backdrop-filter: blur(2px);
         }
@@ -1643,7 +1590,7 @@
             left: 30px;
             width: 60px;
             height: 60px;
-            background: var(--coral-playa);
+            background: var(--bordo);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1652,7 +1599,7 @@
             font-size: 1.8rem;
             cursor: pointer;
             z-index: 9999;
-            box-shadow: 0 4px 12px rgba(232, 160, 144, 0.4);
+            box-shadow: 0 4px 12px rgba(157, 107, 127, 0.4);
             transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease, background 0.3s ease;
             text-decoration: none;
             opacity: 1;
@@ -1661,8 +1608,8 @@
         }
 
         .whatsapp-float:hover {
-            box-shadow: 0 6px 20px rgba(232, 160, 144, 0.6);
-            background: var(--mar-profundo);
+            box-shadow: 0 6px 20px rgba(157, 107, 127, 0.6);
+            background: var(--rosa-viejo);
         }
 
         .whatsapp-float.hidden-cyclic {
@@ -1674,7 +1621,7 @@
         .whatsapp-tooltip {
             position: absolute;
             left: 70px;
-            background: var(--mar-profundo);
+            background: var(--bordo);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 4px;
@@ -1695,7 +1642,7 @@
             transform: translateY(-50%);
             border-width: 6px 6px 6px 0;
             border-style: solid;
-            border-color: transparent var(--mar-profundo) transparent transparent;
+            border-color: transparent var(--bordo) transparent transparent;
         }
 
         .whatsapp-float:hover .whatsapp-tooltip {
@@ -1711,7 +1658,7 @@
             transform: translate(-50%, -50%) scale(0.9);
             background: var(--blanco);
             padding: 2.5rem;
-            border: 2px solid var(--azul-medio);
+            border: 2px solid var(--rosa-medio);
             z-index: 5000;
             max-width: 400px;
             width: 90%;
@@ -1719,8 +1666,8 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
-            box-shadow: 0 20px 60px rgba(42, 64, 80, 0.2);
-            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(157, 107, 127, 0.3);
+            border-radius: 8px;
         }
 
         .newsletter-popup.active {
@@ -1732,30 +1679,30 @@
         .newsletter-popup h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             margin-bottom: 0.5rem;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .newsletter-popup p {
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
             line-height: 1.6;
         }
 
         .newsletter-code {
-            background: var(--lima-suave);
-            border: 2px dashed var(--coral-playa);
+            background: var(--rosa-nude);
+            border: 2px dashed var(--bordo);
             padding: 1rem;
             font-family: 'Courier New', monospace;
             font-size: 1.2rem;
             font-weight: bold;
-            color: var(--mar-profundo);
+            color: var(--bordo);
             margin: 1rem 0;
             letter-spacing: 2px;
-            border-radius: 8px;
+            border-radius: 4px;
         }
 
         .newsletter-close {
@@ -1766,7 +1713,7 @@
             border: none;
             font-size: 1.2rem;
             cursor: pointer;
-            color: var(--azul-medio);
+            color: var(--rosa-oscuro);
             width: 44px;
             height: 44px;
             display: flex;
@@ -1780,7 +1727,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 40, 36, 0.5);
+            background: rgba(44, 36, 36, 0.5);
             z-index: 4999;
             opacity: 0;
             visibility: hidden;
@@ -1793,22 +1740,9 @@
         }
 
         footer {
-            background: var(--mar-profundo);
+            background: var(--bordo);
             color: white;
             padding: 4rem 0 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%232A4050' opacity='.1'/%3E%3C/svg%3E") repeat-x;
-            background-size: 50% 100%;
         }
 
         .footer-content {
@@ -1841,7 +1775,7 @@
         }
 
         .footer-section a:hover {
-            color: var(--dorado-sol);
+            color: white;
         }
 
         .social-footer {
@@ -1864,9 +1798,9 @@
         }
 
         .social-footer a:hover {
-            background: var(--dorado-sol);
-            color: var(--mar-profundo);
-            border-color: var(--dorado-sol);
+            background: white;
+            color: var(--bordo);
+            border-color: white;
             transform: translateY(-2px);
         }
 
@@ -1883,7 +1817,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--mar-profundo);
+            background: var(--bordo);
             color: white;
             padding: 1rem 2rem;
             z-index: 4000;
@@ -1894,7 +1828,7 @@
             font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
-            border-left: 3px solid var(--dorado-sol);
+            border-left: 3px solid var(--dorado);
             border-radius: 4px;
         }
 
@@ -1922,11 +1856,6 @@
             .social-header {
                 display: none;
             }
-            
-            .lang-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.75rem;
-            }
 
             .hero {
                 padding: 2rem 0;
@@ -1936,7 +1865,7 @@
                 font-size: 1.4rem;
             }
 
-            .summer-vibe {
+            .summer-message {
                 font-size: 1rem;
                 padding: 0.6rem 1rem;
             }
@@ -1957,7 +1886,7 @@
 
             .product-card {
                 transform: none !important;
-                box-shadow: 0 4px 6px rgba(42, 64, 80, 0.05) !important;
+                box-shadow: none !important;
             }
 
             .product-card:active {
@@ -2075,7 +2004,7 @@
         @media (hover: none) and (pointer: coarse) {
             .product-card:hover {
                 transform: none;
-                box-shadow: 0 4px 6px rgba(42, 64, 80, 0.05);
+                box-shadow: none;
             }
 
             .product-card:active {
@@ -2101,7 +2030,7 @@
             
             .skeleton {
                 animation: none;
-                background: var(--lima-suave);
+                background: var(--rosa-nude);
             }
         }
 
@@ -2119,12 +2048,6 @@
             <nav>
                 <a href="#" class="logo">KLOHE</a>
                 <div class="nav-right">
-                    <div class="language-switcher">
-                        <button class="lang-btn" onclick="toggleLanguage()" id="langBtn" title="Cambiar idioma / Change language">
-                            <i class="fas fa-globe"></i> <span id="currentLang">ES</span>
-                        </button>
-                    </div>
-                    
                     <div class="social-header">
                         <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
@@ -2154,36 +2077,35 @@
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="categories-menu" id="categoriesMenu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
         <button class="close-menu" onclick="toggleMenu()" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
-        <h3 id="menuTitle" data-i18n="categories">Categorías</h3>
+        <h3 id="menuTitle">Categorías</h3>
         
-        <button class="category-btn active" onclick="filterProducts('todos', this)" data-i18n="all">Todas</button>
-        <button class="category-btn" onclick="filterProducts('accesorios-cabello', this)" data-i18n="hair_accessories">Accesorios para el cabello</button>
-        <button class="category-btn" onclick="filterProducts('anillo', this)" data-i18n="rings">Anillos</button>
-        <button class="category-btn" onclick="filterProducts('aritos', this)" data-i18n="earrings">Aritos</button>
-        <button class="category-btn" onclick="filterProducts('cartera', this)" data-i18n="bags">Carteras</button>
-        <button class="category-btn" onclick="filterProducts('collar', this)" data-i18n="necklaces">Collares</button>
-        <button class="category-btn" onclick="filterProducts('lentes-sol', this)" data-i18n="sunglasses">Lentes de sol</button>
-        <button class="category-btn" onclick="filterProducts('otros', this)" data-i18n="others">Otros</button>
-        <button class="category-btn" onclick="filterProducts('pulsera', this)" data-i18n="bracelets">Pulseras</button>
-        <button class="category-btn" onclick="filterProducts('reloj', this)" data-i18n="watches">Relojes</button>
+        <button class="category-btn active" onclick="filterProducts('todos', this)">Todas</button>
+        <button class="category-btn" onclick="filterProducts('accesorios-cabello', this)">Accesorios para el cabello</button>
+        <button class="category-btn" onclick="filterProducts('anillo', this)">Anillos</button>
+        <button class="category-btn" onclick="filterProducts('aritos', this)">Aritos</button>
+        <button class="category-btn" onclick="filterProducts('cartera', this)">Carteras</button>
+        <button class="category-btn" onclick="filterProducts('collar', this)">Collares</button>
+        <button class="category-btn" onclick="filterProducts('lentes-sol', this)">Lentes de sol</button>
+        <button class="category-btn" onclick="filterProducts('otros', this)">Otros</button>
+        <button class="category-btn" onclick="filterProducts('pulsera', this)">Pulseras</button>
+        <button class="category-btn" onclick="filterProducts('reloj', this)">Relojes</button>
     </div>
 
     <section class="hero">
-        <div class="wave-decoration"></div>
         <div class="container">
             <div class="hero-content">
-                <h1 data-i18n="summer_collection">Colección Verano</h1>
-                <p data-i18n="summer_vibes">Vibes de playa, actitud de ciudad</p>
+                <h1>Colección Verano</h1>
+                <p>Brilla bajo el sol de El Salvador</p>
                 
-                <div class="summer-vibe" data-i18n="latin_sazon">
-                    Ahora todos quieren ser latinos pero les falta sazón, batería y reguetón ☀️🌴
+                <div class="summer-message">
+                    Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
                 </div>
                 
                 <div class="daily-verse-container" id="dailyVerseContainer">
                     <div class="verse-date" id="verseDate"></div>
                     <div class="verse-header">
                         <i class="fas fa-sun"></i>
-                        <span data-i18n="summer_verse">Reflexión de Verano</span>
+                        <span>Reflexión de Verano</span>
                     </div>
                     <div class="verse-text" id="verseText"></div>
                     <div class="verse-reference" id="verseReference"></div>
@@ -2191,7 +2113,7 @@
                 
                 <div class="search-container">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Busca tu accesorio perfecto..." aria-label="Buscar productos" data-i18n-placeholder="search_placeholder">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar el accesorio perfecto..." aria-label="Buscar productos">
                 </div>
             </div>
         </div>
@@ -2200,15 +2122,15 @@
     <section class="products">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title" id="categoryTitle" data-i18n="all">Todas</h2>
-                <span class="products-count" id="productsCount" data-i18n="showing_products">Mostrando 0 de 0 productos</span>
+                <h2 class="section-title" id="categoryTitle">Todas</h2>
+                <span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span>
             </div>
             <div class="products-grid" id="productsContainer">
             </div>
             <div class="scroll-sentinel" id="scrollSentinel"></div>
             <div class="loading-spinner" id="loadingSpinner" style="display: none;">
                 <div class="spinner"></div>
-                <span data-i18n="loading_more">Cargando más productos...</span>
+                <span>Cargando más productos...</span>
             </div>
         </div>
     </section>
@@ -2216,8 +2138,8 @@
     <section class="testimonials-section">
         <div class="container">
             <div class="testimonials-header">
-                <h2 data-i18n="summer_stories">Historias de Verano</h2>
-                <p data-i18n="what_customers_share">Lo que nuestros clientes comparten</p>
+                <h2>Historias de Verano</h2>
+                <p>Lo que nuestros clientes comparten</p>
             </div>
             
             <div class="testimonial-carousel">
@@ -2231,31 +2153,31 @@
             </div>
 
             <div class="comment-box">
-                <h3 data-i18n="share_story">Comparte tu historia</h3>
+                <h3>Comparte tu historia</h3>
                 <form class="comment-form" onsubmit="submitComment(event)">
                     <div class="form-group">
-                        <label for="commentName" data-i18n="name">Nombre</label>
-                        <input type="text" id="commentName" required placeholder="Tu nombre" autocomplete="name" data-i18n-placeholder="your_name">
+                        <label for="commentName">Nombre</label>
+                        <input type="text" id="commentName" required placeholder="Tu nombre" autocomplete="name">
                     </div>
                     <div class="form-group">
-                        <label for="commentEmail" data-i18n="email">Email</label>
-                        <input type="email" id="commentEmail" required placeholder="tu@email.com" autocomplete="email" data-i18n-placeholder="your_email">
+                        <label for="commentEmail">Email</label>
+                        <input type="email" id="commentEmail" required placeholder="tu@email.com" autocomplete="email">
                     </div>
                     <div class="form-group">
-                        <label for="commentRating" data-i18n="rating">Calificación</label>
+                        <label for="commentRating">Calificación</label>
                         <select id="commentRating">
-                            <option>⭐⭐⭐⭐⭐ (5 <span data-i18n="stars">estrellas</span>)</option>
-                            <option>⭐⭐⭐⭐ (4 <span data-i18n="stars">estrellas</span>)</option>
-                            <option>⭐⭐⭐ (3 <span data-i18n="stars">estrellas</span>)</option>
-                            <option>⭐⭐ (2 <span data-i18n="stars">estrellas</span>)</option>
-                            <option>⭐ (1 <span data-i18n="star">estrella</span>)</option>
+                            <option>⭐⭐⭐⭐⭐ (5 estrellas)</option>
+                            <option>⭐⭐⭐⭐ (4 estrellas)</option>
+                            <option>⭐⭐⭐ (3 estrellas)</option>
+                            <option>⭐⭐ (2 estrellas)</option>
+                            <option>⭐ (1 estrella)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="commentText" data-i18n="your_experience">Tu experiencia</label>
-                        <textarea id="commentText" required placeholder="Cuéntanos sobre tu look de verano..." data-i18n-placeholder="tell_experience"></textarea>
+                        <label for="commentText">Tu experiencia</label>
+                        <textarea id="commentText" required placeholder="Cuéntanos sobre tu look de verano..."></textarea>
                     </div>
-                    <button type="submit" class="btn-submit" data-i18n="send_comment">Enviar comentario</button>
+                    <button type="submit" class="btn-submit">Enviar comentario</button>
                 </form>
             </div>
         </div>
@@ -2283,7 +2205,7 @@
                 <p class="preview-description" id="previewDescription"></p>
                 <p class="preview-price" id="previewPrice"></p>
                 <p class="preview-stock" id="previewStock"></p>
-                <button class="preview-add-btn" id="previewAddBtn" data-i18n="add_to_cart">Agregar al carrito</button>
+                <button class="preview-add-btn" id="previewAddBtn">Agregar al carrito</button>
             </div>
         </div>
     </div>
@@ -2295,25 +2217,25 @@
     <div class="story-modal" id="storyModal" onclick="closeStoryModal(event)">
         <div class="story-modal-content" onclick="event.stopPropagation()">
             <button class="close-story-modal" onclick="closeStoryModal()"><i class="fas fa-times"></i></button>
-            <h3 data-i18n="your_story_ready">¡Tu historia está lista!</h3>
-            <p class="story-instruction" data-i18n="download_and_share">Descarga la imagen y súbela a tu historia</p>
+            <h3>¡Tu historia está lista!</h3>
+            <p class="story-instruction">Descarga la imagen y súbela a tu historia</p>
             
             <div class="story-preview-container">
                 <img id="generatedStoryImage" alt="Story preview">
             </div>
             
             <div class="story-actions">
-                <a id="downloadStoryBtn" class="btn-download-story" download="klohe-summer.jpg">
+                <a id="downloadStoryBtn" class="btn-download-story" download="klohe-story.jpg">
                     <i class="fas fa-download"></i>
-                    <span data-i18n="download_image">Descargar imagen</span>
+                    <span>Descargar imagen</span>
                 </a>
                 <button class="btn-copy-story" onclick="copyStoryToClipboard()">
                     <i class="fas fa-copy"></i>
-                    <span data-i18n="copy_image">Copiar imagen</span>
+                    <span>Copiar imagen</span>
                 </button>
             </div>
             
-            <p class="story-tip" data-i18n="story_upload_tip">Abre Instagram/WhatsApp y sube esta imagen a tu historia</p>
+            <p class="story-tip">Abre Instagram/WhatsApp y sube esta imagen a tu historia</p>
         </div>
     </div>
 
@@ -2321,14 +2243,14 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4 data-i18n="contact">Contacto</h4>
+                    <h4>Contacto</h4>
                     <p>WhatsApp: +503 66711569</p>
                     <p>Email: <a href="mailto:industriastobias@gmail.com">industriastobias@gmail.com</a></p>
-                    <p data-i18n="location">San Salvador, El Salvador</p>
+                    <p>San Salvador, El Salvador</p>
                 </div>
                 <div class="footer-section">
-                    <h4 data-i18n="social_media">Redes Sociales</h4>
-                    <p data-i18n="follow_us">Síguenos y descubre las últimas novedades</p>
+                    <h4>Redes Sociales</h4>
+                    <p>Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
                         <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
@@ -2342,309 +2264,129 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>🕐 <span data-i18n="hours">Horarios</span></h4>
-                    <p data-i18n="monday_sunday">Lunes a Domingo</p>
+                    <h4>🕐 Horarios</h4>
+                    <p>Lunes a Domingo</p>
                     <p>7:00 AM - 10:00 PM</p>
-                    <p data-i18n="always_open">Siempre abiertos para ti</p>
+                    <p>Siempre abiertos para ti</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 KLOHE. <span data-i18n="made_with_sun">Hecho con ☀️ en El Salvador</span></p>
+                <p>&copy; 2026 KLOHE. Hecho con ☀️ en El Salvador</p>
             </div>
         </div>
     </footer>
 
     <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-tooltip" id="whatsappTooltip" data-i18n="need_help">¿Necesitas ayuda?</span>
+        <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
     </a>
 
     <div class="newsletter-overlay" id="newsletterOverlay" onclick="closeNewsletter()"></div>
     <div class="newsletter-popup" id="newsletterPopup" role="dialog" aria-modal="true">
         <button class="newsletter-close" onclick="closeNewsletter()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
-        <h3 data-i18n="welcome">¡Bienvenido!</h3>
-        <p data-i18n="discount_text">Obtén un <strong>5% de descuento</strong> en tu primera compra de verano</p>
+        <h3>¡Bienvenido!</h3>
+        <p>Obtén un <strong>5% de descuento</strong> en tu primera compra de verano</p>
         <div class="newsletter-code">SUMMERKLOHE</div>
-        <p style="font-size: 0.8rem; color: var(--azul-medio);" data-i18n="use_code">Usa este código al momento de pagar</p>
+        <p style="font-size: 0.8rem; color: var(--rosa-oscuro);">Usa este código al momento de pagar</p>
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
     <div class="cart-modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
         <div class="cart-header">
-            <h2 id="cartTitle" data-i18n="your_cart">Tu Carrito</h2>
+            <h2 id="cartTitle">Tu Carrito</h2>
             <button class="close-cart" onclick="toggleCart()" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
         </div>
         
         <div class="shipping-option">
             <div class="shipping-header">
-                <span class="shipping-title" data-i18n="nationwide_shipping">Envío a todo el país</span>
+                <span class="shipping-title">Envío a todo el país</span>
                 <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()" role="switch" aria-checked="false" tabindex="0"></div>
             </div>
             <div class="shipping-price" id="shippingPrice" style="display: none;">+$3.75</div>
-            <div class="shipping-desc" data-i18n="delivery_time">Entrega en 2-3 días hábiles</div>
+            <div class="shipping-desc">Entrega en 2-3 días hábiles</div>
         </div>
 
         <div id="cartItems">
-            <div class="cart-empty" data-i18n="empty_cart">Tu carrito está vacío</div>
+            <div class="cart-empty">Tu carrito está vacío</div>
         </div>
         
         <div class="cart-summary" id="cartSummary" style="display: none;">
             <div class="summary-row">
-                <span data-i18n="subtotal">Subtotal:</span>
+                <span>Subtotal:</span>
                 <span id="cartSubtotal">$0.00</span>
             </div>
             <div class="summary-row" id="shippingRow" style="display: none;">
-                <span data-i18n="shipping">Envío:</span>
+                <span>Envío:</span>
                 <span>$3.75</span>
             </div>
         </div>
         
         <div class="cart-total">
-            <span data-i18n="total">Total:</span>
+            <span>Total:</span>
             <span id="cartTotal">$0.00</span>
         </div>
         <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp"></i> <span data-i18n="buy_whatsapp">Comprar por WhatsApp</span>
+            <i class="fab fa-whatsapp"></i> <span>Comprar por WhatsApp</span>
         </a>
         <button class="btn-clear-cart" onclick="clearCart()" id="clearCartBtn" style="display: none;">
-            <i class="fas fa-trash-alt"></i> <span data-i18n="empty_cart_btn">Vaciar carrito</span>
+            <i class="fas fa-trash-alt"></i> <span>Vaciar carrito</span>
         </button>
     </div>
 
-    <div class="notification" id="notification" role="status" aria-live="polite" data-i18n="added_product">Producto agregado</div>
+    <div class="notification" id="notification" role="status" aria-live="polite">Producto agregado</div>
 
     <script src="products.js"></script>
     
     <script>
-        // Translations Object
-        const translations = {
-            es: {
-                categories: "Categorías",
-                all: "Todas",
-                hair_accessories: "Accesorios para el cabello",
-                rings: "Anillos",
-                earrings: "Aritos",
-                bags: "Carteras",
-                necklaces: "Collares",
-                sunglasses: "Lentes de sol",
-                others: "Otros",
-                bracelets: "Pulseras",
-                watches: "Relojes",
-                summer_collection: "Colección Verano",
-                summer_vibes: "Vibes de playa, actitud de ciudad",
-                latin_sazon: "Ahora todos quieren ser latinos pero les falta sazón, batería y reguetón ☀️🌴",
-                summer_verse: "Reflexión de Verano",
-                search_placeholder: "Busca tu accesorio perfecto...",
-                showing_products: "Mostrando {shown} de {total} productos",
-                loading_more: "Cargando más productos...",
-                summer_stories: "Historias de Verano",
-                what_customers_share: "Lo que nuestros clientes comparten",
-                share_story: "Comparte tu historia",
-                name: "Nombre",
-                your_name: "Tu nombre",
-                email: "Email",
-                your_email: "tu@email.com",
-                rating: "Calificación",
-                stars: "estrellas",
-                star: "estrella",
-                your_experience: "Tu experiencia",
-                tell_experience: "Cuéntanos sobre tu look de verano...",
-                send_comment: "Enviar comentario",
-                add_to_cart: "Agregar al carrito",
-                sold_out: "Agotado",
-                quick_view: "Vista rápida",
-                available: "disp.",
-                code: "COD",
-                contact: "Contacto",
-                location: "San Salvador, El Salvador",
-                social_media: "Redes Sociales",
-                follow_us: "Síguenos y descubre las últimas novedades",
-                hours: "Horarios",
-                monday_sunday: "Lunes a Domingo",
-                always_open: "Siempre abiertos para ti",
-                made_with_sun: "Hecho con ☀️ en El Salvador",
-                need_help: "¿Necesitas ayuda?",
-                welcome: "¡Bienvenido!",
-                discount_text: "Obtén un <strong>5% de descuento</strong> en tu primera compra de verano",
-                use_code: "Usa este código al momento de pagar",
-                your_cart: "Tu Carrito",
-                nationwide_shipping: "Envío a todo el país",
-                delivery_time: "Entrega en 2-3 días hábiles",
-                empty_cart: "Tu carrito está vacío",
-                subtotal: "Subtotal:",
-                shipping: "Envío:",
-                total: "Total:",
-                buy_whatsapp: "Comprar por WhatsApp",
-                empty_cart_btn: "Vaciar carrito",
-                added_product: "Producto agregado",
-                removed_products: "Algunos productos ya no están disponibles y fueron removidos",
-                cart_emptied: "El carrito se vació porque los productos ya no están disponibles",
-                cart_cleared: "Carrito vaciado",
-                max_stock: "Stock máximo alcanzado",
-                no_stock: "Sin stock disponible",
-                product_added: "Producto agregado al carrito",
-                thanks_comment: "¡Gracias por tu comentario!",
-                search_results: "Búsqueda: \"{term}\"",
-                units_available: "unidades disponibles",
-                lang_switch: "EN",
-                share_in_stories: "Compartir en historias",
-                your_story_ready: "¡Tu historia está lista!",
-                download_and_share: "Descarga la imagen y súbela a tu historia",
-                download_image: "Descargar imagen",
-                copy_image: "Copiar imagen",
-                story_upload_tip: "Abre Instagram/WhatsApp y sube esta imagen a tu historia"
-            },
-            en: {
-                categories: "Categories",
-                all: "All",
-                hair_accessories: "Hair Accessories",
-                rings: "Rings",
-                earrings: "Earrings",
-                bags: "Bags",
-                necklaces: "Necklaces",
-                sunglasses: "Sunglasses",
-                others: "Others",
-                bracelets: "Bracelets",
-                watches: "Watches",
-                summer_collection: "Summer Collection",
-                summer_vibes: "Beach vibes, city attitude",
-                latin_sazon: "Now everyone wants to be Latino but they're missing the flavor, drums and reggaeton ☀️🌴",
-                summer_verse: "Summer Reflection",
-                search_placeholder: "Search for your perfect accessory...",
-                showing_products: "Showing {shown} of {total} products",
-                loading_more: "Loading more products...",
-                summer_stories: "Summer Stories",
-                what_customers_share: "What our customers share",
-                share_story: "Share your story",
-                name: "Name",
-                your_name: "Your name",
-                email: "Email",
-                your_email: "your@email.com",
-                rating: "Rating",
-                stars: "stars",
-                star: "star",
-                your_experience: "Your experience",
-                tell_experience: "Tell us about your summer look...",
-                send_comment: "Send comment",
-                add_to_cart: "Add to cart",
-                sold_out: "Sold out",
-                quick_view: "Quick view",
-                available: "avail.",
-                code: "SKU",
-                contact: "Contact",
-                location: "San Salvador, El Salvador",
-                social_media: "Social Media",
-                follow_us: "Follow us for the latest updates",
-                hours: "Hours",
-                monday_sunday: "Monday to Sunday",
-                always_open: "Always open for you",
-                made_with_sun: "Made with ☀️ in El Salvador",
-                need_help: "Need help?",
-                welcome: "Welcome!",
-                discount_text: "Get <strong>5% off</strong> on your first summer purchase",
-                use_code: "Use this code at checkout",
-                your_cart: "Your Cart",
-                nationwide_shipping: "Nationwide shipping",
-                delivery_time: "Delivery in 2-3 business days",
-                empty_cart: "Your cart is empty",
-                subtotal: "Subtotal:",
-                shipping: "Shipping:",
-                total: "Total:",
-                buy_whatsapp: "Buy via WhatsApp",
-                empty_cart_btn: "Empty cart",
-                added_product: "Product added",
-                removed_products: "Some products are no longer available and were removed",
-                cart_emptied: "Cart was emptied because products are no longer available",
-                cart_cleared: "Cart cleared",
-                max_stock: "Maximum stock reached",
-                no_stock: "No stock available",
-                product_added: "Product added to cart",
-                thanks_comment: "Thank you for your comment!",
-                search_results: "Search: \"{term}\"",
-                units_available: "units available",
-                lang_switch: "ES",
-                share_in_stories: "Share to stories",
-                your_story_ready: "Your story is ready!",
-                download_and_share: "Download the image and upload it to your story",
-                download_image: "Download image",
-                copy_image: "Copy image",
-                story_upload_tip: "Open Instagram/WhatsApp and upload this image to your story"
-            }
-        };
-
-        // Verses with both languages - Summer edition
+        // Versículos de verano
         const dailyVerses = [
             { 
-                text: "El sol se levanta para todos, pero donde brilla más fuerte es donde hay buena vibra.", 
-                text_en: "The sun rises for everyone, but it shines brightest where there's good vibes.",
-                reference: "KLOHE Verano 2026", 
-                reference_en: "KLOHE Summer 2026" 
+                text: "El sol se levanta para todos, pero el brillo único lo pones tú con tus accesorios.", 
+                reference: "KLOHE Verano 2026" 
             },
             { 
                 text: "Como dice el dicho: 'Ponte las pilas' porque el verano no espera a nadie.", 
-                text_en: "As they say: 'Get your batteries on' because summer waits for no one.",
-                reference: "Sabiduría Salvadoreña", 
-                reference_en: "Salvadoran Wisdom" 
+                reference: "Sabiduría Veraniega" 
             },
             { 
-                text: "La vida es como una ola: hay que surfearla con estilo.", 
-                text_en: "Life is like a wave: you gotta surf it with style.",
-                reference: "Filosofía Playera", 
-                reference_en: "Beach Philosophy" 
+                text: "La vida es como una ola: hay que surfearla con estilo y buenos accesorios.", 
+                reference: "Filosofía Playera" 
             },
             { 
-                text: "Con sazón, batería y reguetón, todo es mejor bajo el sol.", 
-                text_en: "With flavor, drums and reggaeton, everything is better under the sun.",
-                reference: "Latino Vibes", 
-                reference_en: "Latino Vibes" 
+                text: "Con sazón, batería y reggaeton, todo look es mejor bajo el sol.", 
+                reference: "Latino Vibes" 
             },
             { 
-                text: "El mar está lleno de sal, pero la vida está llena de sabor.", 
-                text_en: "The sea is full of salt, but life is full of flavor.",
-                reference: "Reflexión Playera", 
-                reference_en: "Beach Reflection" 
+                text: "El mar está lleno de sal, pero tu estilo está lleno de brillo.", 
+                reference: "Reflexión Playera" 
             },
             { 
-                text: "No dejes para mañana el bronceado que puedes hacerte hoy.", 
-                text_en: "Don't leave for tomorrow the tan you can get today.",
-                reference: "Máxima Veraniega", 
-                reference_en: "Summer Maxim" 
+                text: "No dejes para mañana el accesorio que puedes lucir hoy.", 
+                reference: "Máxima Veraniega" 
             },
             { 
                 text: "El calor no es excusa, la actitud es todo.", 
-                text_en: "The heat is no excuse, attitude is everything.",
-                reference: "Código KLOHE", 
-                reference_en: "KLOHE Code" 
+                reference: "Código KLOHE" 
             },
             { 
-                text: "Bajo el sol de El Salvador, todos somos más brillantes.", 
-                text_en: "Under the El Salvador sun, we all shine brighter.",
-                reference: "Orgullo Cuzcatleco", 
-                reference_en: "Cuzcatleco Pride" 
+                text: "Bajo el sol de El Salvador, todos brillamos más con el accesorio perfecto.", 
+                reference: "Orgullo Cuzcatleco" 
             },
             { 
                 text: "La playa cura todo, pero un buen accesorio acelera el proceso.", 
-                text_en: "The beach cures everything, but a good accessory speeds up the process.",
-                reference: "Medicina Alternativa", 
-                reference_en: "Alternative Medicine" 
+                reference: "Medicina Alternativa" 
             },
             { 
                 text: "Verano es un estado de mente, no solo una estación.", 
-                text_en: "Summer is a state of mind, not just a season.",
-                reference: "Filosofía KLOHE", 
-                reference_en: "KLOHE Philosophy" 
+                reference: "Filosofía KLOHE" 
             },
             { 
-                text: "Si la vida te da limones, hazte una limonada y tómala en la playa.", 
-                text_en: "When life gives you lemons, make lemonade and drink it at the beach.",
-                reference: "Optimismo Tropical", 
-                reference_en: "Tropical Optimism" 
+                text: "Si la vida te da limones, hazte una limonada y lúcela con estilo.", 
+                reference: "Optimismo Tropical" 
             },
             { 
-                text: "El mejor bronceado es el que viene con buenos recuerdos.", 
-                text_en: "The best tan is the one that comes with good memories.",
-                reference: "Verano Eterno", 
-                reference_en: "Eternal Summer" 
+                text: "El mejor bronceado es el que viene con buenos recuerdos y mejores accesorios.", 
+                reference: "Verano Eterno" 
             }
         ];
 
@@ -2666,8 +2408,7 @@
             isLoading: false,
             hasMoreProducts: true,
             currentTestimonial: 0,
-            searchTerm: '',
-            currentLang: localStorage.getItem('klohe_lang') || 'es'
+            searchTerm: ''
         };
 
         // Intersection Observer for Lazy Loading Images
@@ -2724,76 +2465,19 @@
             };
         }
 
-        // Get translation helper
-        function t(key, replacements = {}) {
-            let text = translations[AppState.currentLang][key] || key;
-            Object.keys(replacements).forEach(key => {
-                text = text.replace(`{${key}}`, replacements[key]);
-            });
-            return text;
-        }
-
-        // Toggle Language Function
-        function toggleLanguage() {
-            const newLang = AppState.currentLang === 'es' ? 'en' : 'es';
-            AppState.currentLang = newLang;
-            localStorage.setItem('klohe_lang', newLang);
-            
-            document.getElementById('currentLang').textContent = t('lang_switch');
-            
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[newLang][key]) {
-                    if (key === 'discount_text') {
-                        element.innerHTML = translations[newLang][key];
-                    } else {
-                        element.textContent = translations[newLang][key];
-                    }
-                }
-            });
-            
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-                const key = element.getAttribute('data-i18n-placeholder');
-                if (translations[newLang][key]) {
-                    element.placeholder = translations[newLang][key];
-                }
-            });
-            
-            if (AppState.currentFilter === 'todos' && !AppState.searchTerm) {
-                document.getElementById('categoryTitle').textContent = t('all');
-            }
-            
-            document.documentElement.lang = newLang;
-            
-            displayDailyVerse();
-            initTestimonials();
-            updateCart();
-            
-            document.getElementById('productsContainer').innerHTML = '';
-            AppState.currentPage = 0;
-            renderProducts();
-            updateProductsCount();
-        }
-
         function getDailyVerse() {
             const today = new Date();
             const dayOfMonth = today.getDate();
-            const month = today.toLocaleString(AppState.currentLang === 'es' ? 'es-ES' : 'en-US', { month: 'long' });
+            const month = today.toLocaleString('es-ES', { month: 'long' });
             const year = today.getFullYear();
             const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
             const verse = dailyVerses[verseIndex];
             
-            let formattedDate;
-            if (AppState.currentLang === 'es') {
-                formattedDate = `${dayOfMonth} de ${month} de ${year}`;
-            } else {
-                const daySuffix = (dayOfMonth > 3 && dayOfMonth < 21) || (dayOfMonth % 10 > 3) ? 'th' : ['st','nd','rd'][dayOfMonth % 10 - 1] || 'th';
-                formattedDate = `${month} ${dayOfMonth}${daySuffix}, ${year}`;
-            }
+            const formattedDate = `${dayOfMonth} de ${month} de ${year}`;
             
             return {
-                text: AppState.currentLang === 'es' ? verse.text : verse.text_en,
-                reference: AppState.currentLang === 'es' ? verse.reference : verse.reference_en,
+                text: verse.text,
+                reference: verse.reference,
                 date: formattedDate,
                 dayNumber: dayOfMonth
             };
@@ -2823,21 +2507,18 @@
             { 
                 name: "María Fernanda L.", 
                 text: "Los accesorios son perfectos para el calor salvadoreño. ¡Me encantan!", 
-                text_en: "The accessories are perfect for the Salvadoran heat. I love them!", 
                 date: "Feb 10, 2026", 
                 stars: "★★★★★" 
             },
             { 
                 name: "Carlos Mendoza", 
                 text: "Excelente calidad y el estilo es único. Ideal para la temporada de verano.", 
-                text_en: "Excellent quality and unique style. Perfect for summer season.", 
                 date: "Feb 8, 2026", 
                 stars: "★★★★★" 
             },
             { 
                 name: "Ana Lucía R.", 
                 text: "Me siento en la playa aunque esté en la ciudad. ¡Pura vibe!", 
-                text_en: "I feel at the beach even when I'm in the city. Pure vibes!", 
                 date: "Feb 5, 2026", 
                 stars: "★★★★★" 
             }
@@ -2892,8 +2573,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('currentLang').textContent = AppState.currentLang === 'es' ? 'EN' : 'ES';
-            
             initWhatsAppCyclicAnimation();
             
             displayDailyVerse();
@@ -2920,9 +2599,9 @@
                 if (AppState.cart.length !== originalCartLength) {
                     localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
                     if (AppState.cart.length === 0) {
-                        showNotification(t('cart_emptied'));
+                        showNotification('El carrito se vació porque los productos ya no están disponibles');
                     } else {
-                        showNotification(t('removed_products'));
+                        showNotification('Algunos productos ya no están disponibles y fueron removidos');
                     }
                 }
                 
@@ -2939,7 +2618,7 @@
                 updateCart();
                 
                 document.getElementById('productsContainer').innerHTML = 
-                    '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--azul-medio);">Error loading products</div>';
+                    '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">Error cargando productos</div>';
             }
             
             const searchInput = document.getElementById('searchInput');
@@ -3026,9 +2705,9 @@
                 updateProductsCount();
                 
                 if (AppState.searchTerm !== '') {
-                    document.getElementById('categoryTitle').textContent = t('search_results', {term: term});
+                    document.getElementById('categoryTitle').textContent = `Búsqueda: "${term}"`;
                 } else {
-                    document.getElementById('categoryTitle').textContent = t(AppState.currentFilter === 'todos' ? 'all' : AppState.currentFilter);
+                    document.getElementById('categoryTitle').textContent = AppState.currentFilter === 'todos' ? 'Todas' : categoryMap[AppState.currentFilter];
                 }
             }, 300);
         }
@@ -3037,12 +2716,7 @@
             const track = document.getElementById('testimonialTrack');
             const dotsContainer = document.getElementById('carouselDots');
             
-            const currentTestimonials = testimonials.map(t => ({
-                ...t,
-                text: AppState.currentLang === 'es' ? t.text : t.text_en
-            }));
-            
-            track.innerHTML = currentTestimonials.map(t => `
+            track.innerHTML = testimonials.map(t => `
                 <div class="testimonial-slide">
                     <div class="testimonial-card">
                         <div class="testimonial-stars">${t.stars}</div>
@@ -3053,7 +2727,7 @@
                 </div>
             `).join('');
             
-            dotsContainer.innerHTML = currentTestimonials.map((_, i) => 
+            dotsContainer.innerHTML = testimonials.map((_, i) => 
                 `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})" role="button" tabindex="0" aria-label="Testimonial ${i + 1}"></div>`
             ).join('');
             
@@ -3088,7 +2762,7 @@
 
         function submitComment(e) {
             e.preventDefault();
-            showNotification(t('thanks_comment'));
+            showNotification('¡Gracias por tu comentario!');
             e.target.reset();
         }
 
@@ -3128,7 +2802,20 @@
                 btnElement.classList.add('active');
             }
             
-            document.getElementById('categoryTitle').textContent = t(category === 'todos' ? 'all' : category);
+            const categoryNames = {
+                'todos': 'Todas',
+                'accesorios-cabello': 'Accesorios para el cabello',
+                'anillo': 'Anillos',
+                'aritos': 'Aritos',
+                'cartera': 'Carteras',
+                'collar': 'Collares',
+                'lentes-sol': 'Lentes de sol',
+                'otros': 'Otros',
+                'pulsera': 'Pulseras',
+                'reloj': 'Relojes'
+            };
+            
+            document.getElementById('categoryTitle').textContent = categoryNames[category] || 'Todas';
             
             document.getElementById('productsContainer').innerHTML = '';
             renderSkeletons(4);
@@ -3159,7 +2846,7 @@
             const productsToShow = AppState.filteredProducts.slice(start, end);
             
             if (productsToShow.length === 0 && AppState.currentPage === 0) {
-                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--azul-medio);">No products found</div>';
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">No se encontraron productos</div>';
                 AppState.hasMoreProducts = false;
                 return;
             }
@@ -3186,7 +2873,7 @@
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23E8F0D8'/%3E%3C/svg%3E`;
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -3195,21 +2882,21 @@
                          class="product-image blur-up"
                          src="${placeholderSvg}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23E8F0D8%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%232A4050%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
-                    <span class="stock-badge">${product.stock} ${t('available')}</span>
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                    <span class="stock-badge">${product.stock} disp.</span>
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">${product.name}</h3>
-                    <p class="product-barcode">${t('code')}: ${product.barcode}</p>
+                    <p class="product-barcode">COD: ${product.barcode}</p>
                     <p class="product-description">${product.description || ''}</p>
                     <div class="product-row">
                         <span class="product-price">$${product.price.toFixed(2)}</span>
-                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${realIndex})" title="${t('quick_view')}" aria-label="${t('quick_view')} ${product.name}">
+                        <button class="eye-btn" onclick="event.stopPropagation(); openPreview(${realIndex})" title="Vista rápida" aria-label="Vista rápida ${product.name}">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
-                    <button class="btn-add-cart" onclick="addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''} aria-label="${hasStock ? t('add_to_cart') : t('sold_out')}">
-                        ${hasStock ? t('add_to_cart') : t('sold_out')}
+                    <button class="btn-add-cart" onclick="addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''} aria-label="${hasStock ? 'Agregar al carrito' : 'Agotado'}">
+                        ${hasStock ? 'Agregar al carrito' : 'Agotado'}
                     </button>
                 </div>
             `;
@@ -3242,8 +2929,7 @@
         function updateProductsCount() {
             const shown = Math.min((AppState.currentPage + 1) * CONFIG.productsPerPage, AppState.filteredProducts.length);
             const total = AppState.filteredProducts.length;
-            const countElement = document.getElementById('productsCount');
-            countElement.textContent = t('showing_products', {shown: shown, total: total});
+            document.getElementById('productsCount').textContent = `Mostrando ${shown} de ${total} productos`;
         }
 
         let currentPreviewIndex = null;
@@ -3259,32 +2945,31 @@
             
             document.getElementById('previewImage').alt = product.name;
             document.getElementById('previewName').textContent = product.name;
-            document.getElementById('previewBarcode').textContent = `${t('code')}: ${product.barcode}`;
+            document.getElementById('previewBarcode').textContent = `COD: ${product.barcode}`;
             
-            // Mostrar descripción
             const descElement = document.getElementById('previewDescription');
             if (product.description && product.description.trim() !== '') {
                 descElement.textContent = product.description;
                 descElement.style.display = 'block';
             } else {
-                descElement.textContent = AppState.currentLang === 'es' ? 'No hay descripción disponible.' : 'No description available.';
+                descElement.textContent = 'No hay descripción disponible.';
                 descElement.style.display = 'block';
             }
             
             document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
-            document.getElementById('previewStock').textContent = `${product.stock} ${t('units_available')}`;
+            document.getElementById('previewStock').textContent = `${product.stock} unidades disponibles`;
             
             const addBtn = document.getElementById('previewAddBtn');
             if (product.stock > 0) {
                 addBtn.disabled = false;
-                addBtn.textContent = t('add_to_cart');
+                addBtn.textContent = 'Agregar al carrito';
                 addBtn.onclick = () => {
                     addToCart(index);
                     closePreview();
                 };
             } else {
                 addBtn.disabled = true;
-                addBtn.textContent = t('sold_out');
+                addBtn.textContent = 'Agotado';
             }
             
             document.getElementById('previewModal').classList.add('active');
@@ -3299,7 +2984,7 @@
             currentPreviewIndex = null;
         }
 
-        // Funciones para generar y compartir historias
+        // Funciones para generar y compartir historias - CORREGIDO
         function generateStoryImage(platform) {
             if (currentPreviewIndex === null) return;
             
@@ -3311,38 +2996,42 @@
             canvas.width = 1080;
             canvas.height = 1920;
             
-            // Fondo degradado veraniego
+            // Fondo degradado con colores originales + toques de verano
             const gradient = ctx.createLinearGradient(0, 0, 1080, 1920);
-            gradient.addColorStop(0, '#E8F0D8');
-            gradient.addColorStop(0.5, '#C8E0F0');
-            gradient.addColorStop(1, '#E8D8E8');
+            gradient.addColorStop(0, '#FDF8F6'); // blanco
+            gradient.addColorStop(0.3, '#F5E6E0'); // rosa-nude
+            gradient.addColorStop(0.6, '#E8D5D0'); // rosa-suave
+            gradient.addColorStop(1, '#E8F0D8'); // lima-cream (toque verano)
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, 1080, 1920);
             
-            // Patrón de sol y palmeras sutiles
-            ctx.fillStyle = 'rgba(232, 208, 144, 0.15)';
+            // Patrón de corazones y soles sutiles
+            ctx.fillStyle = 'rgba(212, 165, 154, 0.1)';
             for (let i = 0; i < 15; i++) {
                 const x = Math.random() * 1080;
                 const y = Math.random() * 1920;
-                const size = 30 + Math.random() * 50;
-                drawSun(ctx, x, y, size);
+                const size = 20 + Math.random() * 40;
+                // Dibujar círculos que representan soles/destellos
+                ctx.beginPath();
+                ctx.arc(x, y, size/2, 0, Math.PI * 2);
+                ctx.fill();
             }
             
             // Marco decorativo
-            ctx.strokeStyle = '#2A4050';
+            ctx.strokeStyle = '#6D435A'; // bordo
             ctx.lineWidth = 8;
             ctx.strokeRect(60, 60, 960, 1800);
             
             // Logo KLOHE
             ctx.font = 'bold 80px "Playfair Display", serif';
-            ctx.fillStyle = '#2A4050';
+            ctx.fillStyle = '#6D435A'; // bordo
             ctx.textAlign = 'center';
             ctx.fillText('KLOHE', 540, 200);
             
             // Subtítulo veraniego
             ctx.font = '300 40px "Inter", sans-serif';
-            ctx.fillStyle = '#7EB8D4';
-            ctx.fillText('Summer Collection', 540, 260);
+            ctx.fillStyle = '#B5838D'; // rosa-viejo
+            ctx.fillText('Colección Verano', 540, 260);
             
             // Cargar imagen del producto
             const img = new Image();
@@ -3350,7 +3039,7 @@
             img.onload = function() {
                 // Marco de foto
                 ctx.fillStyle = '#FFFFFF';
-                ctx.shadowColor = 'rgba(42, 64, 80, 0.3)';
+                ctx.shadowColor = 'rgba(157, 107, 127, 0.3)';
                 ctx.shadowBlur = 40;
                 ctx.shadowOffsetY = 20;
                 ctx.fillRect(140, 350, 800, 800);
@@ -3363,13 +3052,13 @@
                 ctx.drawImage(img, -x, -y, img.width * scale, img.height * scale, 140, 350, 800, 800);
                 
                 // Marco interior
-                ctx.strokeStyle = '#C8E0F0';
+                ctx.strokeStyle = '#D4A59A'; // rosa-medio
                 ctx.lineWidth = 4;
                 ctx.strokeRect(160, 370, 760, 760);
                 
                 // Nombre del producto
                 ctx.font = 'bold 60px "Playfair Display", serif';
-                ctx.fillStyle = '#2C2824';
+                ctx.fillStyle = '#2C2424'; // negro-suave
                 ctx.textAlign = 'center';
                 
                 // Texto multilinea para nombre largo
@@ -3396,23 +3085,23 @@
                 // Precio destacado
                 const priceY = yPos + 120;
                 ctx.font = 'bold 100px "Inter", sans-serif';
-                ctx.fillStyle = '#E8A090';
+                ctx.fillStyle = '#6D435A'; // bordo
                 ctx.fillText(`$${product.price.toFixed(2)}`, 540, priceY);
                 
                 // Badge de disponibilidad
                 ctx.font = '500 35px "Inter", sans-serif';
                 ctx.fillStyle = product.stock > 0 ? '#25D366' : '#dc3545';
-                ctx.fillText(product.stock > 0 ? (AppState.currentLang === 'es' ? '✓ Disponible' : '✓ Available') : (AppState.currentLang === 'es' ? 'Agotado' : 'Sold Out'), 540, priceY + 80);
+                ctx.fillText(product.stock > 0 ? '✓ Disponible' : 'Agotado', 540, priceY + 80);
                 
                 // Código
                 ctx.font = '400 30px "Courier New", monospace';
-                ctx.fillStyle = '#7EB8D4';
-                ctx.fillText(`${AppState.currentLang === 'es' ? 'COD' : 'SKU'}: ${product.barcode}`, 540, priceY + 140);
+                ctx.fillStyle = '#9B6B7F'; // rosa-oscuro
+                ctx.fillText(`COD: ${product.barcode}`, 540, priceY + 140);
                 
                 // Footer con call to action
                 ctx.font = 'italic 400 40px "Cormorant Garamond", serif';
-                ctx.fillStyle = '#2A4050';
-                ctx.fillText(AppState.currentLang === 'es' ? '☀️ Puro sabor salvadoreño' : '☀️ Pure Salvadoran flavor', 540, 1750);
+                ctx.fillStyle = '#6D435A'; // bordo
+                ctx.fillText('☀️ Brilla con estilo este verano', 540, 1750);
                 
                 // WhatsApp contacto
                 ctx.font = '500 35px "Inter", sans-serif';
@@ -3420,46 +3109,28 @@
                 ctx.fillText('WhatsApp: 6671-1569', 540, 1820);
                 
                 // Generar imagen
-                const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
-                document.getElementById('generatedStoryImage').src = dataUrl;
-                document.getElementById('downloadStoryBtn').href = dataUrl;
-                
-                // Mostrar modal
-                document.getElementById('storyModal').classList.add('active');
-                document.body.style.overflow = 'hidden';
-                
-                // Guardar en variable global para copiar
-                window.currentStoryImage = dataUrl;
+                try {
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                    document.getElementById('generatedStoryImage').src = dataUrl;
+                    document.getElementById('downloadStoryBtn').href = dataUrl;
+                    
+                    // Mostrar modal
+                    document.getElementById('storyModal').classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Guardar en variable global para copiar
+                    window.currentStoryImage = dataUrl;
+                } catch (err) {
+                    console.error('Error generando imagen:', err);
+                    showNotification('Error al generar la imagen', 'error');
+                }
             };
             
             img.onerror = function() {
-                showNotification('Error cargando imagen', 'error');
+                showNotification('Error cargando imagen del producto', 'error');
             };
             
             img.src = `${product.barcode}.jpg`;
-        }
-
-        // Dibujar sol decorativo
-        function drawSun(ctx, x, y, size) {
-            ctx.beginPath();
-            ctx.arc(x, y, size/2, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Rayos
-            for (let i = 0; i < 8; i++) {
-                const angle = (i * Math.PI) / 4;
-                const x1 = x + Math.cos(angle) * (size/2 + 5);
-                const y1 = y + Math.sin(angle) * (size/2 + 5);
-                const x2 = x + Math.cos(angle) * (size/2 + 15);
-                const y2 = y + Math.sin(angle) * (size/2 + 15);
-                
-                ctx.beginPath();
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = 'rgba(232, 208, 144, 0.15)';
-                ctx.stroke();
-            }
         }
 
         // Cerrar modal de historia
@@ -3469,7 +3140,7 @@
             document.body.style.overflow = '';
         }
 
-        // Copiar imagen al portapapeles
+        // Copiar imagen al portapapeles - CORREGIDO
         async function copyStoryToClipboard() {
             const img = document.getElementById('generatedStoryImage');
             
@@ -3485,21 +3156,23 @@
                     ]);
                     
                     const btn = document.querySelector('.btn-copy-story');
+                    const originalContent = btn.innerHTML;
                     btn.classList.add('copied');
                     btn.innerHTML = '<i class="fas fa-check"></i><span>¡Copiado!</span>';
                     
-                    showNotification(AppState.currentLang === 'es' ? '¡Imagen copiada! Pégala en tu historia' : 'Image copied! Paste it in your story');
+                    showNotification('¡Imagen copiada! Pégala en tu historia');
                     
                     setTimeout(() => {
                         btn.classList.remove('copied');
-                        btn.innerHTML = `<i class="fas fa-copy"></i><span>${t('copy_image')}</span>`;
+                        btn.innerHTML = originalContent;
                     }, 3000);
                 } else {
-                    showNotification('Tu navegador no soporta copiar imágenes. Descarga la imagen.', 'error');
+                    // Fallback para navegadores que no soportan clipboard API
+                    showNotification('Descarga la imagen para compartirla');
                 }
             } catch (err) {
-                console.error('Error copying:', err);
-                showNotification('Error al copiar. Intenta descargar.', 'error');
+                console.error('Error copiando:', err);
+                showNotification('Error al copiar. Intenta descargar la imagen.', 'error');
             }
         }
 
@@ -3521,7 +3194,7 @@
             const product = products[index];
             
             if (product.stock <= 0) {
-                showNotification(t('no_stock'), 'error');
+                showNotification('Sin stock disponible', 'error');
                 return;
             }
 
@@ -3531,7 +3204,7 @@
                 if (existingItem.quantity < product.stock) {
                     existingItem.quantity++;
                 } else {
-                    showNotification(t('max_stock'), 'error');
+                    showNotification('Stock máximo alcanzado', 'error');
                     return;
                 }
             } else {
@@ -3539,7 +3212,7 @@
             }
 
             updateCart();
-            showNotification(t('product_added'));
+            showNotification('Producto agregado al carrito');
         }
 
         function removeFromCart(barcode) {
@@ -3548,11 +3221,11 @@
         }
 
         function clearCart() {
-            if (confirm(t('empty_cart_btn') + '?')) {
+            if (confirm('¿Vaciar carrito?')) {
                 AppState.cart = [];
                 localStorage.removeItem('klohe_cart');
                 updateCart();
-                showNotification(t('cart_cleared'));
+                showNotification('Carrito vaciado');
             }
         }
 
@@ -3574,7 +3247,7 @@
             clearBtn.style.display = AppState.cart.length > 0 ? 'block' : 'none';
 
             if (AppState.cart.length === 0) {
-                cartItems.innerHTML = `<div class="cart-empty">${t('empty_cart')}</div>`;
+                cartItems.innerHTML = `<div class="cart-empty">Tu carrito está vacío</div>`;
                 summary.style.display = 'none';
                 whatsappBtn.style.display = 'none';
                 document.getElementById('cartTotal').textContent = '$0.00';
@@ -3593,14 +3266,14 @@
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
                                  loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23E8F0D8%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%232A4050%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
-                            <p class="cart-item-code">${t('code')}: ${item.barcode}</p>
+                            <p class="cart-item-code">COD: ${item.barcode}</p>
                             <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
                         </div>
-                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Remove ${item.name}">
+                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name}">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -3616,13 +3289,12 @@
             whatsappBtn.style.display = 'flex';
             
             const message = AppState.cart.map(item => 
-                `• ${item.name} (${t('code')}: ${item.barcode}) - ${AppState.currentLang === 'es' ? 'Cant' : 'Qty'}: ${item.quantity}`
+                `• ${item.name} (COD: ${item.barcode}) - Cant: ${item.quantity}`
             ).join('%0A');
             
-            const shippingText = AppState.shippingEnabled ? `%0A%0A${t('shipping')} $3.75` : '';
-            const greeting = AppState.currentLang === 'es' ? '¡Hola! Quiero comprar:' : 'Hello! I want to buy:';
+            const shippingText = AppState.shippingEnabled ? `%0A%0AEnvío: $3.75` : '';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent(greeting)}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0A${t('total')} $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
         }
 
         function toggleCart() {
@@ -3645,7 +3317,7 @@
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
             notification.textContent = message;
-            notification.style.background = type === 'error' ? '#dc3545' : 'var(--mar-profundo)';
+            notification.style.background = type === 'error' ? '#dc3545' : 'var(--bordo)';
             notification.classList.add('show');
             
             setTimeout(() => {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>KLOHE - Summer Collection</title>
+    <title>KLOHE - Summer Collection El Salvador</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     
@@ -19,16 +19,22 @@
         }
 
         :root {
-            --blanco: #FDF8F6;
-            --rosa-nude: #F5E6E0;
-            --rosa-suave: #E8D5D0;
-            --rosa-medio: #D4A59A;
-            --rosa-viejo: #B5838D;
-            --rosa-oscuro: #9B6B7F;
-            --bordo: #6D435A;
-            --chocolate: #4A3B3A;
-            --negro-suave: #2C2424;
-            --dorado: #C9A87C;
+            /* NUEVA PALETA VERANO - Basada en Pantone de la imagen */
+            --blanco: #FDFCF8;
+            --lima-suave: #E8F0D8;
+            --lima-cream: #D4E4C4;
+            --lima-medio: #A8C896;
+            --azul-delicate: #C8E0F0;
+            --azul-suave: #B0D4E8;
+            --azul-medio: #7EB8D4;
+            --lila-snow: #E8D8E8;
+            --lila-suave: #D4C4D8;
+            --lila-medio: #B8A0C4;
+            --coral-playa: #E8A090;
+            --arena: #F0E8D8;
+            --mar-profundo: #2A4050;
+            --negro-suave: #2C2824;
+            --dorado-sol: #E8C880;
         }
 
         body {
@@ -49,13 +55,19 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0) translateZ(0) scaleY(1); }
+            50% { transform: translateX(-25%) translateZ(0) scaleY(0.8); }
+            100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
         }
 
         .skeleton {
-            background: linear-gradient(90deg, var(--rosa-nude) 25%, var(--rosa-suave) 50%, var(--rosa-nude) 75%);
+            background: linear-gradient(90deg, var(--lima-suave) 25%, var(--azul-delicate) 50%, var(--lima-suave) 75%);
             background-size: 1000px 100%;
             animation: shimmer 2s infinite linear;
             border-radius: 4px;
@@ -93,7 +105,7 @@
             align-items: center;
             padding: 3rem 0;
             gap: 0.5rem;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             font-size: 0.9rem;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -102,8 +114,8 @@
         .spinner {
             width: 20px;
             height: 20px;
-            border: 2px solid var(--rosa-suave);
-            border-top-color: var(--bordo);
+            border: 2px solid var(--azul-delicate);
+            border-top-color: var(--mar-profundo);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -120,13 +132,13 @@
         }
 
         header {
-            background: rgba(253, 248, 246, 0.95);
+            background: rgba(253, 252, 248, 0.95);
             backdrop-filter: blur(10px);
             padding: 1.2rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--azul-delicate);
         }
 
         .container {
@@ -144,7 +156,7 @@
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             text-decoration: none;
             font-weight: 600;
             letter-spacing: 8px;
@@ -158,7 +170,7 @@
             top: -5px;
             right: -25px;
             font-size: 0.9rem;
-            animation: pulse 2s ease-in-out infinite;
+            animation: float 3s ease-in-out infinite;
         }
 
         .nav-right {
@@ -173,8 +185,8 @@
 
         .lang-btn {
             background: transparent;
-            border: 1px solid var(--rosa-medio);
-            color: var(--rosa-oscuro);
+            border: 1px solid var(--azul-medio);
+            color: var(--mar-profundo);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             cursor: pointer;
@@ -190,8 +202,8 @@
         }
 
         .lang-btn:hover {
-            border-color: var(--bordo);
-            background: var(--bordo);
+            border-color: var(--coral-playa);
+            background: var(--coral-playa);
             color: white;
             transform: scale(1.05);
         }
@@ -207,21 +219,21 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            border: 1px solid var(--rosa-medio);
+            border: 1px solid var(--azul-medio);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: var(--rosa-oscuro);
+            color: var(--mar-profundo);
             font-size: 1rem;
             transition: all 0.3s ease;
             background: transparent;
         }
 
         .social-btn:hover {
-            background: var(--bordo);
+            background: var(--coral-playa);
             color: white;
-            border-color: var(--bordo);
+            border-color: var(--coral-playa);
             transform: translateY(-2px);
         }
 
@@ -244,7 +256,7 @@
         .menu-toggle span {
             width: 22px;
             height: 2px;
-            background: var(--bordo);
+            background: var(--mar-profundo);
             transition: all 0.3s ease;
             display: block;
         }
@@ -272,7 +284,7 @@
             padding: 5rem 2rem 2rem;
             transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
-            border-right: 2px solid var(--rosa-suave);
+            border-right: 2px solid var(--azul-delicate);
             -webkit-overflow-scrolling: touch;
         }
 
@@ -282,13 +294,13 @@
 
         .categories-menu h3 {
             font-family: 'Playfair Display', serif;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
             font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
-            border-bottom: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--azul-delicate);
             padding-bottom: 0.8rem;
         }
 
@@ -299,11 +311,11 @@
             margin-bottom: 0.3rem;
             background: transparent;
             border: none;
-            border-bottom: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--azul-delicate);
             text-align: left;
             font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
-            color: var(--rosa-oscuro);
+            color: var(--mar-profundo);
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 400;
@@ -314,9 +326,9 @@
 
         .category-btn:hover,
         .category-btn.active {
-            color: var(--bordo);
+            color: var(--coral-playa);
             padding-left: 1rem;
-            border-bottom-color: var(--bordo);
+            border-bottom-color: var(--coral-playa);
         }
 
         .close-menu {
@@ -327,7 +339,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             width: 44px;
             height: 44px;
             display: flex;
@@ -346,22 +358,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--rosa-medio);
+            border: 1px solid var(--azul-medio);
             border-radius: 50%;
-            color: var(--bordo);
+            color: var(--mar-profundo);
         }
 
         .cart-icon:hover {
-            background: var(--bordo);
+            background: var(--coral-playa);
             color: white;
-            border-color: var(--bordo);
+            border-color: var(--coral-playa);
         }
 
         .cart-count {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: var(--bordo);
+            background: var(--coral-playa);
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -374,23 +386,42 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, var(--blanco) 0%, var(--rosa-nude) 100%);
+            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 50%, var(--lila-snow) 100%);
             padding: 3rem 0;
             text-align: center;
             position: relative;
-            border-bottom: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--azul-delicate);
             overflow: hidden;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(212,165,154,0.1) 0%, transparent 70%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(232, 208, 144, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(200, 224, 240, 0.4) 0%, transparent 50%);
             animation: pulse 15s ease-in-out infinite;
+        }
+
+        .wave-decoration {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 60px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23FDFCF8' opacity='.25'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' fill='%23FDFCF8' opacity='.5'/%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%23FDFCF8'/%3E%3C/svg%3E") repeat-x;
+            background-size: 50% 100%;
+            animation: wave 20s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .hero-content {
@@ -403,32 +434,48 @@
         .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             margin-bottom: 0.5rem;
             font-weight: 400;
             letter-spacing: 4px;
             text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
         }
 
         .hero p {
             font-size: 0.9rem;
-            color: var(--rosa-oscuro);
-            font-weight: 300;
+            color: var(--coral-playa);
+            font-weight: 500;
             letter-spacing: 2px;
             font-style: italic;
             margin-bottom: 1.5rem;
         }
 
+        .summer-vibe {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--mar-profundo);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            letter-spacing: 1px;
+            background: rgba(255,255,255,0.6);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            display: inline-block;
+            border: 1px solid var(--dorado-sol);
+        }
+
         .daily-verse-container {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(5px);
-            border: 1px solid var(--rosa-medio);
-            border-radius: 12px;
+            border: 1px solid var(--azul-medio);
+            border-radius: 16px;
             padding: 1.5rem 2rem;
             margin: 0 auto 2rem;
             max-width: 700px;
             position: relative;
             animation: fadeIn 1s ease-in;
+            box-shadow: 0 8px 32px rgba(42, 64, 80, 0.1);
         }
 
         .verse-header {
@@ -440,18 +487,18 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--rosa-viejo);
+            color: var(--azul-medio);
             font-weight: 600;
         }
 
         .verse-header i {
-            color: var(--dorado);
+            color: var(--dorado-sol);
         }
 
         .verse-text {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
-            color: var(--chocolate);
+            color: var(--mar-profundo);
             line-height: 1.6;
             font-style: italic;
             margin-bottom: 0.5rem;
@@ -459,7 +506,7 @@
 
         .verse-reference {
             font-size: 0.8rem;
-            color: var(--bordo);
+            color: var(--coral-playa);
             font-weight: 600;
             letter-spacing: 1px;
         }
@@ -468,7 +515,7 @@
             position: absolute;
             top: -10px;
             right: 20px;
-            background: var(--bordo);
+            background: var(--coral-playa);
             color: white;
             padding: 0.2rem 0.8rem;
             font-size: 0.7rem;
@@ -486,8 +533,8 @@
             width: 100%;
             padding: 1rem 1.5rem;
             padding-left: 3rem;
-            border: 1px solid var(--rosa-medio);
-            background: rgba(255,255,255,0.8);
+            border: 1px solid var(--azul-medio);
+            background: rgba(255,255,255,0.9);
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             transition: all 0.3s ease;
@@ -497,8 +544,8 @@
 
         .search-input:focus {
             outline: none;
-            border-color: var(--bordo);
-            box-shadow: 0 0 0 3px rgba(157, 107, 127, 0.1);
+            border-color: var(--coral-playa);
+            box-shadow: 0 0 0 3px rgba(232, 160, 144, 0.2);
         }
 
         .search-icon {
@@ -506,7 +553,7 @@
             left: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
         }
 
         .products {
@@ -521,13 +568,13 @@
             align-items: center;
             margin-bottom: 2.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--azul-delicate);
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -535,7 +582,7 @@
 
         .products-count {
             font-size: 0.8rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             font-weight: 400;
             letter-spacing: 1px;
         }
@@ -553,24 +600,26 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 4px;
+            border: 1px solid var(--azul-delicate);
+            border-radius: 12px;
             animation: fadeIn 0.5s ease forwards;
+            box-shadow: 0 4px 6px rgba(42, 64, 80, 0.05);
         }
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(157, 107, 127, 0.15);
-            border-color: var(--rosa-medio);
+            box-shadow: 0 20px 40px rgba(42, 64, 80, 0.15);
+            border-color: var(--coral-playa);
         }
 
         .product-image-container {
             position: relative;
             width: 100%;
             aspect-ratio: 1/1;
-            background: var(--rosa-nude);
+            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 100%);
             overflow: hidden;
             cursor: pointer;
+            border-radius: 12px 12px 0 0;
         }
 
         .product-image {
@@ -589,13 +638,13 @@
             top: 0.8rem;
             right: 0.8rem;
             background: rgba(255,255,255,0.95);
-            color: var(--bordo);
+            color: var(--mar-profundo);
             padding: 0.3rem 0.8rem;
             font-size: 0.7rem;
             font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
-            border: 1px solid var(--rosa-medio);
+            border: 1px solid var(--azul-medio);
             border-radius: 20px;
             z-index: 2;
         }
@@ -605,7 +654,7 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            border-top: 1px solid var(--rosa-suave);
+            border-top: 1px solid var(--azul-delicate);
         }
 
         .product-name {
@@ -621,7 +670,7 @@
 
         .product-barcode {
             font-size: 0.75rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             margin-bottom: 0.8rem;
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
@@ -629,7 +678,7 @@
 
         .product-description {
             font-size: 0.85rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             line-height: 1.5;
             margin-bottom: 0.8rem;
             display: -webkit-box;
@@ -647,12 +696,12 @@
             margin-top: auto;
             margin-bottom: 0.8rem;
             padding-top: 0.8rem;
-            border-top: 1px solid var(--rosa-suave);
+            border-top: 1px solid var(--azul-delicate);
         }
 
         .product-price {
             font-size: 1.2rem;
-            color: var(--bordo);
+            color: var(--coral-playa);
             font-weight: 600;
             letter-spacing: 1px;
         }
@@ -661,7 +710,7 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            border: 1px solid var(--rosa-medio);
+            border: 1px solid var(--azul-medio);
             background: transparent;
             cursor: pointer;
             display: flex;
@@ -669,19 +718,19 @@
             justify-content: center;
             font-size: 1rem;
             transition: all 0.3s ease;
-            color: var(--rosa-oscuro);
+            color: var(--mar-profundo);
         }
 
         .eye-btn:hover {
-            background: var(--bordo);
+            background: var(--coral-playa);
             color: white;
-            border-color: var(--bordo);
+            border-color: var(--coral-playa);
         }
 
         .btn-add-cart {
             width: 100%;
             padding: 0.9rem;
-            background: var(--bordo);
+            background: var(--mar-profundo);
             color: white;
             border: none;
             cursor: pointer;
@@ -691,25 +740,47 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            border-radius: 0 0 4px 4px;
+            border-radius: 0 0 12px 12px;
             min-height: 44px;
         }
 
         .btn-add-cart:hover {
-            background: var(--rosa-viejo);
+            background: var(--coral-playa);
         }
 
         .btn-add-cart:disabled {
-            background: var(--rosa-suave);
-            color: var(--rosa-oscuro);
+            background: var(--azul-delicate);
+            color: var(--azul-medio);
             cursor: not-allowed;
         }
 
         .testimonials-section {
-            background: linear-gradient(to bottom, var(--rosa-nude), var(--blanco));
+            background: linear-gradient(to bottom, var(--lima-suave), var(--blanco));
             padding: 4rem 0;
-            border-top: 1px solid var(--rosa-suave);
-            border-bottom: 1px solid var(--rosa-suave);
+            border-top: 1px solid var(--azul-delicate);
+            border-bottom: 1px solid var(--azul-delicate);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-section::before {
+            content: '🌴';
+            position: absolute;
+            top: 20px;
+            left: 5%;
+            font-size: 4rem;
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .testimonials-section::after {
+            content: '🌊';
+            position: absolute;
+            bottom: 20px;
+            right: 5%;
+            font-size: 4rem;
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite 1s;
         }
 
         .testimonials-header {
@@ -720,7 +791,7 @@
         .testimonials-header h2 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -728,7 +799,7 @@
         }
 
         .testimonials-header p {
-            color: var(--rosa-oscuro);
+            color: var(--coral-playa);
             font-size: 0.9rem;
             letter-spacing: 1px;
             font-style: italic;
@@ -754,10 +825,11 @@
         .testimonial-card {
             background: var(--blanco);
             padding: 2.5rem;
-            border: 1px solid var(--rosa-suave);
+            border: 1px solid var(--azul-delicate);
             text-align: center;
-            border-radius: 4px;
+            border-radius: 16px;
             position: relative;
+            box-shadow: 0 8px 24px rgba(42, 64, 80, 0.08);
         }
 
         .testimonial-card::before {
@@ -767,13 +839,13 @@
             left: 20px;
             font-family: 'Playfair Display', serif;
             font-size: 4rem;
-            color: var(--rosa-suave);
+            color: var(--azul-delicate);
             opacity: 0.5;
             line-height: 1;
         }
 
         .testimonial-stars {
-            color: var(--dorado);
+            color: var(--dorado-sol);
             font-size: 1.1rem;
             margin-bottom: 1rem;
             letter-spacing: 2px;
@@ -781,7 +853,7 @@
 
         .testimonial-text {
             font-size: 0.95rem;
-            color: var(--chocolate);
+            color: var(--mar-profundo);
             line-height: 1.8;
             margin-bottom: 1.5rem;
             font-style: italic;
@@ -789,14 +861,14 @@
 
         .testimonial-author {
             font-weight: 600;
-            color: var(--bordo);
+            color: var(--coral-playa);
             font-size: 0.9rem;
             letter-spacing: 1px;
         }
 
         .testimonial-date {
             font-size: 0.75rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             margin-top: 0.3rem;
         }
 
@@ -811,20 +883,20 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            border: 1px solid var(--rosa-medio);
+            border: 1px solid var(--azul-medio);
             background: transparent;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
-            color: var(--rosa-oscuro);
+            color: var(--mar-profundo);
         }
 
         .carousel-btn:hover {
-            background: var(--bordo);
+            background: var(--coral-playa);
             color: white;
-            border-color: var(--bordo);
+            border-color: var(--coral-playa);
         }
 
         .carousel-dots {
@@ -838,29 +910,30 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--rosa-medio);
+            background: var(--azul-delicate);
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .dot.active {
-            background: var(--bordo);
+            background: var(--coral-playa);
             transform: scale(1.2);
         }
 
         .comment-box {
             background: var(--blanco);
             padding: 2.5rem;
-            border: 1px solid var(--rosa-suave);
+            border: 1px solid var(--azul-delicate);
             max-width: 600px;
             margin: 0 auto;
-            border-radius: 4px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(42, 64, 80, 0.08);
         }
 
         .comment-box h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             margin-bottom: 1.5rem;
             text-align: center;
             letter-spacing: 2px;
@@ -881,7 +954,7 @@
 
         .form-group label {
             font-size: 0.8rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -890,12 +963,12 @@
         .form-group textarea,
         .form-group select {
             padding: 0.8rem;
-            border: 1px solid var(--rosa-suave);
+            border: 1px solid var(--azul-delicate);
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             transition: all 0.3s;
             background: transparent;
-            border-radius: 4px;
+            border-radius: 8px;
             min-height: 44px;
         }
 
@@ -903,8 +976,8 @@
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--bordo);
-            box-shadow: 0 0 0 3px rgba(157, 107, 127, 0.1);
+            border-color: var(--coral-playa);
+            box-shadow: 0 0 0 3px rgba(232, 160, 144, 0.1);
         }
 
         .form-group textarea {
@@ -914,7 +987,7 @@
 
         .btn-submit {
             padding: 1rem;
-            background: var(--bordo);
+            background: var(--mar-profundo);
             color: white;
             border: none;
             cursor: pointer;
@@ -929,7 +1002,7 @@
         }
 
         .btn-submit:hover {
-            background: var(--rosa-viejo);
+            background: var(--coral-playa);
         }
 
         .preview-modal {
@@ -939,7 +1012,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(253, 248, 246, 0.98);
+            background: rgba(253, 252, 248, 0.98);
             z-index: 3000;
             padding: 2rem;
             overflow-y: auto;
@@ -961,18 +1034,18 @@
             gap: 3rem;
             position: relative;
             padding: 2rem;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(157, 107, 127, 0.2);
+            border: 1px solid var(--azul-delicate);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(42, 64, 80, 0.15);
             cursor: default;
         }
 
         .preview-image-container {
             aspect-ratio: 1/1;
-            background: var(--rosa-nude);
+            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 100%);
             overflow: hidden;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 4px;
+            border: 1px solid var(--azul-delicate);
+            border-radius: 12px;
             cursor: pointer;
             position: relative;
         }
@@ -995,7 +1068,7 @@
         .preview-name {
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             margin-bottom: 0.5rem;
             font-weight: 500;
             letter-spacing: 2px;
@@ -1003,34 +1076,34 @@
 
         .preview-barcode {
             font-size: 0.9rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             margin-bottom: 1rem;
             font-family: 'Courier New', monospace;
             letter-spacing: 2px;
             padding: 0.4rem 0.8rem;
-            background: var(--rosa-nude);
+            background: var(--lima-suave);
             display: inline-block;
-            border: 1px solid var(--rosa-suave);
+            border: 1px solid var(--azul-delicate);
             width: fit-content;
-            border-radius: 4px;
+            border-radius: 8px;
         }
 
         .preview-description {
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            color: var(--chocolate);
+            color: var(--mar-profundo);
             line-height: 1.7;
             margin-bottom: 1.5rem;
             padding: 1rem 0;
-            border-top: 1px solid var(--rosa-suave);
-            border-bottom: 1px solid var(--rosa-suave);
+            border-top: 1px solid var(--azul-delicate);
+            border-bottom: 1px solid var(--azul-delicate);
             max-height: 200px;
             overflow-y: auto;
         }
 
         .preview-price {
             font-size: 2rem;
-            color: var(--bordo);
+            color: var(--coral-playa);
             font-weight: 600;
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
@@ -1038,7 +1111,7 @@
 
         .preview-stock {
             font-size: 0.85rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -1046,7 +1119,7 @@
 
         .preview-add-btn {
             padding: 1rem 2rem;
-            background: var(--bordo);
+            background: var(--mar-profundo);
             color: white;
             border: none;
             cursor: pointer;
@@ -1063,12 +1136,12 @@
         }
 
         .preview-add-btn:hover {
-            background: var(--rosa-viejo);
+            background: var(--coral-playa);
         }
 
         .preview-add-btn:disabled {
-            background: var(--rosa-suave);
-            color: var(--rosa-oscuro);
+            background: var(--azul-delicate);
+            color: var(--azul-medio);
             cursor: not-allowed;
         }
 
@@ -1125,7 +1198,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(253, 248, 246, 0.98);
+            background: rgba(253, 252, 248, 0.98);
             z-index: 4000;
             padding: 2rem;
             overflow-y: auto;
@@ -1142,11 +1215,11 @@
             max-width: 450px;
             width: 100%;
             padding: 2.5rem;
-            border: 1px solid var(--rosa-suave);
+            border: 1px solid var(--azul-delicate);
             border-radius: 20px;
             text-align: center;
             position: relative;
-            box-shadow: 0 20px 60px rgba(157, 107, 127, 0.2);
+            box-shadow: 0 20px 60px rgba(42, 64, 80, 0.15);
         }
 
         .close-story-modal {
@@ -1157,7 +1230,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             width: 44px;
             height: 44px;
             display: flex;
@@ -1167,30 +1240,30 @@
         }
 
         .close-story-modal:hover {
-            color: var(--rosa-viejo);
+            color: var(--coral-playa);
             transform: rotate(90deg);
         }
 
         .story-modal-content h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
         }
 
         .story-instruction {
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
         }
 
         .story-preview-container {
-            background: linear-gradient(135deg, var(--rosa-nude) 0%, var(--rosa-suave) 100%);
+            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 100%);
             padding: 1.5rem;
             border-radius: 16px;
             margin-bottom: 1.5rem;
-            border: 2px solid var(--rosa-medio);
+            border: 2px solid var(--azul-medio);
         }
 
         .story-preview-container img {
@@ -1227,23 +1300,23 @@
         }
 
         .btn-download-story {
-            background: var(--bordo);
+            background: var(--mar-profundo);
             color: white;
         }
 
         .btn-download-story:hover {
-            background: var(--rosa-viejo);
+            background: var(--coral-playa);
             transform: translateY(-2px);
         }
 
         .btn-copy-story {
             background: transparent;
-            color: var(--bordo);
-            border: 2px solid var(--bordo);
+            color: var(--mar-profundo);
+            border: 2px solid var(--mar-profundo);
         }
 
         .btn-copy-story:hover {
-            background: var(--bordo);
+            background: var(--mar-profundo);
             color: white;
         }
 
@@ -1255,10 +1328,10 @@
 
         .story-tip {
             font-size: 0.75rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             font-style: italic;
             padding: 0.8rem;
-            background: var(--rosa-nude);
+            background: var(--lima-suave);
             border-radius: 8px;
         }
 
@@ -1274,7 +1347,7 @@
             padding: 2rem;
             overflow-y: auto;
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 2px solid var(--rosa-suave);
+            border-left: 2px solid var(--azul-delicate);
             -webkit-overflow-scrolling: touch;
         }
 
@@ -1289,12 +1362,12 @@
             align-items: center;
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--azul-delicate);
         }
 
         .cart-header h2 {
             font-family: 'Playfair Display', serif;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             font-size: 1.5rem;
             font-weight: 500;
             letter-spacing: 2px;
@@ -1306,7 +1379,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             width: 44px;
             height: 44px;
             display: flex;
@@ -1315,11 +1388,11 @@
         }
 
         .shipping-option {
-            background: var(--rosa-nude);
+            background: var(--lima-suave);
             padding: 1.2rem;
             margin-bottom: 1.5rem;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 4px;
+            border: 1px solid var(--azul-delicate);
+            border-radius: 12px;
         }
 
         .shipping-header {
@@ -1332,7 +1405,7 @@
         .shipping-title {
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -1341,14 +1414,14 @@
             position: relative;
             width: 50px;
             height: 26px;
-            background: var(--rosa-medio);
+            background: var(--azul-delicate);
             border-radius: 13px;
             cursor: pointer;
             transition: background 0.3s;
         }
 
         .shipping-toggle.active {
-            background: var(--bordo);
+            background: var(--coral-playa);
         }
 
         .shipping-toggle::after {
@@ -1369,13 +1442,13 @@
 
         .shipping-price {
             font-size: 1.1rem;
-            color: var(--bordo);
+            color: var(--coral-playa);
             font-weight: 600;
         }
 
         .shipping-desc {
             font-size: 0.8rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             margin-top: 0.3rem;
         }
 
@@ -1384,18 +1457,18 @@
             gap: 1rem;
             margin-bottom: 1.2rem;
             padding-bottom: 1.2rem;
-            border-bottom: 1px solid var(--rosa-suave);
+            border-bottom: 1px solid var(--azul-delicate);
             align-items: center;
         }
 
         .cart-item-image {
             width: 70px;
             height: 70px;
-            background: var(--rosa-nude);
+            background: linear-gradient(135deg, var(--lima-suave) 0%, var(--azul-delicate) 100%);
             overflow: hidden;
             flex-shrink: 0;
-            border: 1px solid var(--rosa-suave);
-            border-radius: 4px;
+            border: 1px solid var(--azul-delicate);
+            border-radius: 8px;
         }
 
         .cart-item-image img {
@@ -1410,7 +1483,7 @@
 
         .cart-item-details h4 {
             font-family: 'Playfair Display', serif;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             margin-bottom: 0.2rem;
             font-size: 1rem;
             font-weight: 500;
@@ -1419,13 +1492,13 @@
 
         .cart-item-code {
             font-size: 0.75rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             font-family: 'Courier New', monospace;
             margin-bottom: 0.3rem;
         }
 
         .cart-item-details p {
-            color: var(--bordo);
+            color: var(--coral-playa);
             font-weight: 500;
             font-size: 0.9rem;
         }
@@ -1433,7 +1506,7 @@
         .remove-item {
             background: none;
             border: none;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             cursor: pointer;
             font-size: 1rem;
             padding: 0.4rem;
@@ -1446,12 +1519,12 @@
         }
 
         .remove-item:hover {
-            color: var(--bordo);
+            color: var(--coral-playa);
         }
 
         .cart-empty {
             text-align: center;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             padding: 3rem 0;
             font-style: italic;
         }
@@ -1459,7 +1532,7 @@
         .cart-summary {
             margin-top: 1.5rem;
             padding-top: 1rem;
-            border-top: 1px solid var(--rosa-suave);
+            border-top: 1px solid var(--azul-delicate);
         }
 
         .summary-row {
@@ -1467,16 +1540,16 @@
             justify-content: space-between;
             margin-bottom: 0.8rem;
             font-size: 0.9rem;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
         }
 
         .cart-total {
             margin-top: 1rem;
             padding-top: 1rem;
-            border-top: 2px solid var(--bordo);
+            border-top: 2px solid var(--mar-profundo);
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             display: flex;
             justify-content: space-between;
             margin-bottom: 1.5rem;
@@ -1486,7 +1559,7 @@
         .btn-whatsapp {
             width: 100%;
             padding: 1.1rem;
-            background: var(--bordo);
+            background: var(--mar-profundo);
             color: white;
             border: none;
             cursor: pointer;
@@ -1506,7 +1579,7 @@
         }
 
         .btn-whatsapp:hover {
-            background: var(--rosa-viejo);
+            background: var(--coral-playa);
         }
 
         .btn-clear-cart {
@@ -1514,8 +1587,8 @@
             margin-top: 10px;
             padding: 0.8rem;
             background: transparent;
-            border: 1px solid var(--rosa-medio);
-            color: var(--rosa-oscuro);
+            border: 1px solid var(--azul-medio);
+            color: var(--azul-medio);
             cursor: pointer;
             font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
@@ -1527,9 +1600,9 @@
         }
 
         .btn-clear-cart:hover {
-            background: var(--rosa-nude);
-            border-color: var(--bordo);
-            color: var(--bordo);
+            background: var(--lima-suave);
+            border-color: var(--coral-playa);
+            color: var(--coral-playa);
         }
 
         .overlay {
@@ -1539,7 +1612,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 36, 36, 0.4);
+            background: rgba(44, 40, 36, 0.4);
             z-index: 1500;
             backdrop-filter: blur(2px);
         }
@@ -1555,7 +1628,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 36, 36, 0.4);
+            background: rgba(44, 40, 36, 0.4);
             z-index: 1400;
             backdrop-filter: blur(2px);
         }
@@ -1570,7 +1643,7 @@
             left: 30px;
             width: 60px;
             height: 60px;
-            background: var(--bordo);
+            background: var(--coral-playa);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1579,7 +1652,7 @@
             font-size: 1.8rem;
             cursor: pointer;
             z-index: 9999;
-            box-shadow: 0 4px 12px rgba(157, 107, 127, 0.4);
+            box-shadow: 0 4px 12px rgba(232, 160, 144, 0.4);
             transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease, background 0.3s ease;
             text-decoration: none;
             opacity: 1;
@@ -1588,8 +1661,8 @@
         }
 
         .whatsapp-float:hover {
-            box-shadow: 0 6px 20px rgba(157, 107, 127, 0.6);
-            background: var(--rosa-viejo);
+            box-shadow: 0 6px 20px rgba(232, 160, 144, 0.6);
+            background: var(--mar-profundo);
         }
 
         .whatsapp-float.hidden-cyclic {
@@ -1601,7 +1674,7 @@
         .whatsapp-tooltip {
             position: absolute;
             left: 70px;
-            background: var(--bordo);
+            background: var(--mar-profundo);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 4px;
@@ -1622,7 +1695,7 @@
             transform: translateY(-50%);
             border-width: 6px 6px 6px 0;
             border-style: solid;
-            border-color: transparent var(--bordo) transparent transparent;
+            border-color: transparent var(--mar-profundo) transparent transparent;
         }
 
         .whatsapp-float:hover .whatsapp-tooltip {
@@ -1638,7 +1711,7 @@
             transform: translate(-50%, -50%) scale(0.9);
             background: var(--blanco);
             padding: 2.5rem;
-            border: 2px solid var(--rosa-medio);
+            border: 2px solid var(--azul-medio);
             z-index: 5000;
             max-width: 400px;
             width: 90%;
@@ -1646,8 +1719,8 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
-            box-shadow: 0 20px 60px rgba(157, 107, 127, 0.3);
-            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(42, 64, 80, 0.2);
+            border-radius: 16px;
         }
 
         .newsletter-popup.active {
@@ -1659,30 +1732,30 @@
         .newsletter-popup h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             margin-bottom: 0.5rem;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .newsletter-popup p {
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
             line-height: 1.6;
         }
 
         .newsletter-code {
-            background: var(--rosa-nude);
-            border: 2px dashed var(--bordo);
+            background: var(--lima-suave);
+            border: 2px dashed var(--coral-playa);
             padding: 1rem;
             font-family: 'Courier New', monospace;
             font-size: 1.2rem;
             font-weight: bold;
-            color: var(--bordo);
+            color: var(--mar-profundo);
             margin: 1rem 0;
             letter-spacing: 2px;
-            border-radius: 4px;
+            border-radius: 8px;
         }
 
         .newsletter-close {
@@ -1693,7 +1766,7 @@
             border: none;
             font-size: 1.2rem;
             cursor: pointer;
-            color: var(--rosa-oscuro);
+            color: var(--azul-medio);
             width: 44px;
             height: 44px;
             display: flex;
@@ -1707,7 +1780,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 36, 36, 0.5);
+            background: rgba(44, 40, 36, 0.5);
             z-index: 4999;
             opacity: 0;
             visibility: hidden;
@@ -1720,9 +1793,22 @@
         }
 
         footer {
-            background: var(--bordo);
+            background: var(--mar-profundo);
             color: white;
             padding: 4rem 0 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%232A4050' opacity='.1'/%3E%3C/svg%3E") repeat-x;
+            background-size: 50% 100%;
         }
 
         .footer-content {
@@ -1755,7 +1841,7 @@
         }
 
         .footer-section a:hover {
-            color: white;
+            color: var(--dorado-sol);
         }
 
         .social-footer {
@@ -1778,9 +1864,9 @@
         }
 
         .social-footer a:hover {
-            background: white;
-            color: var(--bordo);
-            border-color: white;
+            background: var(--dorado-sol);
+            color: var(--mar-profundo);
+            border-color: var(--dorado-sol);
             transform: translateY(-2px);
         }
 
@@ -1797,7 +1883,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--bordo);
+            background: var(--mar-profundo);
             color: white;
             padding: 1rem 2rem;
             z-index: 4000;
@@ -1808,7 +1894,7 @@
             font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
-            border-left: 3px solid var(--dorado);
+            border-left: 3px solid var(--dorado-sol);
             border-radius: 4px;
         }
 
@@ -1850,6 +1936,11 @@
                 font-size: 1.4rem;
             }
 
+            .summer-vibe {
+                font-size: 1rem;
+                padding: 0.6rem 1rem;
+            }
+
             .daily-verse-container {
                 margin: 0 1rem 1.5rem;
                 padding: 1.2rem;
@@ -1866,7 +1957,7 @@
 
             .product-card {
                 transform: none !important;
-                box-shadow: none !important;
+                box-shadow: 0 4px 6px rgba(42, 64, 80, 0.05) !important;
             }
 
             .product-card:active {
@@ -1984,7 +2075,7 @@
         @media (hover: none) and (pointer: coarse) {
             .product-card:hover {
                 transform: none;
-                box-shadow: none;
+                box-shadow: 0 4px 6px rgba(42, 64, 80, 0.05);
             }
 
             .product-card:active {
@@ -2010,7 +2101,7 @@
             
             .skeleton {
                 animation: none;
-                background: var(--rosa-nude);
+                background: var(--lima-suave);
             }
         }
 
@@ -2078,16 +2169,21 @@
     </div>
 
     <section class="hero">
+        <div class="wave-decoration"></div>
         <div class="container">
             <div class="hero-content">
                 <h1 data-i18n="summer_collection">Colección Verano</h1>
-                <p data-i18n="shine_bright">Brilla con el sol, vive el momento</p>
+                <p data-i18n="summer_vibes">Vibes de playa, actitud de ciudad</p>
+                
+                <div class="summer-vibe" data-i18n="latin_sazon">
+                    Ahora todos quieren ser latinos pero les falta sazón, batería y reguetón ☀️🌴
+                </div>
                 
                 <div class="daily-verse-container" id="dailyVerseContainer">
                     <div class="verse-date" id="verseDate"></div>
                     <div class="verse-header">
                         <i class="fas fa-sun"></i>
-                        <span data-i18n="verse_of_day">Versículo de Hoy</span>
+                        <span data-i18n="summer_verse">Reflexión de Verano</span>
                     </div>
                     <div class="verse-text" id="verseText"></div>
                     <div class="verse-reference" id="verseReference"></div>
@@ -2120,7 +2216,7 @@
     <section class="testimonials-section">
         <div class="container">
             <div class="testimonials-header">
-                <h2 data-i18n="summer_vibes">Vibra con el Verano</h2>
+                <h2 data-i18n="summer_stories">Historias de Verano</h2>
                 <p data-i18n="what_customers_share">Lo que nuestros clientes comparten</p>
             </div>
             
@@ -2165,12 +2261,14 @@
         </div>
     </section>
 
+    <!-- Modal de Vista Previa -->
     <div class="preview-modal" id="previewModal" onclick="closePreview(event)" role="dialog" aria-modal="true" aria-labelledby="previewName">
         <div class="preview-content" onclick="event.stopPropagation()">
             <div class="preview-image-container">
                 <img src="" alt="" class="preview-image blur-up" id="previewImage" loading="lazy">
             </div>
             <div class="preview-details">
+                <!-- Botones de compartir en esquina superior derecha -->
                 <div class="share-corner">
                     <button class="share-corner-btn instagram" onclick="generateStoryImage('instagram')" title="Compartir en Instagram" aria-label="Compartir en Instagram">
                         <i class="fab fa-instagram"></i>
@@ -2190,8 +2288,10 @@
         </div>
     </div>
 
+    <!-- Canvas oculto para generar la imagen -->
     <canvas id="storyCanvas"></canvas>
 
+    <!-- Modal para descargar la imagen generada -->
     <div class="story-modal" id="storyModal" onclick="closeStoryModal(event)">
         <div class="story-modal-content" onclick="event.stopPropagation()">
             <button class="close-story-modal" onclick="closeStoryModal()"><i class="fas fa-times"></i></button>
@@ -2203,7 +2303,7 @@
             </div>
             
             <div class="story-actions">
-                <a id="downloadStoryBtn" class="btn-download-story" download="klohe-story.jpg">
+                <a id="downloadStoryBtn" class="btn-download-story" download="klohe-summer.jpg">
                     <i class="fas fa-download"></i>
                     <span data-i18n="download_image">Descargar imagen</span>
                 </a>
@@ -2249,7 +2349,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 KLOHE. <span data-i18n="made_with_love">Hecho con ☀️ en El Salvador</span></p>
+                <p>&copy; 2026 KLOHE. <span data-i18n="made_with_sun">Hecho con ☀️ en El Salvador</span></p>
             </div>
         </div>
     </footer>
@@ -2264,8 +2364,8 @@
         <button class="newsletter-close" onclick="closeNewsletter()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
         <h3 data-i18n="welcome">¡Bienvenido!</h3>
         <p data-i18n="discount_text">Obtén un <strong>5% de descuento</strong> en tu primera compra de verano</p>
-        <div class="newsletter-code">KLOHESUN</div>
-        <p style="font-size: 0.8rem; color: var(--rosa-oscuro);" data-i18n="use_code">Usa este código al momento de pagar</p>
+        <div class="newsletter-code">SUMMERKLOHE</div>
+        <p style="font-size: 0.8rem; color: var(--azul-medio);" data-i18n="use_code">Usa este código al momento de pagar</p>
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
@@ -2316,6 +2416,7 @@
     <script src="products.js"></script>
     
     <script>
+        // Translations Object
         const translations = {
             es: {
                 categories: "Categorías",
@@ -2330,12 +2431,13 @@
                 bracelets: "Pulseras",
                 watches: "Relojes",
                 summer_collection: "Colección Verano",
-                shine_bright: "Brilla con el sol, vive el momento",
-                verse_of_day: "Versículo de Hoy",
+                summer_vibes: "Vibes de playa, actitud de ciudad",
+                latin_sazon: "Ahora todos quieren ser latinos pero les falta sazón, batería y reguetón ☀️🌴",
+                summer_verse: "Reflexión de Verano",
                 search_placeholder: "Busca tu accesorio perfecto...",
                 showing_products: "Mostrando {shown} de {total} productos",
                 loading_more: "Cargando más productos...",
-                summer_vibes: "Vibra con el Verano",
+                summer_stories: "Historias de Verano",
                 what_customers_share: "Lo que nuestros clientes comparten",
                 share_story: "Comparte tu historia",
                 name: "Nombre",
@@ -2360,7 +2462,7 @@
                 hours: "Horarios",
                 monday_sunday: "Lunes a Domingo",
                 always_open: "Siempre abiertos para ti",
-                made_with_love: "Hecho con ☀️ en El Salvador",
+                made_with_sun: "Hecho con ☀️ en El Salvador",
                 need_help: "¿Necesitas ayuda?",
                 welcome: "¡Bienvenido!",
                 discount_text: "Obtén un <strong>5% de descuento</strong> en tu primera compra de verano",
@@ -2405,12 +2507,13 @@
                 bracelets: "Bracelets",
                 watches: "Watches",
                 summer_collection: "Summer Collection",
-                shine_bright: "Shine with the sun, live the moment",
-                verse_of_day: "Verse of the Day",
+                summer_vibes: "Beach vibes, city attitude",
+                latin_sazon: "Now everyone wants to be Latino but they're missing the flavor, drums and reggaeton ☀️🌴",
+                summer_verse: "Summer Reflection",
                 search_placeholder: "Search for your perfect accessory...",
                 showing_products: "Showing {shown} of {total} products",
                 loading_more: "Loading more products...",
-                summer_vibes: "Summer Vibes",
+                summer_stories: "Summer Stories",
                 what_customers_share: "What our customers share",
                 share_story: "Share your story",
                 name: "Name",
@@ -2435,7 +2538,7 @@
                 hours: "Hours",
                 monday_sunday: "Monday to Sunday",
                 always_open: "Always open for you",
-                made_with_love: "Made with ☀️ in El Salvador",
+                made_with_sun: "Made with ☀️ in El Salvador",
                 need_help: "Need help?",
                 welcome: "Welcome!",
                 discount_text: "Get <strong>5% off</strong> on your first summer purchase",
@@ -2469,81 +2572,83 @@
             }
         };
 
+        // Verses with both languages - Summer edition
         const dailyVerses = [
             { 
-                text: "El sol sale para todos, pero en cada rostro brilla diferente.", 
-                text_en: "The sun rises for everyone, but shines differently on every face.",
-                reference: "Eclesiastés 11:7", 
-                reference_en: "Ecclesiastes 11:7" 
+                text: "El sol se levanta para todos, pero donde brilla más fuerte es donde hay buena vibra.", 
+                text_en: "The sun rises for everyone, but it shines brightest where there's good vibes.",
+                reference: "KLOHE Verano 2026", 
+                reference_en: "KLOHE Summer 2026" 
             },
             { 
-                text: "Todo tiene su tiempo, y un tiempo para cada propósito bajo el cielo.", 
-                text_en: "There is a time for everything, and a season for every activity under the heavens.",
-                reference: "Eclesiastés 3:1", 
-                reference_en: "Ecclesiastes 3:1" 
+                text: "Como dice el dicho: 'Ponte las pilas' porque el verano no espera a nadie.", 
+                text_en: "As they say: 'Get your batteries on' because summer waits for no one.",
+                reference: "Sabiduría Salvadoreña", 
+                reference_en: "Salvadoran Wisdom" 
             },
             { 
-                text: "El Señor es mi pastor, nada me faltará. Me hace descansar en verdes pastos.", 
-                text_en: "The Lord is my shepherd, I lack nothing. He makes me lie down in green pastures.",
-                reference: "Salmo 23:1-2", 
-                reference_en: "Psalm 23:1-2" 
+                text: "La vida es como una ola: hay que surfearla con estilo.", 
+                text_en: "Life is like a wave: you gotta surf it with style.",
+                reference: "Filosofía Playera", 
+                reference_en: "Beach Philosophy" 
             },
             { 
-                text: "Todo lo puedo en Cristo que me fortalece.", 
-                text_en: "I can do all things through Christ who strengthens me.",
-                reference: "Filipenses 4:13", 
-                reference_en: "Philippians 4:13" 
+                text: "Con sazón, batería y reguetón, todo es mejor bajo el sol.", 
+                text_en: "With flavor, drums and reggaeton, everything is better under the sun.",
+                reference: "Latino Vibes", 
+                reference_en: "Latino Vibes" 
             },
             { 
-                text: "Confía en el Señor de todo corazón.", 
-                text_en: "Trust in the Lord with all your heart.",
-                reference: "Proverbios 3:5", 
-                reference_en: "Proverbs 3:5" 
+                text: "El mar está lleno de sal, pero la vida está llena de sabor.", 
+                text_en: "The sea is full of salt, but life is full of flavor.",
+                reference: "Reflexión Playera", 
+                reference_en: "Beach Reflection" 
             },
             { 
-                text: "El Señor es mi luz y mi salvación; ¿de quién temeré?", 
-                text_en: "The Lord is my light and my salvation—whom shall I fear?",
-                reference: "Salmo 27:1", 
-                reference_en: "Psalm 27:1" 
+                text: "No dejes para mañana el bronceado que puedes hacerte hoy.", 
+                text_en: "Don't leave for tomorrow the tan you can get today.",
+                reference: "Máxima Veraniega", 
+                reference_en: "Summer Maxim" 
             },
             { 
-                text: "Buscad primero el reino de Dios y su justicia.", 
-                text_en: "Seek first his kingdom and his righteousness.",
-                reference: "Mateo 6:33", 
-                reference_en: "Matthew 6:33" 
+                text: "El calor no es excusa, la actitud es todo.", 
+                text_en: "The heat is no excuse, attitude is everything.",
+                reference: "Código KLOHE", 
+                reference_en: "KLOHE Code" 
             },
             { 
-                text: "No temas, porque yo estoy contigo.", 
-                text_en: "So do not fear, for I am with you.",
-                reference: "Isaías 41:10", 
-                reference_en: "Isaiah 41:10" 
+                text: "Bajo el sol de El Salvador, todos somos más brillantes.", 
+                text_en: "Under the El Salvador sun, we all shine brighter.",
+                reference: "Orgullo Cuzcatleco", 
+                reference_en: "Cuzcatleco Pride" 
             },
             { 
-                text: "Dios es nuestro amparo y nuestra fortaleza.", 
-                text_en: "God is our refuge and strength.",
-                reference: "Salmo 46:1", 
-                reference_en: "Psalm 46:1" 
+                text: "La playa cura todo, pero un buen accesorio acelera el proceso.", 
+                text_en: "The beach cures everything, but a good accessory speeds up the process.",
+                reference: "Medicina Alternativa", 
+                reference_en: "Alternative Medicine" 
             },
             { 
-                text: "El amor nunca deja de ser.", 
-                text_en: "Love never fails.",
-                reference: "1 Corintios 13:8", 
-                reference_en: "1 Corinthians 13:8" 
+                text: "Verano es un estado de mente, no solo una estación.", 
+                text_en: "Summer is a state of mind, not just a season.",
+                reference: "Filosofía KLOHE", 
+                reference_en: "KLOHE Philosophy" 
             },
             { 
-                text: "Grande es el Señor y digno de toda alabanza.", 
-                text_en: "Great is the Lord and most worthy of praise.",
-                reference: "Salmo 145:3", 
-                reference_en: "Psalm 145:3" 
+                text: "Si la vida te da limones, hazte una limonada y tómala en la playa.", 
+                text_en: "When life gives you lemons, make lemonade and drink it at the beach.",
+                reference: "Optimismo Tropical", 
+                reference_en: "Tropical Optimism" 
             },
             { 
-                text: "Vengan a mí todos los que están cansados.", 
-                text_en: "Come to me, all you who are weary.",
-                reference: "Mateo 11:28", 
-                reference_en: "Matthew 11:28" 
+                text: "El mejor bronceado es el que viene con buenos recuerdos.", 
+                text_en: "The best tan is the one that comes with good memories.",
+                reference: "Verano Eterno", 
+                reference_en: "Eternal Summer" 
             }
         ];
 
+        // Configuration
         const CONFIG = {
             productsPerPage: 12,
             preloadOffset: '200px',
@@ -2551,6 +2656,7 @@
             whatsappHiddenDuration: 180000
         };
 
+        // State Management
         const AppState = {
             currentFilter: 'todos',
             cart: JSON.parse(localStorage.getItem('klohe_cart')) || [],
@@ -2564,6 +2670,7 @@
             currentLang: localStorage.getItem('klohe_lang') || 'es'
         };
 
+        // Intersection Observer for Lazy Loading Images
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2617,6 +2724,7 @@
             };
         }
 
+        // Get translation helper
         function t(key, replacements = {}) {
             let text = translations[AppState.currentLang][key] || key;
             Object.keys(replacements).forEach(key => {
@@ -2625,6 +2733,7 @@
             return text;
         }
 
+        // Toggle Language Function
         function toggleLanguage() {
             const newLang = AppState.currentLang === 'es' ? 'en' : 'es';
             AppState.currentLang = newLang;
@@ -2713,23 +2822,23 @@
         const testimonials = [
             { 
                 name: "María Fernanda L.", 
-                text: "Los accesorios de verano son perfectos para la playa. ¡Me encantó la calidad!", 
-                text_en: "The summer accessories are perfect for the beach. Loved the quality!", 
-                date: "Feb 15, 2026", 
+                text: "Los accesorios son perfectos para el calor salvadoreño. ¡Me encantan!", 
+                text_en: "The accessories are perfect for the Salvadoran heat. I love them!", 
+                date: "Feb 10, 2026", 
                 stars: "★★★★★" 
             },
             { 
                 name: "Carlos Mendoza", 
-                text: "Excelente servicio. Encontré el regalo ideal para el verano.", 
-                text_en: "Excellent service. Found the perfect summer gift.", 
-                date: "Feb 12, 2026", 
+                text: "Excelente calidad y el estilo es único. Ideal para la temporada de verano.", 
+                text_en: "Excellent quality and unique style. Perfect for summer season.", 
+                date: "Feb 8, 2026", 
                 stars: "★★★★★" 
             },
             { 
                 name: "Ana Lucía R.", 
-                text: "Los lentes de sol son exactamente como se ven en las fotos. Perfectos para el sol.", 
-                text_en: "The sunglasses look exactly like the photos. Perfect for the sun.", 
-                date: "Feb 10, 2026", 
+                text: "Me siento en la playa aunque esté en la ciudad. ¡Pura vibe!", 
+                text_en: "I feel at the beach even when I'm in the city. Pure vibes!", 
+                date: "Feb 5, 2026", 
                 stars: "★★★★★" 
             }
         ];
@@ -2830,7 +2939,7 @@
                 updateCart();
                 
                 document.getElementById('productsContainer').innerHTML = 
-                    '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">Error loading products</div>';
+                    '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--azul-medio);">Error loading products</div>';
             }
             
             const searchInput = document.getElementById('searchInput');
@@ -3050,7 +3159,7 @@
             const productsToShow = AppState.filteredProducts.slice(start, end);
             
             if (productsToShow.length === 0 && AppState.currentPage === 0) {
-                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--rosa-oscuro);">No products found</div>';
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--azul-medio);">No products found</div>';
                 AppState.hasMoreProducts = false;
                 return;
             }
@@ -3077,7 +3186,7 @@
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23E8F0D8'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -3086,7 +3195,7 @@
                          class="product-image blur-up"
                          src="${placeholderSvg}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23E8F0D8%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%232A4050%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
                     <span class="stock-badge">${product.stock} ${t('available')}</span>
                 </div>
                 <div class="product-info">
@@ -3152,6 +3261,7 @@
             document.getElementById('previewName').textContent = product.name;
             document.getElementById('previewBarcode').textContent = `${t('code')}: ${product.barcode}`;
             
+            // Mostrar descripción
             const descElement = document.getElementById('previewDescription');
             if (product.description && product.description.trim() !== '') {
                 descElement.textContent = product.description;
@@ -3189,6 +3299,7 @@
             currentPreviewIndex = null;
         }
 
+        // Funciones para generar y compartir historias
         function generateStoryImage(platform) {
             if (currentPreviewIndex === null) return;
             
@@ -3196,68 +3307,72 @@
             const canvas = document.getElementById('storyCanvas');
             const ctx = canvas.getContext('2d');
             
+            // Dimensiones 9:16 para historias (1080x1920)
             canvas.width = 1080;
             canvas.height = 1920;
             
-            // Fondo degradado original (rosas)
+            // Fondo degradado veraniego
             const gradient = ctx.createLinearGradient(0, 0, 1080, 1920);
-            gradient.addColorStop(0, '#FDF8F6');
-            gradient.addColorStop(0.5, '#F5E6E0');
-            gradient.addColorStop(1, '#E8D5D0');
+            gradient.addColorStop(0, '#E8F0D8');
+            gradient.addColorStop(0.5, '#C8E0F0');
+            gradient.addColorStop(1, '#E8D8E8');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, 1080, 1920);
             
-            // Patrón de círculos suaves
-            ctx.fillStyle = 'rgba(212, 165, 154, 0.1)';
-            for (let i = 0; i < 20; i++) {
+            // Patrón de sol y palmeras sutiles
+            ctx.fillStyle = 'rgba(232, 208, 144, 0.15)';
+            for (let i = 0; i < 15; i++) {
                 const x = Math.random() * 1080;
                 const y = Math.random() * 1920;
-                const radius = 30 + Math.random() * 60;
-                ctx.beginPath();
-                ctx.arc(x, y, radius, 0, Math.PI * 2);
-                ctx.fill();
+                const size = 30 + Math.random() * 50;
+                drawSun(ctx, x, y, size);
             }
             
             // Marco decorativo
-            ctx.strokeStyle = '#B5838D';
+            ctx.strokeStyle = '#2A4050';
             ctx.lineWidth = 8;
             ctx.strokeRect(60, 60, 960, 1800);
             
             // Logo KLOHE
             ctx.font = 'bold 80px "Playfair Display", serif';
-            ctx.fillStyle = '#6D435A';
+            ctx.fillStyle = '#2A4050';
             ctx.textAlign = 'center';
             ctx.fillText('KLOHE', 540, 200);
             
             // Subtítulo veraniego
             ctx.font = '300 40px "Inter", sans-serif';
-            ctx.fillStyle = '#9B6B7F';
+            ctx.fillStyle = '#7EB8D4';
             ctx.fillText('Summer Collection', 540, 260);
             
             // Cargar imagen del producto
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.onload = function() {
+                // Marco de foto
                 ctx.fillStyle = '#FFFFFF';
-                ctx.shadowColor = 'rgba(157, 107, 127, 0.3)';
+                ctx.shadowColor = 'rgba(42, 64, 80, 0.3)';
                 ctx.shadowBlur = 40;
                 ctx.shadowOffsetY = 20;
                 ctx.fillRect(140, 350, 800, 800);
                 ctx.shadowColor = 'transparent';
                 
+                // Imagen del producto (recortada a cuadrado)
                 const scale = Math.max(800 / img.width, 800 / img.height);
                 const x = (img.width * scale - 800) / 2;
                 const y = (img.height * scale - 800) / 2;
                 ctx.drawImage(img, -x, -y, img.width * scale, img.height * scale, 140, 350, 800, 800);
                 
-                ctx.strokeStyle = '#D4A59A';
+                // Marco interior
+                ctx.strokeStyle = '#C8E0F0';
                 ctx.lineWidth = 4;
                 ctx.strokeRect(160, 370, 760, 760);
                 
+                // Nombre del producto
                 ctx.font = 'bold 60px "Playfair Display", serif';
-                ctx.fillStyle = '#2C2424';
+                ctx.fillStyle = '#2C2824';
                 ctx.textAlign = 'center';
                 
+                // Texto multilinea para nombre largo
                 const maxWidth = 900;
                 const lineHeight = 80;
                 const words = product.name.split(' ');
@@ -3278,34 +3393,42 @@
                 }
                 ctx.fillText(line, 540, yPos);
                 
+                // Precio destacado
                 const priceY = yPos + 120;
                 ctx.font = 'bold 100px "Inter", sans-serif';
-                ctx.fillStyle = '#6D435A';
+                ctx.fillStyle = '#E8A090';
                 ctx.fillText(`$${product.price.toFixed(2)}`, 540, priceY);
                 
+                // Badge de disponibilidad
                 ctx.font = '500 35px "Inter", sans-serif';
                 ctx.fillStyle = product.stock > 0 ? '#25D366' : '#dc3545';
                 ctx.fillText(product.stock > 0 ? (AppState.currentLang === 'es' ? '✓ Disponible' : '✓ Available') : (AppState.currentLang === 'es' ? 'Agotado' : 'Sold Out'), 540, priceY + 80);
                 
+                // Código
                 ctx.font = '400 30px "Courier New", monospace';
-                ctx.fillStyle = '#9B6B7F';
+                ctx.fillStyle = '#7EB8D4';
                 ctx.fillText(`${AppState.currentLang === 'es' ? 'COD' : 'SKU'}: ${product.barcode}`, 540, priceY + 140);
                 
+                // Footer con call to action
                 ctx.font = 'italic 400 40px "Cormorant Garamond", serif';
-                ctx.fillStyle = '#6D435A';
-                ctx.fillText(AppState.currentLang === 'es' ? '☀️ Brilla este verano con KLOHE' : '☀️ Shine this summer with KLOHE', 540, 1750);
+                ctx.fillStyle = '#2A4050';
+                ctx.fillText(AppState.currentLang === 'es' ? '☀️ Puro sabor salvadoreño' : '☀️ Pure Salvadoran flavor', 540, 1750);
                 
+                // WhatsApp contacto
                 ctx.font = '500 35px "Inter", sans-serif';
                 ctx.fillStyle = '#25D366';
                 ctx.fillText('WhatsApp: 6671-1569', 540, 1820);
                 
+                // Generar imagen
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
                 document.getElementById('generatedStoryImage').src = dataUrl;
                 document.getElementById('downloadStoryBtn').href = dataUrl;
                 
+                // Mostrar modal
                 document.getElementById('storyModal').classList.add('active');
                 document.body.style.overflow = 'hidden';
                 
+                // Guardar en variable global para copiar
                 window.currentStoryImage = dataUrl;
             };
             
@@ -3316,12 +3439,37 @@
             img.src = `${product.barcode}.jpg`;
         }
 
+        // Dibujar sol decorativo
+        function drawSun(ctx, x, y, size) {
+            ctx.beginPath();
+            ctx.arc(x, y, size/2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Rayos
+            for (let i = 0; i < 8; i++) {
+                const angle = (i * Math.PI) / 4;
+                const x1 = x + Math.cos(angle) * (size/2 + 5);
+                const y1 = y + Math.sin(angle) * (size/2 + 5);
+                const x2 = x + Math.cos(angle) * (size/2 + 15);
+                const y2 = y + Math.sin(angle) * (size/2 + 15);
+                
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = 'rgba(232, 208, 144, 0.15)';
+                ctx.stroke();
+            }
+        }
+
+        // Cerrar modal de historia
         function closeStoryModal(e) {
             if (e && e.target !== e.currentTarget) return;
             document.getElementById('storyModal').classList.remove('active');
             document.body.style.overflow = '';
         }
 
+        // Copiar imagen al portapapeles
         async function copyStoryToClipboard() {
             const img = document.getElementById('generatedStoryImage');
             
@@ -3445,7 +3593,7 @@
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
                                  loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23E8F0D8%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%232A4050%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
@@ -3497,7 +3645,7 @@
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
             notification.textContent = message;
-            notification.style.background = type === 'error' ? '#dc3545' : 'var(--bordo)';
+            notification.style.background = type === 'error' ? '#dc3545' : 'var(--mar-profundo)';
             notification.classList.add('show');
             
             setTimeout(() => {

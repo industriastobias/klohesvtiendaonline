@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>KLOHE - Colección Verano</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300 ;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
     
     <style>
         * {
@@ -148,26 +148,23 @@
         }
 
         .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    color: var(--bordo);
-    text-decoration: none;
-    font-weight: 600;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    position: relative;
-    display: flex;          /* NUEVO */
-    align-items: center;    /* NUEVO */
-    gap: 0.3rem;           /* NUEVO: espacio entre KLOHE y ☀️ */
-}
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--bordo);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-.logo::after {
-    content: '☀️';
-    position: static;       /* CAMBIO: de absolute a static */
-    font-size: 1.6rem;      /* Ajustado al tamaño del texto */
-    animation: float 3s ease-in-out infinite;
-}
-}
+        .logo-sun {
+            font-size: 1.8rem;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
         }
 
         .nav-right {
@@ -427,9 +424,9 @@
             backdrop-filter: blur(5px);
             border: 1px solid var(--rosa-medio);
             border-radius: 12px;
-            padding: 1.5rem 2rem;
+            padding: 1rem 1.5rem;
             margin: 0 auto 2rem;
-            max-width: 700px;
+            max-width: 400px;
             position: relative;
             animation: fadeIn 1s ease-in;
         }
@@ -439,8 +436,8 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            margin-bottom: 0.8rem;
-            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--rosa-viejo);
@@ -453,15 +450,15 @@
 
         .verse-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: var(--chocolate);
-            line-height: 1.6;
+            line-height: 1.5;
             font-style: italic;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .verse-reference {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--bordo);
             font-weight: 600;
             letter-spacing: 1px;
@@ -474,7 +471,7 @@
             background: var(--bordo);
             color: white;
             padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             border-radius: 20px;
             letter-spacing: 1px;
         }
@@ -1856,6 +1853,10 @@
                 letter-spacing: 4px;
             }
 
+            .logo-sun {
+                font-size: 1.4rem;
+            }
+
             .social-header {
                 display: none;
             }
@@ -1875,11 +1876,12 @@
 
             .daily-verse-container {
                 margin: 0 1rem 1.5rem;
-                padding: 1.2rem;
+                padding: 0.8rem 1rem;
+                max-width: 100%;
             }
 
             .verse-text {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
 
             .products-grid {
@@ -1974,7 +1976,7 @@
             }
             
             .daily-verse-container {
-                padding: 1rem;
+                padding: 0.8rem;
             }
 
             .preview-content {
@@ -2049,16 +2051,16 @@
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">KLOHE</a>
+                <a href="#" class="logo">KLOHE <span class="logo-sun">☀️</span></a>
                 <div class="nav-right">
                     <div class="social-header">
-                        <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv " target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv " target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry " target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -2255,13 +2257,13 @@
                     <h4>Redes Sociales</h4>
                     <p>Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
-                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv " target="_blank" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv " target="_blank" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry " target="_blank" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -2279,7 +2281,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
+    <a href="https://wa.me/50366711569 " target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
     </a>
@@ -2876,7 +2878,7 @@
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg ' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -2885,7 +2887,7 @@
                          class="product-image blur-up"
                          src="${placeholderSvg}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22  width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
                     <span class="stock-badge">${product.stock} disp.</span>
                 </div>
                 <div class="product-info">
@@ -3269,7 +3271,7 @@
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
                                  loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22  width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
@@ -3297,7 +3299,7 @@
             
             const shippingText = AppState.shippingEnabled ? `%0A%0AEnvío: $3.75` : '';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text= ${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
         }
 
         function toggleCart() {

@@ -155,16 +155,18 @@
     font-weight: 600;
     letter-spacing: 8px;
     text-transform: uppercase;
-    display: inline-flex;  /* NUEVO: permite alinear en línea */
-    align-items: center;   /* NUEVO: centra verticalmente */
-    gap: 0.5rem;          /* NUEVO: espacio entre texto y sol */
+    position: relative;
+    display: flex;          /* NUEVO */
+    align-items: center;    /* NUEVO */
+    gap: 0.3rem;           /* NUEVO: espacio entre KLOHE y ☀️ */
 }
 
 .logo::after {
     content: '☀️';
-    position: static;     /* CAMBIO: elimina posición absoluta */
-    font-size: 1.8rem;    /* Ajustado para que sea visible */
+    position: static;       /* CAMBIO: de absolute a static */
+    font-size: 1.6rem;      /* Ajustado al tamaño del texto */
     animation: float 3s ease-in-out infinite;
+}
 }
         }
 

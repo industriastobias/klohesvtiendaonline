@@ -148,23 +148,24 @@
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: var(--bordo);
-            text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            position: relative;
-        }
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--bordo);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    display: inline-flex;  /* NUEVO: permite alinear en línea */
+    align-items: center;   /* NUEVO: centra verticalmente */
+    gap: 0.5rem;          /* NUEVO: espacio entre texto y sol */
+}
 
-        .logo::after {
-            content: '☀️';
-            position: absolute;
-            top: -5px;
-            right: -25px;
-            font-size: 0.9rem;
-            animation: float 3s ease-in-out infinite;
+.logo::after {
+    content: '☀️';
+    position: static;     /* CAMBIO: elimina posición absoluta */
+    font-size: 1.8rem;    /* Ajustado para que sea visible */
+    animation: float 3s ease-in-out infinite;
+}
         }
 
         .nav-right {

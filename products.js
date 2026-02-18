@@ -239,7 +239,7 @@ const products = [
   { name: "RELOJ", price: 25.00, stock: 1, barcode: "03334", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 16.00, stock: 1, barcode: "03335", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 25.00, stock: 1, barcode: "03336", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ", price: 25.00, stock: 1, barcode: "03337", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ", price: 25.00, stock: 0, barcode: "03337", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 25.00, stock: 1, barcode: "03338", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 20.00, stock: 1, barcode: "03339", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 15.00, stock: 1, barcode: "033340", category: "Relojes", description: "Relojes de acero inoxidable" },

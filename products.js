@@ -78,7 +78,7 @@ const products = [
   { name: "CARTERA MORADA", price: 10.99, stock: 0, barcode: "054", category: "Carteras" },
   { name: "CARTERA NEGRA", price: 10.99, stock: 1, barcode: "047", category: "Carteras" },
   { name: "CARTERA ROJA", price: 13.50, stock: 0, barcode: "074", category: "Carteras" },
-  { name: "CARTERA ROSADA", price: 9.50, stock: 1, barcode: "023", category: "Carteras" },
+  { name: "CARTERA ROSADA", price: 9.50, stock: 0, barcode: "023", category: "Carteras" },
   { name: "CARTERA VINO", price: 18.00, stock: 0, barcode: "053", category: "Carteras" },
   { name: "Carteras", price: 10.00, stock: 1, barcode: "181", category: "Carteras" },
   
@@ -250,7 +250,7 @@ const products = [
   { name: "RELOJ", price: 15.00, stock: 1, barcode: "033345", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 15.00, stock: 1, barcode: "033346", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 30.00, stock: 1, barcode: "033347", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ", price: 30.00, stock: 1, barcode: "033348", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ", price: 30.00, stock: 0, barcode: "033348", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 20.00, stock: 1, barcode: "033349", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 18.00, stock: 2, barcode: "033350", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ BLANCO", price: 15.00, stock: 1, barcode: "011144", category: "Relojes", description: "Relojes de acero inoxidable" },

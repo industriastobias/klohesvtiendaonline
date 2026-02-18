@@ -69,7 +69,7 @@ const products = [
   { name: "CARTERA BLANCA", price: 13.00, stock: 0, barcode: "022", category: "Carteras" },
   { name: "CARTERA BLANCA", price: 10.99, stock: 0, barcode: "049", category: "Carteras" },
   { name: "CARTERA BLANCA", price: 10.99, stock: 0, barcode: "058", category: "Carteras" },
-  { name: "CARTERA BLANCA", price: 10.50, stock: 1, barcode: "063", category: "Carteras" },
+  { name: "CARTERA BLANCA", price: 10.50, stock: 0, barcode: "063", category: "Carteras" },
   { name: "CARTERA BLANCA", price: 13.50, stock: 0, barcode: "075", category: "Carteras" },
   { name: "Cartera blanca", price: 10.99, stock: 0, barcode: "190", category: "Carteras" },
   { name: "CARTERA CAFE", price: 17.75, stock: 0, barcode: "899", category: "Carteras" },

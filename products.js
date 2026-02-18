@@ -234,7 +234,7 @@ const products = [
   
   // RELOJES (30 productos existentes + nuevos arriba)
   { name: "RELOJ", price: 5.00, stock: 1, barcode: "01111", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ", price: 20.00, stock: 1, barcode: "01125", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ", price: 20.00, stock: 0, barcode: "01125", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 16.00, stock: 1, barcode: "03333", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 25.00, stock: 1, barcode: "03334", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 16.00, stock: 1, barcode: "03335", category: "Relojes", description: "Relojes de acero inoxidable" },

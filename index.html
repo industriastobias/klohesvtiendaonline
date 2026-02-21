@@ -53,8 +53,8 @@
         }
 
         @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 1; transform: translateY(0); max-height: 500px; margin-bottom: 3rem; }
+            to { opacity: 0; transform: translateY(-20px); max-height: 0; margin-bottom: 0; padding: 0; }
         }
 
         @keyframes float {
@@ -394,7 +394,7 @@
             box-shadow: 0 2px 8px rgba(139, 69, 87, 0.4);
         }
 
-        /* HERO - CON ANIMACIÓN DE DESAPARICIÓN EN MÓVIL */
+        /* HERO */
         .hero {
             background: var(--blanco);
             padding: 5rem 0 4rem;
@@ -444,7 +444,7 @@
             margin-bottom: 2rem;
         }
 
-        /* BLOQUE DE TEXTO TEMPORAL EN MÓVIL */
+        /* MENSAJE DE VERANO - NO SE OCULTA */
         .summer-message {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
@@ -457,19 +457,9 @@
             display: inline-block;
             border-left: 4px solid var(--bordo);
             border-radius: 0 8px 8px 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .summer-message.hidden-mobile {
-            opacity: 0;
-            transform: translateY(-20px);
-            pointer-events: none;
-            height: 0;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
+        /* REFLEXIÓN DIARIA - SE OCULTA EN MÓVIL DESPUÉS DE 25 SEGUNDOS */
         .daily-verse-container {
             background: white;
             border: 1px solid var(--gris-medio);
@@ -480,6 +470,13 @@
             position: relative;
             animation: fadeIn 1s ease-in;
             box-shadow: var(--sombra-suave);
+            transition: all 0.5s ease;
+            overflow: hidden;
+        }
+
+        .daily-verse-container.hidden-mobile {
+            animation: fadeOut 0.5s ease forwards;
+            pointer-events: none;
         }
 
         .verse-header {
@@ -1018,7 +1015,7 @@
             box-shadow: var(--sombra-bordo);
         }
 
-        /* MODAL DE VISTA PREVIA - CORREGIDO */
+        /* MODAL DE VISTA PREVIA */
         .preview-modal {
             display: none;
             position: fixed;
@@ -1088,7 +1085,6 @@
             max-height: 90vh;
         }
 
-        /* ICONOS EN ESQUINA SUPERIOR DERECHA */
         .share-corner {
             position: absolute;
             top: 1.5rem;
@@ -2128,14 +2124,12 @@
                 letter-spacing: 4px;
             }
 
-            /* ANIMACIÓN DE DESAPARICIÓN EN MÓVIL */
             .summer-message {
                 font-size: 1.1rem;
                 padding: 1rem 1.5rem;
-                animation: fadeOut 0.5s ease forwards;
-                animation-delay: 25s;
             }
 
+            /* OCULTAR REFLEXIÓN DIARIA EN MÓVIL DESPUÉS DE 25 SEGUNDOS */
             .daily-verse-container {
                 margin: 0 1rem 2rem;
                 padding: 1.5rem;
@@ -2155,7 +2149,6 @@
                 transform: scale(0.98) !important;
             }
 
-            /* MODAL VISTA PREVIA MÓVIL CORREGIDO */
             .preview-content {
                 grid-template-columns: 1fr;
                 gap: 0;
@@ -2188,7 +2181,6 @@
                 font-size: 1.8rem;
             }
 
-            /* ICONOS EN ESQUINA SUPERIOR DERECHA EN MÓVIL */
             .share-corner {
                 top: 1rem;
                 right: 1rem;
@@ -2386,10 +2378,11 @@
                 <h1>Colección Verano</h1>
                 <p>Brilla bajo el sol de El Salvador</p>
                 
-                <div class="summer-message" id="summerMessage">
+                <div class="summer-message">
                     Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
                 </div>
                 
+                <!-- ESTA ES LA REFLEXIÓN DIARIA QUE SE OCULTARÁ EN MÓVIL -->
                 <div class="daily-verse-container" id="dailyVerseContainer">
                     <div class="verse-date" id="verseDate"></div>
                     <div class="verse-header">
@@ -2476,7 +2469,7 @@
     <div class="preview-modal" id="previewModal" onclick="closePreview(event)" role="dialog" aria-modal="true" aria-labelledby="previewName">
         <div class="preview-content" onclick="event.stopPropagation()">
             <div class="preview-image-container">
-                <img src="" alt="" class="preview-image blur-up" id="previewImage" loading="lazy">
+                <img src="" alt="" class="preview-image blur-up" id="previewImage" loading="lazy" crossorigin="anonymous">
             </div>
             <div class="preview-details">
                 <div class="share-corner">
@@ -2505,7 +2498,7 @@
             <div class="story-logo">KLOHE</div>
             <div class="story-subtitle">Colección Verano</div>
             <div class="story-image-container">
-                <img class="story-product-image" id="storyProductImage" src="" alt="">
+                <img class="story-product-image" id="storyProductImage" src="" alt="" crossorigin="anonymous">
             </div>
             <div class="story-product-name" id="storyProductName"></div>
             <div class="story-price" id="storyPrice"></div>
@@ -2712,7 +2705,8 @@
             hasMoreProducts: true,
             currentTestimonial: 0,
             searchTerm: '',
-            currentStoryImage: null
+            currentStoryImage: null,
+            currentStoryBlob: null
         };
 
         // Intersection Observer for Lazy Loading Images
@@ -2876,14 +2870,14 @@
             cycle();
         }
 
-        // Función para ocultar texto en móvil después de 25 segundos
+        // Función para ocultar reflexión diaria en móvil después de 25 segundos
         function initMobileTextHide() {
             const isMobile = window.matchMedia('(max-width: 768px)').matches;
             if (isMobile) {
                 setTimeout(() => {
-                    const summerMessage = document.getElementById('summerMessage');
-                    if (summerMessage) {
-                        summerMessage.classList.add('hidden-mobile');
+                    const verseContainer = document.getElementById('dailyVerseContainer');
+                    if (verseContainer) {
+                        verseContainer.classList.add('hidden-mobile');
                     }
                 }, CONFIG.mobileTextHideDelay);
             }
@@ -2891,7 +2885,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             initWhatsAppCyclicAnimation();
-            initMobileTextHide(); // Iniciar temporizador para ocultar texto
+            initMobileTextHide(); // Iniciar temporizador para ocultar reflexión diaria
             
             displayDailyVerse();
             initTestimonials();
@@ -3302,25 +3296,34 @@
             currentPreviewIndex = null;
         }
 
-        // Función mejorada para generar imagen de story usando html2canvas
+        // Función mejorada para generar imagen de story
         async function generateStoryImage(platform) {
             if (currentPreviewIndex === null) return;
             
             const product = products[currentPreviewIndex];
             
             // Configurar el template
-            document.getElementById('storyProductImage').src = `${product.barcode}.jpg`;
+            const storyImg = document.getElementById('storyProductImage');
+            storyImg.src = `${product.barcode}.jpg`;
             document.getElementById('storyProductName').textContent = product.name;
             document.getElementById('storyPrice').textContent = `$${product.price.toFixed(2)}`;
             document.getElementById('storyStock').textContent = product.stock > 0 ? '✓ Disponible' : 'Agotado';
             document.getElementById('storyCode').textContent = `COD: ${product.barcode}`;
             
             // Esperar a que la imagen cargue
-            await new Promise((resolve) => {
-                const img = document.getElementById('storyProductImage');
-                if (img.complete) resolve();
-                else img.onload = resolve;
-            });
+            try {
+                await new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+                    img.onload = resolve;
+                    img.onerror = reject;
+                    img.src = `${product.barcode}.jpg`;
+                    storyImg.src = img.src;
+                });
+            } catch (e) {
+                // Si falla la carga con CORS, intentar con la imagen original
+                console.log('CORS error, using fallback');
+            }
             
             try {
                 const element = document.getElementById('storyTemplate');
@@ -3330,11 +3333,16 @@
                     allowTaint: true,
                     backgroundColor: '#FAFAFA',
                     width: 1080,
-                    height: 1920
+                    height: 1920,
+                    logging: false
                 });
                 
-                const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
                 AppState.currentStoryImage = dataUrl;
+                
+                // Convertir a blob para copiar
+                const response = await fetch(dataUrl);
+                AppState.currentStoryBlob = await response.blob();
                 
                 document.getElementById('generatedStoryImage').src = dataUrl;
                 document.getElementById('storyModal').classList.add('active');
@@ -3356,24 +3364,27 @@
             if (!AppState.currentStoryImage) return;
             
             const link = document.createElement('a');
-            link.download = `klohe-${Date.now()}.jpg`;
+            link.download = `klohe-story-${Date.now()}.jpg`;
             link.href = AppState.currentStoryImage;
+            document.body.appendChild(link);
             link.click();
+            document.body.removeChild(link);
             
             showNotification('Imagen descargada');
         }
 
         async function copyStoryToClipboard() {
-            if (!AppState.currentStoryImage) return;
+            if (!AppState.currentStoryBlob) {
+                showNotification('Error: No hay imagen para copiar', 'error');
+                return;
+            }
             
             try {
-                const response = await fetch(AppState.currentStoryImage);
-                const blob = await response.blob();
-                
+                // Intentar usar Clipboard API moderna
                 if (navigator.clipboard && window.ClipboardItem) {
                     await navigator.clipboard.write([
                         new ClipboardItem({
-                            'image/jpeg': blob
+                            'image/jpeg': AppState.currentStoryBlob
                         })
                     ]);
                     
@@ -3382,19 +3393,47 @@
                     btn.classList.add('copied');
                     btn.innerHTML = '<i class="fas fa-check"></i><span>¡Copiado!</span>';
                     
-                    showNotification('¡Imagen copiada! Pégala en tu historia');
+                    showNotification('¡Imagen copiada al portapapeles!');
                     
                     setTimeout(() => {
                         btn.classList.remove('copied');
                         btn.innerHTML = originalContent;
                     }, 3000);
                 } else {
-                    // Fallback para móviles
-                    showNotification('Descarga la imagen para compartirla');
+                    // Fallback para navegadores que no soportan Clipboard API
+                    showNotification('Tu navegador no soporta copiar imágenes. Descárgala primero.');
                 }
             } catch (err) {
                 console.error('Error copiando:', err);
-                showNotification('Error al copiar. Intenta descargar la imagen.', 'error');
+                
+                // Intentar método alternativo para móviles
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const img = new Image();
+                    
+                    await new Promise((resolve) => {
+                        img.onload = resolve;
+                        img.src = AppState.currentStoryImage;
+                    });
+                    
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    
+                    canvas.toBlob(async (blob) => {
+                        try {
+                            await navigator.clipboard.write([
+                                new ClipboardItem({ 'image/png': blob })
+                            ]);
+                            showNotification('¡Imagen copiada!');
+                        } catch (e) {
+                            showNotification('No se pudo copiar. Descarga la imagen.', 'error');
+                        }
+                    });
+                } catch (e2) {
+                    showNotification('Error al copiar. Descarga la imagen.', 'error');
+                }
             }
         }
 

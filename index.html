@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- html2canvas para generar imágenes -->
+    <!-- html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
@@ -133,7 +133,6 @@
             visibility: hidden;
         }
 
-        /* HEADER */
         header {
             background: rgba(250, 250, 250, 0.98);
             backdrop-filter: blur(20px);
@@ -255,7 +254,6 @@
             transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        /* MENÚ LATERAL */
         .categories-menu {
             position: fixed;
             top: 0;
@@ -351,7 +349,6 @@
             transform: rotate(90deg);
         }
 
-        /* CARRITO ICONO */
         .cart-icon {
             position: relative;
             cursor: pointer;
@@ -394,7 +391,6 @@
             box-shadow: 0 2px 8px rgba(139, 69, 87, 0.4);
         }
 
-        /* HERO */
         .hero {
             background: var(--blanco);
             padding: 5rem 0 4rem;
@@ -444,7 +440,6 @@
             margin-bottom: 2rem;
         }
 
-        /* MENSAJE DE VERANO - NO SE OCULTA */
         .summer-message {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
@@ -459,7 +454,6 @@
             border-radius: 0 8px 8px 0;
         }
 
-        /* REFLEXIÓN DIARIA - SE OCULTA EN MÓVIL DESPUÉS DE 25 SEGUNDOS */
         .daily-verse-container {
             background: white;
             border: 1px solid var(--gris-medio);
@@ -529,7 +523,6 @@
             box-shadow: var(--sombra-bordo);
         }
 
-        /* BÚSQUEDA */
         .search-container {
             max-width: 600px;
             margin: 0 auto;
@@ -569,7 +562,6 @@
             font-size: 1.1rem;
         }
 
-        /* PRODUCTOS */
         .products {
             padding: 4rem 0;
             background: var(--blanco);
@@ -608,7 +600,6 @@
             gap: 2.5rem;
         }
 
-        /* TARJETA DE PRODUCTO */
         .product-card {
             background: white;
             overflow: hidden;
@@ -770,7 +761,6 @@
             cursor: not-allowed;
         }
 
-        /* TESTIMONIOS */
         .testimonials-section {
             background: var(--gris-suave);
             padding: 5rem 0;
@@ -925,7 +915,6 @@
             transform: scale(1.3);
         }
 
-        /* FORMULARIO DE COMENTARIOS */
         .comment-box {
             background: white;
             padding: 3rem;
@@ -1015,7 +1004,7 @@
             box-shadow: var(--sombra-bordo);
         }
 
-        /* MODAL DE VISTA PREVIA */
+        /* MODAL VISTA PREVIA - IMAGEN MÁS PEQUEÑA */
         .preview-modal {
             display: none;
             position: fixed;
@@ -1026,7 +1015,7 @@
             background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(10px);
             z-index: 3000;
-            padding: 2rem;
+            padding: 1rem;
             overflow-y: auto;
             cursor: pointer;
             align-items: center;
@@ -1039,14 +1028,14 @@
 
         .preview-content {
             background: white;
-            max-width: 1000px;
+            max-width: 900px;
             width: 100%;
-            max-height: 90vh;
+            max-height: 85vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
             position: relative;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 25px 80px rgba(0,0,0,0.3);
             cursor: default;
@@ -1056,8 +1045,8 @@
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 400px;
-            max-height: 600px;
+            min-height: 300px;
+            max-height: 500px;
             background: var(--gris-suave);
             overflow: hidden;
             cursor: pointer;
@@ -1070,7 +1059,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            max-height: 600px;
+            max-height: 500px;
             transition: transform 0.3s ease;
         }
 
@@ -1078,11 +1067,11 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding: 3rem;
+            padding: 2.5rem;
             position: relative;
             background: white;
             overflow-y: auto;
-            max-height: 90vh;
+            max-height: 85vh;
         }
 
         .share-corner {
@@ -1096,15 +1085,15 @@
         }
 
         .share-corner-btn {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: white;
             transition: all 0.3s ease;
             box-shadow: var(--sombra-media);
@@ -1125,7 +1114,7 @@
 
         .preview-name {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--negro);
             margin-bottom: 0.8rem;
             font-weight: 600;
@@ -1135,7 +1124,7 @@
         }
 
         .preview-barcode {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--gris-texto);
             margin-bottom: 1.5rem;
             font-family: 'Courier New', monospace;
@@ -1149,19 +1138,19 @@
 
         .preview-description {
             font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--gris-texto);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            padding: 1.5rem 0;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
             border-top: 2px solid var(--gris-medio);
             border-bottom: 2px solid var(--gris-medio);
-            max-height: 200px;
+            max-height: 150px;
             overflow-y: auto;
         }
 
         .preview-price {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--bordo);
             font-weight: 700;
             margin-bottom: 0.5rem;
@@ -1169,16 +1158,16 @@
         }
 
         .preview-stock {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--gris-texto);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 500;
         }
 
         .preview-add-btn {
-            padding: 1.2rem 3rem;
+            padding: 1rem 2.5rem;
             background: var(--bordo);
             color: white;
             border: none;
@@ -1186,12 +1175,12 @@
             font-weight: 600;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 3px;
             width: fit-content;
             border-radius: 50px;
-            min-height: 56px;
+            min-height: 50px;
             margin-bottom: 1rem;
         }
 
@@ -1209,7 +1198,7 @@
             box-shadow: none;
         }
 
-        /* CONTENEDOR PARA GENERAR IMAGEN DE STORY */
+        /* TEMPLATE STORY - CORREGIDO PARA NO ESTAR PARTIDO */
         #storyCaptureContainer {
             position: fixed;
             top: -9999px;
@@ -1222,67 +1211,72 @@
         }
 
         .story-template {
-            width: 100%;
-            height: 100%;
+            width: 1080px;
+            height: 1920px;
             position: relative;
-            background: #FAFAFA;
+            background: linear-gradient(180deg, #FAFAFA 0%, #F5F5F5 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 80px 60px;
+            padding: 60px 50px;
             box-sizing: border-box;
         }
 
         .story-frame {
             position: absolute;
-            top: 40px;
-            left: 40px;
-            right: 40px;
-            bottom: 40px;
-            border: 6px solid #8B4557;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border: 5px solid #8B4557;
             pointer-events: none;
+            border-radius: 4px;
         }
 
         .story-logo {
             font-family: 'Playfair Display', serif;
-            font-size: 80px;
+            font-size: 70px;
             color: #8B4557;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
+            line-height: 1;
         }
 
         .story-subtitle {
             font-family: 'Inter', sans-serif;
-            font-size: 40px;
+            font-size: 32px;
             color: #666666;
             font-weight: 300;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             text-align: center;
+            letter-spacing: 3px;
         }
 
         .story-image-container {
-            width: 800px;
-            height: 800px;
+            width: 700px;
+            height: 700px;
             background: white;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             position: relative;
+            border-radius: 8px;
         }
 
         .story-image-container::after {
             content: '';
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 4px solid #E0E0E0;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 3px solid #E0E0E0;
             pointer-events: none;
+            border-radius: 4px;
         }
 
         .story-product-image {
@@ -1293,55 +1287,64 @@
 
         .story-product-name {
             font-family: 'Playfair Display', serif;
-            font-size: 60px;
+            font-size: 48px;
             color: #1A1A1A;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             max-width: 900px;
-            line-height: 1.3;
+            line-height: 1.2;
+            padding: 0 20px;
         }
 
         .story-price {
             font-family: 'Inter', sans-serif;
-            font-size: 100px;
+            font-size: 80px;
             color: #8B4557;
             font-weight: bold;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            line-height: 1;
         }
 
         .story-stock {
             font-family: 'Inter', sans-serif;
-            font-size: 35px;
+            font-size: 30px;
             color: #25D366;
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .story-code {
             font-family: 'Courier New', monospace;
-            font-size: 30px;
+            font-size: 26px;
             color: #666666;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
+            background: rgba(139, 69, 87, 0.1);
+            padding: 10px 25px;
+            border-radius: 20px;
         }
 
         .story-footer {
             font-family: 'Playfair Display', serif;
-            font-size: 40px;
+            font-size: 36px;
             color: #8B4557;
             font-style: italic;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
 
         .story-whatsapp {
             font-family: 'Inter', sans-serif;
-            font-size: 35px;
+            font-size: 30px;
             color: #25D366;
-            font-weight: 500;
+            font-weight: 600;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 12px 30px;
+            border-radius: 30px;
         }
 
-        /* MODAL DE HISTORIA */
+        /* MODAL STORY */
         .story-modal {
             display: none;
             position: fixed;
@@ -1352,7 +1355,7 @@
             background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(10px);
             z-index: 4000;
-            padding: 2rem;
+            padding: 1rem;
             overflow-y: auto;
             align-items: center;
             justify-content: center;
@@ -1364,10 +1367,10 @@
 
         .story-modal-content {
             background: white;
-            max-width: 450px;
+            max-width: 400px;
             width: 100%;
-            padding: 2.5rem;
-            border-radius: 24px;
+            padding: 2rem;
+            border-radius: 20px;
             text-align: center;
             position: relative;
             box-shadow: 0 25px 80px rgba(0,0,0,0.3);
@@ -1375,15 +1378,15 @@
 
         .close-story-modal {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 1rem;
+            right: 1rem;
             background: var(--gris-suave);
             border: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             color: var(--bordo);
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1399,7 +1402,7 @@
 
         .story-modal-content h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.6rem;
             color: var(--bordo);
             margin-bottom: 0.5rem;
             letter-spacing: 2px;
@@ -1407,54 +1410,55 @@
 
         .story-instruction {
             color: var(--gris-texto);
-            font-size: 1rem;
-            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
         }
 
         .story-preview-container {
             background: var(--gris-suave);
-            padding: 1.5rem;
-            border-radius: 20px;
-            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
             border: 2px solid var(--gris-medio);
-            max-height: 400px;
+            max-height: 350px;
             overflow: hidden;
         }
 
         .story-preview-container img {
             width: 100%;
             height: auto;
-            max-height: 350px;
+            max-height: 300px;
             object-fit: contain;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             display: block;
         }
 
         .story-actions {
             display: flex;
-            gap: 1rem;
+            flex-direction: column;
+            gap: 0.8rem;
             margin-bottom: 1rem;
         }
 
         .btn-download-story,
         .btn-copy-story {
-            flex: 1;
-            padding: 1.2rem;
+            width: 100%;
+            padding: 1rem;
             border-radius: 50px;
             text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
-            min-height: 56px;
+            min-height: 50px;
         }
 
         .btn-download-story {
@@ -1486,16 +1490,16 @@
         }
 
         .story-tip {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--gris-texto);
             font-style: italic;
-            padding: 1rem;
+            padding: 0.8rem;
             background: var(--gris-suave);
-            border-radius: 12px;
-            margin-top: 1rem;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+            line-height: 1.4;
         }
 
-        /* CARRITO MODAL */
         .cart-modal {
             display: none;
             position: fixed;
@@ -1815,7 +1819,6 @@
             display: block;
         }
 
-        /* WHATSAPP FLOTANTE */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -1880,7 +1883,6 @@
             left: 85px;
         }
 
-        /* NEWSLETTER POPUP */
         .newsletter-popup {
             position: fixed;
             top: 50%;
@@ -1978,7 +1980,6 @@
             visibility: visible;
         }
 
-        /* FOOTER */
         footer {
             background: var(--negro);
             color: white;
@@ -2064,7 +2065,6 @@
             letter-spacing: 2px;
         }
 
-        /* NOTIFICACIÓN */
         .notification {
             position: fixed;
             bottom: 30px;
@@ -2089,7 +2089,6 @@
             opacity: 1;
         }
 
-        /* RESPONSIVE */
         @media (max-width: 1200px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -2129,7 +2128,6 @@
                 padding: 1rem 1.5rem;
             }
 
-            /* OCULTAR REFLEXIÓN DIARIA EN MÓVIL DESPUÉS DE 25 SEGUNDOS */
             .daily-verse-container {
                 margin: 0 1rem 2rem;
                 padding: 1.5rem;
@@ -2149,47 +2147,54 @@
                 transform: scale(0.98) !important;
             }
 
+            /* MODAL VISTA PREVIA MÁS PEQUEÑO EN MÓVIL */
             .preview-content {
                 grid-template-columns: 1fr;
                 gap: 0;
                 margin: 0;
-                max-height: 95vh;
+                max-height: 90vh;
                 width: 100%;
-                border-radius: 16px;
+                border-radius: 12px;
             }
 
             .preview-image-container {
-                min-height: 300px;
-                max-height: 400px;
+                min-height: 250px;
+                max-height: 350px;
             }
 
             .preview-image {
-                max-height: 400px;
+                max-height: 350px;
             }
 
             .preview-details {
-                padding: 2rem 1.5rem;
-                max-height: 50vh;
+                padding: 1.5rem;
+                max-height: 45vh;
             }
 
             .preview-name {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
                 padding-right: 80px;
+                margin-bottom: 0.5rem;
             }
 
             .preview-price {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+            }
+
+            .preview-description {
+                font-size: 0.9rem;
+                max-height: 100px;
+                margin-bottom: 1rem;
             }
 
             .share-corner {
                 top: 1rem;
                 right: 1rem;
-                flex-direction: row;
             }
 
             .share-corner-btn {
-                width: 40px;
-                height: 40px;
+                width: 36px;
+                height: 36px;
                 font-size: 1rem;
             }
 
@@ -2229,8 +2234,16 @@
             }
 
             .story-modal-content {
-                margin: 1rem;
-                padding: 2rem 1.5rem;
+                margin: 0.5rem;
+                padding: 1.5rem;
+            }
+
+            .story-preview-container {
+                max-height: 300px;
+            }
+
+            .story-preview-container img {
+                max-height: 250px;
             }
         }
 
@@ -2244,13 +2257,9 @@
                 padding: 1.2rem;
             }
 
-            .preview-content {
-                border-radius: 12px;
-            }
-
             .preview-image-container {
-                min-height: 250px;
-                max-height: 350px;
+                min-height: 200px;
+                max-height: 300px;
             }
 
             .product-info {
@@ -2274,11 +2283,15 @@
             }
 
             .preview-details {
-                padding: 1.5rem;
+                padding: 1.2rem;
             }
 
             .preview-name {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
+            }
+
+            .preview-barcode {
+                font-size: 0.8rem;
             }
         }
 
@@ -2382,7 +2395,7 @@
                     Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
                 </div>
                 
-                <!-- ESTA ES LA REFLEXIÓN DIARIA QUE SE OCULTARÁ EN MÓVIL -->
+                <!-- ESTA TARJETA SE OCULTARÁ EN MÓVIL DESPUÉS DE 25 SEGUNDOS -->
                 <div class="daily-verse-container" id="dailyVerseContainer">
                     <div class="verse-date" id="verseDate"></div>
                     <div class="verse-header">
@@ -2491,7 +2504,7 @@
         </div>
     </div>
 
-    <!-- Contenedor oculto para capturar story -->
+    <!-- Template Story Corregido -->
     <div id="storyCaptureContainer">
         <div class="story-template" id="storyTemplate">
             <div class="story-frame"></div>
@@ -2524,13 +2537,18 @@
                     <i class="fas fa-download"></i>
                     <span>Descargar imagen</span>
                 </button>
-                <button class="btn-copy-story" onclick="copyStoryToClipboard()">
+                <button class="btn-copy-story" onclick="copyStoryToClipboard()" id="copyBtn">
                     <i class="fas fa-copy"></i>
                     <span>Copiar imagen</span>
                 </button>
             </div>
             
-            <p class="story-tip">Abre Instagram/WhatsApp y sube esta imagen a tu historia</p>
+            <p class="story-tip" id="mobileTip" style="display: none;">
+                <strong>En móvil:</strong> Mantén presionada la imagen arriba y selecciona "Guardar imagen" o "Copiar"
+            </p>
+            <p class="story-tip" id="desktopTip">
+                La imagen se copiará al portapapeles para pegarla directamente
+            </p>
         </div>
     </div>
 
@@ -2685,16 +2703,14 @@
             }
         ];
 
-        // Configuration
         const CONFIG = {
             productsPerPage: 12,
             preloadOffset: '200px',
             whatsappVisibleDuration: 10000,
             whatsappHiddenDuration: 180000,
-            mobileTextHideDelay: 25000 // 25 segundos
+            mobileTextHideDelay: 25000
         };
 
-        // State Management
         const AppState = {
             currentFilter: 'todos',
             cart: JSON.parse(localStorage.getItem('klohe_cart')) || [],
@@ -2706,10 +2722,9 @@
             currentTestimonial: 0,
             searchTerm: '',
             currentStoryImage: null,
-            currentStoryBlob: null
+            isMobile: false
         };
 
-        // Intersection Observer for Lazy Loading Images
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2870,22 +2885,30 @@
             cycle();
         }
 
-        // Función para ocultar reflexión diaria en móvil después de 25 segundos
         function initMobileTextHide() {
             const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            AppState.isMobile = isMobile;
+            
             if (isMobile) {
+                // Mostrar tip para móvil, ocultar tip de desktop
+                document.getElementById('mobileTip').style.display = 'block';
+                document.getElementById('desktopTip').style.display = 'none';
+                
                 setTimeout(() => {
                     const verseContainer = document.getElementById('dailyVerseContainer');
                     if (verseContainer) {
                         verseContainer.classList.add('hidden-mobile');
                     }
                 }, CONFIG.mobileTextHideDelay);
+            } else {
+                document.getElementById('mobileTip').style.display = 'none';
+                document.getElementById('desktopTip').style.display = 'block';
             }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             initWhatsAppCyclicAnimation();
-            initMobileTextHide(); // Iniciar temporizador para ocultar reflexión diaria
+            initMobileTextHide();
             
             displayDailyVerse();
             initTestimonials();
@@ -3296,37 +3319,51 @@
             currentPreviewIndex = null;
         }
 
-        // Función mejorada para generar imagen de story
+        // FUNCIÓN CORREGIDA PARA GENERAR STORY
         async function generateStoryImage(platform) {
             if (currentPreviewIndex === null) return;
             
             const product = products[currentPreviewIndex];
             
-            // Configurar el template
+            // Configurar el template con tamaños corregidos
             const storyImg = document.getElementById('storyProductImage');
-            storyImg.src = `${product.barcode}.jpg`;
+            
+            // Precargar imagen para evitar problemas de CORS
+            try {
+                await new Promise((resolve, reject) => {
+                    const tempImg = new Image();
+                    tempImg.crossOrigin = 'anonymous';
+                    tempImg.onload = () => {
+                        storyImg.src = tempImg.src;
+                        resolve();
+                    };
+                    tempImg.onerror = () => {
+                        // Si falla CORS, usar imagen sin crossOrigin
+                        storyImg.src = `${product.barcode}.jpg`;
+                        resolve();
+                    };
+                    tempImg.src = `${product.barcode}.jpg`;
+                });
+            } catch (e) {
+                storyImg.src = `${product.barcode}.jpg`;
+            }
+            
+            // Configurar textos
             document.getElementById('storyProductName').textContent = product.name;
             document.getElementById('storyPrice').textContent = `$${product.price.toFixed(2)}`;
             document.getElementById('storyStock').textContent = product.stock > 0 ? '✓ Disponible' : 'Agotado';
             document.getElementById('storyCode').textContent = `COD: ${product.barcode}`;
             
-            // Esperar a que la imagen cargue
-            try {
-                await new Promise((resolve, reject) => {
-                    const img = new Image();
-                    img.crossOrigin = 'anonymous';
-                    img.onload = resolve;
-                    img.onerror = reject;
-                    img.src = `${product.barcode}.jpg`;
-                    storyImg.src = img.src;
-                });
-            } catch (e) {
-                // Si falla la carga con CORS, intentar con la imagen original
-                console.log('CORS error, using fallback');
-            }
+            // Pequeña espera para asegurar renderizado
+            await new Promise(resolve => setTimeout(resolve, 100));
             
             try {
                 const element = document.getElementById('storyTemplate');
+                
+                // Forzar dimensiones exactas
+                element.style.width = '1080px';
+                element.style.height = '1920px';
+                
                 const canvas = await html2canvas(element, {
                     scale: 1,
                     useCORS: true,
@@ -3334,17 +3371,30 @@
                     backgroundColor: '#FAFAFA',
                     width: 1080,
                     height: 1920,
-                    logging: false
+                    logging: false,
+                    onclone: (clonedDoc) => {
+                        // Asegurar que el clon tenga las dimensiones correctas
+                        const clonedElement = clonedDoc.getElementById('storyTemplate');
+                        clonedElement.style.width = '1080px';
+                        clonedElement.style.height = '1920px';
+                    }
                 });
                 
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
                 AppState.currentStoryImage = dataUrl;
                 
-                // Convertir a blob para copiar
-                const response = await fetch(dataUrl);
-                AppState.currentStoryBlob = await response.blob();
+                // Mostrar en el modal
+                const previewImg = document.getElementById('generatedStoryImage');
+                previewImg.src = dataUrl;
                 
-                document.getElementById('generatedStoryImage').src = dataUrl;
+                // Hacer la imagen descargable al mantener presionado en móvil
+                previewImg.style.cursor = AppState.isMobile ? 'pointer' : 'default';
+                if (AppState.isMobile) {
+                    previewImg.onclick = () => {
+                        downloadStory();
+                    };
+                }
+                
                 document.getElementById('storyModal').classList.add('active');
                 document.body.style.overflow = 'hidden';
                 
@@ -3373,67 +3423,70 @@
             showNotification('Imagen descargada');
         }
 
+        // FUNCIÓN DE COPIAR MEJORADA PARA MÓVILES
         async function copyStoryToClipboard() {
-            if (!AppState.currentStoryBlob) {
+            if (!AppState.currentStoryImage) {
                 showNotification('Error: No hay imagen para copiar', 'error');
                 return;
             }
             
-            try {
-                // Intentar usar Clipboard API moderna
-                if (navigator.clipboard && window.ClipboardItem) {
-                    await navigator.clipboard.write([
-                        new ClipboardItem({
-                            'image/jpeg': AppState.currentStoryBlob
-                        })
-                    ]);
+            // En móvil, la copia al portapapeles de imágenes es muy limitada
+            if (AppState.isMobile) {
+                showNotification('En móvil, descarga la imagen o mantén presionada la imagen arriba para copiarla');
+                
+                // Intentar método alternativo para iOS/Android
+                try {
+                    const response = await fetch(AppState.currentStoryImage);
+                    const blob = await response.blob();
                     
-                    const btn = document.querySelector('.btn-copy-story');
-                    const originalContent = btn.innerHTML;
-                    btn.classList.add('copied');
-                    btn.innerHTML = '<i class="fas fa-check"></i><span>¡Copiado!</span>';
-                    
-                    showNotification('¡Imagen copiada al portapapeles!');
-                    
-                    setTimeout(() => {
-                        btn.classList.remove('copied');
-                        btn.innerHTML = originalContent;
-                    }, 3000);
-                } else {
-                    // Fallback para navegadores que no soportan Clipboard API
-                    showNotification('Tu navegador no soporta copiar imágenes. Descárgala primero.');
+                    // Intentar usar Clipboard API si está disponible
+                    if (navigator.clipboard && navigator.clipboard.write) {
+                        await navigator.clipboard.write([
+                            new ClipboardItem({
+                                [blob.type]: blob
+                            })
+                        ]);
+                        
+                        const btn = document.getElementById('copyBtn');
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<i class="fas fa-check"></i><span>¡Copiado!</span>';
+                        
+                        setTimeout(() => {
+                            btn.classList.remove('copied');
+                            btn.innerHTML = '<i class="fas fa-copy"></i><span>Copiar imagen</span>';
+                        }, 2000);
+                    }
+                } catch (err) {
+                    console.log('Copia no soportada en este dispositivo');
                 }
+                return;
+            }
+            
+            // Desktop: intentar copiar normalmente
+            try {
+                const response = await fetch(AppState.currentStoryImage);
+                const blob = await response.blob();
+                
+                await navigator.clipboard.write([
+                    new ClipboardItem({
+                        'image/jpeg': blob
+                    })
+                ]);
+                
+                const btn = document.getElementById('copyBtn');
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i><span>¡Copiado!</span>';
+                
+                showNotification('¡Imagen copiada al portapapeles!');
+                
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<i class="fas fa-copy"></i><span>Copiar imagen</span>';
+                }, 3000);
+                
             } catch (err) {
                 console.error('Error copiando:', err);
-                
-                // Intentar método alternativo para móviles
-                try {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    const img = new Image();
-                    
-                    await new Promise((resolve) => {
-                        img.onload = resolve;
-                        img.src = AppState.currentStoryImage;
-                    });
-                    
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    ctx.drawImage(img, 0, 0);
-                    
-                    canvas.toBlob(async (blob) => {
-                        try {
-                            await navigator.clipboard.write([
-                                new ClipboardItem({ 'image/png': blob })
-                            ]);
-                            showNotification('¡Imagen copiada!');
-                        } catch (e) {
-                            showNotification('No se pudo copiar. Descarga la imagen.', 'error');
-                        }
-                    });
-                } catch (e2) {
-                    showNotification('Error al copiar. Descarga la imagen.', 'error');
-                }
+                showNotification('No se pudo copiar automáticamente. Descarga la imagen.', 'error');
             }
         }
 
@@ -3583,7 +3636,7 @@
             
             setTimeout(() => {
                 notification.classList.remove('show');
-            }, 2500);
+            }, 3000);
         }
 
         window.addEventListener('resize', debounce(() => {

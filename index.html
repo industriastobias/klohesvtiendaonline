@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- html2canvas para generar imágenes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -19,7 +22,6 @@
         }
 
         :root {
-            /* PALETA MINIMALISTA - Tonos de Borgoña y Neutros */
             --blanco: #FAFAFA;
             --gris-suave: #F5F5F5;
             --gris-medio: #E0E0E0;
@@ -30,7 +32,6 @@
             --gris-texto: #666666;
             --dorado: #C9A87C;
             
-            /* Sombras modernas */
             --sombra-suave: 0 2px 8px rgba(0,0,0,0.04);
             --sombra-media: 0 4px 20px rgba(0,0,0,0.08);
             --sombra-fuerte: 0 8px 30px rgba(0,0,0,0.12);
@@ -49,6 +50,11 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
         }
 
         @keyframes float {
@@ -127,7 +133,7 @@
             visibility: hidden;
         }
 
-        /* HEADER - Minimalista con fondo blanco puro */
+        /* HEADER */
         header {
             background: rgba(250, 250, 250, 0.98);
             backdrop-filter: blur(20px);
@@ -249,7 +255,7 @@
             transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        /* MENÚ LATERAL - Diseño limpio */
+        /* MENÚ LATERAL */
         .categories-menu {
             position: fixed;
             top: 0;
@@ -388,7 +394,7 @@
             box-shadow: 0 2px 8px rgba(139, 69, 87, 0.4);
         }
 
-        /* HERO - Minimalista con tipografía grande */
+        /* HERO - CON ANIMACIÓN DE DESAPARICIÓN EN MÓVIL */
         .hero {
             background: var(--blanco);
             padding: 5rem 0 4rem;
@@ -438,6 +444,7 @@
             margin-bottom: 2rem;
         }
 
+        /* BLOQUE DE TEXTO TEMPORAL EN MÓVIL */
         .summer-message {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
@@ -450,9 +457,19 @@
             display: inline-block;
             border-left: 4px solid var(--bordo);
             border-radius: 0 8px 8px 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        /* VERSÍCULO - Tarjeta elegante */
+        .summer-message.hidden-mobile {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
         .daily-verse-container {
             background: white;
             border: 1px solid var(--gris-medio);
@@ -515,7 +532,7 @@
             box-shadow: var(--sombra-bordo);
         }
 
-        /* BÚSQUEDA - Input moderno */
+        /* BÚSQUEDA */
         .search-container {
             max-width: 600px;
             margin: 0 auto;
@@ -555,7 +572,7 @@
             font-size: 1.1rem;
         }
 
-        /* PRODUCTOS - Grid limpio */
+        /* PRODUCTOS */
         .products {
             padding: 4rem 0;
             background: var(--blanco);
@@ -594,7 +611,7 @@
             gap: 2.5rem;
         }
 
-        /* TARJETA DE PRODUCTO - Minimalista con sombras */
+        /* TARJETA DE PRODUCTO */
         .product-card {
             background: white;
             overflow: hidden;
@@ -756,7 +773,7 @@
             cursor: not-allowed;
         }
 
-        /* TESTIMONIOS - Sección elegante */
+        /* TESTIMONIOS */
         .testimonials-section {
             background: var(--gris-suave);
             padding: 5rem 0;
@@ -1001,7 +1018,7 @@
             box-shadow: var(--sombra-bordo);
         }
 
-        /* MODAL DE VISTA PREVIA */
+        /* MODAL DE VISTA PREVIA - CORREGIDO */
         .preview-modal {
             display: none;
             position: fixed;
@@ -1015,18 +1032,19 @@
             padding: 2rem;
             overflow-y: auto;
             cursor: pointer;
+            align-items: center;
+            justify-content: center;
         }
 
         .preview-modal.active {
             display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .preview-content {
             background: white;
             max-width: 1000px;
             width: 100%;
+            max-height: 90vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
@@ -1038,17 +1056,24 @@
         }
 
         .preview-image-container {
-            aspect-ratio: 1/1;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            max-height: 600px;
             background: var(--gris-suave);
             overflow: hidden;
             cursor: pointer;
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .preview-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            max-height: 600px;
             transition: transform 0.3s ease;
         }
 
@@ -1059,14 +1084,17 @@
             padding: 3rem;
             position: relative;
             background: white;
+            overflow-y: auto;
+            max-height: 90vh;
         }
 
+        /* ICONOS EN ESQUINA SUPERIOR DERECHA */
         .share-corner {
             position: absolute;
             top: 1.5rem;
             right: 1.5rem;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 0.8rem;
             z-index: 10;
         }
@@ -1185,8 +1213,136 @@
             box-shadow: none;
         }
 
-        #storyCanvas {
-            display: none;
+        /* CONTENEDOR PARA GENERAR IMAGEN DE STORY */
+        #storyCaptureContainer {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 1080px;
+            height: 1920px;
+            background: #FAFAFA;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .story-template {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #FAFAFA;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 60px;
+            box-sizing: border-box;
+        }
+
+        .story-frame {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            right: 40px;
+            bottom: 40px;
+            border: 6px solid #8B4557;
+            pointer-events: none;
+        }
+
+        .story-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 80px;
+            color: #8B4557;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .story-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 40px;
+            color: #666666;
+            font-weight: 300;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .story-image-container {
+            width: 800px;
+            height: 800px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .story-image-container::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 4px solid #E0E0E0;
+            pointer-events: none;
+        }
+
+        .story-product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 60px;
+            color: #1A1A1A;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 900px;
+            line-height: 1.3;
+        }
+
+        .story-price {
+            font-family: 'Inter', sans-serif;
+            font-size: 100px;
+            color: #8B4557;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .story-stock {
+            font-family: 'Inter', sans-serif;
+            font-size: 35px;
+            color: #25D366;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .story-code {
+            font-family: 'Courier New', monospace;
+            font-size: 30px;
+            color: #666666;
+            margin-bottom: 80px;
+        }
+
+        .story-footer {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: #8B4557;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .story-whatsapp {
+            font-family: 'Inter', sans-serif;
+            font-size: 35px;
+            color: #25D366;
+            font-weight: 500;
         }
 
         /* MODAL DE HISTORIA */
@@ -1265,11 +1421,15 @@
             border-radius: 20px;
             margin-bottom: 2rem;
             border: 2px solid var(--gris-medio);
+            max-height: 400px;
+            overflow: hidden;
         }
 
         .story-preview-container img {
             width: 100%;
             height: auto;
+            max-height: 350px;
+            object-fit: contain;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             display: block;
@@ -1822,7 +1982,7 @@
             visibility: visible;
         }
 
-        /* FOOTER - Elegante y oscuro */
+        /* FOOTER */
         footer {
             background: var(--negro);
             color: white;
@@ -1968,9 +2128,12 @@
                 letter-spacing: 4px;
             }
 
+            /* ANIMACIÓN DE DESAPARICIÓN EN MÓVIL */
             .summer-message {
                 font-size: 1.1rem;
                 padding: 1rem 1.5rem;
+                animation: fadeOut 0.5s ease forwards;
+                animation-delay: 25s;
             }
 
             .daily-verse-container {
@@ -1992,31 +2155,50 @@
                 transform: scale(0.98) !important;
             }
 
+            /* MODAL VISTA PREVIA MÓVIL CORREGIDO */
             .preview-content {
                 grid-template-columns: 1fr;
                 gap: 0;
-                margin: 1rem;
-                max-height: 90vh;
-                overflow-y: auto;
+                margin: 0;
+                max-height: 95vh;
+                width: 100%;
+                border-radius: 16px;
+            }
+
+            .preview-image-container {
+                min-height: 300px;
+                max-height: 400px;
+            }
+
+            .preview-image {
+                max-height: 400px;
             }
 
             .preview-details {
-                padding: 2rem;
+                padding: 2rem 1.5rem;
+                max-height: 50vh;
             }
 
             .preview-name {
-                font-size: 1.8rem;
-                padding-right: 0;
+                font-size: 1.6rem;
+                padding-right: 80px;
             }
 
             .preview-price {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
+            /* ICONOS EN ESQUINA SUPERIOR DERECHA EN MÓVIL */
             .share-corner {
                 top: 1rem;
                 right: 1rem;
                 flex-direction: row;
+            }
+
+            .share-corner-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
 
             .footer-content {
@@ -2053,6 +2235,11 @@
             .section-title {
                 font-size: 1.5rem;
             }
+
+            .story-modal-content {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -2066,8 +2253,12 @@
             }
 
             .preview-content {
-                padding: 0;
-                margin: 0.5rem;
+                border-radius: 12px;
+            }
+
+            .preview-image-container {
+                min-height: 250px;
+                max-height: 350px;
             }
 
             .product-info {
@@ -2088,6 +2279,14 @@
 
             .hero h1 {
                 font-size: 1.8rem;
+            }
+
+            .preview-details {
+                padding: 1.5rem;
+            }
+
+            .preview-name {
+                font-size: 1.4rem;
             }
         }
 
@@ -2187,7 +2386,7 @@
                 <h1>Colección Verano</h1>
                 <p>Brilla bajo el sol de El Salvador</p>
                 
-                <div class="summer-message">
+                <div class="summer-message" id="summerMessage">
                     Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
                 </div>
                 
@@ -2299,7 +2498,23 @@
         </div>
     </div>
 
-    <canvas id="storyCanvas"></canvas>
+    <!-- Contenedor oculto para capturar story -->
+    <div id="storyCaptureContainer">
+        <div class="story-template" id="storyTemplate">
+            <div class="story-frame"></div>
+            <div class="story-logo">KLOHE</div>
+            <div class="story-subtitle">Colección Verano</div>
+            <div class="story-image-container">
+                <img class="story-product-image" id="storyProductImage" src="" alt="">
+            </div>
+            <div class="story-product-name" id="storyProductName"></div>
+            <div class="story-price" id="storyPrice"></div>
+            <div class="story-stock" id="storyStock"></div>
+            <div class="story-code" id="storyCode"></div>
+            <div class="story-footer">☀️ Brilla con estilo este verano</div>
+            <div class="story-whatsapp">WhatsApp: 6671-1569</div>
+        </div>
+    </div>
 
     <div class="story-modal" id="storyModal" onclick="closeStoryModal(event)">
         <div class="story-modal-content" onclick="event.stopPropagation()">
@@ -2312,10 +2527,10 @@
             </div>
             
             <div class="story-actions">
-                <a id="downloadStoryBtn" class="btn-download-story" download="klohe-story.jpg">
+                <button class="btn-download-story" onclick="downloadStory()">
                     <i class="fas fa-download"></i>
                     <span>Descargar imagen</span>
-                </a>
+                </button>
                 <button class="btn-copy-story" onclick="copyStoryToClipboard()">
                     <i class="fas fa-copy"></i>
                     <span>Copiar imagen</span>
@@ -2482,7 +2697,8 @@
             productsPerPage: 12,
             preloadOffset: '200px',
             whatsappVisibleDuration: 10000,
-            whatsappHiddenDuration: 180000
+            whatsappHiddenDuration: 180000,
+            mobileTextHideDelay: 25000 // 25 segundos
         };
 
         // State Management
@@ -2495,7 +2711,8 @@
             isLoading: false,
             hasMoreProducts: true,
             currentTestimonial: 0,
-            searchTerm: ''
+            searchTerm: '',
+            currentStoryImage: null
         };
 
         // Intersection Observer for Lazy Loading Images
@@ -2659,8 +2876,22 @@
             cycle();
         }
 
+        // Función para ocultar texto en móvil después de 25 segundos
+        function initMobileTextHide() {
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            if (isMobile) {
+                setTimeout(() => {
+                    const summerMessage = document.getElementById('summerMessage');
+                    if (summerMessage) {
+                        summerMessage.classList.add('hidden-mobile');
+                    }
+                }, CONFIG.mobileTextHideDelay);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             initWhatsAppCyclicAnimation();
+            initMobileTextHide(); // Iniciar temporizador para ocultar texto
             
             displayDailyVerse();
             initTestimonials();
@@ -3071,130 +3302,48 @@
             currentPreviewIndex = null;
         }
 
-        function generateStoryImage(platform) {
+        // Función mejorada para generar imagen de story usando html2canvas
+        async function generateStoryImage(platform) {
             if (currentPreviewIndex === null) return;
             
             const product = products[currentPreviewIndex];
-            const canvas = document.getElementById('storyCanvas');
-            const ctx = canvas.getContext('2d');
             
-            canvas.width = 1080;
-            canvas.height = 1920;
+            // Configurar el template
+            document.getElementById('storyProductImage').src = `${product.barcode}.jpg`;
+            document.getElementById('storyProductName').textContent = product.name;
+            document.getElementById('storyPrice').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('storyStock').textContent = product.stock > 0 ? '✓ Disponible' : 'Agotado';
+            document.getElementById('storyCode').textContent = `COD: ${product.barcode}`;
             
-            // Fondo limpio blanco/gris muy suave
-            ctx.fillStyle = '#FAFAFA';
-            ctx.fillRect(0, 0, 1080, 1920);
+            // Esperar a que la imagen cargue
+            await new Promise((resolve) => {
+                const img = document.getElementById('storyProductImage');
+                if (img.complete) resolve();
+                else img.onload = resolve;
+            });
             
-            // Marco decorativo minimalista
-            ctx.strokeStyle = '#8B4557';
-            ctx.lineWidth = 6;
-            ctx.strokeRect(50, 50, 980, 1820);
-            
-            // Logo KLOHE
-            ctx.font = 'bold 80px "Playfair Display", serif';
-            ctx.fillStyle = '#8B4557';
-            ctx.textAlign = 'center';
-            ctx.fillText('KLOHE', 540, 180);
-            
-            // Subtítulo
-            ctx.font = '300 40px "Inter", sans-serif';
-            ctx.fillStyle = '#666666';
-            ctx.fillText('Colección Verano', 540, 240);
-            
-            // Cargar imagen del producto
-            const img = new Image();
-            img.crossOrigin = 'anonymous';
-            img.onload = function() {
-                // Marco de foto
-                ctx.fillStyle = '#FFFFFF';
-                ctx.shadowColor = 'rgba(0,0,0,0.1)';
-                ctx.shadowBlur = 40;
-                ctx.shadowOffsetY = 20;
-                ctx.fillRect(140, 320, 800, 800);
-                ctx.shadowColor = 'transparent';
+            try {
+                const element = document.getElementById('storyTemplate');
+                const canvas = await html2canvas(element, {
+                    scale: 1,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#FAFAFA',
+                    width: 1080,
+                    height: 1920
+                });
                 
-                // Imagen del producto
-                const scale = Math.max(800 / img.width, 800 / img.height);
-                const x = (img.width * scale - 800) / 2;
-                const y = (img.height * scale - 800) / 2;
-                ctx.drawImage(img, -x, -y, img.width * scale, img.height * scale, 140, 320, 800, 800);
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                AppState.currentStoryImage = dataUrl;
                 
-                // Marco interior
-                ctx.strokeStyle = '#E0E0E0';
-                ctx.lineWidth = 4;
-                ctx.strokeRect(160, 340, 760, 760);
+                document.getElementById('generatedStoryImage').src = dataUrl;
+                document.getElementById('storyModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
                 
-                // Nombre del producto
-                ctx.font = 'bold 60px "Playfair Display", serif';
-                ctx.fillStyle = '#1A1A1A';
-                ctx.textAlign = 'center';
-                
-                const maxWidth = 900;
-                const lineHeight = 80;
-                const words = product.name.split(' ');
-                let line = '';
-                let yPos = 1220;
-                
-                for (let n = 0; n < words.length; n++) {
-                    const testLine = line + words[n] + ' ';
-                    const metrics = ctx.measureText(testLine);
-                    const testWidth = metrics.width;
-                    if (testWidth > maxWidth && n > 0) {
-                        ctx.fillText(line, 540, yPos);
-                        line = words[n] + ' ';
-                        yPos += lineHeight;
-                    } else {
-                        line = testLine;
-                    }
-                }
-                ctx.fillText(line, 540, yPos);
-                
-                // Precio destacado
-                const priceY = yPos + 120;
-                ctx.font = 'bold 100px "Inter", sans-serif';
-                ctx.fillStyle = '#8B4557';
-                ctx.fillText(`$${product.price.toFixed(2)}`, 540, priceY);
-                
-                // Badge de disponibilidad
-                ctx.font = '500 35px "Inter", sans-serif';
-                ctx.fillStyle = product.stock > 0 ? '#25D366' : '#dc3545';
-                ctx.fillText(product.stock > 0 ? '✓ Disponible' : 'Agotado', 540, priceY + 80);
-                
-                // Código
-                ctx.font = '400 30px "Courier New", monospace';
-                ctx.fillStyle = '#666666';
-                ctx.fillText(`COD: ${product.barcode}`, 540, priceY + 140);
-                
-                // Footer
-                ctx.font = 'italic 400 40px "Playfair Display", serif';
-                ctx.fillStyle = '#8B4557';
-                ctx.fillText('☀️ Brilla con estilo este verano', 540, 1720);
-                
-                // WhatsApp contacto
-                ctx.font = '500 35px "Inter", sans-serif';
-                ctx.fillStyle = '#25D366';
-                ctx.fillText('WhatsApp: 6671-1569', 540, 1790);
-                
-                try {
-                    const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
-                    document.getElementById('generatedStoryImage').src = dataUrl;
-                    document.getElementById('downloadStoryBtn').href = dataUrl;
-                    
-                    document.getElementById('storyModal').classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    
-                    window.currentStoryImage = dataUrl;
-                } catch (err) {
-                    console.error('Error generando imagen:', err);
-                    showNotification('Error al generar la imagen', 'error');
-                }
-            };
-            
-            img.onerror = function() {
-                showNotification('Error cargando imagen del producto', 'error');
-            };
-            
-            img.src = `${product.barcode}.jpg`;
+            } catch (err) {
+                console.error('Error generando imagen:', err);
+                showNotification('Error al generar la imagen. Intenta de nuevo.', 'error');
+            }
         }
 
         function closeStoryModal(e) {
@@ -3203,17 +3352,28 @@
             document.body.style.overflow = '';
         }
 
+        function downloadStory() {
+            if (!AppState.currentStoryImage) return;
+            
+            const link = document.createElement('a');
+            link.download = `klohe-${Date.now()}.jpg`;
+            link.href = AppState.currentStoryImage;
+            link.click();
+            
+            showNotification('Imagen descargada');
+        }
+
         async function copyStoryToClipboard() {
-            const img = document.getElementById('generatedStoryImage');
+            if (!AppState.currentStoryImage) return;
             
             try {
-                const response = await fetch(img.src);
+                const response = await fetch(AppState.currentStoryImage);
                 const blob = await response.blob();
                 
                 if (navigator.clipboard && window.ClipboardItem) {
                     await navigator.clipboard.write([
                         new ClipboardItem({
-                            'image/png': blob
+                            'image/jpeg': blob
                         })
                     ]);
                     
@@ -3229,6 +3389,7 @@
                         btn.innerHTML = originalContent;
                     }, 3000);
                 } else {
+                    // Fallback para móviles
                     showNotification('Descarga la imagen para compartirla');
                 }
             } catch (err) {

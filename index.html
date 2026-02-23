@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>KLOHE - Colección Verano</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300 ;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
     
     <!-- html2canvas -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js "></script>
     
     <style>
         * {
@@ -71,6 +71,11 @@
         @keyframes shimmer {
             0% { background-position: -1000px 0; }
             100% { background-position: 1000px 0; }
+        }
+
+        @keyframes verseFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .skeleton {
@@ -446,11 +451,20 @@
             margin-bottom: 2rem;
         }
 
+        /* ESTILOS PARA EL MENSAJE ROTATIVO */
+        .message-container {
+            min-height: 120px;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         .summer-message {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             color: var(--bordo);
-            margin-bottom: 3rem;
             font-style: italic;
             letter-spacing: 1px;
             background: var(--rosa-nude);
@@ -458,6 +472,57 @@
             display: inline-block;
             border-left: 4px solid var(--bordo);
             border-radius: 0 8px 8px 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .summer-message.fade-out {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .daily-verse-container {
+            display: none;
+            animation: verseFadeIn 0.8s ease forwards;
+        }
+
+        .daily-verse-container.show {
+            display: block;
+        }
+
+        .verse-date {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--rosa-oscuro);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .verse-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--bordo);
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            max-width: 600px;
+        }
+
+        .verse-reference {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gris-texto);
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .verse-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--dorado);
+            margin: 1rem auto;
+            border-radius: 2px;
         }
 
         .search-container {
@@ -2070,9 +2135,21 @@
                 letter-spacing: 4px;
             }
 
+            .message-container {
+                min-height: 140px;
+            }
+
             .summer-message {
                 font-size: 1.1rem;
                 padding: 1rem 1.5rem;
+            }
+
+            .verse-text {
+                font-size: 1.2rem;
+            }
+
+            .verse-date {
+                font-size: 0.75rem;
             }
 
             .products-grid {
@@ -2293,13 +2370,13 @@
                 <a href="#" class="logo">KLOHE <span class="logo-sun">☀️</span></a>
                 <div class="nav-right">
                     <div class="social-header">
-                        <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv " target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv " target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry " target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -2341,8 +2418,20 @@
                 <h1>Colección Verano</h1>
                 <p>Brilla bajo el sol de El Salvador</p>
                 
-                <div class="summer-message">
-                    Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
+                <!-- CONTENEDOR DE MENSAJES ROTATIVOS -->
+                <div class="message-container" id="messageContainer">
+                    <!-- Mensaje inicial (5 segundos) -->
+                    <div class="summer-message" id="initialMessage">
+                        Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
+                    </div>
+                    
+                    <!-- Versículo diario (aparece después) -->
+                    <div class="daily-verse-container" id="dailyVerseContainer">
+                        <div class="verse-date" id="verseDate"></div>
+                        <div class="verse-divider"></div>
+                        <div class="verse-text" id="verseText"></div>
+                        <div class="verse-reference" id="verseReference"></div>
+                    </div>
                 </div>
                 
                 <div class="search-container">
@@ -2504,13 +2593,13 @@
                     <h4>Redes Sociales</h4>
                     <p>Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
-                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv " target="_blank" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv " target="_blank" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry " target="_blank" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -2525,14 +2614,14 @@
             <div class="copyright">
                 <p>© 2026 KLOHE A FAMILY COMPANY. Hecho en Corea del Sur y traído a El Salvador</p>
                 <p style="margin-top: 0.5rem; font-size: 0.85rem;">
-                    BY: <a href="https://www.instagram.com/ERNESTOTOBIASS" target="_blank">ERNESTO TOBIAS</a> & 
-                    <a href="https://www.instagram.com/tatianapalacios720" target="_blank">PAOLA PALACIOS</a>
+                    BY: <a href="https://www.instagram.com/ERNESTOTOBIASS " target="_blank">ERNESTO TOBIAS</a> & 
+                    <a href="https://www.instagram.com/tatianapalacios720 " target="_blank">PAOLA PALACIOS</a>
                 </p>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
+    <a href="https://wa.me/50366711569 " target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
     </a>
@@ -2594,65 +2683,19 @@
     <script src="products.js"></script>
     
     <script>
-        // Versículos de verano
-        const dailyVerses = [
-            { 
-                text: "El sol se levanta para todos, pero el brillo único lo pones tú con tus accesorios.", 
-                reference: "KLOHE Verano 2026" 
-            },
-            { 
-                text: "Como dice el dicho: 'Ponte las pilas' porque el verano no espera a nadie.", 
-                reference: "Sabiduría Veraniega" 
-            },
-            { 
-                text: "La vida es como una ola: hay que surfearla con estilo y buenos accesorios.", 
-                reference: "Filosofía Playera" 
-            },
-            { 
-                text: "Con sazón, batería y reggaeton, todo look es mejor bajo el sol.", 
-                reference: "Latino Vibes" 
-            },
-            { 
-                text: "El mar está lleno de sal, pero tu estilo está lleno de brillo.", 
-                reference: "Reflexión Playera" 
-            },
-            { 
-                text: "No dejes para mañana el accesorio que puedes lucir hoy.", 
-                reference: "Máxima Veraniega" 
-            },
-            { 
-                text: "El calor no es excusa, la actitud es todo.", 
-                reference: "Código KLOHE" 
-            },
-            { 
-                text: "Bajo el sol de El Salvador, todos brillamos más con el accesorio perfecto.", 
-                reference: "Orgullo Cuzcatleco" 
-            },
-            { 
-                text: "La playa cura todo, pero un buen accesorio acelera el proceso.", 
-                reference: "Medicina Alternativa" 
-            },
-            { 
-                text: "Verano es un estado de mente, no solo una estación.", 
-                reference: "Filosofía KLOHE" 
-            },
-            { 
-                text: "Si la vida te da limones, hazte una limonada y lúcela con estilo.", 
-                reference: "Optimismo Tropical" 
-            },
-            { 
-                text: "El mejor bronceado es el que viene con buenos recuerdos y mejores accesorios.", 
-                reference: "Verano Eterno" 
-            }
-        ];
-
+        // Configuración
         const CONFIG = {
             productsPerPage: 12,
             preloadOffset: '200px',
             whatsappVisibleDuration: 10000,
             whatsappHiddenDuration: 180000,
-            mobileTextHideDelay: 25000
+            mobileTextHideDelay: 25000,
+            initialMessageDuration: 5000 // 5 segundos para el mensaje inicial
         };
+
+        // Variables para los versículos (se cargarán desde diario.html)
+        let dailyVerses = [];
+        let versesLoaded = false;
 
         const AppState = {
             currentFilter: 'todos',
@@ -2721,11 +2764,73 @@
             };
         }
 
+        // Función para cargar versículos desde diario.html
+        async function loadDailyVerses() {
+            try {
+                const response = await fetch('diario.html');
+                if (!response.ok) throw new Error('No se pudo cargar diario.html');
+                
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Buscar el script con los versículos en diario.html
+                const scripts = doc.querySelectorAll('script');
+                let versesData = null;
+                
+                scripts.forEach(script => {
+                    if (script.textContent.includes('window.dailyVersesData')) {
+                        const match = script.textContent.match(/window\.dailyVersesData\s*=\s*(\[.*?\]);/s);
+                        if (match) {
+                            versesData = JSON.parse(match[1]);
+                        }
+                    }
+                });
+                
+                if (versesData && versesData.length > 0) {
+                    dailyVerses = versesData;
+                    versesLoaded = true;
+                    return true;
+                } else {
+                    // Si no se encuentran versículos, usar fallback
+                    console.log('No se encontraron versículos en diario.html, usando fallback');
+                    useFallbackVerses();
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error cargando versículos:', error);
+                useFallbackVerses();
+                return false;
+            }
+        }
+
+        // Versículos de respaldo si diario.html no está disponible
+        function useFallbackVerses() {
+            dailyVerses = [
+                { text: "El sol se levanta para todos, pero el brillo único lo pones tú con tus accesorios.", reference: "KLOHE Verano 2026" },
+                { text: "Como dice el dicho: 'Ponte las pilas' porque el verano no espera a nadie.", reference: "Sabiduría Veraniega" },
+                { text: "La vida es como una ola: hay que surfearla con estilo y buenos accesorios.", reference: "Filosofía Playera" },
+                { text: "Con sazón, batería y reggaeton, todo look es mejor bajo el sol.", reference: "Latino Vibes" },
+                { text: "El mar está lleno de sal, pero tu estilo está lleno de brillo.", reference: "Reflexión Playera" },
+                { text: "No dejes para mañana el accesorio que puedes lucir hoy.", reference: "Máxima Veraniega" },
+                { text: "El calor no es excusa, la actitud es todo.", reference: "Código KLOHE" },
+                { text: "Bajo el sol de El Salvador, todos brillamos más con el accesorio perfecto.", reference: "Orgullo Cuzcatleco" },
+                { text: "La playa cura todo, pero un buen accesorio acelera el proceso.", reference: "Medicina Alternativa" },
+                { text: "Verano es un estado de mente, no solo una estación.", reference: "Filosofía KLOHE" },
+                { text: "Si la vida te da limones, hazte una limonada y lúcela con estilo.", reference: "Optimismo Tropical" },
+                { text: "El mejor bronceado es el que viene con buenos recuerdos y mejores accesorios.", reference: "Verano Eterno" }
+            ];
+            versesLoaded = true;
+        }
+
+        // Obtener versículo del día basado en la fecha
         function getDailyVerse() {
             const today = new Date();
             const dayOfMonth = today.getDate();
             const month = today.toLocaleString('es-ES', { month: 'long' });
             const year = today.getFullYear();
+            
+            // Usar el día del mes para seleccionar el versículo (ciclo)
             const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
             const verse = dailyVerses[verseIndex];
             
@@ -2737,6 +2842,37 @@
                 date: formattedDate,
                 dayNumber: dayOfMonth
             };
+        }
+
+        // Mostrar el versículo diario
+        function showDailyVerse() {
+            if (!versesLoaded) return;
+            
+            const verse = getDailyVerse();
+            const container = document.getElementById('dailyVerseContainer');
+            
+            document.getElementById('verseDate').textContent = verse.date;
+            document.getElementById('verseText').textContent = `"${verse.text}"`;
+            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
+            
+            // Animar la transición
+            container.classList.add('show');
+        }
+
+        // Iniciar rotación de mensajes
+        function initMessageRotation() {
+            const initialMessage = document.getElementById('initialMessage');
+            
+            // Después de 5 segundos, ocultar mensaje inicial y mostrar versículo
+            setTimeout(() => {
+                initialMessage.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    initialMessage.style.display = 'none';
+                    showDailyVerse();
+                }, 500); // Esperar a que termine la animación de fade out
+                
+            }, CONFIG.initialMessageDuration);
         }
 
         const categoryMap = {
@@ -2832,7 +2968,7 @@
                 
                 setTimeout(() => {
                     const verseContainer = document.getElementById('dailyVerseContainer');
-                    if (verseContainer) {
+                    if (verseContainer && verseContainer.classList.contains('show')) {
                         verseContainer.classList.add('hidden-mobile');
                     }
                 }, CONFIG.mobileTextHideDelay);
@@ -2842,9 +2978,15 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             initWhatsAppCyclicAnimation();
             initMobileTextHide();
+            
+            // Cargar versículos primero
+            await loadDailyVerses();
+            
+            // Iniciar rotación de mensajes
+            initMessageRotation();
             
             initTestimonials();
             renderSkeletons(8);
@@ -3143,7 +3285,7 @@
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg ' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -3152,7 +3294,7 @@
                          class="product-image blur-up"
                          src="${placeholderSvg}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22  width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
                     <span class="stock-badge">${product.stock} disp.</span>
                 </div>
                 <div class="product-info">
@@ -3515,7 +3657,7 @@
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
                                  loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22  width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
@@ -3543,7 +3685,7 @@
             
             const shippingText = AppState.shippingEnabled ? `%0A%0AEnvío: $3.75` : '';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text= ${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
         }
 
         function toggleCart() {

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Versículos Diarios - KLOHE</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #FDF8F6;
+            color: #2C2424;
+        }
+        h1 {
+            color: #6D435A;
+            font-family: 'Playfair Display', serif;
+        }
+        .verse-list {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(44, 36, 36, 0.08);
+        }
+        .verse-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: #F5E6E0;
+            border-left: 4px solid #6D435A;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📖 Versículos Diarios</h1>
+    <p>Esta página aloja los versículos que se muestran en la página principal de KLOHE.</p>
+    
+    <div class="verse-list" id="verseList">
+        <!-- Los versículos se generan dinámicamente -->
+    </div>
+
+    <script>
+        // Array de versículos - puedes editar esto fácilmente
+        window.dailyVersesData = [
+            { 
+                text: "El sol se levanta para todos, pero el brillo único lo pones tú con tus accesorios.", 
+                reference: "KLOHE Verano 2026" 
+            },
+            { 
+                text: "Como dice el dicho: 'Ponte las pilas' porque el verano no espera a nadie.", 
+                reference: "Sabiduría Veraniega" 
+            },
+            { 
+                text: "La vida es como una ola: hay que surfearla con estilo y buenos accesorios.", 
+                reference: "Filosofía Playera" 
+            },
+            { 
+                text: "Con sazón, batería y reggaeton, todo look es mejor bajo el sol.", 
+                reference: "Latino Vibes" 
+            },
+            { 
+                text: "El mar está lleno de sal, pero tu estilo está lleno de brillo.", 
+                reference: "Reflexión Playera" 
+            },
+            { 
+                text: "No dejes para mañana el accesorio que puedes lucir hoy.", 
+                reference: "Máxima Veraniega" 
+            },
+            { 
+                text: "El calor no es excusa, la actitud es todo.", 
+                reference: "Código KLOHE" 
+            },
+            { 
+                text: "Bajo el sol de El Salvador, todos brillamos más con el accesorio perfecto.", 
+                reference: "Orgullo Cuzcatleco" 
+            },
+            { 
+                text: "La playa cura todo, pero un buen accesorio acelera el proceso.", 
+                reference: "Medicina Alternativa" 
+            },
+            { 
+                text: "Verano es un estado de mente, no solo una estación.", 
+                reference: "Filosofía KLOHE" 
+            },
+            { 
+                text: "Si la vida te da limones, hazte una limonada y lúcela con estilo.", 
+                reference: "Optimismo Tropical" 
+            },
+            { 
+                text: "El mejor bronceado es el que viene con buenos recuerdos y mejores accesorios.", 
+                reference: "Verano Eterno" 
+            },
+            { 
+                text: "Brilla tanto que necesites gafas de sol propias.", 
+                reference: "Moda Veraniega" 
+            },
+            { 
+                text: "El verano es corto, pero el estilo es eterno.", 
+                reference: "KLOHE Philosophy" 
+            },
+            { 
+                text: "Que tu brillo no dependa del sol, sino de tu actitud.", 
+                reference: "Inspiración Latina" 
+            },
+            { 
+                text: "Accesorios buenos, vibes mejores.", 
+                reference: "Mantra Diario" 
+            },
+            { 
+                text: "Hoy es un buen día para lucir espectacular.", 
+                reference: "KLOHE Daily" 
+            },
+            { 
+                text: "El estilo no tiene temporada, pero el verano lo potencia.", 
+                reference: "Fashion Forward" 
+            },
+            { 
+                text: "Sé el sol en el día nublado de alguien.", 
+                reference: "Bondad Tropical" 
+            },
+            { 
+                text: "La vida es demasiado corta para accesorios aburridos.", 
+                reference: "Sabiduría KLOHE" 
+            },
+            { 
+                text: "Brilla como si nadie estuviera mirando, pero todos lo harán.", 
+                reference: "Confianza Veraniega" 
+            },
+            { 
+                text: "Tu única competencia es quién fuiste ayer.", 
+                reference: "Crecimiento Personal" 
+            },
+            { 
+                text: "El mejor outfit es la confianza, los accesorios son el bonus.", 
+                reference: "Estilo Real" 
+            },
+            { 
+                text: "Que cada día sea tan brillante como tus accesorios.", 
+                reference: "Deseo Diario" 
+            },
+            { 
+                text: "El mar llama y yo tengo que ir con estilo.", 
+                reference: "Llamada del Océano" 
+            },
+            { 
+                text: "No esperes a que pase la tormenta, aprende a bailar bajo la lluvia.", 
+                reference: "Resiliencia" 
+            },
+            { 
+                text: "La felicidad es un estado de ánimo, el estilo es una elección.", 
+                reference: "Elección Consciente" 
+            },
+            { 
+                text: "Hoy decide ser la mejor versión de ti misma.", 
+                reference: "Autoamor" 
+            },
+            { 
+                text: "Los mejores momentos no necesitan filtro, solo buena compañía y mejor estilo.", 
+                reference: "Autenticidad" 
+            },
+            { 
+                text: "Que tu luz interior sea tan brillante como tu accesorio exterior.", 
+                reference: "Equilibrio" 
+            },
+            { 
+                text: "El verano es una invitación a ser más audaz.", 
+                reference: "Audacia" 
+            }
+        ];
+
+        // Mostrar lista para referencia (opcional)
+        document.addEventListener('DOMContentLoaded', function() {
+            const list = document.getElementById('verseList');
+            window.dailyVersesData.forEach((verse, index) => {
+                const div = document.createElement('div');
+                div.className = 'verse-item';
+                div.innerHTML = `
+                    <strong>Día ${index + 1}:</strong> "${verse.text}"<br>
+                    <em>— ${verse.reference}</em>
+                `;
+                list.appendChild(div);
+            });
+        });
+    </script>
+</body>
+</html>

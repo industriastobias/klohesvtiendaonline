@@ -453,6 +453,7 @@
             margin-bottom: 2rem;
         }
 
+        /* ESTILOS PARA EL MENSAJE ROTATIVO */
         .message-container {
             min-height: 120px;
             margin-bottom: 3rem;
@@ -1007,6 +1008,7 @@
             box-shadow: var(--sombra-bordo);
         }
 
+        /* MODAL VISTA PREVIA */
         .preview-modal {
             display: none;
             position: fixed;
@@ -1227,6 +1229,7 @@
             box-shadow: none;
         }
 
+        /* TEMPLATE STORY */
         #storyCaptureContainer {
             position: fixed;
             top: -9999px;
@@ -1372,6 +1375,7 @@
             border-radius: 30px;
         }
 
+        /* MODAL STORY */
         .story-modal {
             display: none;
             position: fixed;
@@ -1864,21 +1868,11 @@
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
-            /* Asegurar que sea visible al inicio */
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            pointer-events: auto;
         }
 
         .whatsapp-float:hover {
             transform: scale(1.1) rotate(10deg);
             box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
-        }
-
-        .whatsapp-float.hidden-cyclic {
-            opacity: 0;
-            transform: scale(0.8) translateY(20px);
-            pointer-events: none;
         }
 
         .whatsapp-tooltip {
@@ -2484,11 +2478,14 @@
                 <h1>Colección Verano</h1>
                 <p>BRILLA A TU MANERA</p>
                 
+                <!-- CONTENEDOR DE MENSAJES ROTATIVOS -->
                 <div class="message-container" id="messageContainer">
+                    <!-- Mensaje inicial (5 segundos) -->
                     <div class="summer-message" id="initialMessage">
                         Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
                     </div>
                     
+                    <!-- Versículo diario (aparece después) -->
                     <div class="daily-verse-container" id="dailyVerseContainer">
                         <div class="verse-date" id="verseDate"></div>
                         <div class="verse-divider"></div>
@@ -2569,6 +2566,7 @@
         </div>
     </section>
 
+    <!-- Modal de Vista Previa -->
     <div class="preview-modal" id="previewModal" onclick="closePreview(event)" role="dialog" aria-modal="true" aria-labelledby="previewName">
         <div class="preview-content" onclick="event.stopPropagation()">
             <button class="close-preview-btn" onclick="closePreview()" aria-label="Cerrar vista previa">
@@ -2598,6 +2596,7 @@
         </div>
     </div>
 
+    <!-- Template Story -->
     <div id="storyCaptureContainer">
         <div class="story-template" id="storyTemplate">
             <div class="story-frame"></div>
@@ -2748,19 +2747,28 @@
     <script src="products.js"></script>
     
     <script>
-        // Configuración - MODIFICADO: WhatsApp visible por 20 segundos
+        // ==========================================
+        // CONFIGURACIÓN
+        // ==========================================
         const CONFIG = {
             productsPerPage: 12,
             preloadOffset: '200px',
-            whatsappVisibleDuration: 20000,  // CAMBIADO: 20 segundos visibles
-            whatsappHiddenDuration: 180000,  // 3 minutos oculto
+            whatsappVisibleDuration: 10000,
+            whatsappHiddenDuration: 180000,
             mobileTextHideDelay: 25000,
-            initialMessageDuration: 5000
+            initialMessageDuration: 5000,
+            verseLoadTimeout: 3000
         };
 
+        // ==========================================
+        // VARIABLES GLOBALES PARA VERSÍCULOS
+        // ==========================================
         let dailyVerses = [];
         let versesLoaded = false;
 
+        // ==========================================
+        // ESTADO DE LA APLICACIÓN
+        // ==========================================
         const AppState = {
             currentFilter: 'todos',
             cart: JSON.parse(localStorage.getItem('klohe_cart')) || [],
@@ -2775,6 +2783,182 @@
             isMobile: false
         };
 
+        // ==========================================
+        // FUNCIONES DE VERSÍCULOS (CORREGIDAS)
+        // ==========================================
+        
+        // Función para cargar versículos desde diario.html
+        async function loadDailyVerses() {
+            console.log('📖 Intentando cargar versículos desde diario.html...');
+            
+            try {
+                // Agregar timestamp para evitar caché
+                const timestamp = new Date().getTime();
+                const response = await fetch(`diario.html?t=${timestamp}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'text/html',
+                        'Cache-Control': 'no-cache'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const html = await response.text();
+                console.log('✅ diario.html descargado correctamente');
+                
+                // Extraer el contenido del script
+                const scriptMatch = html.match(/window\.dailyVersesData\s*=\s*(\[[\s\S]*?\]);/);
+                
+                if (!scriptMatch) {
+                    throw new Error('No se encontró window.dailyVersesData en el HTML');
+                }
+                
+                let jsonStr = scriptMatch[1].trim();
+                
+                // Limpiar posibles problemas de formato
+                jsonStr = jsonStr.replace(/,\s*]$/, ']'); // Quitar coma final
+                
+                // Parsear el JSON
+                const versesData = JSON.parse(jsonStr);
+                
+                if (!Array.isArray(versesData) || versesData.length === 0) {
+                    throw new Error('Los datos no son un array válido o está vacío');
+                }
+                
+                // Validar estructura
+                const validVerses = versesData.filter((v, i) => {
+                    const isValid = v && typeof v === 'object' && 
+                                   typeof v.text === 'string' && 
+                                   typeof v.reference === 'string';
+                    if (!isValid) {
+                        console.warn(`⚠️ Versículo ${i + 1} inválido:`, v);
+                    }
+                    return isValid;
+                });
+                
+                if (validVerses.length === 0) {
+                    throw new Error('No hay versículos válidos');
+                }
+                
+                dailyVerses = validVerses;
+                versesLoaded = true;
+                
+                console.log(`✅ ${dailyVerses.length} versículos bíblicos cargados correctamente`);
+                return true;
+                
+            } catch (error) {
+                console.error('❌ Error cargando diario.html:', error.message);
+                console.log('🔄 Usando versículos de respaldo...');
+                useFallbackVerses();
+                return false;
+            }
+        }
+
+        // Versículos de respaldo (bíblicos)
+        function useFallbackVerses() {
+            dailyVerses = [
+                { text: "Todo lo puedo en Cristo que me fortalece.", reference: "Filipenses 4:13" },
+                { text: "El Señor es mi luz y mi salvación; ¿de quién temeré?", reference: "Salmos 27:1" },
+                { text: "Encomienda al Señor tu camino, y confía en él; y él hará.", reference: "Salmos 37:5" },
+                { text: "El Señor peleará por vosotros, y vosotros estaréis tranquilos.", reference: "Éxodo 14:14" },
+                { text: "Esforzaos y cobrad ánimo; no temáis, ni tengáis miedo.", reference: "Deuteronomio 31:6" },
+                { text: "El Señor es mi pastor; nada me faltará.", reference: "Salmos 23:1" },
+                { text: "Confía en el Señor de todo tu corazón.", reference: "Proverbios 3:5" },
+                { text: "Todo lo que hagáis, hacedlo de corazón, como para el Señor.", reference: "Colosenses 3:23" },
+                { text: "El Señor te bendiga, y te guarde.", reference: "Números 6:24" },
+                { text: "Venid a mí todos los que estáis trabajados y cargados.", reference: "Mateo 11:28" },
+                { text: "Mas buscad primero el reino de Dios y su justicia.", reference: "Mateo 6:33" },
+                { text: "El amor es paciente, es bondadoso.", reference: "1 Corintios 13:4" }
+            ];
+            versesLoaded = true;
+            console.log(`✅ ${dailyVerses.length} versículos de respaldo activados`);
+        }
+
+        // Obtener versículo del día
+        function getDailyVerse() {
+            if (!versesLoaded || dailyVerses.length === 0) {
+                console.warn('Versículos no disponibles');
+                return null;
+            }
+            
+            const today = new Date();
+            const dayOfMonth = today.getDate();
+            const month = today.toLocaleString('es-ES', { month: 'long' });
+            const year = today.getFullYear();
+            
+            const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
+            const verse = dailyVerses[verseIndex];
+            
+            return {
+                text: verse.text,
+                reference: verse.reference,
+                date: `${dayOfMonth} de ${month} de ${year}`,
+                dayNumber: dayOfMonth
+            };
+        }
+
+        // Mostrar versículo en la página
+        function showDailyVerse() {
+            console.log('🎯 Mostrando versículo del día...');
+            
+            const verse = getDailyVerse();
+            const container = document.getElementById('dailyVerseContainer');
+            
+            if (!verse) {
+                console.error('No se pudo obtener el versículo');
+                return;
+            }
+            
+            const dateEl = document.getElementById('verseDate');
+            const textEl = document.getElementById('verseText');
+            const refEl = document.getElementById('verseReference');
+            
+            if (dateEl) dateEl.textContent = verse.date;
+            if (textEl) textEl.textContent = `"${verse.text}"`;
+            if (refEl) refEl.textContent = `— ${verse.reference}`;
+            
+            if (container) {
+                container.style.display = 'block';
+                void container.offsetHeight; // Forzar reflow
+                container.classList.add('show');
+                console.log(`✅ Versículo mostrado: ${verse.reference}`);
+            }
+        }
+
+        // Iniciar rotación de mensajes
+        function initMessageRotation() {
+            const initialMessage = document.getElementById('initialMessage');
+            const verseContainer = document.getElementById('dailyVerseContainer');
+            
+            if (!initialMessage || !verseContainer) {
+                console.error('Elementos no encontrados');
+                return;
+            }
+            
+            console.log('⏱️ Iniciando rotación de mensajes...');
+            
+            verseContainer.style.display = 'none';
+            verseContainer.classList.remove('show');
+            
+            setTimeout(() => {
+                console.log('🔄 Transicionando a versículo...');
+                initialMessage.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    initialMessage.style.display = 'none';
+                    showDailyVerse();
+                }, 500);
+                
+            }, CONFIG.initialMessageDuration);
+        }
+
+        // ==========================================
+        // RESTO DEL CÓDIGO (PRODUCTOS, CARRITO, ETC.)
+        // ==========================================
+        
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2828,191 +3012,28 @@
             };
         }
 
-        async function loadDailyVerses() {
-            try {
-                const response = await fetch('diario.html');
-                if (!response.ok) throw new Error('No se pudo cargar diario.html');
-                
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                
-                const scripts = doc.querySelectorAll('script');
-                let versesData = null;
-                
-                scripts.forEach(script => {
-                    if (script.textContent.includes('window.dailyVersesData')) {
-                        const match = script.textContent.match(/window\.dailyVersesData\s*=\s*(\[.*?\]);/s);
-                        if (match) {
-                            versesData = JSON.parse(match[1]);
-                        }
-                    }
-                });
-                
-                if (versesData && versesData.length > 0) {
-                    dailyVerses = versesData;
-                    versesLoaded = true;
-                    return true;
-                } else {
-                    useFallbackVerses();
-                    return false;
-                }
-            } catch (error) {
-                useFallbackVerses();
-                return false;
-            }
-        }
-
-        function useFallbackVerses() {
-            dailyVerses = [
-                { text: "El sol se levanta para todos, pero el brillo único lo pones tú con tus accesorios.", reference: "KLOHE Verano 2026" },
-                { text: "Como dice el dicho: 'Ponte las pilas' porque el verano no espera a nadie.", reference: "Sabiduría Veraniega" },
-                { text: "La vida es como una ola: hay que surfearla con estilo y buenos accesorios.", reference: "Filosofía Playera" },
-                { text: "Con sazón, batería y reggaeton, todo look es mejor bajo el sol.", reference: "Latino Vibes" },
-                { text: "El mar está lleno de sal, pero tu estilo está lleno de brillo.", reference: "Reflexión Playera" },
-                { text: "No dejes para mañana el accesorio que puedes lucir hoy.", reference: "Máxima Veraniega" },
-                { text: "El calor no es excusa, la actitud es todo.", reference: "Código KLOHE" },
-                { text: "Bajo el sol de El Salvador, todos brillamos más con el accesorio perfecto.", reference: "Orgullo Cuzcatleco" },
-                { text: "La playa cura todo, pero un buen accesorio acelera el proceso.", reference: "Medicina Alternativa" },
-                { text: "Verano es un estado de mente, no solo una estación.", reference: "Filosofía KLOHE" },
-                { text: "Si la vida te da limones, hazte una limonada y lúcela con estilo.", reference: "Optimismo Tropical" },
-                { text: "El mejor bronceado es el que viene con buenos recuerdos y mejores accesorios.", reference: "Verano Eterno" }
-            ];
-            versesLoaded = true;
-        }
-
-        function getDailyVerse() {
-            const today = new Date();
-            const dayOfMonth = today.getDate();
-            const month = today.toLocaleString('es-ES', { month: 'long' });
-            const year = today.getFullYear();
-            
-            const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
-            const verse = dailyVerses[verseIndex];
-            
-            const formattedDate = `${dayOfMonth} de ${month} de ${year}`;
-            
-            return {
-                text: verse.text,
-                reference: verse.reference,
-                date: formattedDate,
-                dayNumber: dayOfMonth
-            };
-        }
-
-        function showDailyVerse() {
-            if (!versesLoaded) return;
-            
-            const verse = getDailyVerse();
-            const container = document.getElementById('dailyVerseContainer');
-            
-            document.getElementById('verseDate').textContent = verse.date;
-            document.getElementById('verseText').textContent = `"${verse.text}"`;
-            document.getElementById('verseReference').textContent = `— ${verse.reference}`;
-            
-            container.classList.add('show');
-        }
-
-        function initMessageRotation() {
-            const initialMessage = document.getElementById('initialMessage');
-            
-            setTimeout(() => {
-                initialMessage.classList.add('fade-out');
-                
-                setTimeout(() => {
-                    initialMessage.style.display = 'none';
-                    showDailyVerse();
-                }, 500);
-                
-            }, CONFIG.initialMessageDuration);
-        }
-
-        const categoryMap = {
-            'todos': null,
-            'accesorios-cabello': 'Accesorios para el cabello',
-            'anillo': 'Anillos',
-            'aritos': 'Aritos',
-            'cartera': 'Carteras',
-            'collar': 'Collares',
-            'lentes-sol': 'Lentes de sol',
-            'otros': 'Otros',
-            'pulsera': 'Pulseras',
-            'reloj': 'Relojes'
-        };
-
-        const testimonials = [
-            { 
-                name: "María Fernanda L.", 
-                text: "Los accesorios son perfectos para el calor salvadoreño. ¡Me encantan!", 
-                date: "Feb 10, 2026", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Carlos Mendoza", 
-                text: "Excelente calidad y el estilo es único. Ideal para la temporada de verano.", 
-                date: "Feb 8, 2026", 
-                stars: "★★★★★" 
-            },
-            { 
-                name: "Ana Lucía R.", 
-                text: "Me siento en la playa aunque esté en la ciudad. ¡Pura vibe!", 
-                date: "Feb 5, 2026", 
-                stars: "★★★★★" 
-            }
-        ];
-
-        function renderSkeletons(count = 8) {
-            const container = document.getElementById('productsContainer');
-            container.innerHTML = '';
-            
-            for (let i = 0; i < count; i++) {
-                const skeletonCard = document.createElement('div');
-                skeletonCard.className = 'product-card loading';
-                skeletonCard.innerHTML = `
-                    <div class="product-image-container">
-                        <div class="skeleton skeleton-image"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name skeleton-text"></div>
-                        <div class="product-barcode skeleton-text"></div>
-                        <div class="product-description skeleton-text" style="height: 3em;"></div>
-                        <div class="product-row">
-                            <div class="product-price skeleton-text"></div>
-                        </div>
-                        <div class="skeleton" style="height: 48px; width: 100%;"></div>
-                    </div>
-                `;
-                container.appendChild(skeletonCard);
-            }
-        }
-
-        // FUNCIÓN CORREGIDA: Ciclo de WhatsApp con 20 segundos visibles
         function initWhatsAppCyclicAnimation() {
             const float = document.getElementById('whatsappFloat');
             let isVisible = true;
             
-            // Asegurar que comience visible
-            float.classList.remove('hidden-cyclic');
-            
             function cycle() {
                 if (isVisible) {
-                    // Después de 20 segundos, ocultar
                     setTimeout(() => {
-                        float.classList.add('hidden-cyclic');
+                        float.style.opacity = '0';
+                        float.style.pointerEvents = 'none';
                         isVisible = false;
-                        cycle(); // Llamar recursivamente para el siguiente ciclo
+                        cycle();
                     }, CONFIG.whatsappVisibleDuration);
                 } else {
-                    // Después de 3 minutos oculto, mostrar nuevamente
                     setTimeout(() => {
-                        float.classList.remove('hidden-cyclic');
+                        float.style.opacity = '1';
+                        float.style.pointerEvents = 'all';
                         isVisible = true;
-                        cycle(); // Llamar recursivamente para el siguiente ciclo
+                        cycle();
                     }, CONFIG.whatsappHiddenDuration);
                 }
             }
             
-            // Iniciar el ciclo
             cycle();
         }
 
@@ -3027,7 +3048,7 @@
                 setTimeout(() => {
                     const verseContainer = document.getElementById('dailyVerseContainer');
                     if (verseContainer && verseContainer.classList.contains('show')) {
-                        verseContainer.classList.add('hidden-mobile');
+                        verseContainer.style.opacity = '0';
                     }
                 }, CONFIG.mobileTextHideDelay);
             } else {
@@ -3036,40 +3057,47 @@
             }
         }
 
+        // ==========================================
+        // INICIALIZACIÓN PRINCIPAL
+        // ==========================================
         document.addEventListener('DOMContentLoaded', async function() {
-            // Iniciar animación de WhatsApp inmediatamente
+            console.log('🌟 KLOHE Verano 2026 - Iniciando aplicación...');
+            
+            // 1. Iniciar utilidades
             initWhatsAppCyclicAnimation();
             initMobileTextHide();
             
-            await loadDailyVerses();
+            // 2. Cargar versículos (con timeout de seguridad)
+            const versesPromise = loadDailyVerses();
+            
+            // Timeout de seguridad para versículos
+            setTimeout(() => {
+                if (!versesLoaded) {
+                    console.warn('⏰ Timeout de versículos, usando respaldo');
+                    useFallbackVerses();
+                }
+            }, CONFIG.verseLoadTimeout);
+            
+            // 3. Iniciar rotación de mensajes
             initMessageRotation();
+            
+            // 4. Inicializar testimonios
             initTestimonials();
+            
+            // 5. Cargar productos
             renderSkeletons(8);
             
-            if (typeof products !== 'undefined') {
+            if (typeof products !== 'undefined' && Array.isArray(products)) {
                 AppState.filteredProducts = [...products];
                 
+                // Validar carrito
                 const validBarcodes = new Set(products.map(p => p.barcode));
                 const originalCartLength = AppState.cart.length;
                 
                 AppState.cart = AppState.cart.filter(item => validBarcodes.has(item.barcode));
                 
-                AppState.cart = AppState.cart.map(cartItem => {
-                    const freshProduct = products.find(p => p.barcode === cartItem.barcode);
-                    if (freshProduct) {
-                        const newQuantity = Math.min(cartItem.quantity, freshProduct.stock);
-                        return { ...freshProduct, quantity: newQuantity };
-                    }
-                    return cartItem;
-                });
-                
                 if (AppState.cart.length !== originalCartLength) {
                     localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
-                    if (AppState.cart.length === 0) {
-                        showNotification('El carrito se vació porque los productos ya no están disponibles');
-                    } else {
-                        showNotification('Algunos productos ya no están disponibles y fueron removidos');
-                    }
                 }
                 
                 setTimeout(() => {
@@ -3080,28 +3108,36 @@
                     updateCart();
                 }, 600);
             } else {
-                AppState.cart = [];
-                localStorage.removeItem('klohe_cart');
-                updateCart();
-                
+                console.error('Error: No se encontró el array de productos');
                 document.getElementById('productsContainer').innerHTML = 
                     '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gris-texto);">Error cargando productos</div>';
             }
             
+            // Esperar versículos para logging
+            await versesPromise;
+            console.log('📖 Estado de versículos:', versesLoaded ? 'OK' : 'Falló');
+            
+            // Event listeners
             const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', debounce((e) => {
-                searchProducts(e.target.value);
-            }, 300));
+            if (searchInput) {
+                searchInput.addEventListener('input', debounce((e) => {
+                    searchProducts(e.target.value);
+                }, 300));
+            }
 
             const menuBtn = document.getElementById('menuBtn');
             const menuOverlay = document.getElementById('menuOverlay');
             
-            menuBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                toggleMenu();
-            });
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+            }
             
-            menuOverlay.addEventListener('click', toggleMenu);
+            if (menuOverlay) {
+                menuOverlay.addEventListener('click', toggleMenu);
+            }
 
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
@@ -3133,11 +3169,13 @@
             const preview = document.getElementById('previewModal');
             const story = document.getElementById('storyModal');
             
-            if (menu.classList.contains('active')) toggleMenu();
-            if (cart.classList.contains('active')) toggleCart();
-            if (preview.classList.contains('active')) closePreview();
-            if (story.classList.contains('active')) closeStoryModal();
-            if (document.getElementById('newsletterPopup').classList.contains('active')) closeNewsletter();
+            if (menu && menu.classList.contains('active')) toggleMenu();
+            if (cart && cart.classList.contains('active')) toggleCart();
+            if (preview && preview.classList.contains('active')) closePreview();
+            if (story && story.classList.contains('active')) closeStoryModal();
+            
+            const newsletter = document.getElementById('newsletterPopup');
+            if (newsletter && newsletter.classList.contains('active')) closeNewsletter();
         }
 
         function searchProducts(term) {
@@ -3183,6 +3221,8 @@
             const track = document.getElementById('testimonialTrack');
             const dotsContainer = document.getElementById('carouselDots');
             
+            if (!track || !dotsContainer) return;
+            
             track.innerHTML = testimonials.map(t => `
                 <div class="testimonial-slide">
                     <div class="testimonial-card">
@@ -3203,6 +3243,8 @@
 
         function updateCarousel() {
             const track = document.getElementById('testimonialTrack');
+            if (!track) return;
+            
             track.style.transform = `translateX(-${AppState.currentTestimonial * 100}%)`;
             
             document.querySelectorAll('.dot').forEach((dot, i) => {
@@ -3238,6 +3280,8 @@
             const overlay = document.getElementById('menuOverlay');
             const btn = document.getElementById('menuBtn');
             
+            if (!menu || !overlay || !btn) return;
+            
             const isActive = menu.classList.contains('active');
             
             if (isActive) {
@@ -3255,12 +3299,48 @@
             }
         }
 
+        const categoryMap = {
+            'todos': null,
+            'accesorios-cabello': 'Accesorios para el cabello',
+            'anillo': 'Anillos',
+            'aritos': 'Aritos',
+            'cartera': 'Carteras',
+            'collar': 'Collares',
+            'lentes-sol': 'Lentes de sol',
+            'otros': 'Otros',
+            'pulsera': 'Pulseras',
+            'reloj': 'Relojes'
+        };
+
+        const testimonials = [
+            { 
+                name: "María Fernanda L.", 
+                text: "Los accesorios son perfectos para el calor salvadoreño. ¡Me encantan!", 
+                date: "Feb 10, 2026", 
+                stars: "★★★★★" 
+            },
+            { 
+                name: "Carlos Mendoza", 
+                text: "Excelente calidad y el estilo es único. Ideal para la temporada de verano.", 
+                date: "Feb 8, 2026", 
+                stars: "★★★★★" 
+            },
+            { 
+                name: "Ana Lucía R.", 
+                text: "Me siento en la playa aunque esté en la ciudad. ¡Pura vibe!", 
+                date: "Feb 5, 2026", 
+                stars: "★★★★★" 
+            }
+        ];
+
         function filterProducts(category, btnElement) {
             AppState.currentFilter = category;
             AppState.currentPage = 0;
             AppState.searchTerm = '';
             AppState.hasMoreProducts = true;
-            document.getElementById('searchInput').value = '';
+            
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
             
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -3306,8 +3386,37 @@
             }, 300);
         }
 
+        function renderSkeletons(count = 8) {
+            const container = document.getElementById('productsContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            for (let i = 0; i < count; i++) {
+                const skeletonCard = document.createElement('div');
+                skeletonCard.className = 'product-card loading';
+                skeletonCard.innerHTML = `
+                    <div class="product-image-container">
+                        <div class="skeleton skeleton-image"></div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name skeleton-text"></div>
+                        <div class="product-barcode skeleton-text"></div>
+                        <div class="product-description skeleton-text" style="height: 3em;"></div>
+                        <div class="product-row">
+                            <div class="product-price skeleton-text"></div>
+                        </div>
+                        <div class="skeleton" style="height: 48px; width: 100%;"></div>
+                    </div>
+                `;
+                container.appendChild(skeletonCard);
+            }
+        }
+
         function renderProducts() {
             const container = document.getElementById('productsContainer');
+            if (!container) return;
+            
             const start = AppState.currentPage * CONFIG.productsPerPage;
             const end = start + CONFIG.productsPerPage;
             const productsToShow = AppState.filteredProducts.slice(start, end);
@@ -3327,7 +3436,8 @@
             updateProductsCount();
             
             if (!AppState.hasMoreProducts) {
-                document.getElementById('loadingSpinner').style.display = 'none';
+                const spinner = document.getElementById('loadingSpinner');
+                if (spinner) spinner.style.display = 'none';
             }
         }
 
@@ -3380,15 +3490,16 @@
             if (AppState.isLoading || !AppState.hasMoreProducts) return;
             
             AppState.isLoading = true;
-            document.getElementById('loadingSpinner').style.display = 'flex';
+            const spinner = document.getElementById('loadingSpinner');
+            if (spinner) spinner.style.display = 'flex';
             
             setTimeout(() => {
                 AppState.currentPage++;
                 renderProducts();
                 AppState.isLoading = false;
                 
-                if (!AppState.hasMoreProducts) {
-                    document.getElementById('loadingSpinner').style.display = 'none';
+                if (!AppState.hasMoreProducts && spinner) {
+                    spinner.style.display = 'none';
                 }
             }, 400);
         }
@@ -3396,58 +3507,80 @@
         function updateProductsCount() {
             const shown = Math.min((AppState.currentPage + 1) * CONFIG.productsPerPage, AppState.filteredProducts.length);
             const total = AppState.filteredProducts.length;
-            document.getElementById('productsCount').textContent = `Mostrando ${shown} de ${total} productos`;
+            const countEl = document.getElementById('productsCount');
+            if (countEl) {
+                countEl.textContent = `Mostrando ${shown} de ${total} productos`;
+            }
         }
 
         let currentPreviewIndex = null;
 
         function openPreview(index) {
             const product = products[index];
+            if (!product) return;
+            
             currentPreviewIndex = index;
             
             const img = document.getElementById('previewImage');
-            img.src = `${product.barcode}.jpg`;
-            img.classList.remove('loaded');
-            img.onload = () => img.classList.add('loaded');
-            
-            document.getElementById('previewImage').alt = product.name;
-            document.getElementById('previewName').textContent = product.name;
-            document.getElementById('previewBarcode').textContent = `COD: ${product.barcode}`;
-            
-            const descElement = document.getElementById('previewDescription');
-            if (product.description && product.description.trim() !== '') {
-                descElement.textContent = product.description;
-                descElement.style.display = 'block';
-            } else {
-                descElement.textContent = 'No hay descripción disponible.';
-                descElement.style.display = 'block';
+            if (img) {
+                img.src = `${product.barcode}.jpg`;
+                img.classList.remove('loaded');
+                img.onload = () => img.classList.add('loaded');
+                img.alt = product.name;
             }
             
-            document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
-            document.getElementById('previewStock').textContent = `${product.stock} unidades disponibles`;
-            
+            const nameEl = document.getElementById('previewName');
+            const barcodeEl = document.getElementById('previewBarcode');
+            const descEl = document.getElementById('previewDescription');
+            const priceEl = document.getElementById('previewPrice');
+            const stockEl = document.getElementById('previewStock');
             const addBtn = document.getElementById('previewAddBtn');
-            if (product.stock > 0) {
-                addBtn.disabled = false;
-                addBtn.textContent = 'Agregar al carrito';
-                addBtn.onclick = () => {
-                    addToCart(index);
-                    closePreview();
-                };
-            } else {
-                addBtn.disabled = true;
-                addBtn.textContent = 'Agotado';
+            
+            if (nameEl) nameEl.textContent = product.name;
+            if (barcodeEl) barcodeEl.textContent = `COD: ${product.barcode}`;
+            
+            if (descEl) {
+                if (product.description && product.description.trim() !== '') {
+                    descEl.textContent = product.description;
+                    descEl.style.display = 'block';
+                } else {
+                    descEl.textContent = 'No hay descripción disponible.';
+                    descEl.style.display = 'block';
+                }
             }
             
-            document.getElementById('previewModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            if (priceEl) priceEl.textContent = `$${product.price.toFixed(2)}`;
+            if (stockEl) stockEl.textContent = `${product.stock} unidades disponibles`;
+            
+            if (addBtn) {
+                if (product.stock > 0) {
+                    addBtn.disabled = false;
+                    addBtn.textContent = 'Agregar al carrito';
+                    addBtn.onclick = () => {
+                        addToCart(index);
+                        closePreview();
+                    };
+                } else {
+                    addBtn.disabled = true;
+                    addBtn.textContent = 'Agotado';
+                }
+            }
+            
+            const modal = document.getElementById('previewModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         function closePreview(e) {
             if (e && e.target !== e.currentTarget && !e.target.closest('.close-preview-btn')) return;
             
-            document.getElementById('previewModal').classList.remove('active');
-            document.body.style.overflow = '';
+            const modal = document.getElementById('previewModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
             currentPreviewIndex = null;
         }
 
@@ -3496,12 +3629,7 @@
                     backgroundColor: '#FDF8F6',
                     width: 1080,
                     height: 1920,
-                    logging: false,
-                    onclone: (clonedDoc) => {
-                        const clonedElement = clonedDoc.getElementById('storyTemplate');
-                        clonedElement.style.width = '1080px';
-                        clonedElement.style.height = '1920px';
-                    }
+                    logging: false
                 });
                 
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
@@ -3510,11 +3638,9 @@
                 const previewImg = document.getElementById('generatedStoryImage');
                 previewImg.src = dataUrl;
                 
-                previewImg.style.cursor = AppState.isMobile ? 'pointer' : 'default';
                 if (AppState.isMobile) {
-                    previewImg.onclick = () => {
-                        downloadStory();
-                    };
+                    previewImg.style.cursor = 'pointer';
+                    previewImg.onclick = () => downloadStory();
                 }
                 
                 document.getElementById('storyModal').classList.add('active');
@@ -3528,8 +3654,11 @@
 
         function closeStoryModal(e) {
             if (e && e.target !== e.currentTarget) return;
-            document.getElementById('storyModal').classList.remove('active');
-            document.body.style.overflow = '';
+            const modal = document.getElementById('storyModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
 
         function downloadStory() {
@@ -3613,16 +3742,19 @@
             const price = document.getElementById('shippingPrice');
             const row = document.getElementById('shippingRow');
             
-            toggle.classList.toggle('active', AppState.shippingEnabled);
-            toggle.setAttribute('aria-checked', AppState.shippingEnabled);
-            price.style.display = AppState.shippingEnabled ? 'block' : 'none';
-            row.style.display = AppState.shippingEnabled ? 'flex' : 'none';
+            if (toggle) {
+                toggle.classList.toggle('active', AppState.shippingEnabled);
+                toggle.setAttribute('aria-checked', AppState.shippingEnabled);
+            }
+            if (price) price.style.display = AppState.shippingEnabled ? 'block' : 'none';
+            if (row) row.style.display = AppState.shippingEnabled ? 'flex' : 'none';
             
             updateCart();
         }
 
         function addToCart(index) {
             const product = products[index];
+            if (!product) return;
             
             if (product.stock <= 0) {
                 showNotification('Sin stock disponible', 'error');
@@ -3672,65 +3804,77 @@
             localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
 
             const totalItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartBadge.textContent = totalItems;
-            cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+            
+            if (cartBadge) {
+                cartBadge.textContent = totalItems;
+                cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
 
-            clearBtn.style.display = AppState.cart.length > 0 ? 'block' : 'none';
+            if (clearBtn) {
+                clearBtn.style.display = AppState.cart.length > 0 ? 'block' : 'none';
+            }
 
             if (AppState.cart.length === 0) {
-                cartItems.innerHTML = `<div class="cart-empty">Tu carrito está vacío</div>`;
-                summary.style.display = 'none';
-                whatsappBtn.style.display = 'none';
-                document.getElementById('cartTotal').textContent = '$0.00';
+                if (cartItems) cartItems.innerHTML = `<div class="cart-empty">Tu carrito está vacío</div>`;
+                if (summary) summary.style.display = 'none';
+                if (whatsappBtn) whatsappBtn.style.display = 'none';
+                if (cartTotal) cartTotal.textContent = '$0.00';
                 return;
             }
 
-            cartItems.innerHTML = '';
-            let subtotal = 0;
+            if (cartItems) {
+                cartItems.innerHTML = '';
+                let subtotal = 0;
 
-            AppState.cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                subtotal += itemTotal;
+                AppState.cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
 
-                cartItems.innerHTML += `
-                    <div class="cart-item">
-                        <div class="cart-item-image">
-                            <img src="${item.barcode}.jpg" alt="${item.name}" 
-                                 loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                    cartItems.innerHTML += `
+                        <div class="cart-item">
+                            <div class="cart-item-image">
+                                <img src="${item.barcode}.jpg" alt="${item.name}" 
+                                     loading="lazy"
+                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                            </div>
+                            <div class="cart-item-details">
+                                <h4>${item.name}</h4>
+                                <p class="cart-item-code">COD: ${item.barcode}</p>
+                                <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
+                            </div>
+                            <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name}">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </div>
-                        <div class="cart-item-details">
-                            <h4>${item.name}</h4>
-                            <p class="cart-item-code">COD: ${item.barcode}</p>
-                            <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
-                        </div>
-                        <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-            });
+                    `;
+                });
 
-            const shippingCost = AppState.shippingEnabled ? 3.75 : 0;
-            const total = subtotal + shippingCost;
+                const shippingCost = AppState.shippingEnabled ? 3.75 : 0;
+                const total = subtotal + shippingCost;
 
-            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-            cartTotal.textContent = `$${total.toFixed(2)}`;
-            summary.style.display = 'block';
-            whatsappBtn.style.display = 'flex';
-            
-            const message = AppState.cart.map(item => 
-                `• ${item.name} (COD: ${item.barcode}) - Cant: ${item.quantity}`
-            ).join('%0A');
-            
-            const shippingText = AppState.shippingEnabled ? `%0A%0AEnvío: $3.75` : '';
-            
-            whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+                if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+                if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
+                if (summary) summary.style.display = 'block';
+                if (whatsappBtn) {
+                    whatsappBtn.style.display = 'flex';
+                    
+                    const message = AppState.cart.map(item => 
+                        `• ${item.name} (COD: ${item.barcode}) - Cant: ${item.quantity}`
+                    ).join('%0A');
+                    
+                    const shippingText = AppState.shippingEnabled ? `%0A%0AEnvío: $3.75` : '';
+                    
+                    whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+                }
+            }
         }
 
         function toggleCart() {
             const modal = document.getElementById('cartModal');
             const overlay = document.getElementById('overlay');
+            
+            if (!modal || !overlay) return;
+            
             const isActive = modal.classList.contains('active');
             
             if (isActive) {
@@ -3747,6 +3891,8 @@
 
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
+            if (!notification) return;
+            
             notification.textContent = message;
             notification.style.background = type === 'error' ? '#dc3545' : 'var(--bordo)';
             notification.classList.add('show');
@@ -3762,7 +3908,7 @@
                 const overlay = document.getElementById('menuOverlay');
                 const btn = document.getElementById('menuBtn');
                 
-                if (menu.classList.contains('active')) {
+                if (menu && menu.classList.contains('active')) {
                     menu.classList.remove('active');
                     overlay.classList.remove('active');
                     btn.classList.remove('active');

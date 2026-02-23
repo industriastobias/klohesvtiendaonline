@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>KLOHE - Colección Verano</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300 ;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- html2canvas -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         * {
@@ -278,6 +278,9 @@
             overflow-y: auto;
             border-right: 1px solid var(--rosa-suave);
             box-shadow: var(--sombra-fuerte);
+            /* CORRECCIÓN: Permitir scroll independiente */
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
         }
 
         .categories-menu.active {
@@ -1006,7 +1009,7 @@
             box-shadow: var(--sombra-bordo);
         }
 
-        /* MODAL VISTA PREVIA - IMAGEN MÁS PEQUEÑA */
+        /* MODAL VISTA PREVIA - CON BOTÓN X AGREGADO */
         .preview-modal {
             display: none;
             position: fixed;
@@ -1041,6 +1044,34 @@
             overflow: hidden;
             box-shadow: 0 25px 80px rgba(44, 36, 36, 0.3);
             cursor: default;
+        }
+
+        /* BOTÓN X PARA CERRAR VISTA PREVIA */
+        .close-preview-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--rosa-suave);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--bordo);
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .close-preview-btn:hover {
+            background: var(--bordo);
+            color: white;
+            border-color: var(--bordo);
+            transform: rotate(90deg);
         }
 
         .preview-image-container {
@@ -1846,12 +1877,6 @@
             box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
         }
 
-        .whatsapp-float.hidden-cyclic {
-            opacity: 0;
-            transform: scale(0.8) translateY(20px);
-            pointer-events: none;
-        }
-
         .whatsapp-tooltip {
             position: absolute;
             left: 80px;
@@ -2130,26 +2155,53 @@
                 padding: 3rem 0;
             }
 
+            /* TAMAÑOS REDUCIDOS PARA MÓVIL */
             .hero h1 {
-                font-size: 2.2rem;
-                letter-spacing: 4px;
+                font-size: 1.8rem;
+                letter-spacing: 3px;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero p {
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+                margin-bottom: 1.5rem;
             }
 
             .message-container {
-                min-height: 140px;
+                min-height: 100px;
+                margin-bottom: 2rem;
             }
 
             .summer-message {
-                font-size: 1.1rem;
-                padding: 1rem 1.5rem;
+                font-size: 0.95rem;
+                padding: 0.8rem 1.2rem;
+                letter-spacing: 0.5px;
             }
 
             .verse-text {
-                font-size: 1.2rem;
+                font-size: 1rem;
+                line-height: 1.5;
             }
 
             .verse-date {
-                font-size: 0.75rem;
+                font-size: 0.7rem;
+                letter-spacing: 2px;
+            }
+
+            .verse-reference {
+                font-size: 0.8rem;
+            }
+
+            .search-input {
+                padding: 1rem 1.2rem 1rem 3rem;
+                font-size: 0.9rem;
+                min-height: 48px;
+            }
+
+            .search-icon {
+                left: 1.2rem;
+                font-size: 1rem;
             }
 
             .products-grid {
@@ -2220,6 +2272,15 @@
                 font-size: 0.9rem;
                 max-height: 100px;
                 margin-bottom: 1rem;
+            }
+
+            /* Botón X más pequeño en móvil */
+            .close-preview-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+                top: 0.8rem;
+                right: 0.8rem;
             }
 
             .share-corner {
@@ -2306,7 +2367,12 @@
             }
 
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+
+            .hero p {
+                font-size: 0.75rem;
             }
 
             .preview-details {
@@ -2370,13 +2436,13 @@
                 <a href="#" class="logo">KLOHE <span class="logo-sun">☀️</span></a>
                 <div class="nav-right">
                     <div class="social-header">
-                        <a href="https://instagram.com/klohesv " target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv " target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv" target="_blank" class="social-btn" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry " target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry" target="_blank" class="social-btn" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -2416,7 +2482,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Colección Verano</h1>
-                <p>Brilla bajo el sol de El Salvador</p>
+                <p>BRILLA A TU MANERA</p>
                 
                 <!-- CONTENEDOR DE MENSAJES ROTATIVOS -->
                 <div class="message-container" id="messageContainer">
@@ -2506,9 +2572,14 @@
         </div>
     </section>
 
-    <!-- Modal de Vista Previa -->
+    <!-- Modal de Vista Previa - CON BOTÓN X AGREGADO -->
     <div class="preview-modal" id="previewModal" onclick="closePreview(event)" role="dialog" aria-modal="true" aria-labelledby="previewName">
         <div class="preview-content" onclick="event.stopPropagation()">
+            <!-- BOTÓN X PARA CERRAR -->
+            <button class="close-preview-btn" onclick="closePreview()" aria-label="Cerrar vista previa">
+                <i class="fas fa-times"></i>
+            </button>
+            
             <div class="preview-image-container">
                 <img src="" alt="" class="preview-image blur-up" id="previewImage" loading="lazy" crossorigin="anonymous">
             </div>
@@ -2593,13 +2664,13 @@
                     <h4>Redes Sociales</h4>
                     <p>Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
-                        <a href="https://instagram.com/klohesv " target="_blank" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv " target="_blank" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry " target="_blank" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -2614,14 +2685,14 @@
             <div class="copyright">
                 <p>© 2026 KLOHE A FAMILY COMPANY. Hecho en Corea del Sur y traído a El Salvador</p>
                 <p style="margin-top: 0.5rem; font-size: 0.85rem;">
-                    BY: <a href="https://www.instagram.com/ERNESTOTOBIASS " target="_blank">ERNESTO TOBIAS</a> & 
-                    <a href="https://www.instagram.com/tatianapalacios720 " target="_blank">PAOLA PALACIOS</a>
+                    BY: <a href="https://www.instagram.com/ERNESTOTOBIASS" target="_blank">ERNESTO TOBIAS</a> & 
+                    <a href="https://www.instagram.com/tatianapalacios720" target="_blank">PAOLA PALACIOS</a>
                 </p>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/50366711569 " target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
+    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
     </a>
@@ -3285,7 +3356,7 @@
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg ' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -3294,7 +3365,7 @@
                          class="product-image blur-up"
                          src="${placeholderSvg}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22  width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
                     <span class="stock-badge">${product.stock} disp.</span>
                 </div>
                 <div class="product-info">
@@ -3389,7 +3460,7 @@
         }
 
         function closePreview(e) {
-            if (e && e.target !== e.currentTarget) return;
+            if (e && e.target !== e.currentTarget && !e.target.closest('.close-preview-btn')) return;
             
             document.getElementById('previewModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -3657,7 +3728,7 @@
                         <div class="cart-item-image">
                             <img src="${item.barcode}.jpg" alt="${item.name}" 
                                  loading="lazy"
-                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22  width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                         </div>
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
@@ -3685,7 +3756,7 @@
             
             const shippingText = AppState.shippingEnabled ? `%0A%0AEnvío: $3.75` : '';
             
-            whatsappBtn.href = `https://wa.me/50366711569?text= ${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+            whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
         }
 
         function toggleCart() {

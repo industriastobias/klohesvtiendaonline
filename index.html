@@ -78,6 +78,16 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 124, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(201, 168, 124, 0.6); }
+        }
+
         .skeleton {
             background: linear-gradient(90deg, var(--rosa-nude) 25%, var(--rosa-suave) 50%, var(--rosa-nude) 75%);
             background-size: 1000px 100%;
@@ -485,6 +495,36 @@
         .daily-verse-container {
             display: none;
             animation: verseFadeIn 0.8s ease forwards;
+            cursor: pointer;
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .daily-verse-container:hover {
+            background: var(--rosa-nude);
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-media);
+        }
+
+        .daily-verse-container::before {
+            content: '✨ Toca para ver en grande';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--rosa-oscuro);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .daily-verse-container:hover::before {
+            opacity: 1;
         }
 
         .daily-verse-container.show {
@@ -525,6 +565,249 @@
             background: var(--dorado);
             margin: 1rem auto;
             border-radius: 2px;
+        }
+
+        /* MODAL DEL VERSÍCULO - DISEÑO PREMIUM */
+        .verse-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 36, 36, 0.9);
+            backdrop-filter: blur(15px);
+            z-index: 6000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .verse-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .verse-modal-content {
+            background: linear-gradient(135deg, var(--blanco) 0%, var(--rosa-nude) 100%);
+            max-width: 600px;
+            width: 100%;
+            padding: 0;
+            border-radius: 24px;
+            position: relative;
+            box-shadow: 0 25px 80px rgba(44, 36, 36, 0.4);
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid var(--rosa-suave);
+        }
+
+        .verse-modal.active .verse-modal-content {
+            transform: scale(1);
+        }
+
+        .verse-modal-header {
+            background: var(--bordo);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verse-modal-header::before {
+            content: 'KLOHE';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-15deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.08);
+            font-weight: 600;
+            letter-spacing: 8px;
+            pointer-events: none;
+        }
+
+        .verse-modal-title {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .verse-modal-title i {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .close-verse-modal {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-verse-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .verse-modal-body {
+            padding: 3rem 2.5rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .verse-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            color: var(--bordo);
+            opacity: 0.03;
+            font-weight: 600;
+            letter-spacing: 12px;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 0;
+        }
+
+        .verse-icon-large {
+            font-size: 3rem;
+            color: var(--dorado);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .verse-text-large {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--negro);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+            quotes: "❝" "❞";
+        }
+
+        .verse-text-large::before {
+            content: open-quote;
+            font-size: 4rem;
+            color: var(--dorado);
+            position: absolute;
+            top: -1.5rem;
+            left: -1rem;
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .verse-reference-large {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--bordo);
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .verse-date-large {
+            font-size: 0.9rem;
+            color: var(--gris-texto);
+            letter-spacing: 2px;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .verse-divider-large {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--dorado), var(--bordo));
+            margin: 0 auto 2.5rem;
+            border-radius: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .verse-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-copy-verse {
+            padding: 1rem 2rem;
+            background: var(--bordo);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--sombra-bordo);
+        }
+
+        .btn-copy-verse:hover {
+            background: var(--rosa-oscuro);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(109, 67, 90, 0.3);
+        }
+
+        .btn-copy-verse.copied {
+            background: #25D366;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-copy-verse i {
+            font-size: 1.1rem;
+        }
+
+        .verse-footer-brand {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            color: var(--rosa-oscuro);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.6;
         }
 
         .search-container {
@@ -2190,6 +2473,36 @@
                 font-size: 0.8rem;
             }
 
+            /* MODAL VERSÍCULO RESPONSIVE */
+            .verse-modal-content {
+                margin: 1rem;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .verse-modal-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .verse-text-large {
+                font-size: 1.4rem;
+            }
+
+            .verse-text-large::before {
+                font-size: 3rem;
+                top: -1rem;
+                left: -0.5rem;
+            }
+
+            .verse-watermark {
+                font-size: 5rem;
+            }
+
+            .verse-modal-header::before {
+                font-size: 2.5rem;
+                right: -10px;
+            }
+
             .search-input {
                 padding: 1rem 1.2rem 1rem 3rem;
                 font-size: 0.9rem;
@@ -2380,6 +2693,15 @@
             .preview-barcode {
                 font-size: 0.8rem;
             }
+
+            .verse-modal-title {
+                font-size: 1.1rem;
+                letter-spacing: 2px;
+            }
+
+            .verse-text-large {
+                font-size: 1.2rem;
+            }
         }
 
         @media (hover: none) and (pointer: coarse) {
@@ -2400,6 +2722,10 @@
             .whatsapp-tooltip {
                 display: none !important;
             }
+
+            .daily-verse-container::before {
+                display: none;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -2416,7 +2742,7 @@
         }
 
         @supports (-webkit-touch-callout: none) {
-            .cart-modal, .preview-modal, .categories-menu, .story-modal {
+            .cart-modal, .preview-modal, .categories-menu, .story-modal, .verse-modal {
                 padding-bottom: env(safe-area-inset-bottom);
             }
         }
@@ -2485,8 +2811,8 @@
                         Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
                     </div>
                     
-                    <!-- Versículo diario (aparece después) -->
-                    <div class="daily-verse-container" id="dailyVerseContainer">
+                    <!-- Versículo diario (aparece después) - AHORA CLICKEABLE -->
+                    <div class="daily-verse-container" id="dailyVerseContainer" onclick="openVerseModal()" role="button" tabindex="0" aria-label="Ver versículo del día en grande">
                         <div class="verse-date" id="verseDate"></div>
                         <div class="verse-divider"></div>
                         <div class="verse-text" id="verseText"></div>
@@ -2501,6 +2827,39 @@
             </div>
         </div>
     </section>
+
+    <!-- MODAL DEL VERSÍCULO - DISEÑO PREMIUM -->
+    <div class="verse-modal" id="verseModal" onclick="closeVerseModal(event)" role="dialog" aria-modal="true" aria-labelledby="verseModalTitle">
+        <div class="verse-modal-content" onclick="event.stopPropagation()">
+            <div class="verse-modal-header">
+                <div class="verse-modal-title" id="verseModalTitle">
+                    <i class="fas fa-sun"></i>
+                    <span>Versículo del Día</span>
+                </div>
+                <button class="close-verse-modal" onclick="closeVerseModal()" aria-label="Cerrar versículo">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="verse-modal-body">
+                <div class="verse-watermark">KLOHE</div>
+                <i class="fas fa-quote-left verse-icon-large"></i>
+                <div class="verse-text-large" id="verseTextLarge"></div>
+                <div class="verse-reference-large" id="verseReferenceLarge"></div>
+                <div class="verse-date-large" id="verseDateLarge"></div>
+                <div class="verse-divider-large"></div>
+                
+                <div class="verse-actions">
+                    <button class="btn-copy-verse" id="btnCopyVerse" onclick="copyVerseToClipboard()">
+                        <i class="fas fa-copy"></i>
+                        <span>Copiar versículo</span>
+                    </button>
+                </div>
+                
+                <div class="verse-footer-brand">KLOHE JEWELRY</div>
+            </div>
+        </div>
+    </div>
 
     <section class="products">
         <div class="container">
@@ -2765,6 +3124,7 @@
         // ==========================================
         let dailyVerses = [];
         let versesLoaded = false;
+        let currentVerse = null; // Almacena el versículo actual para el modal
 
         // ==========================================
         // ESTADO DE LA APLICACIÓN
@@ -2912,6 +3272,9 @@
                 return;
             }
             
+            // Guardar versículo actual para el modal
+            currentVerse = verse;
+            
             const dateEl = document.getElementById('verseDate');
             const textEl = document.getElementById('verseText');
             const refEl = document.getElementById('verseReference');
@@ -2928,32 +3291,77 @@
             }
         }
 
-        // Iniciar rotación de mensajes
-        function initMessageRotation() {
-            const initialMessage = document.getElementById('initialMessage');
-            const verseContainer = document.getElementById('dailyVerseContainer');
+        // ==========================================
+        // FUNCIONES DEL MODAL DEL VERSÍCULO (NUEVAS)
+        // ==========================================
+
+        function openVerseModal() {
+            if (!currentVerse) return;
             
-            if (!initialMessage || !verseContainer) {
-                console.error('Elementos no encontrados');
-                return;
-            }
+            const modal = document.getElementById('verseModal');
+            const textLarge = document.getElementById('verseTextLarge');
+            const refLarge = document.getElementById('verseReferenceLarge');
+            const dateLarge = document.getElementById('verseDateLarge');
             
-            console.log('⏱️ Iniciando rotación de mensajes...');
+            // Llenar el modal con el versículo actual
+            textLarge.textContent = currentVerse.text;
+            refLarge.textContent = `— ${currentVerse.reference}`;
+            dateLarge.textContent = currentVerse.date;
             
-            verseContainer.style.display = 'none';
-            verseContainer.classList.remove('show');
+            // Mostrar modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
             
-            setTimeout(() => {
-                console.log('🔄 Transicionando a versículo...');
-                initialMessage.classList.add('fade-out');
+            // Resetear botón de copiar
+            const btn = document.getElementById('btnCopyVerse');
+            btn.classList.remove('copied');
+            btn.innerHTML = '<i class="fas fa-copy"></i><span>Copiar versículo</span>';
+            
+            console.log('📖 Modal de versículo abierto');
+        }
+
+        function closeVerseModal(event) {
+            if (event && event.target !== event.currentTarget && !event.target.closest('.close-verse-modal')) return;
+            
+            const modal = document.getElementById('verseModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        async function copyVerseToClipboard() {
+            if (!currentVerse) return;
+            
+            const textToCopy = `"${currentVerse.text}" — ${currentVerse.reference}\n\n${currentVerse.date}\n\n✨ KLOHE JEWELRY`;
+            
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                
+                const btn = document.getElementById('btnCopyVerse');
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i><span>¡Copiado!</span>';
+                
+                showNotification('Versículo copiado al portapapeles');
                 
                 setTimeout(() => {
-                    initialMessage.style.display = 'none';
-                    showDailyVerse();
-                }, 500);
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<i class="fas fa-copy"></i><span>Copiar versículo</span>';
+                }, 3000);
                 
-            }, CONFIG.initialMessageDuration);
+            } catch (err) {
+                console.error('Error copiando:', err);
+                showNotification('Error al copiar. Intenta manualmente.', 'error');
+            }
         }
+
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const verseModal = document.getElementById('verseModal');
+                if (verseModal && verseModal.classList.contains('active')) {
+                    closeVerseModal();
+                }
+            }
+        });
 
         // ==========================================
         // RESTO DEL CÓDIGO (PRODUCTOS, CARRITO, ETC.)
@@ -3055,6 +3463,33 @@
                 document.getElementById('mobileTip').style.display = 'none';
                 document.getElementById('desktopTip').style.display = 'block';
             }
+        }
+
+        // Iniciar rotación de mensajes
+        function initMessageRotation() {
+            const initialMessage = document.getElementById('initialMessage');
+            const verseContainer = document.getElementById('dailyVerseContainer');
+            
+            if (!initialMessage || !verseContainer) {
+                console.error('Elementos no encontrados');
+                return;
+            }
+            
+            console.log('⏱️ Iniciando rotación de mensajes...');
+            
+            verseContainer.style.display = 'none';
+            verseContainer.classList.remove('show');
+            
+            setTimeout(() => {
+                console.log('🔄 Transicionando a versículo...');
+                initialMessage.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    initialMessage.style.display = 'none';
+                    showDailyVerse();
+                }, 500);
+                
+            }, CONFIG.initialMessageDuration);
         }
 
         // ==========================================
@@ -3168,11 +3603,13 @@
             const cart = document.getElementById('cartModal');
             const preview = document.getElementById('previewModal');
             const story = document.getElementById('storyModal');
+            const verse = document.getElementById('verseModal');
             
             if (menu && menu.classList.contains('active')) toggleMenu();
             if (cart && cart.classList.contains('active')) toggleCart();
             if (preview && preview.classList.contains('active')) closePreview();
             if (story && story.classList.contains('active')) closeStoryModal();
+            if (verse && verse.classList.contains('active')) closeVerseModal();
             
             const newsletter = document.getElementById('newsletterPopup');
             if (newsletter && newsletter.classList.contains('active')) closeNewsletter();

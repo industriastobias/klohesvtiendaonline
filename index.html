@@ -278,7 +278,6 @@
             overflow-y: auto;
             border-right: 1px solid var(--rosa-suave);
             box-shadow: var(--sombra-fuerte);
-            /* CORRECCIÓN: Permitir scroll independiente */
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
         }
@@ -454,7 +453,6 @@
             margin-bottom: 2rem;
         }
 
-        /* ESTILOS PARA EL MENSAJE ROTATIVO */
         .message-container {
             min-height: 120px;
             margin-bottom: 3rem;
@@ -1009,7 +1007,6 @@
             box-shadow: var(--sombra-bordo);
         }
 
-        /* MODAL VISTA PREVIA - CON BOTÓN X AGREGADO */
         .preview-modal {
             display: none;
             position: fixed;
@@ -1046,7 +1043,6 @@
             cursor: default;
         }
 
-        /* BOTÓN X PARA CERRAR VISTA PREVIA */
         .close-preview-btn {
             position: absolute;
             top: 1rem;
@@ -1231,7 +1227,6 @@
             box-shadow: none;
         }
 
-        /* TEMPLATE STORY - CORREGIDO PARA NO ESTAR PARTIDO */
         #storyCaptureContainer {
             position: fixed;
             top: -9999px;
@@ -1377,7 +1372,6 @@
             border-radius: 30px;
         }
 
-        /* MODAL STORY */
         .story-modal {
             display: none;
             position: fixed;
@@ -1870,11 +1864,21 @@
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
+            /* Asegurar que sea visible al inicio */
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
         }
 
         .whatsapp-float:hover {
             transform: scale(1.1) rotate(10deg);
             box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-float.hidden-cyclic {
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+            pointer-events: none;
         }
 
         .whatsapp-tooltip {
@@ -2155,7 +2159,6 @@
                 padding: 3rem 0;
             }
 
-            /* TAMAÑOS REDUCIDOS PARA MÓVIL */
             .hero h1 {
                 font-size: 1.8rem;
                 letter-spacing: 3px;
@@ -2218,7 +2221,6 @@
                 transform: scale(0.98) !important;
             }
 
-            /* Alineación del contador de productos a la izquierda en móvil */
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -2234,7 +2236,6 @@
                 align-self: flex-start;
             }
 
-            /* MODAL VISTA PREVIA MÁS PEQUEÑO EN MÓVIL */
             .preview-content {
                 grid-template-columns: 1fr;
                 gap: 0;
@@ -2274,7 +2275,6 @@
                 margin-bottom: 1rem;
             }
 
-            /* Botón X más pequeño en móvil */
             .close-preview-btn {
                 width: 36px;
                 height: 36px;
@@ -2484,14 +2484,11 @@
                 <h1>Colección Verano</h1>
                 <p>BRILLA A TU MANERA</p>
                 
-                <!-- CONTENEDOR DE MENSAJES ROTATIVOS -->
                 <div class="message-container" id="messageContainer">
-                    <!-- Mensaje inicial (5 segundos) -->
                     <div class="summer-message" id="initialMessage">
                         Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
                     </div>
                     
-                    <!-- Versículo diario (aparece después) -->
                     <div class="daily-verse-container" id="dailyVerseContainer">
                         <div class="verse-date" id="verseDate"></div>
                         <div class="verse-divider"></div>
@@ -2572,10 +2569,8 @@
         </div>
     </section>
 
-    <!-- Modal de Vista Previa - CON BOTÓN X AGREGADO -->
     <div class="preview-modal" id="previewModal" onclick="closePreview(event)" role="dialog" aria-modal="true" aria-labelledby="previewName">
         <div class="preview-content" onclick="event.stopPropagation()">
-            <!-- BOTÓN X PARA CERRAR -->
             <button class="close-preview-btn" onclick="closePreview()" aria-label="Cerrar vista previa">
                 <i class="fas fa-times"></i>
             </button>
@@ -2603,7 +2598,6 @@
         </div>
     </div>
 
-    <!-- Template Story Corregido -->
     <div id="storyCaptureContainer">
         <div class="story-template" id="storyTemplate">
             <div class="story-frame"></div>
@@ -2754,17 +2748,16 @@
     <script src="products.js"></script>
     
     <script>
-        // Configuración
+        // Configuración - MODIFICADO: WhatsApp visible por 20 segundos
         const CONFIG = {
             productsPerPage: 12,
             preloadOffset: '200px',
-            whatsappVisibleDuration: 10000,
-            whatsappHiddenDuration: 180000,
+            whatsappVisibleDuration: 20000,  // CAMBIADO: 20 segundos visibles
+            whatsappHiddenDuration: 180000,  // 3 minutos oculto
             mobileTextHideDelay: 25000,
-            initialMessageDuration: 5000 // 5 segundos para el mensaje inicial
+            initialMessageDuration: 5000
         };
 
-        // Variables para los versículos (se cargarán desde diario.html)
         let dailyVerses = [];
         let versesLoaded = false;
 
@@ -2835,7 +2828,6 @@
             };
         }
 
-        // Función para cargar versículos desde diario.html
         async function loadDailyVerses() {
             try {
                 const response = await fetch('diario.html');
@@ -2845,7 +2837,6 @@
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
                 
-                // Buscar el script con los versículos en diario.html
                 const scripts = doc.querySelectorAll('script');
                 let versesData = null;
                 
@@ -2863,19 +2854,15 @@
                     versesLoaded = true;
                     return true;
                 } else {
-                    // Si no se encuentran versículos, usar fallback
-                    console.log('No se encontraron versículos en diario.html, usando fallback');
                     useFallbackVerses();
                     return false;
                 }
             } catch (error) {
-                console.error('Error cargando versículos:', error);
                 useFallbackVerses();
                 return false;
             }
         }
 
-        // Versículos de respaldo si diario.html no está disponible
         function useFallbackVerses() {
             dailyVerses = [
                 { text: "El sol se levanta para todos, pero el brillo único lo pones tú con tus accesorios.", reference: "KLOHE Verano 2026" },
@@ -2894,14 +2881,12 @@
             versesLoaded = true;
         }
 
-        // Obtener versículo del día basado en la fecha
         function getDailyVerse() {
             const today = new Date();
             const dayOfMonth = today.getDate();
             const month = today.toLocaleString('es-ES', { month: 'long' });
             const year = today.getFullYear();
             
-            // Usar el día del mes para seleccionar el versículo (ciclo)
             const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
             const verse = dailyVerses[verseIndex];
             
@@ -2915,7 +2900,6 @@
             };
         }
 
-        // Mostrar el versículo diario
         function showDailyVerse() {
             if (!versesLoaded) return;
             
@@ -2926,22 +2910,19 @@
             document.getElementById('verseText').textContent = `"${verse.text}"`;
             document.getElementById('verseReference').textContent = `— ${verse.reference}`;
             
-            // Animar la transición
             container.classList.add('show');
         }
 
-        // Iniciar rotación de mensajes
         function initMessageRotation() {
             const initialMessage = document.getElementById('initialMessage');
             
-            // Después de 5 segundos, ocultar mensaje inicial y mostrar versículo
             setTimeout(() => {
                 initialMessage.classList.add('fade-out');
                 
                 setTimeout(() => {
                     initialMessage.style.display = 'none';
                     showDailyVerse();
-                }, 500); // Esperar a que termine la animación de fade out
+                }, 500);
                 
             }, CONFIG.initialMessageDuration);
         }
@@ -3005,26 +2986,33 @@
             }
         }
 
+        // FUNCIÓN CORREGIDA: Ciclo de WhatsApp con 20 segundos visibles
         function initWhatsAppCyclicAnimation() {
             const float = document.getElementById('whatsappFloat');
             let isVisible = true;
             
+            // Asegurar que comience visible
+            float.classList.remove('hidden-cyclic');
+            
             function cycle() {
                 if (isVisible) {
+                    // Después de 20 segundos, ocultar
                     setTimeout(() => {
                         float.classList.add('hidden-cyclic');
                         isVisible = false;
-                        cycle();
+                        cycle(); // Llamar recursivamente para el siguiente ciclo
                     }, CONFIG.whatsappVisibleDuration);
                 } else {
+                    // Después de 3 minutos oculto, mostrar nuevamente
                     setTimeout(() => {
                         float.classList.remove('hidden-cyclic');
                         isVisible = true;
-                        cycle();
+                        cycle(); // Llamar recursivamente para el siguiente ciclo
                     }, CONFIG.whatsappHiddenDuration);
                 }
             }
             
+            // Iniciar el ciclo
             cycle();
         }
 
@@ -3033,7 +3021,6 @@
             AppState.isMobile = isMobile;
             
             if (isMobile) {
-                // Mostrar tip para móvil, ocultar tip de desktop
                 document.getElementById('mobileTip').style.display = 'block';
                 document.getElementById('desktopTip').style.display = 'none';
                 
@@ -3050,15 +3037,12 @@
         }
 
         document.addEventListener('DOMContentLoaded', async function() {
+            // Iniciar animación de WhatsApp inmediatamente
             initWhatsAppCyclicAnimation();
             initMobileTextHide();
             
-            // Cargar versículos primero
             await loadDailyVerses();
-            
-            // Iniciar rotación de mensajes
             initMessageRotation();
-            
             initTestimonials();
             renderSkeletons(8);
             
@@ -3467,16 +3451,13 @@
             currentPreviewIndex = null;
         }
 
-        // FUNCIÓN CORREGIDA PARA GENERAR STORY
         async function generateStoryImage(platform) {
             if (currentPreviewIndex === null) return;
             
             const product = products[currentPreviewIndex];
             
-            // Configurar el template con tamaños corregidos
             const storyImg = document.getElementById('storyProductImage');
             
-            // Precargar imagen para evitar problemas de CORS
             try {
                 await new Promise((resolve, reject) => {
                     const tempImg = new Image();
@@ -3486,7 +3467,6 @@
                         resolve();
                     };
                     tempImg.onerror = () => {
-                        // Si falla CORS, usar imagen sin crossOrigin
                         storyImg.src = `${product.barcode}.jpg`;
                         resolve();
                     };
@@ -3496,19 +3476,16 @@
                 storyImg.src = `${product.barcode}.jpg`;
             }
             
-            // Configurar textos
             document.getElementById('storyProductName').textContent = product.name;
             document.getElementById('storyPrice').textContent = `$${product.price.toFixed(2)}`;
             document.getElementById('storyStock').textContent = product.stock > 0 ? '✓ Disponible' : 'Agotado';
             document.getElementById('storyCode').textContent = `COD: ${product.barcode}`;
             
-            // Pequeña espera para asegurar renderizado
             await new Promise(resolve => setTimeout(resolve, 100));
             
             try {
                 const element = document.getElementById('storyTemplate');
                 
-                // Forzar dimensiones exactas
                 element.style.width = '1080px';
                 element.style.height = '1920px';
                 
@@ -3521,7 +3498,6 @@
                     height: 1920,
                     logging: false,
                     onclone: (clonedDoc) => {
-                        // Asegurar que el clon tenga las dimensiones correctas
                         const clonedElement = clonedDoc.getElementById('storyTemplate');
                         clonedElement.style.width = '1080px';
                         clonedElement.style.height = '1920px';
@@ -3531,11 +3507,9 @@
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
                 AppState.currentStoryImage = dataUrl;
                 
-                // Mostrar en el modal
                 const previewImg = document.getElementById('generatedStoryImage');
                 previewImg.src = dataUrl;
                 
-                // Hacer la imagen descargable al mantener presionado en móvil
                 previewImg.style.cursor = AppState.isMobile ? 'pointer' : 'default';
                 if (AppState.isMobile) {
                     previewImg.onclick = () => {
@@ -3571,23 +3545,19 @@
             showNotification('Imagen descargada');
         }
 
-        // FUNCIÓN DE COPIAR MEJORADA PARA MÓVILES
         async function copyStoryToClipboard() {
             if (!AppState.currentStoryImage) {
                 showNotification('Error: No hay imagen para copiar', 'error');
                 return;
             }
             
-            // En móvil, la copia al portapapeles de imágenes es muy limitada
             if (AppState.isMobile) {
                 showNotification('En móvil, descarga la imagen o mantén presionada la imagen arriba para copiarla');
                 
-                // Intentar método alternativo para iOS/Android
                 try {
                     const response = await fetch(AppState.currentStoryImage);
                     const blob = await response.blob();
                     
-                    // Intentar usar Clipboard API si está disponible
                     if (navigator.clipboard && navigator.clipboard.write) {
                         await navigator.clipboard.write([
                             new ClipboardItem({
@@ -3610,7 +3580,6 @@
                 return;
             }
             
-            // Desktop: intentar copiar normalmente
             try {
                 const response = await fetch(AppState.currentStoryImage);
                 const blob = await response.blob();

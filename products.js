@@ -129,9 +129,9 @@ const products = [
   { name: "ARITOS DE ESTRELLA", price: 3.00, stock: 0, barcode: "019", category: "Aritos", description: "Aritos de acero inoxidable con laminado de oro de 14K resistentes a salpicaduras de agua, waterproof" },
   { name: "ARITOS DE ALEACION", price: 5.00, stock: 0, barcode: "02222", category: "Aritos", description: "Aritos DE ALTA GAMA" },
   { name: "AGUJA PLATA", price: 5.00, stock: 0, barcode: "02224", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K RECOMENDACION NO MOJARLOS" },
-  { name: "AGUJA PLATA", price: 5.00, stock: 1, barcode: "02226", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K RECOMENDACION NO MOJARLOS" },
+  { name: "AGUJA PLATA", price: 5.00, stock: 0, barcode: "02226", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K RECOMENDACION NO MOJARLOS" },
   { name: "AGUJA PLATA", price: 5.00, stock: 1, barcode: "02227", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K RECOMENDACION NO MOJARLOS" },
-  { name: "AGUJA PLATA", price: 5.00, stock: 1, barcode: "02228", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K RECOMENDACION NO MOJARLOS" },
+  { name: "AGUJA PLATA", price: 5.00, stock: 0, barcode: "02228", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K RECOMENDACION NO MOJARLOS" },
   
   // COLLARES (52 productos) - CON DESCRIPCIÓN
   { name: "Aritos", price: 5.50, stock: 0, barcode: "029", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
@@ -178,8 +178,8 @@ const products = [
   { name: "COLLAR", price: 10.00, stock: 1, barcode: "183", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
   { name: "COLLAR", price: 10.00, stock: 1, barcode: "184", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
   { name: "COLLAR", price: 10.00, stock: 1, barcode: "1200", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
-  { name: "COLLAR", price: 12.00, stock: 1, barcode: "01116", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
-  { name: "COLLAR", price: 10.00, stock: 1, barcode: "01127", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
+  { name: "COLLAR", price: 12.00, stock: 0, barcode: "01116", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
+  { name: "COLLAR", price: 10.00, stock: 0, barcode: "01127", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
   { name: "COLLAR", price: 10.00, stock: 0, barcode: "01129", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
   { name: "COLLAR CLASICO", price: 10.00, stock: 2, barcode: "020", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },
   { name: "COLLAR DE CORAZON NEGRO", price: 10.00, stock: 1, barcode: "062", category: "Collares", description: "Collares de acero inoxidable con laminado en oro de 18K resistentes a salpicaduras waterproof" },

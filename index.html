@@ -735,7 +735,7 @@
         }
 
         .verse-modal-body {
-            padding: 3rem 2.5rem;
+            padding: 3rem 2.5rem 2rem;
             position: relative;
             text-align: center;
         }
@@ -819,47 +819,7 @@
             z-index: 1;
         }
 
-        .verse-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-copy-verse {
-            padding: 1rem 2rem;
-            background: var(--bordo);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            transition: all 0.3s ease;
-            box-shadow: var(--sombra-bordo);
-        }
-
-        .btn-copy-verse:hover {
-            background: var(--rosa-oscuro);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(109, 67, 90, 0.3);
-        }
-
-        .btn-copy-verse.copied {
-            background: #25D366;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-        }
-
-        .btn-copy-verse i {
-            font-size: 1.1rem;
-        }
+        /* ELIMINADO: verse-actions y btn-copy-verse */
 
         .verse-footer-brand {
             position: absolute;
@@ -3109,7 +3069,7 @@
         </div>
     </section>
 
-    <!-- MODAL DEL VERSÍCULO - DISEÑO PREMIUM -->
+    <!-- MODAL DEL VERSÍCULO - DISEÑO PREMIUM (SIN BOTÓN COPIAR) -->
     <div class="verse-modal" id="verseModal" onclick="closeVerseModal(event)" role="dialog" aria-modal="true" aria-labelledby="verseModalTitle">
         <div class="verse-modal-content" onclick="event.stopPropagation()">
             <div class="verse-modal-header">
@@ -3129,14 +3089,7 @@
                 <div class="verse-reference-large" id="verseReferenceLarge"></div>
                 <div class="verse-date-large" id="verseDateLarge"></div>
                 <div class="verse-divider-large"></div>
-                
-                <div class="verse-actions">
-                    <button class="btn-copy-verse" id="btnCopyVerse" onclick="copyVerseToClipboard()">
-                        <i class="fas fa-copy"></i>
-                        <span>Copiar</span>
-                    </button>
-                </div>
-                
+                <!-- ELIMINADO: Botón de copiar versículo -->
                 <div class="verse-footer-brand">KLOHE JEWELRY</div>
             </div>
         </div>
@@ -3598,7 +3551,7 @@
         }
 
         // ==========================================
-        // FUNCIONES DEL MODAL DEL VERSÍCULO (NUEVAS)
+        // FUNCIONES DEL MODAL DEL VERSÍCULO (SIN COPIAR)
         // ==========================================
 
         function openVerseModal() {
@@ -3618,11 +3571,6 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Resetear botón de copiar
-            const btn = document.getElementById('btnCopyVerse');
-            btn.classList.remove('copied');
-            btn.innerHTML = '<i class="fas fa-copy"></i><span>Copiar</span>';
-            
             console.log('📖 Modal de versículo abierto');
         }
 
@@ -3632,8 +3580,9 @@
             const modal = document.getElementById('verseModal');
             modal.classList.remove('active');
             document.body.style.overflow = '';
-            }
         }
+
+        // ELIMINADO: Función copyVerseToClipboard() - ya no existe
 
         // Cerrar modal con tecla ESC
         document.addEventListener('keydown', (e) => {

@@ -3632,30 +3632,6 @@
             const modal = document.getElementById('verseModal');
             modal.classList.remove('active');
             document.body.style.overflow = '';
-        }
-
-        async function copyVerseToClipboard() {
-            if (!currentVerse) return;
-            
-            const textToCopy = `"${currentVerse.text}" — ${currentVerse.reference}\n\n${currentVerse.date}\n\n✨ KLOHE JEWELRY`;
-            
-            try {
-                await navigator.clipboard.writeText(textToCopy);
-                
-                const btn = document.getElementById('btnCopyVerse');
-                btn.classList.add('copied');
-                btn.innerHTML = '<i class="fas fa-check"></i><span>¡Copiado!</span>';
-                
-                showNotification('Versículo copiado al portapapeles');
-                
-                setTimeout(() => {
-                    btn.classList.remove('copied');
-                    btn.innerHTML = '<i class="fas fa-copy"></i><span>Copiar</span>';
-                }, 3000);
-                
-            } catch (err) {
-                console.error('Error copiando:', err);
-                showNotification('Error al copiar. Intenta manualmente.', 'error');
             }
         }
 

@@ -494,9 +494,9 @@
             justify-content: center;
         }
 
-        /* Versículo diario compacto */
+        /* Versículo diario compacto - SIEMPRE VISIBLE */
         .daily-verse-container {
-            display: none;
+            display: block;
             animation: verseFadeIn 0.8s ease forwards;
             cursor: pointer;
             position: relative;
@@ -529,10 +529,6 @@
 
         .daily-verse-container:hover::before {
             opacity: 1;
-        }
-
-        .daily-verse-container.show {
-            display: block;
         }
 
         .verse-date {
@@ -798,8 +794,6 @@
             position: relative;
             z-index: 1;
         }
-
-        /* ELIMINADO: verse-actions y btn-copy-verse */
 
         .verse-footer-brand {
             position: absolute;
@@ -3020,10 +3014,10 @@
                 <!-- CONTENEDOR DE MENSAJES - SOLO VERSÍCULO DIARIO -->
                 <div class="message-container" id="messageContainer">
                     <!-- Versículo diario - AHORA CLICKEABLE -->
-                    <div class="daily-verse-container show" id="dailyVerseContainer" onclick="openVerseModal()" role="button" tabindex="0" aria-label="Ver versículo del día en grande">
-                        <div class="verse-date" id="verseDate"></div>
+                    <div class="daily-verse-container" id="dailyVerseContainer" onclick="openVerseModal()" role="button" tabindex="0" aria-label="Ver versículo del día en grande">
+                        <div class="verse-date" id="verseDate">Cargando versículo...</div>
                         <div class="verse-divider"></div>
-                        <div class="verse-text" id="verseText"></div>
+                        <div class="verse-text" id="verseText">Por favor espera...</div>
                         <div class="verse-reference" id="verseReference"></div>
                     </div>
                 </div>
@@ -3509,12 +3503,7 @@
             if (textEl) textEl.textContent = `"${verse.text}"`;
             if (refEl) refEl.textContent = `— ${verse.reference}`;
             
-            if (container) {
-                container.style.display = 'block';
-                void container.offsetHeight; // Forzar reflow
-                container.classList.add('show');
-                console.log(`✅ Versículo mostrado: ${verse.reference}`);
-            }
+            console.log(`✅ Versículo mostrado: ${verse.reference}`);
         }
 
         // ==========================================
@@ -3663,21 +3652,6 @@
             }
         }
 
-        // Iniciar versículo diario directamente
-        function initMessageRotation() {
-            const verseContainer = document.getElementById('dailyVerseContainer');
-            
-            if (!verseContainer) {
-                console.error('Elemento de versículo no encontrado');
-                return;
-            }
-            
-            console.log('⏱️ Iniciando versículo del día...');
-            
-            // Mostrar versículo inmediatamente
-            showDailyVerse();
-        }
-
         // ==========================================
         // INICIALIZACIÓN PRINCIPAL
         // ==========================================
@@ -3688,24 +3662,20 @@
             initWhatsAppCyclicAnimation();
             initMobileTextHide();
             
-            // 2. Cargar versículos (con timeout de seguridad)
-            const versesPromise = loadDailyVerses();
+            // 2. Cargar versículos inmediatamente
+            try {
+                await loadDailyVerses();
+                showDailyVerse();
+            } catch (e) {
+                console.error('Error cargando versículos:', e);
+                useFallbackVerses();
+                showDailyVerse();
+            }
             
-            // Timeout de seguridad para versículos
-            setTimeout(() => {
-                if (!versesLoaded) {
-                    console.warn('⏰ Timeout de versículos, usando respaldo');
-                    useFallbackVerses();
-                }
-            }, CONFIG.verseLoadTimeout);
-            
-            // 3. Iniciar versículo
-            initMessageRotation();
-            
-            // 4. Inicializar testimonios
+            // 3. Inicializar testimonios
             initTestimonials();
             
-            // 5. Cargar productos
+            // 4. Cargar productos
             renderSkeletons(8);
             
             if (typeof products !== 'undefined' && Array.isArray(products)) {
@@ -3739,10 +3709,6 @@
                 document.getElementById('productsContainer').innerHTML = 
                     '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gris-texto);">Error cargando productos</div>';
             }
-            
-            // Esperar versículos para logging
-            await versesPromise;
-            console.log('📖 Estado de versículos:', versesLoaded ? 'OK' : 'Falló');
             
             // Event listeners
             const searchInput = document.getElementById('searchInput');

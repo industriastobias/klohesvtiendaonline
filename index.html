@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>KLOHE - Colección Verano</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300 ;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js "></script>
     
     <style>
         * {
@@ -492,26 +492,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-
-        .summer-message {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.9rem;
-            color: var(--bordo);
-            font-style: italic;
-            letter-spacing: 1px;
-            background: var(--rosa-nude);
-            padding: 0.6rem 1.2rem;
-            display: inline-block;
-            border-left: 3px solid var(--bordo);
-            border-radius: 0 8px 8px 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            max-width: 90%;
-        }
-
-        .summer-message.fade-out {
-            opacity: 0;
-            transform: translateY(-10px);
         }
 
         /* Versículo diario compacto */
@@ -2599,12 +2579,6 @@
                 margin-bottom: 0.8rem;
             }
 
-            .summer-message {
-                font-size: 0.8rem;
-                padding: 0.5rem 1rem;
-                letter-spacing: 0.5px;
-            }
-
             .verse-text {
                 font-size: 0.9rem;
                 line-height: 1.3;
@@ -3027,7 +3001,7 @@
         <h3 id="menuTitle">Categorías</h3>
         
         <button class="category-btn active" onclick="filterProducts('todos', this)">Todas</button>
-        <button class="category-btn" onclick="filterProducts('accesorios-cabello', this)">Accesorios para el cabello</button>
+        <button class="category-btn" onclick="filterProducts('reloj', this)">Relojes</button>
         <button class="category-btn" onclick="filterProducts('anillo', this)">Anillos</button>
         <button class="category-btn" onclick="filterProducts('aritos', this)">Aritos</button>
         <button class="category-btn" onclick="filterProducts('cartera', this)">Carteras</button>
@@ -3035,7 +3009,6 @@
         <button class="category-btn" onclick="filterProducts('lentes-sol', this)">Lentes de sol</button>
         <button class="category-btn" onclick="filterProducts('otros', this)">Otros</button>
         <button class="category-btn" onclick="filterProducts('pulsera', this)">Pulseras</button>
-        <button class="category-btn" onclick="filterProducts('reloj', this)">Relojes</button>
     </div>
 
     <section class="hero">
@@ -3044,15 +3017,10 @@
                 <h1>Colección Verano</h1>
                 <p>BRILLA A TU MANERA</p>
                 
-                <!-- CONTENEDOR DE MENSAJES ROTATIVOS - MÁS COMPACTO -->
+                <!-- CONTENEDOR DE MENSAJES - SOLO VERSÍCULO DIARIO -->
                 <div class="message-container" id="messageContainer">
-                    <!-- Mensaje inicial (5 segundos) -->
-                    <div class="summer-message" id="initialMessage">
-                        Ahora todos quieren ser latinos pero les falta sazón, batería y reggaeton ☀️🌴
-                    </div>
-                    
-                    <!-- Versículo diario (aparece después) - AHORA CLICKEABLE -->
-                    <div class="daily-verse-container" id="dailyVerseContainer" onclick="openVerseModal()" role="button" tabindex="0" aria-label="Ver versículo del día en grande">
+                    <!-- Versículo diario - AHORA CLICKEABLE -->
+                    <div class="daily-verse-container show" id="dailyVerseContainer" onclick="openVerseModal()" role="button" tabindex="0" aria-label="Ver versículo del día en grande">
                         <div class="verse-date" id="verseDate"></div>
                         <div class="verse-divider"></div>
                         <div class="verse-text" id="verseText"></div>
@@ -3250,13 +3218,13 @@
                     <h4>Redes Sociales</h4>
                     <p>Síguenos y descubre las últimas novedades</p>
                     <div class="social-footer">
-                        <a href="https://instagram.com/klohesv" target="_blank" title="Instagram" aria-label="Instagram">
+                        <a href="https://instagram.com/klohesv " target="_blank" title="Instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://tiktok.com/@klohesv" target="_blank" title="TikTok" aria-label="TikTok">
+                        <a href="https://tiktok.com/@klohesv " target="_blank" title="TikTok" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://facebook.com/klohejewelry" target="_blank" title="Facebook" aria-label="Facebook">
+                        <a href="https://facebook.com/klohejewelry " target="_blank" title="Facebook" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -3271,14 +3239,14 @@
             <div class="copyright">
                 <p>© 2026 KLOHE A FAMILY COMPANY. Hecho en Corea del Sur y traído a El Salvador</p>
                 <p style="margin-top: 0.5rem; font-size: 0.85rem;">
-                    BY: <a href="https://www.instagram.com/ERNESTOTOBIASS" target="_blank">ERNESTO TOBIAS</a> & 
-                    <a href="https://www.instagram.com/tatianapalacios720" target="_blank">PAOLA PALACIOS</a>
+                    BY: <a href="https://www.instagram.com/ERNESTOTOBIASS " target="_blank">ERNESTO TOBIAS</a> & 
+                    <a href="https://www.instagram.com/tatianapalacios720 " target="_blank">PAOLA PALACIOS</a>
                 </p>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/50366711569" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
+    <a href="https://wa.me/50366711569 " target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
     </a>
@@ -3361,7 +3329,6 @@
             whatsappVisibleDuration: 10000,
             whatsappHiddenDuration: 180000,
             mobileTextHideDelay: 25000,
-            initialMessageDuration: 5000,
             verseLoadTimeout: 3000
         };
 
@@ -3696,31 +3663,19 @@
             }
         }
 
-        // Iniciar rotación de mensajes
+        // Iniciar versículo diario directamente
         function initMessageRotation() {
-            const initialMessage = document.getElementById('initialMessage');
             const verseContainer = document.getElementById('dailyVerseContainer');
             
-            if (!initialMessage || !verseContainer) {
-                console.error('Elementos no encontrados');
+            if (!verseContainer) {
+                console.error('Elemento de versículo no encontrado');
                 return;
             }
             
-            console.log('⏱️ Iniciando rotación de mensajes...');
+            console.log('⏱️ Iniciando versículo del día...');
             
-            verseContainer.style.display = 'none';
-            verseContainer.classList.remove('show');
-            
-            setTimeout(() => {
-                console.log('🔄 Transicionando a versículo...');
-                initialMessage.classList.add('fade-out');
-                
-                setTimeout(() => {
-                    initialMessage.style.display = 'none';
-                    showDailyVerse();
-                }, 500);
-                
-            }, CONFIG.initialMessageDuration);
+            // Mostrar versículo inmediatamente
+            showDailyVerse();
         }
 
         // ==========================================
@@ -3744,7 +3699,7 @@
                 }
             }, CONFIG.verseLoadTimeout);
             
-            // 3. Iniciar rotación de mensajes
+            // 3. Iniciar versículo
             initMessageRotation();
             
             // 4. Inicializar testimonios
@@ -3977,15 +3932,14 @@
 
         const categoryMap = {
             'todos': null,
-            'accesorios-cabello': 'Accesorios para el cabello',
+            'reloj': 'Relojes',
             'anillo': 'Anillos',
             'aritos': 'Aritos',
             'cartera': 'Carteras',
             'collar': 'Collares',
             'lentes-sol': 'Lentes de sol',
             'otros': 'Otros',
-            'pulsera': 'Pulseras',
-            'reloj': 'Relojes'
+            'pulsera': 'Pulseras'
         };
 
         const testimonials = [
@@ -4027,15 +3981,14 @@
             
             const categoryNames = {
                 'todos': 'Todas',
-                'accesorios-cabello': 'Accesorios para el cabello',
+                'reloj': 'Relojes',
                 'anillo': 'Anillos',
                 'aritos': 'Aritos',
                 'cartera': 'Carteras',
                 'collar': 'Collares',
                 'lentes-sol': 'Lentes de sol',
                 'otros': 'Otros',
-                'pulsera': 'Pulseras',
-                'reloj': 'Relojes'
+                'pulsera': 'Pulseras'
             };
             
             document.getElementById('categoryTitle').textContent = categoryNames[category] || 'Todas';
@@ -4127,7 +4080,7 @@
             const realIndex = products.indexOf(product);
             const isFavorite = AppState.favorites.includes(product.barcode);
             
-            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
+            const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg ' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23F5E6E0'/%3E%3C/svg%3E`;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -4136,7 +4089,7 @@
                          class="product-image blur-up"
                          src="${placeholderSvg}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22  width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'; this.classList.add('loaded');">
                     <button class="wishlist-btn ${isFavorite ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(this, '${product.barcode}')" aria-label="Agregar a favoritos">
                         <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
                     </button>
@@ -4212,7 +4165,7 @@
                                     <div class="favorite-item-image">
                                         <img src="${product.barcode}.jpg" alt="${product.name}" 
                                              loading="lazy"
-                                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22  width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${product.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                                     </div>
                                     <div class="favorite-item-details">
                                         <h4>${product.name}</h4>
@@ -4623,7 +4576,7 @@
                             <div class="cart-item-image">
                                 <img src="${item.barcode}.jpg" alt="${item.name}" 
                                      loading="lazy"
-                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
+                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22  width=%2270%22 height=%2270%22%3E%3Crect width=%2270%22 height=%2270%22 fill=%22%23F5E6E0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2225%22 fill=%22%236D435A%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${item.name.charAt(0)}%3C/text%3E%3C/svg%3E'">
                             </div>
                             <div class="cart-item-details">
                                 <h4>${item.name}</h4>
@@ -4652,7 +4605,7 @@
                     
                     const shippingText = AppState.shippingEnabled ? `%0A%0AEnvío: $3.75` : '';
                     
-                    whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+                    whatsappBtn.href = `https://wa.me/50366711569?text= ${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
                 }
             }
         }

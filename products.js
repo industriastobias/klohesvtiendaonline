@@ -1,6 +1,6 @@
 const products = [
   // === RELOJES (Mayor precio primero) ===
-  { name: "RELOJ", price: 18.00, stock: 1, barcode: "20204", category: "Relojes", description: "resistente a salpicaduras de agua, Reloj de acero inoxidable, " },
+  { name: "RELOJ", price: 18.00, stock: 0, barcode: "20204", category: "Relojes", description: "resistente a salpicaduras de agua, Reloj de acero inoxidable, " },
   { name: "RELOJ", price: 18.00, stock: 1, barcode: "20203", category: "Relojes", description: " resistente a salpicaduras de agua, Reloj de acero inoxidable, " },
   { name: "RELOJ", price: 30.00, stock: 1, barcode: "20202", category: "Relojes", description: " resistente a salpicaduras de agua, Reloj de acero inoxidable" },
   

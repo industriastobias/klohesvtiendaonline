@@ -47,7 +47,7 @@ const products = [
   { name: "CARTERA", price: 13.50, stock: 0, barcode: "077", category: "Carteras" },
   { name: "CARTERA", price: 18.50, stock: 1, barcode: "086", category: "Carteras" },
   { name: "CARTERA", price: 18.50, stock: 1, barcode: "087", category: "Carteras" },
-  { name: "CARTERA", price: 14.99, stock: 1, barcode: "089", category: "Carteras" },
+  { name: "CARTERA", price: 14.99, stock: 0, barcode: "089", category: "Carteras" },
   { name: "CARTERA", price: 14.99, stock: 1, barcode: "096", category: "Carteras" },
   { name: "CARTERA", price: 14.99, stock: 1, barcode: "097", category: "Carteras" },
   { name: "CARTERA", price: 24.00, stock: 1, barcode: "098", category: "Carteras" },

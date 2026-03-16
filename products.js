@@ -17,7 +17,7 @@ const products = [
   { name: "RELOJ DE FLOR ROJA", price: 22.99, stock: 1, barcode: "202606", category: "Relojes", description: "RELOJ DORADO DE ACERO INOXIDABLE" },
   // Precio 22.50
   { name: "RELOJ ELEGANTE BLANCO", price: 22.50, stock: 1, barcode: "202623", category: "Relojes", description: "Reloj De Pulsera Cuadrado Para Mujer GoGoey Con Correa De Ultra-sintética Y Cristal Ordinary Movimiento De Cuarzo Moda" },
-  { name: "RELOJ ELEGANTE ROJO", price: 22.50, stock: 1, barcode: "202624", category: "Relojes", description: "Reloj De Pulsera Cuadrado Para Mujer GoGoey Con Correa De Ultra-sintética Y Cristal Ordinary Movimiento De Cuarzo Moda" },
+  { name: "RELOJ ELEGANTE ROJO", price: 15.75, stock: 1, barcode: "202624", category: "Relojes", description: "Reloj De Pulsera Cuadrado Para Mujer GoGoey Con Correa De Ultra-sintética Y Cristal Ordinary Movimiento De Cuarzo Moda" },
   { name: "RELOJ OLD MONEY PLATEADO", price: 22.50, stock: 1, barcode: "202504", category: "Relojes", description: "" },
   { name: "RELOJ ROMANO BLANCO", price: 22.50, stock: 1, barcode: "202501", category: "Relojes", description: "" },
   { name: "RELOJ ROMANO NEGRO", price: 22.50, stock: 1, barcode: "202529", category: "Relojes", description: "" },

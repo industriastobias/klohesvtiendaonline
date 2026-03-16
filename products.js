@@ -9,8 +9,8 @@ const products = [
   { name: "RELOJ", price: 25.75, stock: 1, barcode: "03336", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 25.75, stock: 1, barcode: "03338", category: "Relojes", description: "Relojes de acero inoxidable" },
   // Precio 23.50
-  { name: "RELOJ CLASICO DORADO", price: 23.50, stock: 1, barcode: "202610", category: "Relojes", description: "Reloj de cuarzo de acero inoxidable con rosa de té en miniatura para mujeres con correa de malla, reloj de pulsera femenino" },
-  { name: "RELOJ CLASICO PLATEADO", price: 23.50, stock: 1, barcode: "202007", category: "Relojes", description: "Reloj De Cuarzo Para Mujer SUNLIFEX Con Pulsera De Acero Inoxidable Y Escala Elíptica Diseño Sencillo Y Elegante Con" },
+  { name: "RELOJ CLASICO DORADO", price:30.75, stock: 1, barcode: "202610", category: "Relojes", description: "Reloj de cuarzo de acero inoxidable con rosa de té en miniatura para mujeres con correa de malla, reloj de pulsera femenino" },
+  { name: "RELOJ CLASICO PLATEADO", price: 30.75, stock: 1, barcode: "202007", category: "Relojes", description: "Reloj De Cuarzo Para Mujer SUNLIFEX Con Pulsera De Acero Inoxidable Y Escala Elíptica Diseño Sencillo Y Elegante Con" },
   // Precio 23.00
   { name: "RELOJ FLOR BLANCA", price: 23.00, stock: 1, barcode: "202504", category: "Relojes", description: "Reloj de cuarzo de acero inoxidable con rosa de té en miniatura para mujeres con correa de malla, reloj de pulsera femenino" },
   // Precio 22.99
@@ -34,9 +34,9 @@ const products = [
   // Precio 19.99
   { name: "RELOJ DE LUJO", price: 19.99, stock: 1, barcode: "2026013", category: "Relojes", description: "" },
   // Precio 19.75
-  { name: "RELOJ PLATEADO", price: 19.75, stock: 1, barcode: "202626", category: "Relojes", description: "Negocio Serpiente Hebilla De Herradura Electrónico Reloj Relojes de mujer" },
+  { name: "RELOJ PLATEADO", price: 19.99, stock: 1, barcode: "202626", category: "Relojes", description: "Negocio Serpiente Hebilla De Herradura Electrónico Reloj Relojes de mujer" },
   // Precio 18.99
-  { name: "RELOJ ESFERA AZUL", price: 18.99, stock: 2, barcode: "022026", category: "Relojes", description: "Serpiente Hebilla De Herradura Electrónico Reloj Relojes de mujer" },
+  { name: "RELOJ ESFERA AZUL", price: 19.99, stock: 2, barcode: "022026", category: "Relojes", description: "Serpiente Hebilla De Herradura Electrónico Reloj Relojes de mujer" },
   { name: "RELOJ LANGFORD", price: 18.99, stock: 1, barcode: "202527", category: "Relojes", description: "" },
   { name: "RELOJ STERLING", price: 18.99, stock: 1, barcode: "202511", category: "Relojes", description: "" },
   { name: "RELOJ VALERO", price: 18.99, stock: 1, barcode: "202526", category: "Relojes", description: "" },
@@ -62,11 +62,11 @@ const products = [
   // Precio 17.50
   { name: "RELOJ CLASICO BLANCO", price: 17.50, stock: 1, barcode: "2026017", category: "Relojes", description: "" },
   // Precio 16.75
-  { name: "RELOJ CLASICO NEGRO", price: 16.75, stock: 1, barcode: "2026019", category: "Relojes", description: "Retro Color Sólido Hebilla Cuarzo Reloj Relojes de mujer" },
-  { name: "RELOJ CLASICO NEGROFONDO BLANCO", price: 16.75, stock: 1, barcode: "202620", category: "Relojes", description: "Retro Color Sólido Hebilla Cuarzo Reloj Relojes de mujer" },
-  { name: "RELOJ ROJO", price: 16.75, stock: 1, barcode: "01119", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ CLASICO NEGRO", price: 17.75, stock: 1, barcode: "2026019", category: "Relojes", description: "Retro Color Sólido Hebilla Cuarzo Reloj Relojes de mujer" },
+  { name: "RELOJ CLASICO NEGROFONDO BLANCO", price: 17.75, stock: 1, barcode: "202620", category: "Relojes", description: "Retro Color Sólido Hebilla Cuarzo Reloj Relojes de mujer" },
+  { name: "RELOJ ROJO", price: 17.75, stock: 1, barcode: "01119", category: "Relojes", description: "Relojes de acero inoxidable" },
   // Precio 16.50
-  { name: "RELOJ NEGRO", price: 16.50, stock: 1, barcode: "2026011", category: "Relojes", description: "Negro con marco de oro y superficie negra" },
+  { name: "RELOJ NEGRO", price: 17.50, stock: 1, barcode: "2026011", category: "Relojes", description: "Negro con marco de oro y superficie negra" },
   // Precio 15.75
   { name: "RELOJ", price: 15.75, stock: 1, barcode: "033345", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ BELLGRAVE", price: 15.75, stock: 1, barcode: "202507", category: "Relojes", description: "" },

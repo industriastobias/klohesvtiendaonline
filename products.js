@@ -15,8 +15,8 @@ const products = [
   // ... (más relojes con stock existentes)
   // Nuevos relojes del PDF (todos con stock)
   { name: "RELOJ", price: 18.50, stock: 2, barcode: "202603", category: "Relojes", description: "Serpiente Hebilla De Herradura Electrónico Reloj Relojes de mujer" },
-  { name: "RELOJ", price: 15.00, stock: 1, barcode: "2026014", category: "Relojes", description: "VENDIDO" },
-  { name: "RELOJ ESFERA AZUL", price: 18.99, stock: 2, barcode: "022026", category: "Relojes", description: "Serpiente Hebilla De Herradura Electrónico Reloj Relojes de mujer" },
+  { name: "RELOJ", price: 15.00, stock: 0, barcode: "2026014", category: "Relojes", description: "VENDIDO" },
+  { name: "RELOJ ESFERA AZUL", price: 18.99, stock: 1, barcode: "022026", category: "Relojes", description: "Serpiente Hebilla De Herradura Electrónico Reloj Relojes de mujer" },
   { name: "RELOJ AURELIAN", price: 20.75, stock: 1, barcode: "202507", category: "Relojes", description: "" },
   { name: "RELOJ BELLGRAVE", price: 15.75, stock: 1, barcode: "202512", category: "Relojes", description: "" },
   { name: "RELOJ BLANCO CLASICO", price: 29.99, stock: 1, barcode: "2026012", category: "Relojes", description: "reloj de acero inoxidable" },

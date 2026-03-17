@@ -46,7 +46,7 @@ const products = [
   { name: "RELOJ NEGRO CON DORADO", price: 18.75, stock: 1, barcode: "2026018", category: "Relojes", description: "" },
   { name: "RELOJ OLD MONEY PLATEADO", price: 22.50, stock: 1, barcode: "202504", category: "Relojes", description: "" },
   { name: "RELOJ OVALADO CLASICO", price: 17.75, stock: 1, barcode: "202627", category: "Relojes", description: "RELOJ CLASICO" },
-  { name: "RELOJ PLATEADO", price: 15.75, stock: 1, barcode: "20262409", category: "Relojes", description: "" },
+  { name: "RELOJ PLATEADO", price: 16.50, stock: 1, barcode: "20262409", category: "Relojes", description: "" },
   { name: "RELOJ PLATEADO", price: 18.99, stock: 1, barcode: "202626", category: "Relojes", description: "Negocio Serpiente Hebilla De Herradura Electrónico Reloj Relojes de mujer" },
   { name: "RELOJ PULSERA", price: 17.75, stock: 1, barcode: "202608", category: "Relojes", description: "Reloj de cuarzo de acero inoxidable con números romanos, diseño de nicho, esfera hexagonal, reloj de pulsera para mujeres con ..." },
   { name: "RELOJ PULSERA", price: 17.75, stock: 1, barcode: "202628", category: "Relojes", description: "RELOJ PULSERA ITALIANA ACERO INOXIDABLE" },

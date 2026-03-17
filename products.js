@@ -2,6 +2,7 @@ const products = [
   // === RELOJES (con stock primero, luego agotados) ===
   // (Aquí se han agregado los 46 nuevos relojes del PDF, todos con stock > 0,
   //  y se han mezclado con los existentes que también tienen stock)
+   { name: "RELOJ", price: 18.75, stock: 1, barcode: "033350", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 18.00, stock: 1, barcode: "20203", category: "Relojes", description: "resistente a salpicaduras de agua, Reloj de acero inoxidable, " },
   { name: "RELOJ", price: 30.00, stock: 1, barcode: "20202", category: "Relojes", description: "resistente a salpicaduras de agua, Reloj de acero inoxidable" },
   { name: "RELOJ", price: 25.75, stock: 1, barcode: "03336", category: "Relojes", description: "Relojes de acero inoxidable" },
@@ -76,7 +77,6 @@ const products = [
   { name: "RELOJ", price: 30.75, stock: 0, barcode: "033347", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 30.75, stock: 0, barcode: "033348", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 20.75, stock: 0, barcode: "033349", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ", price: 18.75, stock: 0, barcode: "033350", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ DE ACERO INOXIDABLE", price: 15.00, stock: 0, barcode: "01117", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ DE ACERO INOXIDABLE", price: 15.75, stock: 0, barcode: "01123", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ DORADO WATERPROOF", price: 20.75, stock: 0, barcode: "01122", category: "Relojes", description: "Relojes de acero inoxidable" },

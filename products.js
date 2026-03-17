@@ -42,7 +42,7 @@ const products = [
   { name: "RELOJ MONTCLAIR", price: 20.75, stock: 1, barcode: "202508", category: "Relojes", description: "" },
   { name: "RELOJ MONTEBELLO NEGRO", price: 15.75, stock: 2, barcode: "202523", category: "Relojes", description: "" },
   { name: "RELOJ MONTEBELLO ROSA", price: 15.75, stock: 2, barcode: "202522", category: "Relojes", description: "" },
-  { name: "RELOJ NEGRO", price: 16.50, stock: 1, barcode: "2026011", category: "Relojes", description: "Negro con marco de oro y superficie negra" },
+  { name: "RELOJ NEGRO", price: 16.50, stock: 0, barcode: "2026011", category: "Relojes", description: "Negro con marco de oro y superficie negra" },
   { name: "RELOJ NEGRO CON DORADO", price: 18.75, stock: 1, barcode: "2026018", category: "Relojes", description: "" },
   { name: "RELOJ OLD MONEY PLATEADO", price: 22.50, stock: 1, barcode: "202504", category: "Relojes", description: "" },
   { name: "RELOJ OVALADO CLASICO", price: 17.75, stock: 1, barcode: "202627", category: "Relojes", description: "RELOJ CLASICO" },

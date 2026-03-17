@@ -7,10 +7,10 @@ const products = [
   { name: "RELOJ", price: 30.00, stock: 1, barcode: "20202", category: "Relojes", description: "resistente a salpicaduras de agua, Reloj de acero inoxidable" },
   { name: "RELOJ", price: 25.75, stock: 1, barcode: "03336", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 25.75, stock: 1, barcode: "03338", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ", price: 15.75, stock: 1, barcode: "033345", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ", price: 15.75, stock: 0, barcode: "033345", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ BLANCO", price: 5.00, stock: 1, barcode: "011144", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ NEGRO", price: 5.00, stock: 1, barcode: "01113", category: "Relojes", description: "Relojes de acero inoxidable" },
-  { name: "RELOJ ROJO", price: 16.75, stock: 1, barcode: "01119", category: "Relojes", description: "Relojes de acero inoxidable" },
+  { name: "RELOJ ROJO", price: 16.75, stock: 0, barcode: "01119", category: "Relojes", description: "Relojes de acero inoxidable" },
   { name: "RELOJ", price: 5.00, stock: 1, barcode: "01111", category: "Relojes", description: "Relojes de acero inoxidable" },
   // ... (más relojes con stock existentes)
   // Nuevos relojes del PDF (todos con stock)

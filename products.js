@@ -34,7 +34,7 @@ const products = [
   { name: "RELOJ ELEGANTE BLANCO", price: 22.50, stock: 1, barcode: "202623", category: "Relojes", description: "Reloj De Pulsera Cuadrado Para Mujer GoGoey Con Correa De Ultra-sintética Y Cristal Ordinary Movimiento De Cuarzo Moda" },
   { name: "RELOJ ELEGANTE ROJO", price: 22.50, stock: 1, barcode: "202624", category: "Relojes", description: "Reloj De Pulsera Cuadrado Para Mujer GoGoey Con Correa De Ultra-sintética Y Cristal Ordinary Movimiento De Cuarzo Moda" },
   { name: "RELOJ Estilo Clásico Color Sólido", price: 20.50, stock: 3, barcode: "202601", category: "Relojes", description: "Estilo Clásico Color Sólido" },
-  { name: "RELOJ FLOR BLANCA", price: 22.99, stock: 1, barcode: "202504", category: "Relojes", description: "Reloj de cuarzo de acero inoxidable con rosa de té en miniatura para mujeres con correa de malla, reloj de pulsera femenino" },
+  { name: "RELOJ FLOR BLANCA", price: 22.99, stock: 1, barcode: "2025041", category: "Relojes", description: "Reloj de cuarzo de acero inoxidable con rosa de té en miniatura para mujeres con correa de malla, reloj de pulsera femenino" },
   { name: "RELOJ HARTWELL", price: 20.75, stock: 1, barcode: "202514", category: "Relojes", description: "" },
   { name: "RELOJ LANGFORD", price: 18.99, stock: 1, barcode: "202527", category: "Relojes", description: "" },
   { name: "RELOJ MODERNO", price: 17.99, stock: 1, barcode: "2026016", category: "Relojes", description: "" },

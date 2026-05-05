@@ -1,26 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>KLOHE - Colección Verano</title>
-    
-    <meta property="og:title" content="KLOHE Jewelry | Colección Verano 2026">
-    <meta property="og:description" content="✨ Accesorios únicos que brillan con luz propia. Descubre anillos, collares, pulseras y más. Envíos a todo El Salvador.">
+    <title>KLOHE - Día de las Madres | Descuentos Especiales</title>
+
+    <meta property="og:title" content="KLOHE Jewelry | Día de las Madres 2026">
+    <meta property="og:description" content="🌸 Celebra a mamá con estilo. 15% OFF en relojes y 30% OFF en todo lo demás. Accesorios únicos para mujeres únicas. Envíos a todo El Salvador.">
     <meta property="og:image" content="https://industriastobias.github.io/klohesvtiendaonline/123.jpg">
     <meta property="og:url" content="https://industriastobias.github.io/klohesvtiendaonline/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
+
         :root {
             --blanco: #FDF8F6;
             --rosa-nude: #F5E6E0;
@@ -38,6 +37,8 @@
             --sombra-media: 0 4px 20px rgba(44, 36, 36, 0.08);
             --sombra-fuerte: 0 8px 30px rgba(44, 36, 36, 0.12);
             --sombra-bordo: 0 4px 20px rgba(109, 67, 90, 0.15);
+            --descuento: #E84A7F;
+            --rosa-intenso: #D44670;
         }
 
         body {
@@ -61,6 +62,12 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseBadge {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .skeleton {
@@ -346,6 +353,26 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 0.8rem;
+        }
+
+        .discount-banner {
+            background: linear-gradient(135deg, var(--bordo) 0%, var(--rosa-intenso) 100%);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1rem;
+            animation: fadeIn 0.8s ease forwards;
+            box-shadow: var(--sombra-bordo);
+        }
+
+        .discount-banner strong {
+            font-size: 1rem;
+            letter-spacing: 1px;
         }
 
         .message-container {
@@ -700,6 +727,22 @@
             transition: opacity 0.3s ease;
         }
 
+        .discount-badge {
+            position: absolute;
+            top: 0.8rem;
+            left: 0.8rem;
+            background: linear-gradient(135deg, var(--descuento) 0%, var(--rosa-intenso) 100%);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            z-index: 3;
+            box-shadow: 0 2px 8px rgba(212, 70, 112, 0.3);
+            animation: pulseBadge 2s infinite ease-in-out;
+        }
+
         .wishlist-btn {
             position: absolute;
             top: 0.8rem;
@@ -769,7 +812,15 @@
             color: var(--bordo);
             font-weight: 600;
             letter-spacing: 1px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .product-original-price {
+            font-size: 0.8rem;
+            color: var(--rosa-oscuro);
+            text-decoration: line-through;
+            margin-bottom: 0.3rem;
+            opacity: 0.7;
         }
 
         .product-stock {
@@ -1232,11 +1283,34 @@
             overflow-y: auto;
         }
 
+        .preview-price-container {
+            margin-bottom: 0.5rem;
+        }
+
         .preview-price {
             font-size: 2rem;
             color: var(--bordo);
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .preview-original-price {
+            font-size: 1.2rem;
+            color: var(--rosa-oscuro);
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-left: 0.5rem;
+        }
+
+        .preview-discount-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--descuento) 0%, var(--rosa-intenso) 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             letter-spacing: 1px;
         }
 
@@ -1775,6 +1849,15 @@
             color: var(--gris-texto);
         }
 
+        .summary-row.discount-row {
+            color: var(--descuento);
+            font-weight: 600;
+        }
+
+        .summary-row.discount-row span:last-child {
+            color: var(--descuento);
+        }
+
         .cart-total {
             margin-top: 1.5rem;
             padding-top: 1.5rem;
@@ -1786,6 +1869,16 @@
             justify-content: space-between;
             margin-bottom: 2rem;
             letter-spacing: 1px;
+        }
+
+        .cart-savings {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--descuento);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .btn-whatsapp {
@@ -2103,10 +2196,12 @@
             .product-card { transform: none !important; box-shadow: none !important; }
             .product-image-container { aspect-ratio: 1/1; }
             .wishlist-btn { width: 32px; height: 32px; top: 0.4rem; right: 0.4rem; font-size: 0.85rem; }
+            .discount-badge { font-size: 0.65rem; padding: 0.2rem 0.5rem; top: 0.4rem; left: 0.4rem; }
             .product-info { padding: 0.6rem; }
             .product-name { font-size: 0.75rem; }
             .product-description { display: none; }
             .product-price { font-size: 0.85rem; }
+            .product-original-price { font-size: 0.7rem; }
             .product-stock { font-size: 0.6rem; }
             .cart-corner-btn { width: 32px; height: 32px; bottom: 0.4rem; right: 0.4rem; font-size: 0.8rem; }
             .section-title { font-size: 1.1rem; }
@@ -2128,6 +2223,7 @@
             .cart-corner-btn { width: 28px; height: 28px; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -2179,8 +2275,11 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Colección Verano</h1>
-                <p>BRILLA A TU MANERA</p>
+                <h1>Colección Día de las Madres</h1>
+                <p>UN REGALO HECHO CON AMOR</p>
+                <div class="discount-banner">
+                    <i class="fas fa-gift"></i> <strong>15% OFF</strong> en Relojes &nbsp;|&nbsp; <strong>30% OFF</strong> en Todo lo Demás
+                </div>
                 <div class="message-container" id="messageContainer">
                     <div class="daily-verse-container" id="dailyVerseContainer" onclick="openVerseModal()">
                         <div class="verse-date" id="verseDate">Cargando versículo...</div>
@@ -2201,7 +2300,7 @@
         <div class="verse-modal-content" onclick="event.stopPropagation()">
             <div class="verse-modal-header">
                 <div class="verse-modal-title">
-                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-heart"></i>
                     <span>Versículo del Día</span>
                 </div>
                 <button class="close-verse-modal" onclick="closeVerseModal()">
@@ -2243,8 +2342,8 @@
     <section class="testimonials-section">
         <div class="container">
             <div class="testimonials-header">
-                <h2>Historias de Verano</h2>
-                <p>Lo que nuestros clientes comparten</p>
+                <h2>Historias que Inspiran</h2>
+                <p>Lo que nuestros clientes comparten sobre mamá</p>
             </div>
             <div class="testimonial-carousel">
                 <div class="testimonial-track" id="testimonialTrack"></div>
@@ -2277,7 +2376,7 @@
                     </div>
                     <div class="form-group">
                         <label for="commentText">Tu experiencia</label>
-                        <textarea id="commentText" required placeholder="Cuéntanos sobre tu look de verano..."></textarea>
+                        <textarea id="commentText" required placeholder="Cuéntanos sobre el regalo perfecto para mamá..."></textarea>
                     </div>
                     <button type="submit" class="btn-submit">Enviar comentario</button>
                 </form>
@@ -2303,7 +2402,11 @@
                 <h3 class="preview-name" id="previewName"></h3>
                 <p class="preview-barcode" id="previewBarcode"></p>
                 <p class="preview-description" id="previewDescription"></p>
-                <p class="preview-price" id="previewPrice"></p>
+                <div class="preview-price-container">
+                    <span class="preview-price" id="previewPrice"></span>
+                    <span class="preview-original-price" id="previewOriginalPrice"></span>
+                </div>
+                <span class="preview-discount-badge" id="previewDiscountBadge" style="display: none;"></span>
                 <p class="preview-stock" id="previewStock"></p>
                 <button class="preview-add-btn" id="previewAddBtn">Agregar al carrito</button>
             </div>
@@ -2314,7 +2417,7 @@
         <div class="story-template" id="storyTemplate">
             <div class="story-frame"></div>
             <div class="story-logo">KLOHE</div>
-            <div class="story-subtitle">Colección Verano</div>
+            <div class="story-subtitle">Día de las Madres</div>
             <div class="story-image-container">
                 <img class="story-product-image" id="storyProductImage" src="" alt="">
             </div>
@@ -2322,7 +2425,7 @@
             <div class="story-price" id="storyPrice"></div>
             <div class="story-stock" id="storyStock"></div>
             <div class="story-code" id="storyCode"></div>
-            <div class="story-footer">☀️ Brilla con estilo este verano</div>
+            <div class="story-footer">🌸 El regalo perfecto para mamá</div>
             <div class="story-whatsapp">WhatsApp: 6671-1569</div>
         </div>
     </div>
@@ -2391,13 +2494,13 @@
     <div class="newsletter-popup" id="newsletterPopup">
         <button class="newsletter-close" onclick="closeNewsletter()"><i class="fas fa-times"></i></button>
         <h3>¡Bienvenido!</h3>
-        <p>Obtén un <strong>5% de descuento</strong> en tu primera compra de verano</p>
-        <div class="newsletter-code">SUMMERKLOHE</div>
+        <p>Obtén un <strong>5% de descuento</strong> adicional en tu compra del Día de las Madres</p>
+        <div class="newsletter-code">MAMAKLOHE</div>
         <p style="font-size: 0.9rem; color: var(--gris-texto);">Usa este código al momento de pagar</p>
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
-    
+
     <div class="favorites-modal" id="favoritesModal">
         <div class="favorites-header">
             <h2>Tus Favoritos</h2>
@@ -2429,11 +2532,16 @@
                 <span>Subtotal:</span>
                 <span id="cartSubtotal">$0.00</span>
             </div>
+            <div class="summary-row discount-row" id="discountRow" style="display: none;">
+                <span>Descuento Día de las Madres:</span>
+                <span id="cartDiscount">-$0.00</span>
+            </div>
             <div class="summary-row" id="shippingRow" style="display: none;">
                 <span>Envío:</span>
                 <span>$3.75</span>
             </div>
         </div>
+        <div class="cart-savings" id="cartSavings" style="display: none;"></div>
         <div class="cart-total">
             <span>Total:</span>
             <span id="cartTotal">$0.00</span>
@@ -2458,7 +2566,11 @@
             preloadOffset: '200px',
             whatsappVisibleDuration: 10000,
             whatsappHiddenDuration: 180000,
-            verseLoadTimeout: 3000
+            verseLoadTimeout: 3000,
+            discount: {
+                watches: 0.15,
+                others: 0.30
+            }
         };
 
         // ==========================================
@@ -2491,6 +2603,24 @@
         };
 
         // ==========================================
+        // DESCUENTOS
+        // ==========================================
+        function getDiscountRate(category) {
+            return category === 'Relojes' ? CONFIG.discount.watches : CONFIG.discount.others;
+        }
+
+        function getDiscountedPrice(product) {
+            const rate = getDiscountRate(product.category);
+            return product.price * (1 - rate);
+        }
+
+        function formatDiscountBadge(category) {
+            const rate = getDiscountRate(category);
+            const percent = Math.round(rate * 100);
+            return `-${percent}%`;
+        }
+
+        // ==========================================
         // OBSERVADOR DE IMÁGENES OPTIMIZADO
         // ==========================================
         function initImageObserver() {
@@ -2499,27 +2629,27 @@
                     if (entry.isIntersecting) {
                         const img = entry.target;
                         const src = img.dataset.src;
-                        
+
                         if (src && !loadingImages.has(src)) {
                             loadingImages.set(src, true);
-                            
+
                             const preloadImg = new Image();
-                            
+
                             preloadImg.onload = () => {
                                 img.src = src;
                                 img.classList.add('loaded');
                                 img.removeAttribute('data-src');
                                 loadingImages.delete(src);
                             };
-                            
+
                             preloadImg.onerror = () => {
                                 img.classList.add('loaded');
                                 loadingImages.delete(src);
                             };
-                            
+
                             preloadImg.src = src;
                         }
-                        
+
                         imageObserver.unobserve(img);
                     }
                 });
@@ -2532,7 +2662,7 @@
         function initInfiniteScroll() {
             const sentinel = document.getElementById('scrollSentinel');
             if (!sentinel) return;
-            
+
             scrollObserver = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting && !AppState.isLoading && AppState.hasMoreProducts) {
                     loadMoreProducts();
@@ -2541,7 +2671,7 @@
                 rootMargin: CONFIG.preloadOffset,
                 threshold: 0.1
             });
-            
+
             scrollObserver.observe(sentinel);
         }
 
@@ -2566,20 +2696,20 @@
                 const response = await fetch(`diario.html?t=${timestamp}`, {
                     headers: { 'Accept': 'text/html', 'Cache-Control': 'no-cache' }
                 });
-                
+
                 if (!response.ok) throw new Error('Error cargando versículos');
-                
+
                 const html = await response.text();
                 const scriptMatch = html.match(/window\.dailyVersesData\s*=\s*(\[[\s\S]*?\]);/);
-                
+
                 if (!scriptMatch) throw new Error('No se encontraron versículos');
-                
+
                 let jsonStr = scriptMatch[1].trim().replace(/,\s*]$/, ']');
                 const versesData = JSON.parse(jsonStr);
-                
+
                 dailyVerses = versesData.filter(v => v && typeof v.text === 'string' && typeof v.reference === 'string');
                 versesLoaded = true;
-                
+
             } catch (error) {
                 useFallbackVerses();
             }
@@ -2605,15 +2735,15 @@
 
         function getDailyVerse() {
             if (!versesLoaded || dailyVerses.length === 0) return null;
-            
+
             const today = new Date();
             const dayOfMonth = today.getDate();
             const month = today.toLocaleString('es-ES', { month: 'long' });
             const year = today.getFullYear();
-            
+
             const verseIndex = (dayOfMonth - 1) % dailyVerses.length;
             const verse = dailyVerses[verseIndex];
-            
+
             return {
                 text: verse.text,
                 reference: verse.reference,
@@ -2625,9 +2755,9 @@
         function showDailyVerse() {
             const verse = getDailyVerse();
             if (!verse) return;
-            
+
             currentVerse = verse;
-            
+
             document.getElementById('verseDate').textContent = verse.date;
             document.getElementById('verseText').textContent = `"${verse.text}"`;
             document.getElementById('verseReference').textContent = `— ${verse.reference}`;
@@ -2635,11 +2765,11 @@
 
         function openVerseModal() {
             if (!currentVerse) return;
-            
+
             document.getElementById('verseTextLarge').textContent = currentVerse.text;
             document.getElementById('verseReferenceLarge').textContent = `— ${currentVerse.reference}`;
             document.getElementById('verseDateLarge').textContent = currentVerse.date;
-            
+
             document.getElementById('verseModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2658,10 +2788,10 @@
             AppState.currentSort = sortValue;
             AppState.currentPage = 0;
             AppState.hasMoreProducts = true;
-            
+
             document.getElementById('productsContainer').innerHTML = '';
             renderSkeletons(4);
-            
+
             setTimeout(() => {
                 sortProducts();
                 document.getElementById('productsContainer').innerHTML = '';
@@ -2669,19 +2799,19 @@
                 updateProductsCount();
             }, 200);
         }
-        
+
         function sortProducts() {
             if (AppState.currentSort === 'default') return;
-            
+
             const withStock = AppState.filteredProducts.filter(p => p.stock > 0);
             const withoutStock = AppState.filteredProducts.filter(p => p.stock <= 0);
-            
+
             if (AppState.currentSort === 'price-desc') {
-                withStock.sort((a, b) => b.price - a.price);
+                withStock.sort((a, b) => getDiscountedPrice(b) - getDiscountedPrice(a));
             } else if (AppState.currentSort === 'price-asc') {
-                withStock.sort((a, b) => a.price - b.price);
+                withStock.sort((a, b) => getDiscountedPrice(a) - getDiscountedPrice(b));
             }
-            
+
             AppState.filteredProducts = [...withStock, ...withoutStock];
         }
 
@@ -2714,18 +2844,18 @@
             AppState.currentPage = 0;
             AppState.searchTerm = '';
             AppState.hasMoreProducts = true;
-            
+
             const searchInput = document.getElementById('searchInput');
             if (searchInput) searchInput.value = '';
-            
+
             document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
             if (btnElement) btnElement.classList.add('active');
-            
+
             document.getElementById('categoryTitle').textContent = categoryDisplayNames[category] || 'Todas';
-            
+
             document.getElementById('productsContainer').innerHTML = '';
             renderSkeletons(4);
-            
+
             setTimeout(() => {
                 if (category === 'todos') {
                     AppState.filteredProducts = [...products];
@@ -2733,11 +2863,11 @@
                     const targetCategory = categoryMap[category];
                     AppState.filteredProducts = products.filter(product => product.category === targetCategory);
                 }
-                
+
                 if (AppState.currentSort !== 'default') {
                     sortProducts();
                 }
-                
+
                 document.getElementById('productsContainer').innerHTML = '';
                 renderProducts();
                 updateProductsCount();
@@ -2749,10 +2879,10 @@
             AppState.searchTerm = term.toLowerCase().trim();
             AppState.currentPage = 0;
             AppState.hasMoreProducts = true;
-            
+
             document.getElementById('productsContainer').innerHTML = '';
             renderSkeletons(4);
-            
+
             setTimeout(() => {
                 if (AppState.searchTerm === '') {
                     if (AppState.currentFilter === 'todos') {
@@ -2767,15 +2897,15 @@
                         product.barcode.toLowerCase().includes(AppState.searchTerm)
                     );
                 }
-                
+
                 if (AppState.currentSort !== 'default') {
                     sortProducts();
                 }
-                
+
                 document.getElementById('productsContainer').innerHTML = '';
                 renderProducts();
                 updateProductsCount();
-                
+
                 if (AppState.searchTerm !== '') {
                     document.getElementById('categoryTitle').textContent = `Búsqueda: "${term}"`;
                 } else {
@@ -2790,9 +2920,9 @@
         function renderSkeletons(count = 8) {
             const container = document.getElementById('productsContainer');
             if (!container) return;
-            
+
             container.innerHTML = '';
-            
+
             for (let i = 0; i < count; i++) {
                 const skeletonCard = document.createElement('div');
                 skeletonCard.className = 'product-card loading';
@@ -2813,25 +2943,25 @@
         function renderProducts() {
             const container = document.getElementById('productsContainer');
             if (!container) return;
-            
+
             const start = AppState.currentPage * CONFIG.productsPerPage;
             const end = start + CONFIG.productsPerPage;
             const productsToShow = AppState.filteredProducts.slice(start, end);
-            
+
             if (productsToShow.length === 0 && AppState.currentPage === 0) {
                 container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gris-texto);">No se encontraron productos</div>';
                 AppState.hasMoreProducts = false;
                 return;
             }
-            
+
             productsToShow.forEach((product, index) => {
                 const card = createProductCard(product, start + index);
                 container.appendChild(card);
             });
-            
+
             AppState.hasMoreProducts = end < AppState.filteredProducts.length;
             updateProductsCount();
-            
+
             if (!AppState.hasMoreProducts) {
                 const spinner = document.getElementById('loadingSpinner');
                 if (spinner) spinner.style.display = 'none';
@@ -2842,11 +2972,15 @@
             const card = document.createElement('div');
             card.className = 'product-card';
             card.style.animationDelay = `${index * 0.05}s`;
-            
+
             const hasStock = product.stock > 0;
             const realIndex = products.indexOf(product);
             const isFavorite = AppState.favorites.includes(product.barcode);
             const initial = product.name.charAt(0).toUpperCase();
+
+            const discountedPrice = getDiscountedPrice(product);
+            const discountBadge = formatDiscountBadge(product.category);
+            const hasDiscount = true;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -2856,6 +2990,7 @@
                          loading="lazy"
                          decoding="async">
                     <div class="image-placeholder" data-initial="${initial}"></div>
+                    ${hasDiscount ? `<div class="discount-badge">${discountBadge}</div>` : ''}
                     <button class="wishlist-btn ${isFavorite ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(this, '${product.barcode}')" aria-label="Agregar a favoritos">
                         <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
                     </button>
@@ -2863,7 +2998,8 @@
                 <div class="product-info">
                     <h3 class="product-name">${product.name}</h3>
                     <p class="product-description">${product.description || ''}</p>
-                    <span class="product-price">$${product.price.toFixed(2)}</span>
+                    <span class="product-original-price">$${product.price.toFixed(2)}</span>
+                    <span class="product-price">$${discountedPrice.toFixed(2)}</span>
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
@@ -2872,27 +3008,27 @@
                     </button>
                 </div>
             `;
-            
+
             const img = card.querySelector('img[data-src]');
             if (img && imageObserver) {
                 imageObserver.observe(img);
             }
-            
+
             return card;
         }
 
         function loadMoreProducts() {
             if (AppState.isLoading || !AppState.hasMoreProducts) return;
-            
+
             AppState.isLoading = true;
             const spinner = document.getElementById('loadingSpinner');
             if (spinner) spinner.style.display = 'flex';
-            
+
             setTimeout(() => {
                 AppState.currentPage++;
                 renderProducts();
                 AppState.isLoading = false;
-                
+
                 if (!AppState.hasMoreProducts && spinner) {
                     spinner.style.display = 'none';
                 }
@@ -2915,7 +3051,7 @@
             btn.classList.toggle('active');
             const icon = btn.querySelector('i');
             const isActive = btn.classList.contains('active');
-            
+
             if (isActive) {
                 icon.classList.remove('far');
                 icon.classList.add('fas');
@@ -2929,7 +3065,7 @@
                 AppState.favorites = AppState.favorites.filter(f => f !== barcode);
                 showNotification('Eliminado de favoritos');
             }
-            
+
             localStorage.setItem('klohe_favorites', JSON.stringify(AppState.favorites));
             updateFavorites();
         }
@@ -2938,16 +3074,16 @@
             const badge = document.getElementById('favoritesBadge');
             const btn = document.getElementById('favoritesBtn');
             const list = document.getElementById('favoritesList');
-            
+
             if (badge) {
                 badge.textContent = AppState.favorites.length;
                 badge.style.display = AppState.favorites.length > 0 ? 'flex' : 'none';
             }
-            
+
             if (btn) {
                 btn.classList.toggle('active', AppState.favorites.length > 0);
             }
-            
+
             if (list) {
                 if (AppState.favorites.length === 0) {
                     list.innerHTML = '<div class="favorites-empty">No tienes productos favoritos</div>';
@@ -2956,6 +3092,7 @@
                     AppState.favorites.forEach(barcode => {
                         const product = products.find(p => p.barcode === barcode);
                         if (product) {
+                            const discountedPrice = getDiscountedPrice(product);
                             list.innerHTML += `
                                 <div class="favorite-item">
                                     <div class="favorite-item-image">
@@ -2964,7 +3101,8 @@
                                     </div>
                                     <div class="favorite-item-details">
                                         <h4>${product.name}</h4>
-                                        <p>$${product.price.toFixed(2)}</p>
+                                        <p style="font-size:0.85rem; color:var(--rosa-oscuro); text-decoration:line-through; margin-bottom:0.2rem;">$${product.price.toFixed(2)}</p>
+                                        <p>$${discountedPrice.toFixed(2)}</p>
                                     </div>
                                     <button class="remove-favorite" onclick="removeFromFavorites('${product.barcode}')" aria-label="Eliminar de favoritos">
                                         <i class="fas fa-trash"></i>
@@ -2981,7 +3119,7 @@
             AppState.favorites = AppState.favorites.filter(f => f !== barcode);
             localStorage.setItem('klohe_favorites', JSON.stringify(AppState.favorites));
             updateFavorites();
-            
+
             document.querySelectorAll('.wishlist-btn').forEach(btn => {
                 const onclick = btn.getAttribute('onclick');
                 if (onclick && onclick.includes(barcode)) {
@@ -2991,18 +3129,18 @@
                     icon.classList.add('far');
                 }
             });
-            
+
             showNotification('Eliminado de favoritos');
         }
 
         function toggleFavorites() {
             const modal = document.getElementById('favoritesModal');
             const overlay = document.getElementById('overlay');
-            
+
             if (!modal || !overlay) return;
-            
+
             const isActive = modal.classList.contains('active');
-            
+
             if (isActive) {
                 modal.classList.remove('active');
                 overlay.classList.remove('active');
@@ -3012,7 +3150,7 @@
                 if (cartModal && cartModal.classList.contains('active')) {
                     cartModal.classList.remove('active');
                 }
-                
+
                 modal.classList.add('active');
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -3026,14 +3164,14 @@
         function addToCart(index) {
             const product = products[index];
             if (!product) return;
-            
+
             if (product.stock <= 0) {
                 showNotification('Sin stock disponible', 'error');
                 return;
             }
 
             const existingItem = AppState.cart.find(item => item.barcode === product.barcode);
-            
+
             if (existingItem) {
                 if (existingItem.quantity < product.stock) {
                     existingItem.quantity++;
@@ -3063,19 +3201,39 @@
             }
         }
 
+        function calculateCartTotals() {
+            let subtotal = 0;
+            let discount = 0;
+
+            AppState.cart.forEach(item => {
+                const originalTotal = item.price * item.quantity;
+                const discountedTotal = getDiscountedPrice(item) * item.quantity;
+                subtotal += originalTotal;
+                discount += (originalTotal - discountedTotal);
+            });
+
+            const shippingCost = AppState.shippingEnabled ? 3.75 : 0;
+            const total = subtotal - discount + shippingCost;
+
+            return { subtotal, discount, shippingCost, total };
+        }
+
         function updateCart() {
             const cartItems = document.getElementById('cartItems');
             const cartTotal = document.getElementById('cartTotal');
             const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartDiscount = document.getElementById('cartDiscount');
+            const cartSavings = document.getElementById('cartSavings');
             const cartBadge = document.getElementById('cartBadge');
             const whatsappBtn = document.getElementById('whatsappBtn');
             const summary = document.getElementById('cartSummary');
             const clearBtn = document.getElementById('clearCartBtn');
+            const discountRow = document.getElementById('discountRow');
 
             localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
 
             const totalItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
-            
+
             if (cartBadge) {
                 cartBadge.textContent = totalItems;
                 cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
@@ -3088,6 +3246,8 @@
             if (AppState.cart.length === 0) {
                 if (cartItems) cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>';
                 if (summary) summary.style.display = 'none';
+                if (discountRow) discountRow.style.display = 'none';
+                if (cartSavings) cartSavings.style.display = 'none';
                 if (whatsappBtn) whatsappBtn.style.display = 'none';
                 if (cartTotal) cartTotal.textContent = '$0.00';
                 return;
@@ -3095,11 +3255,11 @@
 
             if (cartItems) {
                 cartItems.innerHTML = '';
-                let subtotal = 0;
 
                 AppState.cart.forEach(item => {
-                    const itemTotal = item.price * item.quantity;
-                    subtotal += itemTotal;
+                    const discountedPrice = getDiscountedPrice(item);
+                    const itemTotal = discountedPrice * item.quantity;
+                    const discountPercent = Math.round(getDiscountRate(item.category) * 100);
 
                     cartItems.innerHTML += `
                         <div class="cart-item">
@@ -3110,7 +3270,8 @@
                             <div class="cart-item-details">
                                 <h4>${item.name}</h4>
                                 <p class="cart-item-code">COD: ${item.barcode}</p>
-                                <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
+                                <p style="font-size:0.85rem; color:var(--rosa-oscuro); text-decoration:line-through;">$${item.price.toFixed(2)}</p>
+                                <p>$${discountedPrice.toFixed(2)} x ${item.quantity} <span style="color:var(--descuento); font-size:0.8rem;">(-${discountPercent}%)</span></p>
                             </div>
                             <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name}">
                                 <i class="fas fa-trash"></i>
@@ -3119,22 +3280,38 @@
                     `;
                 });
 
-                const shippingCost = AppState.shippingEnabled ? 3.75 : 0;
-                const total = subtotal + shippingCost;
+                const totals = calculateCartTotals();
 
-                if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-                if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
+                if (cartSubtotal) cartSubtotal.textContent = `$${totals.subtotal.toFixed(2)}`;
+                if (cartDiscount) cartDiscount.textContent = `-$${totals.discount.toFixed(2)}`;
+                if (cartTotal) cartTotal.textContent = `$${totals.total.toFixed(2)}`;
+
                 if (summary) summary.style.display = 'block';
+                if (discountRow) discountRow.style.display = totals.discount > 0 ? 'flex' : 'none';
+
+                if (cartSavings) {
+                    if (totals.discount > 0) {
+                        cartSavings.textContent = `¡Ahorrás $${totals.discount.toFixed(2)} en esta compra! 🌸`;
+                        cartSavings.style.display = 'block';
+                    } else {
+                        cartSavings.style.display = 'none';
+                    }
+                }
+
                 if (whatsappBtn) {
                     whatsappBtn.style.display = 'flex';
-                    
-                    const message = AppState.cart.map(item => 
-                        `• ${item.name} (COD: ${item.barcode}) - Cant: ${item.quantity}`
-                    ).join('%0A');
-                    
+
+                    const message = AppState.cart.map(item => {
+                        const discountedPrice = getDiscountedPrice(item);
+                        const discountPercent = Math.round(getDiscountRate(item.category) * 100);
+                        return `• ${item.name} (COD: ${item.barcode}) - Cant: ${item.quantity} - $${discountedPrice.toFixed(2)} c/u (-${discountPercent}%)`;
+                    }).join('%0A');
+
                     const shippingText = AppState.shippingEnabled ? `%0A%0AEnvío: $3.75` : '';
-                    
-                    whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent('¡Hola! Quiero comprar:')}%0A%0A${encodeURIComponent(message)}${shippingText}%0A%0ATotal: $${total.toFixed(2)}`;
+                    const totals = calculateCartTotals();
+                    const discountText = totals.discount > 0 ? `%0A%0ADescuento Día de las Madres: -$${totals.discount.toFixed(2)}` : '';
+
+                    whatsappBtn.href = `https://wa.me/50366711569?text=${encodeURIComponent('¡Hola! Quiero comprar para el Día de las Madres:')}%0A%0A${encodeURIComponent(message)}${discountText}${shippingText}%0A%0ATotal a pagar: $${totals.total.toFixed(2)}`;
                 }
             }
         }
@@ -3142,11 +3319,11 @@
         function toggleCart() {
             const modal = document.getElementById('cartModal');
             const overlay = document.getElementById('overlay');
-            
+
             if (!modal || !overlay) return;
-            
+
             const isActive = modal.classList.contains('active');
-            
+
             if (isActive) {
                 modal.classList.remove('active');
                 overlay.classList.remove('active');
@@ -3156,7 +3333,7 @@
                 if (favoritesModal && favoritesModal.classList.contains('active')) {
                     favoritesModal.classList.remove('active');
                 }
-                
+
                 modal.classList.add('active');
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -3169,11 +3346,11 @@
             const toggle = document.getElementById('shippingToggle');
             const price = document.getElementById('shippingPrice');
             const row = document.getElementById('shippingRow');
-            
+
             if (toggle) toggle.classList.toggle('active', AppState.shippingEnabled);
             if (price) price.style.display = AppState.shippingEnabled ? 'block' : 'none';
             if (row) row.style.display = AppState.shippingEnabled ? 'flex' : 'none';
-            
+
             updateCart();
         }
 
@@ -3185,21 +3362,33 @@
         function openPreview(index) {
             const product = products[index];
             if (!product) return;
-            
+
             currentPreviewIndex = index;
-            
+
             const img = document.getElementById('previewImage');
             if (img) {
                 img.src = `${product.barcode}.jpg`;
                 img.alt = product.name;
             }
-            
+
+            const discountedPrice = getDiscountedPrice(product);
+            const discountRate = getDiscountRate(product.category);
+            const discountPercent = Math.round(discountRate * 100);
+
             document.getElementById('previewName').textContent = product.name;
             document.getElementById('previewBarcode').textContent = `COD: ${product.barcode}`;
             document.getElementById('previewDescription').textContent = product.description || 'No hay descripción disponible.';
-            document.getElementById('previewPrice').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('previewPrice').textContent = `$${discountedPrice.toFixed(2)}`;
+            document.getElementById('previewOriginalPrice').textContent = `$${product.price.toFixed(2)}`;
+
+            const discountBadge = document.getElementById('previewDiscountBadge');
+            if (discountBadge) {
+                discountBadge.textContent = `-${discountPercent}% OFF Día de las Madres`;
+                discountBadge.style.display = 'inline-block';
+            }
+
             document.getElementById('previewStock').textContent = `${product.stock} unidades disponibles`;
-            
+
             const addBtn = document.getElementById('previewAddBtn');
             if (addBtn) {
                 if (product.stock > 0) {
@@ -3214,7 +3403,7 @@
                     addBtn.textContent = 'Agotado';
                 }
             }
-            
+
             document.getElementById('previewModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -3228,22 +3417,23 @@
 
         async function generateStoryImage(platform) {
             if (currentPreviewIndex === null) return;
-            
+
             const product = products[currentPreviewIndex];
+            const discountedPrice = getDiscountedPrice(product);
             const storyImg = document.getElementById('storyProductImage');
-            
+
             storyImg.src = `${product.barcode}.jpg`;
-            
+
             document.getElementById('storyProductName').textContent = product.name;
-            document.getElementById('storyPrice').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('storyPrice').textContent = `$${discountedPrice.toFixed(2)}`;
             document.getElementById('storyStock').textContent = product.stock > 0 ? '✓ Disponible' : 'Agotado';
             document.getElementById('storyCode').textContent = `COD: ${product.barcode}`;
-            
+
             await new Promise(resolve => setTimeout(resolve, 100));
-            
+
             try {
                 const element = document.getElementById('storyTemplate');
-                
+
                 const canvas = await html2canvas(element, {
                     scale: 1,
                     useCORS: true,
@@ -3253,14 +3443,14 @@
                     height: 1920,
                     logging: false
                 });
-                
+
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
                 AppState.currentStoryImage = dataUrl;
-                
+
                 document.getElementById('generatedStoryImage').src = dataUrl;
                 document.getElementById('storyModal').classList.add('active');
                 document.body.style.overflow = 'hidden';
-                
+
             } catch (err) {
                 console.error('Error generando imagen:', err);
                 showNotification('Error al generar la imagen. Intenta de nuevo.', 'error');
@@ -3275,14 +3465,14 @@
 
         function downloadStory() {
             if (!AppState.currentStoryImage) return;
-            
+
             const link = document.createElement('a');
-            link.download = `klohe-story-${Date.now()}.jpg`;
+            link.download = `klohe-mama-${Date.now()}.jpg`;
             link.href = AppState.currentStoryImage;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            
+
             showNotification('Imagen descargada');
         }
 
@@ -3291,26 +3481,26 @@
                 showNotification('Error: No hay imagen para copiar', 'error');
                 return;
             }
-            
+
             try {
                 const response = await fetch(AppState.currentStoryImage);
                 const blob = await response.blob();
-                
+
                 await navigator.clipboard.write([
                     new ClipboardItem({ 'image/jpeg': blob })
                 ]);
-                
+
                 const btn = document.getElementById('copyBtn');
                 btn.classList.add('copied');
                 btn.innerHTML = '<i class="fas fa-check"></i><span>¡Copiado!</span>';
-                
+
                 showNotification('¡Imagen copiada al portapapeles!');
-                
+
                 setTimeout(() => {
                     btn.classList.remove('copied');
                     btn.innerHTML = '<i class="fas fa-copy"></i><span>Copiar imagen</span>';
                 }, 3000);
-                
+
             } catch (err) {
                 showNotification('No se pudo copiar. Descarga la imagen.', 'error');
             }
@@ -3320,17 +3510,17 @@
         // TESTIMONIOS
         // ==========================================
         const testimonials = [
-            { name: "María Fernanda L.", text: "Los accesorios son perfectos para el calor salvadoreño. ¡Me encantan!", date: "Feb 10, 2026", stars: "★★★★★" },
-            { name: "Carlos Mendoza", text: "Excelente calidad y el estilo es único. Ideal para la temporada de verano.", date: "Feb 8, 2026", stars: "★★★★★" },
-            { name: "Ana Lucía R.", text: "Me siento en la playa aunque esté en la ciudad. ¡Pura vibe!", date: "Feb 5, 2026", stars: "★★★★★" }
+            { name: "María Fernanda L.", text: "Le regalé un collar a mi mamá y no paró de llorar de la emoción. La calidad es increíble. ¡Gracias KLOHE!", date: "May 2026", stars: "★★★★★" },
+            { name: "Carlos Mendoza", text: "Encontré el reloj perfecto para mi esposa con descuento del 15%. Llegó rápido y en caja de regalo.", date: "May 2026", stars: "★★★★★" },
+            { name: "Ana Lucía R.", text: "Compré pulseras para mis tías y el 30% de descuento me ayudó muchísimo. Todas quedaron encantadas.", date: "May 2026", stars: "★★★★★" }
         ];
 
         function initTestimonials() {
             const track = document.getElementById('testimonialTrack');
             const dotsContainer = document.getElementById('carouselDots');
-            
+
             if (!track || !dotsContainer) return;
-            
+
             track.innerHTML = testimonials.map(t => `
                 <div class="testimonial-slide">
                     <div class="testimonial-card">
@@ -3341,7 +3531,7 @@
                     </div>
                 </div>
             `).join('');
-            
+
             dotsContainer.innerHTML = testimonials.map((_, i) => 
                 `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})"></div>`
             ).join('');
@@ -3351,7 +3541,7 @@
             const track = document.getElementById('testimonialTrack');
             if (!track) return;
             track.style.transform = `translateX(-${AppState.currentTestimonial * 100}%)`;
-            
+
             document.querySelectorAll('.dot').forEach((dot, i) => {
                 dot.classList.toggle('active', i === AppState.currentTestimonial);
             });
@@ -3387,11 +3577,11 @@
             const menu = document.getElementById('categoriesMenu');
             const overlay = document.getElementById('menuOverlay');
             const btn = document.getElementById('menuBtn');
-            
+
             if (!menu || !overlay || !btn) return;
-            
+
             const isActive = menu.classList.contains('active');
-            
+
             if (isActive) {
                 menu.classList.remove('active');
                 overlay.classList.remove('active');
@@ -3408,11 +3598,11 @@
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
             if (!notification) return;
-            
+
             notification.textContent = message;
             notification.style.background = type === 'error' ? '#dc3545' : 'var(--bordo)';
             notification.classList.add('show');
-            
+
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 3000);
@@ -3440,7 +3630,7 @@
             const float = document.getElementById('whatsappFloat');
             if (!float) return;
             let isVisible = true;
-            
+
             function cycle() {
                 if (isVisible) {
                     setTimeout(() => {
@@ -3465,13 +3655,13 @@
         // INICIALIZACIÓN
         // ==========================================
         document.addEventListener('DOMContentLoaded', async function() {
-            console.log('🌟 KLOHE Verano 2026 - Iniciando...');
-            
+            console.log('🌸 KLOHE Día de las Madres 2026 - Iniciando...');
+
             initImageObserver();
             initWhatsAppCyclicAnimation();
-            
+
             AppState.isMobile = window.matchMedia('(max-width: 768px)').matches;
-            
+
             try {
                 await loadDailyVerses();
                 showDailyVerse();
@@ -3479,20 +3669,20 @@
                 useFallbackVerses();
                 showDailyVerse();
             }
-            
+
             initTestimonials();
             renderSkeletons(8);
-            
+
             if (typeof products !== 'undefined' && Array.isArray(products)) {
                 AppState.filteredProducts = [...products];
-                
+
                 const validBarcodes = new Set(products.map(p => p.barcode));
                 AppState.cart = AppState.cart.filter(item => validBarcodes.has(item.barcode));
                 AppState.favorites = AppState.favorites.filter(barcode => validBarcodes.has(barcode));
-                
+
                 localStorage.setItem('klohe_cart', JSON.stringify(AppState.cart));
                 localStorage.setItem('klohe_favorites', JSON.stringify(AppState.favorites));
-                
+
                 setTimeout(() => {
                     document.getElementById('productsContainer').innerHTML = '';
                     renderProducts();
@@ -3505,7 +3695,7 @@
                 document.getElementById('productsContainer').innerHTML = 
                     '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gris-texto);">Error cargando productos</div>';
             }
-            
+
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
                 searchInput.addEventListener('input', debounce((e) => {
@@ -3515,14 +3705,14 @@
 
             const menuBtn = document.getElementById('menuBtn');
             const menuOverlay = document.getElementById('menuOverlay');
-            
+
             if (menuBtn) {
                 menuBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     toggleMenu();
                 });
             }
-            
+
             if (menuOverlay) {
                 menuOverlay.addEventListener('click', toggleMenu);
             }
@@ -3555,7 +3745,7 @@
                 const menu = document.getElementById('categoriesMenu');
                 const overlay = document.getElementById('menuOverlay');
                 const btn = document.getElementById('menuBtn');
-                
+
                 if (menu && menu.classList.contains('active')) {
                     menu.classList.remove('active');
                     overlay.classList.remove('active');

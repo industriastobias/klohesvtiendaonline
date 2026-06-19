@@ -326,31 +326,6 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* ====== BANNER PROMOCIONAL ====== */
-        .promo-banner {
-            background: linear-gradient(90deg, var(--azul-cielo) 0%, var(--azul-cielo-claro) 50%, var(--rosa-vieja-claro) 100%);
-            background-size: 200% 100%;
-            animation: gradientShift 6s ease infinite;
-            padding: 0.5rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        .promo-text {
-            color: var(--negro);
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .promo-text strong { font-weight: 700; }
-
         /* ====== CATEGORIES MENU ====== */
         .categories-menu {
             position: fixed;
@@ -792,7 +767,7 @@
             width: 100%;
             padding: 0.6rem;
             border: none;
-            background: linear-gradient(135deg, var(--negro), var(--negro-suave));
+            background: var(--azul-cielo);
             color: white;
             cursor: pointer;
             display: flex;
@@ -810,7 +785,7 @@
         }
 
         .cart-corner-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, var(--azul-cielo), var(--azul-cielo-claro));
+            background: var(--azul-cielo-claro);
             transform: translateY(-2px);
             box-shadow: var(--sombra-media);
         }
@@ -1093,13 +1068,13 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 26, 26, 0.92);
-            backdrop-filter: blur(10px);
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(15px);
             z-index: 3000;
-            padding: 1rem;
-            overflow-y: auto;
+            overflow: hidden;
             align-items: center;
             justify-content: center;
         }
@@ -1108,25 +1083,24 @@
 
         .preview-content {
             background: white;
-            max-width: 850px;
             width: 100%;
-            max-height: 85vh;
+            height: 100%;
+            max-width: 100vw;
+            max-height: 100vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
             position: relative;
-            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 25px 80px rgba(26, 26, 26, 0.3);
-            animation: fadeInScale 0.4s ease forwards;
+            animation: fadeInScale 0.3s ease forwards;
         }
 
         .close-preview-btn {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 40px;
-            height: 40px;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid var(--azul-cielo-suave);
@@ -1136,8 +1110,9 @@
             justify-content: center;
             font-size: 1.1rem;
             color: var(--negro);
-            z-index: 10;
+            z-index: 100;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
         }
 
         .close-preview-btn:hover {
@@ -1150,8 +1125,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 300px;
-            max-height: 500px;
+            min-height: 100%;
             background: linear-gradient(135deg, var(--azul-cielo-suave) 0%, var(--rosa-suave) 100%);
             overflow: hidden;
             display: flex;
@@ -1162,128 +1136,143 @@
         .preview-image {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            max-height: 500px;
+            object-fit: cover;
         }
 
         .preview-details {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding: 2rem;
+            padding: 3rem;
             position: relative;
             background: white;
             overflow-y: auto;
-            max-height: 85vh;
+            height: 100vh;
+            height: 100dvh;
         }
 
         .share-corner {
             position: absolute;
-            top: 1.2rem;
-            right: 1.2rem;
+            top: 1.5rem;
+            left: 1.5rem;
             display: flex;
             flex-direction: row;
-            gap: 0.6rem;
+            gap: 0.8rem;
             z-index: 10;
         }
 
         .share-corner-btn {
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: white;
             transition: all 0.3s ease;
-            box-shadow: var(--sombra-media);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        .share-corner-btn.instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        .share-corner-btn.share {
+            background: var(--azul-cielo);
         }
 
         .share-corner-btn.whatsapp {
             background: #25D366;
         }
 
+        .share-corner-btn.favorite {
+            background: var(--rosa-vieja);
+        }
+
         .share-corner-btn:hover {
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 6px 20px rgba(26, 26, 26, 0.3);
+            transform: scale(1.12);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        }
+
+        .share-corner-btn.active {
+            background: var(--rosa-vieja);
+        }
+
+        .share-corner-btn.active i {
+            font-weight: 900;
         }
 
         .preview-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
+            font-size: 2rem;
             color: var(--negro);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.8rem;
+            margin-top: 4rem;
             font-weight: 700;
             letter-spacing: 1px;
             line-height: 1.2;
-            padding-right: 100px;
+            text-transform: uppercase;
         }
 
         .preview-barcode {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--gris);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-family: 'Courier New', monospace;
             letter-spacing: 2px;
-            padding: 0.4rem 0.8rem;
+            padding: 0.5rem 1rem;
             background: var(--azul-cielo-suave);
             display: inline-block;
-            border-radius: 6px;
+            border-radius: 8px;
             width: fit-content;
         }
 
         .preview-description {
             font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--gris);
-            line-height: 1.6;
-            margin-bottom: 1.2rem;
-            padding: 0.8rem 0;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            padding: 1.2rem 0;
             border-top: 1px solid var(--azul-cielo-suave);
             border-bottom: 1px solid var(--azul-cielo-suave);
-            max-height: 120px;
-            overflow-y: auto;
         }
 
         .preview-price-container {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .preview-price {
-            font-size: 1.6rem;
-            color: var(--negro);
+            font-size: 2.2rem;
+            color: var(--azul-cielo);
             font-weight: 700;
             letter-spacing: 0.5px;
             font-family: 'Poppins', sans-serif;
         }
 
         .preview-price-original {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #bbb;
             text-decoration: line-through;
             margin-left: 0.5rem;
         }
 
         .preview-stock {
-            font-size: 0.8rem;
-            color: var(--gris);
-            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+            color: #25D366;
+            margin-bottom: 2rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            font-weight: 500;
+            font-weight: 600;
             font-family: 'Outfit', sans-serif;
+        }
+
+        .preview-stock.out {
+            color: #dc3545;
         }
 
         .preview-add-btn {
             padding: 0.9rem 2rem;
-            background: linear-gradient(135deg, var(--negro), var(--negro-suave));
+            background: var(--azul-cielo);
             color: white;
             border: none;
             cursor: pointer;
@@ -1293,14 +1282,14 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            width: fit-content;
+            width: 100%;
             border-radius: 50px;
             min-height: 48px;
             margin-bottom: 0.8rem;
         }
 
         .preview-add-btn:hover {
-            background: linear-gradient(135deg, var(--azul-cielo), var(--azul-cielo-claro));
+            background: var(--azul-cielo-claro);
             transform: translateY(-2px);
         }
 
@@ -2271,10 +2260,13 @@
             .cart-corner-btn { font-size: 0.68rem; padding: 0.5rem; }
             .discount-tag { font-size: 0.6rem; padding: 0.2rem 0.5rem; }
             .section-title { font-size: 1rem; }
-            .preview-content { grid-template-columns: 1fr; max-height: 90vh; }
-            .preview-image-container { min-height: 250px; max-height: 300px; }
-            .preview-details { padding: 1.2rem; max-height: 45vh; }
-            .preview-name { font-size: 1.2rem; }
+            .preview-content { grid-template-columns: 1fr; width: 100%; height: 100%; max-height: 100vh; max-height: 100dvh; border-radius: 0; }
+            .preview-image-container { min-height: 40vh; height: 40vh; }
+            .preview-details { padding: 1.5rem; height: auto; overflow-y: auto; }
+            .preview-name { font-size: 1.4rem; margin-top: 3.5rem; }
+            .preview-price { font-size: 1.8rem; }
+            .share-corner { top: 0.8rem; left: 0.8rem; gap: 0.5rem; }
+            .share-corner-btn { width: 38px; height: 38px; font-size: 1rem; }
             .footer-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
             .footer-section h4::after { left: 50%; transform: translateX(-50%); }
             .social-footer { justify-content: center; }
@@ -2295,6 +2287,7 @@
             .wishlist-btn { width: 26px; height: 26px; font-size: 0.75rem; }
         }
     </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -2332,13 +2325,6 @@
             </nav>
         </div>
     </header>
-
-    <!-- Banner Promocional -->
-    <div class="promo-banner">
-        <div class="promo-text">
-            <i class="fas fa-sun"></i> Verano 2026 <strong>Relojes 15% OFF</strong> | <strong>Todo lo demas 30% OFF</strong> <i class="fas fa-sun"></i>
-        </div>
-    </div>
 
     <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay"></div>
@@ -2465,7 +2451,7 @@
                     </div>
                 </div>
                 <div class="location-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.4!2d-89.2182!3d13.6929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQxJzM0LjQiTiA4OcKwMTMnMDUuNSJX!5e0!3m2!1ses!2ssv!4v1" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248305.97300153466!2d-89.30428505!3d13.72410255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6327c9ab3fc8d1%3A0x7ed5e553f5e3d91e!2sSan%20Salvador!5e0!3m2!1ses!2ssv!4v1700000000000!5m2!1ses!2ssv" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -2480,11 +2466,14 @@
             </div>
             <div class="preview-details">
                 <div class="share-corner">
-                    <button class="share-corner-btn instagram" onclick="generateStoryImage('instagram')">
-                        <i class="fab fa-instagram"></i>
+                    <button class="share-corner-btn share" onclick="shareProduct()" title="Compartir">
+                        <i class="fas fa-share-alt"></i>
                     </button>
-                    <button class="share-corner-btn whatsapp" onclick="generateStoryImage('whatsapp')">
+                    <button class="share-corner-btn whatsapp" onclick="shareWhatsApp()" title="Compartir por WhatsApp">
                         <i class="fab fa-whatsapp"></i>
+                    </button>
+                    <button class="share-corner-btn favorite" id="previewFavBtn" onclick="togglePreviewFavorite()" title="Agregar a favoritos">
+                        <i class="far fa-heart"></i>
                     </button>
                 </div>
                 <h3 class="preview-name" id="previewName"></h3>
@@ -2495,8 +2484,12 @@
                     <span class="preview-price-original" id="previewPriceOriginal"></span>
                 </div>
                 <p class="preview-stock" id="previewStock"></p>
-                <button class="preview-add-btn" id="previewAddBtn">Agregar al carrito</button>
+                <button class="preview-add-btn" id="previewAddBtn">
+                    <i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito
+                </button>
             </div>
+        </div>
+    </div>
         </div>
     </div>
 
@@ -2569,7 +2562,7 @@
             <div class="copyright">
                 <p>&copy; 2026 DAYMAR SHOP. TODOS LOS DERECHOS RESERVADOS.</p>
                 <p style="margin-top: 0.5rem;">
-                    BY: <a href="https://www.instagram.com/ERNESTOTOBIASS" target="_blank">ERNESTO TOBIAS</a> & 
+                    BY: <a href="https://www.instagram.com/tobiasxel" target="_blank">ERNESTO TOBIAS</a> & 
                     <a href="https://www.instagram.com/tatianapalacios720" target="_blank">PAOLA PALACIOS</a>
                 </p>
             </div>
@@ -3347,45 +3340,138 @@
         function openPreview(index) {
             const product = products[index];
             if (!product) return;
-            
+
             currentPreviewIndex = index;
-            
+
             const img = document.getElementById('previewImage');
             if (img) {
                 img.src = `${product.barcode}.jpg`;
                 img.alt = product.name;
             }
-            
+
             const discount = getDiscountForProduct(product);
             const discountedPrice = getDiscountedPrice(product);
-            
+
             document.getElementById('previewName').textContent = product.name;
             document.getElementById('previewBarcode').textContent = `COD: ${product.barcode}`;
             document.getElementById('previewDescription').textContent = product.description || 'No hay descripcion disponible.';
             document.getElementById('previewPrice').textContent = `$${discountedPrice.toFixed(2)}`;
             document.getElementById('previewPriceOriginal').textContent = product.stock > 0 ? `$${product.price.toFixed(2)}` : '';
-            document.getElementById('previewStock').textContent = `${product.stock} unidades disponibles`;
-            
+
+            const stockEl = document.getElementById('previewStock');
+            if (product.stock > 0) {
+                stockEl.textContent = `${product.stock} unidades disponibles`;
+                stockEl.classList.remove('out');
+            } else {
+                stockEl.textContent = 'Agotado';
+                stockEl.classList.add('out');
+            }
+
+            // Actualizar estado del botón de favoritos
+            const favBtn = document.getElementById('previewFavBtn');
+            const isFav = AppState.favorites.includes(product.barcode);
+            if (favBtn) {
+                favBtn.classList.toggle('active', isFav);
+                const heartIcon = favBtn.querySelector('i');
+                if (heartIcon) {
+                    heartIcon.className = isFav ? 'fas fa-heart' : 'far fa-heart';
+                }
+            }
+
             const addBtn = document.getElementById('previewAddBtn');
             if (addBtn) {
                 if (product.stock > 0) {
                     addBtn.disabled = false;
-                    addBtn.textContent = 'Agregar al carrito';
+                    addBtn.innerHTML = '<i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito';
                     addBtn.onclick = () => {
                         addToCart(index);
                         closePreview();
                     };
                 } else {
                     addBtn.disabled = true;
-                    addBtn.textContent = 'Agotado';
+                    addBtn.innerHTML = 'Agotado';
                 }
             }
-            
+
             document.getElementById('previewModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        function closePreview(e) {
+        function shareProduct() {
+            if (currentPreviewIndex === null) return;
+            const product = products[currentPreviewIndex];
+            if (!product) return;
+
+            const discountedPrice = getDiscountedPrice(product);
+            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${discountedPrice.toFixed(2)}`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: product.name,
+                    text: shareText,
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                // Fallback: copiar al portapapeles
+                navigator.clipboard.writeText(`${shareText} - ${window.location.href}`).then(() => {
+                    showNotification('Enlace copiado al portapapeles');
+                }).catch(() => {
+                    showNotification('No se pudo copiar', 'error');
+                });
+            }
+        }
+
+        function shareWhatsApp() {
+            if (currentPreviewIndex === null) return;
+            const product = products[currentPreviewIndex];
+            if (!product) return;
+
+            const discountedPrice = getDiscountedPrice(product);
+            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${discountedPrice.toFixed(2)}`;
+            const url = `https://wa.me/?text=${encodeURIComponent(shareText + ' - ' + window.location.href)}`;
+            window.open(url, '_blank');
+        }
+
+        function togglePreviewFavorite() {
+            if (currentPreviewIndex === null) return;
+            const product = products[currentPreviewIndex];
+            if (!product) return;
+
+            const favBtn = document.getElementById('previewFavBtn');
+            const heartIcon = favBtn.querySelector('i');
+            const isActive = favBtn.classList.contains('active');
+
+            if (!isActive) {
+                favBtn.classList.add('active');
+                heartIcon.className = 'fas fa-heart';
+                if (!AppState.favorites.includes(product.barcode)) {
+                    AppState.favorites.push(product.barcode);
+                }
+                showNotification('Agregado a favoritos');
+            } else {
+                favBtn.classList.remove('active');
+                heartIcon.className = 'far fa-heart';
+                AppState.favorites = AppState.favorites.filter(f => f !== product.barcode);
+                showNotification('Eliminado de favoritos');
+            }
+
+            localStorage.setItem('daymar_favorites', JSON.stringify(AppState.favorites));
+            updateFavorites();
+
+            // Actualizar también el ícono de corazón en la tarjeta del producto
+            document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                const onclick = btn.getAttribute('onclick');
+                if (onclick && onclick.includes(product.barcode)) {
+                    btn.classList.toggle('active', !isActive);
+                    const cardIcon = btn.querySelector('i');
+                    if (cardIcon) {
+                        cardIcon.className = !isActive ? 'fas fa-heart' : 'far fa-heart';
+                    }
+                }
+            });
+        }
+
+function closePreview(e) {
             if (e && e.target !== e.currentTarget && !e.target.closest('.close-preview-btn')) return;
             document.getElementById('previewModal').classList.remove('active');
             document.body.style.overflow = '';

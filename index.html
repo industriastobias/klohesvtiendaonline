@@ -191,9 +191,9 @@
         }
 
         .container {
-            max-width: 1400px;
+            width: 100%;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 0.75rem;
         }
 
         nav {
@@ -266,6 +266,11 @@
             background: var(--azul-cielo);
             color: white;
             transform: scale(1.08);
+        }
+
+        .header-icon.active {
+            background: var(--azul-cielo);
+            color: white;
         }
 
         .menu-toggle {
@@ -425,7 +430,7 @@
         }
 
         .hero-content {
-            max-width: 700px;
+            width: 100%;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -462,6 +467,7 @@
             max-width: 480px;
             margin: 0 auto;
             position: relative;
+            padding: 0 0.75rem;
         }
 
         .search-input {
@@ -485,11 +491,105 @@
 
         .search-icon {
             position: absolute;
-            left: 1rem;
+            left: calc(0.75rem + 1rem);
             top: 50%;
             transform: translateY(-50%);
             color: var(--azul-cielo);
             font-size: 0.9rem;
+        }
+
+        /* ====== DAILY VERSE SECTION ====== */
+        .daily-verse-section {
+            max-width: 600px;
+            margin: 1rem auto 0;
+            padding: 0 0.75rem;
+            animation: fadeIn 0.8s ease forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .daily-verse-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(232,244,252,0.95));
+            border: 1.5px solid var(--azul-cielo-claro);
+            border-radius: var(--radius);
+            padding: 1rem 1.2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .daily-verse-card:hover {
+            box-shadow: var(--sombra-media);
+            border-color: var(--azul-cielo);
+        }
+
+        .daily-verse-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .daily-verse-header i {
+            color: var(--azul-cielo);
+            font-size: 0.8rem;
+        }
+
+        .daily-verse-header span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--azul-cielo);
+        }
+
+        .daily-verse-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            color: var(--negro);
+            line-height: 1.6;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .daily-verse-ref {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--rosa-vieja);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .daily-verse-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.3rem;
+            margin-top: 0.5rem;
+        }
+
+        .daily-verse-nav button {
+            background: var(--azul-cielo-suave);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--negro);
+            font-size: 0.6rem;
+            transition: all 0.3s ease;
+        }
+
+        .daily-verse-nav button:hover {
+            background: var(--azul-cielo);
+            color: white;
         }
 
         /* ====== PRODUCTS ====== */
@@ -560,7 +660,7 @@
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.2rem;
+            gap: 0.75rem;
         }
 
         .product-card {
@@ -2229,12 +2329,12 @@
         @media (max-width: 1200px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 1.2rem;
+                gap: 0.75rem;
             }
         }
 
         @media (max-width: 768px) {
-            .container { padding: 0 1rem; }
+            .container { padding: 0 0.5rem; }
             nav { height: 56px; }
             .logo { font-size: 1.4rem; }
             .nav-left, .nav-right { gap: 0.4rem; }
@@ -2247,7 +2347,7 @@
             .section-header { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
             .filter-container { width: 100%; margin-left: 0; }
             .filter-select { width: 100%; }
-            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
             .product-card { transform: none !important; box-shadow: none !important; }
             .product-image-container { aspect-ratio: 1/1; }
             .wishlist-btn { width: 30px; height: 30px; top: 0.4rem; right: 0.4rem; font-size: 0.8rem; }
@@ -2279,6 +2379,8 @@
             .comment-box { padding: 1.5rem; }
             .newsletter-popup { padding: 1.8rem; }
             .newsletter-popup h3 { font-size: 1.4rem; }
+            .daily-verse-text { font-size: 0.78rem; }
+            .daily-verse-card { padding: 0.8rem 1rem; }
         }
 
         @media (max-width: 480px) {
@@ -2287,6 +2389,7 @@
             .wishlist-btn { width: 26px; height: 26px; font-size: 0.75rem; }
         }
     </style>
+<base target="_blank">
 <base target="_blank">
 <base target="_blank">
 </head>
@@ -2305,8 +2408,8 @@
                         <span></span>
                         <span></span>
                     </button>
-                    <button class="header-icon search-icon-btn" onclick="focusSearch()" aria-label="Buscar">
-                        <i class="fas fa-search"></i>
+                    <button class="header-icon" onclick="toggleDailyVerse()" aria-label="Versiculo del dia" title="Versiculo del dia">
+                        <i class="fas fa-book-open"></i>
                     </button>
                 </div>
                 <div class="nav-center">
@@ -2354,6 +2457,23 @@
                 <div class="search-container">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" class="search-input" id="searchInput" placeholder="Buscar accesorios..." aria-label="Buscar productos">
+                </div>
+                <!-- Daily Verse Section -->
+                <div class="daily-verse-section" id="dailyVerseSection">
+                    <div class="daily-verse-card">
+                        <div class="daily-verse-header">
+                            <i class="fas fa-sun"></i>
+                            <span>Versiculo del Dia</span>
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <p class="daily-verse-text" id="dailyVerseText">"Porque yo se los planes que tengo para ustedes, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza."</p>
+                        <p class="daily-verse-ref" id="dailyVerseRef">Jeremias 29:11</p>
+                        <div class="daily-verse-nav">
+                            <button onclick="prevVerse()" title="Versiculo anterior"><i class="fas fa-chevron-left"></i></button>
+                            <button onclick="loadDiarioVerse()" title="Cargar de diario.html"><i class="fas fa-sync-alt"></i></button>
+                            <button onclick="nextVerse()" title="Siguiente versiculo"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2420,7 +2540,7 @@
                     </div>
                     <div class="form-group">
                         <label for="commentText">Tu experiencia</label>
-                        <textarea id="commentText" required placeholder="Cuéntanos tu experiencia..."></textarea>
+                        <textarea id="commentText" required placeholder="Cuentanos tu experiencia..."></textarea>
                     </div>
                     <button type="submit" class="btn-submit">Enviar comentario</button>
                 </form>
@@ -2683,8 +2803,110 @@
             searchTerm: '',
             currentStoryImage: null,
             isMobile: false,
-            currentSort: 'default'
+            currentSort: 'default',
+            currentVerseIndex: 0
         };
+
+        // ==========================================
+        // VERSICULOS DIARIOS
+        // ==========================================
+        const dailyVerses = [
+            { text: "Porque yo se los planes que tengo para ustedes, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.", ref: "Jeremias 29:11" },
+            { text: "Todo lo puedo en Cristo que me fortalece.", ref: "Filipenses 4:13" },
+            { text: "El Senor es mi pastor, nada me faltara.", ref: "Salmos 23:1" },
+            { text: "Pues donde dos o tres se reinen en mi nombre, alli estoy yo en medio de ellos.", ref: "Mateo 18:20" },
+            { text: "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.", ref: "1 Corintios 13:4" },
+            { text: "Confia en el Senor con todo tu corazon, y no te apoyes en tu propia inteligencia.", ref: "Proverbios 3:5" },
+            { text: "Pues por gracia ustedes han sido salvados mediante la fe; esto no proviene de ustedes, sino que es el regalo de Dios.", ref: "Efesios 2:8" },
+            { text: "Pero los que esperan al Senor tendran nuevas fuerzas; se remontaran con alas como las aguilas.", ref: "Isaias 40:31" },
+            { text: "Porque tanto amo Dios al mundo que dio a su Hijo unigenito, para que todo el que cree en el no se pierda, sino que tenga vida eterna.", ref: "Juan 3:16" },
+            { text: "El Senor te bendiga y te guarde; el Senor haga resplandecer su rostro sobre ti y te conceda gracia.", ref: "Numeros 6:24-25" },
+            { text: "No temas, porque yo estoy contigo; no te desanimes, porque yo soy tu Dios.", ref: "Isaias 41:10" },
+            { text: "Den gracias a Dios en toda situacion, porque esta es su voluntad para ustedes en Cristo Jesus.", ref: "1 Tesalonicenses 5:18" },
+            { text: "Venid a mi todos los que estais trabajados y cargados, y yo os hare descansar.", ref: "Mateo 11:28" },
+            { text: "Porque el salario del pecado es muerte, mas la dacion gratuita de Dios es vida eterna en Cristo Jesus Senor nuestro.", ref: "Romanos 6:23" },
+            { text: "Sigan amando a sus enemigos y oren por quienes los persiguen.", ref: "Mateo 5:44" },
+            { text: "Si Dios es por nosotros, quien contra nosotros?", ref: "Romanos 8:31" },
+            { text: "No se inquieten por nada; mas bien, en toda ocasion, con oracion y ruego, presenten sus peticiones a Dios y denle gracias.", ref: "Filipenses 4:6" },
+            { text: "Buscad primero el reino de Dios y su justicia, y todas estas cosas os seran anadidas.", ref: "Mateo 6:33" },
+            { text: "El fruto del Espiritu es amor, gozo, paz, paciencia, benignidad, bondad, fe, mansedumbre, templanza.", ref: "Galatas 5:22-23" },
+            { text: "Jehova peleara por vosotros, y vosotros estareis tranquilos.", ref: "Exodo 14:14" },
+            { text: "Encomienda al Senor tu camino, y confia en el, y el lo hara.", ref: "Salmos 37:5" },
+            { text: "Porque un nino nos es nacido, hijo nos es dado, y el principado sobre su hombro; y se llamara su nombre Admirable, Consejero, Dios Fuerte, Padre Eterno, Principe de Paz.", ref: "Isaias 9:6" },
+            { text: "Lampara es a mis pies tu palabra, y lumbrera a mi camino.", ref: "Salmos 119:105" },
+            { text: "El Dios de paz aplastara pronto a Satanas bajo vuestros pies.", ref: "Romanos 16:20" },
+            { text: "A Dios sea la gloria y el poder por los siglos de los siglos. Amen.", ref: "1 Pedro 4:11" },
+            { text: "No se ha retirado de mi ni un solo bien de cuantos prometio Jehova el Dios de Israel.", ref: "Josue 23:14" },
+            { text: "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os seran anadidas.", ref: "Mateo 6:33" },
+            { text: "Porque el Senor mismo con voz de mando, con voz de arcangel, y con trompeta de Dios, descendera del cielo.", ref: "1 Tesalonicenses 4:16" },
+            { text: "Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su proposito son llamados.", ref: "Romanos 8:28" },
+            { text: "Aunque yo camine en valle de sombra de muerte, no temere mal alguno, porque tu estaras conmigo.", ref: "Salmos 23:4" },
+            { text: "Ensenad a los ninos el camino en que deben andar, y aun cuando fueren viejos no se apartaran de el.", ref: "Proverbios 22:6" }
+        ];
+
+        function getDailyVerse() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            return dayOfYear % dailyVerses.length;
+        }
+
+        function initDailyVerse() {
+            AppState.currentVerseIndex = getDailyVerse();
+            renderVerse();
+        }
+
+        function renderVerse() {
+            const verse = dailyVerses[AppState.currentVerseIndex];
+            const textEl = document.getElementById('dailyVerseText');
+            const refEl = document.getElementById('dailyVerseRef');
+            if (textEl && refEl && verse) {
+                textEl.textContent = '"' + verse.text + '"';
+                refEl.textContent = verse.ref;
+            }
+        }
+
+        function nextVerse() {
+            AppState.currentVerseIndex = (AppState.currentVerseIndex + 1) % dailyVerses.length;
+            renderVerse();
+        }
+
+        function prevVerse() {
+            AppState.currentVerseIndex = (AppState.currentVerseIndex - 1 + dailyVerses.length) % dailyVerses.length;
+            renderVerse();
+        }
+
+        function toggleDailyVerse() {
+            const section = document.getElementById('dailyVerseSection');
+            if (section) {
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+                if (section.style.display !== 'none') {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        }
+
+        function loadDiarioVerse() {
+            fetch('diario.html')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const verseText = doc.querySelector('.verse-text, #verseText, .daily-verse, [data-verse]');
+                    const verseRef = doc.querySelector('.verse-ref, #verseRef, .verse-reference');
+                    if (verseText) {
+                        document.getElementById('dailyVerseText').textContent = '"' + verseText.textContent.trim() + '"';
+                    }
+                    if (verseRef) {
+                        document.getElementById('dailyVerseRef').textContent = verseRef.textContent.trim();
+                    } else {
+                        showNotification('Versiculo cargado de diario.html');
+                    }
+                })
+                .catch(() => {
+                    showNotification('No se pudo cargar diario.html. Usando versiculo del dia.', 'error');
+                    renderVerse();
+                });
+        }
 
         // ==========================================
         // FONDO ANIMADO
@@ -3110,7 +3332,7 @@
                                 <div class="favorite-item">
                                     <div class="favorite-item-image">
                                         <img src="${product.barcode}.jpg" alt="${product.name}" loading="lazy"
-                                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--azul-cielo-suave);font-family:Poppins;font-size:2rem;color:var(--azul-cielo);\'>${product.name.charAt(0)}</div>'">
+                                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--azul-cielo-suave);font-family:Poppins;font-size:2rem;color:var(--azul-cielo);\">${product.name.charAt(0)}</div>'">
                                     </div>
                                     <div class="favorite-item-details">
                                         <h4>${product.name}</h4>
@@ -3256,7 +3478,7 @@
                         <div class="cart-item">
                             <div class="cart-item-image">
                                 <img src="${item.barcode}.jpg" alt="${item.name}" loading="lazy"
-                                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--azul-cielo-suave);font-family:Poppins;font-size:2rem;color:var(--azul-cielo);\'>${item.name.charAt(0)}</div>'">
+                                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--azul-cielo-suave);font-family:Poppins;font-size:2rem;color:var(--azul-cielo);\">${item.name.charAt(0)}</div>'">
                             </div>
                             <div class="cart-item-details">
                                 <h4>${item.name}</h4>
@@ -3280,7 +3502,6 @@
                 if (whatsappBtn) {
                     whatsappBtn.style.display = 'flex';
                     
-                    // Build beautiful WhatsApp message with product image link
                     const messageLines = AppState.cart.map(item => {
                         const discountedPrice = getDiscountedPrice(item);
                         return `* ${item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${discountedPrice.toFixed(2)}\n  Imagen: https://industriastobias.github.io/klohesvtiendaonline/${item.barcode}.jpg`;
@@ -3368,7 +3589,6 @@
                 stockEl.classList.add('out');
             }
 
-            // Actualizar estado del botón de favoritos
             const favBtn = document.getElementById('previewFavBtn');
             const isFav = AppState.favorites.includes(product.barcode);
             if (favBtn) {
@@ -3413,7 +3633,6 @@
                     url: window.location.href
                 }).catch(() => {});
             } else {
-                // Fallback: copiar al portapapeles
                 navigator.clipboard.writeText(`${shareText} - ${window.location.href}`).then(() => {
                     showNotification('Enlace copiado al portapapeles');
                 }).catch(() => {
@@ -3459,7 +3678,6 @@
             localStorage.setItem('daymar_favorites', JSON.stringify(AppState.favorites));
             updateFavorites();
 
-            // Actualizar también el ícono de corazón en la tarjeta del producto
             document.querySelectorAll('.wishlist-btn').forEach(btn => {
                 const onclick = btn.getAttribute('onclick');
                 if (onclick && onclick.includes(product.barcode)) {
@@ -3728,6 +3946,7 @@ function closePreview(e) {
             initFloatingHearts();
             initImageObserver();
             initWhatsAppCyclicAnimation();
+            initDailyVerse();
             
             AppState.isMobile = window.matchMedia('(max-width: 768px)').matches;
             

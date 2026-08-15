@@ -2539,8 +2539,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             display: none;
             align-items: center;
             justify-content: center;
-            width: 52px;
-            height: 52px;
+            width: 46px;
+            height: 46px;
             padding: 0;
             border: none;
             border-radius: 50%;
@@ -2551,12 +2551,19 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             transition: transform .25s ease, box-shadow .25s ease;
         }
 
+        @keyframes floatingCartAdded {
+            0% { transform: scale(1); }
+            45% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
         .floating-cart-btn.visible { display: flex; animation: bounceIn .45s ease; }
+        .floating-cart-btn.is-updated { animation: floatingCartAdded .55s ease; }
         .floating-cart-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(23, 21, 21, 0.2); }
         .floating-cart-btn i { color: var(--negro, #1a1a1a); font-size: 19px; }
 
         @media (max-width: 600px) {
-            .floating-cart-btn { right: 16px; bottom: 16px; width: 48px; height: 48px; }
+            .floating-cart-btn { right: 16px; bottom: 16px; width: 42px; height: 42px; }
         }
     </style>
     <style id="preview-size-tuning">
@@ -2936,7 +2943,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
     </div>
 
     <!-- Floating cart: visible only when the cart has products -->
-    <button class="floating-cart-btn" id="floatingCartBtn" aria-label="Abrir carrito">
+    <button class="floating-cart-btn" id="floatingCartBtn" onclick="toggleCart()" aria-label="Abrir carrito">
         <i class="fas fa-shopping-bag"></i>
     </button>
 
@@ -3626,6 +3633,14 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
 
             updateCart();
             showAddedButtonState(sourceButton);
+
+            const floatingCartBtn = document.getElementById('floatingCartBtn');
+            if (floatingCartBtn) {
+                floatingCartBtn.classList.remove('is-updated');
+                void floatingCartBtn.offsetWidth;
+                floatingCartBtn.classList.add('is-updated');
+                setTimeout(() => floatingCartBtn.classList.remove('is-updated'), 600);
+            }
 
             showNotification('Producto agregado al carrito');
         }

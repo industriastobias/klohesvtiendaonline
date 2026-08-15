@@ -2522,6 +2522,52 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
     }
 }
 </style>
+    <style>
+        /* ====== CARRITO FLOTANTE ====== */
+        .floating-cart-btn {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 1200;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 18px;
+            border: 1px solid var(--line, var(--azul-cielo-claro));
+            border-radius: 999px;
+            background: var(--ink, var(--negro));
+            color: #fff;
+            box-shadow: 0 12px 30px rgba(23, 21, 21, 0.18);
+            cursor: pointer;
+            font-family: 'Manrope', 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+        }
+
+        .floating-cart-btn.visible { display: flex; animation: bounceIn .45s ease; }
+        .floating-cart-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(23, 21, 21, 0.24); }
+        .floating-cart-btn i { color: var(--blush, var(--azul-cielo)); font-size: 15px; }
+        .floating-cart-count {
+            min-width: 22px;
+            height: 22px;
+            padding: 0 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: var(--blush, var(--rosa-vieja));
+            color: var(--ink, var(--negro));
+            font-size: 11px;
+            line-height: 1;
+        }
+
+        @media (max-width: 600px) {
+            .floating-cart-btn { right: 16px; bottom: 16px; padding: 12px 15px; font-size: 10px; }
+        }
+    </style>
 </head>
 <body>
     <div class="atelier-topline"><span>DAYMAR ATELIER / VERANO 2026</span><span>Envíos a todo El Salvador</span><span>Compra local, elige bonito</span></div>
@@ -2841,6 +2887,13 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             <i class="fas fa-trash-alt"></i> <span>Vaciar carrito</span>
         </button>
     </div>
+
+    <!-- Floating cart summary -->
+    <button class="floating-cart-btn" id="floatingCartBtn" onclick="toggleCart()" aria-label="Abrir carrito">
+        <i class="fas fa-shopping-bag"></i>
+        <span>Ver carrito</span>
+        <span class="floating-cart-count" id="floatingCartCount">0</span>
+    </button>
 
     <!-- Notification -->
     <div class="notification" id="notification">Producto agregado</div>
@@ -3531,6 +3584,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const cartTotal = document.getElementById('cartTotal');
             const cartSubtotal = document.getElementById('cartSubtotal');
             const cartBadge = document.getElementById('cartBadge');
+            const floatingCartBtn = document.getElementById('floatingCartBtn');
+            const floatingCartCount = document.getElementById('floatingCartCount');
             const whatsappBtn = document.getElementById('whatsappBtn');
             const summary = document.getElementById('cartSummary');
             const clearBtn = document.getElementById('clearCartBtn');
@@ -3543,6 +3598,9 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 cartBadge.textContent = totalItems;
                 cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
             }
+
+            if (floatingCartCount) floatingCartCount.textContent = totalItems;
+            if (floatingCartBtn) floatingCartBtn.classList.toggle('visible', totalItems > 0);
 
             if (clearBtn) {
                 clearBtn.style.display = AppState.cart.length > 0 ? 'block' : 'none';

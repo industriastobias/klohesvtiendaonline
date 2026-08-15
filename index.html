@@ -2368,6 +2368,20 @@
             border-color: var(--rosa-vieja);
         }
 
+        @keyframes loadMorePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 165, 165, 0); }
+            50% { box-shadow: 0 0 0 7px rgba(212, 165, 165, 0.18); }
+        }
+
+        .load-more-products-btn:hover:not(:disabled) {
+            animation: loadMorePulse 1.6s ease-in-out infinite;
+            transform: translateY(-2px);
+        }
+
+        .load-more-products-btn:active:not(:disabled) {
+            transform: translateY(0) scale(0.98);
+        }
+
         .load-more-products-btn:disabled {
             opacity: 0.65;
             cursor: wait;
@@ -2688,6 +2702,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                         <a href="https://instagram.com/daymarsv" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="https://tiktok.com/@daymarsv" target="_blank"><i class="fab fa-tiktok"></i></a>
                         <a href="https://facebook.com/daymarsv" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/50366711569" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">

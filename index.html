@@ -2319,20 +2319,20 @@
             left: 50%;
             right: auto;
             bottom: auto;
-            background: linear-gradient(135deg, var(--negro), var(--negro-suave));
-            color: white;
-            padding: 1rem 1.8rem;
+            background: rgba(255, 255, 255, 0.96);
+            color: var(--ink, var(--negro));
+            padding: 0.7rem 1.15rem;
             z-index: 4000;
             transform: translate(-50%, calc(-50% + 100px));
             opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            border-radius: var(--radius-sm);
-            box-shadow: var(--sombra-media);
-            font-family: 'Poppins', sans-serif;
+            transition: all 0.35s ease;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(186, 120, 132, 0.28);
+            border-radius: 999px;
+            box-shadow: 0 8px 24px rgba(23, 21, 21, 0.08);
+            font-family: 'Manrope', 'Poppins', sans-serif;
         }
 
         .notification.show {
@@ -2341,7 +2341,9 @@
         }
 
         .notification.error {
-            background: linear-gradient(135deg, #dc3545, #c0392b);
+            background: rgba(255, 247, 247, 0.97);
+            color: #b45f69;
+            border-color: rgba(180, 95, 105, 0.25);
         }
 
         /* ====== RESPONSIVE ====== */

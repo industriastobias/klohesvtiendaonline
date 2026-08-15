@@ -2602,6 +2602,62 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             .floating-cart-subtotal { font-size: 11px; }
         }
     </style>
+    <style id="preview-size-tuning">
+        /* Ajuste responsive de la ventana de detalle de producto */
+        .preview-content {
+            width: min(760px, 88vw) !important;
+            max-height: 78vh !important;
+        }
+
+        .preview-details { padding: 2rem !important; }
+
+        @media (max-width: 1024px) {
+            .preview-content {
+                width: min(720px, 86vw) !important;
+                max-height: 80vh !important;
+            }
+            .preview-details { padding: 1.6rem !important; }
+        }
+
+        @media (max-width: 800px) and (min-width: 601px) {
+            .preview-modal { padding: 1rem !important; }
+            .preview-content {
+                width: min(650px, 88vw) !important;
+                max-height: 80vh !important;
+            }
+            .preview-details { padding: 1.35rem !important; }
+            .preview-name { font-size: 1.25rem !important; }
+            .preview-price { font-size: 1.65rem !important; }
+        }
+
+        @media (max-width: 600px) {
+            .preview-modal {
+                padding: 0.75rem !important;
+                align-items: center !important;
+            }
+            .preview-content {
+                width: min(88vw, 380px) !important;
+                max-height: 84vh !important;
+                display: block !important;
+                overflow-y: auto !important;
+            }
+            .preview-image-container {
+                height: 26vh !important;
+                min-height: 165px !important;
+                max-height: 230px !important;
+            }
+            .preview-details {
+                height: auto !important;
+                min-height: 0 !important;
+                padding: 1rem 1.1rem !important;
+                overflow: visible !important;
+            }
+            .preview-name { font-size: 1.1rem !important; margin-top: 2.8rem !important; }
+            .preview-price { font-size: 1.45rem !important; }
+            .preview-description { font-size: 0.8rem !important; }
+            .preview-add-btn { min-height: 42px !important; padding: 0.7rem 1rem !important; }
+        }
+    </style>
 </head>
 <body>
     <div class="atelier-topline"><span>DAYMAR ATELIER / VERANO 2026</span><span>Envíos a todo El Salvador</span><span>Compra local, elige bonito</span></div>

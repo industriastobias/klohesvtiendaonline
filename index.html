@@ -2547,7 +2547,14 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
         }
 
+        @keyframes cartAddedPulse {
+            0% { transform: scale(1); }
+            45% { transform: scale(1.045); }
+            100% { transform: scale(1); }
+        }
+
         .floating-cart-btn.visible { display: flex; animation: bounceIn .45s ease; }
+        .floating-cart-btn.is-updated { animation: cartAddedPulse .55s ease; }
         .floating-cart-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(23, 21, 21, 0.24); }
         .floating-cart-btn i { color: var(--blush, var(--azul-cielo)); font-size: 15px; }
         .floating-cart-count {
@@ -3562,6 +3569,16 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             }
 
             updateCart();
+
+            // Pulso sutil para confirmar visualmente la nueva adición.
+            const floatingCartBtn = document.getElementById('floatingCartBtn');
+            if (floatingCartBtn) {
+                floatingCartBtn.classList.remove('is-updated');
+                void floatingCartBtn.offsetWidth;
+                floatingCartBtn.classList.add('is-updated');
+                setTimeout(() => floatingCartBtn.classList.remove('is-updated'), 600);
+            }
+
             showNotification('Producto agregado al carrito');
         }
 

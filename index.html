@@ -2343,6 +2343,36 @@
         }
 
         /* ====== RESPONSIVE ====== */
+        .load-more-products-wrap {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .load-more-products-btn {
+            padding: 0.9rem 1.8rem;
+            background: var(--negro);
+            color: white;
+            border: 1px solid var(--negro);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-products-btn:hover:not(:disabled) {
+            background: var(--rosa-vieja);
+            border-color: var(--rosa-vieja);
+        }
+
+        .load-more-products-btn:disabled {
+            opacity: 0.65;
+            cursor: wait;
+        }
+
         @media (max-width: 1200px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -2483,10 +2513,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
     <section class="products atelier-catalog" id="catalogo">
         <div class="container">
             <div class="section-header atelier-section-header"><div><p class="eyebrow">02 / LA COLECCIÓN</p><h2 class="section-title" id="categoryTitle">Todas</h2></div><div class="atelier-section-tools"><span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span><div class="filter-container"><select class="filter-select" id="sortFilter" onchange="applySortFilter()"><option value="default">Ordenar</option><option value="price-desc">Precio mayor</option><option value="price-asc">Precio menor</option></select></div></div></div><div class="atelier-category-rail"><span>Filtrar por</span><button onclick="filterProducts('todos', this)" class="active">Todo</button><button onclick="filterProducts('reloj', this)">Relojes</button><button onclick="filterProducts('collar', this)">Collares</button><button onclick="filterProducts('cartera', this)">Carteras</button><button onclick="filterProducts('anillo', this)">Anillos</button><button onclick="filterProducts('pulsera', this)">Pulseras</button></div><div class="products-grid" id="productsContainer"></div>
-            <div class="scroll-sentinel" id="scrollSentinel"></div>
-            <div class="loading-spinner" id="loadingSpinner" style="display: none;">
-                <div class="spinner"></div>
-                <span>Cargando mas productos...</span>
+            <div class="load-more-products-wrap" id="loadMoreProductsWrap" style="display: none;">
+                <button class="load-more-products-btn" id="loadMoreProductsBtn" type="button" onclick="loadMoreProducts()">Cargar más productos</button>
             </div>
         </div>
     </section>
@@ -2760,7 +2788,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         // CONFIGURACION
         // ==========================================
         const CONFIG = {
-            productsPerPage: 12,
+            productsPerPage: 75,
             preloadOffset: '200px',
             whatsappVisibleDuration: 10000,
             whatsappHiddenDuration: 180000,
@@ -2974,19 +3002,11 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         }
 
         function initInfiniteScroll() {
-            const sentinel = document.getElementById('scrollSentinel');
-            if (!sentinel) return;
-            
-            scrollObserver = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting && !AppState.isLoading && AppState.hasMoreProducts) {
-                    loadMoreProducts();
-                }
-            }, {
-                rootMargin: CONFIG.preloadOffset,
-                threshold: 0.1
-            });
-            
-            scrollObserver.observe(sentinel);
+            // La carga de productos ahora se realiza únicamente mediante el botón visible.
+            if (scrollObserver) {
+                scrollObserver.disconnect();
+                scrollObserver = null;
+            }
         }
 
         function debounce(func, wait) {
@@ -3187,6 +3207,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             if (productsToShow.length === 0 && AppState.currentPage === 0) {
                 container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gris);">No se encontraron productos</div>';
                 AppState.hasMoreProducts = false;
+                const loadMoreWrap = document.getElementById('loadMoreProductsWrap');
+                if (loadMoreWrap) loadMoreWrap.style.display = 'none';
                 return;
             }
             
@@ -3198,9 +3220,12 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             AppState.hasMoreProducts = end < AppState.filteredProducts.length;
             updateProductsCount();
             
-            if (!AppState.hasMoreProducts) {
-                const spinner = document.getElementById('loadingSpinner');
-                if (spinner) spinner.style.display = 'none';
+            const loadMoreWrap = document.getElementById('loadMoreProductsWrap');
+            const loadMoreBtn = document.getElementById('loadMoreProductsBtn');
+            if (loadMoreWrap) loadMoreWrap.style.display = AppState.hasMoreProducts ? 'flex' : 'none';
+            if (loadMoreBtn) {
+                loadMoreBtn.disabled = false;
+                loadMoreBtn.textContent = 'Cargar más productos';
             }
         }
 
@@ -3259,17 +3284,16 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             if (AppState.isLoading || !AppState.hasMoreProducts) return;
             
             AppState.isLoading = true;
-            const spinner = document.getElementById('loadingSpinner');
-            if (spinner) spinner.style.display = 'flex';
+            const loadMoreBtn = document.getElementById('loadMoreProductsBtn');
+            if (loadMoreBtn) {
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.textContent = 'Cargando productos...';
+            }
             
             setTimeout(() => {
                 AppState.currentPage++;
                 renderProducts();
                 AppState.isLoading = false;
-                
-                if (!AppState.hasMoreProducts && spinner) {
-                    spinner.style.display = 'none';
-                }
             }, 400);
         }
 

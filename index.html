@@ -2315,13 +2315,15 @@
         /* ====== NOTIFICATION ====== */
         .notification {
             position: fixed;
-            bottom: 25px;
-            left: 25px;
+            top: 50%;
+            left: 50%;
+            right: auto;
+            bottom: auto;
             background: linear-gradient(135deg, var(--negro), var(--negro-suave));
             color: white;
             padding: 1rem 1.8rem;
             z-index: 4000;
-            transform: translateY(100px);
+            transform: translate(-50%, calc(-50% + 100px));
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 0.85rem;
@@ -2334,7 +2336,7 @@
         }
 
         .notification.show {
-            transform: translateY(0);
+            transform: translate(-50%, -50%);
             opacity: 1;
         }
 
@@ -2433,7 +2435,7 @@
             .social-footer { justify-content: center; }
             .favorites-modal, .cart-modal { width: 100%; }
             .whatsapp-float { width: 55px; height: 55px; font-size: 1.6rem; bottom: 20px; left: 20px; }
-            .notification { left: 16px; right: auto; bottom: 16px; max-width: calc(100vw - 92px); }
+            .notification { top: 50%; left: 50%; right: auto; bottom: auto; max-width: calc(100vw - 32px); }
             .promo-text { font-size: 0.65rem; letter-spacing: 1px; }
             .testimonials-header h2 { font-size: 1.4rem; }
             .location-container { grid-template-columns: 1fr; gap: 1.5rem; }

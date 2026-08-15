@@ -2544,8 +2544,16 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             background: #fff;
             color: var(--blush, var(--rosa-vieja));
             box-shadow: 0 10px 26px rgba(23, 21, 21, 0.12);
-            cursor: pointer;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
             transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+        }
+
+        .floating-cart-btn.is-dragging {
+            cursor: grabbing;
+            opacity: 0.92;
+            transition: none;
         }
 
         @keyframes cartAddedPulse {
@@ -2915,7 +2923,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
     </div>
 
     <!-- Floating cart summary -->
-    <button class="floating-cart-btn floating-cart-position-bottom-right" id="floatingCartBtn" onclick="toggleCart()" aria-label="Abrir carrito">
+    <button class="floating-cart-btn floating-cart-position-bottom-right" id="floatingCartBtn" aria-label="Abrir carrito">
         <i class="fas fa-shopping-bag"></i>
         <span class="floating-cart-count" id="floatingCartCount">0</span>
         <strong class="floating-cart-subtotal" id="floatingCartSubtotal">$0.00</strong>
@@ -3640,10 +3648,16 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             if (!floatingCartBtn) return;
 
             const validPositions = ['bottom-right', 'bottom-left', 'top-right', 'top-left'];
-            const selectedPosition = validPositions.includes(CONFIG.floatingCartPosition)
-                ? CONFIG.floatingCartPosition
+            const savedPosition = localStorage.getItem('daymar_floating_cart_position');
+            const configuredPosition = savedPosition || CONFIG.floatingCartPosition;
+            const selectedPosition = validPositions.includes(configuredPosition)
+                ? configuredPosition
                 : 'bottom-right';
 
+            floatingCartBtn.style.left = '';
+            floatingCartBtn.style.right = '';
+            floatingCartBtn.style.top = '';
+            floatingCartBtn.style.bottom = '';
             floatingCartBtn.classList.remove(
                 'floating-cart-position-bottom-right',
                 'floating-cart-position-bottom-left',
@@ -3651,6 +3665,87 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 'floating-cart-position-top-left'
             );
             floatingCartBtn.classList.add(`floating-cart-position-${selectedPosition}`);
+        }
+
+        function initFloatingCartDrag() {
+            const floatingCartBtn = document.getElementById('floatingCartBtn');
+            if (!floatingCartBtn) return;
+
+            let isDragging = false;
+            let hasMoved = false;
+            let startX = 0;
+            let startY = 0;
+            let startLeft = 0;
+            let startTop = 0;
+
+            const startDrag = (event) => {
+                if (event.button !== undefined && event.button !== 0) return;
+
+                const rect = floatingCartBtn.getBoundingClientRect();
+                isDragging = true;
+                hasMoved = false;
+                startX = event.clientX;
+                startY = event.clientY;
+                startLeft = rect.left;
+                startTop = rect.top;
+
+                floatingCartBtn.style.left = `${rect.left}px`;
+                floatingCartBtn.style.top = `${rect.top}px`;
+                floatingCartBtn.style.right = 'auto';
+                floatingCartBtn.style.bottom = 'auto';
+                floatingCartBtn.classList.add('is-dragging');
+                floatingCartBtn.setPointerCapture?.(event.pointerId);
+                event.preventDefault();
+            };
+
+            const moveDrag = (event) => {
+                if (!isDragging) return;
+
+                const deltaX = event.clientX - startX;
+                const deltaY = event.clientY - startY;
+                if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) hasMoved = true;
+
+                const maxLeft = window.innerWidth - floatingCartBtn.offsetWidth - 8;
+                const maxTop = window.innerHeight - floatingCartBtn.offsetHeight - 8;
+                const nextLeft = Math.max(8, Math.min(maxLeft, startLeft + deltaX));
+                const nextTop = Math.max(8, Math.min(maxTop, startTop + deltaY));
+
+                floatingCartBtn.style.left = `${nextLeft}px`;
+                floatingCartBtn.style.top = `${nextTop}px`;
+                event.preventDefault();
+            };
+
+            const endDrag = (event) => {
+                if (!isDragging) return;
+
+                isDragging = false;
+                floatingCartBtn.classList.remove('is-dragging');
+                floatingCartBtn.releasePointerCapture?.(event.pointerId);
+
+                if (hasMoved) {
+                    const rect = floatingCartBtn.getBoundingClientRect();
+                    const horizontal = rect.left + rect.width / 2 < window.innerWidth / 2 ? 'left' : 'right';
+                    const vertical = rect.top + rect.height / 2 < window.innerHeight / 2 ? 'top' : 'bottom';
+                    const selectedPosition = `${vertical}-${horizontal}`;
+
+                    localStorage.setItem('daymar_floating_cart_position', selectedPosition);
+                    CONFIG.floatingCartPosition = selectedPosition;
+                    floatingCartBtn.dataset.dragMoved = 'true';
+                    applyFloatingCartPosition();
+                }
+            };
+
+            floatingCartBtn.addEventListener('pointerdown', startDrag);
+            floatingCartBtn.addEventListener('pointermove', moveDrag);
+            floatingCartBtn.addEventListener('pointerup', endDrag);
+            floatingCartBtn.addEventListener('pointercancel', endDrag);
+            floatingCartBtn.addEventListener('click', () => {
+                if (floatingCartBtn.dataset.dragMoved === 'true') {
+                    floatingCartBtn.dataset.dragMoved = 'false';
+                    return;
+                }
+                toggleCart();
+            });
         }
 
         function updateCart() {
@@ -4173,6 +4268,7 @@ function closePreview(e) {
             
             initFloatingHearts();
             initImageObserver();
+            initFloatingCartDrag();
             initWhatsAppCyclicAnimation();
             initDailyVerse();
             

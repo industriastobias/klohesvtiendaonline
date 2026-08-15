@@ -1936,6 +1936,8 @@
         }
 
         .btn-whatsapp {
+            position: sticky;
+            bottom: 0;
             width: 100%;
             padding: 1rem;
             background: #25D366;
@@ -2536,15 +2538,14 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             z-index: 1200;
             display: none;
             align-items: center;
-            justify-content: center;
-            width: 58px;
-            height: 58px;
-            padding: 0;
+            gap: 10px;
+            min-height: 58px;
+            padding: 9px 12px 9px 15px;
             border: 1px solid var(--blush, var(--azul-cielo-claro));
-            border-radius: 50%;
+            border-radius: 999px;
             background: #fff;
             color: var(--blush, var(--rosa-vieja));
-            box-shadow: 0 12px 30px rgba(23, 21, 21, 0.16);
+            box-shadow: 0 10px 26px rgba(23, 21, 21, 0.12);
             cursor: pointer;
             transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
         }
@@ -2558,8 +2559,11 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         .floating-cart-btn.visible { display: flex; animation: bounceIn .45s ease; }
         .floating-cart-btn.is-updated { animation: cartAddedPulse .55s ease; }
         .floating-cart-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(23, 21, 21, 0.24); }
-        .floating-cart-btn i { color: var(--blush, var(--rosa-vieja)); font-size: 21px; }
-        .floating-cart-btn > span:not(.floating-cart-count) { display: none; }
+        .cart-corner-btn.added { color: var(--blush-dark, var(--rosa-vieja)) !important; border-color: var(--blush-dark, var(--rosa-vieja)) !important; }
+        .floating-cart-btn i { color: var(--blush, var(--rosa-vieja)); font-size: 20px; }
+        .floating-cart-info { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; line-height: 1.1; }
+        .floating-cart-items { color: var(--muted, var(--gris)); font-size: 10px; font-weight: 500; }
+        .floating-cart-subtotal { color: var(--blush, var(--rosa-vieja)); font-size: 12px; font-weight: 700; }
         .floating-cart-count {
             position: absolute;
             top: -7px;
@@ -2581,7 +2585,9 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         }
 
         @media (max-width: 600px) {
-            .floating-cart-btn { right: 16px; bottom: 16px; width: 54px; height: 54px; }
+            .floating-cart-btn { right: 16px; bottom: 16px; min-height: 54px; padding: 8px 10px 8px 13px; }
+            .floating-cart-items { font-size: 9px; }
+            .floating-cart-subtotal { font-size: 11px; }
         }
     </style>
 </head>
@@ -2896,7 +2902,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             <span>Total:</span>
             <span id="cartTotal">$0.00</span>
         </div>
-        <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank">
+        <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank" rel="noopener" title="Comprar por WhatsApp" aria-label="Comprar por WhatsApp">
             <i class="fab fa-whatsapp"></i> <span>Comprar por WhatsApp</span>
         </a>
         <button class="btn-clear-cart" onclick="clearCart()" id="clearCartBtn" style="display: none;">
@@ -2907,7 +2913,10 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
     <!-- Floating cart summary -->
     <button class="floating-cart-btn" id="floatingCartBtn" onclick="toggleCart()" aria-label="Abrir carrito">
         <i class="fas fa-shopping-bag"></i>
-        <span>Ver carrito</span>
+        <span class="floating-cart-info">
+            <span class="floating-cart-items" id="floatingCartItems">0 productos</span>
+            <strong class="floating-cart-subtotal" id="floatingCartSubtotal">$0.00</strong>
+        </span>
         <span class="floating-cart-count" id="floatingCartCount">0</span>
     </button>
 
@@ -3109,6 +3118,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                             loadingImages.set(src, true);
                             
                             const preloadImg = new Image();
+                            preloadImg.decoding = 'async';
+                            preloadImg.fetchPriority = 'low';
                             
                             preloadImg.onload = () => {
                                 img.src = src;
@@ -3383,7 +3394,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                          alt="${product.name}" 
                          class="product-image"
                          loading="lazy"
-                         decoding="async">
+                         decoding="async"
+                         fetchpriority="low">
                     <div class="image-placeholder" data-initial="${initial}"></div>
                     <button class="wishlist-btn ${isFavorite ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(this, '${product.barcode}')" aria-label="Agregar a favoritos">
                         <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
@@ -3399,8 +3411,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
-                    <button class="cart-corner-btn" onclick="event.stopPropagation(); addToCart(${realIndex})" ${!hasStock ? 'disabled' : ''} title="${hasStock ? 'Agregar al carrito' : 'Agotado'}">
-                        <i class="fas fa-shopping-bag"></i> Agregar
+                    <button class="cart-corner-btn" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" ${!hasStock ? 'disabled' : ''} title="${hasStock ? 'Agregar al carrito' : 'Agotado'}">
+                        <i class="fas fa-shopping-bag"></i> <span class="cart-btn-label">Agregar</span>
                     </button>
                 </div>
             `;
@@ -3555,7 +3567,22 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         // ==========================================
         // CARRITO
         // ==========================================
-        function addToCart(index) {
+        function showAddedButtonState(button) {
+            if (!button) return;
+
+            const originalContent = button.innerHTML;
+            button.classList.add('added');
+            button.innerHTML = '<i class="fas fa-check"></i> <span>Añadido</span>';
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.innerHTML = originalContent;
+                button.classList.remove('added');
+                button.disabled = false;
+            }, 900);
+        }
+
+        function addToCart(index, sourceButton = null) {
             const product = products[index];
             if (!product) return;
             
@@ -3578,6 +3605,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             }
 
             updateCart();
+            showAddedButtonState(sourceButton);
 
             // Pulso sutil para confirmar visualmente la nueva adición.
             const floatingCartBtn = document.getElementById('floatingCartBtn');
@@ -3612,6 +3640,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const cartBadge = document.getElementById('cartBadge');
             const floatingCartBtn = document.getElementById('floatingCartBtn');
             const floatingCartCount = document.getElementById('floatingCartCount');
+            const floatingCartItems = document.getElementById('floatingCartItems');
+            const floatingCartSubtotal = document.getElementById('floatingCartSubtotal');
             const whatsappBtn = document.getElementById('whatsappBtn');
             const summary = document.getElementById('cartSummary');
             const clearBtn = document.getElementById('clearCartBtn');
@@ -3626,6 +3656,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             }
 
             if (floatingCartCount) floatingCartCount.textContent = totalItems;
+            if (floatingCartItems) floatingCartItems.textContent = `${totalItems} ${totalItems === 1 ? 'producto' : 'productos'}`;
+            if (floatingCartSubtotal) floatingCartSubtotal.textContent = '$0.00';
             if (floatingCartBtn) floatingCartBtn.classList.toggle('visible', totalItems > 0);
 
             if (clearBtn) {
@@ -3637,6 +3669,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 if (summary) summary.style.display = 'none';
                 if (whatsappBtn) whatsappBtn.style.display = 'none';
                 if (cartTotal) cartTotal.textContent = '$0.00';
+                if (floatingCartSubtotal) floatingCartSubtotal.textContent = '$0.00';
                 return;
             }
 
@@ -3672,6 +3705,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
 
                 if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
                 if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
+                if (floatingCartSubtotal) floatingCartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
                 if (summary) summary.style.display = 'block';
                 
                 if (whatsappBtn) {
@@ -3780,8 +3814,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     addBtn.disabled = false;
                     addBtn.innerHTML = '<i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito';
                     addBtn.onclick = () => {
-                        addToCart(index);
-                        closePreview();
+                        addToCart(index, addBtn);
+                        setTimeout(closePreview, 650);
                     };
                 } else {
                     addBtn.disabled = true;

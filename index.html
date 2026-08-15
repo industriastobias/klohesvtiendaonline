@@ -2533,8 +2533,6 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         /* ====== CARRITO FLOTANTE ====== */
         .floating-cart-btn {
             position: fixed;
-            right: 24px;
-            bottom: 24px;
             z-index: 1200;
             display: none;
             align-items: center;
@@ -2556,13 +2554,16 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             100% { transform: scale(1); }
         }
 
+        .floating-cart-position-bottom-right { right: 24px; bottom: 24px; left: auto; top: auto; }
+        .floating-cart-position-bottom-left { left: 24px; bottom: 24px; right: auto; top: auto; }
+        .floating-cart-position-top-right { right: 24px; top: 24px; left: auto; bottom: auto; }
+        .floating-cart-position-top-left { left: 24px; top: 24px; right: auto; bottom: auto; }
+
         .floating-cart-btn.visible { display: flex; animation: bounceIn .45s ease; }
         .floating-cart-btn.is-updated { animation: cartAddedPulse .55s ease; }
         .floating-cart-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(23, 21, 21, 0.24); }
         .cart-corner-btn.added { color: var(--blush-dark, var(--rosa-vieja)) !important; border-color: var(--blush-dark, var(--rosa-vieja)) !important; }
         .floating-cart-btn i { color: var(--blush, var(--rosa-vieja)); font-size: 20px; }
-        .floating-cart-info { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; line-height: 1.1; }
-        .floating-cart-items { color: var(--muted, var(--gris)); font-size: 10px; font-weight: 500; }
         .floating-cart-subtotal { color: var(--blush, var(--rosa-vieja)); font-size: 12px; font-weight: 700; }
         .floating-cart-count {
             position: absolute;
@@ -2585,8 +2586,11 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         }
 
         @media (max-width: 600px) {
-            .floating-cart-btn { right: 16px; bottom: 16px; min-height: 54px; padding: 8px 10px 8px 13px; }
-            .floating-cart-items { font-size: 9px; }
+            .floating-cart-btn { min-height: 54px; padding: 8px 10px 8px 13px; }
+            .floating-cart-position-bottom-right { right: 16px; bottom: 16px; }
+            .floating-cart-position-bottom-left { left: 16px; bottom: 16px; }
+            .floating-cart-position-top-right { right: 16px; top: 16px; }
+            .floating-cart-position-top-left { left: 16px; top: 16px; }
             .floating-cart-subtotal { font-size: 11px; }
         }
     </style>
@@ -2911,13 +2915,10 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
     </div>
 
     <!-- Floating cart summary -->
-    <button class="floating-cart-btn" id="floatingCartBtn" onclick="toggleCart()" aria-label="Abrir carrito">
+    <button class="floating-cart-btn floating-cart-position-bottom-right" id="floatingCartBtn" onclick="toggleCart()" aria-label="Abrir carrito">
         <i class="fas fa-shopping-bag"></i>
-        <span class="floating-cart-info">
-            <span class="floating-cart-items" id="floatingCartItems">0 productos</span>
-            <strong class="floating-cart-subtotal" id="floatingCartSubtotal">$0.00</strong>
-        </span>
         <span class="floating-cart-count" id="floatingCartCount">0</span>
+        <strong class="floating-cart-subtotal" id="floatingCartSubtotal">$0.00</strong>
     </button>
 
     <!-- Notification -->
@@ -2934,6 +2935,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             preloadOffset: '200px',
             whatsappVisibleDuration: 10000,
             whatsappHiddenDuration: 180000,
+            floatingCartPosition: 'bottom-right', // bottom-right, bottom-left, top-right o top-left
             verseLoadTimeout: 3000,
             shippingCost: 4.00,
             phoneNumber: '50366711569'
@@ -3633,14 +3635,32 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             }
         }
 
+        function applyFloatingCartPosition() {
+            const floatingCartBtn = document.getElementById('floatingCartBtn');
+            if (!floatingCartBtn) return;
+
+            const validPositions = ['bottom-right', 'bottom-left', 'top-right', 'top-left'];
+            const selectedPosition = validPositions.includes(CONFIG.floatingCartPosition)
+                ? CONFIG.floatingCartPosition
+                : 'bottom-right';
+
+            floatingCartBtn.classList.remove(
+                'floating-cart-position-bottom-right',
+                'floating-cart-position-bottom-left',
+                'floating-cart-position-top-right',
+                'floating-cart-position-top-left'
+            );
+            floatingCartBtn.classList.add(`floating-cart-position-${selectedPosition}`);
+        }
+
         function updateCart() {
+            applyFloatingCartPosition();
             const cartItems = document.getElementById('cartItems');
             const cartTotal = document.getElementById('cartTotal');
             const cartSubtotal = document.getElementById('cartSubtotal');
             const cartBadge = document.getElementById('cartBadge');
             const floatingCartBtn = document.getElementById('floatingCartBtn');
             const floatingCartCount = document.getElementById('floatingCartCount');
-            const floatingCartItems = document.getElementById('floatingCartItems');
             const floatingCartSubtotal = document.getElementById('floatingCartSubtotal');
             const whatsappBtn = document.getElementById('whatsappBtn');
             const summary = document.getElementById('cartSummary');
@@ -3656,7 +3676,6 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             }
 
             if (floatingCartCount) floatingCartCount.textContent = totalItems;
-            if (floatingCartItems) floatingCartItems.textContent = `${totalItems} ${totalItems === 1 ? 'producto' : 'productos'}`;
             if (floatingCartSubtotal) floatingCartSubtotal.textContent = '$0.00';
             if (floatingCartBtn) floatingCartBtn.classList.toggle('visible', totalItems > 0);
 
@@ -3705,7 +3724,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
 
                 if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
                 if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
-                if (floatingCartSubtotal) floatingCartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+                if (floatingCartSubtotal) floatingCartSubtotal.textContent = `$${total.toFixed(2)}`;
                 if (summary) summary.style.display = 'block';
                 
                 if (whatsappBtn) {

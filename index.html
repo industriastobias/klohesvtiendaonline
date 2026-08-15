@@ -2556,6 +2556,42 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             transition: none;
         }
 
+        .floating-cart-btn.user-hidden { display: none !important; }
+        .floating-cart-hide {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--line, var(--azul-cielo-claro));
+            border-radius: 50%;
+            background: #fff;
+            color: var(--muted, var(--gris));
+            font-size: 9px;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .floating-cart-hide:hover { color: var(--blush-dark, var(--rosa-vieja)); }
+        .floating-cart-show {
+            position: fixed;
+            z-index: 1200;
+            display: none;
+            width: 34px;
+            height: 34px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--blush, var(--azul-cielo-claro));
+            border-radius: 50%;
+            background: #fff;
+            color: var(--blush, var(--rosa-vieja));
+            box-shadow: 0 8px 20px rgba(23, 21, 21, 0.1);
+            cursor: pointer;
+        }
+        .floating-cart-show.visible { display: flex; }
+
         @keyframes cartAddedPulse {
             0% { transform: scale(1); }
             45% { transform: scale(1.045); }
@@ -2567,6 +2603,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         .floating-cart-position-top-right { right: 24px; top: 24px; left: auto; bottom: auto; }
         .floating-cart-position-top-left { left: 24px; top: 24px; right: auto; bottom: auto; }
 
+        .floating-cart-btn.visible, .floating-cart-show.visible { display: flex; }
         .floating-cart-btn.visible { display: flex; animation: bounceIn .45s ease; }
         .floating-cart-btn.is-updated { animation: cartAddedPulse .55s ease; }
         .floating-cart-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(23, 21, 21, 0.24); }
@@ -2600,6 +2637,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             .floating-cart-position-top-right { right: 16px; top: 16px; }
             .floating-cart-position-top-left { left: 16px; top: 16px; }
             .floating-cart-subtotal { font-size: 11px; }
+            .floating-cart-show { width: 32px; height: 32px; }
         }
     </style>
     <style id="preview-size-tuning">
@@ -2980,9 +3018,13 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
 
     <!-- Floating cart summary -->
     <button class="floating-cart-btn floating-cart-position-bottom-right" id="floatingCartBtn" aria-label="Abrir carrito">
+        <span class="floating-cart-hide" id="floatingCartHide" role="button" tabindex="0" aria-label="Ocultar carrito" onpointerdown="event.stopPropagation()" onclick="event.stopPropagation(); hideFloatingCart()" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); hideFloatingCart(); }"><i class="fas fa-times"></i></span>
         <i class="fas fa-shopping-bag"></i>
         <span class="floating-cart-count" id="floatingCartCount">0</span>
         <strong class="floating-cart-subtotal" id="floatingCartSubtotal">$0.00</strong>
+    </button>
+    <button class="floating-cart-show floating-cart-position-bottom-right" id="floatingCartShow" aria-label="Mostrar carrito" title="Mostrar carrito" onclick="showFloatingCart()">
+        <i class="fas fa-shopping-bag"></i>
     </button>
 
     <!-- Notification -->
@@ -3699,8 +3741,27 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             }
         }
 
+        function setFloatingCartVisibility(isHidden) {
+            const floatingCartBtn = document.getElementById('floatingCartBtn');
+            const floatingCartShow = document.getElementById('floatingCartShow');
+            const hasItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0) > 0;
+
+            localStorage.setItem('daymar_floating_cart_hidden', isHidden ? 'true' : 'false');
+            if (floatingCartBtn) floatingCartBtn.classList.toggle('user-hidden', isHidden);
+            if (floatingCartShow) floatingCartShow.classList.toggle('visible', isHidden && hasItems);
+        }
+
+        function hideFloatingCart() {
+            setFloatingCartVisibility(true);
+        }
+
+        function showFloatingCart() {
+            setFloatingCartVisibility(false);
+        }
+
         function applyFloatingCartPosition() {
             const floatingCartBtn = document.getElementById('floatingCartBtn');
+            const floatingCartShow = document.getElementById('floatingCartShow');
             if (!floatingCartBtn) return;
 
             const validPositions = ['bottom-right', 'bottom-left', 'top-right', 'top-left'];
@@ -3714,13 +3775,18 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             floatingCartBtn.style.right = '';
             floatingCartBtn.style.top = '';
             floatingCartBtn.style.bottom = '';
-            floatingCartBtn.classList.remove(
+            const positionClasses = [
                 'floating-cart-position-bottom-right',
                 'floating-cart-position-bottom-left',
                 'floating-cart-position-top-right',
                 'floating-cart-position-top-left'
-            );
+            ];
+            floatingCartBtn.classList.remove(...positionClasses);
             floatingCartBtn.classList.add(`floating-cart-position-${selectedPosition}`);
+            if (floatingCartShow) {
+                floatingCartShow.classList.remove(...positionClasses);
+                floatingCartShow.classList.add(`floating-cart-position-${selectedPosition}`);
+            }
         }
 
         function initFloatingCartDrag() {
@@ -3811,6 +3877,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const cartSubtotal = document.getElementById('cartSubtotal');
             const cartBadge = document.getElementById('cartBadge');
             const floatingCartBtn = document.getElementById('floatingCartBtn');
+            const floatingCartShow = document.getElementById('floatingCartShow');
             const floatingCartCount = document.getElementById('floatingCartCount');
             const floatingCartSubtotal = document.getElementById('floatingCartSubtotal');
             const whatsappBtn = document.getElementById('whatsappBtn');
@@ -3826,9 +3893,14 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
             }
 
+            const isFloatingCartHidden = localStorage.getItem('daymar_floating_cart_hidden') === 'true';
             if (floatingCartCount) floatingCartCount.textContent = totalItems;
             if (floatingCartSubtotal) floatingCartSubtotal.textContent = '$0.00';
-            if (floatingCartBtn) floatingCartBtn.classList.toggle('visible', totalItems > 0);
+            if (floatingCartBtn) {
+                floatingCartBtn.classList.toggle('visible', totalItems > 0 && !isFloatingCartHidden);
+                floatingCartBtn.classList.toggle('user-hidden', isFloatingCartHidden);
+            }
+            if (floatingCartShow) floatingCartShow.classList.toggle('visible', totalItems > 0 && isFloatingCartHidden);
 
             if (clearBtn) {
                 clearBtn.style.display = AppState.cart.length > 0 ? 'block' : 'none';

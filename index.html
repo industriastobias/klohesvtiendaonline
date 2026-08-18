@@ -156,18 +156,34 @@
             border-radius: 4px;
         }
 
-        .loading-spinner {
+.loading-spinner {
             grid-column: 1 / -1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 4rem 0;
-            gap: 1rem;
+            padding: 1.25rem 0 0;
+            gap: 0.75rem;
             color: var(--azul-cielo);
-            font-size: 0.85rem;
-            letter-spacing: 3px;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            font-weight: 500;
+            font-weight: 600;
+            min-height: 52px;
+        }
+
+        .catalog-loading-status {
+            position: relative;
+            z-index: 2;
+            animation: loadingStatusIn 0.45s ease both;
+        }
+
+        .catalog-loading-status .spinner {
+            flex: 0 0 auto;
+        }
+
+        @keyframes loadingStatusIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .spinner {
@@ -907,6 +923,22 @@
             background: var(--gris-claro);
             color: #aaa;
             cursor: not-allowed;
+        }
+
+        .cart-corner-btn.out-of-stock,
+        .preview-add-btn.out-of-stock {
+            color: #b45f69;
+            border-color: rgba(180, 95, 105, 0.35);
+            cursor: pointer;
+        }
+
+        .cart-corner-btn.out-of-stock:hover,
+        .preview-add-btn.out-of-stock:hover {
+            color: #a14f5b;
+            border-color: #b45f69;
+            background: rgba(180, 95, 105, 0.06);
+            transform: none;
+            box-shadow: none;
         }
 
         .scroll-sentinel {
@@ -2315,31 +2347,46 @@
         }
 
         /* ====== NOTIFICATION ====== */
+        @keyframes notificationPop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.78); }
+            12% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            82% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.94); }
+        }
+
         .notification {
             position: fixed;
             top: 50%;
             left: 50%;
             right: auto;
             bottom: auto;
-            background: rgba(255, 255, 255, 0.96);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 190px;
+            max-width: calc(100vw - 32px);
+            background: rgba(255, 255, 255, 0.98);
             color: var(--ink, var(--negro));
-            padding: 0.7rem 1.15rem;
+            padding: 0.9rem 1.35rem;
             z-index: 4000;
-            transform: translate(-50%, calc(-50% + 100px));
+            transform: translate(-50%, -50%) scale(0.78);
             opacity: 0;
-            transition: all 0.35s ease;
-            font-size: 0.75rem;
-            font-weight: 500;
+            visibility: hidden;
+            pointer-events: none;
+            font-size: 0.78rem;
+            font-weight: 700;
             letter-spacing: 0.5px;
-            border: 1px solid rgba(186, 120, 132, 0.28);
-            border-radius: 999px;
-            box-shadow: 0 8px 24px rgba(23, 21, 21, 0.08);
+            text-align: center;
+            border: 1px solid rgba(186, 120, 132, 0.38);
+            border-radius: 12px;
+            box-shadow: 0 14px 36px rgba(23, 21, 21, 0.16);
             font-family: 'Manrope', 'Poppins', sans-serif;
         }
 
         .notification.show {
-            transform: translate(-50%, -50%);
-            opacity: 1;
+            visibility: visible;
+            animation: notificationPop 2s ease-in-out forwards;
         }
 
         .notification.error {
@@ -2620,6 +2667,46 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             .preview-price { font-size: 1.45rem !important; }
             .preview-description { font-size: 0.8rem !important; }
             .preview-add-btn { min-height: 42px !important; padding: 0.7rem 1rem !important; }
+        }
+    </style>
+    <style id="product-feedback-fix">
+        /* Estados finales de carga, agotado y confirmacion del carrito */
+        .cart-corner-btn.out-of-stock {
+            color: #b45f69 !important;
+            border-bottom: 1px solid #b45f69 !important;
+            background: transparent !important;
+            opacity: 0.9;
+        }
+
+        .cart-corner-btn.out-of-stock:hover {
+            color: #a14f5b !important;
+            border-bottom-color: #a14f5b !important;
+            background: rgba(180, 95, 105, 0.06) !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .preview-add-btn.out-of-stock {
+            background: transparent !important;
+            color: #b45f69 !important;
+            border: 1px solid rgba(180, 95, 105, 0.4) !important;
+            cursor: pointer !important;
+        }
+
+        .preview-add-btn.out-of-stock:hover {
+            background: rgba(180, 95, 105, 0.06) !important;
+            color: #a14f5b !important;
+            border-color: #a14f5b !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .catalog-loading-status,
+            .notification.show,
+            .skeleton,
+            .product-card {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
         }
     </style>
 </head>
@@ -2972,6 +3059,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         let loadingImages = new Map();
         let scrollObserver = null;
         let imageObserver = null;
+        let notificationTimer = null;
 
         // ==========================================
         // ESTADO DE LA APLICACION
@@ -3349,6 +3437,13 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             if (!container) return;
             
             container.innerHTML = '';
+
+            const loadingStatus = document.createElement('div');
+            loadingStatus.className = 'loading-spinner catalog-loading-status';
+            loadingStatus.setAttribute('role', 'status');
+            loadingStatus.setAttribute('aria-live', 'polite');
+            loadingStatus.innerHTML = '<span class="spinner" aria-hidden="true"></span><span>Cargando productos...</span>';
+            container.appendChild(loadingStatus);
             
             for (let i = 0; i < count; i++) {
                 const skeletonCard = document.createElement('div');
@@ -3405,7 +3500,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             card.className = 'product-card';
             card.style.animationDelay = `${index * 0.05}s`;
             
-            const hasStock = product.stock > 0;
+            const hasStock = Number(product.stock) > 0;
             const realIndex = products.indexOf(product);
             const isFavorite = AppState.favorites.includes(product.barcode);
             const initial = product.name.charAt(0).toUpperCase();
@@ -3438,8 +3533,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
-                    <button class="cart-corner-btn" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" ${!hasStock ? 'disabled' : ''} title="${hasStock ? 'Agregar al carrito' : 'Agotado'}">
-                        <i class="fas fa-shopping-bag"></i> <span class="cart-btn-label">Agregar</span>
+                    <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'Agregar al carrito' : 'Producto agotado'}" title="${hasStock ? 'Agregar al carrito' : 'Agotado'}">
+                        <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? 'Agregar' : 'Agotado'}</span>
                     </button>
                 </div>
             `;
@@ -3598,6 +3693,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             if (!button) return;
 
             const originalContent = button.innerHTML;
+            const wasDisabled = button.disabled;
             button.classList.add('added');
             button.innerHTML = '<i class="fas fa-check"></i> <span>Añadido</span>';
             button.disabled = true;
@@ -3605,16 +3701,16 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             setTimeout(() => {
                 button.innerHTML = originalContent;
                 button.classList.remove('added');
-                button.disabled = false;
-            }, 900);
+                button.disabled = wasDisabled;
+            }, 2000);
         }
 
         function addToCart(index, sourceButton = null) {
             const product = products[index];
             if (!product) return;
             
-            if (product.stock <= 0) {
-                showNotification('Sin stock disponible', 'error');
+            if (Number(product.stock) <= 0) {
+                showNotification('Agotado', 'error');
                 return;
             }
 
@@ -3642,7 +3738,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 setTimeout(() => floatingCartBtn.classList.remove('is-updated'), 600);
             }
 
-            showNotification('Producto agregado al carrito');
+            showNotification('Añadido al carrito');
         }
 
         function removeFromCart(barcode) {
@@ -3828,17 +3924,21 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
 
             const addBtn = document.getElementById('previewAddBtn');
             if (addBtn) {
-                if (product.stock > 0) {
-                    addBtn.disabled = false;
-                    addBtn.innerHTML = '<i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito';
-                    addBtn.onclick = () => {
+                const previewHasStock = Number(product.stock) > 0;
+                addBtn.disabled = false;
+                addBtn.classList.toggle('out-of-stock', !previewHasStock);
+                addBtn.innerHTML = previewHasStock
+                    ? '<i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito'
+                    : '<i class="fas fa-ban" style="margin-right: 0.5rem;"></i> Agotado';
+                addBtn.title = previewHasStock ? 'Agregar al carrito' : 'Producto agotado';
+                addBtn.onclick = () => {
+                    if (previewHasStock) {
                         addToCart(index, addBtn);
                         setTimeout(closePreview, 650);
-                    };
-                } else {
-                    addBtn.disabled = true;
-                    addBtn.innerHTML = 'Agotado';
-                }
+                    } else {
+                        addToCart(index, addBtn);
+                    }
+                };
             }
 
             document.getElementById('previewModal').classList.add('active');
@@ -4108,17 +4208,19 @@ function closePreview(e) {
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
             if (!notification) return;
-            
+
+            clearTimeout(notificationTimer);
+            notification.classList.remove('show', 'error');
+            void notification.offsetWidth;
             notification.textContent = message;
-            notification.classList.remove('error');
             if (type === 'error') {
                 notification.classList.add('error');
             }
             notification.classList.add('show');
-            
-            setTimeout(() => {
+
+            notificationTimer = setTimeout(() => {
                 notification.classList.remove('show');
-            }, 3000);
+            }, 2000);
         }
 
         function showNewsletter() {

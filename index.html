@@ -2388,13 +2388,6 @@
             .comment-box { padding: 1.5rem; }
             .newsletter-popup { padding: 1.8rem; }
             .newsletter-popup h3 { font-size: 1.4rem; }}
-            .preview-modal { padding: 0.5rem; overflow-y: auto; align-items: flex-start; }
-            .preview-content { max-height: calc(100dvh - 1rem); overflow-y: auto; display: block; }
-            .preview-image-container { height: 32vh; min-height: 220px; }
-            .preview-details { height: auto; min-height: 0; overflow: visible; padding: 1.25rem; }
-            .preview-stock { margin-bottom: 1rem; }
-            .preview-add-btn { margin-bottom: 0; }
-        }
 
         @media (max-width: 480px) {
             .products-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
@@ -2764,6 +2757,57 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             .product-image,
             .product-info {
                 transition: none !important;
+            }
+        }
+    </style>
+    <style id="preview-desktop-layout-fix">
+        /* Vista amplia de producto para computadoras: dos columnas y contenido completo. */
+        @media (min-width: 801px) {
+            .preview-modal {
+                padding: 1.5rem !important;
+                align-items: center !important;
+                overflow: hidden !important;
+            }
+
+            .preview-content {
+                width: min(1120px, 92vw) !important;
+                max-width: 1120px !important;
+                height: min(760px, calc(100dvh - 48px)) !important;
+                max-height: calc(100dvh - 48px) !important;
+                display: grid !important;
+                grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr) !important;
+                overflow: hidden !important;
+            }
+
+            .preview-image-container {
+                height: auto !important;
+                min-height: 0 !important;
+                align-self: stretch !important;
+            }
+
+            .preview-details {
+                height: auto !important;
+                min-height: 0 !important;
+                overflow-y: auto !important;
+                padding: 2.35rem 2.6rem !important;
+            }
+
+            .preview-name {
+                font-size: clamp(1.65rem, 2.5vw, 2.45rem) !important;
+                line-height: 1.1 !important;
+                margin-top: 3.8rem !important;
+                margin-bottom: .8rem !important;
+            }
+
+            .preview-description {
+                font-size: .95rem !important;
+                line-height: 1.55 !important;
+                margin-bottom: 1.25rem !important;
+                padding: .9rem 0 !important;
+            }
+
+            .preview-stock {
+                margin-bottom: 1.25rem !important;
             }
         }
     </style>

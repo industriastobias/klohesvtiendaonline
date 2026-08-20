@@ -370,7 +370,7 @@ const products = [
     barcode: "1991712",
     category: "Joyería fina",
     description: "Pendientes de oro 9k Au375 con incrustación de perlas de agua.",
-    images: ["1991712.jpg", "1991712_1.jpg", "1991712_2.jpg", "1991712_3.jpg", "1991712_4.jpg"]
+    images: ["1991712.jpg", "1991712.1.jpg", "1991712.2.jpg", "1991712.3.jpg", "1991712.4.jpg"]
   },
   {
     name: "Anillo de flores estilo vintage en plata 925",
@@ -379,7 +379,7 @@ const products = [
     barcode: "5982",
     category: "Joyería fina",
     description: "Anillo ajustable de plata de ley 925 con diseño de flores y acabado dorado.",
-    images: ["5982.jpg", "5982_1.jpg", "5982_2.jpg", "5982_3.jpg", "5982_4.jpg"]
+    images: ["5982.jpg", "5982.1.jpg", "5982.2.jpg", "5982.3.jpg", "5982.4.jpg"]
   },
   {
     name: "Pulsera para mujer de oro 9k",
@@ -388,7 +388,7 @@ const products = [
     barcode: "11759776",
     category: "Joyería fina",
     description: "Pulsera de oro 9k Au375 con estilo simple, peso aproximado de 3 g.",
-    images: ["11759776.jpg", "11759776_1.jpg", "11759776_2.jpg", "11759776_3.jpg"]
+    images: ["11759776.jpg", "11759776.1.jpg", "11759776.2.jpg", "11759776.3.jpg"]
   },
   {
     name: "Anillo retro para mujer en plata 925",
@@ -406,7 +406,7 @@ const products = [
     barcode: "12296214",
     category: "Joyería fina",
     description: "Anillo de plata 925 con moissanita de 1 ct en corte pera. Consultar tallas.",
-    images: ["12296214.jpg", "12296214_1.jpg", "12296214_2.jpg", "12296214_3.jpg"]
+    images: ["12296214.jpg", "12296214.1.jpg", "12296214.2.jpg", "12296214.3.jpg"]
   },
   {
     name: "Anillo para mujer de plata 925",
@@ -415,7 +415,7 @@ const products = [
     barcode: "1884",
     category: "Joyería fina",
     description: "Anillo de plata 925 con patrón cuadrilátero y acabado en oro de 18 quilates. Consultar tallas.",
-    images: ["1884.jpg", "1884_1.jpg", "1884_2.jpg", "1884_3.jpg"]
+    images: ["1884.jpg", "1884.1.jpg", "1884.2.jpg", "1884.3.jpg"]
   },
   {
     name: "Anillo de plata 925 con moissanita oval",
@@ -424,7 +424,7 @@ const products = [
     barcode: "50073399",
     category: "Joyería fina",
     description: "Anillo de plata 925 con moissanita oval de 2 ct y diseño geométrico. Consultar diseños y tallas.",
-    images: ["50073399.jpg", "50073399_1.jpg", "50073399_2.jpg", "50073399_3.jpg"]
+    images: ["50073399.jpg", "50073399.1.jpg", "50073399.2.jpg", "50073399.3.jpg"]
   },
   {
     name: "Pulsera de plata 925",
@@ -433,7 +433,7 @@ const products = [
     barcode: "82966070",
     category: "Joyería fina",
     description: "Pulsera de plata 925 con diseño de corazón y acabado electrochapado.",
-    images: ["82966070.jpg", "82966070_1.jpg"]
+    images: ["82966070.jpg", "82966070.1.jpg"]
   },
   {
     name: "Collar vintage para mujer en plata 925",
@@ -442,7 +442,7 @@ const products = [
     barcode: "3669816711",
     category: "Joyería fina",
     description: "Collar vintage de plata 925 con diseño geométrico y cierre de langosta.",
-    images: ["3669816711.jpg", "3669816711_1.jpg", "3669816711_2.jpg", "3669816711_3.jpg"]
+    images: ["3669816711.jpg", "3669816711.1.jpg", "3669816711.2.jpg", "3669816711.3.jpg"]
   },
   {
     name: "Collar colgante de oro de 18 quilates",
@@ -478,7 +478,7 @@ const products = [
     barcode: "365671231",
     category: "Joyería fina",
     description: "Joya de oro 9k Au375 con piedra de nacimiento esmeralda cultivada en laboratorio.",
-    images: ["365671231.jpg", "365671231_1.jpg", "365671231_2.jpg"]
+    images: ["365671231.jpg", "365671231.1.jpg", "365671231.2.jpg"]
   },
   {
     name: "Collar de plata 925 con cisne",
@@ -487,7 +487,7 @@ const products = [
     barcode: "17948864PLATA925",
     category: "Joyería fina",
     description: "Collar de plata 925 con colgante de cisne y circón. Disponible en distintos diseños.",
-    images: ["17948864PLATA925.jpg", "17948864PLATA925_1.jpg", "17948864PLATA925_2.jpg", "17948864PLATA925_3.jpg", "17948864PLATA925_4.jpg"]
+    images: ["17948864PLATA925.jpg", "17948864PLATA925.1.jpg", "17948864PLATA925.2.jpg", "17948864PLATA925.3.jpg", "17948864PLATA925.4.jpg"]
   },
   {
     name: "Pendientes de plata 925",
@@ -496,7 +496,7 @@ const products = [
     barcode: "17670PENI9251",
     category: "Joyería fina",
     description: "Pendientes de plata 925 con colgante de cisne, disponibles en distintos tonos.",
-    images: ["17670PENI9251.jpg", "17670PENI9251_1.jpg", "17670PENI9251_2.jpg", "17670PENI9251_3.jpg", "17670PENI9251_4.jpg"]
+    images: ["17670PENI9251.jpg", "17670PENI9251.1.jpg", "17670PENI9251.2.jpg", "17670PENI9251.3.jpg", "17670PENI9251.4.jpg"]
   },
   {
     name: "Collar de plata S925 con cruz",
@@ -505,7 +505,7 @@ const products = [
     barcode: "687249s925",
     category: "Joyería fina",
     description: "Collar de moda con colgante de cruz S925 e incrustaciones decorativas.",
-    images: ["687249s925.jpg", "687249s925_1.jpg", "687249s925_2.jpg", "687249s925_3.jpg", "687249s925_4.jpg"]
+    images: ["687249s925.jpg", "687249s925.1.jpg", "687249s925.2.jpg", "687249s925.3.jpg", "687249s925.4.jpg"]
   },
   {
     name: "Collar fino de plata 925",
@@ -514,7 +514,7 @@ const products = [
     barcode: "3448COL9251",
     category: "Joyería fina",
     description: "Collar colgante elegante de plata 925 con forma de corazón y circón.",
-    images: ["3448COL9251.jpg", "3448COL9251_1.jpg", "3448COL9251_2.jpg", "3448COL9251_3.jpg"]
+    images: ["3448COL9251.jpg", "3448COL9251.1.jpg", "3448COL9251.2.jpg", "3448COL9251.3.jpg"]
   },
   {
     name: "Cadena de serpiente de plata 925",
@@ -523,7 +523,7 @@ const products = [
     barcode: "PLATA90268910201",
     category: "Joyería fina",
     description: "Cadena minimalista de plata 925 tipo serpiente. Precio desde $55.",
-    images: ["PLATA90268910201.jpg", "PLATA90268910201_1.jpg", "PLATA90268910201_2.jpg", "PLATA90268910201_3.jpg"]
+    images: ["PLATA90268910201.jpg", "PLATA90268910201.1.jpg", "PLATA90268910201.2.jpg", "PLATA90268910201.3.jpg"]
   }
 
 ];

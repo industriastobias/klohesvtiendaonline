@@ -761,7 +761,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .discount-tag {
+        .discount-tag { display: none !important; 
             position: absolute;
             top: 0.7rem;
             left: 0.7rem;
@@ -854,7 +854,7 @@
             margin-bottom: 0.4rem;
         }
 
-        .product-price-original {
+        .product-price-original { display: none !important; 
             font-size: 0.75rem;
             color: #bbb;
             text-decoration: line-through;
@@ -1399,7 +1399,7 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .preview-price-original {
+        .preview-price-original { display: none !important; 
             font-size: 1.2rem;
             color: #bbb;
             text-decoration: line-through;
@@ -2963,7 +2963,6 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 <p class="preview-description" id="previewDescription"></p>
                 <div class="preview-price-container">
                     <span class="preview-price" id="previewPrice"></span>
-                    <span class="preview-price-original" id="previewPriceOriginal"></span>
                 </div>
                 <p class="preview-stock" id="previewStock"></p>
                 <button class="preview-add-btn" id="previewAddBtn">
@@ -3064,10 +3063,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         <h3>Bienvenido</h3>
         <p>Verano 2026</p>
         <div style="font-size: 1.8rem; margin: 0.8rem 0;">☀️🌊✨</div>
-        <p>Relojes con <strong>15% de descuento</strong></p>
-        <p>Todo lo demas con <strong>30% de descuento</strong></p>
-        <div class="newsletter-code">DAYMAR26</div>
-        <p style="font-size: 0.85rem; color: var(--gris); font-family: 'Outfit', sans-serif;">Menciona este codigo al comprar</p>
+        <p>Descubre nuestra nueva colección</p>
+        <p style="font-size: 0.85rem; color: var(--gris); font-family: 'Outfit', sans-serif;">Piezas seleccionadas para cada ocasión</p>
     </div>
 
     <!-- Overlay -->
@@ -3378,18 +3375,10 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         }
 
         // ==========================================
-        // DESCUENTOS
+        // PRECIOS
         // ==========================================
-        function getDiscountForProduct(product) {
-            if (product.category === 'Relojes') {
-                return { percent: 15, label: '-15%' };
-            }
-            return { percent: 30, label: '-30%' };
-        }
-
-        function getDiscountedPrice(product) {
-            const discount = getDiscountForProduct(product);
-            return product.price * (1 - discount.percent / 100);
+        function getProductPrice(product) {
+            return Number(product.price) || 0;
         }
 
         // ==========================================
@@ -3419,9 +3408,9 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const withoutStock = AppState.filteredProducts.filter(p => p.stock <= 0);
             
             if (AppState.currentSort === 'price-desc') {
-                withStock.sort((a, b) => getDiscountedPrice(b) - getDiscountedPrice(a));
+                withStock.sort((a, b) => getProductPrice(b) - getProductPrice(a));
             } else if (AppState.currentSort === 'price-asc') {
-                withStock.sort((a, b) => getDiscountedPrice(a) - getDiscountedPrice(b));
+                withStock.sort((a, b) => getProductPrice(a) - getProductPrice(b));
             }
             
             AppState.filteredProducts = [...withStock, ...withoutStock];
@@ -3603,16 +3592,16 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 return images.map(image => {
                     const imagePath = String(image).trim();
                     const isAbsolute = /^(https?:|data:|\/)/i.test(imagePath);
-                    const alreadyHasFolder = imagePath.startsWith('joyeria-fina/');
+                    const alreadyHasFolder = imagePath.startsWith('prodimg/');
                     if (isFineJewelry && !isAbsolute && !alreadyHasFolder) {
-                        return `joyeria-fina/${imagePath}`;
+                        return `prodimg/${imagePath}`;
                     }
                     return imagePath;
                 });
             }
 
             return [isFineJewelry
-                ? `joyeria-fina/${product.barcode}.jpg`
+                ? `prodimg/${product.barcode}.jpg`
                 : `${product.barcode}.jpg`];
         }
 
@@ -3620,7 +3609,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         function getProductImageUrl(product, image) {
             if (!image) {
                 return product.category === 'Joyería fina'
-                    ? `joyeria-fina/${product.barcode}.jpg`
+                    ? `prodimg/${product.barcode}.jpg`
                     : `${product.barcode}.jpg`;
             }
             return image;
@@ -3636,13 +3625,10 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const isFavorite = AppState.favorites.includes(product.barcode);
             const initial = product.name.charAt(0).toUpperCase();
             
-            const discount = getDiscountForProduct(product);
-            const discountedPrice = getDiscountedPrice(product);
-            const discountClass = product.category === 'Relojes' ? 'reloj' : '';
+            const productPrice = Number(product.price) || 0;
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
-                    ${hasStock ? `<div class="discount-tag ${discountClass}">${discount.label}</div>` : ''}
                     <img data-src="${getProductImages(product)[0]}" 
                          alt="${product.name}" 
                          class="product-image"
@@ -3658,8 +3644,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     <h3 class="product-name">${product.name}</h3>
                     <p class="product-description">${product.description || ''}</p>
                     <div class="product-price-container">
-                        ${hasStock ? `<span class="product-price-original">$${product.price.toFixed(2)}</span>` : ''}
-                        <span class="product-price">$${discountedPrice.toFixed(2)}</span>
+                        <span class="product-price">$${productPrice.toFixed(2)}</span>
                     </div>
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
@@ -3752,7 +3737,6 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     AppState.favorites.forEach(barcode => {
                         const product = products.find(p => p.barcode === barcode);
                         if (product) {
-                            const discountedPrice = getDiscountedPrice(product);
                             list.innerHTML += `
                                 <div class="favorite-item">
                                     <div class="favorite-item-image">
@@ -3761,7 +3745,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                                     </div>
                                     <div class="favorite-item-details">
                                         <h4>${product.name}</h4>
-                                        <p><span style="text-decoration:line-through;color:#bbb;font-size:0.85rem;">$${product.price.toFixed(2)}</span> $${discountedPrice.toFixed(2)}</p>
+                                        <p>$${product.price.toFixed(2)}</p>
                                     </div>
                                     <button class="remove-favorite" onclick="removeFromFavorites('${product.barcode}')" aria-label="Eliminar de favoritos">
                                         <i class="fas fa-trash"></i>
@@ -3924,8 +3908,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 let subtotal = 0;
 
                 AppState.cart.forEach(item => {
-                    const discountedPrice = getDiscountedPrice(item);
-                    const itemTotal = discountedPrice * item.quantity;
+                    const itemPrice = Number(item.price) || 0;
+                    const itemTotal = itemPrice * item.quantity;
                     subtotal += itemTotal;
 
                     cartItems.innerHTML += `
@@ -3937,7 +3921,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                             <div class="cart-item-details">
                                 <h4>${item.name}</h4>
                                 <p class="cart-item-code">COD: ${item.barcode}</p>
-                                <p><span style="text-decoration:line-through;color:#bbb;font-size:0.85rem;">$${item.price.toFixed(2)}</span> $${discountedPrice.toFixed(2)} x ${item.quantity}</p>
+                                <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
                             </div>
                             <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name}">
                                 <i class="fas fa-trash"></i>
@@ -3957,8 +3941,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     whatsappBtn.style.display = 'flex';
                     
                     const messageLines = AppState.cart.map(item => {
-                        const discountedPrice = getDiscountedPrice(item);
-                        return `* ${item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${discountedPrice.toFixed(2)}\n  Imagen: https://industriastobias.github.io/klohesvtiendaonline/${getProductImages(item)[0]}`;
+                        return `* ${item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${item.price.toFixed(2)}\n  Imagen: https://industriastobias.github.io/klohesvtiendaonline/${getProductImages(item)[0]}`;
                     });
                     
                     const shippingText = AppState.shippingEnabled ? `\n\nEnvio nacional: $${CONFIG.shippingCost.toFixed(2)}` : '';
@@ -4069,14 +4052,10 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             AppState.currentPreviewImageIndex = 0;
             renderPreviewGallery(product);
 
-            const discount = getDiscountForProduct(product);
-            const discountedPrice = getDiscountedPrice(product);
-
             document.getElementById('previewName').textContent = product.name;
             document.getElementById('previewBarcode').textContent = `COD: ${product.barcode}`;
             document.getElementById('previewDescription').textContent = product.description || 'No hay descripcion disponible.';
-            document.getElementById('previewPrice').textContent = `$${discountedPrice.toFixed(2)}`;
-            document.getElementById('previewPriceOriginal').textContent = product.stock > 0 ? `$${product.price.toFixed(2)}` : '';
+            document.getElementById('previewPrice').textContent = `$${Number(product.price || 0).toFixed(2)}`;
 
             const stockEl = document.getElementById('previewStock');
             if (product.stock > 0) {
@@ -4125,8 +4104,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const product = products[currentPreviewIndex];
             if (!product) return;
 
-            const discountedPrice = getDiscountedPrice(product);
-            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${discountedPrice.toFixed(2)}`;
+            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${Number(product.price || 0).toFixed(2)}`;
 
             if (navigator.share) {
                 navigator.share({
@@ -4148,8 +4126,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const product = products[currentPreviewIndex];
             if (!product) return;
 
-            const discountedPrice = getDiscountedPrice(product);
-            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${discountedPrice.toFixed(2)}`;
+            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${Number(product.price || 0).toFixed(2)}`;
             const url = `https://wa.me/?text=${encodeURIComponent(shareText + ' - ' + window.location.href)}`;
             window.open(url, '_blank');
         }
@@ -4209,10 +4186,10 @@ function closePreview(e) {
             
             storyImg.src = getProductImages(product)[0];
             
-            const discountedPrice = getDiscountedPrice(product);
+            const productPrice = Number(product.price) || 0;
             
             document.getElementById('storyProductName').textContent = product.name;
-            document.getElementById('storyPrice').textContent = `$${discountedPrice.toFixed(2)}`;
+            document.getElementById('storyPrice').textContent = `$${productPrice.toFixed(2)}`;
             document.getElementById('storyStock').textContent = product.stock > 0 ? 'Disponible' : 'Agotado';
             document.getElementById('storyCode').textContent = `COD: ${product.barcode}`;
             

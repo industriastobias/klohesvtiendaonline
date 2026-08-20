@@ -360,4 +360,170 @@ const products = [
   // === OTROS (con stock primero, luego agotados) ===
   { name: "CEREZA", price: 5.25, stock: 3, barcode: "122", category: "Otros" },
   { name: "TARJETAS NAVIDEÑAS", price: 0.0, stock: 121, barcode: "154", category: "Otros" },
+
+
+  // === JOYERÍA FINA: productos del catálogo PDF ===
+  {
+    name: "Pendientes con patrón de perla en oro",
+    price: 135.00,
+    stock: 1,
+    barcode: "1991712",
+    category: "Joyería fina",
+    description: "Pendientes de oro 9k Au375 con incrustación de perlas de agua.",
+    images: ["1991712.jpg"]
+  },
+  {
+    name: "Anillo de flores estilo vintage en plata 925",
+    price: 30.00,
+    stock: 1,
+    barcode: "5982",
+    category: "Joyería fina",
+    description: "Anillo ajustable de plata de ley 925 con diseño de flores y acabado dorado.",
+    images: ["5982.jpg"]
+  },
+  {
+    name: "Pulsera para mujer de oro 9k",
+    price: 203.20,
+    stock: 1,
+    barcode: "11759776",
+    category: "Joyería fina",
+    description: "Pulsera de oro 9k Au375 con estilo simple, peso aproximado de 3 g.",
+    images: ["11759776.jpg"]
+  },
+  {
+    name: "Anillo retro para mujer en plata 925",
+    price: 35.00,
+    stock: 1,
+    barcode: "12593475plata",
+    category: "Joyería fina",
+    description: "Anillo retro de plata de ley 925 con diseño de gotas de agua.",
+    images: ["12593475plata.jpg"]
+  },
+  {
+    name: "Anillo de plata 925 con moissanita",
+    price: 75.00,
+    stock: 1,
+    barcode: "12296214",
+    category: "Joyería fina",
+    description: "Anillo de plata 925 con moissanita de 1 ct en corte pera. Consultar tallas.",
+    images: ["12296214.jpg"]
+  },
+  {
+    name: "Anillo para mujer de plata 925",
+    price: 30.00,
+    stock: 1,
+    barcode: "1884",
+    category: "Joyería fina",
+    description: "Anillo de plata 925 con patrón cuadrilátero y acabado en oro de 18 quilates. Consultar tallas.",
+    images: ["1884.jpg", "1884_1.jpg", "1884_2.jpg"]
+  },
+  {
+    name: "Anillo de plata 925 con moissanita oval",
+    price: 95.00,
+    stock: 5,
+    barcode: "50073399",
+    category: "Joyería fina",
+    description: "Anillo de plata 925 con moissanita oval de 2 ct y diseño geométrico. Consultar diseños y tallas.",
+    images: ["50073399.jpg"]
+  },
+  {
+    name: "Pulsera de plata 925",
+    price: 35.00,
+    stock: 2,
+    barcode: "82966070",
+    category: "Joyería fina",
+    description: "Pulsera de plata 925 con diseño de corazón y acabado electrochapado.",
+    images: ["82966070.jpg"]
+  },
+  {
+    name: "Collar vintage para mujer en plata 925",
+    price: 35.00,
+    stock: 5,
+    barcode: "3669816711",
+    category: "Joyería fina",
+    description: "Collar vintage de plata 925 con diseño geométrico y cierre de langosta.",
+    images: ["3669816711.jpg"]
+  },
+  {
+    name: "Collar colgante de oro de 18 quilates",
+    price: 275.00,
+    stock: 5,
+    barcode: "8774415oro18k",
+    category: "Joyería fina",
+    description: "Collar unisex de oro 18k Au750. Precio desde $275 hasta $531.28.",
+    images: ["8774415oro18k.jpg"]
+  },
+  {
+    name: "Pendientes pequeños para niña en oro",
+    price: 50.00,
+    stock: 5,
+    barcode: "54974oro18k",
+    category: "Joyería fina",
+    description: "Pendientes para mujer en oro con diseño de flores y circón, ideales para el verano.",
+    images: ["54974oro18k.jpg"]
+  },
+  {
+    name: "Pendientes pequeños en oro de 14k",
+    price: 80.00,
+    stock: 5,
+    barcode: "73914174112oro14k",
+    category: "Joyería fina",
+    description: "Pendientes hechos a mano en oro de 14 quilates con diseño de mariposa.",
+    images: ["73914174112oro14k.jpg"]
+  },
+  {
+    name: "Pendientes de oro con esmeralda cultivada",
+    price: 135.00,
+    stock: 5,
+    barcode: "365671231",
+    category: "Joyería fina",
+    description: "Joya de oro 9k Au375 con piedra de nacimiento esmeralda cultivada en laboratorio.",
+    images: ["365671231.jpg"]
+  },
+  {
+    name: "Collar de plata 925 con cisne",
+    price: 40.00,
+    stock: 5,
+    barcode: "17948864PLATA925",
+    category: "Joyería fina",
+    description: "Collar de plata 925 con colgante de cisne y circón. Disponible en distintos diseños.",
+    images: ["17948864PLATA925.jpg"]
+  },
+  {
+    name: "Pendientes de plata 925",
+    price: 25.00,
+    stock: 6,
+    barcode: "17670PENI9251",
+    category: "Joyería fina",
+    description: "Pendientes de plata 925 con colgante de cisne, disponibles en distintos tonos.",
+    images: ["17670PENI9251.jpg"]
+  },
+  {
+    name: "Collar de plata S925 con cruz",
+    price: 35.00,
+    stock: 5,
+    barcode: "687249s925",
+    category: "Joyería fina",
+    description: "Collar de moda con colgante de cruz S925 e incrustaciones decorativas.",
+    images: ["687249s925.jpg"]
+  },
+  {
+    name: "Collar fino de plata 925",
+    price: 35.00,
+    stock: 5,
+    barcode: "3448COL9251",
+    category: "Joyería fina",
+    description: "Collar colgante elegante de plata 925 con forma de corazón y circón.",
+    images: ["3448COL9251.jpg"]
+  },
+  {
+    name: "Cadena de serpiente de plata 925",
+    price: 55.00,
+    stock: 5,
+    barcode: "PLATA90268910201",
+    category: "Joyería fina",
+    description: "Cadena minimalista de plata 925 tipo serpiente. Precio desde $55.",
+    images: ["PLATA90268910201.jpg"]
+  }
+
 ];

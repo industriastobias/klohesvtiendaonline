@@ -3036,6 +3036,127 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             }
         }
     </style>
+    <style id="touch-gallery-and-lightbox">
+        .preview-image-zoomable {
+            cursor: zoom-in;
+            touch-action: pan-y;
+        }
+
+        .image-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(14, 13, 13, .94);
+            opacity: 0;
+            transition: opacity .22s ease;
+            touch-action: pan-y;
+        }
+
+        .image-lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .image-lightbox-img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: min(94vw, 1100px);
+            max-height: 88dvh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, .45);
+            cursor: zoom-out;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .image-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, .45);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .94);
+            color: var(--ink, #171515);
+            font-size: 1.15rem;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .image-lightbox-counter {
+            position: absolute;
+            left: 50%;
+            bottom: 42px;
+            transform: translateX(-50%);
+            color: #fff;
+            background: rgba(0, 0, 0, .58);
+            border-radius: 99px;
+            padding: 8px 14px;
+            font: 600 .78rem/1 'Manrope', sans-serif;
+            letter-spacing: .12em;
+        }
+
+        .image-lightbox-hint {
+            position: absolute;
+            bottom: 14px;
+            left: 0;
+            right: 0;
+            margin: 0;
+            text-align: center;
+            color: rgba(255, 255, 255, .72);
+            font: .7rem/1.2 'Manrope', sans-serif;
+            letter-spacing: .08em;
+        }
+
+        @media (max-width: 600px) {
+            .preview-image-container {
+                touch-action: pan-y !important;
+            }
+
+            .preview-gallery-controls {
+                display: none !important;
+            }
+
+            .preview-image-zoomable {
+                cursor: zoom-in;
+                padding: 16px !important;
+            }
+
+            .fine-jewelry-preview {
+                padding: 22px !important;
+            }
+
+            .image-lightbox {
+                padding: 12px;
+            }
+
+            .image-lightbox-img {
+                max-width: 96vw;
+                max-height: 82dvh;
+                border-radius: 6px;
+            }
+
+            .image-lightbox-close {
+                top: 14px;
+                right: 14px;
+                width: 46px;
+                height: 46px;
+            }
+
+            .image-lightbox-counter {
+                bottom: 44px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="atelier-topline" aria-label="Información de la tienda">
@@ -3201,7 +3322,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         <div class="preview-content" onclick="event.stopPropagation()">
             <button class="close-preview-btn" onclick="closePreview()"><i class="fas fa-times"></i></button>
             <div class="preview-image-container">
-                <img src="" alt="" class="preview-image" id="previewImage" loading="lazy">
+                <img src="" alt="" class="preview-image preview-image-zoomable" id="previewImage" loading="lazy" onclick="event.stopPropagation(); openImageLightbox()" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openImageLightbox(); }" tabindex="0" role="button" aria-label="Abrir imagen en grande">
                 <div class="preview-gallery-controls" id="previewGalleryControls" style="display:none;">
                     <button type="button" class="preview-gallery-btn" onclick="event.stopPropagation(); changePreviewImage(-1)" aria-label="Imagen anterior"><i class="fas fa-chevron-left"></i></button>
                     <button type="button" class="preview-gallery-btn" onclick="event.stopPropagation(); changePreviewImage(1)" aria-label="Imagen siguiente"><i class="fas fa-chevron-right"></i></button>
@@ -3235,6 +3356,14 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         </div>
     </div>
         </div>
+    </div>
+
+    <!-- Visor de imagen ampliada -->
+    <div class="image-lightbox" id="imageLightbox" onclick="closeImageLightbox(event)" role="dialog" aria-modal="true" aria-label="Imagen ampliada" aria-hidden="true">
+        <button type="button" class="image-lightbox-close" onclick="closeImageLightbox()" aria-label="Cerrar imagen ampliada"><i class="fas fa-times"></i></button>
+        <img id="imageLightboxImg" class="image-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+        <div class="image-lightbox-counter" id="imageLightboxCounter" aria-live="polite"></div>
+        <p class="image-lightbox-hint">Toca fuera de la imagen para cerrar</p>
     </div>
 
     <!-- Story Template (Hidden) -->
@@ -3793,11 +3922,18 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             if (currentPreviewImages.length <= 1) return;
 
             currentPreviewImageIndex = (currentPreviewImageIndex + step + currentPreviewImages.length) % currentPreviewImages.length;
+            const nextImage = currentPreviewImages[currentPreviewImageIndex];
             const img = document.getElementById('previewImage');
-            if (img) img.src = currentPreviewImages[currentPreviewImageIndex];
+            if (img) img.src = nextImage;
 
+            const lightboxImg = document.getElementById('imageLightboxImg');
+            if (lightboxImg) lightboxImg.src = nextImage;
+
+            const counterText = `${currentPreviewImageIndex + 1} / ${currentPreviewImages.length}`;
             const counter = document.getElementById('previewGalleryCounter');
-            if (counter) counter.textContent = `${currentPreviewImageIndex + 1} / ${currentPreviewImages.length}`;
+            if (counter) counter.textContent = counterText;
+            const lightboxCounter = document.getElementById('imageLightboxCounter');
+            if (lightboxCounter) lightboxCounter.textContent = counterText;
         }
 
         function createProductCard(product, index) {
@@ -4319,8 +4455,80 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             });
         }
 
-function closePreview(e) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartTime = 0;
+
+        function openImageLightbox() {
+            const previewImage = document.getElementById('previewImage');
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImg = document.getElementById('imageLightboxImg');
+            const lightboxCounter = document.getElementById('imageLightboxCounter');
+            const previewContainer = document.querySelector('.preview-image-container');
+            if (!previewImage || !lightbox || !lightboxImg || !previewImage.src || previewContainer?.dataset.suppressClick === 'true') return;
+
+            lightboxImg.src = currentPreviewImages[currentPreviewImageIndex] || previewImage.src;
+            lightboxImg.alt = previewImage.alt || 'Imagen ampliada del producto';
+            lightboxCounter.textContent = currentPreviewImages.length > 1
+                ? `${currentPreviewImageIndex + 1} / ${currentPreviewImages.length}`
+                : '';
+            lightbox.classList.add('active');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageLightbox(e) {
+            const lightbox = document.getElementById('imageLightbox');
+            if (!lightbox) return;
+            if (e && e.target !== e.currentTarget && !e.target.closest('.image-lightbox-close')) return;
+            lightbox.classList.remove('active');
+            lightbox.setAttribute('aria-hidden', 'true');
+            if (document.getElementById('previewModal')?.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function handleGalleryTouchStart(e) {
+            if (!e.touches || e.touches.length !== 1) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchStartTime = Date.now();
+        }
+
+        function handleGalleryTouchEnd(e) {
+            if (!e.changedTouches || e.changedTouches.length !== 1) return;
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const deltaX = endX - touchStartX;
+            const deltaY = endY - touchStartY;
+            const elapsed = Date.now() - touchStartTime;
+            const isHorizontalSwipe = Math.abs(deltaX) >= 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && elapsed < 700;
+
+            if (isHorizontalSwipe && currentPreviewImages.length > 1) {
+                e.preventDefault();
+                const imageContainer = document.querySelector('.preview-image-container');
+                if (imageContainer) imageContainer.dataset.suppressClick = 'true';
+                changePreviewImage(deltaX < 0 ? 1 : -1);
+                window.setTimeout(() => {
+                    if (imageContainer) delete imageContainer.dataset.suppressClick;
+                }, 350);
+            }
+        }
+
+        function initGalleryTouchGestures() {
+            const previewContainer = document.querySelector('.preview-image-container');
+            const lightbox = document.getElementById('imageLightbox');
+            [previewContainer, lightbox].filter(Boolean).forEach(target => {
+                target.addEventListener('touchstart', handleGalleryTouchStart, { passive: true });
+                target.addEventListener('touchend', handleGalleryTouchEnd, { passive: false });
+            });
+        }
+
+        function closePreview(e) {
             if (e && e.target !== e.currentTarget && !e.target.closest('.close-preview-btn')) return;
+            closeImageLightbox();
             document.getElementById('previewModal').classList.remove('active');
             document.body.style.overflow = '';            currentPreviewIndex = null;
             currentPreviewImages = [];
@@ -4576,6 +4784,7 @@ function closePreview(e) {
             
             initFloatingHearts();
             initImageObserver();
+            initGalleryTouchGestures();
             initWhatsAppCyclicAnimation();
 
             AppState.isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -4629,6 +4838,10 @@ function closePreview(e) {
 
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
+                    if (document.getElementById('imageLightbox')?.classList.contains('active')) {
+                        closeImageLightbox();
+                        return;
+                    }
                     const modals = ['previewModal', 'storyModal', 'categoriesMenu', 'cartModal', 'favoritesModal'];
                     modals.forEach(id => {
                         const el = document.getElementById(id);

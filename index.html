@@ -2907,6 +2907,135 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             }
         }
     </style>
+    <style id="mobile-product-experience-v2">
+        /* Precios normales: no mostrar etiquetas ni precios anteriores en ninguna vista. */
+        .discount-tag,
+        .product-price-original,
+        .preview-price-original {
+            display: none !important;
+        }
+
+        @media (max-width: 600px) {
+            .preview-modal {
+                padding: 10px !important;
+                align-items: center !important;
+                justify-content: center !important;
+                background: rgba(20, 18, 18, .76) !important;
+                overscroll-behavior: contain;
+            }
+
+            .preview-content {
+                width: min(100%, 430px) !important;
+                height: calc(100dvh - 20px) !important;
+                max-height: calc(100dvh - 20px) !important;
+                display: flex !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
+                border-radius: 22px !important;
+                box-shadow: 0 24px 75px rgba(0, 0, 0, .38) !important;
+            }
+
+            .preview-image-container {
+                flex: 0 0 clamp(250px, 42dvh, 430px) !important;
+                height: clamp(250px, 42dvh, 430px) !important;
+                min-height: 0 !important;
+                background: #171515 !important;
+            }
+
+            .preview-image,
+            .fine-jewelry-preview {
+                object-fit: contain !important;
+                object-position: center !important;
+                padding: 16px !important;
+            }
+
+            .fine-jewelry-preview {
+                padding: 22px !important;
+                background: radial-gradient(circle at 50% 35%, #fffdfb 0%, #f5eee9 62%, #e9ddd6 100%) !important;
+            }
+
+            .preview-gallery-controls {
+                padding: 0 12px !important;
+            }
+
+            .preview-gallery-btn {
+                width: 46px !important;
+                height: 46px !important;
+                font-size: 1rem !important;
+            }
+
+            .preview-gallery-counter {
+                bottom: 14px !important;
+                padding: 7px 12px !important;
+                font-size: .72rem !important;
+            }
+
+            .preview-details {
+                flex: 1 1 auto !important;
+                min-height: 0 !important;
+                height: auto !important;
+                overflow-y: auto !important;
+                overscroll-behavior: contain;
+                padding: 20px 18px 18px !important;
+            }
+
+            .share-corner {
+                position: static !important;
+                display: flex !important;
+                gap: 10px !important;
+                margin: 0 0 16px !important;
+            }
+
+            .share-corner-btn {
+                width: 45px !important;
+                height: 45px !important;
+                font-size: 1rem !important;
+            }
+
+            .preview-name {
+                font-size: clamp(1.25rem, 6vw, 1.75rem) !important;
+                line-height: 1.12 !important;
+                margin: 0 0 12px !important;
+                letter-spacing: .04em !important;
+            }
+
+            .preview-barcode {
+                margin-bottom: 16px !important;
+                padding: 8px 12px !important;
+                font-size: .75rem !important;
+            }
+
+            .preview-description {
+                font-size: .94rem !important;
+                line-height: 1.55 !important;
+                margin-bottom: 18px !important;
+                padding: 16px 0 !important;
+            }
+
+            .preview-price-container {
+                margin-bottom: 12px !important;
+            }
+
+            .preview-price {
+                font-size: clamp(1.9rem, 9vw, 2.35rem) !important;
+                color: var(--blush-dark) !important;
+            }
+
+            .preview-stock {
+                margin-bottom: 18px !important;
+                font-size: .78rem !important;
+            }
+
+            .preview-add-btn {
+                min-height: 54px !important;
+                padding: 14px 16px !important;
+                font-size: .76rem !important;
+                position: sticky !important;
+                bottom: 0 !important;
+                z-index: 2;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="atelier-topline" aria-label="Información de la tienda">
@@ -3389,18 +3518,11 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
         }
 
         // ==========================================
-        // DESCUENTOS
+        // PRECIOS
         // ==========================================
-        function getDiscountForProduct(product) {
-            if (product.category === 'Relojes') {
-                return { percent: 15, label: '-15%' };
-            }
-            return { percent: 30, label: '-30%' };
-        }
-
-        function getDiscountedPrice(product) {
-            const discount = getDiscountForProduct(product);
-            return product.price * (1 - discount.percent / 100);
+        // Los productos se muestran y se cobran a su precio normal.
+        function getProductPrice(product) {
+            return Number(product?.price) || 0;
         }
 
         // ==========================================
@@ -3430,9 +3552,9 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const withoutStock = AppState.filteredProducts.filter(p => p.stock <= 0);
             
             if (AppState.currentSort === 'price-desc') {
-                withStock.sort((a, b) => getDiscountedPrice(b) - getDiscountedPrice(a));
+                withStock.sort((a, b) => getProductPrice(b) - getProductPrice(a));
             } else if (AppState.currentSort === 'price-asc') {
-                withStock.sort((a, b) => getDiscountedPrice(a) - getDiscountedPrice(b));
+                withStock.sort((a, b) => getProductPrice(a) - getProductPrice(b));
             }
             
             AppState.filteredProducts = [...withStock, ...withoutStock];
@@ -3689,13 +3811,10 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const isFavorite = AppState.favorites.includes(product.barcode);
             const initial = product.name.charAt(0).toUpperCase();
             
-            const discount = getDiscountForProduct(product);
-            const discountedPrice = getDiscountedPrice(product);
-            const discountClass = product.category === 'Relojes' ? 'reloj' : '';
+            const productPrice = getProductPrice(product);
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
-                    ${hasStock ? `<div class="discount-tag ${discountClass}">${discount.label}</div>` : ''}
                     <img data-src="${getPrimaryProductImage(product)}" 
                          alt="${product.name}" 
                          class="product-image"
@@ -3711,8 +3830,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     <h3 class="product-name">${product.name}</h3>
                     <p class="product-description">${product.description || ''}</p>
                     <div class="product-price-container">
-                        ${hasStock ? `<span class="product-price-original">$${product.price.toFixed(2)}</span>` : ''}
-                        <span class="product-price">$${discountedPrice.toFixed(2)}</span>
+                        <span class="product-price">$${productPrice.toFixed(2)}</span>
                     </div>
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
@@ -3805,7 +3923,6 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     AppState.favorites.forEach(barcode => {
                         const product = products.find(p => p.barcode === barcode);
                         if (product) {
-                            const discountedPrice = getDiscountedPrice(product);
                             list.innerHTML += `
                                 <div class="favorite-item">
                                     <div class="favorite-item-image">
@@ -3814,7 +3931,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                                     </div>
                                     <div class="favorite-item-details">
                                         <h4>${product.name}</h4>
-                                        <p><span style="text-decoration:line-through;color:#bbb;font-size:0.85rem;">$${product.price.toFixed(2)}</span> $${discountedPrice.toFixed(2)}</p>
+                                        <p>$${product.price.toFixed(2)}</p>
                                     </div>
                                     <button class="remove-favorite" onclick="removeFromFavorites('${product.barcode}')" aria-label="Eliminar de favoritos">
                                         <i class="fas fa-trash"></i>
@@ -3977,8 +4094,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 let subtotal = 0;
 
                 AppState.cart.forEach(item => {
-                    const discountedPrice = getDiscountedPrice(item);
-                    const itemTotal = discountedPrice * item.quantity;
+                    const itemPrice = Number(item.price) || 0;
+                    const itemTotal = itemPrice * item.quantity;
                     subtotal += itemTotal;
 
                     cartItems.innerHTML += `
@@ -3990,7 +4107,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                             <div class="cart-item-details">
                                 <h4>${item.name}</h4>
                                 <p class="cart-item-code">COD: ${item.barcode}</p>
-                                <p><span style="text-decoration:line-through;color:#bbb;font-size:0.85rem;">$${item.price.toFixed(2)}</span> $${discountedPrice.toFixed(2)} x ${item.quantity}</p>
+                                <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
                             </div>
                             <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name}">
                                 <i class="fas fa-trash"></i>
@@ -4010,8 +4127,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     whatsappBtn.style.display = 'flex';
                     
                     const messageLines = AppState.cart.map(item => {
-                        const discountedPrice = getDiscountedPrice(item);
-                        return `* ${item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${discountedPrice.toFixed(2)}\n  Imagen: https://industriastobias.github.io/klohesvtiendaonline/${getPrimaryProductImage(item)}`;
+                        const itemPrice = Number(item.price) || 0;
+                        return `* ${item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}\n  Imagen: https://industriastobias.github.io/klohesvtiendaonline/${getPrimaryProductImage(item)}`;
                     });
                     
                     const shippingText = AppState.shippingEnabled ? `\n\nEnvio nacional: $${CONFIG.shippingCost.toFixed(2)}` : '';
@@ -4080,14 +4197,13 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                 img.classList.toggle('fine-jewelry-preview', isFineJewelryProduct(product));
             }
 
-            const discount = getDiscountForProduct(product);
-            const discountedPrice = getDiscountedPrice(product);
+            const productPrice = getProductPrice(product);
 
             document.getElementById('previewName').textContent = product.name;
             document.getElementById('previewBarcode').textContent = `COD: ${product.barcode}`;
             document.getElementById('previewDescription').textContent = product.description || 'No hay descripcion disponible.';
-            document.getElementById('previewPrice').textContent = `$${discountedPrice.toFixed(2)}`;
-            document.getElementById('previewPriceOriginal').textContent = product.stock > 0 ? `$${product.price.toFixed(2)}` : '';
+            document.getElementById('previewPrice').textContent = `$${productPrice.toFixed(2)}`;
+            document.getElementById('previewPriceOriginal').textContent = '';
 
             const stockEl = document.getElementById('previewStock');
             if (product.stock > 0) {
@@ -4136,8 +4252,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const product = products[currentPreviewIndex];
             if (!product) return;
 
-            const discountedPrice = getDiscountedPrice(product);
-            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${discountedPrice.toFixed(2)}`;
+            const productPrice = getProductPrice(product);
+            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${productPrice.toFixed(2)}`;
 
             if (navigator.share) {
                 navigator.share({
@@ -4159,8 +4275,8 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const product = products[currentPreviewIndex];
             if (!product) return;
 
-            const discountedPrice = getDiscountedPrice(product);
-            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${discountedPrice.toFixed(2)}`;
+            const productPrice = getProductPrice(product);
+            const shareText = `Mira este producto de DAYMAR SHOP: ${product.name} - $${productPrice.toFixed(2)}`;
             const url = `https://wa.me/?text=${encodeURIComponent(shareText + ' - ' + window.location.href)}`;
             window.open(url, '_blank');
         }
@@ -4218,10 +4334,10 @@ function closePreview(e) {
             
             storyImg.src = getPrimaryProductImage(product);
             
-            const discountedPrice = getDiscountedPrice(product);
+            const productPrice = getProductPrice(product);
             
             document.getElementById('storyProductName').textContent = product.name;
-            document.getElementById('storyPrice').textContent = `$${discountedPrice.toFixed(2)}`;
+            document.getElementById('storyPrice').textContent = `$${productPrice.toFixed(2)}`;
             document.getElementById('storyStock').textContent = product.stock > 0 ? 'Disponible' : 'Agotado';
             document.getElementById('storyCode').textContent = `COD: ${product.barcode}`;
             

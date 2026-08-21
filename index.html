@@ -3461,6 +3461,123 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             }
         }
     </style>
+    <style id="fine-jewelry-card-design">
+        /* Diseño propio para las piezas de Oro y Plata. La imagen y la funcionalidad del producto permanecen intactas. */
+        .fine-jewelry-card {
+            position: relative;
+        }
+
+        .fine-jewelry-card .product-image-container {
+            border: 1px solid rgba(186, 120, 132, .22) !important;
+            box-shadow: 0 16px 32px rgba(23, 21, 21, .08) !important;
+            isolation: isolate;
+        }
+
+        .fine-jewelry-card .product-image-container::after {
+            content: '';
+            position: absolute;
+            inset: 9px;
+            border: 1px solid rgba(255, 255, 255, .7);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .fine-jewelry-overline {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #332815;
+            font: 700 8px/1 'Manrope', sans-serif;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+
+        .fine-jewelry-overline i {
+            font-size: 12px;
+            opacity: .75;
+        }
+
+        .fine-jewelry-overline.silver {
+            color: #414141;
+        }
+
+        .fine-jewelry-overline.mixed {
+            color: var(--blush-deep, #ba7884);
+        }
+
+        .fine-jewelry-card .product-info {
+            padding: 17px 2px 0 !important;
+        }
+
+        .fine-jewelry-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: var(--blush-deep, #ba7884);
+            font: 700 8px/1.2 'Manrope', sans-serif;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .fine-jewelry-meta span:last-child {
+            color: var(--muted, #766e6a);
+            font-weight: 500;
+            letter-spacing: .08em;
+        }
+
+        .fine-jewelry-card .product-name {
+            letter-spacing: .08em !important;
+        }
+
+        .fine-jewelry-card .product-price {
+            color: var(--blush-deep, #ba7884) !important;
+            font-size: 22px !important;
+        }
+
+        .fine-jewelry-card .cart-corner-btn {
+            border-bottom-color: var(--blush-deep, #ba7884) !important;
+        }
+
+        @media (max-width: 600px) {
+            .fine-jewelry-card .product-image-container::after {
+                inset: 7px;
+            }
+
+            .fine-jewelry-overline {
+                top: 12px;
+                left: 12px;
+                right: 12px;
+                font-size: 7px;
+            }
+
+            .fine-jewelry-card .product-info {
+                padding-top: 13px !important;
+            }
+
+            .fine-jewelry-meta {
+                display: block;
+                margin-bottom: 8px;
+                font-size: 7px;
+            }
+
+            .fine-jewelry-meta span:last-child {
+                display: block;
+                margin-top: 4px;
+            }
+
+            .fine-jewelry-card .product-price {
+                font-size: 19px !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="atelier-topline" aria-label="Información de la tienda">
@@ -3647,8 +3764,7 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                     <button type="button" class="preview-gallery-btn" onclick="event.stopPropagation(); changePreviewImage(-1)" aria-label="Imagen anterior"><i class="fas fa-chevron-left"></i></button>
                     <button type="button" class="preview-gallery-btn" onclick="event.stopPropagation(); changePreviewImage(1)" aria-label="Imagen siguiente"><i class="fas fa-chevron-right"></i></button>
                 </div>
-                <div class="preview-gallery-counter" id="previewGalleryCounter" aria-live="polite" style="display:none;"></div>
-                <div class="gallery-touch-hint"><i class="fas fa-arrows-left-right"></i> Desliza para ver más · toca para ampliar</div>
+                <div class="preview-gallery-counter" id="previewGalleryCounter" aria-live="polite" style="display:none;"></div>>
             </div>
             <div class="preview-details">
                 <div class="share-corner">
@@ -4283,6 +4399,13 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             const initial = product.name.charAt(0).toUpperCase();
             
             const productPrice = getProductPrice(product);
+            const productText = `${product.name || ''} ${product.description || ''} ${product.material || ''}`.toLowerCase();
+            const fineMaterial = /plata|silver|925/.test(productText)
+                ? 'PLATA 925'
+                : /oro|gold|au\d/.test(productText)
+                    ? 'ORO'
+                    : 'ORO Y PLATA';
+            const fineMaterialClass = fineMaterial.includes('PLATA') ? 'silver' : fineMaterial === 'ORO' ? 'gold' : 'mixed';
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
@@ -4291,13 +4414,14 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
                          class="product-image"
                          loading="lazy"
                          decoding="async"
-                         fetchpriority="low">
-                    <div class="image-placeholder" data-initial="${initial}"></div>
-                    <button class="wishlist-btn ${isFavorite ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(this, '${product.barcode}')" aria-label="Agregar a favoritos">
+                         fetchpriority="low">                    <div class="image-placeholder" data-initial="${initial}"></div>
+                    ${isFineJewelry ? `<div class="fine-jewelry-overline ${fineMaterialClass}"><span>${fineMaterial}</span><i class="fas fa-sparkles" aria-hidden="true"></i></div>` : ''}
+                    <button class="wishlist-btnn ${isFavorite ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(this, '${product.barcode}')" aria-label="Agregar a favoritos">
                         <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
                     </button>
                 </div>
                 <div class="product-info">
+                    ${isFineJewelry ? `<div class="fine-jewelry-meta"><span>PIEZA ESPECIAL</span><span>${fineMaterial}</span></div>` : ''}
                     <h3 class="product-name">${product.name}</h3>
                     <p class="product-description">${product.description || ''}</p>
                     <div class="product-price-container">

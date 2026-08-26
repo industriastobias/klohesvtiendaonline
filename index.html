@@ -3779,6 +3779,32 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     }
 }
 </style>
+<style id="category-filter-active-style">
+.atelier-category-rail > span,
+.atelier-category-rail button {
+    font-weight: 800 !important;
+}
+
+.atelier-category-rail button {
+    padding: 10px 14px !important;
+    border-radius: 3px !important;
+    transition: background-color .25s ease, color .25s ease !important;
+}
+
+.atelier-category-rail button:hover {
+    background: #b8e0f7 !important;
+    color: #171515 !important;
+}
+
+.atelier-category-rail button.active {
+    background: #87ceeb !important;
+    color: #171515 !important;
+}
+
+.atelier-category-rail button.active::after {
+    color: #171515 !important;
+}
+</style>
 </head>
 <body>
     <div class="atelier-topline" aria-label="Información de la tienda">
@@ -4377,8 +4403,13 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             if (searchInput) searchInput.value = '';
             
             document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.atelier-category-rail button').forEach(btn => btn.classList.remove('active'));
             if (btnElement) btnElement.classList.add('active');
-            
+
+            const activeRailButton = Array.from(document.querySelectorAll('.atelier-category-rail button'))
+                .find(btn => (btn.getAttribute('onclick') || '').includes(`'${category}'`));
+            if (activeRailButton) activeRailButton.classList.add('active');
+
             document.getElementById('categoryTitle').textContent = categoryDisplayNames[category] || 'Todas';
             
             document.getElementById('productsContainer').innerHTML = '';

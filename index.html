@@ -3593,6 +3593,48 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 @media (max-width:600px){.atelier-topline{min-height:27px}.atelier-hero-copy{padding-left:var(--daymar-edge)!important;padding-right:var(--daymar-edge)!important}.atelier-hero-art{margin-left:var(--daymar-edge)!important;margin-right:var(--daymar-edge)!important;width:auto!important}.atelier-search-row .container{padding-left:var(--daymar-edge)!important;padding-right:var(--daymar-edge)!important}.atelier-catalog>.container{padding-left:var(--daymar-edge)!important;padding-right:var(--daymar-edge)!important}.products-grid{gap:28px 10px!important}.atelier-section-header{margin-bottom:24px!important}}
 @media (prefers-reduced-motion:reduce){.daymar-mobile-nav,.brand-isotipo{transition:none!important}}
 </style>
+<style id="mobile-hero-gallery-fix">
+@media (max-width: 900px) {
+    .atelier-hero-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        align-items: stretch !important;
+    }
+
+    .atelier-hero-copy,
+    .atelier-hero-art {
+        min-width: 0 !important;
+    }
+
+    .atelier-hero-art {
+        display: block !important;
+        width: auto !important;
+        height: 420px !important;
+        margin-left: var(--daymar-edge) !important;
+        margin-right: var(--daymar-edge) !important;
+        padding: 12px !important;
+    }
+
+    .hero-art-image {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+    }
+
+    .hero-gallery-slide.active {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+@media (max-width: 520px) {
+    .atelier-hero-art {
+        height: 350px !important;
+    }
+}
+</style>
 </head>
 <body>
     <div class="atelier-topline" aria-label="Información de la tienda">

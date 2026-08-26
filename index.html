@@ -3818,6 +3818,43 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     .brand-isotipo { width: 30px !important; height: 30px !important; }
 }
 </style>
+<style id="daymar-restore-previous-mobile">
+/* Restauración solicitada únicamente para teléfonos y tablets; escritorio conserva la versión actual. */
+@media (max-width: 900px) {
+    .atelier-header .atelier-nav {
+        min-height: 116px !important;
+        padding: 15px var(--daymar-edge) 13px !important;
+    }
+    .atelier-brand-lockup {
+        position: static !important;
+        display: flex !important;
+        width: max-content !important;
+        transform: none !important;
+        text-align: center !important;
+    }
+    .atelier-brand-lockup .logo {
+        position: static !important;
+        display: inline-flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 5px !important;
+        font-size: 17px !important;
+        line-height: 1 !important;
+        letter-spacing: .1em !important;
+    }
+    .brand-isotipo {
+        width: 37px !important;
+        height: 37px !important;
+    }
+    .brand-name { display: block !important; }
+}
+@media (max-width: 600px) {
+    .atelier-header .atelier-nav { min-height: 106px !important; }
+    .atelier-brand-lockup .logo { font-size: 15px !important; }
+    .brand-isotipo { width: 32px !important; height: 32px !important; }
+}
+</style>
 </head>
 <body>
     <div class="atelier-topline" aria-label="Información de la tienda">

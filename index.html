@@ -3807,11 +3807,23 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 </style>
 <style id="product-card-gallery-auto-change">
 .product-image {
-    transition: opacity .35s ease, transform .55s cubic-bezier(.23,1,.32,1), filter .55s ease !important;
+    will-change: opacity, transform;
+    transition: opacity .45s ease-in-out, transform .55s cubic-bezier(.23,1,.32,1), filter .55s ease !important;
 }
 
 .product-image.gallery-changing {
-    opacity: .35;
+    opacity: 0 !important;
+}
+</style>
+<style id="product-gallery-reduced-motion">
+@media (prefers-reduced-motion: reduce) {
+    .product-image {
+        transition: none !important;
+    }
+
+    .product-image.gallery-changing {
+        opacity: 1 !important;
+    }
 }
 </style>
 </head>
@@ -4609,14 +4621,19 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                 isPreloading = true;
 
                 preload.onload = () => {
-                    currentIndex = nextIndex;
+                    // Primero se desvanece la imagen actual y luego entra la siguiente.
                     img.classList.add('gallery-changing');
-                    img.src = nextSrc;
-                    img.removeAttribute('data-src');
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => img.classList.remove('gallery-changing'));
-                    });
-                    isPreloading = false;
+
+                    setTimeout(() => {
+                        currentIndex = nextIndex;
+                        img.src = nextSrc;
+                        img.removeAttribute('data-src');
+
+                        requestAnimationFrame(() => {
+                            img.classList.remove('gallery-changing');
+                        });
+                        isPreloading = false;
+                    }, 320);
                 };
 
                 preload.onerror = () => {

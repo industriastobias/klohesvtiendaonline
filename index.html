@@ -3805,6 +3805,15 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     color: #171515 !important;
 }
 </style>
+<style id="product-card-gallery-auto-change">
+.product-image {
+    transition: opacity .35s ease, transform .55s cubic-bezier(.23,1,.32,1), filter .55s ease !important;
+}
+
+.product-image.gallery-changing {
+    opacity: .35;
+}
+</style>
 </head>
 <body>
     <div class="atelier-topline" aria-label="Información de la tienda">
@@ -4576,13 +4585,70 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             });
 
             return [...new Set(resolvedImages)];
-        }
-
-        function getPrimaryProductImage(product) {
+        }        function getPrimaryProductImage(product) {
             return getProductImages(product)[0] || '';
         }
 
+        // Cambia automáticamente las imágenes de las tarjetas que tienen una galería.
+        function initProductCardGallery(card, images) {
+            if (!card || !Array.isArray(images) || images.length < 2) return;
+
+            const img = card.querySelector('.product-image');
+            if (!img) return;
+
+            let currentIndex = 0;
+            let intervalId = null;
+            let isPreloading = false;
+
+            const showNextImage = () => {
+                if (isPreloading) return;
+
+                const nextIndex = (currentIndex + 1) % images.length;
+                const nextSrc = images[nextIndex];
+                const preload = new Image();
+                isPreloading = true;
+
+                preload.onload = () => {
+                    currentIndex = nextIndex;
+                    img.classList.add('gallery-changing');
+                    img.src = nextSrc;
+                    img.removeAttribute('data-src');
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => img.classList.remove('gallery-changing'));
+                    });
+                    isPreloading = false;
+                };
+
+                preload.onerror = () => {
+                    isPreloading = false;
+                };
+
+                preload.src = nextSrc;
+            };
+
+            const startGallery = () => {
+                if (!intervalId) intervalId = setInterval(showNextImage, 4500);
+            };
+
+            const stopGallery = () => {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+            };
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => entry.isIntersecting ? startGallery() : stopGallery());
+                }, { rootMargin: '120px 0px', threshold: 0.01 });
+                observer.observe(card);
+            } else {
+                startGallery();
+            }
+        }
+
         let currentPreviewImages = [];
+;
         let currentPreviewImageIndex = 0;
 
         function renderPreviewGallery(product) {
@@ -4625,9 +4691,10 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             card.className = `product-card${isFineJewelry ? ' fine-jewelry-card' : ''}`;
             card.style.animationDelay = `${index * 0.05}s`;
             
-            const hasStock = Number(product.stock) > 0;
-            const realIndex = products.indexOf(product);
+            const hasStock = Number(product.stock) > 0;            const realIndex = products.indexOf(product);
+            const productImages = getProductImages(product);
             const isFavorite = AppState.favorites.includes(product.barcode);
+;
             const initial = product.name.charAt(0).toUpperCase();
             
             const productPrice = getProductPrice(product);
@@ -4668,12 +4735,14 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                 </div>
             `;
             
-            const img = card.querySelector('img[data-src]');
-            if (img && imageObserver) {
+            const img = card.querySelector('img[data-src]');            if (img && imageObserver) {
                 imageObserver.observe(img);
             }
+
+            initProductCardGallery(card, productImages);
             
             return card;
+;
         }
 
         function loadMoreProducts() {

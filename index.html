@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -3592,100 +3593,6 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 @media (max-width:600px){.atelier-topline{min-height:27px}.atelier-hero-copy{padding-left:var(--daymar-edge)!important;padding-right:var(--daymar-edge)!important}.atelier-hero-art{margin-left:var(--daymar-edge)!important;margin-right:var(--daymar-edge)!important;width:auto!important}.atelier-search-row .container{padding-left:var(--daymar-edge)!important;padding-right:var(--daymar-edge)!important}.atelier-catalog>.container{padding-left:var(--daymar-edge)!important;padding-right:var(--daymar-edge)!important}.products-grid{gap:28px 10px!important}.atelier-section-header{margin-bottom:24px!important}}
 @media (prefers-reduced-motion:reduce){.daymar-mobile-nav,.brand-isotipo{transition:none!important}}
 </style>
-<style id="daymar-header-hero-fix">
-/* Ajuste final: cabecera equilibrada, tipografía legible y hero visible en teléfonos. */
-.atelier-menu-trigger,
-.atelier-link,
-.atelier-search-link,
-.daymar-mobile-nav a,
-.daymar-mobile-nav button {
-    font-size: 11px !important;
-}
-.atelier-menu-trigger { letter-spacing: .13em !important; }
-.atelier-link, .atelier-search-link { letter-spacing: .1em !important; }
-.atelier-brand-lockup .logo {
-    font-size: clamp(16px, 1.45vw, 22px) !important;
-    letter-spacing: .13em !important;
-}
-.brand-isotipo { width: clamp(30px, 3.2vw, 46px) !important; height: clamp(30px, 3.2vw, 46px) !important; }
-.hero-art-image { width: 100% !important; min-height: 0 !important; }
-.hero-gallery-slide.active { opacity: 1 !important; visibility: visible !important; }
-
-@media (min-width: 901px) {
-    .atelier-nav { position: relative !important; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important; }
-    .atelier-nav-start, .atelier-nav-end { min-width: 0; }
-    .atelier-nav-start { justify-content: flex-start !important; }
-    .atelier-nav-end { justify-content: flex-end !important; }
-    .atelier-brand-lockup { justify-self: center !important; }
-    .daymar-mobile-nav { display: none !important; }
-}
-
-@media (max-width: 900px) {
-    .atelier-nav {
-        position: relative !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        grid-template-columns: none !important;
-        width: 100% !important;
-        min-height: 70px !important;
-        padding-left: var(--daymar-edge) !important;
-        padding-right: var(--daymar-edge) !important;
-    }
-    .atelier-nav-start, .atelier-nav-end { position: relative; z-index: 2; flex: 0 0 auto !important; }
-    .atelier-brand-lockup {
-        position: absolute !important;
-        left: 50% !important;
-        top: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        z-index: 1;
-        width: max-content !important;
-    }
-    .atelier-brand-lockup .logo {
-        font-size: clamp(14px, 4vw, 18px) !important;
-        letter-spacing: .09em !important;
-        gap: 5px !important;
-    }
-    .brand-isotipo { width: 31px !important; height: 31px !important; }
-    .atelier-menu-trigger { font-size: 0 !important; width: 38px !important; height: 38px !important; gap: 0 !important; }
-    .atelier-menu-trigger span { width: 22px !important; height: 2px !important; margin: 3px 0 !important; }
-    .atelier-menu-trigger b { display: none !important; }
-    .atelier-nav-end { gap: 2px !important; }
-    .atelier-search-link { font-size: 0 !important; padding: 7px !important; }
-    .atelier-search-link i { font-size: 17px !important; }
-    .atelier-icon { padding: 7px !important; font-size: 17px !important; }
-    .daymar-mobile-nav { gap: 21px !important; padding-top: 12px !important; padding-bottom: 13px !important; }
-    .daymar-mobile-nav a, .daymar-mobile-nav button { font-size: 10px !important; letter-spacing: .08em !important; }
-    .daymar-mobile-nav i { font-size: 11px !important; }
-
-    .atelier-hero-grid {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 28px !important;
-        min-height: 0 !important;
-        padding: 0 !important;
-    }
-    .atelier-hero-art {
-        display: block !important;
-        width: auto !important;
-        height: min(420px, 108vw) !important;
-        min-height: 300px !important;
-        margin-left: var(--daymar-edge) !important;
-        margin-right: var(--daymar-edge) !important;
-        padding: 12px !important;
-    }
-    .hero-art-image { height: 100% !important; }
-    .atelier-hero-note { display: none !important; }
-}
-
-@media (max-width: 600px) {
-    .atelier-nav { min-height: 66px !important; }
-    .atelier-brand-lockup .logo { font-size: 15px !important; }
-    .brand-isotipo { width: 29px !important; height: 29px !important; }
-    .atelier-hero-art { height: min(390px, 102vw) !important; min-height: 280px !important; }
-    .daymar-mobile-nav { gap: 18px !important; }
-}
-</style>
 </head>
 <body>
     <div class="atelier-topline" aria-label="Información de la tienda">
@@ -3731,14 +3638,6 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             </div>
         </div>
     </header>
-    <nav class="daymar-mobile-nav" aria-label="Navegación principal móvil">
-        <button type="button" onclick="toggleMenu()"><i class="fas fa-bars"></i><span>Explorar</span></button>
-        <a href="#catalogo">Colección</a>
-        <a href="#catalogo">Esenciales</a>
-        <button type="button" onclick="focusSearch()"><i class="fas fa-search"></i><span>Buscar</span></button>
-        <button type="button" onclick="toggleFavorites()"><i class="far fa-heart"></i><span>Favoritos</span></button>
-        <button type="button" onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span>Carrito</span></button>
-    </nav>
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="categories-menu atelier-categories" id="categoriesMenu">
         <div class="atelier-menu-heading"><span>Índice</span><button class="close-menu" onclick="toggleMenu()"><i class="fas fa-times"></i></button></div>

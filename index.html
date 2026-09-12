@@ -3867,6 +3867,36 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 @media(max-width:800px){body{padding-bottom:72px}.daymar-trust{padding:46px 0}.daymar-trust>.container,.daymar-faq>.container{padding-left:20px;padding-right:20px}.daymar-trust-heading h2,.daymar-faq h2{font-size:38px}.daymar-trust-grid{grid-template-columns:1fr 1fr;gap:10px}.daymar-trust-card{display:block;padding:16px 13px;min-height:145px}.daymar-trust-card i{display:block;margin-bottom:13px}.daymar-trust-card h3{font-size:12px}.daymar-trust-card p{font-size:11px}.daymar-faq{padding:65px 0}.daymar-faq-grid{display:block}.daymar-faq-list{margin-top:38px}.mobile-bottom-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;bottom:0;left:0;right:0;height:64px;z-index:1400;background:rgba(252,250,247,.97);border-top:1px solid var(--line,#e5dcd8);box-shadow:0 -8px 24px rgba(23,21,21,.08);padding-bottom:env(safe-area-inset-bottom)}.mobile-bottom-nav a,.mobile-bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:0;background:transparent;color:var(--ink,#1a1717);font:inherit;text-decoration:none;font-size:10px}.mobile-bottom-nav i{font-size:16px;color:var(--blush-dark,#a96776)}.whatsapp-float{bottom:86px!important;left:auto!important;right:16px!important}.floating-cart-btn{bottom:86px!important;right:16px!important}.daymar-faq-list summary{font-size:13px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
+
+<style id="daymar-opinions-side-by-side">
+/* Opiniones y Tu opinión en columnas para reducir el espacio vertical. */
+@media (min-width: 769px) {
+    .testimonials-section > .container {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+        column-gap: clamp(28px, 5vw, 80px);
+        align-items: start;
+    }
+    .testimonials-section .testimonials-header,
+    .testimonials-section .testimonial-carousel {
+        grid-column: 1;
+    }
+    .testimonials-section .comment-box {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        margin-top: 0;
+        align-self: start;
+    }
+}
+@media (max-width: 768px) {
+    .testimonials-section > .container {
+        display: block;
+    }
+    .testimonials-section .comment-box {
+        margin-top: 28px;
+    }
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

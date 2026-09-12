@@ -3954,6 +3954,15 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     .daymar-payment-item img{width:145px!important}
 }
 </style>
+
+        /* Evita el zoom automatico de Safari/iOS al enfocar el buscador. */
+        @media (max-width: 768px) {
+            #searchInput,
+            .atelier-search-row .search-input {
+                font-size: 16px !important;
+            }
+        }
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -3994,7 +4003,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 <a href="#catalogo" class="logo" aria-label="DAYMAR"><img class="brand-isotipo" src="isotipo.png" alt="Isotipo DAYMAR"> <span class="brand-name">DAYMAR</span></a>
             </div>
             <div class="atelier-nav-end">
-                <button class="atelier-search-link" onclick="document.getElementById('searchInput').focus(); document.getElementById('searchInput').scrollIntoView({behavior:'smooth',block:'center'})" aria-label="Buscar"><i class="fas fa-search"></i><span>Buscar</span></button>
+                <button class="atelier-search-link" onclick="focusSearch()" aria-label="Buscar"><i class="fas fa-search"></i><span>Buscar</span></button>
                 <button class="header-icon favorites-icon-btn atelier-icon" onclick="toggleFavorites()" aria-label="Favoritos" id="favoritesBtn"><i class="far fa-heart"></i><span class="favorites-count-header" id="favoritesBadge" style="display:none">0</span></button>
                 <button class="header-icon cart-icon-header atelier-icon" onclick="toggleCart()" aria-label="Carrito"><i class="fas fa-shopping-bag"></i><span class="cart-count-header" id="cartBadge" style="display:none">0</span></button>
             </div>
@@ -4235,7 +4244,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     <!-- Navegación rápida para teléfonos -->
     <nav class="mobile-bottom-nav" aria-label="Navegación rápida">
         <a href="#catalogo"><i class="fas fa-store" aria-hidden="true"></i><span>Catálogo</span></a>
-        <button type="button" onclick="document.getElementById('searchInput').focus(); document.getElementById('searchInput').scrollIntoView({behavior:'smooth',block:'center'})"><i class="fas fa-search" aria-hidden="true"></i><span>Buscar</span></button>
+        <button type="button" onclick="focusSearch()"><i class="fas fa-search" aria-hidden="true"></i><span>Buscar</span></button>
         <button type="button" onclick="toggleFavorites()"><i class="far fa-heart" aria-hidden="true"></i><span>Favoritos</span></button>
         <button type="button" onclick="toggleCart()"><i class="fas fa-shopping-bag" aria-hidden="true"></i><span>Carrito</span></button>
     </nav>
@@ -5565,8 +5574,22 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
         // ==========================================
         function focusSearch() {
             const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
+            if (!searchInput) return;
+
+            // En telefonos, el scroll suave junto con focus() produce un salto
+            // visible y puede activar el zoom automatico de iOS.
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            try {
+                searchInput.focus({ preventScroll: true });
+            } catch (error) {
                 searchInput.focus();
+            }
+
+            if (isMobile) {
+                requestAnimationFrame(() => {
+                    searchInput.scrollIntoView({ behavior: 'auto', block: 'center' });
+                });
+            } else {
                 searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }

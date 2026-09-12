@@ -2543,43 +2543,6 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
     }
 }
 </style>
-    <style>
-        /* ====== CARRITO FLOTANTE ====== */
-        .floating-cart-btn {
-            position: fixed;
-            right: 24px;
-            bottom: 24px;
-            z-index: 1200;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            width: 46px;
-            height: 46px;
-            padding: 0;
-            border: none;
-            border-radius: 50%;
-            background: var(--azul-cielo, #87CEEB);
-            color: var(--negro, #1a1a1a);
-            box-shadow: 0 8px 22px rgba(23, 21, 21, 0.14);
-            cursor: pointer;
-            transition: transform .25s ease, box-shadow .25s ease;
-        }
-
-        @keyframes floatingCartAdded {
-            0% { transform: scale(1); }
-            45% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .floating-cart-btn.visible { display: flex; animation: bounceIn .45s ease; }
-        .floating-cart-btn.is-updated { animation: floatingCartAdded .55s ease; }
-        .floating-cart-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(23, 21, 21, 0.2); }
-        .floating-cart-btn i { color: var(--negro, #1a1a1a); font-size: 19px; }
-
-        @media (max-width: 600px) {
-            .floating-cart-btn { right: 16px; bottom: 16px; width: 42px; height: 42px; }
-        }
-    </style>
     <style id="preview-size-tuning">
         /* Ajuste responsive de la ventana de detalle de producto */
         .preview-content {
@@ -3797,10 +3760,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     }
 
     .atelier-nav-end {
-        order: 3 !important;
-        min-width: 0 !important;
-        justify-content: flex-end !important;
-        gap: 2px !important;
+        display: none !important;
     }
 
     .atelier-search-link span {
@@ -3865,7 +3825,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 <style id="daymar-mobile-trust-seo">
 .skip-link{position:fixed;left:12px;top:-60px;z-index:3000;padding:12px 16px;background:var(--ink,#1a1717);color:#fff;text-decoration:none;transition:top .2s ease}.skip-link:focus{top:12px}
 .daymar-trust{padding:58px 0 64px;background:var(--paper,#fcfaf7);border-top:1px solid var(--line,#e5dcd8);border-bottom:1px solid var(--line,#e5dcd8)}.daymar-trust>.container,.daymar-faq>.container{max-width:1440px;padding-left:7.5%;padding-right:7.5%}.daymar-trust-heading{margin-bottom:28px}.daymar-trust-heading h2,.daymar-faq h2{font-family:'DM Serif Display',serif;font-size:clamp(34px,4vw,54px);font-weight:400;line-height:1;letter-spacing:-.035em}.daymar-trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.daymar-trust-card{display:flex;gap:14px;align-items:flex-start;padding:22px 18px;background:var(--warm,#f5f0ed);border:1px solid var(--line,#e5dcd8);min-height:130px}.daymar-trust-card i{color:var(--blush-dark,#a96776);font-size:20px;margin-top:3px}.daymar-trust-card h3{font-size:13px;margin-bottom:8px}.daymar-trust-card p,.daymar-faq-intro{color:var(--muted,#746b68);font-size:12px;line-height:1.7}.daymar-faq{padding:90px 0;background:var(--paper,#fcfaf7);border-top:1px solid var(--line,#e5dcd8)}.daymar-faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:10%;align-items:start}.daymar-faq-intro{max-width:310px;margin:20px 0}.daymar-faq-link{display:inline-flex;gap:12px;align-items:center;color:var(--ink,#1a1717);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--blush-dark,#a96776);padding-bottom:8px;text-decoration:none}.daymar-faq-list{border-top:1px solid var(--line,#e5dcd8)}.daymar-faq-list details{border-bottom:1px solid var(--line,#e5dcd8);padding:20px 0}.daymar-faq-list summary{cursor:pointer;list-style:none;font-size:14px;font-weight:700;padding-right:30px;position:relative}.daymar-faq-list summary::-webkit-details-marker{display:none}.daymar-faq-list summary:after{content:'+';position:absolute;right:0;color:var(--blush-dark,#a96776);font-size:20px;font-weight:400}.daymar-faq-list details[open] summary:after{content:'−'}.daymar-faq-list details p{color:var(--muted,#746b68);font-size:13px;line-height:1.7;margin:12px 25px 0 0}.mobile-bottom-nav{display:none}
-@media(max-width:800px){body{padding-bottom:72px}.daymar-trust{padding:46px 0}.daymar-trust>.container,.daymar-faq>.container{padding-left:20px;padding-right:20px}.daymar-trust-heading h2,.daymar-faq h2{font-size:38px}.daymar-trust-grid{grid-template-columns:1fr 1fr;gap:10px}.daymar-trust-card{display:block;padding:16px 13px;min-height:145px}.daymar-trust-card i{display:block;margin-bottom:13px}.daymar-trust-card h3{font-size:12px}.daymar-trust-card p{font-size:11px}.daymar-faq{padding:65px 0}.daymar-faq-grid{display:block}.daymar-faq-list{margin-top:38px}.mobile-bottom-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;bottom:0;left:0;right:0;height:64px;z-index:1400;background:rgba(252,250,247,.97);border-top:1px solid var(--line,#e5dcd8);box-shadow:0 -8px 24px rgba(23,21,21,.08);padding-bottom:env(safe-area-inset-bottom)}.mobile-bottom-nav a,.mobile-bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:0;background:transparent;color:var(--ink,#1a1717);font:inherit;text-decoration:none;font-size:10px}.mobile-bottom-nav i{font-size:16px;color:var(--blush-dark,#a96776)}.whatsapp-float{bottom:86px!important;left:auto!important;right:16px!important}.floating-cart-btn{bottom:86px!important;right:16px!important}.daymar-faq-list summary{font-size:13px}}
+@media(max-width:800px){body{padding-bottom:72px}.daymar-trust{padding:46px 0}.daymar-trust>.container,.daymar-faq>.container{padding-left:20px;padding-right:20px}.daymar-trust-heading h2,.daymar-faq h2{font-size:38px}.daymar-trust-grid{grid-template-columns:1fr 1fr;gap:10px}.daymar-trust-card{display:block;padding:16px 13px;min-height:145px}.daymar-trust-card i{display:block;margin-bottom:13px}.daymar-trust-card h3{font-size:12px}.daymar-trust-card p{font-size:11px}.daymar-faq{padding:65px 0}.daymar-faq-grid{display:block}.daymar-faq-list{margin-top:38px}.mobile-bottom-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;bottom:0;left:0;right:0;height:64px;z-index:1400;background:rgba(252,250,247,.97);border-top:1px solid var(--line,#e5dcd8);box-shadow:0 -8px 24px rgba(23,21,21,.08);padding-bottom:env(safe-area-inset-bottom)}.mobile-bottom-nav a,.mobile-bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:0;background:transparent;color:var(--ink,#1a1717);font:inherit;text-decoration:none;font-size:10px}.mobile-bottom-nav i{font-size:16px;color:var(--blush-dark,#a96776)}.mobile-bottom-nav button{position:relative}.mobile-nav-badge{position:absolute;top:7px;left:calc(50% + 8px);min-width:15px;height:15px;padding:0 4px;border-radius:999px;background:var(--blush-dark,#a96776);color:#fff;font:700 9px/15px 'Manrope',sans-serif}.whatsapp-float{bottom:86px!important;left:auto!important;right:16px!important}.daymar-faq-list summary{font-size:13px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 
@@ -4248,8 +4208,8 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     <nav class="mobile-bottom-nav" aria-label="Navegación rápida">
         <button type="button" onclick="toggleMenu()" aria-label="Abrir catálogo"><i class="fas fa-store" aria-hidden="true"></i><span>Catálogo</span></button>
         <button type="button" onclick="focusSearch()"><i class="fas fa-search" aria-hidden="true"></i><span>Buscar</span></button>
-        <button type="button" onclick="toggleFavorites()"><i class="far fa-heart" aria-hidden="true"></i><span>Favoritos</span></button>
-        <button type="button" onclick="toggleCart()"><i class="fas fa-shopping-bag" aria-hidden="true"></i><span>Carrito</span></button>
+        <button type="button" onclick="toggleFavorites()"><i class="far fa-heart" aria-hidden="true"></i><span>Favoritos</span><span class="mobile-nav-badge" id="bottomFavoritesBadge" style="display:none">0</span></button>
+        <button type="button" onclick="toggleCart()"><i class="fas fa-shopping-bag" aria-hidden="true"></i><span>Carrito</span><span class="mobile-nav-badge" id="bottomCartBadge" style="display:none">0</span></button>
     </nav>
 
     <!-- WhatsApp Float -->
@@ -4323,11 +4283,6 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             <i class="fas fa-trash-alt"></i> <span>Vaciar carrito</span>
         </button>
     </div>
-
-    <!-- Floating cart: visible only when the cart has products -->
-    <button class="floating-cart-btn" id="floatingCartBtn" onclick="toggleCart()" aria-label="Abrir carrito">
-        <i class="fas fa-shopping-bag"></i>
-    </button>
 
     <!-- Notification -->
     <div class="notification" id="notification">Producto agregado</div>
@@ -4570,81 +4525,46 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             }, 300);
         }
 
-        // ==========================================
-        // BÚSQUEDA OPTIMIZADA — DAYMAR
-        // ==========================================
-        function normalizeText(str) {
-            return String(str || '')
-                .toLowerCase()
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '')
-                .trim();
-        }
-
-        let searchIndex = null;
-
-        function buildSearchIndex() {
-            searchIndex = products.map(product => ({
-                product,
-                haystack: normalizeText([
-                    product.name,
-                    product.description,
-                    product.barcode,
-                    product.category
-                ].filter(Boolean).join(' '))
-            }));
-        }
-
-        function performSearch(term) {
-            const query = normalizeText(term);
-            AppState.searchTerm = query;
+        function searchProducts(term) {
+            AppState.searchTerm = term.toLowerCase().trim();
             AppState.currentPage = 0;
             AppState.hasMoreProducts = true;
-
-            if (!searchIndex) buildSearchIndex();
-
-            if (!query) {
-                if (AppState.currentFilter === 'todos') {
-                    AppState.filteredProducts = [...products];
+            
+            document.getElementById('productsContainer').innerHTML = '';
+            renderSkeletons(4);
+            
+            setTimeout(() => {
+                if (AppState.searchTerm === '') {
+                    if (AppState.currentFilter === 'todos') {
+                        AppState.filteredProducts = [...products];
+                    } else {
+                        const targetCategory = categoryMap[AppState.currentFilter];
+                        AppState.filteredProducts = AppState.currentFilter === 'oro-plata'
+                            ? products.filter(isFineJewelryProduct)
+                            : products.filter(product => product.category === targetCategory);
+                    }
                 } else {
-                    const targetCategory = categoryMap[AppState.currentFilter];
-                    AppState.filteredProducts = AppState.currentFilter === 'oro-plata'
-                        ? products.filter(isFineJewelryProduct)
-                        : products.filter(product => product.category === targetCategory);
-                }
-            } else {
-                const words = query.split(/\s+/).filter(Boolean);
-                let pool = searchIndex;
-
-                if (AppState.currentFilter !== 'todos') {
-                    const targetCategory = categoryMap[AppState.currentFilter];
-                    pool = pool.filter(entry =>
-                        AppState.currentFilter === 'oro-plata'
-                            ? isFineJewelryProduct(entry.product)
-                            : entry.product.category === targetCategory
+                    AppState.filteredProducts = products.filter(product => 
+                        product.name.toLowerCase().includes(AppState.searchTerm) || 
+                        product.barcode.toLowerCase().includes(AppState.searchTerm)
                     );
                 }
-
-                AppState.filteredProducts = pool
-                    .filter(entry => words.every(word => entry.haystack.includes(word)))
-                    .map(entry => entry.product);
-            }
-
-            if (AppState.currentSort !== 'default') sortProducts();
-
-            document.getElementById('productsContainer').innerHTML = '';
-            renderProducts();
-            updateProductsCount();
-
-            const categoryTitleEl = document.getElementById('categoryTitle');
-            if (categoryTitleEl) {
-                categoryTitleEl.textContent = query
-                    ? `Resultados para "${term.trim()}"`
-                    : (categoryDisplayNames[AppState.currentFilter] || 'Todas');
-            }
+                
+                if (AppState.currentSort !== 'default') {
+                    sortProducts();
+                }
+                
+                document.getElementById('productsContainer').innerHTML = '';
+                renderProducts();
+                updateProductsCount();
+                
+                if (AppState.searchTerm !== '') {
+                    document.getElementById('categoryTitle').textContent = `Busqueda: "${term}"`;
+                } else {
+                    document.getElementById('categoryTitle').textContent = categoryDisplayNames[AppState.currentFilter] || 'Todas';
+                }
+            }, 300);
         }
-
-        const debouncedSearch = debounce(performSearch, 150);
 
         // ==========================================
         // RENDERIZADO DE PRODUCTOS
@@ -4965,6 +4885,11 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
         function updateFavorites() {
             const badge = document.getElementById('favoritesBadge');
             const btn = document.getElementById('favoritesBtn');
+            const bottomBadge = document.getElementById('bottomFavoritesBadge');
+            if (bottomBadge) {
+                bottomBadge.textContent = AppState.favorites.length;
+                bottomBadge.style.display = AppState.favorites.length > 0 ? 'inline-block' : 'none';
+            }
             const list = document.getElementById('favoritesList');
             
             if (badge) {
@@ -5092,14 +5017,6 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             updateCart();
             showAddedButtonState(sourceButton);
 
-            const floatingCartBtn = document.getElementById('floatingCartBtn');
-            if (floatingCartBtn) {
-                floatingCartBtn.classList.remove('is-updated');
-                void floatingCartBtn.offsetWidth;
-                floatingCartBtn.classList.add('is-updated');
-                setTimeout(() => floatingCartBtn.classList.remove('is-updated'), 600);
-            }
-
             showNotification('Añadido al carrito');
         }
 
@@ -5122,7 +5039,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             const cartTotal = document.getElementById('cartTotal');
             const cartSubtotal = document.getElementById('cartSubtotal');
             const cartBadge = document.getElementById('cartBadge');
-            const floatingCartBtn = document.getElementById('floatingCartBtn');
+            const bottomCartBadge = document.getElementById('bottomCartBadge');
             const whatsappBtn = document.getElementById('whatsappBtn');
             const summary = document.getElementById('cartSummary');
             const clearBtn = document.getElementById('clearCartBtn');
@@ -5135,8 +5052,10 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                 cartBadge.textContent = totalItems;
                 cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
             }
-
-            if (floatingCartBtn) floatingCartBtn.classList.toggle('visible', totalItems > 0);
+            if (bottomCartBadge) {
+                bottomCartBadge.textContent = totalItems;
+                bottomCartBadge.style.display = totalItems > 0 ? 'inline-block' : 'none';
+            }
 
             if (clearBtn) {
                 clearBtn.style.display = AppState.cart.length > 0 ? 'block' : 'none';
@@ -5751,24 +5670,11 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                     '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gris);">Error cargando productos</div>';
             }
             
-            buildSearchIndex();
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    debouncedSearch(e.target.value);
-                });
-                searchInput.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        performSearch(searchInput.value);
-                        searchInput.blur();
-                    }
-                    if (e.key === 'Escape') {
-                        searchInput.value = '';
-                        performSearch('');
-                        searchInput.blur();
-                    }
-                });
+                searchInput.addEventListener('input', debounce((e) => {
+                    searchProducts(e.target.value);
+                }, 300));
             }
 
             const menuBtn = document.getElementById('menuBtn');

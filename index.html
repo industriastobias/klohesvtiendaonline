@@ -3897,6 +3897,12 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     }
 }
 </style>
+
+<style id="daymar-contact-location-compact">
+.daymar-contact-strip{padding:34px 0;background:var(--paper,#fcfaf7);border-top:1px solid var(--line,#e5dcd8);border-bottom:1px solid var(--line,#e5dcd8)}.daymar-contact-grid{max-width:1440px;padding-left:7.5%;padding-right:7.5%;display:grid;grid-template-columns:1fr 1.15fr 1.15fr 1.2fr;gap:24px;align-items:start}.daymar-contact-item{display:flex;flex-direction:column;gap:6px;color:var(--muted,#746b68);font-size:11px;line-height:1.5}.daymar-contact-label{color:var(--ink,#1a1717);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}.daymar-contact-item a{color:var(--muted,#746b68);text-decoration:none}.daymar-contact-item a:hover{color:var(--blush-dark,#a96776)}.daymar-contact-socials{display:flex;flex-wrap:wrap;gap:8px 14px}.daymar-contact-socials a{white-space:nowrap}.daymar-contact-socials i{color:var(--blush-dark,#a96776);margin-right:3px}.daymar-payment-item img{width:118px;height:auto;object-fit:contain;margin-top:5px;background:#fff}.daymar-compact-location{padding-top:48px!important;padding-bottom:48px!important}.daymar-compact-location .location-container{gap:32px}.daymar-compact-location .location-info p{margin-bottom:8px}.daymar-compact-location .location-hours{margin-top:16px!important;padding-top:14px!important}.daymar-compact-location .location-map{height:250px!important}
+@media(max-width:800px){.daymar-contact-strip{padding:28px 0}.daymar-contact-grid{padding-left:20px;padding-right:20px;grid-template-columns:1fr 1fr;gap:22px 14px}.daymar-contact-item{font-size:10px}.daymar-contact-label{font-size:9px}.daymar-contact-socials{display:grid;gap:5px}.daymar-payment-item img{width:105px}.daymar-compact-location{padding-top:38px!important;padding-bottom:38px!important}.daymar-compact-location .location-map{height:190px!important}}
+@media(max-width:480px){.daymar-contact-grid{grid-template-columns:1fr 1fr}.daymar-contact-item{overflow-wrap:anywhere}.daymar-contact-socials a{font-size:10px}}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -3984,52 +3990,35 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials-section">
-        <div class="container">
-            <div class="testimonials-header">
-                <h2>Opiniones</h2>
-                <p>Lo que nuestros clientes dicen</p>
+    <!-- Contacto y redes: bloque compacto al inicio del área informativa -->
+    <section class="daymar-contact-strip" aria-label="Información de contacto y redes sociales">
+        <div class="container daymar-contact-grid">
+            <div class="daymar-contact-item">
+                <span class="daymar-contact-label">Contacto</span>
+                <a href="https://wa.me/50366711569" target="_blank" rel="noopener noreferrer">WhatsApp +503 6671-1569</a>
+                <a href="mailto:industriastobias@gmail.com">industriastobias@gmail.com</a>
             </div>
-            <div class="testimonial-carousel">
-                <div class="testimonial-track" id="testimonialTrack"></div>
-                <div class="carousel-controls">
-                    <button class="carousel-btn" onclick="prevTestimonial()"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-btn" onclick="nextTestimonial()"><i class="fas fa-chevron-right"></i></button>
+            <div class="daymar-contact-item">
+                <span class="daymar-contact-label">Redes sociales</span>
+                <div class="daymar-contact-socials">
+                    <a href="https://instagram.com/daymarsv" target="_blank" rel="noopener noreferrer" aria-label="Instagram DAYMAR"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://tiktok.com/@daymarsv" target="_blank" rel="noopener noreferrer" aria-label="TikTok DAYMAR"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a href="https://facebook.com/daymarsv" target="_blank" rel="noopener noreferrer" aria-label="Facebook DAYMAR"><i class="fab fa-facebook-f"></i> Facebook</a>
                 </div>
-                <div class="carousel-dots" id="carouselDots"></div>
             </div>
-            <div class="comment-box">
-                <h3>Tu opinion</h3>
-                <form class="comment-form" onsubmit="submitComment(event)">
-                    <div class="form-group">
-                        <label for="commentName">Nombre</label>
-                        <input type="text" id="commentName" required placeholder="Tu nombre">
-                    </div>
-                    <div class="form-group">
-                        <label for="commentEmail">Email</label>
-                        <input type="email" id="commentEmail" required placeholder="tu@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="commentRating">Calificacion</label>
-                        <select id="commentRating">
-                            <option>⭐⭐⭐⭐⭐ (5 estrellas)</option>
-                            <option>⭐⭐⭐⭐ (4 estrellas)</option>
-                            <option>⭐⭐⭐ (3 estrellas)</option>
-                            <option>⭐⭐ (2 estrellas)</option>
-                            <option>⭐ (1 estrella)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="commentText">Tu experiencia</label>
-                        <textarea id="commentText" required placeholder="Cuentanos tu experiencia..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Enviar comentario</button>
-                </form>
+            <div class="daymar-contact-item">
+                <span class="daymar-contact-label">Horarios y envíos</span>
+                <span>Lunes a domingo · 7:00 AM – 10:00 PM</span>
+                <span>Envíos a todo El Salvador</span>
+            </div>
+            <div class="daymar-contact-item daymar-payment-item">
+                <span class="daymar-contact-label">Métodos de pago</span>
+                <span>Efectivo o transferencia bancaria</span>
+                <span>Confirma tu pedido por WhatsApp</span>
+                <img src="visa-mastercard.png" alt="Visa y Mastercard" loading="lazy">
             </div>
         </div>
     </section>
-
     <section class="daymar-trust" aria-labelledby="trust-title">
         <div class="container">
             <div class="daymar-trust-heading">
@@ -4046,7 +4035,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     </section>
 
     <!-- Location Section -->
-    <section class="location-section">
+    <section class="location-section daymar-compact-location">
         <div class="container">
             <div class="location-container">
                 <div class="location-info">
@@ -4180,41 +4169,6 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Contacto</h4>
-                    <p>WhatsApp: <a href="tel:+50366711569">+503 6671-1569</a></p>
-                    <p>Email: <a href="mailto:industriastobias@gmail.com">industriastobias@gmail.com</a></p>
-                    <p>San Salvador, El Salvador</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Redes Sociales</h4>
-                    <p>Siguenos en @daymarsv</p>
-                    <div class="social-footer">
-                        <a href="https://instagram.com/daymarsv" target="_blank" rel="noopener noreferrer" aria-label="Instagram DAYMAR"><i class="fab fa-instagram"></i></a>
-                        <a href="https://tiktok.com/@daymarsv" target="_blank" rel="noopener noreferrer" aria-label="TikTok DAYMAR"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://facebook.com/daymarsv" target="_blank" rel="noopener noreferrer" aria-label="Facebook DAYMAR"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/50366711569" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Horarios</h4>
-                    <p>Lunes a Domingo</p>
-                    <p>7:00 AM - 10:00 PM</p>
-                    <p>Envios a todo El Salvador</p>
-                </div>
-                <div class="footer-section footer-payments">
-                    <h4>Métodos de pago</h4>
-                    <p><i class="fas fa-money-bill-wave"></i> Efectivo</p>
-                    <p><i class="fas fa-university"></i> Transferencias</p>
-                    <p>Confirma tu pedido por WhatsApp.</p>
-                </div>
-                <div class="footer-section footer-policy">
-                    <h4>Cambios y devoluciones</h4>
-                    <p>Aceptamos cambios y devoluciones únicamente si el producto presenta un daño de fábrica.</p>
-                    <p>Comunícate con nosotros para revisar tu caso.</p>
-                </div>
-            </div>
             <div class="copyright">
                 <p>&copy; 2026 DAYMAR. TODOS LOS DERECHOS RESERVADOS.</p>
                 <p style="margin-top: 0.5rem;">

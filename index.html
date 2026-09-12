@@ -3903,6 +3903,38 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 @media(max-width:800px){.daymar-contact-strip{padding:28px 0}.daymar-contact-grid{padding-left:20px;padding-right:20px;grid-template-columns:1fr 1fr;gap:22px 14px}.daymar-contact-item{font-size:10px}.daymar-contact-label{font-size:9px}.daymar-contact-socials{display:grid;gap:5px}.daymar-payment-item img{width:105px}.daymar-compact-location{padding-top:38px!important;padding-bottom:38px!important}.daymar-compact-location .location-map{height:190px!important}}
 @media(max-width:480px){.daymar-contact-grid{grid-template-columns:1fr 1fr}.daymar-contact-item{overflow-wrap:anywhere}.daymar-contact-socials a{font-size:10px}}
 </style>
+
+<style id="daymar-contact-strip-final-fix">
+/* La línea de opciones ocupa todo el ancho, con separación y bordes laterales. */
+.daymar-contact-strip{width:100%;border-left:1px solid var(--line,#e5dcd8);border-right:1px solid var(--line,#e5dcd8);}
+.daymar-contact-grid{width:100%;max-width:none!important;padding-left:clamp(24px,7.5vw,110px)!important;padding-right:clamp(24px,7.5vw,110px)!important;}
+.daymar-contact-item{font-size:13px;line-height:1.65;}
+.daymar-contact-label{font-size:11px;}
+.daymar-contact-socials{gap:8px 16px;}
+.daymar-contact-socials a{font-size:13px;}
+@media(max-width:800px){.daymar-contact-grid{padding-left:20px!important;padding-right:20px!important}.daymar-contact-item{font-size:12px}.daymar-contact-label{font-size:10px}.daymar-contact-socials a{font-size:12px}}
+</style>
+
+<style id="daymar-contact-strip-readable-type">
+/* Tipografía legible para computadora en la franja de contacto. */
+@media (min-width: 801px){
+    .daymar-contact-item{font-size:16px!important;line-height:1.65!important}
+    .daymar-contact-label{font-size:14px!important;letter-spacing:.12em!important;margin-bottom:7px!important}
+    .daymar-contact-item a,.daymar-contact-socials a{font-size:16px!important}
+    .daymar-contact-grid{gap:32px!important}
+}
+</style>
+
+<style id="daymar-contact-strip-match-font">
+/* La franja usa exactamente la tipografía heredada del resto de la página. */
+.daymar-contact-strip,
+.daymar-contact-strip .daymar-contact-item,
+.daymar-contact-strip .daymar-contact-label,
+.daymar-contact-strip a,
+.daymar-contact-strip span{
+    font-family:inherit!important;
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -4004,6 +4036,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                     <a href="https://instagram.com/daymarsv" target="_blank" rel="noopener noreferrer" aria-label="Instagram DAYMAR"><i class="fab fa-instagram"></i> Instagram</a>
                     <a href="https://tiktok.com/@daymarsv" target="_blank" rel="noopener noreferrer" aria-label="TikTok DAYMAR"><i class="fab fa-tiktok"></i> TikTok</a>
                     <a href="https://facebook.com/daymarsv" target="_blank" rel="noopener noreferrer" aria-label="Facebook DAYMAR"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="https://wa.me/50366711569" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp DAYMAR"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                 </div>
             </div>
             <div class="daymar-contact-item">

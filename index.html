@@ -3584,7 +3584,7 @@ html,body{width:100%;min-width:0}body{overflow-x:hidden;background:var(--daymar-
 .container,.atelier-header .container,.atelier-hero-grid,.atelier-search-row .container,.atelier-catalog>.container,footer .footer-content{width:100%!important;max-width:none!important;margin-left:auto!important;margin-right:auto!important}
 header{width:100%}.atelier-header .container,.atelier-search-row .container,footer .footer-content{padding-left:var(--daymar-edge)!important;padding-right:var(--daymar-edge)!important}
 .atelier-nav{min-height:78px;height:auto}.atelier-nav-start,.atelier-nav-end{min-width:0}.atelier-nav-start{gap:clamp(14px,2vw,32px)!important}.atelier-nav-end{gap:clamp(8px,1.5vw,24px)!important}.atelier-brand-lockup{min-width:0}
-.atelier-brand-lockup .logo{display:inline-flex!important;align-items:center;justify-content:center;gap:0;white-space:nowrap;font-size:0!important;letter-spacing:0!important}.atelier-brand-lockup .brand-name{display:none!important}.brand-isotipo{display:inline-block;width:clamp(48px,5vw,64px);height:clamp(48px,5vw,64px);object-fit:contain;vertical-align:middle}.brand-symbol{display:none!important}.daymar-mobile-nav{display:none}
+.atelier-brand-lockup .logo{display:inline-flex!important;align-items:center;justify-content:center;gap:clamp(10px,1.5vw,22px);white-space:nowrap;font-size:0!important;letter-spacing:0!important}.atelier-brand-lockup .brand-name{display:none!important}.brand-isotipo{display:inline-block;width:clamp(58px,6vw,82px);height:clamp(58px,6vw,82px);object-fit:contain;vertical-align:middle}.header-wordmark{display:block;width:min(30vw,434px);height:auto;max-height:82px;object-fit:contain;object-position:left center}.brand-symbol{display:none!important}.daymar-mobile-nav{display:none}
 .atelier-hero{width:100%;padding:clamp(28px,4vw,65px) 0 0!important}.atelier-hero-grid{grid-template-columns:minmax(250px,.82fr) minmax(0,1.45fr) minmax(74px,100px)!important;gap:clamp(18px,3vw,52px)!important;padding:0 var(--daymar-edge)!important}.atelier-hero-copy{padding-left:0!important}.atelier-hero-art{width:100%}.atelier-search-row{width:100%}.atelier-hero .atelier-catalog,.atelier-catalog{width:100%;padding-top:clamp(58px,7vw,104px)!important;padding-bottom:clamp(72px,8vw,125px)!important}.atelier-catalog>.container{padding-left:var(--daymar-edge)!important;padding-right:var(--daymar-edge)!important}.products-grid{width:100%}
 @media (min-width:901px){.atelier-nav-start .atelier-link{display:inline-flex!important}.atelier-nav{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important}}
 @media (max-width:900px){.atelier-header .container{padding-left:var(--daymar-edge)!important;padding-right:var(--daymar-edge)!important}.atelier-nav{min-height:68px;grid-template-columns:auto minmax(0,1fr) auto!important;gap:8px}.atelier-nav-start{min-width:auto}.atelier-nav-start .atelier-link{display:none!important}.atelier-menu-trigger{margin:0!important}.atelier-brand-lockup .logo{font-size:clamp(12px,3vw,16px)!important;letter-spacing:.1em!important;gap:5px}.brand-isotipo{width:30px;height:30px}.atelier-nav-end{gap:2px!important}.atelier-search-link span{display:none!important}.atelier-icon{padding:6px!important;font-size:15px!important}.daymar-mobile-nav{display:flex;width:100%;gap:18px;align-items:center;overflow-x:auto;padding:10px var(--daymar-edge) 11px;border-bottom:1px solid var(--daymar-line);background:var(--daymar-paper);scrollbar-width:none;-webkit-overflow-scrolling:touch}.daymar-mobile-nav::-webkit-scrollbar{display:none}.daymar-mobile-nav a,.daymar-mobile-nav button{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;padding:0;border:0;background:transparent;color:var(--daymar-ink);font:700 9px/1 'Manrope',sans-serif;letter-spacing:.1em;text-decoration:none;text-transform:uppercase;white-space:nowrap}.daymar-mobile-nav i{color:var(--daymar-blush)}.atelier-hero-grid{padding:0!important}}
@@ -3757,9 +3757,17 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     .atelier-brand-lockup .brand-name {
         display: none !important;
     }
+    .atelier-brand-lockup .logo {
+        gap: 8px !important;
+    }
     .brand-isotipo {
-        width: 60px !important;
-        height: 60px !important;
+        width: 64px !important;
+        height: 64px !important;
+    }
+    .header-wordmark {
+        width: min(46vw, 240px) !important;
+        height: auto !important;
+        max-height: 64px !important;
     }
 
     .atelier-nav-end {
@@ -3966,7 +3974,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                 <a href="#catalogo" class="atelier-link">Esenciales</a>
             </div>
             <div class="nav-center atelier-brand-lockup">
-<a href="#catalogo" class="logo" aria-label="DAYMAR"><img class="brand-isotipo" src="isotipo.png" alt="Isotipo DAYMAR"> <span class="brand-name">DAYMAR</span></a>
+<a href="#catalogo" class="logo" aria-label="DAYMAR EL SALVADOR"><img class="brand-isotipo" src="isotipo.png" alt="Isotipo DAYMAR"><img class="header-wordmark" src="encabezado.jpeg" alt="DAYMAR EL SALVADOR"></a>
             </div>
             <div class="atelier-nav-end">
                 <button class="atelier-search-link" onclick="focusSearch()" aria-label="Buscar"><i class="fas fa-search"></i><span>Buscar</span></button>

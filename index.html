@@ -3955,6 +3955,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 }
 </style>
 
+<style>
         /* Evita el zoom automatico de Safari/iOS al enfocar el buscador. */
         @media (max-width: 768px) {
             #searchInput,
@@ -3962,6 +3963,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                 font-size: 16px !important;
             }
         }
+</style>
 
 </head>
 <body>
@@ -4243,7 +4245,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 
     <!-- Navegación rápida para teléfonos -->
     <nav class="mobile-bottom-nav" aria-label="Navegación rápida">
-        <a href="#catalogo"><i class="fas fa-store" aria-hidden="true"></i><span>Catálogo</span></a>
+        <button type="button" onclick="toggleMenu()" aria-label="Abrir catálogo"><i class="fas fa-store" aria-hidden="true"></i><span>Catálogo</span></button>
         <button type="button" onclick="focusSearch()"><i class="fas fa-search" aria-hidden="true"></i><span>Buscar</span></button>
         <button type="button" onclick="toggleFavorites()"><i class="far fa-heart" aria-hidden="true"></i><span>Favoritos</span></button>
         <button type="button" onclick="toggleCart()"><i class="fas fa-shopping-bag" aria-hidden="true"></i><span>Carrito</span></button>
@@ -5576,20 +5578,17 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             const searchInput = document.getElementById('searchInput');
             if (!searchInput) return;
 
-            // En telefonos, el scroll suave junto con focus() produce un salto
-            // visible y puede activar el zoom automatico de iOS.
+            // En movil conservamos la posicion del cliente para que no pierda
+            // de vista los productos que estaba revisando.
             const isMobile = window.matchMedia('(max-width: 768px)').matches;
             try {
-                searchInput.focus({ preventScroll: true });
+                searchInput.focus({ preventScroll: isMobile });
             } catch (error) {
                 searchInput.focus();
             }
 
-            if (isMobile) {
-                requestAnimationFrame(() => {
-                    searchInput.scrollIntoView({ behavior: 'auto', block: 'center' });
-                });
-            } else {
+            // En escritorio si se puede llevar al buscador suavemente.
+            if (!isMobile) {
                 searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }

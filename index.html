@@ -3972,6 +3972,53 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     }
 }
 </style>
+<style id="daymar-isotipo-viewport-center-final">
+/* Corrección final: el centro se calcula con la ventana completa, incluso si el menú genera overflow. */
+.atelier-brand-lockup {
+    left: 50vw !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+}
+ (max-width: 900px) {
+    .atelier-brand-lockup {
+        left: 50vw !important;
+        transform: translate(-50%, -50%) !important;
+    }
+}
+</style>
+<style id="daymar-desktop-actions-right-final">
+/* En computadora, las acciones permanecen agrupadas en el extremo derecho. */
+ (min-width: 901px) {
+    .atelier-nav {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+    .atelier-nav-start {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex: 0 0 auto !important;
+    }
+    .atelier-nav-end {
+        position: absolute !important;
+        top: 50% !important;
+        right: var(--daymar-edge, 42px) !important;
+        left: auto !important;
+        transform: translateY(-50%) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        flex: 0 0 auto !important;
+        z-index: 2 !important;
+    }
+    .atelier-brand-lockup {
+        left: 50vw !important;
+        z-index: 3 !important;
+    }
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

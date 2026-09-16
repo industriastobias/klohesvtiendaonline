@@ -4019,6 +4019,53 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     }
 }
 </style>
+<style id="daymar-header-separation-final">
+/* Separación definitiva del isotipo y las acciones del encabezado. */
+.atelier-nav {
+    position: relative !important;
+}
+.atelier-brand-lockup {
+    position: absolute !important;
+    left: 50vw !important;
+    top: 50% !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 3 !important;
+}
+@media (min-width: 901px) {
+    .atelier-nav {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+    }
+    .atelier-nav-start {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex: 0 0 auto !important;
+    }
+    .atelier-nav-end {
+        position: absolute !important;
+        top: 50% !important;
+        right: var(--daymar-edge, 42px) !important;
+        left: auto !important;
+        transform: translateY(-50%) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        width: auto !important;
+        margin: 0 !important;
+        z-index: 4 !important;
+    }
+}
+@media (max-width: 900px) {
+    .atelier-brand-lockup {
+        left: 50vw !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+    }
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

@@ -1,9 +1,15 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>DAYMAR | Accesorios y regalos en El Salvador</title>
+    <title>DAYMAR | EL SALVADOR</title>
     <meta name="description" content="Descubre relojes, collares, carteras, anillos y accesorios DAYMAR. Envíos a todo El Salvador y pedidos fáciles por WhatsApp.">
     <meta name="keywords" content="accesorios El Salvador, relojes, collares, carteras, anillos, DAYMAR">
     <meta name="author" content="DAYMAR">
@@ -4436,6 +4442,239 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
     .preview-modal { padding: 8px; }
     .preview-content { height: calc(100dvh - 16px); }
     .preview-image-container { flex-basis: 245px; height: 245px !important; }
+    .preview-details { padding-left: 17px; padding-right: 17px; }
+}
+</style>
+
+
+<style id="daymar-product-modal-v3">
+/* ===== DAYMAR · Modal editorial V3. Solo afecta al detalle del producto. ===== */
+.preview-modal {
+    padding: 28px;
+    background: rgba(35, 28, 28, .38);
+    backdrop-filter: blur(20px) saturate(.85);
+    -webkit-backdrop-filter: blur(20px) saturate(.85);
+}
+.preview-content {
+    width: min(1120px, 94vw);
+    height: min(700px, calc(100dvh - 56px));
+    grid-template-columns: minmax(0, 1.02fr) minmax(390px, .98fr);
+    gap: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fcfaf8;
+    border: 1px solid rgba(255,255,255,.9);
+    box-shadow: 0 32px 90px rgba(30, 20, 20, .25);
+}
+.preview-image-container {
+    min-height: 0 !important;
+    background: #eee5df !important;
+    position: relative;
+    overflow: hidden;
+}
+.preview-image-container::before {
+    content: 'DAYMAR / EL SALVADOR';
+    position: absolute;
+    z-index: 3;
+    top: 26px;
+    left: 30px;
+    color: rgba(51, 39, 39, .62);
+    font: 600 9px/1 'Poppins', sans-serif;
+    letter-spacing: .22em;
+    pointer-events: none;
+}
+.preview-image-container::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    inset: 20px;
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 12px;
+    pointer-events: none;
+}
+.preview-image,
+.preview-image.fine-jewelry-preview {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    padding: 76px !important;
+    background: transparent !important;
+    mix-blend-mode: normal !important;
+    filter: none !important;
+    opacity: 1 !important;
+    position: relative;
+    z-index: 1;
+}
+.preview-gallery-controls { z-index: 5; padding: 0 24px; }
+.preview-gallery-btn {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    color: #2a2222;
+    border: 1px solid rgba(42,34,34,.08);
+    box-shadow: 0 7px 18px rgba(30,20,20,.14);
+}
+.preview-gallery-counter {
+    z-index: 5;
+    bottom: 25px;
+    background: rgba(42,34,34,.86);
+    border-radius: 4px;
+    padding: 7px 11px;
+    font-size: 9px;
+    letter-spacing: .18em;
+}
+.preview-details {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 56px 58px 46px;
+    background: #fcfaf8 !important;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #dcc0c2 transparent;
+}
+.preview-details::before {
+    content: 'DAYMAR · EL SALVADOR';
+    display: block;
+    margin-bottom: 26px;
+    color: #a96776;
+    font: 700 9px/1 'Poppins', sans-serif;
+    letter-spacing: .25em;
+}
+.share-corner {
+    top: 25px;
+    left: auto;
+    right: 64px;
+    gap: 6px;
+}
+.share-corner-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    box-shadow: none;
+}
+.close-preview-btn {
+    top: 23px;
+    right: 20px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #e7dcd8;
+    background: transparent;
+    box-shadow: none;
+}
+.close-preview-btn:hover { background: #1a1717; }
+.preview-name {
+    margin: 0 0 15px;
+    max-width: 430px;
+    color: #211b1b;
+    font-size: clamp(1.75rem, 3vw, 2.55rem);
+    line-height: 1.04;
+    letter-spacing: -.04em;
+}
+.preview-barcode {
+    margin-bottom: 27px;
+    padding: 7px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #e5dcd8;
+    border-radius: 0;
+    color: #887975;
+    font-size: 9px;
+    letter-spacing: .23em;
+}
+.preview-description {
+    margin-bottom: 28px;
+    padding: 0 0 25px;
+    border-top: 0;
+    border-bottom: 1px solid #e5dcd8;
+    color: #746b68;
+    font-size: 14px;
+    line-height: 1.7;
+}
+.preview-price-container {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    margin-bottom: 8px;
+}
+.preview-price {
+    color: #a96776;
+    font-size: 2.65rem;
+    letter-spacing: -.04em;
+}
+.preview-price-original { margin-left: 0; }
+.preview-stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    font-size: 10px;
+    letter-spacing: .16em;
+}
+.preview-stock::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    flex: 0 0 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+.preview-add-btn {
+    min-height: 55px;
+    margin: 0;
+    border-radius: 4px;
+    background: #211b1b;
+    box-shadow: none;
+    font-size: 10px;
+    letter-spacing: .24em;
+}
+.preview-add-btn:hover { background: #a96776; }
+
+@media (max-width: 760px) {
+    .preview-modal {
+        padding: 10px;
+        align-items: center !important;
+    }
+    .preview-content {
+        width: min(100%, 430px);
+        height: calc(100dvh - 20px);
+        display: flex;
+        flex-direction: column;
+        border-radius: 18px;
+    }
+    .preview-image-container {
+        flex: 0 0 clamp(245px, 38dvh, 350px);
+        height: clamp(245px, 38dvh, 350px) !important;
+    }
+    .preview-image,
+    .preview-image.fine-jewelry-preview {
+        padding: 50px 34px 28px !important;
+    }
+    .preview-image-container::before { top: 18px; left: 20px; font-size: 8px; }
+    .preview-image-container::after { inset: 12px; border-radius: 10px; }
+    .preview-gallery-controls { padding: 0 13px; }
+    .preview-gallery-btn { width: 35px; height: 35px; }
+    .preview-gallery-counter { bottom: 12px; }
+    .preview-details {
+        flex: 1 1 auto;
+        padding: 25px 22px calc(22px + env(safe-area-inset-bottom));
+        background: #fcfaf8 !important;
+    }
+    .preview-details::before { margin-bottom: 15px; font-size: 8px; }
+    .share-corner { top: -51px; left: 16px; right: auto; }
+    .share-corner-btn { width: 35px; height: 35px; }
+    .close-preview-btn { top: 13px; right: 13px; width: 34px; height: 34px; background: #fff; }
+    .preview-name { margin: 0 0 12px; font-size: clamp(1.5rem, 7vw, 1.95rem); }
+    .preview-barcode { margin-bottom: 18px; font-size: 8px; }
+    .preview-description { margin-bottom: 20px; padding-bottom: 17px; font-size: 13px; line-height: 1.55; }
+    .preview-price { font-size: 2.15rem; }
+    .preview-stock { margin-bottom: 19px; }
+    .preview-add-btn { min-height: 50px; }
+}
+@media (max-width: 380px) {
+    .preview-modal { padding: 6px; }
+    .preview-content { height: calc(100dvh - 12px); }
+    .preview-image-container { flex-basis: 235px; height: 235px !important; }
     .preview-details { padding-left: 17px; padding-right: 17px; }
 }
 </style>

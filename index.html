@@ -5080,6 +5080,54 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 }
 </style>
 
+
+<style id="daymar-device-animations">
+/* Animaciones específicas por plataforma para el detalle del producto. */
+@keyframes daymarIosSheetIn {
+    from { opacity: 0; transform: translateY(34px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes daymarIosImageIn {
+    from { opacity: 0; transform: scale(1.035); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes daymarAndroidZoomIn {
+    0% { opacity: 0; transform: translateY(18px) scale(.92); }
+    65% { opacity: 1; transform: translateY(-2px) scale(1.012); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes daymarAndroidImageIn {
+    from { opacity: 0; transform: scale(.94); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes daymarDesktopFadeIn {
+    from { opacity: 0; transform: scale(.975); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+html.device-ios .preview-content {
+    animation: daymarIosSheetIn .42s cubic-bezier(.22,.8,.2,1) both !important;
+}
+html.device-ios .preview-image {
+    animation: daymarIosImageIn .55s ease-out .04s both;
+}
+html.device-android .preview-content {
+    animation: daymarAndroidZoomIn .38s cubic-bezier(.2,.9,.25,1) both !important;
+}
+html.device-android .preview-image {
+    animation: daymarAndroidImageIn .42s cubic-bezier(.2,.8,.2,1) .05s both;
+}
+html.device-desktop .preview-content {
+    animation: daymarDesktopFadeIn .28s ease-out both !important;
+}
+
+/* También diferencia la entrada de los paneles auxiliares sin cambiar su comportamiento. */
+html.device-ios .favorites-modal,
+html.device-ios .cart-modal { animation: daymarIosSheetIn .38s ease-out both; }
+html.device-android .favorites-modal,
+html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezier(.2,.85,.2,1) both; }
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -6783,11 +6831,26 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             cycle();
         }
 
+
+        // Detecta la plataforma sin depender del ancho de pantalla.
+        function detectDevicePlatform() {
+            const ua = navigator.userAgent || '';
+            const platform = navigator.platform || '';
+            const touchPoints = navigator.maxTouchPoints || 0;
+            const isIOS = /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && touchPoints > 1);
+            const isAndroid = /Android/i.test(ua);
+            const root = document.documentElement;
+            root.classList.remove('device-ios', 'device-android', 'device-desktop');
+            root.classList.add(isIOS ? 'device-ios' : isAndroid ? 'device-android' : 'device-desktop');
+            root.dataset.daymarPlatform = isIOS ? 'ios' : isAndroid ? 'android' : 'desktop';
+        }
+
         // ==========================================
         // INICIALIZACION
         // ==========================================
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('DAYMAR - Iniciando...');
+            detectDevicePlatform();
             
             initFloatingHearts();
             initImageObserver();

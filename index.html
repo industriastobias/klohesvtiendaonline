@@ -5066,6 +5066,20 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 }
 </style>
 
+
+<style id="daymar-favorites-two-columns-fix">
+/* Favoritos: exactamente dos productos por cada fila. */
+.favorites-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+@media (max-width: 350px) {
+    .favorites-list { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .favorite-item-image { aspect-ratio: 1 / 1 !important; }
+    .favorite-item-details { padding-left: 8px; padding-right: 8px; }
+    .favorite-item-details h4 { font-size: .68rem !important; }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -6051,7 +6065,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                                 <div class="favorite-item" onclick="openPreview(${products.findIndex(p => p.barcode === product.barcode)})" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openPreview(${products.findIndex(p => p.barcode === product.barcode)}); }" tabindex="0" role="button" aria-label="Ver ${product.name} en grande">
                                     <div class="favorite-item-image">
                                         <img src="${getPrimaryProductImage(product)}" alt="${product.name}" loading="lazy"
-                                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--azul-cielo-suave);font-family:Poppins;font-size:2rem;color:var(--azul-cielo);\">${product.name.charAt(0)}</div>'">
+                                             onerror="this.style.display='none'">
                                     </div>
                                     <div class="favorite-item-details">
                                         <h4>${product.name}</h4>
@@ -6220,7 +6234,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                         <div class="cart-item">
                             <div class="cart-item-image">
                                 <img src="${getPrimaryProductImage(item)}" alt="${item.name}" loading="lazy"
-                                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--azul-cielo-suave);font-family:Poppins;font-size:2rem;color:var(--azul-cielo);\">${item.name.charAt(0)}</div>'">
+                                     onerror="this.style.display='none'">
                             </div>
                             <div class="cart-item-details">
                                 <h4>${item.name}</h4>

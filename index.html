@@ -5242,7 +5242,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
     margin: 0 !important;
     padding: 0 38px 0 14px !important;
     border: 0 !important;
-    border-bottom: 1px solid #eee7e3 !important;
+    border-bottom: 0 !important;
     background: transparent !important;
     color: #211b1a !important;
     font: 700 11px/1 'Manrope', sans-serif !important;
@@ -5252,15 +5252,8 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
     transition: color .2s ease, background .2s ease, padding-left .2s ease !important;
 }
 .categories-menu .category-btn::after {
-    content: '↗' !important;
-    position: absolute !important;
-    right: 14px !important;
-    bottom: auto !important;
-    color: #a96776 !important;
-    font-size: 16px !important;
-    opacity: .7 !important;
-    transform: none !important;
-    transition: transform .2s ease, opacity .2s ease !important;
+    content: none !important;
+    display: none !important;
 }
 .categories-menu .category-btn:hover,
 .categories-menu .category-btn.active {
@@ -5268,20 +5261,15 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
     background: #f2e7e5 !important;
     color: #a96776 !important;
 }
-.categories-menu .category-btn:hover::after,
-.categories-menu .category-btn.active::after {
-    opacity: 1 !important;
-    transform: translate(3px, -3px) !important;
-}
 @media (max-width: 900px) {
     .atelier-nav {
-        grid-template-columns: auto minmax(0, 1fr) auto !important;
+        grid-template-columns: 1fr !important;
     }
     .atelier-nav-start {
-        display: flex !important;
+        display: none !important;
     }
     .atelier-menu-trigger {
-        display: flex !important;
+        display: none !important;
     }
     .atelier-brand-lockup {
         justify-self: center !important;

@@ -2916,6 +2916,11 @@ footer .footer-section h4{color:var(--ink)!important}footer .footer-section p,fo
             font-size: 0.78em;
             opacity: 0.72;
         }
+        .discount-tag {
+            color: var(--rosa-vieja);
+            font-size: 0.68em;
+            font-weight: 600;
+        }
 
         @media (max-width: 600px) {
             .preview-modal {
@@ -5623,8 +5628,11 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
         function getOriginalPrice(product) {
             return Number(product?.price) || 0;
         }
+        function roundPrice(value) {
+            return Math.round((Number(value) + Number.EPSILON) * 100) / 100;
+        }
         function getProductPrice(product) {
-            return getOriginalPrice(product) * (1 - getDiscountRate(product));
+            return roundPrice(getOriginalPrice(product) * (1 - getDiscountRate(product)));
         }
 
         // ==========================================
@@ -6017,12 +6025,13 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                     <div class="product-price-container">
                         <span class="product-price">$${productPrice.toFixed(2)}</span>
                         <span class="product-price-original">$${getOriginalPrice(product).toFixed(2)}</span>
+                        <span class="discount-tag">-${Math.round(getDiscountRate(product) * 100)}%</span>
                     </div>
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
                     <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'Agregar al carrito' : 'Producto agotado'}" title="${hasStock ? 'Agregar al carrito' : 'Agotado'}">
-                        <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? 'Agregar' : 'Agotado'}</span>
+                        <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? `Agregar por $${productPrice.toFixed(2)}` : 'Agotado'}</span>
                     </button>
                 </div>
             `;
@@ -6282,8 +6291,8 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
 
                 AppState.cart.forEach(item => {
                     const itemPrice = Number(item.price) || 0;
-                    const itemTotal = itemPrice * item.quantity;
-                    subtotal += itemTotal;
+                    const itemTotal = roundPrice(itemPrice * item.quantity);
+                    subtotal = roundPrice(subtotal + itemTotal);
 
                     cartItems.innerHTML += `
                         <div class="cart-item">
@@ -6304,7 +6313,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                 });
 
                 const shippingCost = AppState.shippingEnabled ? CONFIG.shippingCost : 0;
-                const total = subtotal + shippingCost;
+                const total = roundPrice(subtotal + shippingCost);
 
                 if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
                 if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;

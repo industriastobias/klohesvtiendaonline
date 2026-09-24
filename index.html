@@ -5,7 +5,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5421,6 +5420,25 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             .atelier-brand-lockup .brand-name { font-size: 16px !important; }
             .products-grid { gap: 22px 10px !important; }
             .product-card .product-info { padding-top: 9px !important; }
+        }
+    </style>
+    <style id="daymar-compact-copyright">
+        /* El footer solo tiene el aviso legal; quitamos el relleno reservado para columnas vacías. */
+        footer {
+            padding: 14px 0 10px !important;
+            min-height: 0 !important;
+        }
+        footer .copyright {
+            margin: 0 !important;
+            padding: 0 !important;
+            border-top: 0 !important;
+        }
+        footer .copyright p {
+            margin: 0 !important;
+            line-height: 1.5 !important;
+        }
+        footer .copyright p + p {
+            margin-top: 6px !important;
         }
     </style>
 </head>

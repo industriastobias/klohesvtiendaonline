@@ -16,7 +16,7 @@
     <meta property="og:site_name" content="DAYMAR">
     <meta property="og:title" content="DAYMAR | Accesorios y regalos en El Salvador">
     <meta property="og:description" content="Accesorios seleccionados, envíos a todo El Salvador y pedidos por WhatsApp.">
-    <meta property="og:image" content="https://industriastobias.github.io/klohesvtiendaonline/newlogo.jpg">
+    <meta property="og:image" content="https://industriastobias.github.io/klohesvtiendaonline/isotipo.png">
     <meta property="og:url" content="https://industriastobias.github.io/klohesvtiendaonline/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -29,8 +29,8 @@
       "@type": "OnlineStore",
       "name": "DAYMAR",
       "url": "https://industriastobias.github.io/klohesvtiendaonline/",
-      "logo": "https://industriastobias.github.io/klohesvtiendaonline/newlogo.jpg",
-      "image": "https://industriastobias.github.io/klohesvtiendaonline/newlogo.jpg",
+      "logo": "https://industriastobias.github.io/klohesvtiendaonline/isotipo.png",
+      "image": "https://industriastobias.github.io/klohesvtiendaonline/isotipo.png",
       "description": "Tienda en línea de accesorios con envíos a todo El Salvador.",
       "telephone": "+50366711569",
       "email": "industriastobias@gmail.com",
@@ -6265,11 +6265,12 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             if (!product) return;
 
             const productPrice = getProductPrice(product);
-            const shareText = `Mira este producto de DAYMAR: ${product.name} - $${productPrice.toFixed(2)}`;
+            const discountPercent = Math.round(getDiscountRate(product) * 100);
+            const shareText = `✨ ¡Descuentos especiales en DAYMAR! Relojes con 15% y todos los demás accesorios con 30% de descuento. Mira ${product.name} por solo $${productPrice.toFixed(2)}. ¡Date un gusto y comparte la belleza!`;
 
             if (navigator.share) {
                 navigator.share({
-                    title: product.name,
+                    title: `Oferta DAYMAR: ${product.name} (-${discountPercent}%)`,
                     text: shareText,
                     url: window.location.href
                 }).catch(() => {});
@@ -6288,7 +6289,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             if (!product) return;
 
             const productPrice = getProductPrice(product);
-            const shareText = `Mira este producto de DAYMAR: ${product.name} - $${productPrice.toFixed(2)}`;
+            const shareText = `✨ ¡Descuentos especiales en DAYMAR! Relojes con 15% y todos los demás accesorios con 30% de descuento. Mira ${product.name} por solo $${productPrice.toFixed(2)}. ¡Date un gusto y comparte la belleza!`;
             const url = `https://wa.me/?text=${encodeURIComponent(shareText + ' - ' + window.location.href)}`;
             window.open(url, '_blank');
         }

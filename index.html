@@ -4981,6 +4981,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             </div>
             <div class="atelier-nav-end">
                 <button class="atelier-search-link" onclick="focusSearch()" aria-label="Buscar"><i class="fas fa-search"></i><span>Buscar</span></button>
+                <button class="header-icon atelier-icon" onclick="sharePage()" aria-label="Compartir página" title="Compartir página"><i class="fas fa-share-alt"></i></button>
                 <button class="header-icon favorites-icon-btn atelier-icon" onclick="toggleFavorites()" aria-label="Favoritos" id="favoritesBtn"><i class="far fa-heart"></i><span class="favorites-count-header" id="favoritesBadge" style="display:none">0</span></button>
                 <button class="header-icon cart-icon-header atelier-icon" onclick="toggleCart()" aria-label="Carrito"><i class="fas fa-shopping-bag"></i><span class="cart-count-header" id="cartBadge" style="display:none">0</span></button>
             </div>
@@ -6259,18 +6260,34 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             document.body.style.overflow = 'hidden';
         }
 
+        function sharePage() {
+            const shareText = '✨ ¡Descubre DAYMAR! Tenemos 15% de descuento en relojes y 30% en todos los demás accesorios. Elige algo bonito para ti o para regalar.';
+            if (navigator.share) {
+                navigator.share({
+                    title: 'DAYMAR | Accesorios y regalos',
+                    text: shareText,
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(`${shareText} ${window.location.href}`).then(() => {
+                    showNotification('Enlace copiado al portapapeles');
+                }).catch(() => {
+                    showNotification('No se pudo copiar', 'error');
+                });
+            }
+        }
+
         function shareProduct() {
             if (currentPreviewIndex === null) return;
             const product = products[currentPreviewIndex];
             if (!product) return;
 
             const productPrice = getProductPrice(product);
-            const discountPercent = Math.round(getDiscountRate(product) * 100);
-            const shareText = `✨ ¡Descuentos especiales en DAYMAR! Relojes con 15% y todos los demás accesorios con 30% de descuento. Mira ${product.name} por solo $${productPrice.toFixed(2)}. ¡Date un gusto y comparte la belleza!`;
+            const shareText = `Mira este producto de DAYMAR: ${product.name} - $${productPrice.toFixed(2)}`;
 
             if (navigator.share) {
                 navigator.share({
-                    title: `Oferta DAYMAR: ${product.name} (-${discountPercent}%)`,
+                    title: product.name,
                     text: shareText,
                     url: window.location.href
                 }).catch(() => {});
@@ -6289,7 +6306,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             if (!product) return;
 
             const productPrice = getProductPrice(product);
-            const shareText = `✨ ¡Descuentos especiales en DAYMAR! Relojes con 15% y todos los demás accesorios con 30% de descuento. Mira ${product.name} por solo $${productPrice.toFixed(2)}. ¡Date un gusto y comparte la belleza!`;
+            const shareText = `Mira este producto de DAYMAR: ${product.name} - $${productPrice.toFixed(2)}`;
             const url = `https://wa.me/?text=${encodeURIComponent(shareText + ' - ' + window.location.href)}`;
             window.open(url, '_blank');
         }

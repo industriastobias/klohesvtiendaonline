@@ -5303,6 +5303,144 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
     }
 }
 </style>
+    <style id="daymar-responsive-polish">
+        /* Refinamiento adaptable: identidad visible, espacios equilibrados y catálogo alineado. */
+        .atelier-brand-lockup .brand-isotipo { display: inline-block !important; }
+        .atelier-brand-lockup .brand-name { display: none !important; }
+        .atelier-brand-lockup .logo {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0 !important;
+            white-space: nowrap !important;
+            font-size: 0 !important;
+            letter-spacing: 0 !important;
+            text-decoration: none !important;
+        }
+        .atelier-hero-grid { min-width: 0 !important; }
+        .atelier-hero-copy, .atelier-hero-art, .atelier-hero-note { min-width: 0 !important; }
+        .atelier-catalog > .container, .atelier-search-row .container {
+            max-width: 1600px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        .atelier-catalog {
+            padding-top: clamp(52px, 5.5vw, 78px) !important;
+            padding-bottom: clamp(64px, 7vw, 100px) !important;
+        }
+        .atelier-section-header { gap: 24px !important; }
+        .atelier-section-tools { flex-wrap: wrap !important; justify-content: flex-end !important; }
+        .products-grid {
+            display: grid !important;
+            width: 100% !important;
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+            align-items: start !important;
+            gap: clamp(20px, 2.2vw, 34px) !important;
+        }
+        .product-card, .product-card:nth-child(n) {
+            grid-column: span 1 !important;
+            min-width: 0 !important;
+            margin-top: 0 !important;
+        }
+        .product-card:nth-child(n) .product-image-container {
+            width: 100% !important;
+            aspect-ratio: 4 / 5 !important;
+        }
+        .product-card .product-info { padding: 12px 0 0 !important; }
+        @media (min-width: 901px) and (max-width: 1120px) {
+            .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+        }
+        @media (max-width: 900px) {
+            .atelier-nav {
+                min-height: 64px !important;
+                height: 64px !important;
+                grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+                gap: 8px !important;
+            }
+            .atelier-nav-start {
+                display: flex !important;
+                grid-column: 1 !important;
+                order: 1 !important;
+                min-width: 0 !important;
+                justify-content: flex-start !important;
+                gap: 0 !important;
+            }
+            .atelier-nav-start .atelier-link,
+            .atelier-menu-trigger b { display: none !important; }
+            .atelier-menu-trigger {
+                display: flex !important;
+                width: 38px !important;
+                height: 38px !important;
+                margin: 0 !important;
+            }
+            .atelier-brand-lockup {
+                display: flex !important;
+                grid-column: 2 !important;
+                order: 2 !important;
+                justify-self: center !important;
+                min-width: 0 !important;
+                position: static !important;
+                transform: none !important;
+            }
+            .atelier-brand-lockup .brand-name {
+                font-size: 18px !important;
+                letter-spacing: .18em !important;
+            }
+            .atelier-nav-end {
+                display: flex !important;
+                grid-column: 3 !important;
+                order: 3 !important;
+                min-width: 0 !important;
+                align-items: center !important;
+                justify-content: flex-end !important;
+                gap: 6px !important;
+            }
+            .atelier-search-link,
+            .atelier-icon {
+                flex: 0 0 auto !important;
+                width: 32px !important;
+                min-width: 32px !important;
+                height: 36px !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 !important;
+                font-size: 14px !important;
+            }
+            .atelier-hero { padding-top: 24px !important; }
+            .atelier-hero h1 { font-size: clamp(46px, 13vw, 58px) !important; }
+            .atelier-hero-art {
+                height: clamp(285px, 82vw, 360px) !important;
+                margin-left: var(--daymar-edge) !important;
+                margin-right: var(--daymar-edge) !important;
+            }
+            .atelier-catalog {
+                padding-top: 42px !important;
+                padding-bottom: 64px !important;
+            }
+            .atelier-section-header { margin-bottom: 20px !important; }
+            .atelier-section-tools {
+                display: flex !important;
+                justify-content: flex-start !important;
+                gap: 12px !important;
+                margin-top: 14px !important;
+            }
+            .products-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 26px 14px !important;
+            }
+            .daymar-contact-grid { gap: 20px 14px !important; }
+            .daymar-trust-grid { gap: 12px !important; }
+            .daymar-mobile-nav { padding-top: 9px !important; padding-bottom: 9px !important; }
+        }
+        @media (max-width: 380px) {
+            .atelier-nav { grid-template-columns: 38px minmax(0, 1fr) 38px !important; gap: 5px !important; }
+            .atelier-menu-trigger { width: 34px !important; height: 34px !important; }
+            .atelier-brand-lockup .brand-name { font-size: 16px !important; }
+            .products-grid { gap: 22px 10px !important; }
+            .product-card .product-info { padding-top: 9px !important; }
+        }
+    </style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

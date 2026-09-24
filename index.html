@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5149,6 +5155,145 @@ html.device-android .favorites-modal,
 html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezier(.2,.85,.2,1) both; }
 </style>
 
+<style id="daymar-unified-hamburger-menu">
+/* ===== DAYMAR · Menú hamburguesa unificado ===== */
+.menu-overlay {
+    background: rgba(25, 20, 20, .44) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity .32s ease, visibility .32s ease !important;
+}
+.menu-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+.categories-menu {
+    top: 0 !important;
+    left: 0 !important;
+    width: min(390px, calc(100vw - 24px)) !important;
+    height: 100dvh !important;
+    padding: 30px 24px 34px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    background: #fcfaf8 !important;
+    border: 0 !important;
+    border-right: 1px solid #e5dcd8 !important;
+    box-shadow: 20px 0 60px rgba(35, 25, 23, .18) !important;
+    transform: translateX(-105%) !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition: transform .42s cubic-bezier(.22, 1, .36, 1), opacity .28s ease, visibility .42s ease !important;
+}
+.categories-menu.active {
+    left: 0 !important;
+    transform: translateX(0) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+.atelier-menu-heading {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    padding: 0 0 22px !important;
+    border-bottom: 1px solid #e5dcd8 !important;
+}
+.atelier-menu-heading::before {
+    content: 'DAYMAR / CATEGORÍAS';
+    position: absolute;
+    margin-top: -2px;
+    color: #a96776;
+    font: 700 9px/1 'Manrope', sans-serif;
+    letter-spacing: .2em;
+}
+.atelier-menu-heading > span {
+    margin-top: 20px;
+    color: #211b1a !important;
+    font: 400 clamp(2rem, 7vw, 2.8rem)/1 'DM Serif Display', serif !important;
+    letter-spacing: -.035em !important;
+}
+.close-menu {
+    width: 38px !important;
+    height: 38px !important;
+    margin: 0 !important;
+    border: 1px solid #e5dcd8 !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+    color: #211b1a !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background .2s ease, color .2s ease, transform .2s ease !important;
+}
+.close-menu:hover {
+    background: #a96776 !important;
+    color: #fff !important;
+    transform: rotate(90deg) !important;
+}
+.categories-menu > p {
+    margin: 22px 0 18px !important;
+    color: #746b68 !important;
+    font: 500 11px/1.7 'Manrope', sans-serif !important;
+    letter-spacing: .08em !important;
+    text-transform: uppercase !important;
+}
+.categories-menu .category-btn {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    margin: 0 !important;
+    padding: 0 38px 0 14px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #eee7e3 !important;
+    background: transparent !important;
+    color: #211b1a !important;
+    font: 700 11px/1 'Manrope', sans-serif !important;
+    letter-spacing: .13em !important;
+    text-align: left !important;
+    text-transform: uppercase !important;
+    transition: color .2s ease, background .2s ease, padding-left .2s ease !important;
+}
+.categories-menu .category-btn::after {
+    content: '↗' !important;
+    position: absolute !important;
+    right: 14px !important;
+    bottom: auto !important;
+    color: #a96776 !important;
+    font-size: 16px !important;
+    opacity: .7 !important;
+    transform: none !important;
+    transition: transform .2s ease, opacity .2s ease !important;
+}
+.categories-menu .category-btn:hover,
+.categories-menu .category-btn.active {
+    padding-left: 22px !important;
+    background: #f2e7e5 !important;
+    color: #a96776 !important;
+}
+.categories-menu .category-btn:hover::after,
+.categories-menu .category-btn.active::after {
+    opacity: 1 !important;
+    transform: translate(3px, -3px) !important;
+}
+@media (max-width: 900px) {
+    .atelier-nav {
+        grid-template-columns: auto minmax(0, 1fr) auto !important;
+    }
+    .atelier-nav-start {
+        display: flex !important;
+    }
+    .atelier-menu-trigger {
+        display: flex !important;
+    }
+    .atelier-brand-lockup {
+        justify-self: center !important;
+    }
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

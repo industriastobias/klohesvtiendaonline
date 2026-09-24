@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -4922,6 +4928,206 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
 }
 </style>
 
+
+<style id="daymar-favorites-gallery">
+/* ===== DAYMAR · Favoritos como galería, independiente del carrito ===== */
+.favorites-modal {
+    width: min(980px, 94vw) !important;
+    right: -105% !important;
+    padding: 34px clamp(20px, 4vw, 48px) 42px !important;
+    background: #fcfaf8 !important;
+    border-left: 0 !important;
+    box-shadow: -18px 0 55px rgba(35, 25, 23, .14) !important;
+}
+.favorites-modal.active { right: 0 !important; }
+.favorites-header {
+    margin-bottom: 28px !important;
+    padding-bottom: 18px !important;
+    border-bottom: 1px solid #e5dcd8 !important;
+}
+.favorites-header h2 {
+    color: #211b1a !important;
+    font-size: clamp(1.15rem, 2.5vw, 1.65rem) !important;
+    letter-spacing: .08em !important;
+}
+.close-favorites {
+    width: 36px !important;
+    height: 36px !important;
+    background: #fff !important;
+    border: 1px solid #e5dcd8 !important;
+    color: #211b1a !important;
+}
+.close-favorites:hover { background: #a96776 !important; }
+.favorites-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px 16px !important;
+    align-items: start;
+}
+.favorite-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    min-width: 0;
+    padding: 0 !important;
+    border: 1px solid #e7dfdb !important;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    cursor: pointer;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    animation: fadeInScale .35s ease both !important;
+}
+.favorite-item:hover {
+    transform: translateY(-4px);
+    border-color: #d7b7bb !important;
+    box-shadow: 0 12px 28px rgba(80, 47, 47, .12);
+}
+.favorite-item-image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    flex: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #f4efec !important;
+    overflow: hidden;
+}
+.favorite-item-image img {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    padding: 12px;
+    transition: transform .3s ease;
+}
+.favorite-item:hover .favorite-item-image img { transform: scale(1.045); }
+.favorite-item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+    padding: 14px 14px 16px;
+}
+.favorite-item-details h4 {
+    overflow: hidden;
+    color: #211b1a !important;
+    margin: 0 !important;
+    font-size: .86rem !important;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.favorite-item-details p {
+    margin: 0 !important;
+    color: #a96776 !important;
+    font-size: 1rem !important;
+}
+.favorite-item .remove-favorite {
+    position: absolute;
+    width: 30px !important;
+    height: 30px !important;
+    margin: 9px;
+    align-self: flex-end;
+    z-index: 2;
+    background: rgba(255,255,255,.94) !important;
+    border: 1px solid #e5dcd8 !important;
+    color: #806f6d !important;
+    font-size: .78rem !important;
+}
+.favorite-item { position: relative; }
+.favorite-item .remove-favorite:hover { color: #b84252 !important; background: #fff !important; }
+.favorites-empty {
+    grid-column: 1 / -1;
+    padding: 80px 20px !important;
+    color: #857773 !important;
+    border: 1px dashed #d9cfca;
+    background: #fff;
+}
+@media (max-width: 760px) {
+    .favorites-modal {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 24px 16px calc(28px + env(safe-area-inset-bottom)) !important;
+    }
+    .favorites-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px 10px !important;
+    }
+    .favorite-item-details { padding: 11px 11px 13px; }
+    .favorite-item-details h4 { font-size: .72rem !important; }
+    .favorite-item-details p { font-size: .9rem !important; }
+    .favorite-item .remove-favorite { margin: 7px; }
+}
+@media (max-width: 350px) {
+    .favorites-list { grid-template-columns: 1fr; gap: 14px !important; }
+    .favorite-item-image { aspect-ratio: 1.15 / 1 !important; }
+}
+</style>
+
+
+<style id="daymar-favorites-two-columns-fix">
+/* Favoritos: exactamente dos productos por cada fila. */
+.favorites-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+@media (max-width: 350px) {
+    .favorites-list { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .favorite-item-image { aspect-ratio: 1 / 1 !important; }
+    .favorite-item-details { padding-left: 8px; padding-right: 8px; }
+    .favorite-item-details h4 { font-size: .68rem !important; }
+}
+</style>
+
+
+<style id="daymar-device-animations">
+/* Animaciones específicas por plataforma para el detalle del producto. */
+@keyframes daymarIosSheetIn {
+    from { opacity: 0; transform: translateY(34px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes daymarIosImageIn {
+    from { opacity: 0; transform: scale(1.035); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes daymarAndroidZoomIn {
+    0% { opacity: 0; transform: translateY(18px) scale(.92); }
+    65% { opacity: 1; transform: translateY(-2px) scale(1.012); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes daymarAndroidImageIn {
+    from { opacity: 0; transform: scale(.94); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes daymarDesktopFadeIn {
+    from { opacity: 0; transform: scale(.975); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+html.device-ios .preview-content {
+    animation: daymarIosSheetIn .42s cubic-bezier(.22,.8,.2,1) both !important;
+}
+html.device-ios .preview-image {
+    animation: daymarIosImageIn .55s ease-out .04s both;
+}
+html.device-android .preview-content {
+    animation: daymarAndroidZoomIn .38s cubic-bezier(.2,.9,.25,1) both !important;
+}
+html.device-android .preview-image {
+    animation: daymarAndroidImageIn .42s cubic-bezier(.2,.8,.2,1) .05s both;
+}
+html.device-desktop .preview-content {
+    animation: daymarDesktopFadeIn .28s ease-out both !important;
+}
+
+/* También diferencia la entrada de los paneles auxiliares sin cambiar su comportamiento. */
+html.device-ios .favorites-modal,
+html.device-ios .cart-modal { animation: daymarIosSheetIn .38s ease-out both; }
+html.device-android .favorites-modal,
+html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezier(.2,.85,.2,1) both; }
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -5904,16 +6110,16 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                         const product = products.find(p => p.barcode === barcode);
                         if (product) {
                             list.innerHTML += `
-                                <div class="favorite-item">
+                                <div class="favorite-item" onclick="openPreview(${products.findIndex(p => p.barcode === product.barcode)})" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openPreview(${products.findIndex(p => p.barcode === product.barcode)}); }" tabindex="0" role="button" aria-label="Ver ${product.name} en grande">
                                     <div class="favorite-item-image">
                                         <img src="${getPrimaryProductImage(product)}" alt="${product.name}" loading="lazy"
-                                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--azul-cielo-suave);font-family:Poppins;font-size:2rem;color:var(--azul-cielo);\">${product.name.charAt(0)}</div>'">
+                                             onerror="this.style.display='none'">
                                     </div>
                                     <div class="favorite-item-details">
                                         <h4>${product.name}</h4>
                                         <p>$${product.price.toFixed(2)}</p>
                                     </div>
-                                    <button class="remove-favorite" onclick="removeFromFavorites('${product.barcode}')" aria-label="Eliminar de favoritos">
+                                    <button class="remove-favorite" onclick="event.stopPropagation(); removeFromFavorites('${product.barcode}')" aria-label="Eliminar de favoritos">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -6076,7 +6282,7 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
                         <div class="cart-item">
                             <div class="cart-item-image">
                                 <img src="${getPrimaryProductImage(item)}" alt="${item.name}" loading="lazy"
-                                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--azul-cielo-suave);font-family:Poppins;font-size:2rem;color:var(--azul-cielo);\">${item.name.charAt(0)}</div>'">
+                                     onerror="this.style.display='none'">
                             </div>
                             <div class="cart-item-details">
                                 <h4>${item.name}</h4>
@@ -6625,11 +6831,26 @@ header{width:100%}.atelier-header .container,.atelier-search-row .container,foot
             cycle();
         }
 
+
+        // Detecta la plataforma sin depender del ancho de pantalla.
+        function detectDevicePlatform() {
+            const ua = navigator.userAgent || '';
+            const platform = navigator.platform || '';
+            const touchPoints = navigator.maxTouchPoints || 0;
+            const isIOS = /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && touchPoints > 1);
+            const isAndroid = /Android/i.test(ua);
+            const root = document.documentElement;
+            root.classList.remove('device-ios', 'device-android', 'device-desktop');
+            root.classList.add(isIOS ? 'device-ios' : isAndroid ? 'device-android' : 'device-desktop');
+            root.dataset.daymarPlatform = isIOS ? 'ios' : isAndroid ? 'android' : 'desktop';
+        }
+
         // ==========================================
         // INICIALIZACION
         // ==========================================
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('DAYMAR - Iniciando...');
+            detectDevicePlatform();
             
             initFloatingHearts();
             initImageObserver();

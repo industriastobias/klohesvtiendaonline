@@ -5240,7 +5240,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
     border: 1px solid #e5dcd8 !important;
     border-radius: 50% !important;
     background: #fff !important;
-    color: #211b1a !important;
+    color: #000 !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -5248,9 +5248,11 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
 }
 .close-menu:hover {
     background: #a96776 !important;
-    color: #fff !important;
+    color: #000 !important;
     transform: rotate(90deg) !important;
 }
+.close-menu i { color: #000 !important; }
+.close-menu:hover i { color: #000 !important; }
 .categories-menu > p {
     margin: 22px 0 18px !important;
     color: #746b68 !important;
@@ -5349,7 +5351,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
     </header>
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="categories-menu atelier-categories" id="categoriesMenu">
-        <div class="atelier-menu-heading"><span>Índice</span><button class="close-menu" onclick="toggleMenu()"><i class="fas fa-times"></i></button></div>
+        <div class="atelier-menu-heading"><button class="close-menu" onclick="toggleMenu()" aria-label="Cerrar menú"><i class="fas fa-times" aria-hidden="true"></i></button></div>
         <p>Encuentra tu pieza para cada momento.</p>
         <button class="category-btn active" onclick="filterProducts('todos', this)">Todas</button>
         <button class="category-btn fine-jewelry-category" onclick="filterProducts('oro-plata', this)">Oro y Plata</button>

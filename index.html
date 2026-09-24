@@ -5,6 +5,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5354,11 +5355,11 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             .atelier-nav {
                 min-height: 64px !important;
                 height: 64px !important;
-                grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+                grid-template-columns: minmax(0, 1fr) !important;
                 gap: 8px !important;
             }
             .atelier-nav-start {
-                display: flex !important;
+                display: none !important;
                 grid-column: 1 !important;
                 order: 1 !important;
                 min-width: 0 !important;
@@ -5368,14 +5369,14 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             .atelier-nav-start .atelier-link,
             .atelier-menu-trigger b { display: none !important; }
             .atelier-menu-trigger {
-                display: flex !important;
+                display: none !important;
                 width: 38px !important;
                 height: 38px !important;
                 margin: 0 !important;
             }
             .atelier-brand-lockup {
                 display: flex !important;
-                grid-column: 2 !important;
+                grid-column: 1 !important;
                 order: 2 !important;
                 justify-self: center !important;
                 min-width: 0 !important;

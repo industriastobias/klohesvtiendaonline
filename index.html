@@ -5738,7 +5738,8 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
         <p>Verano 2026</p>
         <div style="font-size: 1.8rem; margin: 0.8rem 0;">☀️🌊✨</div>
         <p>Relojes con <strong>15% de descuento</strong></p>
-        <p>Todo lo demas con <strong>30% de descuento</strong></p>
+        <p>Oro y plata <strong>sin descuento</strong></p>
+        <p>Los demás accesorios con <strong>30% de descuento</strong></p>
     </div>
 
     <!-- Overlay -->
@@ -5930,6 +5931,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
         // PRECIOS
         // ==========================================
         function getDiscountRate(product) {
+            if (isFineJewelryProduct(product)) return 0;
             return String(product?.category || '').trim().toLowerCase() === 'relojes' ? 0.15 : 0.30;
         }
         function getOriginalPrice(product) {
@@ -5990,6 +5992,24 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             'pulsera': 'Pulseras'
         };
 
+        function mixProductsByCategory(productList) {
+            const groups = new Map();
+            productList.forEach(product => {
+                const key = String(product?.category || 'otros').trim().toLocaleLowerCase('es')
+                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') || 'otros';
+                if (!groups.has(key)) groups.set(key, []);
+                groups.get(key).push(product);
+            });
+            const mixed = [];
+            const queues = Array.from(groups.values());
+            while (queues.some(queue => queue.length)) {
+                queues.forEach(queue => {
+                    if (queue.length) mixed.push(queue.shift());
+                });
+            }
+            return mixed;
+        }
+
         const categoryDisplayNames = {
             'todos': 'TODOS',
             'oro-plata': 'ORO Y PLATA',
@@ -6027,7 +6047,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             
             setTimeout(() => {
                 if (category === 'todos') {
-                    AppState.filteredProducts = [...products];
+                    AppState.filteredProducts = mixProductsByCategory(products);
                 } else {
                     const targetCategory = categoryMap[category];
                     AppState.filteredProducts = category === 'oro-plata'
@@ -6057,7 +6077,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             setTimeout(() => {
                 if (AppState.searchTerm === '') {
                     if (AppState.currentFilter === 'todos') {
-                        AppState.filteredProducts = [...products];
+                        AppState.filteredProducts = mixProductsByCategory(products);
                     } else {
                         const targetCategory = categoryMap[AppState.currentFilter];
                         AppState.filteredProducts = AppState.currentFilter === 'oro-plata'
@@ -6065,10 +6085,13 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                             : products.filter(product => product.category === targetCategory);
                     }
                 } else {
-                    AppState.filteredProducts = products.filter(product => 
-                        product.name.toLowerCase().includes(AppState.searchTerm) || 
+                    const matchingProducts = products.filter(product =>
+                        product.name.toLowerCase().includes(AppState.searchTerm) ||
                         product.barcode.toLowerCase().includes(AppState.searchTerm)
                     );
+                    AppState.filteredProducts = AppState.currentFilter === 'todos'
+                        ? mixProductsByCategory(matchingProducts)
+                        : matchingProducts;
                 }
                 
                 if (AppState.currentSort !== 'default') {
@@ -6331,8 +6354,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                     <p class="product-description">${product.description || ''}</p>
                     <div class="product-price-container">
                         <span class="product-price">$${productPrice.toFixed(2)}</span>
-                        <span class="product-price-original">$${getOriginalPrice(product).toFixed(2)}</span>
-                        <span class="discount-tag">-${Math.round(getDiscountRate(product) * 100)}%</span>
+                        ${getDiscountRate(product) > 0 ? `<span class="product-price-original">$${getOriginalPrice(product).toFixed(2)}</span><span class="discount-tag">-${Math.round(getDiscountRate(product) * 100)}%</span>` : ''}
                     </div>
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
@@ -6440,7 +6462,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                                     </div>
                                     <div class="favorite-item-details">
                                         <h4>${product.name}</h4>
-                                        <p><span class="favorite-price-current">$${getProductPrice(product).toFixed(2)}</span><span class="favorite-price-original">$${getOriginalPrice(product).toFixed(2)}</span><span class="favorite-discount">-${Math.round(getDiscountRate(product) * 100)}%</span></p>
+                                        <p><span class="favorite-price-current">$${getProductPrice(product).toFixed(2)}</span>${getDiscountRate(product) > 0 ? `<span class="favorite-price-original">$${getOriginalPrice(product).toFixed(2)}</span><span class="favorite-discount">-${Math.round(getDiscountRate(product) * 100)}%</span>` : ''}</p>
                                     </div>
                                     <button class="remove-favorite" onclick="event.stopPropagation(); removeFromFavorites('${product.barcode}')" aria-label="Eliminar de favoritos">
                                         <i class="fas fa-trash"></i>
@@ -6706,7 +6728,9 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             document.getElementById('previewBarcode').textContent = `COD: ${product.barcode}`;
             document.getElementById('previewDescription').textContent = product.description || 'No hay descripcion disponible.';
             document.getElementById('previewPrice').textContent = `$${productPrice.toFixed(2)}`;
-            document.getElementById('previewPriceOriginal').textContent = `$${getOriginalPrice(product).toFixed(2)}`;
+            const previewOriginalPrice = document.getElementById('previewPriceOriginal');
+            previewOriginalPrice.textContent = getDiscountRate(product) > 0 ? `$${getOriginalPrice(product).toFixed(2)}` : '';
+            previewOriginalPrice.style.display = getDiscountRate(product) > 0 ? '' : 'none';
 
             const stockEl = document.getElementById('previewStock');
             if (product.stock > 0) {
@@ -7186,7 +7210,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             renderSkeletons(8);
             
             if (typeof products !== 'undefined' && Array.isArray(products)) {
-                AppState.filteredProducts = [...products];
+                AppState.filteredProducts = mixProductsByCategory(products);
                 
                 const validBarcodes = new Set(products.map(p => p.barcode));
                 AppState.cart = AppState.cart.filter(item => validBarcodes.has(item.barcode));

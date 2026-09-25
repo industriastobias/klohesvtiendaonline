@@ -6332,7 +6332,6 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             
             const hasStock = Number(product.stock) > 0;            const realIndex = products.indexOf(product);
             const productImages = getProductImages(product);
-            const isFavorite = AppState.favorites.includes(product.barcode);
 ;
             const initial = product.name.charAt(0).toUpperCase();
             
@@ -6355,9 +6354,6 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                          fetchpriority="${index < 6 ? 'high' : 'low'}"
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
                     ${isFineJewelry ? `<div class="fine-jewelry-overline ${fineMaterialClass}"><span>${fineMaterial}</span><i class="fas fa-sparkles" aria-hidden="true"></i></div>` : ''}
-                    <button class="wishlist-btnn ${isFavorite ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(this, '${product.barcode}')" aria-label="Agregar a favoritos">
-                        <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
-                    </button>
                 </div>
                 <div class="product-info">
                     ${isFineJewelry ? `<div class="fine-jewelry-meta"><span>PIEZA ESPECIAL</span><span>${fineMaterial}</span></div>` : ''}
@@ -6414,29 +6410,6 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
         // ==========================================
         // FAVORITOS
         // ==========================================
-        function toggleWishlist(btn, barcode) {
-            btn.classList.toggle('active');
-            const icon = btn.querySelector('i');
-            const isActive = btn.classList.contains('active');
-            
-            if (isActive) {
-                icon.classList.remove('far');
-                icon.classList.add('fas');
-                if (!AppState.favorites.includes(barcode)) {
-                    AppState.favorites.push(barcode);
-                }
-                showNotification('Agregado a favoritos');
-            } else {
-                icon.classList.remove('fas');
-                icon.classList.add('far');
-                AppState.favorites = AppState.favorites.filter(f => f !== barcode);
-                showNotification('Eliminado de favoritos');
-            }
-            
-            localStorage.setItem('daymar_favorites', JSON.stringify(AppState.favorites));
-            updateFavorites();
-        }
-
         function updateFavorites() {
             const badge = document.getElementById('favoritesBadge');
             const btn = document.getElementById('favoritesBtn');
@@ -6489,16 +6462,6 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             AppState.favorites = AppState.favorites.filter(f => f !== barcode);
             localStorage.setItem('daymar_favorites', JSON.stringify(AppState.favorites));
             updateFavorites();
-            
-            document.querySelectorAll('.wishlist-btn').forEach(btn => {
-                const onclick = btn.getAttribute('onclick');
-                if (onclick && onclick.includes(barcode)) {
-                    btn.classList.remove('active');
-                    const icon = btn.querySelector('i');
-                    icon.classList.remove('fas');
-                    icon.classList.add('far');
-                }
-            });
             
             showNotification('Eliminado de favoritos');
         }
@@ -6843,17 +6806,6 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
 
             localStorage.setItem('daymar_favorites', JSON.stringify(AppState.favorites));
             updateFavorites();
-
-            document.querySelectorAll('.wishlist-btn').forEach(btn => {
-                const onclick = btn.getAttribute('onclick');
-                if (onclick && onclick.includes(product.barcode)) {
-                    btn.classList.toggle('active', !isActive);
-                    const cardIcon = btn.querySelector('i');
-                    if (cardIcon) {
-                        cardIcon.className = !isActive ? 'fas fa-heart' : 'far fa-heart';
-                    }
-                }
-            });
         }
 
         let touchStartX = 0;

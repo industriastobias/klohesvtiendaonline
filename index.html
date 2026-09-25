@@ -5965,18 +5965,23 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
         }
         
         function sortProducts() {
-            if (AppState.currentSort === 'default') return;
-            
-            const withStock = AppState.filteredProducts.filter(p => p.stock > 0);
-            const withoutStock = AppState.filteredProducts.filter(p => p.stock <= 0);
-            
+            const regularProducts = AppState.filteredProducts.filter(product =>
+                Number(product?.stock) > 0 && getOriginalPrice(product) > 0
+            );
+            const zeroPriceProducts = AppState.filteredProducts.filter(product =>
+                Number(product?.stock) > 0 && getOriginalPrice(product) <= 0
+            );
+            const soldOutProducts = AppState.filteredProducts.filter(product =>
+                !(Number(product?.stock) > 0)
+            );
+
             if (AppState.currentSort === 'price-desc') {
-                withStock.sort((a, b) => getProductPrice(b) - getProductPrice(a));
+                regularProducts.sort((a, b) => getProductPrice(b) - getProductPrice(a));
             } else if (AppState.currentSort === 'price-asc') {
-                withStock.sort((a, b) => getProductPrice(a) - getProductPrice(b));
+                regularProducts.sort((a, b) => getProductPrice(a) - getProductPrice(b));
             }
-            
-            AppState.filteredProducts = [...withStock, ...withoutStock];
+
+            AppState.filteredProducts = [...regularProducts, ...zeroPriceProducts, ...soldOutProducts];
         }
 
         const categoryMap = {
@@ -6008,6 +6013,38 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                 });
             }
             return mixed;
+        }
+
+        function prepareAllProducts(productList) {
+            const inStock = productList.filter(product => Number(product?.stock) > 0);
+            const pricedProducts = inStock.filter(product => getOriginalPrice(product) > 0);
+            const zeroPriceProducts = inStock.filter(product => getOriginalPrice(product) <= 0);
+            return [
+                ...mixProductsByCategory(pricedProducts),
+                ...mixProductsByCategory(zeroPriceProducts)
+            ];
+        }
+
+        function placeSoldOutAndZeroPriceLast(productList) {
+            return productList
+                .map((product, index) => ({ product, index }))
+                .sort((a, b) => {
+                    const aPriority = Number(a.product?.stock) > 0
+                        ? (getOriginalPrice(a.product) > 0 ? 0 : 1)
+                        : 2;
+                    const bPriority = Number(b.product?.stock) > 0
+                        ? (getOriginalPrice(b.product) > 0 ? 0 : 1)
+                        : 2;
+                    return aPriority - bPriority || a.index - b.index;
+                })
+                .map(item => item.product);
+        }
+
+        function getCategoryProducts(productList, category) {
+            const filtered = category === 'oro-plata'
+                ? productList.filter(isFineJewelryProduct)
+                : productList.filter(product => product.category === categoryMap[category]);
+            return placeSoldOutAndZeroPriceLast(filtered);
         }
 
         const categoryDisplayNames = {
@@ -6047,12 +6084,9 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             
             setTimeout(() => {
                 if (category === 'todos') {
-                    AppState.filteredProducts = mixProductsByCategory(products);
+                    AppState.filteredProducts = prepareAllProducts(products);
                 } else {
-                    const targetCategory = categoryMap[category];
-                    AppState.filteredProducts = category === 'oro-plata'
-                        ? products.filter(isFineJewelryProduct)
-                        : products.filter(product => product.category === targetCategory);
+                    AppState.filteredProducts = getCategoryProducts(products, category);
                 }
                 
                 if (AppState.currentSort !== 'default') {
@@ -6077,12 +6111,9 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             setTimeout(() => {
                 if (AppState.searchTerm === '') {
                     if (AppState.currentFilter === 'todos') {
-                        AppState.filteredProducts = mixProductsByCategory(products);
+                        AppState.filteredProducts = prepareAllProducts(products);
                     } else {
-                        const targetCategory = categoryMap[AppState.currentFilter];
-                        AppState.filteredProducts = AppState.currentFilter === 'oro-plata'
-                            ? products.filter(isFineJewelryProduct)
-                            : products.filter(product => product.category === targetCategory);
+                        AppState.filteredProducts = getCategoryProducts(products, AppState.currentFilter);
                     }
                 } else {
                     const matchingProducts = products.filter(product =>
@@ -6090,8 +6121,8 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                         product.barcode.toLowerCase().includes(AppState.searchTerm)
                     );
                     AppState.filteredProducts = AppState.currentFilter === 'todos'
-                        ? mixProductsByCategory(matchingProducts)
-                        : matchingProducts;
+                        ? prepareAllProducts(matchingProducts)
+                        : getCategoryProducts(matchingProducts, AppState.currentFilter);
                 }
                 
                 if (AppState.currentSort !== 'default') {
@@ -7210,7 +7241,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             renderSkeletons(8);
             
             if (typeof products !== 'undefined' && Array.isArray(products)) {
-                AppState.filteredProducts = mixProductsByCategory(products);
+                AppState.filteredProducts = prepareAllProducts(products);
                 
                 const validBarcodes = new Set(products.map(p => p.barcode));
                 AppState.cart = AppState.cart.filter(item => validBarcodes.has(item.barcode));

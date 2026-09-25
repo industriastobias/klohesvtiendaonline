@@ -238,7 +238,7 @@ const products = [
   { name: "VAN CLEEF", price: 12.0, stock: 0, barcode: "050", category: "Pulseras" },
 
   // === ARITOS (con stock primero, luego agotados) ===
-  { name: "AGUJA PLATA", price: 5.0, stock: 1, barcode: "02227", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K RECOMENDACION NO MOJARLOS" },
+  { name: "AGUJA PLATA", price: 5.0, stock: 1, barcode: "02227", category: "Aritos", description: "AGUJA DE PLATA con BAÑADOS de oro de 14K" },
   { name: "ARITOS", price: 3.5, stock: 1, barcode: "046", category: "Aritos", description: "Aritos de acero inoxidable con laminado de oro de 14K resistentes a salpicaduras de agua, waterproof" },
   { name: "ARITOS", price: 4.0, stock: 7, barcode: "124", category: "Aritos", description: "Aritos de acero inoxidable con laminado de oro de 14K resistentes a salpicaduras de agua, waterproof" },
   { name: "ARITOS", price: 5.0, stock: 1, barcode: "19009", category: "Aritos", description: "Aritos de acero inoxidable con laminado de oro de 14K resistentes a salpicaduras de agua, waterproof" },

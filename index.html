@@ -5802,7 +5802,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
     <div class="notification" id="notification">Producto agregado</div>
 
     <!-- Scripts -->
-    <script src="products.js"></script>
+    <script src="products.js" defer></script>
     <script>
         // ==========================================
         // CONFIGURACION
@@ -5870,39 +5870,17 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
         // OBSERVADOR DE IMAGENES
         // ==========================================
         function initImageObserver() {
+            // Las tarjetas usan la carga nativa del navegador (src + loading=lazy).
+            // No hacemos una segunda descarga con new Image(), que retrasaba cada foto.
             imageObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        const src = img.dataset.src;
-                        
-                        if (src && !loadingImages.has(src)) {
-                            loadingImages.set(src, true);
-                            
-                            const preloadImg = new Image();
-                            preloadImg.decoding = 'async';
-                            preloadImg.fetchPriority = 'low';
-                            
-                            preloadImg.onload = () => {
-                                img.src = src;
-                                img.classList.add('loaded');
-                                img.removeAttribute('data-src');
-                                loadingImages.delete(src);
-                            };
-                            
-                            preloadImg.onerror = () => {
-                                img.classList.add('loaded');
-                                loadingImages.delete(src);
-                            };
-                            
-                            preloadImg.src = src;
-                        }
-                        
-                        imageObserver.unobserve(img);
-                    }
+                    if (!entry.isIntersecting) return;
+                    const img = entry.target;
+                    img.classList.add('loaded');
+                    imageObserver.unobserve(img);
                 });
             }, {
-                rootMargin: '100px 0px',
+                rootMargin: '300px 0px',
                 threshold: 0.01
             });
         }
@@ -6116,10 +6094,11 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                         AppState.filteredProducts = getCategoryProducts(products, AppState.currentFilter);
                     }
                 } else {
-                    const matchingProducts = products.filter(product =>
-                        product.name.toLowerCase().includes(AppState.searchTerm) ||
-                        product.barcode.toLowerCase().includes(AppState.searchTerm)
-                    );
+                    const matchingProducts = products.filter(product => {
+                        const name = String(product?.name || '').toLowerCase();
+                        const barcode = String(product?.barcode || '').toLowerCase();
+                        return name.includes(AppState.searchTerm) || barcode.includes(AppState.searchTerm);
+                    });
                     AppState.filteredProducts = AppState.currentFilter === 'todos'
                         ? prepareAllProducts(matchingProducts)
                         : getCategoryProducts(matchingProducts, AppState.currentFilter);
@@ -6368,12 +6347,13 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
 
             card.innerHTML = `
                 <div class="product-image-container" onclick="openPreview(${realIndex})">
-                    <img data-src="${getPrimaryProductImage(product)}" 
+                    <img src="${getPrimaryProductImage(product)}" 
                          alt="${product.name}" 
                          class="product-image"
-                         loading="lazy"
+                         loading="${index < 6 ? 'eager' : 'lazy'}"
                          decoding="async"
-                         fetchpriority="low">                    <div class="image-placeholder" data-initial="${initial}"></div>
+                         fetchpriority="${index < 6 ? 'high' : 'low'}"
+                         onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
                     ${isFineJewelry ? `<div class="fine-jewelry-overline ${fineMaterialClass}"><span>${fineMaterial}</span><i class="fas fa-sparkles" aria-hidden="true"></i></div>` : ''}
                     <button class="wishlist-btnn ${isFavorite ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(this, '${product.barcode}')" aria-label="Agregar a favoritos">
                         <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
@@ -6396,9 +6376,8 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                 </div>
             `;
             
-            const img = card.querySelector('img[data-src]');            if (img && imageObserver) {
-                imageObserver.observe(img);
-            }
+            const img = card.querySelector('.product-image');
+            if (img && imageObserver) imageObserver.observe(img);
 
             initProductCardGallery(card, productImages);
             
@@ -7241,9 +7220,12 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             renderSkeletons(8);
             
             if (typeof products !== 'undefined' && Array.isArray(products)) {
-                AppState.filteredProducts = prepareAllProducts(products);
+                // Ignora registros vacíos o incompletos para que una actualización de
+                // products.js no deje el catálogo completo en blanco.
+                const validProducts = products.filter(product => product && typeof product === 'object');
+                AppState.filteredProducts = prepareAllProducts(validProducts);
                 
-                const validBarcodes = new Set(products.map(p => p.barcode));
+                const validBarcodes = new Set(validProducts.map(p => p.barcode).filter(Boolean));
                 AppState.cart = AppState.cart.filter(item => validBarcodes.has(item.barcode));
                 AppState.favorites = AppState.favorites.filter(barcode => validBarcodes.has(barcode));
                 

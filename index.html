@@ -5957,6 +5957,62 @@ html.device-ios .cart-corner-btn .cart-btn-label,
   .cart-corner-btn .cart-btn-label { font-size: .66rem !important; }
 }
 </style>
+
+<style id="daymar-desktop-modal-controls-fix">
+/* Controles del modal: Favoritos y WhatsApp con exactamente el mismo tamaño. */
+.share-corner {
+  display: flex !important;
+  align-items: center !important;
+  gap: .75rem !important;
+}
+.share-corner-btn.whatsapp,
+.share-corner-btn.favorite {
+  box-sizing: border-box !important;
+  width: 48px !important;
+  min-width: 48px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  line-height: 1 !important;
+  font-size: 1.1rem !important;
+}
+/* Acciones principales del producto con el mismo ancho, alto y tipografía. */
+.preview-actions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  align-items: stretch !important;
+}
+.preview-actions .preview-add-btn,
+.preview-actions .preview-whatsapp-btn {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 52px !important;
+  height: 52px !important;
+  margin: 0 !important;
+  padding: .75rem 1rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .45rem !important;
+  border-radius: 5px !important;
+  font: 700 .82rem/1.15 Outfit, Poppins, sans-serif !important;
+  text-align: center !important;
+  white-space: normal !important;
+  overflow: visible !important;
+}
+@media (max-width: 640px) {
+  .share-corner-btn.whatsapp, .share-corner-btn.favorite { width: 44px !important; min-width: 44px !important; height: 44px !important; min-height: 44px !important; }
+  .preview-actions { gap: 8px !important; }
+  .preview-actions .preview-add-btn, .preview-actions .preview-whatsapp-btn { height: 52px !important; min-height: 52px !important; padding-inline: .45rem !important; font-size: .72rem !important; }
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -7924,7 +7980,6 @@ html.device-ios .cart-corner-btn .cart-btn-label,
                 addBtn.onclick = () => {
                     if (previewHasStock) {
                         addToCart(index, addBtn);
-                        setTimeout(closePreview, 650);
                     } else {
                         addToCart(index, addBtn);
                     }

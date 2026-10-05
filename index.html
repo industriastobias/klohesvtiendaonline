@@ -5931,6 +5931,32 @@ html.device-ios .cart-corner-btn .cart-btn-label,
 .mobile-bottom-nav button:first-child { visibility: visible !important; opacity: 1 !important; color: var(--ink, #1a1717) !important; }
 .mobile-bottom-nav button:first-child span, .mobile-bottom-nav button:first-child i { visibility: visible !important; opacity: 1 !important; }
 </style>
+
+<style id="daymar-initial-add-button-fit">
+/* En las tarjetas iniciales el texto se ajusta sin truncarse. */
+.cart-corner-btn {
+  min-width: 0 !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+.cart-corner-btn .cart-btn-label {
+  display: inline-block !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  text-overflow: clip !important;
+  text-align: center !important;
+  font-size: clamp(.62rem, 1.9vw, .82rem) !important;
+  line-height: 1.15 !important;
+}
+@media (max-width: 420px) {
+  .cart-corner-btn { padding-left: .25rem !important; padding-right: .25rem !important; }
+  .cart-corner-btn .cart-btn-label { font-size: .66rem !important; }
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -7434,8 +7460,8 @@ html.device-ios .cart-corner-btn .cart-btn-label,
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
-                    <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AGREGAR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AGREGAR AL CARRITO' : 'Agotado'}">
-                        <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? `AGREGAR AL CARRITO` : 'Agotado'}</span>
+                    <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
+                        <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? `AÑADIR AL CARRITO` : 'Agotado'}</span>
                     </button>
                 </div>
             `;

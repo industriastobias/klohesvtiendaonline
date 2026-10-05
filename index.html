@@ -5561,6 +5561,54 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
 }
 </style>
 
+
+<style id="daymar-favorites-ios-android-updates">
+/* ===== Favoritos: Android adaptable + experiencia iPhone/iOS ===== */
+.favorites-header-actions { display:flex; align-items:center; gap:10px; }
+.share-favorites {
+    min-height:44px; min-width:44px; padding:0 12px; display:inline-flex; align-items:center; justify-content:center; gap:7px;
+    background:#fff; border:1px solid #e5dcd8; color:#a96776; cursor:pointer; font:600 11px/1 'Manrope','Outfit',sans-serif;
+    letter-spacing:.06em; text-transform:uppercase; transition:background .2s ease, color .2s ease, transform .2s ease;
+}
+.share-favorites:hover, .share-favorites:focus-visible { background:#a96776; color:#fff; outline:none; transform:translateY(-1px); }
+.close-favorites, .share-favorites, .favorite-item .remove-favorite { min-width:44px !important; min-height:44px !important; }
+.favorite-item .remove-favorite { width:44px !important; height:44px !important; margin:6px; display:grid; place-items:center; }
+.favorite-item { -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+.favorite-item:focus-visible { outline:2px solid #a96776; outline-offset:3px; }
+.favorites-empty { text-align:center; line-height:1.7; }
+.favorites-empty::before { content:'♡'; display:block; margin-bottom:10px; color:#a96776; font-size:42px; line-height:1; }
+
+/* Safari/iPhone: ocupa la pantalla real y respeta notch y barra inferior. */
+html.device-ios .favorites-modal {
+    width:100vw !important; max-width:none !important; height:100dvh !important; max-height:none !important;
+    top:0 !important; bottom:0 !important; right:-105% !important; padding-top:calc(20px + env(safe-area-inset-top)) !important;
+    padding-bottom:calc(28px + env(safe-area-inset-bottom)) !important; overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch; overscroll-behavior:contain; border-radius:0 !important;
+}
+html.device-ios .favorites-modal.active { right:0 !important; }
+html.device-ios body.favorites-open { position:fixed; width:100%; overflow:hidden; }
+html.device-ios .favorites-header { position:sticky; top:0; z-index:3; background:#fcfaf8; padding-top:6px !important; }
+html.device-ios .favorites-list { padding-bottom:env(safe-area-inset-bottom); }
+
+/* Android: dos columnas estables en móviles pequeños y grandes, sin desbordamiento. */
+html.device-android .favorites-modal { max-width:100vw; box-sizing:border-box; overflow-y:auto; overscroll-behavior:contain; }
+html.device-android .favorites-list { grid-template-columns:repeat(2, minmax(0, 1fr)) !important; min-width:0; }
+html.device-android .favorite-item, html.device-ios .favorite-item { min-width:0; }
+html.device-android .favorite-item-details, html.device-ios .favorite-item-details { overflow:hidden; }
+
+/* Animación y respuesta táctil del corazón. */
+@keyframes daymarHeartTap { 0%{transform:scale(1)} 45%{transform:scale(1.24)} 100%{transform:scale(1)} }
+.daymar-heart-pulse { animation:daymarHeartTap .3s ease-out; }
+@media (prefers-reduced-motion: reduce) { .daymar-heart-pulse { animation:none; } }
+@media (max-width:480px) {
+    .favorites-header h2 { font-size:1rem !important; }
+    .share-favorites span { display:none; }
+    .share-favorites { padding:0; }
+    .favorite-item-details h4 { font-size:.7rem !important; }
+    .favorite-item-details p { font-size:.86rem !important; }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -5881,7 +5929,10 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
     <div class="favorites-modal" id="favoritesModal">
         <div class="favorites-header">
             <h2>Tus Favoritos</h2>
-            <button class="close-favorites" onclick="toggleFavorites()"><i class="fas fa-times"></i></button>
+            <div class="favorites-header-actions">
+                <button class="share-favorites" type="button" onclick="shareFavorites()" aria-label="Compartir favoritos" title="Compartir favoritos"><i class="fas fa-share-nodes" aria-hidden="true"></i><span>Compartir</span></button>
+                <button class="close-favorites" type="button" onclick="toggleFavorites()" aria-label="Cerrar favoritos"><i class="fas fa-times" aria-hidden="true"></i></button>
+            </div>
         </div>
         <div class="favorites-list" id="favoritesList">
             <div class="favorites-empty">No tienes productos favoritos</div>
@@ -6542,6 +6593,38 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
         // ==========================================
         // FAVORITOS
         // ==========================================
+        function daymarHaptic(element) {
+            if (element) {
+                element.classList.remove('daymar-heart-pulse');
+                void element.offsetWidth;
+                element.classList.add('daymar-heart-pulse');
+            }
+            // Android permite vibración web en muchos navegadores; iOS simplemente ignora esta llamada.
+            if (navigator.vibrate) navigator.vibrate(10);
+        }
+
+        function shareFavorites() {
+            const favoriteProducts = AppState.favorites
+                .map(barcode => products.find(product => product.barcode === barcode))
+                .filter(Boolean);
+            if (!favoriteProducts.length) {
+                showNotification('Agrega productos a favoritos primero', 'error');
+                return;
+            }
+            const lines = favoriteProducts.map((product, index) =>
+                `${index + 1}. ${product.name} - $${getProductPrice(product).toFixed(2)} (COD: ${product.barcode})`
+            );
+            const shareText = `Mis favoritos de DAYMAR:\n\n${lines.join('\n')}\n\nQuiero consultar disponibilidad.`;
+            if (navigator.share) {
+                navigator.share({ title: 'Mis favoritos de DAYMAR', text: shareText, url: window.location.href }).catch(() => {});
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText).then(() => showNotification('Favoritos copiados para compartir'))
+                    .catch(() => showNotification('No se pudo compartir', 'error'));
+            } else {
+                window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+            }
+        }
+
         function updateFavorites() {
             const badge = document.getElementById('favoritesBadge');
             const btn = document.getElementById('favoritesBtn');
@@ -6610,6 +6693,10 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                 modal.classList.remove('active');
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
+                document.body.classList.remove('favorites-open');
+                const hadFavoritesHistory = modal.dataset.historyPushed === 'true';
+                modal.dataset.historyPushed = '';
+                if (hadFavoritesHistory && window.matchMedia('(max-width: 800px)').matches) history.back();
             } else {
                 const cartModal = document.getElementById('cartModal');
                 if (cartModal && cartModal.classList.contains('active')) {
@@ -6619,9 +6706,44 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                 modal.classList.add('active');
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                document.body.classList.add('favorites-open');
+                if (window.matchMedia('(max-width: 800px)').matches && !modal.dataset.historyPushed) {
+                    history.pushState({ daymarFavorites: true }, '', window.location.href);
+                    modal.dataset.historyPushed = 'true';
+                }
                 updateFavorites();
             }
         }
+
+        function initFavoritesMobileGestures() {
+            const modal = document.getElementById('favoritesModal');
+            const header = modal?.querySelector('.favorites-header');
+            if (!modal || !header) return;
+            let startY = 0;
+            let startX = 0;
+            header.addEventListener('touchstart', event => {
+                const touch = event.changedTouches[0];
+                startY = touch.clientY;
+                startX = touch.clientX;
+            }, { passive: true });
+            header.addEventListener('touchend', event => {
+                const touch = event.changedTouches[0];
+                const deltaY = touch.clientY - startY;
+                const deltaX = Math.abs(touch.clientX - startX);
+                if (modal.classList.contains('active') && deltaY > 70 && deltaX < 80) toggleFavorites();
+            }, { passive: true });
+        }
+
+        window.addEventListener('popstate', () => {
+            const modal = document.getElementById('favoritesModal');
+            if (modal?.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.getElementById('overlay')?.classList.remove('active');
+                document.body.style.overflow = '';
+                document.body.classList.remove('favorites-open');
+                modal.dataset.historyPushed = '';
+            }
+        });
 
         // ==========================================
         // CARRITO
@@ -6921,6 +7043,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             const favBtn = document.getElementById('previewFavBtn');
             const heartIcon = favBtn.querySelector('i');
             const isActive = favBtn.classList.contains('active');
+            daymarHaptic(favBtn);
 
             if (!isActive) {
                 favBtn.classList.add('active');
@@ -7292,6 +7415,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('DAYMAR - Iniciando...');
             detectDevicePlatform();
+            initFavoritesMobileGestures();
             
             initFloatingHearts();
             initImageObserver();

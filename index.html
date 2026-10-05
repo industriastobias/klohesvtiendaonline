@@ -5764,7 +5764,7 @@ html.device-ios .cart-corner-btn.out-of-stock .cart-btn-label::after { content:'
 html.device-android #whatsappBtn span,
 html.device-ios #whatsappBtn span { font-size:0; }
 html.device-android #whatsappBtn span::after,
-html.device-ios #whatsappBtn span::after { content:'COMPRAR'; font:700 10px/1 'Manrope','Outfit',sans-serif; letter-spacing:.14em; }
+html.device-ios #whatsappBtn span::after { content:'COMPRAR POR WHATSAPP'; font:700 10px/1 'Manrope','Outfit',sans-serif; letter-spacing:.08em; }
 html.device-android #whatsappBtn i,
 html.device-ios #whatsappBtn i { font-size:17px; margin-right:7px; }
 @media (max-width:360px) {
@@ -5846,15 +5846,15 @@ html.device-ios #whatsappBtn span::after { font-size:9px; letter-spacing:.09em; 
   min-height: 52px;
   margin: 1rem 0 .75rem;
   padding: .9rem 1.2rem;
-  background: var(--daymar-pink) !important;
-  border: 1px solid var(--daymar-pink) !important;
+  background: #000 !important;
+  border: 1px solid #000 !important;
   color: #fff !important;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: .04em;
-  box-shadow: 0 8px 20px rgba(216,91,131,.25);
+  box-shadow: 0 8px 20px rgba(0,0,0,.2);
 }
-.cart-modal .btn-whatsapp:hover, .cart-modal .btn-whatsapp:focus-visible { background: var(--daymar-pink-dark) !important; }
+.cart-modal .btn-whatsapp:hover, .cart-modal .btn-whatsapp:focus-visible { background: #1f1f1f !important; }
 .favorites-header-actions { display: flex; align-items: center; justify-content: flex-end; gap: .5rem; }
 .share-favorites, .share-corner-btn.share { display: none !important; }
 .cart-item-image { overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -5893,7 +5893,7 @@ html.device-ios #whatsappBtn span::after { font-size:9px; letter-spacing:.09em; 
 #previewAddBtn, #previewWhatsappBtn { flex: 1 1 0 !important; }
 #previewAddBtn::before, #previewAddBtn::after, #previewWhatsappBtn::before, #previewWhatsappBtn::after, .cart-corner-btn::before, .cart-corner-btn::after { content: none !important; display: none !important; }
 .preview-actions { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: .75rem !important; align-items: stretch !important; }
-.cart-modal .btn-whatsapp { background: #d85b83 !important; color: #fff !important; border-color: #d85b83 !important; }
+.cart-modal .btn-whatsapp { background: #000 !important; color: #fff !important; border-color: #000 !important; }
 /* La foto del primer producto conserva proporción en Android, iPhone y escritorio. */
 .cart-item-image { width: 84px !important; height: 84px !important; min-width: 84px !important; flex: 0 0 84px !important; background: #f7f4f2 !important; }
 .cart-item-image img { width: 100% !important; height: 100% !important; object-fit: contain !important; object-position: center !important; opacity: 1 !important; visibility: visible !important; }

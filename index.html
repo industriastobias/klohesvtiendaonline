@@ -5712,6 +5712,19 @@ html.device-android .cart-item { min-width:0; }
 html.device-android .favorite-stock, html.device-ios .favorite-stock { font-size:8px; }
 </style>
 
+
+<style id="daymar-cart-stock-status">
+/* Estados del carrito: productos no disponibles quedan visibles, pero no pueden comprarse por accidente. */
+.cart-item.unavailable { opacity:.72; background:rgba(184,66,82,.035); }
+.cart-item.unavailable .cart-item-image { filter:grayscale(1); opacity:.65; }
+.cart-item.unavailable .cart-item-details h4,
+.cart-item.unavailable .cart-item-details p:not(.cart-item-code) { text-decoration:line-through; text-decoration-thickness:1.5px; text-decoration-color:#b84252; }
+.cart-stock-status { display:inline-flex; align-items:center; gap:5px; margin-top:5px; font:700 9px/1.2 'Manrope','Outfit',sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+.cart-stock-status::before { content:''; width:6px; height:6px; flex:0 0 6px; border-radius:50%; background:currentColor; }
+.cart-stock-status.available { color:#2e9b63; }
+.cart-stock-status.unavailable { color:#b84252; }
+html.device-android .cart-stock-status, html.device-ios .cart-stock-status { font-size:8px; }
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -5836,7 +5849,7 @@ html.device-android .favorite-stock, html.device-ios .favorite-stock { font-size
                 <h2 id="trust-title">Todo claro antes de elegir.</h2>
             </div>
             <div class="daymar-trust-faq" aria-label="Preguntas frecuentes sobre tu compra">
-                <details class="daymar-trust-question" open>
+                <details class="daymar-trust-question" id="shippingFaq" open>
                     <summary><i class="fas fa-truck-fast" aria-hidden="true"></i><span>¿Cómo funcionan los envíos?</span></summary>
                     <p>Realizamos entregas a todo El Salvador en un plazo de 2–5 días hábiles. Te confirmaremos los detalles de tu pedido directamente por WhatsApp.</p>
                 </details>
@@ -6974,30 +6987,42 @@ html.device-android .favorite-stock, html.device-ios .favorite-stock { font-size
             if (cartItems) {
                 cartItems.innerHTML = '';
                 let subtotal = 0;
-
+                const purchasableCartItems = [];
                 AppState.cart.forEach(item => {
-                    const itemPrice = Number(item.price) || 0;
-                    const itemTotal = roundPrice(itemPrice * item.quantity);
-                    subtotal = roundPrice(subtotal + itemTotal);
+                    const liveProduct = products.find(product => String(product.barcode) === String(item.barcode));
+                    const isDeleted = !liveProduct;
+                    const currentStock = liveProduct ? Number(liveProduct.stock) || 0 : 0;
+                    const isOutOfStock = !isDeleted && currentStock <= 0;
+                    const isUnavailable = isDeleted || isOutOfStock;
+                    const itemPrice = liveProduct ? getProductPrice(liveProduct) : (Number(item.price) || 0);
+                    const itemTotal = isUnavailable ? 0 : roundPrice(itemPrice * Number(item.quantity || 0));
+                    if (!isUnavailable) {
+                        subtotal = roundPrice(subtotal + itemTotal);
+                        purchasableCartItems.push({ item, liveProduct, itemPrice });
+                    }
+                    const statusText = isDeleted ? 'Producto eliminado' : isOutOfStock ? 'Agotado' : `${currentStock} disponibles`;
+                    const statusClass = isUnavailable ? 'unavailable' : 'available';
+                    const itemClass = isUnavailable ? 'cart-item unavailable' : 'cart-item';
+                    const displayName = liveProduct?.name || item.name || 'Producto';
 
                     cartItems.innerHTML += `
-                        <div class="cart-item">
+                        <div class="${itemClass}" aria-label="${displayName}: ${statusText}">
                             <div class="cart-item-image">
-                                <img src="${getPrimaryProductImage(item)}" alt="${item.name}" loading="lazy"
+                                <img src="${getPrimaryProductImage(liveProduct || item)}" alt="${displayName}" loading="lazy"
                                      onerror="this.style.display='none'">
                             </div>
                             <div class="cart-item-details">
-                                <h4>${item.name}</h4>
+                                <h4>${displayName}</h4>
                                 <p class="cart-item-code">COD: ${item.barcode}</p>
-                                <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
+                                <p>$${itemPrice.toFixed(2)} x ${item.quantity}</p>
+                                <span class="cart-stock-status ${statusClass}">${statusText}</span>
                             </div>
-                            <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${item.name}">
+                            <button class="remove-item" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${displayName}">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
                     `;
                 });
-
                 const shippingCost = AppState.shippingEnabled ? CONFIG.shippingCost : 0;
                 const total = roundPrice(subtotal + shippingCost);
 
@@ -7006,17 +7031,12 @@ html.device-android .favorite-stock, html.device-ios .favorite-stock { font-size
                 if (summary) summary.style.display = 'block';
                 
                 if (whatsappBtn) {
-                    whatsappBtn.style.display = 'flex';
-                    
-                    const messageLines = AppState.cart.map(item => {
-                        const itemPrice = Number(item.price) || 0;
-                        return `* ${item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}\n  Imagen: https://industriastobias.github.io/klohesvtiendaonline/${getPrimaryProductImage(item)}`;
-                    });
-                    
+                    whatsappBtn.style.display = purchasableCartItems.length > 0 ? 'flex' : 'none';
+                    const messageLines = purchasableCartItems.map(({ item, itemPrice }) =>
+                        `* ${item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}\n  Imagen: https://industriastobias.github.io/klohesvtiendaonline/${getPrimaryProductImage(item)}`
+                    );
                     const shippingText = AppState.shippingEnabled ? `\n\nEnvio nacional: $${CONFIG.shippingCost.toFixed(2)}` : '';
-                    
                     const fullMessage = `*Hola! Quiero comprar estos productos de DAYMAR:*\n\n${messageLines.join('\n\n')}${shippingText}\n\n*Total: $${total.toFixed(2)}*\n\nGracias!`;
-                    
                     whatsappBtn.href = `https://wa.me/${CONFIG.phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
                 }
             }
@@ -7576,6 +7596,8 @@ html.device-android .favorite-stock, html.device-ios .favorite-stock { font-size
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('DAYMAR - Iniciando...');
             detectDevicePlatform();
+            const shippingFaq = document.getElementById('shippingFaq');
+            if (shippingFaq) shippingFaq.open = true;
             initFavoritesMobileGestures();
             
             initFloatingHearts();

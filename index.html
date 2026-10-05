@@ -5752,7 +5752,7 @@ html.device-ios .preview-actions .preview-add-btn::after { content:'Añadir'; fo
 html.device-android .preview-actions .preview-add-btn.out-of-stock::after,
 html.device-ios .preview-actions .preview-add-btn.out-of-stock::after { content:'Agotado'; }
 html.device-android .preview-actions .preview-whatsapp-btn::after,
-html.device-ios .preview-actions .preview-whatsapp-btn::after { content:'Consultar'; font:700 9px/1 'Manrope','Outfit',sans-serif; }
+html.device-ios .preview-actions .preview-whatsapp-btn::after { content:none !important; display:none !important; }
 /* En tarjetas, el acceso al carrito se convierte en COMPRAR; los agotados conservan su etiqueta. */
 html.device-android .cart-corner-btn .cart-btn-label,
 html.device-ios .cart-corner-btn .cart-btn-label { font-size:0; }
@@ -5870,6 +5870,49 @@ html.device-ios #whatsappBtn span::after { font-size:9px; letter-spacing:.09em; 
 }
 </style>
 
+
+<style id="daymar-final-button-image-fix">
+/* Botones finales: un único texto, mismo tamaño y esquinas rectas. */
+.cart-corner-btn, #previewAddBtn, #previewWhatsappBtn, .btn-whatsapp {
+  border-radius: 5px !important;
+  min-height: 50px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .45rem !important;
+  padding: .75rem 1rem !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  font-size: .82rem !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+}
+#previewAddBtn, #previewWhatsappBtn { flex: 1 1 0 !important; }
+#previewAddBtn::before, #previewAddBtn::after, #previewWhatsappBtn::before, #previewWhatsappBtn::after, .cart-corner-btn::before, .cart-corner-btn::after { content: none !important; display: none !important; }
+.preview-actions { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: .75rem !important; align-items: stretch !important; }
+.cart-modal .btn-whatsapp { background: #d85b83 !important; color: #fff !important; border-color: #d85b83 !important; }
+/* La foto del primer producto conserva proporción en Android, iPhone y escritorio. */
+.cart-item-image { width: 84px !important; height: 84px !important; min-width: 84px !important; flex: 0 0 84px !important; background: #f7f4f2 !important; }
+.cart-item-image img { width: 100% !important; height: 100% !important; object-fit: contain !important; object-position: center !important; opacity: 1 !important; visibility: visible !important; }
+@media (max-width: 640px) {
+  .preview-actions { grid-template-columns: 1fr 1fr !important; gap: .5rem !important; }
+  .cart-corner-btn, #previewAddBtn, #previewWhatsappBtn { min-height: 52px !important; font-size: .74rem !important; padding-inline: .45rem !important; }
+}
+</style>
+
+<style id="daymar-remove-legacy-button-labels">
+html.device-android .preview-actions .preview-add-btn::after,
+html.device-ios .preview-actions .preview-add-btn::after,
+html.device-android .preview-actions .preview-whatsapp-btn::after,
+html.device-ios .preview-actions .preview-whatsapp-btn::after,
+html.device-android .cart-corner-btn .cart-btn-label::after,
+html.device-ios .cart-corner-btn .cart-btn-label::after {
+  content: none !important; display: none !important; width: 0 !important; margin: 0 !important;
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -6075,10 +6118,10 @@ html.device-ios #whatsappBtn span::after { font-size:9px; letter-spacing:.09em; 
                 <p class="preview-stock" id="previewStock"></p>
                 <div class="preview-actions">
                     <button class="preview-add-btn" id="previewAddBtn">
-                        <i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito
+                        <i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> AGREGAR AL CARRITO
                     </button>
                     <button class="preview-whatsapp-btn" id="previewWhatsappBtn" type="button" onclick="contactProductWhatsApp()">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar por WhatsApp
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> CONSULTAR
                     </button>
                 </div>
             </div>
@@ -7217,7 +7260,9 @@ html.device-ios #whatsappBtn span::after { font-size:9px; letter-spacing:.09em; 
 
             return [...new Set(resolvedImages)];
         }        function getPrimaryProductImage(product) {
-            return getProductImages(product)[0] || '';
+            const image = getProductImages(product)[0] || '';
+            if (!image) return '';
+            try { return new URL(image, document.baseURI).href; } catch (_) { return image; }
         }
 
         // Cambia automáticamente las imágenes de las tarjetas que tienen una galería.
@@ -7363,8 +7408,8 @@ html.device-ios #whatsappBtn span::after { font-size:9px; letter-spacing:.09em; 
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
-                    <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
-                        <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? `AÑADIR AL CARRITO` : 'Agotado'}</span>
+                    <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AGREGAR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AGREGAR AL CARRITO' : 'Agotado'}">
+                        <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? `AGREGAR AL CARRITO` : 'Agotado'}</span>
                     </button>
                 </div>
             `;
@@ -7680,8 +7725,8 @@ html.device-ios #whatsappBtn span::after { font-size:9px; letter-spacing:.09em; 
                     cartItems.innerHTML += `
                         <div class="${itemClass}" aria-label="${displayName}: ${statusText}">
                             <div class="cart-item-image">
-                                <img src="${getPrimaryProductImage(liveProduct || item)}" alt="${displayName}" loading="lazy"
-                                     onerror="this.style.display='none'">
+                                <img src="${getPrimaryProductImage(liveProduct || item)}" alt="${displayName}" loading="lazy" decoding="async"
+                                     onerror="if (!this.dataset.fallback) { this.dataset.fallback='1'; this.src = new URL(String((liveProduct || item).barcode) + '.jpg', document.baseURI).href; } else { this.removeAttribute('src'); }">
                             </div>
                             <div class="cart-item-details">
                                 <h4>${displayName}</h4>
@@ -7820,9 +7865,9 @@ html.device-ios #whatsappBtn span::after { font-size:9px; letter-spacing:.09em; 
                 addBtn.disabled = false;
                 addBtn.classList.toggle('out-of-stock', !previewHasStock);
                 addBtn.innerHTML = previewHasStock
-                    ? '<i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito'
+                    ? '<i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> AGREGAR AL CARRITO'
                     : '<i class="fas fa-ban" style="margin-right: 0.5rem;"></i> Agotado';
-                addBtn.title = previewHasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado';
+                addBtn.title = previewHasStock ? 'AGREGAR AL CARRITO' : 'Producto agotado';
                 addBtn.onclick = () => {
                     if (previewHasStock) {
                         addToCart(index, addBtn);

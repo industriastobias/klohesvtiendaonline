@@ -6105,6 +6105,122 @@ html.device-ios .cart-corner-btn .cart-btn-label::after {
   display: none !important;
 }
 </style>
+
+<style id="daymar-cart-confirm-and-whatsapp-type">
+/* Confirmación personalizada para vaciar el carrito. */
+.cart-confirm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: rgba(15, 13, 14, .72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .25s ease, visibility .25s ease;
+}
+.cart-confirm-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+.cart-confirm-card {
+    width: min(100%, 390px);
+    padding: 2rem 1.5rem 1.35rem;
+    background: #fff;
+    color: #1a1717;
+    border: 1px solid rgba(255,255,255,.75);
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgba(0,0,0,.35);
+    text-align: center;
+    transform: translateY(16px) scale(.97);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1);
+}
+.cart-confirm-overlay.active .cart-confirm-card { transform: translateY(0) scale(1); }
+.cart-confirm-icon {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f3f3f3;
+    color: #1a1717;
+    font-size: 1.25rem;
+}
+.cart-confirm-card h3 {
+    margin: 0 0 .55rem;
+    font: 700 1.25rem/1.2 'Poppins', sans-serif;
+    letter-spacing: -.01em;
+}
+.cart-confirm-card p {
+    margin: 0 auto 1.45rem;
+    max-width: 290px;
+    color: #686363;
+    font: 400 .9rem/1.55 'Outfit', sans-serif;
+}
+.cart-confirm-actions {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: .65rem;
+}
+.cart-confirm-actions button {
+    min-height: 44px;
+    padding: .7rem .8rem;
+    border-radius: 9px;
+    cursor: pointer;
+    font: 700 .72rem/1.1 'Poppins', sans-serif;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.cart-confirm-cancel {
+    background: #fff;
+    border: 1px solid #d8d4d4;
+    color: #565252;
+}
+.cart-confirm-cancel:hover,
+.cart-confirm-cancel:focus-visible { background: #f5f4f4; border-color: #aaa4a4; }
+.cart-confirm-danger {
+    background: #1a1717;
+    border: 1px solid #1a1717;
+    color: #fff;
+}
+.cart-confirm-danger:hover,
+.cart-confirm-danger:focus-visible { background: #3a3535; border-color: #3a3535; }
+.cart-confirm-actions button:active { transform: scale(.98); }
+.cart-confirm-actions button:focus-visible { outline: 3px solid rgba(26,23,23,.2); outline-offset: 2px; }
+
+/* Texto de compra más legible, incluido el reemplazo visual de iOS/Android. */
+.cart-modal .btn-whatsapp { font-size: 1.05rem !important; }
+.cart-modal .btn-whatsapp > span { font-size: 1.05rem !important; }
+html.device-ios #whatsappBtn > span,
+html.device-android #whatsappBtn > span { font-size: 0 !important; }
+html.device-ios #whatsappBtn > span::after,
+html.device-android #whatsappBtn > span::after {
+    content: 'COMPRAR POR WHATSAPP';
+    font-size: 1.05rem !important;
+    letter-spacing: .045em !important;
+    line-height: 1.1 !important;
+}
+@media (max-width: 420px) {
+    .cart-confirm-card { padding: 1.65rem 1rem 1.1rem; }
+    .cart-confirm-card h3 { font-size: 1.12rem; }
+    .cart-confirm-card p { font-size: .84rem; }
+    .cart-confirm-actions button { font-size: .67rem; }
+    .cart-modal .btn-whatsapp,
+    .cart-modal .btn-whatsapp > span,
+    html.device-ios #whatsappBtn > span::after,
+    html.device-android #whatsappBtn > span::after { font-size: .98rem !important; }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -6476,6 +6592,20 @@ html.device-ios .cart-corner-btn .cart-btn-label::after {
         <button class="btn-clear-cart" onclick="clearCart()" id="clearCartBtn" style="display: none;">
             <i class="fas fa-trash-alt"></i> <span>Vaciar carrito</span>
         </button>
+    </div>
+
+
+    <!-- Confirmación personalizada de vaciado del carrito -->
+    <div class="cart-confirm-overlay" id="cartConfirmOverlay" role="dialog" aria-modal="true" aria-labelledby="cartConfirmTitle" aria-describedby="cartConfirmText">
+        <div class="cart-confirm-card" role="document">
+            <div class="cart-confirm-icon" aria-hidden="true"><i class="fas fa-trash-alt"></i></div>
+            <h3 id="cartConfirmTitle">¿Vaciar tu carrito?</h3>
+            <p id="cartConfirmText">Se eliminarán todos los productos que agregaste. Esta acción no se puede deshacer.</p>
+            <div class="cart-confirm-actions">
+                <button type="button" class="cart-confirm-cancel" onclick="closeClearCartConfirm()">Cancelar</button>
+                <button type="button" class="cart-confirm-danger" onclick="confirmClearCart()">Sí, vaciar carrito</button>
+            </div>
+        </div>
     </div>
 
     <!-- Notification -->
@@ -7870,12 +8000,27 @@ html.device-ios .cart-corner-btn .cart-btn-label::after {
         }
 
         function clearCart() {
-            if (confirm('Vaciar carrito?')) {
-                AppState.cart = [];
-                localStorage.removeItem('daymar_cart');
-                updateCart();
-                showNotification('Carrito vaciado');
-            }
+            if (!AppState.cart.length) return;
+            const confirmOverlay = document.getElementById('cartConfirmOverlay');
+            if (!confirmOverlay) return;
+            confirmOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            confirmOverlay.querySelector('.cart-confirm-cancel')?.focus();
+        }
+
+        function closeClearCartConfirm() {
+            const confirmOverlay = document.getElementById('cartConfirmOverlay');
+            if (confirmOverlay) confirmOverlay.classList.remove('active');
+            const cartModal = document.getElementById('cartModal');
+            document.body.style.overflow = cartModal?.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function confirmClearCart() {
+            AppState.cart = [];
+            localStorage.removeItem('daymar_cart');
+            closeClearCartConfirm();
+            updateCart();
+            showNotification('Carrito vaciado');
         }
 
         function updateCart() {
@@ -8590,6 +8735,10 @@ html.device-ios .cart-corner-btn .cart-btn-label::after {
 
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
+                    if (document.getElementById('cartConfirmOverlay')?.classList.contains('active')) {
+                        closeClearCartConfirm();
+                        return;
+                    }
                     if (document.getElementById('imageLightbox')?.classList.contains('active')) {
                         closeImageLightbox();
                         return;

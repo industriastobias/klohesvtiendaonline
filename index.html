@@ -6013,6 +6013,61 @@ html.device-ios .cart-corner-btn .cart-btn-label,
   .preview-actions .preview-add-btn, .preview-actions .preview-whatsapp-btn { height: 52px !important; min-height: 52px !important; padding-inline: .45rem !important; font-size: .72rem !important; }
 }
 </style>
+
+<style id="daymar-final-favorites-cart-polish">
+/* Botón del carrito: texto completo y claro. */
+.cart-modal .btn-whatsapp span {
+  white-space: nowrap !important;
+  text-overflow: clip !important;
+  overflow: visible !important;
+}
+/* Favoritos: botón de eliminar limpio, circular y bien ubicado. */
+.favorite-item .remove-favorite {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(169,103,118,.28) !important;
+  border-radius: 50% !important;
+  background: rgba(252,250,247,.96) !important;
+  color: #a96776 !important;
+  box-shadow: 0 3px 10px rgba(60,35,40,.10) !important;
+  cursor: pointer !important;
+  transition: background .2s ease, color .2s ease, transform .2s ease, border-color .2s ease !important;
+}
+.favorite-item .remove-favorite i {
+  font-size: .82rem !important;
+  line-height: 1 !important;
+}
+.favorite-item .remove-favorite:hover,
+.favorite-item .remove-favorite:focus-visible {
+  background: #a96776 !important;
+  border-color: #a96776 !important;
+  color: #fff !important;
+  transform: scale(1.06) !important;
+  outline: none !important;
+}
+@media (max-width: 640px) {
+  .favorite-item .remove-favorite { top: 8px !important; right: 8px !important; width: 34px !important; min-width: 34px !important; height: 34px !important; min-height: 34px !important; }
+  .cart-modal .btn-whatsapp { font-size: .86rem !important; padding-inline: .7rem !important; }
+}
+</style>
+
+<style id="daymar-added-state-style">
+.cart-corner-btn.added, .preview-add-btn.added {
+  background: #a96776 !important;
+  color: #fff !important;
+  border-color: #a96776 !important;
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -6379,7 +6434,7 @@ html.device-ios .cart-corner-btn .cart-btn-label,
             Efectivo o transferencia bancaria. Confirma tu pedido por WhatsApp.
         </div>
         <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank" rel="noopener" title="Comprar por WhatsApp" aria-label="Comprar por WhatsApp">
-            <i class="fab fa-whatsapp"></i> <span>COMPRAR</span>
+            <i class="fab fa-whatsapp"></i> <span>COMPRAR POR WHATSAPP</span>
         </a>
         <button class="btn-clear-cart" onclick="clearCart()" id="clearCartBtn" style="display: none;">
             <i class="fas fa-trash-alt"></i> <span>Vaciar carrito</span>
@@ -7516,7 +7571,7 @@ html.device-ios .cart-corner-btn .cart-btn-label,
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
-                    <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
+                    <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
                         <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? `AÑADIR AL CARRITO` : 'Agotado'}</span>
                     </button>
                 </div>
@@ -7716,20 +7771,32 @@ html.device-ios .cart-corner-btn .cart-btn-label,
         // ==========================================
         // CARRITO
         // ==========================================
+        function syncAddButtonStates() {
+            const cartBarcodes = new Set(AppState.cart.map(item => String(item.barcode)));
+            document.querySelectorAll('.cart-corner-btn[data-barcode], .preview-add-btn[data-barcode]').forEach(button => {
+                const added = cartBarcodes.has(String(button.dataset.barcode));
+                button.classList.toggle('added', added);
+                button.disabled = false;
+                if (button.classList.contains('cart-corner-btn')) {
+                    const label = button.querySelector('.cart-btn-label');
+                    if (label) label.textContent = added ? 'AÑADIDO' : 'AÑADIR AL CARRITO';
+                } else {
+                    button.innerHTML = added
+                        ? '<i class="fas fa-check" aria-hidden="true"></i><span>AÑADIDO</span>'
+                        : '<i class="fas fa-shopping-bag" aria-hidden="true"></i><span>AÑADIR AL CARRITO</span>';
+                }
+            });
+        }
         function showAddedButtonState(button) {
             if (!button) return;
-
-            const originalContent = button.innerHTML;
-            const wasDisabled = button.disabled;
             button.classList.add('added');
-            button.innerHTML = '<i class="fas fa-check"></i> <span>Añadido</span>';
-            button.disabled = true;
-
-            setTimeout(() => {
-                button.innerHTML = originalContent;
-                button.classList.remove('added');
-                button.disabled = wasDisabled;
-            }, 2000);
+            button.disabled = false;
+            if (button.classList.contains('cart-corner-btn')) {
+                const label = button.querySelector('.cart-btn-label');
+                if (label) label.textContent = 'AÑADIDO';
+            } else {
+                button.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><span>AÑADIDO</span>';
+            }
         }
 
         function addToCart(index, sourceButton = null) {
@@ -7785,6 +7852,7 @@ html.device-ios .cart-corner-btn .cart-btn-label,
             const clearBtn = document.getElementById('clearCartBtn');
 
             localStorage.setItem('daymar_cart', JSON.stringify(AppState.cart));
+            syncAddButtonStates();
 
             const totalItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
             
@@ -7972,6 +8040,7 @@ html.device-ios .cart-corner-btn .cart-btn-label,
             if (addBtn) {
                 const previewHasStock = Number(product.stock) > 0;
                 addBtn.disabled = false;
+                addBtn.dataset.barcode = String(product.barcode || '');
                 addBtn.classList.toggle('out-of-stock', !previewHasStock);
                 addBtn.innerHTML = previewHasStock
                     ? '<i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> AGREGAR AL CARRITO'
@@ -7986,6 +8055,7 @@ html.device-ios .cart-corner-btn .cart-btn-label,
                 };
             }
 
+            syncAddButtonStates();
             document.getElementById('previewModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }

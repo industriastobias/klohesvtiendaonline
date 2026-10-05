@@ -6068,6 +6068,42 @@ html.device-ios .cart-corner-btn .cart-btn-label,
   border-color: #a96776 !important;
 }
 </style>
+
+<style id="daymar-added-mobile-text-only">
+/* AÑADIDO: visible en Android/iPhone y sin relleno rosado. */
+.cart-corner-btn.added,
+.preview-add-btn.added {
+  background: transparent !important;
+  color: #a96776 !important;
+  border-color: #a96776 !important;
+}
+.cart-corner-btn.added .cart-btn-label,
+.preview-add-btn.added span {
+  color: #a96776 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html.device-android .cart-corner-btn .cart-btn-label,
+html.device-ios .cart-corner-btn .cart-btn-label {
+  display: inline-block !important;
+  width: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  font-size: .66rem !important;
+  line-height: 1.15 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  color: inherit !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+html.device-android .cart-corner-btn .cart-btn-label::after,
+html.device-ios .cart-corner-btn .cart-btn-label::after {
+  content: none !important;
+  display: none !important;
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

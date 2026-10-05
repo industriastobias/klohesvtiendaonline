@@ -39,7 +39,7 @@
       "image": "https://industriastobias.github.io/klohesvtiendaonline/isotipo.png",
       "description": "Tienda en línea de accesorios con envíos a todo El Salvador.",
       "telephone": "+50366711569",
-      "email": "industriastobias@gmail.com",
+      "email": "daymarsv@gmail.com",
       "areaServed": "SV",
       "sameAs": [
         "https://instagram.com/daymarsv",
@@ -5441,6 +5441,126 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             margin-top: 6px !important;
         }
     </style>
+
+<style id="daymar-requested-updates">
+/* ===== Ajustes solicitados: rosa para carga, preguntas desplegables y contacto ===== */
+.load-more-products-wrap {
+    padding-top: 28px;
+}
+.load-more-products-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 220px;
+    background: var(--rosa-vieja) !important;
+    border: 1px solid var(--rosa-vieja) !important;
+    color: #fff !important;
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.load-more-products-btn:hover:not(:disabled),
+.load-more-products-btn:focus-visible {
+    background: #b97685 !important;
+    border-color: #b97685 !important;
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(185, 118, 133, .25);
+}
+.load-more-products-btn:disabled {
+    background: var(--rosa-vieja) !important;
+    border-color: var(--rosa-vieja) !important;
+    color: #fff !important;
+    opacity: .88;
+    cursor: wait;
+}
+.spinner,
+.load-more-spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--rosa-vieja-claro);
+    border-top-color: var(--rosa-vieja);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+}
+.load-more-spinner {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+    border-color: rgba(255,255,255,.45);
+    border-top-color: #fff;
+}
+.catalog-loading-status { color: var(--rosa-vieja) !important; }
+.catalog-loading-status .spinner { border-color: var(--rosa-vieja-claro); border-top-color: var(--rosa-vieja); }
+
+/* Compra con tranquilidad funciona como preguntas frecuentes desplegables. */
+.daymar-trust-faq {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+.daymar-trust-question {
+    background: var(--warm, #f5f0ed);
+    border: 1px solid var(--line, #e5dcd8);
+    transition: border-color .25s ease, box-shadow .25s ease;
+}
+.daymar-trust-question[open] {
+    border-color: var(--rosa-vieja-claro);
+    box-shadow: 0 8px 24px rgba(185, 118, 133, .10);
+}
+.daymar-trust-question summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 22px;
+    cursor: pointer;
+    list-style: none;
+    color: var(--negro);
+    font-size: 14px;
+    font-weight: 700;
+}
+.daymar-trust-question summary::-webkit-details-marker { display: none; }
+.daymar-trust-question summary::after {
+    content: '+';
+    margin-left: auto;
+    color: var(--rosa-vieja);
+    font-size: 22px;
+    font-weight: 400;
+}
+.daymar-trust-question[open] summary::after { content: '−'; }
+.daymar-trust-question summary i { color: var(--rosa-vieja); font-size: 20px; width: 22px; text-align: center; }
+.daymar-trust-question p {
+    margin: -2px 22px 20px 58px;
+    color: var(--gris, #746b68);
+    font-size: 13px;
+    line-height: 1.7;
+}
+.daymar-trust-question p a { color: var(--rosa-vieja); font-weight: 700; }
+
+/* Redes sociales más grandes y en una sola línea en computadora. */
+.daymar-contact-grid { grid-template-columns: 1fr 2fr 1.15fr 1.2fr; }
+.daymar-contact-grid > .daymar-contact-item:nth-child(2) { min-width: 0; }
+.daymar-contact-socials { flex-wrap: nowrap !important; align-items: center; gap: 12px 24px !important; }
+.daymar-contact-socials a { font-size: 18px !important; display: inline-flex; align-items: center; gap: 5px; }
+.daymar-contact-socials i { font-size: 22px; margin-right: 1px; }
+@media (max-width: 1100px) and (min-width: 801px) {
+    .daymar-contact-grid { grid-template-columns: 1fr 1.6fr 1fr 1fr; gap: 18px !important; }
+    .daymar-contact-socials { gap: 8px 14px !important; }
+    .daymar-contact-socials a { font-size: 15px !important; }
+    .daymar-contact-socials i { font-size: 18px; }
+}
+@media (max-width: 800px) {
+    .daymar-trust-faq { grid-template-columns: 1fr; }
+    .daymar-trust-question summary { padding: 17px 15px; font-size: 13px; }
+    .daymar-trust-question p { margin: -2px 15px 17px 51px; font-size: 12px; }
+    .daymar-contact-grid { grid-template-columns: 1fr 1fr; }
+    .daymar-contact-grid > .daymar-contact-item:nth-child(2) { grid-column: 1 / -1; }
+    .daymar-contact-socials { flex-wrap: wrap !important; gap: 10px 18px !important; }
+    .daymar-contact-socials a { font-size: 15px !important; }
+    .daymar-contact-socials i { font-size: 19px; }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -5534,7 +5654,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             <div class="daymar-contact-item">
                 <span class="daymar-contact-label">Contacto</span>
                 <a href="https://wa.me/50366711569" target="_blank" rel="noopener noreferrer">WhatsApp +503 6671-1569</a>
-                <a href="mailto:industriastobias@gmail.com">industriastobias@gmail.com</a>
+                <a href="mailto:daymarsv@gmail.com">daymarsv@gmail.com</a>
             </div>
             <div class="daymar-contact-item">
                 <span class="daymar-contact-label">Redes sociales</span>
@@ -5564,11 +5684,23 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                 <p class="eyebrow">Compra con tranquilidad</p>
                 <h2 id="trust-title">Todo claro antes de elegir.</h2>
             </div>
-            <div class="daymar-trust-grid">
-                <article class="daymar-trust-card"><i class="fas fa-truck-fast" aria-hidden="true"></i><div><h3>Envíos nacionales</h3><p>Entregas a todo El Salvador en 2–5 días hábiles.</p></div></article>
-                <article class="daymar-trust-card"><i class="fab fa-whatsapp" aria-hidden="true"></i><div><h3>Atención por WhatsApp</h3><p>Confirma disponibilidad y tu pedido directamente con nosotros.</p></div></article>
-                <article class="daymar-trust-card"><i class="fas fa-wallet" aria-hidden="true"></i><div><h3>Pagos sencillos</h3><p>Efectivo o transferencia bancaria, según tu conveniencia.</p></div></article>
-                <article class="daymar-trust-card"><i class="fas fa-shield-heart" aria-hidden="true"></i><div><h3>Compra respaldada</h3><p>Revisamos contigo cualquier daño de fábrica.</p></div></article>
+            <div class="daymar-trust-faq" aria-label="Preguntas frecuentes sobre tu compra">
+                <details class="daymar-trust-question" open>
+                    <summary><i class="fas fa-truck-fast" aria-hidden="true"></i><span>¿Cómo funcionan los envíos?</span></summary>
+                    <p>Realizamos entregas a todo El Salvador en un plazo de 2–5 días hábiles. Te confirmaremos los detalles de tu pedido directamente por WhatsApp.</p>
+                </details>
+                <details class="daymar-trust-question">
+                    <summary><i class="fab fa-whatsapp" aria-hidden="true"></i><span>¿Cómo confirmo mi pedido?</span></summary>
+                    <p>Escríbenos por WhatsApp al <a href="https://wa.me/50366711569" target="_blank" rel="noopener noreferrer">+503 6671-1569</a> para confirmar disponibilidad, precio y datos de entrega.</p>
+                </details>
+                <details class="daymar-trust-question">
+                    <summary><i class="fas fa-wallet" aria-hidden="true"></i><span>¿Qué métodos de pago aceptan?</span></summary>
+                    <p>Puedes pagar en efectivo o por transferencia bancaria. Te compartiremos las instrucciones al confirmar tu compra.</p>
+                </details>
+                <details class="daymar-trust-question">
+                    <summary><i class="fas fa-shield-heart" aria-hidden="true"></i><span>¿Mi compra está respaldada?</span></summary>
+                    <p>Sí. Revisamos contigo cualquier daño de fábrica para ayudarte con la solución correspondiente.</p>
+                </details>
             </div>
         </div>
     </section>
@@ -5583,7 +5715,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
                     </div>
                     <h3>Ubicacion</h3>
                     <p><i class="fas fa-map-pin" style="color: var(--azul-cielo); margin-right: 0.5rem;"></i> San Salvador, El Salvador</p>
-                    <p><i class="fas fa-envelope" style="color: var(--azul-cielo); margin-right: 0.5rem;"></i> <a href="mailto:industriastobias@gmail.com" style="color: var(--gris); text-decoration: none;">industriastobias@gmail.com</a></p>
+                    <p><i class="fas fa-envelope" style="color: var(--azul-cielo); margin-right: 0.5rem;"></i> <a href="mailto:daymarsv@gmail.com" style="color: var(--gris); text-decoration: none;">daymarsv@gmail.com</a></p>
                     <p><i class="fab fa-whatsapp" style="color: #25D366; margin-right: 0.5rem;"></i> +503 66711569</p>
                     <div class="location-hours">
                         <div class="hour-item">
@@ -6182,7 +6314,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             if (loadMoreWrap) loadMoreWrap.style.display = AppState.hasMoreProducts ? 'flex' : 'none';
             if (loadMoreBtn) {
                 loadMoreBtn.disabled = false;
-                loadMoreBtn.textContent = 'Cargar más productos';
+                loadMoreBtn.innerHTML = '<i class="fas fa-plus" aria-hidden="true"></i> Cargar más productos';
             }
         }
 
@@ -6388,7 +6520,7 @@ html.device-android .cart-modal { animation: daymarAndroidZoomIn .34s cubic-bezi
             const loadMoreBtn = document.getElementById('loadMoreProductsBtn');
             if (loadMoreBtn) {
                 loadMoreBtn.disabled = true;
-                loadMoreBtn.textContent = 'Cargando productos...';
+                loadMoreBtn.innerHTML = '<span class="load-more-spinner" aria-hidden="true"></span><span>Cargando productos...</span>';
             }
             
             setTimeout(() => {

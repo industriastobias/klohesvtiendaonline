@@ -5725,6 +5725,58 @@ html.device-android .favorite-stock, html.device-ios .favorite-stock { font-size
 .cart-stock-status.unavailable { color:#b84252; }
 html.device-android .cart-stock-status, html.device-ios .cart-stock-status { font-size:8px; }
 </style>
+
+<style id="daymar-compact-mobile-actions">
+/* Computadora conserva los botones largos y apilados. */
+.preview-actions { display:contents; }
+/* Android, iPhone y tablets: acciones compactas lado a lado. */
+html.device-android .preview-actions,
+html.device-ios .preview-actions {
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px; width:100%; margin-top:10px;
+}
+html.device-android .preview-actions .preview-add-btn,
+html.device-android .preview-actions .preview-whatsapp-btn,
+html.device-ios .preview-actions .preview-add-btn,
+html.device-ios .preview-actions .preview-whatsapp-btn {
+    width:100%; min-width:0; min-height:50px; margin:0; padding:10px 7px; gap:5px;
+    font-size:0; letter-spacing:.08em; white-space:nowrap;
+}
+html.device-android .preview-actions .preview-add-btn i,
+html.device-android .preview-actions .preview-whatsapp-btn i,
+html.device-ios .preview-actions .preview-add-btn i,
+html.device-ios .preview-actions .preview-whatsapp-btn i {
+    margin-right:0 !important; font-size:15px;
+}
+html.device-android .preview-actions .preview-add-btn::after,
+html.device-ios .preview-actions .preview-add-btn::after { content:'Añadir'; font:700 9px/1 'Manrope','Outfit',sans-serif; }
+html.device-android .preview-actions .preview-add-btn.out-of-stock::after,
+html.device-ios .preview-actions .preview-add-btn.out-of-stock::after { content:'Agotado'; }
+html.device-android .preview-actions .preview-whatsapp-btn::after,
+html.device-ios .preview-actions .preview-whatsapp-btn::after { content:'Consultar'; font:700 9px/1 'Manrope','Outfit',sans-serif; }
+/* En tarjetas, el acceso al carrito se convierte en COMPRAR; los agotados conservan su etiqueta. */
+html.device-android .cart-corner-btn .cart-btn-label,
+html.device-ios .cart-corner-btn .cart-btn-label { font-size:0; }
+html.device-android .cart-corner-btn:not(.out-of-stock) .cart-btn-label::after,
+html.device-ios .cart-corner-btn:not(.out-of-stock) .cart-btn-label::after { content:'COMPRAR'; font:700 9px/1 'Manrope','Outfit',sans-serif; letter-spacing:.12em; }
+html.device-android .cart-corner-btn.out-of-stock .cart-btn-label::after,
+html.device-ios .cart-corner-btn.out-of-stock .cart-btn-label::after { content:'AGOTADO'; font:700 9px/1 'Manrope','Outfit',sans-serif; letter-spacing:.1em; }
+/* Botón de compra dentro del carrito: icono minimalista + COMPRAR. */
+html.device-android #whatsappBtn span,
+html.device-ios #whatsappBtn span { font-size:0; }
+html.device-android #whatsappBtn span::after,
+html.device-ios #whatsappBtn span::after { content:'COMPRAR'; font:700 10px/1 'Manrope','Outfit',sans-serif; letter-spacing:.14em; }
+html.device-android #whatsappBtn i,
+html.device-ios #whatsappBtn i { font-size:17px; margin-right:7px; }
+@media (max-width:360px) {
+    html.device-android .preview-actions,
+    html.device-ios .preview-actions { gap:5px; }
+    html.device-android .preview-actions .preview-add-btn,
+    html.device-android .preview-actions .preview-whatsapp-btn,
+    html.device-ios .preview-actions .preview-add-btn,
+    html.device-ios .preview-actions .preview-whatsapp-btn { padding-left:4px; padding-right:4px; }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -5931,12 +5983,14 @@ html.device-android .cart-stock-status, html.device-ios .cart-stock-status { fon
                     <span class="preview-price-original" id="previewPriceOriginal"></span>
                 </div>
                 <p class="preview-stock" id="previewStock"></p>
-                <button class="preview-add-btn" id="previewAddBtn">
-                    <i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito
-                </button>
-                <button class="preview-whatsapp-btn" id="previewWhatsappBtn" type="button" onclick="contactProductWhatsApp()">
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar por WhatsApp
-                </button>
+                <div class="preview-actions">
+                    <button class="preview-add-btn" id="previewAddBtn">
+                        <i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito
+                    </button>
+                    <button class="preview-whatsapp-btn" id="previewWhatsappBtn" type="button" onclick="contactProductWhatsApp()">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar por WhatsApp
+                    </button>
+                </div>
             </div>
         </div>
     </div>

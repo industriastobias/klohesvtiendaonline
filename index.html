@@ -5609,6 +5609,23 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
 }
 </style>
 
+
+<style id="daymar-whatsapp-skeletons-analytics">
+/* Consulta directa por producto, visible y cómoda en cualquier dispositivo. */
+.preview-whatsapp-btn {
+    width:100%; min-height:50px; margin-top:10px; padding:14px 16px; display:flex; align-items:center; justify-content:center; gap:9px;
+    border:1px solid #25d366; background:#25d366; color:#fff; cursor:pointer; font:700 10px/1 'Manrope','Outfit',sans-serif;
+    letter-spacing:.14em; text-transform:uppercase; transition:background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.preview-whatsapp-btn:hover, .preview-whatsapp-btn:focus-visible { background:#1eaf56; border-color:#1eaf56; transform:translateY(-1px); box-shadow:0 8px 18px rgba(37,211,102,.22); outline:none; }
+.preview-whatsapp-btn i { font-size:18px; }
+/* Skeletons: se mantiene la estructura del catálogo mientras llegan los productos. */
+#productsContainer[aria-busy="true"] { min-height:180px; }
+.product-card.loading { pointer-events:none; }
+.product-card.loading .skeleton { min-height:12px; }
+@media (max-width:760px) { .preview-whatsapp-btn { min-height:52px; font-size:9px; } }
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -5818,6 +5835,9 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
                 <button class="preview-add-btn" id="previewAddBtn">
                     <i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> Agregar al carrito
                 </button>
+                <button class="preview-whatsapp-btn" id="previewWhatsappBtn" type="button" onclick="contactProductWhatsApp()">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar por WhatsApp
+                </button>
             </div>
         </div>
     </div>
@@ -6011,7 +6031,7 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
         // ESTADO DE LA APLICACION
         // ==========================================
         const AppState = {
-            currentFilter: 'todos',
+            currentFilter: localStorage.getItem('daymar_last_category') || 'todos',
             cart: JSON.parse(localStorage.getItem('daymar_cart')) || [],
             favorites: JSON.parse(localStorage.getItem('daymar_favorites')) || [],
             currentPage: 0,
@@ -6023,7 +6043,8 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
             searchTerm: '',
             currentStoryImage: null,
             isMobile: false,
-            currentSort: 'default'
+            currentSort: 'default',
+            viewedProducts: JSON.parse(localStorage.getItem('daymar_viewed_products') || '{}')
         };
 
         // ==========================================
@@ -6221,8 +6242,25 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
             'pulsera': 'Pulseras'
         };
 
+        function restoreLastCategory() {
+            const category = AppState.currentFilter;
+            const validCategory = category === 'todos' || Object.prototype.hasOwnProperty.call(categoryMap, category);
+            AppState.currentFilter = validCategory ? category : 'todos';
+            localStorage.setItem('daymar_last_category', AppState.currentFilter);
+            document.querySelectorAll('.category-btn, .atelier-category-rail button').forEach(btn => btn.classList.remove('active'));
+            const activeButton = Array.from(document.querySelectorAll('.category-btn, .atelier-category-rail button'))
+                .find(btn => (btn.getAttribute('onclick') || '').includes(`'${AppState.currentFilter}'`));
+            if (activeButton) activeButton.classList.add('active');
+            const title = document.getElementById('categoryTitle');
+            if (title) title.textContent = categoryDisplayNames[AppState.currentFilter] || 'Todas';
+            AppState.filteredProducts = AppState.currentFilter === 'todos'
+                ? prepareAllProducts(products)
+                : getCategoryProducts(products, AppState.currentFilter);
+        }
+
         function filterProducts(category, btnElement) {
             AppState.currentFilter = category;
+            localStorage.setItem('daymar_last_category', category);
             AppState.currentPage = 0;
             AppState.searchTerm = '';
             AppState.hasMoreProducts = true;
@@ -6311,6 +6349,7 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
             if (!container) return;
             
             container.innerHTML = '';
+            container.setAttribute('aria-busy', 'true');
 
             const loadingStatus = document.createElement('div');
             loadingStatus.className = 'loading-spinner catalog-loading-status';
@@ -6340,6 +6379,7 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
             const container = document.getElementById('productsContainer');
             if (!container) return;
             
+            container.removeAttribute('aria-busy');
             const start = AppState.currentPage * CONFIG.productsPerPage;
             const end = start + CONFIG.productsPerPage;
             const productsToShow = AppState.filteredProducts.slice(start, end);
@@ -6940,6 +6980,14 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
             if (!product) return;
 
             currentPreviewIndex = index;
+            const viewedBarcode = String(product.barcode || '');
+            if (viewedBarcode) {
+                const viewed = AppState.viewedProducts[viewedBarcode] || { count: 0, lastViewed: 0 };
+                viewed.count += 1;
+                viewed.lastViewed = Date.now();
+                AppState.viewedProducts[viewedBarcode] = viewed;
+                localStorage.setItem('daymar_viewed_products', JSON.stringify(AppState.viewedProducts));
+            }
 
             const img = document.getElementById('previewImage');
             renderPreviewGallery(product);
@@ -6978,6 +7026,12 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
                 }
             }
 
+            const whatsappPreviewBtn = document.getElementById('previewWhatsappBtn');
+            if (whatsappPreviewBtn) {
+                whatsappPreviewBtn.dataset.barcode = String(product.barcode || '');
+                whatsappPreviewBtn.setAttribute('aria-label', `Consultar ${product.name} por WhatsApp`);
+            }
+
             const addBtn = document.getElementById('previewAddBtn');
             if (addBtn) {
                 const previewHasStock = Number(product.stock) > 0;
@@ -6999,6 +7053,15 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
 
             document.getElementById('previewModal').classList.add('active');
             document.body.style.overflow = 'hidden';
+        }
+
+        function contactProductWhatsApp() {
+            if (currentPreviewIndex === null) return;
+            const product = products[currentPreviewIndex];
+            if (!product) return;
+            const price = getProductPrice(product);
+            const message = `Hola DAYMAR, quiero consultar disponibilidad de este producto:\n\n*${product.name}*\nCódigo: ${product.barcode}\nPrecio: $${price.toFixed(2)}\n\n¿Me pueden ayudar?`;
+            window.open(`https://wa.me/${CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
         }
 
         function shareProduct() {
@@ -7409,6 +7472,14 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
             root.dataset.daymarPlatform = isIOS ? 'ios' : isAndroid ? 'android' : 'desktop';
         }
 
+        function getMostViewedProducts(limit = 6) {
+            return Object.entries(AppState.viewedProducts)
+                .sort(([, a], [, b]) => (b.count || 0) - (a.count || 0) || (b.lastViewed || 0) - (a.lastViewed || 0))
+                .slice(0, limit)
+                .map(([barcode, stats]) => ({ product: products.find(item => String(item.barcode) === String(barcode)), ...stats }))
+                .filter(item => item.product);
+        }
+
         // ==========================================
         // INICIALIZACION
         // ==========================================
@@ -7432,6 +7503,7 @@ html.device-android .favorite-item-details, html.device-ios .favorite-item-detai
                 // products.js no deje el catálogo completo en blanco.
                 const validProducts = products.filter(product => product && typeof product === 'object');
                 AppState.filteredProducts = prepareAllProducts(validProducts);
+                restoreLastCategory();
                 
                 const validBarcodes = new Set(validProducts.map(p => p.barcode).filter(Boolean));
                 AppState.cart = AppState.cart.filter(item => validBarcodes.has(item.barcode));

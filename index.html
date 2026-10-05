@@ -5849,7 +5849,7 @@ html.device-android .cart-stock-status, html.device-ios .cart-stock-status { fon
                 <h2 id="trust-title">Todo claro antes de elegir.</h2>
             </div>
             <div class="daymar-trust-faq" aria-label="Preguntas frecuentes sobre tu compra">
-                <details class="daymar-trust-question" id="shippingFaq" open>
+                <details class="daymar-trust-question" id="shippingFaq">
                     <summary><i class="fas fa-truck-fast" aria-hidden="true"></i><span>¿Cómo funcionan los envíos?</span></summary>
                     <p>Realizamos entregas a todo El Salvador en un plazo de 2–5 días hábiles. Te confirmaremos los detalles de tu pedido directamente por WhatsApp.</p>
                 </details>
@@ -7596,8 +7596,6 @@ html.device-android .cart-stock-status, html.device-ios .cart-stock-status { fon
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('DAYMAR - Iniciando...');
             detectDevicePlatform();
-            const shippingFaq = document.getElementById('shippingFaq');
-            if (shippingFaq) shippingFaq.open = true;
             initFavoritesMobileGestures();
             
             initFloatingHearts();

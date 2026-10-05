@@ -5777,6 +5777,43 @@ html.device-ios #whatsappBtn i { font-size:17px; margin-right:7px; }
 }
 </style>
 
+
+<style id="daymar-compact-buttons-text-fix">
+/* En móviles/tablets: solo texto limpio, centrado y siempre dentro del botón. */
+html.device-android .preview-actions .preview-add-btn i,
+html.device-android .preview-actions .preview-whatsapp-btn i,
+html.device-ios .preview-actions .preview-add-btn i,
+html.device-ios .preview-actions .preview-whatsapp-btn i,
+html.device-android .cart-corner-btn > i,
+html.device-ios .cart-corner-btn > i,
+html.device-android #whatsappBtn > i,
+html.device-ios #whatsappBtn > i { display:none !important; }
+html.device-android .preview-actions .preview-add-btn,
+html.device-android .preview-actions .preview-whatsapp-btn,
+html.device-ios .preview-actions .preview-add-btn,
+html.device-ios .preview-actions .preview-whatsapp-btn {
+    display:flex; align-items:center; justify-content:center; overflow:hidden; text-overflow:clip;
+    font-size:0; letter-spacing:0; line-height:1; text-align:center;
+}
+html.device-android .preview-actions .preview-add-btn::after,
+html.device-android .preview-actions .preview-whatsapp-btn::after,
+html.device-ios .preview-actions .preview-add-btn::after,
+html.device-ios .preview-actions .preview-whatsapp-btn::after {
+    display:block; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    font-size:8px; line-height:1.15; letter-spacing:.06em; font-weight:700;
+}
+html.device-android .cart-corner-btn,
+html.device-ios .cart-corner-btn { display:flex; align-items:center; justify-content:center; gap:0; overflow:hidden; }
+html.device-android .cart-corner-btn .cart-btn-label,
+html.device-ios .cart-corner-btn .cart-btn-label { max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+html.device-android .cart-corner-btn .cart-btn-label::after,
+html.device-ios .cart-corner-btn .cart-btn-label::after { font-size:8px !important; letter-spacing:.07em !important; }
+html.device-android #whatsappBtn,
+html.device-ios #whatsappBtn { justify-content:center; gap:0; overflow:hidden; }
+html.device-android #whatsappBtn span::after,
+html.device-ios #whatsappBtn span::after { font-size:9px; letter-spacing:.09em; }
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

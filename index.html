@@ -11039,5 +11039,79 @@ html.device-ios .cart-modal .remove-item {
 }
 </style>
 
+
+<style id="daymar-cart-shipping-summary-compact">
+/* En móvil, envío en una franja compacta; el costo se informa en el resumen al activarlo. */
+@media (max-width: 640px) {
+  html.device-android .cart-modal > .shipping-option,
+  html.device-ios .cart-modal > .shipping-option {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 7px !important;
+    min-height: 36px !important;
+    margin: 0 0 5px !important;
+    padding: 5px 8px !important;
+  }
+  html.device-android .cart-modal .shipping-header,
+  html.device-ios .cart-modal .shipping-header {
+    display: contents !important;
+  }
+  html.device-android .cart-modal .shipping-title,
+  html.device-ios .cart-modal .shipping-title {
+    order: 1 !important;
+    flex: 0 1 auto !important;
+    max-width: 44% !important;
+    font-size: .57rem !important;
+    letter-spacing: .045em !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+  }
+  html.device-android .cart-modal .shipping-desc,
+  html.device-ios .cart-modal .shipping-desc {
+    order: 2 !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    text-align: right !important;
+    font-size: .53rem !important;
+    line-height: 1.1 !important;
+  }
+  html.device-android .cart-modal .shipping-toggle,
+  html.device-ios .cart-modal .shipping-toggle {
+    order: 3 !important;
+    flex: 0 0 38px !important;
+    width: 38px !important;
+    height: 22px !important;
+    transform: none !important;
+  }
+  html.device-android .cart-modal .shipping-toggle::after,
+  html.device-ios .cart-modal .shipping-toggle::after {
+    top: 3px !important;
+    left: 3px !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
+  html.device-android .cart-modal .shipping-toggle.active::after,
+  html.device-ios .cart-modal .shipping-toggle.active::after {
+    transform: translateX(16px) !important;
+  }
+  /* El envío aparece en el desglose solo al activarse, evitando duplicar el costo. */
+  html.device-android .cart-modal .shipping-price,
+  html.device-ios .cart-modal .shipping-price {
+    display: none !important;
+  }
+  /* Se elimina únicamente la fila “Descuento”; se mantienen precio real y rebajado. */
+  html.device-android .cart-modal .cart-summary #cartDiscountRow,
+  html.device-ios .cart-modal .cart-summary #cartDiscountRow {
+    display: none !important;
+  }
+}
+</style>
+
 </body>
 </html>

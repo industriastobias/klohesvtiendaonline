@@ -7535,6 +7535,29 @@ html.device-android .preview-image-container .share-corner {
 }
 </style>
 
+
+<style id="daymar-center-actions-left-shift">
+/* ===== DAYMAR · Acciones desplazadas hacia el centro ===== */
+.preview-image-container .share-corner {
+    right: 42px !important;
+    left: auto !important;
+}
+@media (max-width: 760px) {
+    .preview-image-container .share-corner {
+        right: 38px !important;
+        left: auto !important;
+    }
+}
+@media (max-width: 380px) {
+    .preview-image-container .share-corner { right: 32px !important; }
+}
+html.device-ios .preview-image-container .share-corner,
+html.device-android .preview-image-container .share-corner {
+    right: 38px !important;
+    left: auto !important;
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

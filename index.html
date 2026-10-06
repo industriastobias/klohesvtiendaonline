@@ -7672,6 +7672,156 @@ html.device-android .preview-image-container .share-corner {
 }
 </style>
 
+
+<style id="daymar-ios-android-identical-preview">
+/* ===== DAYMAR · Misma tarjeta ampliada en iPhone y Android ===== */
+/* Ambos sistemas comparten exactamente la misma composición. */
+html.device-ios .preview-modal,
+html.device-android .preview-modal {
+    padding: 10px 10px 0 !important;
+    align-items: flex-start !important;
+}
+html.device-ios .preview-content,
+html.device-android .preview-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: calc(100dvh - 10px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    border-radius: 20px 20px 0 0 !important;
+    background: #e9e3dc !important;
+}
+html.device-ios .preview-image-container,
+html.device-android .preview-image-container {
+    flex: 0 0 min(31dvh, 270px) !important;
+    width: 100% !important;
+    height: min(31dvh, 270px) !important;
+    min-height: 190px !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+html.device-ios .preview-image-container > .preview-image,
+html.device-android .preview-image-container > .preview-image,
+html.device-ios .preview-image-container > .preview-image.fine-jewelry-preview,
+html.device-android .preview-image-container > .preview-image.fine-jewelry-preview {
+    flex: 0 0 calc(100% - 62px) !important;
+    width: calc(100% - 62px) !important;
+    max-width: calc(100% - 62px) !important;
+    height: 100% !important;
+    margin: 0 auto 0 0 !important;
+    padding: 17px 6px 15px 7px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+}
+html.device-ios .preview-image-container .share-corner,
+html.device-android .preview-image-container .share-corner {
+    top: 53% !important;
+    right: 64px !important;
+    left: auto !important;
+    transform: translateY(-50%) !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+html.device-ios .preview-image-container .share-corner-btn,
+html.device-android .preview-image-container .share-corner-btn {
+    width: 39px !important;
+    min-width: 39px !important;
+    height: 39px !important;
+    min-height: 39px !important;
+    font-size: .92rem !important;
+}
+html.device-ios .preview-details,
+html.device-android .preview-details {
+    flex: 0 1 auto !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+    padding: 17px 18px calc(17px + env(safe-area-inset-bottom)) !important;
+    border-radius: 0 !important;
+    background: #e9e3dc !important;
+    box-shadow: none !important;
+}
+html.device-ios .preview-details::before,
+html.device-android .preview-details::before {
+    margin: 0 0 11px !important;
+    font-size: .49rem !important;
+}
+html.device-ios .preview-name,
+html.device-android .preview-name {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 6px !important;
+    font-size: clamp(1.14rem, 6vw, 1.58rem) !important;
+    line-height: 1.02 !important;
+    overflow-wrap: anywhere !important;
+}
+html.device-ios .preview-barcode,
+html.device-android .preview-barcode { margin-bottom: 10px !important; }
+html.device-ios .preview-description,
+html.device-android .preview-description {
+    margin-bottom: 11px !important;
+    padding: 10px 0 !important;
+    font-size: .78rem !important;
+    line-height: 1.4 !important;
+}
+html.device-ios .preview-stock,
+html.device-android .preview-stock { margin-bottom: 13px !important; }
+html.device-ios .preview-actions,
+html.device-android .preview-actions {
+    width: 100% !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 10px !important;
+}
+html.device-ios .preview-actions > button,
+html.device-android .preview-actions > button {
+    min-width: 0 !important;
+    width: 100% !important;
+}
+html.device-ios .close-preview-btn,
+html.device-android .close-preview-btn {
+    top: 10px !important;
+    right: 10px !important;
+}
+/* Mismos valores en pantallas muy pequeñas. */
+@media (max-width: 380px) {
+    html.device-ios .preview-image-container,
+    html.device-android .preview-image-container {
+        flex-basis: 27dvh !important;
+        height: 27dvh !important;
+        min-height: 175px !important;
+    }
+    html.device-ios .preview-image-container > .preview-image,
+    html.device-android .preview-image-container > .preview-image,
+    html.device-ios .preview-image-container > .preview-image.fine-jewelry-preview,
+    html.device-android .preview-image-container > .preview-image.fine-jewelry-preview {
+        flex-basis: calc(100% - 58px) !important;
+        width: calc(100% - 58px) !important;
+        max-width: calc(100% - 58px) !important;
+        padding-left: 5px !important;
+        padding-right: 4px !important;
+    }
+    html.device-ios .preview-image-container .share-corner,
+    html.device-android .preview-image-container .share-corner {
+        right: 56px !important;
+        top: 53% !important;
+    }
+    html.device-ios .preview-image-container .share-corner-btn,
+    html.device-android .preview-image-container .share-corner-btn {
+        width: 36px !important;
+        min-width: 36px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        font-size: .86rem !important;
+    }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

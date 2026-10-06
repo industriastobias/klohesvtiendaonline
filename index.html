@@ -7088,6 +7088,78 @@ html.device-android .share-corner {
 }
 </style>
 
+
+<style id="daymar-final-image-actions-and-cart-text">
+/* ===== DAYMAR · Acciones en la imagen y texto blanco del carrito ===== */
+.preview-image-container .share-corner {
+    position: absolute !important;
+    top: 50% !important;
+    right: 22px !important;
+    left: auto !important;
+    z-index: 20 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    transform: translateY(-16%) !important;
+}
+.preview-image-container .share-corner-btn {
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    border-radius: 50% !important;
+    background: rgba(255,255,255,.82) !important;
+    border: 1px solid rgba(128,111,104,.3) !important;
+    box-shadow: 0 5px 14px rgba(50,35,30,.12) !important;
+}
+.preview-image-container .share-corner-btn.whatsapp { color: #218653 !important; }
+.preview-image-container .share-corner-btn.favorite { color: #a4526b !important; }
+.preview-image-container .share-corner-btn:hover {
+    background: #fff !important;
+    transform: scale(1.05) !important;
+}
+/* Los dos estados del botón de carrito siempre conservan letras blancas. */
+.cart-corner-btn,
+.cart-corner-btn .cart-btn-label,
+.cart-corner-btn.added,
+.cart-corner-btn.added .cart-btn-label,
+.preview-add-btn,
+.preview-add-btn.added,
+.preview-add-btn span {
+    color: #fff !important;
+}
+.cart-corner-btn.added,
+.preview-add-btn.added {
+    background: #a96776 !important;
+    border-color: #a96776 !important;
+}
+@media (max-width: 760px) {
+    .preview-image-container .share-corner {
+        top: 50% !important;
+        right: 17px !important;
+        transform: translateY(-18%) !important;
+        gap: 7px !important;
+    }
+    .preview-image-container .share-corner-btn {
+        width: 34px !important;
+        min-width: 34px !important;
+        height: 34px !important;
+        min-height: 34px !important;
+    }
+}
+@media (max-width: 380px) {
+    .preview-image-container .share-corner { right: 13px !important; }
+    .preview-image-container .share-corner-btn {
+        width: 31px !important;
+        min-width: 31px !important;
+        height: 31px !important;
+        min-height: 31px !important;
+    }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -7268,13 +7340,6 @@ html.device-android .share-corner {
             <button class="close-preview-btn" onclick="closePreview()"><i class="fas fa-times"></i></button>
             <div class="preview-image-container">
                 <img src="" alt="" class="preview-image preview-image-zoomable" id="previewImage" loading="lazy" onclick="event.stopPropagation(); openImageLightbox()" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openImageLightbox(); }" tabindex="0" role="button" aria-label="Abrir imagen en grande">
-                <div class="preview-gallery-controls" id="previewGalleryControls" style="display:none;">
-                    <button type="button" class="preview-gallery-btn" onclick="event.stopPropagation(); changePreviewImage(-1)" aria-label="Imagen anterior"><i class="fas fa-chevron-left"></i></button>
-                    <button type="button" class="preview-gallery-btn" onclick="event.stopPropagation(); changePreviewImage(1)" aria-label="Imagen siguiente"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <div class="preview-gallery-counter" id="previewGalleryCounter" aria-live="polite" style="display:none;"></div>
-            </div>
-            <div class="preview-details">
                 <div class="share-corner">
                     <button class="share-corner-btn whatsapp" onclick="shareWhatsApp()" title="Compartir por WhatsApp">
                         <i class="fab fa-whatsapp"></i>
@@ -7283,6 +7348,14 @@ html.device-android .share-corner {
                         <i class="far fa-heart"></i>
                     </button>
                 </div>
+                <div class="preview-gallery-controls" id="previewGalleryControls" style="display:none;">
+                    <button type="button" class="preview-gallery-btn" onclick="event.stopPropagation(); changePreviewImage(-1)" aria-label="Imagen anterior"><i class="fas fa-chevron-left"></i></button>
+                    <button type="button" class="preview-gallery-btn" onclick="event.stopPropagation(); changePreviewImage(1)" aria-label="Imagen siguiente"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="preview-gallery-counter" id="previewGalleryCounter" aria-live="polite" style="display:none;"></div>
+            </div>
+            <div class="preview-details">
+
                 <h3 class="preview-name" id="previewName"></h3>
                 <p class="preview-barcode" id="previewBarcode"></p>
                 <p class="preview-description" id="previewDescription"></p>

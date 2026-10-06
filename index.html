@@ -7870,6 +7870,44 @@ html.device-android .preview-details {
 }
 </style>
 
+
+<style id="daymar-bottom-sheet-smooth-entry">
+/* ===== DAYMAR · Entrada suave desde abajo ===== */
+@keyframes daymar-sheet-rise {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 34px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes daymar-backdrop-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+html.device-ios .preview-modal,
+html.device-android .preview-modal {
+    animation: daymar-backdrop-fade 240ms ease-out both !important;
+}
+html.device-ios .preview-content,
+html.device-android .preview-content {
+    animation: daymar-sheet-rise 420ms cubic-bezier(.22, .8, .24, 1) both !important;
+    transform-origin: bottom center !important;
+    will-change: transform, opacity !important;
+}
+@media (prefers-reduced-motion: reduce) {
+    html.device-ios .preview-modal,
+    html.device-android .preview-modal,
+    html.device-ios .preview-content,
+    html.device-android .preview-content {
+        animation: none !important;
+        transform: none !important;
+    }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

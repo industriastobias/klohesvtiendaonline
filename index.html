@@ -7598,6 +7598,80 @@ html.device-android .preview-image-container .share-corner {
 }
 </style>
 
+
+<style id="daymar-catalog-add-button-compact">
+/* ===== DAYMAR · Botón de catálogo compacto y nativo ===== */
+.product-card .cart-corner-btn {
+    display: inline-flex !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    margin-top: 8px !important;
+    padding: 6px 0 !important;
+    gap: 7px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #1a1717 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #1a1717 !important;
+    font: 700 .62rem/1 'Manrope', 'Outfit', sans-serif !important;
+    letter-spacing: .11em !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+.product-card .cart-corner-btn .cart-btn-label {
+    display: inline-block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    color: #1a1717 !important;
+    font: inherit !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+}
+.product-card .cart-corner-btn > i {
+    display: inline-block !important;
+    color: #1a1717 !important;
+    font-size: .7rem !important;
+}
+.product-card .cart-corner-btn:hover:not(:disabled),
+.product-card .cart-corner-btn:focus-visible {
+    background: transparent !important;
+    color: #a4526b !important;
+    border-bottom-color: #a4526b !important;
+}
+.product-card .cart-corner-btn:hover:not(:disabled) .cart-btn-label,
+.product-card .cart-corner-btn:hover:not(:disabled) > i,
+.product-card .cart-corner-btn:focus-visible .cart-btn-label,
+.product-card .cart-corner-btn:focus-visible > i { color: #a4526b !important; }
+.product-card .cart-corner-btn.added,
+.product-card .cart-corner-btn.added .cart-btn-label,
+.product-card .cart-corner-btn.added > i {
+    background: transparent !important;
+    border-color: #1a1717 !important;
+    color: #1a1717 !important;
+}
+@media (max-width: 640px) {
+    .product-card .cart-corner-btn {
+        height: 32px !important;
+        min-height: 32px !important;
+        margin-top: 6px !important;
+        padding: 5px 0 !important;
+        gap: 5px !important;
+        font-size: .58rem !important;
+        letter-spacing: .08em !important;
+    }
+    .product-card .cart-corner-btn > i { font-size: .64rem !important; }
+}
+@media (max-width: 380px) {
+    .product-card .cart-corner-btn { font-size: .54rem !important; letter-spacing: .06em !important; }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

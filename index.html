@@ -7160,6 +7160,103 @@ html.device-android .share-corner {
 }
 </style>
 
+
+<style id="daymar-image-right-actions-left">
+/* ===== DAYMAR · Imagen a la derecha, acciones a la izquierda ===== */
+.preview-image-container {
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: flex-end !important;
+    overflow: hidden !important;
+}
+.preview-image-container > .preview-image,
+.preview-image-container > .preview-image.fine-jewelry-preview {
+    display: block !important;
+    width: calc(100% - 76px) !important;
+    max-width: calc(100% - 76px) !important;
+    height: 100% !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    padding: 38px 24px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+.preview-image-container .share-corner {
+    top: 50% !important;
+    right: auto !important;
+    left: 18px !important;
+    transform: translateY(-50%) !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+.preview-image-container .share-corner-btn {
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+}
+@media (max-width: 760px) {
+    .preview-image-container {
+        display: flex !important;
+        align-items: stretch !important;
+        justify-content: flex-end !important;
+    }
+    .preview-image-container > .preview-image,
+    .preview-image-container > .preview-image.fine-jewelry-preview {
+        width: calc(100% - 76px) !important;
+        max-width: calc(100% - 76px) !important;
+        height: 100% !important;
+        padding: 24px 14px 20px !important;
+        margin-left: auto !important;
+    }
+    .preview-image-container .share-corner {
+        left: 16px !important;
+        right: auto !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        gap: 7px !important;
+    }
+    .preview-image-container .share-corner-btn {
+        width: 34px !important;
+        min-width: 34px !important;
+        height: 34px !important;
+        min-height: 34px !important;
+    }
+}
+@media (max-width: 380px) {
+    .preview-image-container > .preview-image,
+    .preview-image-container > .preview-image.fine-jewelry-preview {
+        width: calc(100% - 68px) !important;
+        max-width: calc(100% - 68px) !important;
+        padding-left: 9px !important;
+        padding-right: 9px !important;
+    }
+    .preview-image-container .share-corner { left: 12px !important; }
+    .preview-image-container .share-corner-btn {
+        width: 31px !important;
+        min-width: 31px !important;
+        height: 31px !important;
+        min-height: 31px !important;
+    }
+}
+html.device-ios .preview-image-container > .preview-image,
+html.device-android .preview-image-container > .preview-image,
+html.device-ios .preview-image-container > .preview-image.fine-jewelry-preview,
+html.device-android .preview-image-container > .preview-image.fine-jewelry-preview {
+    width: calc(100% - 76px) !important;
+    max-width: calc(100% - 76px) !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+html.device-ios .preview-image-container .share-corner,
+html.device-android .preview-image-container .share-corner {
+    left: 16px !important;
+    right: auto !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

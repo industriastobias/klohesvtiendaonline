@@ -7986,6 +7986,71 @@ html.device-android .preview-modal.is-closing { animation: daymar-backdrop-fade-
 }
 </style>
 
+
+<style id="daymar-android-cart-total-visible">
+/* ===== DAYMAR · Total del carrito siempre visible en Android ===== */
+html.device-android .cart-modal,
+html.device-ios .cart-modal {
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom)) !important;
+}
+html.device-android .cart-modal > .cart-header,
+html.device-ios .cart-modal > .cart-header,
+html.device-android .cart-modal > .shipping-option,
+html.device-ios .cart-modal > .shipping-option,
+html.device-android .cart-modal > .cart-summary,
+html.device-ios .cart-modal > .cart-summary,
+html.device-android .cart-modal > .cart-total,
+html.device-ios .cart-modal > .cart-total,
+html.device-android .cart-modal > .payment-note,
+html.device-ios .cart-modal > .payment-note,
+html.device-android .cart-modal > .btn-whatsapp,
+html.device-ios .cart-modal > .btn-whatsapp,
+html.device-android .cart-modal > .btn-clear-cart,
+html.device-ios .cart-modal > .btn-clear-cart {
+    flex: 0 0 auto !important;
+}
+html.device-android .cart-modal > #cartItems,
+html.device-ios .cart-modal > #cartItems {
+    flex: 1 1 auto !important;
+    min-height: 56px !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+html.device-android .cart-modal > .cart-summary,
+html.device-ios .cart-modal > .cart-summary,
+html.device-android .cart-modal > .cart-total,
+html.device-ios .cart-modal > .cart-total {
+    position: relative !important;
+    z-index: 3 !important;
+    background: #fff !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+html.device-android .cart-modal > .cart-total,
+html.device-ios .cart-modal > .cart-total {
+    display: flex !important;
+    min-height: 58px !important;
+    align-items: center !important;
+    margin-bottom: .5rem !important;
+    padding-bottom: .6rem !important;
+}
+@media (max-height: 680px) {
+    html.device-android .cart-modal,
+    html.device-ios .cart-modal { padding-top: 1rem !important; padding-bottom: calc(10px + env(safe-area-inset-bottom)) !important; }
+    html.device-android .cart-header,
+    html.device-ios .cart-header { margin-bottom: .8rem !important; padding-bottom: .7rem !important; }
+    html.device-android .cart-modal > .cart-total,
+    html.device-ios .cart-modal > .cart-total { min-height: 48px !important; margin-top: .45rem !important; padding-top: .65rem !important; }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -9902,6 +9967,14 @@ html.device-android .preview-modal.is-closing { animation: daymar-backdrop-fade-
                 const realPriceEl = document.getElementById('cartRealPrice');
                 const discountEl = document.getElementById('cartDiscount');
                 if (cartSubtotal) cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+                if (cartTotal) {
+                    cartTotal.textContent = `$${total.toFixed(2)}`;
+                    const cartTotalRow = cartTotal.closest('.cart-total');
+                    if (cartTotalRow) {
+                        cartTotalRow.style.display = 'flex';
+                        cartTotalRow.style.visibility = 'visible';
+                    }
+                }
                 if (realPriceEl) realPriceEl.textContent = `$${regularSubtotal.toFixed(2)}`;
                 if (discountEl) discountEl.textContent = `-$${roundPrice(regularSubtotal - subtotal).toFixed(2)}`;
                 if (realPriceRow) realPriceRow.style.display = hasDiscounts ? 'flex' : 'none';

@@ -10837,5 +10837,207 @@ html.device-ios .cart-modal .remove-item {
 })();
 </script>
 
+
+<style id="daymar-cart-mobile-product-visibility">
+/* Más espacio vertical para reconocer los productos y ver mejor sus fotos en móviles. */
+@media (max-width: 640px) {
+  html.device-android .cart-modal.active,
+  html.device-ios .cart-modal.active {
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    padding: max(12px, env(safe-area-inset-top)) 16px calc(8px + env(safe-area-inset-bottom)) !important;
+    overflow: hidden !important;
+    gap: 0 !important;
+  }
+
+  /* Encabezado más bajo, sin perder el título ni el botón de cierre. */
+  html.device-android .cart-modal > .cart-header,
+  html.device-ios .cart-modal > .cart-header {
+    flex: 0 0 auto !important;
+    margin: 0 0 8px !important;
+    padding: 0 0 8px !important;
+    min-height: 44px !important;
+  }
+  html.device-android .cart-modal > .cart-header h2,
+  html.device-ios .cart-modal > .cart-header h2 {
+    font-size: 1.12rem !important;
+    letter-spacing: .1em !important;
+  }
+  html.device-android .cart-modal .close-cart,
+  html.device-ios .cart-modal .close-cart {
+    width: 36px !important;
+    height: 36px !important;
+    flex: 0 0 36px !important;
+  }
+
+  /* La tarjeta de envío conserva sus datos, con menos relleno. */
+  html.device-android .cart-modal > .shipping-option,
+  html.device-ios .cart-modal > .shipping-option {
+    flex: 0 0 auto !important;
+    margin: 0 0 7px !important;
+    padding: 9px 11px !important;
+  }
+  html.device-android .cart-modal .shipping-header,
+  html.device-ios .cart-modal .shipping-header {
+    margin: 0 0 2px !important;
+  }
+  html.device-android .cart-modal .shipping-title,
+  html.device-ios .cart-modal .shipping-title {
+    font-size: .7rem !important;
+    letter-spacing: .09em !important;
+  }
+  html.device-android .cart-modal .shipping-toggle,
+  html.device-ios .cart-modal .shipping-toggle {
+    transform: scale(.88);
+    transform-origin: right center;
+  }
+  html.device-android .cart-modal .shipping-desc,
+  html.device-ios .cart-modal .shipping-desc {
+    margin-top: 1px !important;
+    font-size: .68rem !important;
+    line-height: 1.25 !important;
+  }
+
+  /* El listado recibe todo el alto libre y se desplaza cuando hay varios productos. */
+  html.device-android .cart-modal > #cartItems,
+  html.device-ios .cart-modal > #cartItems {
+    flex: 1 1 0 !important;
+    min-height: 112px !important;
+    width: 100% !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 0 2px !important;
+  }
+  html.device-android .cart-modal .cart-item,
+  html.device-ios .cart-modal .cart-item {
+    align-items: center !important;
+    gap: 9px !important;
+    padding: 9px 0 !important;
+  }
+  html.device-android .cart-modal .cart-item-image,
+  html.device-ios .cart-modal .cart-item-image {
+    width: 124px !important;
+    height: 124px !important;
+    min-width: 124px !important;
+    flex: 0 0 124px !important;
+    padding: 3px !important;
+    border-radius: 10px !important;
+  }
+  html.device-android .cart-modal .cart-item-image img,
+  html.device-ios .cart-modal .cart-item-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+  html.device-android .cart-modal .cart-item-details,
+  html.device-ios .cart-modal .cart-item-details {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+  html.device-android .cart-modal .cart-item-details h4,
+  html.device-ios .cart-modal .cart-item-details h4 {
+    font-size: .82rem !important;
+    line-height: 1.16 !important;
+  }
+  html.device-android .cart-modal .cart-item-code,
+  html.device-ios .cart-modal .cart-item-code {
+    margin-bottom: 3px !important;
+    font-size: .6rem !important;
+  }
+  html.device-android .cart-modal .cart-item-prices,
+  html.device-ios .cart-modal .cart-item-prices {
+    margin: 2px 0 3px !important;
+    gap: 1px !important;
+    font-size: .62rem !important;
+    line-height: 1.2 !important;
+  }
+  html.device-android .cart-modal .cart-stock-status,
+  html.device-ios .cart-modal .cart-stock-status {
+    margin-top: 2px !important;
+    font-size: 7px !important;
+  }
+  html.device-android .cart-modal .remove-item,
+  html.device-ios .cart-modal .remove-item {
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    height: 30px !important;
+    margin: 0 !important;
+  }
+
+  /* Desglose, total y métodos de pago siguen visibles, pero ocupan menos alto. */
+  html.device-android .cart-modal > .cart-summary,
+  html.device-ios .cart-modal > .cart-summary {
+    flex: 0 0 auto !important;
+    margin: 3px 0 0 !important;
+    padding: 6px 0 0 !important;
+  }
+  html.device-android .cart-modal .cart-summary .summary-row,
+  html.device-ios .cart-modal .cart-summary .summary-row {
+    margin: 0 0 3px !important;
+    font-size: .68rem !important;
+    line-height: 1.2 !important;
+  }
+  html.device-android .cart-modal > .cart-total,
+  html.device-ios .cart-modal > .cart-total {
+    flex: 0 0 auto !important;
+    min-height: 42px !important;
+    margin: 4px 0 2px !important;
+    padding: 6px 0 4px !important;
+    font-size: 1.12rem !important;
+  }
+  html.device-android .cart-modal > .payment-note,
+  html.device-ios .cart-modal > .payment-note {
+    flex: 0 0 auto !important;
+    margin: 4px 0 5px !important;
+    padding: 7px 9px !important;
+    font-size: .66rem !important;
+    line-height: 1.3 !important;
+  }
+  html.device-android .cart-modal .payment-note strong,
+  html.device-ios .cart-modal .payment-note strong {
+    display: inline !important;
+    margin: 0 .35rem 0 0 !important;
+    font-size: .62rem !important;
+  }
+  html.device-android .cart-modal > .btn-whatsapp,
+  html.device-ios .cart-modal > .btn-whatsapp {
+    flex: 0 0 auto !important;
+    min-height: 46px !important;
+    margin: 4px 0 3px !important;
+    padding: .55rem .7rem !important;
+    font-size: .82rem !important;
+  }
+  html.device-android .cart-modal > .btn-whatsapp > span,
+  html.device-ios .cart-modal > .btn-whatsapp > span {
+    font-size: .82rem !important;
+  }
+  html.device-android .cart-modal > .btn-clear-cart,
+  html.device-ios .cart-modal > .btn-clear-cart {
+    flex: 0 0 auto !important;
+    min-height: 32px !important;
+    margin: 2px auto 0 !important;
+    padding: .35rem .65rem !important;
+    font-size: .62rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  html.device-android .cart-modal .cart-item-image,
+  html.device-ios .cart-modal .cart-item-image {
+    width: 112px !important;
+    height: 112px !important;
+    min-width: 112px !important;
+    flex-basis: 112px !important;
+  }
+  html.device-android .cart-modal .cart-item,
+  html.device-ios .cart-modal .cart-item { gap: 7px !important; }
+}
+</style>
+
 </body>
 </html>

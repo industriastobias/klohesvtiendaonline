@@ -6918,6 +6918,176 @@ html.device-android .preview-name {
 }
 </style>
 
+
+<style id="daymar-product-modal-reference-layout">
+/* ===== DAYMAR · Distribución según referencia visual ===== */
+.preview-content {
+    background: #e9e3dc !important;
+    border-radius: 22px !important;
+    overflow: hidden !important;
+    gap: 0 !important;
+}
+.preview-image-container,
+.preview-details {
+    border-radius: 0 !important;
+}
+.preview-details {
+    background: #e9e3dc !important;
+    padding: 27px 30px 28px !important;
+    color: #2b2422 !important;
+}
+/* Línea superior: etiqueta a la izquierda y acciones en la esquina opuesta. */
+.preview-details::before {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 12px !important;
+    color: #806f68 !important;
+    font-size: .56rem !important;
+    line-height: 1 !important;
+    letter-spacing: .16em !important;
+}
+.share-corner {
+    position: absolute !important;
+    top: 22px !important;
+    right: 68px !important;
+    left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    z-index: 20 !important;
+}
+.share-corner-btn {
+    width: 35px !important;
+    min-width: 35px !important;
+    height: 35px !important;
+    min-height: 35px !important;
+    border-radius: 50% !important;
+    border: 1px solid rgba(128,111,104,.35) !important;
+    background: rgba(255,255,255,.48) !important;
+    box-shadow: none !important;
+}
+.share-corner-btn.whatsapp { color: #218653 !important; }
+.share-corner-btn.favorite { color: #a4526b !important; }
+.close-preview-btn { top: 16px !important; right: 17px !important; }
+/* Nombre en la zona verde: compacto, ancho completo y sin montarse. */
+.preview-name {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 7px !important;
+    color: #2b2422 !important;
+    font-size: clamp(1.18rem, 2.5vw, 1.78rem) !important;
+    line-height: 1.03 !important;
+    letter-spacing: -.035em !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    hyphens: auto !important;
+}
+.preview-barcode { margin: 0 0 13px !important; }
+.preview-description {
+    margin: 0 0 14px !important;
+    padding: 12px 0 !important;
+    color: #665852 !important;
+    border-top-color: rgba(128,111,104,.24) !important;
+    border-bottom-color: rgba(128,111,104,.24) !important;
+}
+.preview-price-container { margin-bottom: 5px !important; }
+.preview-stock { margin-bottom: 16px !important; }
+.preview-actions { margin-top: 0 !important; }
+
+@media (max-width: 760px) {
+    .preview-modal { padding: 10px 10px 0 !important; }
+    .preview-content {
+        border-radius: 20px 20px 0 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .preview-image-container {
+        flex: 0 0 min(31dvh, 270px) !important;
+        height: min(31dvh, 270px) !important;
+        min-height: 190px !important;
+        border-radius: 0 !important;
+    }
+    .preview-details {
+        flex: 0 1 auto !important;
+        padding: 17px 18px calc(17px + env(safe-area-inset-bottom)) !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+    .preview-details::before {
+        margin: 0 0 11px !important;
+        font-size: .49rem !important;
+    }
+    .share-corner {
+        top: 13px !important;
+        right: 51px !important;
+        gap: 5px !important;
+    }
+    .share-corner-btn {
+        width: 31px !important;
+        min-width: 31px !important;
+        height: 31px !important;
+        min-height: 31px !important;
+    }
+    .close-preview-btn { top: 10px !important; right: 10px !important; }
+    .preview-name {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 6px !important;
+        font-size: clamp(1.14rem, 6vw, 1.58rem) !important;
+        line-height: 1.02 !important;
+    }
+    .preview-barcode { margin-bottom: 10px !important; }
+    .preview-description {
+        margin-bottom: 11px !important;
+        padding: 10px 0 !important;
+        font-size: .78rem !important;
+        line-height: 1.4 !important;
+    }
+    .preview-stock { margin-bottom: 13px !important; }
+}
+@media (max-width: 380px) {
+    .preview-image-container {
+        flex-basis: 27dvh !important;
+        height: 27dvh !important;
+        min-height: 175px !important;
+    }
+    .preview-details { padding-left: 15px !important; padding-right: 15px !important; }
+    .preview-name { font-size: clamp(1.05rem, 5.6vw, 1.4rem) !important; }
+    .share-corner { right: 46px !important; gap: 4px !important; }
+    .share-corner-btn { width: 29px !important; min-width: 29px !important; height: 29px !important; min-height: 29px !important; }
+}
+html.device-ios .preview-content,
+html.device-android .preview-content {
+    background: #e9e3dc !important;
+    border-radius: 20px 20px 0 0 !important;
+    overflow: hidden !important;
+}
+html.device-ios .preview-image-container,
+html.device-android .preview-image-container,
+html.device-ios .preview-details,
+html.device-android .preview-details { border-radius: 0 !important; }
+html.device-ios .preview-details,
+html.device-android .preview-details {
+    background: #e9e3dc !important;
+    padding: 17px 18px calc(17px + env(safe-area-inset-bottom)) !important;
+}
+html.device-ios .preview-name,
+html.device-android .preview-name {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-right: 0 !important;
+    font-size: clamp(1.14rem, 6vw, 1.58rem) !important;
+    overflow-wrap: anywhere !important;
+}
+html.device-ios .share-corner,
+html.device-android .share-corner {
+    top: 13px !important;
+    right: 51px !important;
+    left: auto !important;
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

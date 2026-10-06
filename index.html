@@ -7480,6 +7480,61 @@ html.device-ios .preview-image-container::after,
 html.device-android .preview-image-container::after { inset: 7px !important; }
 </style>
 
+
+<style id="daymar-center-right-actions-final">
+/* ===== DAYMAR · Acciones centradas en el lateral derecho ===== */
+.preview-image-container .share-corner {
+    top: 58% !important;
+    right: 14px !important;
+    left: auto !important;
+    transform: translateY(-50%) !important;
+    gap: 9px !important;
+}
+.preview-image-container .share-corner-btn {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    font-size: 1rem !important;
+}
+@media (max-width: 760px) {
+    .preview-image-container .share-corner {
+        top: 58% !important;
+        right: 12px !important;
+        left: auto !important;
+        transform: translateY(-50%) !important;
+        gap: 8px !important;
+    }
+    .preview-image-container .share-corner-btn {
+        width: 39px !important;
+        min-width: 39px !important;
+        height: 39px !important;
+        min-height: 39px !important;
+        font-size: .92rem !important;
+    }
+}
+@media (max-width: 380px) {
+    .preview-image-container .share-corner {
+        top: 58% !important;
+        right: 9px !important;
+    }
+    .preview-image-container .share-corner-btn {
+        width: 36px !important;
+        min-width: 36px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        font-size: .86rem !important;
+    }
+}
+html.device-ios .preview-image-container .share-corner,
+html.device-android .preview-image-container .share-corner {
+    top: 58% !important;
+    right: 12px !important;
+    left: auto !important;
+    transform: translateY(-50%) !important;
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

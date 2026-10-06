@@ -6221,6 +6221,221 @@ html.device-android #whatsappBtn > span::after {
 }
 </style>
 
+
+<style id="daymar-product-modal-compact-final">
+/* ===== DAYMAR · Ficha de producto compacta y minimalista ===== */
+.preview-modal {
+    padding: 16px;
+    background: rgba(24, 20, 20, .62);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+.preview-content {
+    width: min(960px, 96vw);
+    height: min(620px, calc(100dvh - 32px));
+    grid-template-columns: minmax(0, 1fr) minmax(330px, .78fr);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.9);
+    box-shadow: 0 24px 70px rgba(25, 18, 18, .3);
+}
+.preview-image-container {
+    background: #f7f4f1 !important;
+}
+.preview-image-container::before {
+    top: 17px;
+    left: 20px;
+    font-size: 9px;
+    letter-spacing: .26em;
+    color: rgba(26,26,26,.28);
+}
+.preview-image-container::after {
+    inset: 14px;
+    border-radius: 12px;
+    border-color: rgba(169,103,118,.14);
+}
+.preview-image,
+.preview-image.fine-jewelry-preview {
+    padding: 30px !important;
+}
+.preview-gallery-controls { padding: 0 18px; }
+.preview-gallery-btn { width: 36px; height: 36px; }
+.preview-gallery-counter { right: 18px; bottom: 18px; padding: 5px 8px; }
+.preview-details {
+    display: flex;
+    flex-direction: column;
+    min-height: 0 !important;
+    padding: 25px 30px 23px !important;
+    overflow-y: auto;
+    background: #fff !important;
+}
+.preview-details::before {
+    margin-bottom: 13px;
+    color: #847875;
+    font-size: .58rem;
+    letter-spacing: .16em;
+}
+.share-corner {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+    margin: 0 0 14px;
+}
+.share-corner-btn {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    border: 1px solid #e1d9d5 !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+}
+.share-corner-btn.whatsapp { background: #fff !important; color: #159447 !important; }
+.share-corner-btn.favorite { background: #fff !important; color: #a96776 !important; }
+.share-corner-btn:hover { transform: translateY(-2px) !important; }
+.close-preview-btn {
+    top: 12px !important;
+    right: 12px !important;
+    width: 32px !important;
+    height: 32px !important;
+    border: 0 !important;
+    background: rgba(255,255,255,.88) !important;
+    color: #1a1717 !important;
+    box-shadow: none !important;
+}
+.preview-name {
+    max-width: 100%;
+    margin: 0 0 6px !important;
+    color: #211b1a;
+    font-size: clamp(1.45rem, 2.8vw, 2.05rem) !important;
+    line-height: 1.05;
+    letter-spacing: -.035em;
+}
+.preview-barcode {
+    width: fit-content;
+    margin: 0 0 13px !important;
+    padding: 0 !important;
+    color: #978b86;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0;
+    font-size: .62rem !important;
+    letter-spacing: .2em;
+}
+.preview-description {
+    margin: 0 0 13px !important;
+    padding: 12px 0 !important;
+    color: #6d6461;
+    font-size: .86rem !important;
+    line-height: 1.48 !important;
+    border-top: 1px solid #eee7e4;
+    border-bottom: 1px solid #eee7e4;
+}
+.preview-price-container {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    margin: 0 0 5px !important;
+}
+.preview-price {
+    color: #a96776;
+    font-size: clamp(1.85rem, 3.5vw, 2.45rem) !important;
+    line-height: 1;
+}
+.preview-price-original { font-size: .78rem; }
+.preview-stock {
+    margin: 0 0 14px !important;
+    font-size: .65rem !important;
+    letter-spacing: .1em;
+}
+.preview-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100%;
+    margin-top: 2px;
+}
+.preview-actions .preview-add-btn,
+.preview-actions .preview-whatsapp-btn {
+    width: 100% !important;
+    min-width: 0;
+    height: 46px !important;
+    min-height: 46px !important;
+    margin: 0 !important;
+    padding: .5rem .65rem !important;
+    border-radius: 8px !important;
+    font-size: .7rem !important;
+    letter-spacing: .08em;
+    box-shadow: none !important;
+}
+.preview-actions .preview-whatsapp-btn { background: #25d366 !important; color: #fff !important; }
+.preview-actions .preview-add-btn { background: #1a1717 !important; color: #fff !important; }
+
+@media (max-width: 760px) {
+    .preview-modal { padding: 0; align-items: flex-end !important; }
+    .preview-content {
+        width: 100%;
+        height: min(96dvh, 780px) !important;
+        max-height: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(205px, 30dvh) minmax(0, 1fr) !important;
+        border-radius: 20px 20px 0 0 !important;
+        border-bottom: 0;
+    }
+    .preview-image-container { min-height: 0 !important; }
+    .preview-image,
+    .preview-image.fine-jewelry-preview { padding: 25px 38px 18px !important; }
+    .preview-image-container::before { top: 13px; left: 16px; font-size: 8px; }
+    .preview-image-container::after { inset: 10px; border-radius: 10px; }
+    .preview-gallery-controls { padding: 0 13px; }
+    .preview-gallery-btn { width: 32px; height: 32px; }
+    .preview-gallery-counter { right: 13px; bottom: 12px; }
+    .preview-details {
+        padding: 15px 18px calc(15px + env(safe-area-inset-bottom)) !important;
+        border-radius: 18px 18px 0 0;
+        box-shadow: 0 -8px 20px rgba(35,20,20,.06);
+    }
+    .preview-details::before { margin-bottom: 10px; font-size: .53rem; }
+    .share-corner { margin-bottom: 10px; }
+    .share-corner-btn { width: 34px !important; min-width: 34px !important; height: 34px !important; min-height: 34px !important; }
+    .close-preview-btn { top: 10px !important; right: 10px !important; width: 30px !important; height: 30px !important; }
+    .preview-name { margin-bottom: 5px !important; font-size: clamp(1.32rem, 6.7vw, 1.78rem) !important; }
+    .preview-barcode { margin-bottom: 10px !important; font-size: .57rem !important; }
+    .preview-description { margin-bottom: 10px !important; padding: 10px 0 !important; font-size: .8rem !important; line-height: 1.42 !important; }
+    .preview-price { font-size: 1.85rem !important; }
+    .preview-stock { margin-bottom: 11px !important; font-size: .59rem !important; }
+    .preview-actions .preview-add-btn,
+    .preview-actions .preview-whatsapp-btn { height: 44px !important; min-height: 44px !important; padding-inline: .35rem !important; font-size: .67rem !important; }
+}
+@media (max-width: 380px) {
+    .preview-content { grid-template-rows: minmax(190px, 28dvh) minmax(0, 1fr) !important; }
+    .preview-details { padding-left: 15px !important; padding-right: 15px !important; }
+    .preview-description { font-size: .76rem !important; }
+    .preview-actions .preview-add-btn,
+    .preview-actions .preview-whatsapp-btn { font-size: .62rem !important; }
+}
+/* Reglas explícitas para que las adaptaciones previas de iOS/Android no vuelvan a agrandar la ficha. */
+html.device-ios .preview-content,
+html.device-android .preview-content {
+    width: 100vw !important;
+    height: min(96dvh, 780px) !important;
+    max-height: none !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: minmax(205px, 30dvh) minmax(0, 1fr) !important;
+    border-radius: 20px 20px 0 0 !important;
+}
+html.device-ios .preview-details,
+html.device-android .preview-details {
+    padding: 15px 18px calc(15px + env(safe-area-inset-bottom)) !important;
+}
+@media (max-width: 380px) {
+    html.device-ios .preview-content,
+    html.device-android .preview-content { grid-template-rows: minmax(190px, 28dvh) minmax(0, 1fr) !important; }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

@@ -6698,6 +6698,107 @@ html.device-android .preview-details {
 }
 </style>
 
+
+<style id="daymar-product-modal-soft-pink-layout">
+/* ===== DAYMAR · Rosa tierno y encabezado compacto ===== */
+.preview-content {
+    background: #f7dfe5 !important;
+    border: 1px solid rgba(169,103,118,.18) !important;
+}
+.preview-details {
+    background: #f7dfe5 !important;
+    color: #2b2022 !important;
+    scrollbar-color: #c9919f #f7dfe5;
+}
+.preview-details::before {
+    color: #9b6573 !important;
+}
+.preview-name {
+    max-width: calc(100% - 92px) !important;
+    margin: 0 82px 5px 0 !important;
+    color: #2b2022 !important;
+    font-size: clamp(1.35rem, 3vw, 2.15rem) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.04em !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+}
+.preview-barcode {
+    color: #9b7b82 !important;
+}
+.preview-description {
+    color: #654f55 !important;
+    border-top-color: rgba(155,101,115,.25) !important;
+    border-bottom-color: rgba(155,101,115,.25) !important;
+}
+.preview-price { color: #a4526b !important; }
+.preview-price-original { color: #9b7b82 !important; }
+.preview-stock { color: #398a63 !important; }
+.preview-stock::before { box-shadow: 0 0 0 4px rgba(57,138,99,.13) !important; }
+.share-corner {
+    top: 25px;
+    right: 28px;
+    z-index: 5;
+    gap: 6px;
+}
+.share-corner-btn {
+    border-color: rgba(155,101,115,.35) !important;
+    background: rgba(255,255,255,.32) !important;
+}
+.share-corner-btn.whatsapp { color: #16864c !important; }
+.share-corner-btn.favorite { color: #a4526b !important; }
+.share-corner-btn:hover { background: rgba(255,255,255,.62) !important; }
+.close-preview-btn {
+    background: rgba(255,255,255,.78) !important;
+    color: #2b2022 !important;
+}
+.preview-actions {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    align-items: stretch !important;
+}
+.preview-actions .preview-add-btn {
+    background: #2b2022 !important;
+    color: #fff !important;
+}
+.preview-actions .preview-whatsapp-btn {
+    background: #55c978 !important;
+    color: #102219 !important;
+}
+.preview-actions .preview-add-btn:hover,
+.preview-actions .preview-whatsapp-btn:hover { filter: brightness(1.05); }
+
+@media (max-width: 760px) {
+    .preview-details { background: #f7dfe5 !important; }
+    .preview-details::before { margin-bottom: 12px; }
+    .preview-name {
+        max-width: calc(100% - 82px) !important;
+        margin-right: 76px !important;
+        font-size: clamp(1.25rem, 6.6vw, 1.85rem) !important;
+        line-height: 1.02 !important;
+    }
+    .share-corner { top: 14px; right: 54px; }
+    .share-corner-btn { width: 32px !important; min-width: 32px !important; height: 32px !important; min-height: 32px !important; }
+}
+@media (max-width: 380px) {
+    .preview-name {
+        max-width: calc(100% - 74px) !important;
+        margin-right: 68px !important;
+        font-size: clamp(1.1rem, 6vw, 1.55rem) !important;
+    }
+    .share-corner { right: 48px; gap: 4px; }
+    .share-corner-btn { width: 29px !important; min-width: 29px !important; height: 29px !important; min-height: 29px !important; font-size: .75rem !important; }
+}
+html.device-ios .preview-details,
+html.device-android .preview-details { background: #f7dfe5 !important; }
+html.device-ios .preview-name,
+html.device-android .preview-name {
+    max-width: calc(100% - 82px) !important;
+    margin-right: 76px !important;
+    overflow-wrap: anywhere;
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

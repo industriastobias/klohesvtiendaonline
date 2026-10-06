@@ -7822,6 +7822,54 @@ html.device-android .close-preview-btn {
 }
 </style>
 
+
+<style id="daymar-ios-android-bottom-sheet-final">
+/* ===== DAYMAR · Tarjeta inferior igual en iPhone y Android ===== */
+html.device-ios .preview-modal,
+html.device-android .preview-modal {
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+    padding: 0 !important;
+}
+html.device-ios .preview-content,
+html.device-android .preview-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: calc(100dvh - 18px) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    align-self: flex-end !important;
+    border-radius: 22px 22px 0 0 !important;
+    overflow: hidden !important;
+}
+html.device-ios .preview-image-container,
+html.device-android .preview-image-container {
+    flex: 0 0 min(31dvh, 270px) !important;
+    height: min(31dvh, 270px) !important;
+    min-height: 190px !important;
+    border-radius: 0 !important;
+}
+html.device-ios .preview-details,
+html.device-android .preview-details {
+    border-radius: 0 !important;
+    padding-bottom: calc(17px + env(safe-area-inset-bottom)) !important;
+}
+@media (max-width: 380px) {
+    html.device-ios .preview-content,
+    html.device-android .preview-content {
+        max-height: calc(100dvh - 12px) !important;
+        border-radius: 20px 20px 0 0 !important;
+    }
+    html.device-ios .preview-image-container,
+    html.device-android .preview-image-container {
+        flex-basis: 27dvh !important;
+        height: 27dvh !important;
+        min-height: 175px !important;
+    }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

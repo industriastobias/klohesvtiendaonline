@@ -7257,6 +7257,163 @@ html.device-android .preview-image-container .share-corner {
 }
 </style>
 
+
+<style id="daymar-image-left-actions-right-final">
+/* ===== DAYMAR · Imagen izquierda, acciones derecha ===== */
+.preview-image-container {
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+    gap: 0 !important;
+}
+.preview-image-container > .preview-image,
+.preview-image-container > .preview-image.fine-jewelry-preview {
+    width: calc(100% - 70px) !important;
+    max-width: calc(100% - 70px) !important;
+    height: 100% !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    padding: 30px 18px 30px 28px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+.preview-image-container .share-corner {
+    top: 50% !important;
+    right: 14px !important;
+    left: auto !important;
+    transform: translateY(-50%) !important;
+    flex-direction: column !important;
+    gap: 7px !important;
+}
+.preview-image-container .share-corner-btn {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    margin: 0 !important;
+}
+@media (max-width: 760px) {
+    .preview-image-container {
+        justify-content: flex-start !important;
+        border-radius: 0 !important;
+    }
+    .preview-image-container > .preview-image,
+    .preview-image-container > .preview-image.fine-jewelry-preview {
+        width: calc(100% - 70px) !important;
+        max-width: calc(100% - 70px) !important;
+        height: 100% !important;
+        margin-left: 0 !important;
+        margin-right: auto !important;
+        padding: 22px 12px 20px 25px !important;
+    }
+    .preview-image-container .share-corner {
+        top: 50% !important;
+        right: 12px !important;
+        left: auto !important;
+        transform: translateY(-50%) !important;
+        gap: 6px !important;
+    }
+    .preview-image-container .share-corner-btn {
+        width: 34px !important;
+        min-width: 34px !important;
+        height: 34px !important;
+        min-height: 34px !important;
+    }
+}
+@media (max-width: 380px) {
+    .preview-image-container > .preview-image,
+    .preview-image-container > .preview-image.fine-jewelry-preview {
+        width: calc(100% - 64px) !important;
+        max-width: calc(100% - 64px) !important;
+        padding-left: 20px !important;
+        padding-right: 8px !important;
+    }
+    .preview-image-container .share-corner { right: 9px !important; }
+    .preview-image-container .share-corner-btn {
+        width: 32px !important;
+        min-width: 32px !important;
+        height: 32px !important;
+        min-height: 32px !important;
+    }
+}
+html.device-ios .preview-image-container > .preview-image,
+html.device-android .preview-image-container > .preview-image,
+html.device-ios .preview-image-container > .preview-image.fine-jewelry-preview,
+html.device-android .preview-image-container > .preview-image.fine-jewelry-preview {
+    width: calc(100% - 70px) !important;
+    max-width: calc(100% - 70px) !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+html.device-ios .preview-image-container .share-corner,
+html.device-android .preview-image-container .share-corner {
+    top: 50% !important;
+    right: 12px !important;
+    left: auto !important;
+    transform: translateY(-50%) !important;
+}
+</style>
+
+
+<style id="daymar-cart-button-context-fix">
+/* ===== DAYMAR · Botones según el contexto ===== */
+/* Tarjeta inicial del catálogo: texto negro, sin fondo. */
+.cart-corner-btn:not(.added) {
+    background: transparent !important;
+    color: #1a1717 !important;
+    border-color: #1a1717 !important;
+}
+.cart-corner-btn:not(.added) .cart-btn-label {
+    color: #1a1717 !important;
+}
+/* Cuando ya fue añadido, conserva el estado rosado con letras blancas. */
+.cart-corner-btn.added,
+.cart-corner-btn.added .cart-btn-label {
+    color: #fff !important;
+}
+.cart-corner-btn.added {
+    background: #a96776 !important;
+    border-color: #a96776 !important;
+}
+/* Ficha ampliada al hacer clic en la imagen: botón oscuro con texto blanco. */
+.preview-actions .preview-add-btn,
+.preview-actions .preview-add-btn.added {
+    background: #1a1717 !important;
+    border-color: #1a1717 !important;
+    color: #fff !important;
+}
+.preview-actions .preview-add-btn i,
+.preview-actions .preview-add-btn span {
+    color: #fff !important;
+}
+.preview-actions .preview-add-btn:hover { background: #3a3030 !important; }
+</style>
+
+
+<style id="daymar-remove-pink-cart-state">
+/* Catálogo: ambos estados sin fondo rosado. */
+.cart-corner-btn:not(.added),
+.cart-corner-btn.added {
+    background: transparent !important;
+    border-color: #1a1717 !important;
+    color: #1a1717 !important;
+}
+.cart-corner-btn:not(.added) .cart-btn-label,
+.cart-corner-btn.added .cart-btn-label {
+    color: #1a1717 !important;
+}
+/* La ficha ampliada mantiene su botón oscuro con texto blanco. */
+.preview-actions .preview-add-btn,
+.preview-actions .preview-add-btn.added {
+    background: #1a1717 !important;
+    border-color: #1a1717 !important;
+    color: #fff !important;
+}
+.preview-actions .preview-add-btn i,
+.preview-actions .preview-add-btn span { color: #fff !important; }
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

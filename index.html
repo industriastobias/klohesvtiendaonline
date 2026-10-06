@@ -7414,6 +7414,72 @@ html.device-android .preview-image-container .share-corner {
 .preview-actions .preview-add-btn span { color: #fff !important; }
 </style>
 
+
+<style id="daymar-image-left-edge-final">
+/* ===== DAYMAR · Imagen alineada al margen izquierdo ===== */
+.preview-image-container {
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    padding: 0 !important;
+}
+.preview-image-container::after {
+    inset: 8px !important;
+    border-radius: 10px !important;
+}
+.preview-image-container > .preview-image,
+.preview-image-container > .preview-image.fine-jewelry-preview {
+    width: calc(100% - 62px) !important;
+    max-width: calc(100% - 62px) !important;
+    height: 100% !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    padding: 18px 8px 18px 8px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+}
+.preview-image-container .share-corner {
+    right: 13px !important;
+    left: auto !important;
+}
+@media (max-width: 760px) {
+    .preview-image-container > .preview-image,
+    .preview-image-container > .preview-image.fine-jewelry-preview {
+        width: calc(100% - 62px) !important;
+        max-width: calc(100% - 62px) !important;
+        margin-left: 0 !important;
+        margin-right: auto !important;
+        padding: 17px 6px 15px 7px !important;
+        object-position: left center !important;
+    }
+    .preview-image-container::after { inset: 7px !important; }
+    .preview-image-container .share-corner { right: 11px !important; }
+}
+@media (max-width: 380px) {
+    .preview-image-container > .preview-image,
+    .preview-image-container > .preview-image.fine-jewelry-preview {
+        width: calc(100% - 58px) !important;
+        max-width: calc(100% - 58px) !important;
+        padding-left: 5px !important;
+        padding-right: 4px !important;
+    }
+    .preview-image-container .share-corner { right: 8px !important; }
+}
+html.device-ios .preview-image-container > .preview-image,
+html.device-android .preview-image-container > .preview-image,
+html.device-ios .preview-image-container > .preview-image.fine-jewelry-preview,
+html.device-android .preview-image-container > .preview-image.fine-jewelry-preview {
+    width: calc(100% - 62px) !important;
+    max-width: calc(100% - 62px) !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    padding-left: 7px !important;
+    padding-right: 6px !important;
+    object-position: left center !important;
+}
+html.device-ios .preview-image-container::after,
+html.device-android .preview-image-container::after { inset: 7px !important; }
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

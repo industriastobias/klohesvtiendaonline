@@ -8051,6 +8051,110 @@ html.device-ios .cart-modal > .cart-total {
 }
 </style>
 
+
+<style id="daymar-mobile-cart-images-complete">
+/* ===== DAYMAR · Carrito móvil compacto con imágenes completas ===== */
+html.device-android .cart-modal,
+html.device-ios .cart-modal {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+}
+html.device-android .cart-modal > #cartItems,
+html.device-ios .cart-modal > #cartItems {
+    min-height: 0 !important;
+    padding: 0 2px !important;
+    scrollbar-width: thin;
+}
+html.device-android .cart-modal .cart-item,
+html.device-ios .cart-modal .cart-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 10px 0 !important;
+    margin: 0 !important;
+}
+html.device-android .cart-modal .cart-item-image,
+html.device-ios .cart-modal .cart-item-image {
+    width: 104px !important;
+    height: 104px !important;
+    min-width: 104px !important;
+    flex: 0 0 104px !important;
+    padding: 4px !important;
+    box-sizing: border-box !important;
+    background: #f7f4f2 !important;
+    border: 1px solid #e6ded9 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+html.device-android .cart-modal .cart-item-image img,
+html.device-ios .cart-modal .cart-item-image img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+html.device-android .cart-modal .cart-item-details,
+html.device-ios .cart-modal .cart-item-details {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    padding: 1px 0 !important;
+}
+html.device-android .cart-modal .cart-item-details h4,
+html.device-ios .cart-modal .cart-item-details h4 {
+    margin: 0 0 4px !important;
+    font-size: .88rem !important;
+    line-height: 1.18 !important;
+    overflow-wrap: anywhere !important;
+}
+html.device-android .cart-modal .cart-item-code,
+html.device-ios .cart-modal .cart-item-code {
+    margin: 0 0 5px !important;
+    font-size: .64rem !important;
+}
+html.device-android .cart-modal .cart-item-prices,
+html.device-ios .cart-modal .cart-item-prices {
+    margin: 3px 0 5px !important;
+    gap: 2px !important;
+    font-size: .66rem !important;
+}
+html.device-android .cart-modal .cart-item-real-price,
+html.device-ios .cart-modal .cart-item-real-price { font-size: .6rem !important; }
+html.device-android .cart-modal .cart-stock-status,
+html.device-ios .cart-modal .cart-stock-status {
+    margin-top: 3px !important;
+    font-size: 7px !important;
+    letter-spacing: .06em !important;
+}
+html.device-android .cart-modal .remove-item,
+html.device-ios .cart-modal .remove-item {
+    flex: 0 0 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin: 0 0 0 2px !important;
+    padding: 0 !important;
+    font-size: .8rem !important;
+}
+@media (max-width: 380px) {
+    html.device-android .cart-modal .cart-item-image,
+    html.device-ios .cart-modal .cart-item-image {
+        width: 92px !important;
+        height: 92px !important;
+        min-width: 92px !important;
+        flex-basis: 92px !important;
+    }
+    html.device-android .cart-modal .cart-item,
+    html.device-ios .cart-modal .cart-item { gap: 8px !important; }
+    html.device-android .cart-modal .remove-item,
+    html.device-ios .cart-modal .remove-item { flex-basis: 30px !important; width: 30px !important; }
+}
+</style>
+
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>

@@ -9950,34 +9950,6 @@ html.device-ios .cart-modal .remove-item {
             showNotification('Añadido al carrito');
         }
 
-        function changeCartQuantity(barcode, direction) {
-            const cartItem = AppState.cart.find(item => String(item.barcode) === String(barcode));
-            if (!cartItem) return;
-
-            const currentQuantity = Math.max(1, Math.floor(Number(cartItem.quantity) || 1));
-            if (direction < 0) {
-                if (currentQuantity <= 1) return;
-                cartItem.quantity = currentQuantity - 1;
-                updateCart();
-                return;
-            }
-
-            if (direction > 0) {
-                const liveProduct = products.find(product => String(product.barcode) === String(barcode));
-                const availableStock = liveProduct ? Math.max(0, Number(liveProduct.stock) || 0) : 0;
-                if (!liveProduct || availableStock <= 0) {
-                    showNotification('Producto no disponible', 'error');
-                    return;
-                }
-                if (currentQuantity >= availableStock) {
-                    showNotification('Stock maximo alcanzado', 'error');
-                    return;
-                }
-                cartItem.quantity = currentQuantity + 1;
-                updateCart();
-            }
-        }
-
         function removeFromCart(barcode) {
             AppState.cart = AppState.cart.filter(item => item.barcode !== barcode);
             updateCart();
@@ -10070,7 +10042,6 @@ html.device-ios .cart-modal .remove-item {
                     const displayName = liveProduct?.name || item.name || 'Producto';
 
                     const itemQuantity = Math.max(1, Math.floor(Number(item.quantity) || 1));
-                    const canIncreaseQuantity = !isUnavailable && itemQuantity < currentStock;
                     cartItems.innerHTML += `
                         <div class="${itemClass}" aria-label="${displayName}: ${statusText}">
                             <div class="cart-item-image">
@@ -10079,17 +10050,14 @@ html.device-ios .cart-modal .remove-item {
                             </div>
                             <div class="cart-item-details">
                                 <h4>${displayName}</h4>
-                                <p class="cart-item-code">COD: ${item.barcode}</p>
                                 <div class="cart-item-price-line">
-                                    <p class="cart-item-prices"><span class="cart-item-discounted-price">$${itemPrice.toFixed(2)}</span></p>
+                                    <p class="cart-item-prices">
+                                        <span class="cart-item-discounted-price">$${itemPrice.toFixed(2)}</span>
+                                        <span class="cart-item-quantity">× ${itemQuantity}</span>
+                                    </p>
                                     <button class="remove-item" type="button" onclick="removeFromCart('${item.barcode}')" aria-label="Eliminar ${displayName}">
                                         <i class="fas fa-trash" aria-hidden="true"></i>
                                     </button>
-                                </div>
-                                <div class="cart-quantity-control" role="group" aria-label="Cantidad de ${displayName}">
-                                    <button type="button" aria-label="Disminuir cantidad" onclick="changeCartQuantity('${item.barcode}', -1)" ${itemQuantity <= 1 ? 'disabled' : ''}>−</button>
-                                    <output class="cart-quantity-value" aria-live="polite">${itemQuantity}</output>
-                                    <button type="button" aria-label="Aumentar cantidad" onclick="changeCartQuantity('${item.barcode}', 1)" ${canIncreaseQuantity ? '' : 'disabled'}>+</button>
                                 </div>
                                 <span class="cart-stock-status ${statusClass}">${statusText}</span>
                             </div>
@@ -10135,26 +10103,34 @@ html.device-ios .cart-modal .remove-item {
         function toggleCart() {
             const modal = document.getElementById('cartModal');
             const overlay = document.getElementById('overlay');
-            
             if (!modal || !overlay) return;
-            
+
             const isActive = modal.classList.contains('active');
-            
             if (isActive) {
+                if (modal._closeTimer) clearTimeout(modal._closeTimer);
+                overlay.classList.add('is-closing');
                 modal.classList.remove('active');
                 overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            } else {
-                const favoritesModal = document.getElementById('favoritesModal');
-                if (favoritesModal && favoritesModal.classList.contains('active')) {
-                    favoritesModal.classList.remove('active');
-                }
-                
-                modal.classList.add('active');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                updateCart();
+                modal._closeTimer = window.setTimeout(() => {
+                    overlay.classList.remove('is-closing');
+                    modal._closeTimer = null;
+                    document.body.style.overflow = '';
+                }, 340);
+                return;
             }
+
+            if (modal._closeTimer) {
+                clearTimeout(modal._closeTimer);
+                modal._closeTimer = null;
+            }
+            modal.classList.remove('is-closing');
+            overlay.classList.remove('is-closing');
+            const favoritesModal = document.getElementById('favoritesModal');
+            if (favoritesModal && favoritesModal.classList.contains('active')) favoritesModal.classList.remove('active');
+            modal.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            updateCart();
         }
 
         function toggleShipping() {
@@ -10984,6 +10960,99 @@ html.device-ios .cart-modal .remove-item {
   #cartModal.active > .payment-note { display:none !important; }
   #cartModal.active > #whatsappBtn { min-height:42px !important; }
   #cartModal.active > #clearCartBtn { min-height:26px !important; }
+}
+</style>
+
+
+<style id="daymar-cart-final-adjustments">
+/* Ajustes solicitados: cabecera en una fila, envío compacto y salida animada sin cortes. */
+#cartModal:not(.active) {
+  right:0 !important; transform:translateX(105%) !important; visibility:hidden !important;
+  transition:transform .32s cubic-bezier(.22,.61,.36,1), visibility 0s linear .32s !important;
+}
+#cartModal.active {
+  right:0 !important; transform:translateX(0) !important; visibility:visible !important;
+  transition:transform .32s cubic-bezier(.22,.61,.36,1), visibility 0s linear 0s !important;
+}
+#cartModal.is-closing {
+  right:0 !important; transform:translateX(105%) !important; visibility:visible !important;
+  transition:transform .32s cubic-bezier(.4,0,.2,1), visibility 0s linear 0s !important;
+}
+#overlay {
+  display:block !important; opacity:0 !important; visibility:hidden !important; pointer-events:none !important;
+  transition:opacity .28s ease, visibility 0s linear .28s !important;
+}
+#overlay.active {
+  display:block !important; opacity:1 !important; visibility:visible !important; pointer-events:auto !important;
+  transition:opacity .28s ease, visibility 0s linear 0s !important;
+}
+#overlay.is-closing {
+  display:block !important; opacity:0 !important; visibility:visible !important; pointer-events:none !important;
+  transition:opacity .28s ease, visibility 0s linear 0s !important;
+}
+#cartModal.active > .cart-header {
+  display:flex !important; flex-direction:row !important; align-items:center !important; justify-content:space-between !important;
+  gap:10px !important; min-height:62px !important; margin:0 22px !important; padding:10px 0 !important;
+  border-bottom:1px solid #e8e5e5 !important;
+}
+#cartModal.active > .cart-header h2 {
+  order:1 !important; flex:1 1 auto !important; min-width:0 !important; margin:0 !important; padding:0 !important;
+  font-size:1.12rem !important; font-weight:500 !important; line-height:1.2 !important; letter-spacing:-.015em !important;
+  white-space:nowrap !important; text-align:left !important;
+}
+#cartModal.active > .cart-header .close-cart {
+  order:2 !important; flex:0 0 32px !important; width:32px !important; height:32px !important; margin:0 !important;
+  color:#6b6464 !important; background:transparent !important; border:0 !important; font-size:1rem !important;
+}
+#cartModal.active > .shipping-option {
+  margin:4px 22px 0 !important; padding:5px 0 6px !important; gap:2px 8px !important;
+  border-bottom:1px solid #efeded !important;
+}
+#cartModal.active .shipping-title { font-size:.57rem !important; letter-spacing:.065em !important; }
+#cartModal.active .shipping-desc { font-size:.59rem !important; line-height:1.1 !important; }
+#cartModal.active .shipping-toggle { width:32px !important; height:18px !important; flex-basis:32px !important; }
+#cartModal.active .shipping-toggle::after { top:2px !important; left:2px !important; width:14px !important; height:14px !important; }
+#cartModal.active .shipping-toggle.active::after { transform:translateX(14px) !important; }
+#cartModal.active .cart-item-code,
+#cartModal.active .cart-quantity-control { display:none !important; }
+#cartModal.active .cart-item-prices { flex-direction:row !important; align-items:baseline !important; gap:7px !important; }
+#cartModal.active .cart-item-discounted-price { font-size:1rem !important; }
+#cartModal.active .cart-item-quantity { color:#5f5858 !important; font-family:'Manrope','Poppins',sans-serif !important; font-size:.72rem !important; }
+#cartModal.active > .payment-note,
+#cartModal > .payment-note { display:none !important; }
+@media (max-width:360px) {
+  #cartModal.active > .cart-header { min-height:56px !important; margin-left:16px !important; margin-right:16px !important; }
+  #cartModal.active > .cart-header h2 { font-size:1.02rem !important; }
+  #cartModal.active > .shipping-option { margin-left:16px !important; margin-right:16px !important; }
+  #cartModal.active > #cartSummary,
+  #cartModal.active > .cart-total { margin-left:16px !important; margin-right:16px !important; }
+  #cartModal.active > #whatsappBtn { width:calc(100% - 32px) !important; margin-left:16px !important; margin-right:16px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cartModal, #cartModal.active, #cartModal.is-closing, #overlay, #overlay.active, #overlay.is-closing { transition-duration:.01ms !important; }
+}
+</style>
+
+<style id="daymar-cart-transition-final">
+#cartModal:not(.active) { transition:transform .32s cubic-bezier(.22,.61,.36,1), visibility 0s linear 0s !important; }
+#overlay { transition:opacity .28s ease, visibility 0s linear 0s !important; }
+</style>
+
+<style id="daymar-cart-transition-right">
+/* Deslizar el panel con right mantiene una salida consistente entre Safari y Android. */
+#cartModal:not(.active) {
+  right:-105vw !important; transform:none !important; visibility:hidden !important;
+  transition:right .32s cubic-bezier(.22,.61,.36,1), visibility 0s linear .32s !important;
+}
+#cartModal.active {
+  right:0 !important; transform:none !important; visibility:visible !important;
+  transition:right .32s cubic-bezier(.22,.61,.36,1), visibility 0s linear 0s !important;
+}
+#cartModal.is-closing { right:-105vw !important; transform:none !important; visibility:visible !important; }
+#overlay { transition:opacity .28s ease, visibility 0s linear 0s !important; }
+#overlay.is-closing { display:block !important; opacity:0 !important; visibility:visible !important; pointer-events:none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #cartModal:not(.active), #cartModal.active, #overlay, #overlay.active, #overlay.is-closing { transition-duration:.01ms !important; }
 }
 </style>
 

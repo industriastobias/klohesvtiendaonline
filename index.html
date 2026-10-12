@@ -9083,7 +9083,7 @@ html.device-ios .cart-modal .remove-item {
     width: calc(100% - 24px) !important;
     max-width: 640px !important;
     max-height: calc(100dvh - 24px) !important;
-    padding: 0 !important;
+    padding: 64px clamp(40px, 12.5vw, 80px) 80px !important;
     background: transparent !important;
     color: #EDE8DB !important;
     border: 0 !important;
@@ -9107,12 +9107,23 @@ html.device-ios .cart-modal .remove-item {
   }
 
   #newsletterPopup .daymar-welcome-content {
-    max-height: calc(100dvh - 24px);
+    max-height: calc(100dvh - 168px);
     overflow-y: auto;
+    overflow-x: hidden;
     overscroll-behavior: contain;
     scrollbar-width: thin;
     scrollbar-color: #C9D66A #662D42;
-    padding: 64px 64px 72px;
+    padding: 0;
+    min-width: 0;
+  }
+
+  #newsletterPopup .daymar-welcome-content p,
+  #newsletterPopup .daymar-welcome-content h3,
+  #newsletterPopup .daymar-welcome-offers span,
+  #newsletterPopup .daymar-welcome-offers strong {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   #newsletterPopup .newsletter-close {
@@ -9120,7 +9131,7 @@ html.device-ios .cart-modal .remove-item {
     width: 38px !important;
     height: 38px !important;
     min-width: 38px;
-    margin: -22px 0 8px auto;
+    margin: 0 0 12px auto !important;
     background: transparent !important;
     color: #EDE8DB !important;
     border: 1px solid rgba(237, 232, 219, .38) !important;
@@ -9177,8 +9188,8 @@ html.device-ios .cart-modal .remove-item {
   }
 
   #newsletterPopup .daymar-welcome-offers p {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
     gap: 14px;
     margin: 0 !important;
@@ -9210,12 +9221,10 @@ html.device-ios .cart-modal .remove-item {
   @media (max-width: 600px) {
     #newsletterPopup {
       max-width: 440px !important;
+      padding: 60px 40px 76px !important;
     }
     #newsletterPopup .daymar-welcome-content {
-      padding: 56px 32px 68px;
-    }
-    #newsletterPopup .newsletter-close {
-      margin-top: -18px;
+      max-height: calc(100dvh - 160px);
     }
     #newsletterPopup .daymar-welcome-subtitle {
       font-size: 13px !important;
@@ -9226,16 +9235,15 @@ html.device-ios .cart-modal .remove-item {
       gap: 8px;
       padding: 12px 0;
     }
-    #newsletterPopup .daymar-welcome-offers strong {
-      max-width: 112px;
-      flex-shrink: 1;
-    }
   }
 
   @media (max-height: 540px) {
+    #newsletterPopup {
+      padding-top: 48px !important;
+      padding-bottom: 60px !important;
+    }
     #newsletterPopup .daymar-welcome-content {
-      padding-top: 42px;
-      padding-bottom: 54px;
+      max-height: calc(100dvh - 132px);
     }
     #newsletterPopup .daymar-welcome-subtitle {
       margin-bottom: 12px !important;
@@ -11732,10 +11740,8 @@ html.device-ios .cart-modal .remove-item {
         }
 
         function showNewsletter() {
-            if (sessionStorage.getItem('newsletterShown')) return;
             document.getElementById('newsletterPopup').classList.add('active');
             document.getElementById('newsletterOverlay').classList.add('active');
-            sessionStorage.setItem('newsletterShown', 'true');
         }
 
         function closeNewsletter() {

@@ -8221,7 +8221,7 @@ html.device-ios .cart-modal .remove-item {
         <button class="category-btn" onclick="filterProducts('otros', this)">Indispensables</button>
         <button class="category-btn" onclick="filterProducts('pulsera', this)">Pulseras</button>
     </div>
-    <section class="hero atelier-hero daymar-compact-hero">
+    <section class="hero atelier-hero daymar-compact-hero" id="daymarSummer">
         <div class="container atelier-hero-grid">
             <div class="atelier-hero-copy">
                 <p class="eyebrow">DAYMAR / SUMMER EDIT 2026</p>
@@ -10678,6 +10678,8 @@ html.device-ios .cart-modal .remove-item {
             root.classList.remove('device-ios', 'device-android', 'device-desktop');
             root.classList.add(isIOS ? 'device-ios' : isAndroid ? 'device-android' : 'device-desktop');
             root.dataset.daymarPlatform = isIOS ? 'ios' : isAndroid ? 'android' : 'desktop';
+            const coarseTouch = touchPoints > 0 && window.matchMedia('(pointer: coarse)').matches;
+            root.classList.toggle('daymar-tablet-capable', isIOS || isAndroid || coarseTouch);
         }
 
         function getMostViewedProducts(limit = 6) {
@@ -11590,6 +11592,116 @@ html.device-ios .cart-modal .remove-item {
     .atelier-hero.daymar-compact-hero .atelier-search-row > .container {
       padding-top: 10px !important;
       padding-bottom: 10px !important;
+    }
+  }
+</style>
+<style id="daymar-adaptive-tablet-summer">
+  /* La plataforma y el tamaño son decisiones separadas: un Android o iPad
+     ancho no debe heredar ni la fila de tres columnas de escritorio ni
+     una imagen móvil gigantesca. La media query responde también al girar. */
+  @media (min-width: 601px) {
+    html.daymar-tablet-capable #daymarSummer {
+      width: 100% !important;
+      padding-top: 16px !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer > .atelier-hero-grid {
+      display: grid !important;
+      width: 100% !important;
+      max-width: 1100px !important;
+      min-height: 0 !important;
+      margin-inline: auto !important;
+      padding: 0 clamp(14px, 2vw, 24px) !important;
+      grid-template-columns: minmax(0, 1fr) minmax(0, min(46vw, 480px)) !important;
+      align-items: center !important;
+      gap: clamp(14px, 2vw, 24px) !important;
+    }
+
+    /* En sitio de escritorio, conservar el tamaño compacto de la imagen
+       y quitar igualmente la tercera columna que dejaba espacio vacío. */
+    html.daymar-tablet-capable.device-desktop #daymarSummer > .atelier-hero-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, min(46vw, 400px)) !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-hero-copy {
+      min-width: 0 !important;
+      padding: 0 !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-hero-copy > .eyebrow {
+      margin-bottom: 8px !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-hero-copy h1 {
+      font-size: clamp(32px, 4.2vw, 48px) !important;
+      line-height: .95 !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .hero-intro {
+      max-width: 100% !important;
+      font-size: 11px !important;
+      line-height: 1.55 !important;
+      letter-spacing: .1em !important;
+      margin: 12px 0 !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-hero-actions {
+      flex-wrap: wrap !important;
+      gap: 12px !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-primary-cta {
+      padding: 10px 14px !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-hero-art {
+      width: 100% !important;
+      max-width: none !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      height: auto !important;
+      aspect-ratio: 1 / 1 !important;
+      margin: 0 !important;
+      padding: 8px !important;
+      align-self: center !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .hero-art-image {
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 1 / 1 !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-hero-note {
+      display: none !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-search-row {
+      margin-top: 12px !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-search-row > .container {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      width: 100% !important;
+      max-width: 1100px !important;
+      margin-inline: auto !important;
+      padding: 10px clamp(14px, 2vw, 24px) !important;
+      gap: 16px !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-search-row label {
+      flex: 0 0 auto;
+      margin-bottom: 0 !important;
+      gap: 12px !important;
+    }
+
+    html.daymar-tablet-capable #daymarSummer .atelier-search-row .search-input {
+      flex: 1 1 0;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
     }
   }
 </style>

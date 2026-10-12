@@ -11153,30 +11153,34 @@ html.device-ios .cart-modal .remove-item {
 <style id="daymar-isotipo-responsive-size">
   /* Isotipo más visible sin deformarlo ni alterar las funciones del encabezado. */
   .brand-isotipo {
-    width: clamp(66px, 6vw, 82px) !important;
-    height: clamp(66px, 6vw, 82px) !important;
+    width: clamp(84px, 8vw, 108px) !important;
+    height: clamp(84px, 8vw, 108px) !important;
     object-fit: contain !important;
+    transform: scale(1.16) !important;
+    transform-origin: center center !important;
   }
 
   @media (max-width: 900px) {
-    .atelier-nav {
-      min-height: 74px !important;
-      height: 74px !important;
-    }
-    .brand-isotipo {
-      width: clamp(54px, 16vw, 72px) !important;
-      height: clamp(54px, 16vw, 72px) !important;
-    }
-  }
-
-  @media (max-width: 380px) {
     .atelier-nav {
       min-height: 70px !important;
       height: 70px !important;
     }
     .brand-isotipo {
-      width: 58px !important;
-      height: 58px !important;
+      width: clamp(68px, 20vw, 86px) !important;
+      height: clamp(68px, 20vw, 86px) !important;
+      transform: scale(1.12) !important;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .atelier-nav {
+      min-height: 66px !important;
+      height: 66px !important;
+    }
+    .brand-isotipo {
+      width: 70px !important;
+      height: 70px !important;
+      transform: scale(1.08) !important;
     }
   }
 </style>

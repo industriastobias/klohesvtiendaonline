@@ -11162,10 +11162,11 @@ html.device-ios .cart-modal .remove-item {
   .atelier-header .daymar-header-layout {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+    grid-template-rows: auto !important;
     grid-template-areas: "links brand actions";
     align-items: center !important;
     height: auto !important;
-    min-height: clamp(88px, 8vw, 108px) !important;
+    min-height: 56px !important;
     column-gap: 16px !important;
     row-gap: 0 !important;
   }
@@ -11199,8 +11200,9 @@ html.device-ios .cart-modal .remove-item {
 
   .atelier-header .daymar-nav-brand .brand-isotipo {
     display: block !important;
-    width: clamp(72px, 7vw, 92px) !important;
-    height: clamp(72px, 7vw, 92px) !important;
+    /* El PNG es horizontal: no reservar un alto cuadrado para la marca. */
+    width: clamp(104px, 9vw, 128px) !important;
+    height: auto !important;
     object-fit: contain !important;
     flex: 0 0 auto;
     transform: none !important;
@@ -11225,23 +11227,24 @@ html.device-ios .cart-modal .remove-item {
        Los accesos existentes de la barra inferior no se modifican. */
     .atelier-header .daymar-header-layout {
       grid-template-columns: minmax(0, 1fr) !important;
+      grid-template-rows: auto !important;
       grid-template-areas: "brand";
-      min-height: 0 !important;
+      min-height: 48px !important;
       height: auto !important;
       gap: 0 !important;
-      padding-top: 8px !important;
-      padding-bottom: 6px !important;
+      padding-top: 4px !important;
+      padding-bottom: 4px !important;
     }
 
     .atelier-header .daymar-nav-brand {
       justify-self: stretch !important;
       width: 100% !important;
-      min-height: clamp(84px, 25vw, 104px) !important;
+      min-height: 0 !important;
     }
 
     .atelier-header .daymar-nav-brand .brand-isotipo {
-      width: clamp(72px, 22vw, 88px) !important;
-      height: clamp(72px, 22vw, 88px) !important;
+      width: clamp(104px, 28vw, 120px) !important;
+      height: auto !important;
     }
 
     .atelier-header .daymar-nav-links,
@@ -11254,23 +11257,24 @@ html.device-ios .cart-modal .remove-item {
      en Android / iPhone al girar la pantalla, incluso por encima de 900px. */
   :is(html.device-android, html.device-ios) .atelier-header .daymar-header-layout {
     grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto !important;
     grid-template-areas: "brand";
-    min-height: 0 !important;
+    min-height: 48px !important;
     height: auto !important;
     gap: 0 !important;
-    padding-top: 8px !important;
-    padding-bottom: 6px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
   }
 
   :is(html.device-android, html.device-ios) .atelier-header .daymar-nav-brand {
     justify-self: stretch !important;
     width: 100% !important;
-    min-height: clamp(84px, 25vw, 104px) !important;
+    min-height: 0 !important;
   }
 
   :is(html.device-android, html.device-ios) .atelier-header .daymar-nav-brand .brand-isotipo {
-    width: clamp(72px, 22vw, 88px) !important;
-    height: clamp(72px, 22vw, 88px) !important;
+    width: clamp(104px, 28vw, 120px) !important;
+    height: auto !important;
   }
 
   :is(html.device-android, html.device-ios) .atelier-header .daymar-nav-links,
@@ -11332,11 +11336,21 @@ html.device-ios .cart-modal .remove-item {
 
   .atelier-hero.daymar-compact-hero .atelier-hero-art {
     width: 100% !important;
+    max-width: 520px !important;
     min-width: 0 !important;
     min-height: 0 !important;
-    height: clamp(280px, 28vw, 390px) !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    justify-self: center !important;
+    align-self: center !important;
     margin: 0 !important;
     padding: 12px !important;
+  }
+
+  .atelier-hero.daymar-compact-hero .hero-art-image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
   }
 
   .atelier-hero.daymar-compact-hero .hero-art-label {
@@ -11380,7 +11394,7 @@ html.device-ios .cart-modal .remove-item {
     }
 
     .atelier-hero.daymar-compact-hero .atelier-hero-art {
-      height: clamp(240px, 65vw, 310px) !important;
+      height: auto !important;
       padding: 8px !important;
     }
 

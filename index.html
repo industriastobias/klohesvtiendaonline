@@ -11408,5 +11408,116 @@ html.device-ios .cart-modal .remove-item {
     }
   }
 </style>
+<style id="daymar-compact-collection-and-desktop-hero">
+  /* 02 / LA COLECCIÓN: menos aire alrededor del encabezado, sin cambiar
+     las tarjetas, el catálogo, los filtros ni sus funciones. */
+  #catalogo.atelier-catalog {
+    min-height: 0 !important;
+    padding-top: 24px !important;
+    padding-bottom: 36px !important;
+  }
+
+  #catalogo.atelier-catalog .atelier-section-header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end !important;
+    gap: 16px !important;
+    margin-bottom: 14px !important;
+    padding-bottom: 10px !important;
+  }
+
+  #catalogo.atelier-catalog .atelier-section-header > div {
+    min-width: 0 !important;
+  }
+
+  #catalogo.atelier-catalog .atelier-section-header .eyebrow {
+    font-size: 9px !important;
+    margin: 0 0 8px !important;
+    line-height: 1.4 !important;
+  }
+
+  #catalogo.atelier-catalog .atelier-section-header .section-title {
+    font-size: clamp(28px, 3vw, 42px) !important;
+    line-height: 1 !important;
+    overflow-wrap: anywhere;
+  }
+
+  #catalogo.atelier-catalog .section-title::before,
+  #catalogo.atelier-catalog .section-title::after {
+    font-size: inherit !important;
+    line-height: inherit !important;
+    white-space: pre-line !important;
+  }
+
+  #catalogo.atelier-catalog .atelier-section-tools {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-top: 0 !important;
+  }
+
+  #catalogo.atelier-catalog .products-count {
+    margin-bottom: 0 !important;
+  }
+
+  @media (max-width: 900px) {
+    #catalogo.atelier-catalog {
+      padding-top: 18px !important;
+      padding-bottom: 28px !important;
+    }
+
+    #catalogo.atelier-catalog .atelier-section-header {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px !important;
+      margin-bottom: 12px !important;
+      padding-bottom: 8px !important;
+    }
+
+    #catalogo.atelier-catalog .atelier-section-header .section-title {
+      font-size: clamp(24px, 6vw, 30px) !important;
+    }
+
+    #catalogo.atelier-catalog .atelier-section-tools {
+      justify-content: space-between !important;
+      gap: 8px !important;
+    }
+  }
+
+  /* SUMMER EDIT: este ajuste SOLO es de computadora. Android e iPhone
+     conservan el diseño anterior, también al girar la pantalla. */
+  @media (min-width: 901px) {
+    html:not(.device-android):not(.device-ios) .hero.atelier-hero.daymar-compact-hero {
+      padding-top: 24px !important;
+    }
+
+    html:not(.device-android):not(.device-ios) .atelier-hero.daymar-compact-hero > .atelier-hero-grid {
+      max-width: 1360px !important;
+      margin-inline: auto !important;
+      padding-inline: clamp(18px, 2vw, 28px) !important;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 112px !important;
+      gap: clamp(20px, 2vw, 28px) !important;
+    }
+
+    html:not(.device-android):not(.device-ios) .atelier-hero.daymar-compact-hero .atelier-hero-copy h1 {
+      font-size: clamp(40px, 4vw, 60px) !important;
+    }
+
+    html:not(.device-android):not(.device-ios) .atelier-hero.daymar-compact-hero .atelier-hero-art {
+      max-width: 400px !important;
+      padding: 10px !important;
+    }
+
+    html:not(.device-android):not(.device-ios) .atelier-hero.daymar-compact-hero .atelier-search-row {
+      margin-top: 18px !important;
+    }
+
+    html:not(.device-android):not(.device-ios) .atelier-hero.daymar-compact-hero .atelier-search-row > .container {
+      max-width: 1360px !important;
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+    }
+  }
+</style>
 </body>
 </html>

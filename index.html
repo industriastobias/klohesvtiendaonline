@@ -11093,5 +11093,24 @@ html.device-ios .cart-modal .remove-item {
   .cart-total span:last-child, .favorite-item-details h4, .cart-item-details h4 { color: #662D42 !important; }
   .hero, .testimonials-section { border-color: rgba(102, 45, 66, 0.16) !important; }
 </style>
+<style id="daymar-desktop-clean-header">
+  /* En escritorio los controles quedan limpios, sin bloques de relleno. */
+  @media (min-width: 769px) {
+    .header-icon, .menu-toggle {
+      background: transparent !important;
+      border: 1px solid transparent !important;
+      box-shadow: none !important;
+      color: #662D42 !important;
+    }
+    .header-icon:hover, .header-icon.active, .menu-toggle:hover, .menu-toggle.active {
+      background: transparent !important;
+      border-color: transparent !important;
+      border-bottom-color: #662D42 !important;
+      color: #662D42 !important;
+      transform: none !important;
+    }
+    .menu-toggle span, .menu-toggle.active span { background: #662D42 !important; }
+  }
+</style>
 </body>
 </html>

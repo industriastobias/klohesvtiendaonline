@@ -11519,5 +11519,79 @@ html.device-ios .cart-modal .remove-item {
     }
   }
 </style>
+<style id="daymar-mobile-summer-compact">
+  /* Solo la vista móvil: se compacta el bloque de texto y sus espacios.
+     El cuadro de imágenes sigue siendo 1:1 y ocupa todo el ancho de la pantalla. */
+  @media (max-width: 900px) {
+    .hero.atelier-hero.daymar-compact-hero {
+      padding-top: 12px !important;
+    }
+
+    .atelier-hero.daymar-compact-hero > .atelier-hero-grid {
+      width: 100% !important;
+      max-width: none !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      padding: 0 !important;
+      gap: 10px !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .atelier-hero-copy {
+      padding: 0 14px !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .atelier-hero-copy > .eyebrow {
+      margin-bottom: 6px !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .atelier-hero-copy h1 {
+      font-size: clamp(28px, 8vw, 38px) !important;
+      line-height: .95 !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .hero-intro {
+      font-size: 11px !important;
+      line-height: 1.5 !important;
+      letter-spacing: .11em !important;
+      margin: 10px 0 !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .atelier-hero-actions {
+      gap: 12px !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .atelier-primary-cta {
+      padding: 10px 14px !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .atelier-hero-art {
+      width: 100% !important;
+      max-width: none !important;
+      height: auto !important;
+      aspect-ratio: 1 / 1 !important;
+      margin: 0 !important;
+      padding: 6px !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .hero-art-image {
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 1 / 1 !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .hero-art-label {
+      top: 16px !important;
+      left: 16px !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .atelier-search-row {
+      margin-top: 14px !important;
+    }
+
+    .atelier-hero.daymar-compact-hero .atelier-search-row > .container {
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+    }
+  }
+</style>
 </body>
 </html>

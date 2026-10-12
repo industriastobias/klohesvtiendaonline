@@ -22,7 +22,7 @@
     <meta property="og:site_name" content="DAYMAR">
     <meta property="og:title" content="DAYMAR | JEWELRY & EXPERIENCES EL SALVADOR">
     <meta property="og:description" content="Accesorios seleccionados, envíos a todo El Salvador y pedidos por WhatsApp.">
-    <meta property="og:image" content="https://industriastobias.github.io/klohesvtiendaonline/isotipo.png">
+    <meta property="og:image" content="https://industriastobias.github.io/klohesvtiendaonline/isotipo.png?v=2">
     <meta property="og:url" content="https://industriastobias.github.io/klohesvtiendaonline/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -35,8 +35,8 @@
       "@type": "OnlineStore",
       "name": "DAYMAR",
       "url": "https://industriastobias.github.io/klohesvtiendaonline/",
-      "logo": "https://industriastobias.github.io/klohesvtiendaonline/isotipo.png",
-      "image": "https://industriastobias.github.io/klohesvtiendaonline/isotipo.png",
+      "logo": "https://industriastobias.github.io/klohesvtiendaonline/isotipo.png?v=2",
+      "image": "https://industriastobias.github.io/klohesvtiendaonline/isotipo.png?v=2",
       "description": "Tienda en línea de accesorios con envíos a todo El Salvador.",
       "telephone": "+50366711569",
       "email": "daymarsv@gmail.com",
@@ -54,7 +54,7 @@
       }
     }
     </script>
-    <link rel="icon" type="image/png" href="isotipo.png">
+    <link rel="icon" type="image/png" href="isotipo.png?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -8192,7 +8192,7 @@ html.device-ios .cart-modal .remove-item {
                 <a href="#catalogo" class="atelier-link">Esenciales</a>
             </div>
             <div class="nav-center atelier-brand-lockup">
-<a href="#catalogo" class="logo" aria-label="DAYMAR"><img class="brand-isotipo" src="isotipo.png" alt="Isotipo DAYMAR"> <span class="brand-name">DAYMAR</span></a>
+<a href="#catalogo" class="logo" aria-label="DAYMAR"><img class="brand-isotipo" src="isotipo.png?v=2" alt="Isotipo DAYMAR"> <span class="brand-name">DAYMAR</span></a>
             </div>
             <div class="atelier-nav-end">
                 <button class="atelier-search-link" onclick="focusSearch()" aria-label="Buscar"><i class="fas fa-search"></i><span>Buscar</span></button>
@@ -11147,6 +11147,36 @@ html.device-ios .cart-modal .remove-item {
     #favoritesBtn.active i {
       color: #662D42 !important;
       background: transparent !important;
+    }
+  }
+</style>
+<style id="daymar-isotipo-responsive-size">
+  /* Isotipo más visible sin deformarlo ni alterar las funciones del encabezado. */
+  .brand-isotipo {
+    width: clamp(66px, 6vw, 82px) !important;
+    height: clamp(66px, 6vw, 82px) !important;
+    object-fit: contain !important;
+  }
+
+  @media (max-width: 900px) {
+    .atelier-nav {
+      min-height: 74px !important;
+      height: 74px !important;
+    }
+    .brand-isotipo {
+      width: clamp(54px, 16vw, 72px) !important;
+      height: clamp(54px, 16vw, 72px) !important;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .atelier-nav {
+      min-height: 70px !important;
+      height: 70px !important;
+    }
+    .brand-isotipo {
+      width: 58px !important;
+      height: 58px !important;
     }
   }
 </style>

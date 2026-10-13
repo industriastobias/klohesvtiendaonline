@@ -9469,6 +9469,318 @@ html.daymar-welcome-open body {
   #catalogo .product-details-trigger { transition: none; }
 }
 </style>
+<script id="daymar-mobile-catalog-device">
+    document.documentElement.classList.toggle('daymar-catalog-phone', /iPhone|iPod|Android.*Mobile/i.test(navigator.userAgent || ''));
+</script>
+<style id="daymar-mobile-catalog-four-rows">
+/* Escritorio conserva su presentación: las acciones se distribuyen como antes. */
+#catalogo .product-card-actions { display: contents; }
+#catalogo .daymar-action-mobile { display: none; }
+#catalogo .cart-corner-btn .cart-btn-label .daymar-action-full,
+#catalogo .cart-corner-btn .cart-btn-label .daymar-action-mobile {
+  color: inherit !important;
+  font: inherit !important;
+}
+
+@media (max-width: 900px) {
+/* Cada ficha móvil: nombre, precios, stock y una fila de acciones. */
+#catalogo .products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  column-gap: 12px !important;
+  row-gap: 20px !important;
+  align-items: start !important;
+}
+#catalogo .product-card,
+#catalogo .product-card:nth-child(n) {
+  width: 100% !important;
+  min-width: 0 !important;
+  grid-column: span 1 !important;
+  margin-top: 0 !important;
+}
+#catalogo .product-card .product-image-container,
+#catalogo .product-card:nth-child(n) .product-image-container {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  aspect-ratio: 4 / 5 !important;
+}
+#catalogo .product-card .product-info {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: 30px 24px 14px 44px !important;
+  gap: 4px !important;
+  align-items: center !important;
+  justify-items: stretch !important;
+  text-align: left !important;
+  min-width: 0 !important;
+  padding: 8px 0 0 !important;
+  transform: none !important;
+}
+#catalogo .product-card .product-description,
+#catalogo .product-card .fine-jewelry-meta {
+  display: none !important;
+}
+#catalogo .product-card .product-name {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 30px !important;
+  margin: 0 !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+  letter-spacing: .025em !important;
+  text-align: left !important;
+  overflow-wrap: anywhere;
+}
+#catalogo .product-card .product-price-container {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-width: 0 !important;
+  gap: 4px !important;
+  margin: 0 !important;
+  height: 24px !important;
+}
+#catalogo .product-card .product-price {
+  font-size: clamp(17px, 4.2vw, 21px) !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+}
+#catalogo .product-card .product-price-original {
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  opacity: .8;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+}
+#catalogo .product-card .discount-tag {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+  padding: 2px 3px !important;
+  margin: 0 !important;
+  background: #662D42 !important;
+  color: #EDE8DB !important;
+  font-size: 8px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  border-radius: 0 !important;
+  white-space: nowrap !important;
+}
+#catalogo .product-card .product-stock {
+  margin: 0 !important;
+  font-size: 9px !important;
+  line-height: 1.4 !important;
+  letter-spacing: .025em !important;
+  text-align: left !important;
+}
+#catalogo .product-card .product-card-actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr) !important;
+  align-items: stretch !important;
+  gap: 5px !important;
+  min-width: 0 !important;
+}
+#catalogo .product-card .product-details-trigger,
+#catalogo .product-card .cart-corner-btn {
+  display: inline-flex !important;
+  position: static !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  margin: 0 !important;
+  padding: 4px 0 !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+}
+#catalogo .product-card .product-details-trigger {
+  justify-content: flex-start !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+#catalogo .product-card .cart-corner-btn {
+  justify-content: flex-end !important;
+  gap: 4px !important;
+  border: 0 !important;
+  background: transparent !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+#catalogo .product-card .cart-corner-btn .cart-btn-label {
+  font: inherit !important;
+}
+#catalogo .product-card .cart-corner-btn > i { font-size: 9px !important; }
+#catalogo .product-card .daymar-action-full { display: none !important; }
+#catalogo .product-card .daymar-action-mobile { display: inline !important; }
+
+}
+@media (min-width: 901px) {
+/* Cada ficha móvil: nombre, precios, stock y una fila de acciones. */
+html.daymar-catalog-phone #catalogo .products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  column-gap: 12px !important;
+  row-gap: 20px !important;
+  align-items: start !important;
+}
+html.daymar-catalog-phone #catalogo .product-card,
+html.daymar-catalog-phone #catalogo .product-card:nth-child(n) {
+  width: 100% !important;
+  min-width: 0 !important;
+  grid-column: span 1 !important;
+  margin-top: 0 !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-image-container,
+html.daymar-catalog-phone #catalogo .product-card:nth-child(n) .product-image-container {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  aspect-ratio: 4 / 5 !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-info {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: 30px 24px 14px 44px !important;
+  gap: 4px !important;
+  align-items: center !important;
+  justify-items: stretch !important;
+  text-align: left !important;
+  min-width: 0 !important;
+  padding: 8px 0 0 !important;
+  transform: none !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-description,
+html.daymar-catalog-phone #catalogo .product-card .fine-jewelry-meta {
+  display: none !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-name {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 30px !important;
+  margin: 0 !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+  letter-spacing: .025em !important;
+  text-align: left !important;
+  overflow-wrap: anywhere;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-price-container {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-width: 0 !important;
+  gap: 4px !important;
+  margin: 0 !important;
+  height: 24px !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-price {
+  font-size: clamp(17px, 4.2vw, 21px) !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-price-original {
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  opacity: .8;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .discount-tag {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+  padding: 2px 3px !important;
+  margin: 0 !important;
+  background: #662D42 !important;
+  color: #EDE8DB !important;
+  font-size: 8px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  border-radius: 0 !important;
+  white-space: nowrap !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-stock {
+  margin: 0 !important;
+  font-size: 9px !important;
+  line-height: 1.4 !important;
+  letter-spacing: .025em !important;
+  text-align: left !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-card-actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr) !important;
+  align-items: stretch !important;
+  gap: 5px !important;
+  min-width: 0 !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-details-trigger,
+html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn {
+  display: inline-flex !important;
+  position: static !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  margin: 0 !important;
+  padding: 4px 0 !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .product-details-trigger {
+  justify-content: flex-start !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn {
+  justify-content: flex-end !important;
+  gap: 4px !important;
+  border: 0 !important;
+  background: transparent !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn .cart-btn-label {
+  font: inherit !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn > i { font-size: 9px !important; }
+html.daymar-catalog-phone #catalogo .product-card .daymar-action-full { display: none !important; }
+html.daymar-catalog-phone #catalogo .product-card .daymar-action-mobile { display: inline !important; }
+
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -9560,10 +9872,8 @@ html.daymar-welcome-open body {
 
     <section class="products atelier-catalog" id="catalogo">
         <div class="container">
-            <div class="section-header atelier-section-header"><div><p class="eyebrow">02 / LA COLECCIÓN</p><h2 class="section-title" id="categoryTitle">Todas</h2></div><div class="atelier-section-tools"><span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span><div class="filter-container"><select class="filter-select" id="sortFilter" onchange="applySortFilter()"><option value="default">Ordenar</option><option value="price-desc">Precio mayor</option><option value="price-asc">Precio menor</option></select></div></div></div>            <p class="daymar-catalog-help" id="daymarProductDetailsHelp">
-                <span class="daymar-desktop-copy">Haz clic en la imagen para ver la descripción del producto.</span>
-                <span class="daymar-touch-copy">Toca la imagen para ver la descripción del producto.</span>
-            </p>
+            <div class="section-header atelier-section-header"><div><p class="eyebrow">02 / LA COLECCIÓN</p><h2 class="section-title" id="categoryTitle">Todas</h2></div><div class="atelier-section-tools"><span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span><div class="filter-container"><select class="filter-select" id="sortFilter" onchange="applySortFilter()"><option value="default">Ordenar</option><option value="price-desc">Precio mayor</option><option value="price-asc">Precio menor</option></select></div></div></div>
+
 <div class="products-grid" id="productsContainer"></div>
             <div class="load-more-products-wrap" id="loadMoreProductsWrap" style="display: none;">
                 <button class="load-more-products-btn" id="loadMoreProductsBtn" type="button" onclick="loadMoreProducts()">Cargar más productos</button>
@@ -11099,10 +11409,12 @@ html.daymar-welcome-open body {
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
-                    <button class="product-details-trigger" type="button" aria-haspopup="dialog" onclick="event.stopPropagation(); openPreview(${realIndex})">Ver detalles</button>
-                    <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
-                        <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? `AÑADIR AL CARRITO` : 'Agotado'}</span>
-                    </button>
+                    <div class="product-card-actions">
+                        <button class="product-details-trigger" type="button" aria-haspopup="dialog" onclick="event.stopPropagation(); openPreview(${realIndex})"><span class="daymar-action-full">Ver detalles</span><span class="daymar-action-mobile">Detalles</span></button>
+                        <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
+                            <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label"><span class="daymar-action-full">${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}</span><span class="daymar-action-mobile">${hasStock ? 'Al carrito' : 'Agotado'}</span></span>
+                        </button>
+                    </div>
                 </div>
             `;
             
@@ -11309,6 +11621,15 @@ html.daymar-welcome-open body {
         // ==========================================
         // CARRITO
         // ==========================================
+        function setCatalogButtonLabel(button, added) {
+            const label = button.querySelector('.cart-btn-label');
+            if (!label) return;
+            const outOfStock = button.classList.contains('out-of-stock');
+            const full = outOfStock ? 'Agotado' : added ? 'AÑADIDO' : 'AÑADIR AL CARRITO';
+            const compact = outOfStock ? 'Agotado' : added ? 'Añadido' : 'Al carrito';
+            label.innerHTML = `<span class="daymar-action-full">${full}</span><span class="daymar-action-mobile">${compact}</span>`;
+        }
+
         function syncAddButtonStates() {
             const cartBarcodes = new Set(AppState.cart.map(item => String(item.barcode)));
             document.querySelectorAll('.cart-corner-btn[data-barcode], .preview-add-btn[data-barcode]').forEach(button => {
@@ -11317,7 +11638,7 @@ html.daymar-welcome-open body {
                 button.disabled = false;
                 if (button.classList.contains('cart-corner-btn')) {
                     const label = button.querySelector('.cart-btn-label');
-                    if (label) label.textContent = added ? 'AÑADIDO' : 'AÑADIR AL CARRITO';
+                    if (label) setCatalogButtonLabel(button, added);
                 } else {
                     button.innerHTML = added
                         ? '<i class="fas fa-check" aria-hidden="true"></i><span>AÑADIDO</span>'
@@ -11331,7 +11652,7 @@ html.daymar-welcome-open body {
             button.disabled = false;
             if (button.classList.contains('cart-corner-btn')) {
                 const label = button.querySelector('.cart-btn-label');
-                if (label) label.textContent = 'AÑADIDO';
+                if (label) setCatalogButtonLabel(button, true);
             } else {
                 button.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><span>AÑADIDO</span>';
             }

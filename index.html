@@ -9797,33 +9797,60 @@ html.daymar-catalog-phone #catalogo .product-card .daymar-action-mobile { displa
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-#catalogo .products-grid {
-  column-gap: 10px !important;
-}
+#catalogo .products-grid { column-gap: 10px !important; }
 #catalogo .product-card .product-info {
-  grid-template-rows: 30px 24px 14px 48px !important;
+  grid-template-rows: 30px 24px 14px 96px !important;
 }
 #catalogo .product-card .product-card-actions {
-  grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr) !important;
-  gap: 5px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: 44px 48px !important;
+  justify-items: center !important;
+  align-items: center !important;
+  gap: 4px !important;
 }
 #catalogo .product-card .product-details-trigger {
-  height: 48px !important;
-  min-height: 48px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  justify-content: center !important;
+  text-align: center !important;
 }
 #catalogo .product-card .cart-corner-btn {
+  width: calc(100% - 8px) !important;
+  max-width: 220px !important;
   height: 48px !important;
   min-height: 48px !important;
-  font-size: 13px !important;
+  justify-self: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
-  padding: 8px 0 !important;
+  padding: 8px 6px !important;
+  margin: 0 !important;
   gap: 5px !important;
-  justify-content: flex-end !important;
-  text-underline-offset: 4px !important;
+  border: 1px solid #662D42 !important;
+  border-radius: 4px !important;
+  background: #662D42 !important;
+  color: #EDE8DB !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+#catalogo .product-card .cart-corner-btn:hover:not(:disabled),
+#catalogo .product-card .cart-corner-btn:focus-visible {
+  background: #512334 !important;
+  border-color: #512334 !important;
+  color: #EDE8DB !important;
+}
+#catalogo .product-card .cart-corner-btn.out-of-stock {
+  background: transparent !important;
+  border-color: rgba(102, 45, 66, .35) !important;
+  color: #662D42 !important;
 }
 #catalogo .product-card .cart-corner-btn > i {
-  font-size: 12px !important;
+  font-size: 11px !important;
+  color: inherit !important;
 }
 #catalogo .product-card .cart-corner-btn .cart-btn-label,
 #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
@@ -9846,33 +9873,60 @@ html.daymar-catalog-phone #catalogo > .container {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-html.daymar-catalog-phone #catalogo .products-grid {
-  column-gap: 10px !important;
-}
+html.daymar-catalog-phone #catalogo .products-grid { column-gap: 10px !important; }
 html.daymar-catalog-phone #catalogo .product-card .product-info {
-  grid-template-rows: 30px 24px 14px 48px !important;
+  grid-template-rows: 30px 24px 14px 96px !important;
 }
 html.daymar-catalog-phone #catalogo .product-card .product-card-actions {
-  grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr) !important;
-  gap: 5px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: 44px 48px !important;
+  justify-items: center !important;
+  align-items: center !important;
+  gap: 4px !important;
 }
 html.daymar-catalog-phone #catalogo .product-card .product-details-trigger {
-  height: 48px !important;
-  min-height: 48px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  justify-content: center !important;
+  text-align: center !important;
 }
 html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn {
+  width: calc(100% - 8px) !important;
+  max-width: 220px !important;
   height: 48px !important;
   min-height: 48px !important;
-  font-size: 13px !important;
+  justify-self: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
-  padding: 8px 0 !important;
+  padding: 8px 6px !important;
+  margin: 0 !important;
   gap: 5px !important;
-  justify-content: flex-end !important;
-  text-underline-offset: 4px !important;
+  border: 1px solid #662D42 !important;
+  border-radius: 4px !important;
+  background: #662D42 !important;
+  color: #EDE8DB !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn:hover:not(:disabled),
+html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn:focus-visible {
+  background: #512334 !important;
+  border-color: #512334 !important;
+  color: #EDE8DB !important;
+}
+html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn.out-of-stock {
+  background: transparent !important;
+  border-color: rgba(102, 45, 66, .35) !important;
+  color: #662D42 !important;
 }
 html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn > i {
-  font-size: 12px !important;
+  font-size: 11px !important;
+  color: inherit !important;
 }
 html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn .cart-btn-label,
 html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
@@ -11512,7 +11566,7 @@ html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn .cart-btn-lab
                     <div class="product-card-actions">
                         <button class="product-details-trigger" type="button" aria-haspopup="dialog" onclick="event.stopPropagation(); openPreview(${realIndex})"><span class="daymar-action-full">Ver detalles</span><span class="daymar-action-mobile">Detalles</span></button>
                         <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
-                            <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label"><span class="daymar-action-full">${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}</span><span class="daymar-action-mobile">${hasStock ? 'Al carrito' : 'Agotado'}</span></span>
+                            <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label"><span class="daymar-action-full">${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}</span><span class="daymar-action-mobile">${hasStock ? 'Añadir al carrito' : 'Agotado'}</span></span>
                         </button>
                     </div>
                 </div>
@@ -11726,7 +11780,7 @@ html.daymar-catalog-phone #catalogo .product-card .cart-corner-btn .cart-btn-lab
             if (!label) return;
             const outOfStock = button.classList.contains('out-of-stock');
             const full = outOfStock ? 'Agotado' : added ? 'AÑADIDO' : 'AÑADIR AL CARRITO';
-            const compact = outOfStock ? 'Agotado' : added ? 'Añadido' : 'Al carrito';
+            const compact = outOfStock ? 'Agotado' : added ? 'Añadido' : 'Añadir al carrito';
             label.innerHTML = `<span class="daymar-action-full">${full}</span><span class="daymar-action-mobile">${compact}</span>`;
         }
 

@@ -64,7 +64,7 @@
       "areaServed": "SV",
       "sameAs": [
         "https://instagram.com/daymarsv",
-        "https://tiktok.com/@daymarsv",
+        "https://www.tiktok.com/@daymarsv",
         "https://facebook.com/daymarsv"
       ],
       "contactPoint": {
@@ -9423,31 +9423,35 @@ html.daymar-welcome-open body {
 }
 #catalogo .daymar-touch-copy { display: none; }
 
+/* Apariencia de enlace editorial, con área táctil amplia y sin recuadro. */
 #catalogo .product-details-trigger {
   display: inline-flex !important;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-start;
   min-height: 44px;
   max-width: 100%;
-  margin: 8px 0 0;
-  padding: 8px 12px;
-  border: 1px solid rgba(102, 45, 66, .3);
-  border-radius: 2px;
+  margin: 4px 0 0;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 0;
   background: transparent;
   color: #662D42;
   font-family: 'Poppins', sans-serif;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.4;
-  letter-spacing: .02em;
+  letter-spacing: 0;
   text-transform: none;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
   cursor: pointer;
-  transition: background-color .15s ease, color .15s ease;
+  transition: color .15s ease;
 }
 #catalogo .product-details-trigger:hover {
-  background: #662D42;
-  color: #EDE8DB;
+  background: transparent;
+  color: #1a1717;
+  text-decoration-thickness: 2px;
 }
 #catalogo .product-details-trigger:focus-visible,
 #catalogo .product-image-container[role="button"]:focus-visible {
@@ -9580,7 +9584,7 @@ html.daymar-welcome-open body {
                 <div class="daymar-contact-socials">
                     <a href="https://instagram.com/daymarsv" target="_blank" rel="noopener noreferrer" aria-label="Instagram DAYMAR"><i class="fab fa-instagram"></i> Instagram</a>
                     <a href="https://wa.me/50366711569" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp DAYMAR"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                    <a href="https://tiktok.com/@daymarsv" target="_blank" rel="noopener noreferrer" aria-label="TikTok DAYMAR"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a href="https://www.tiktok.com/@daymarsv" target="_blank" rel="noopener noreferrer" aria-label="TikTok DAYMAR"><i class="fab fa-tiktok"></i> TikTok</a>
                     <a href="https://facebook.com/daymarsv" target="_blank" rel="noopener noreferrer" aria-label="Facebook DAYMAR"><i class="fab fa-facebook-f"></i> Facebook</a>
                 </div>
             </div>
@@ -9810,11 +9814,14 @@ html.daymar-welcome-open body {
   const closeButton = popup?.querySelector('.newsletter-close');
   if (!popup || !overlay || !closeButton) return;
   let previousFocus = null;
+  let welcomeTimer = null;
 
   const focusables = () => [...popup.querySelectorAll('button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
     .filter(element => !element.disabled && element.getClientRects().length);
 
   const show = () => {
+    clearTimeout(welcomeTimer);
+    welcomeTimer = null;
     if (popup.classList.contains('active')) return;
     previousFocus = document.activeElement;
     popup.setAttribute('aria-hidden', 'false');
@@ -9827,6 +9834,8 @@ html.daymar-welcome-open body {
   };
 
   const close = () => {
+    clearTimeout(welcomeTimer);
+    welcomeTimer = null;
     if (!popup.classList.contains('active')) return;
     popup.classList.remove('active');
     overlay.classList.remove('active');
@@ -9861,9 +9870,9 @@ html.daymar-welcome-open body {
     }
   }, true);
 
-  // Se ejecuta en cuanto existe el modal, antes del catálogo y de sus scripts.
-  // Sin temporizador, sin esperar imágenes, sin guardar la visita en el navegador.
-  show();
+  // Espera de dos segundos desde que el modal está disponible.
+  // Independiente del catálogo, sin guardar la visita: reaparece al recargar.
+  welcomeTimer = setTimeout(show, 2000);
 })();
     </script>
 
@@ -11090,7 +11099,7 @@ html.daymar-welcome-open body {
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
-                    <button class="product-details-trigger" type="button" aria-haspopup="dialog" onclick="event.stopPropagation(); openPreview(${realIndex})">Ver detalles <span aria-hidden="true">↗</span></button>
+                    <button class="product-details-trigger" type="button" aria-haspopup="dialog" onclick="event.stopPropagation(); openPreview(${realIndex})">Ver detalles</button>
                     <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
                         <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? `AÑADIR AL CARRITO` : 'Agotado'}</span>
                     </button>
@@ -12168,7 +12177,7 @@ html.daymar-welcome-open body {
                 }
             });
 
-            // La bienvenida ya se abrió antes del catálogo, sin espera de 5 segundos.
+            // La bienvenida se programó de forma independiente con una espera de 2 segundos.
             setInterval(nextTestimonial, 5000);
         });
 

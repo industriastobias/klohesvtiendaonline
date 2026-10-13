@@ -9398,6 +9398,73 @@ html.device-ios .cart-modal .remove-item {
   }
 }
 </style>
+<style id="daymar-ux-welcome-and-product-details">
+/* Ajustes de uso: no cambian la composición del carrusel ni la marca. */
+html.daymar-welcome-open,
+html.daymar-welcome-open body {
+  overflow: hidden !important;
+}
+
+#catalogo .daymar-catalog-help {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 10px 12px;
+  border-left: 2px solid #662D42;
+  background: rgba(201, 214, 106, .13);
+  color: #662D42;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-transform: none;
+  letter-spacing: 0;
+}
+#catalogo .daymar-touch-copy { display: none; }
+
+#catalogo .product-details-trigger {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  max-width: 100%;
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border: 1px solid rgba(102, 45, 66, .3);
+  border-radius: 2px;
+  background: transparent;
+  color: #662D42;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .02em;
+  text-transform: none;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+#catalogo .product-details-trigger:hover {
+  background: #662D42;
+  color: #EDE8DB;
+}
+#catalogo .product-details-trigger:focus-visible,
+#catalogo .product-image-container[role="button"]:focus-visible {
+  outline: 2px solid #662D42;
+  outline-offset: 3px;
+}
+#catalogo .product-image-container[role="button"] { cursor: pointer; }
+
+@media (pointer: coarse), (max-width: 900px) {
+  #catalogo .daymar-desktop-copy { display: none; }
+  #catalogo .daymar-touch-copy { display: inline; }
+  #catalogo .daymar-catalog-help { font-size: 11px; margin-bottom: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #catalogo .product-details-trigger { transition: none; }
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -9489,7 +9556,11 @@ html.device-ios .cart-modal .remove-item {
 
     <section class="products atelier-catalog" id="catalogo">
         <div class="container">
-            <div class="section-header atelier-section-header"><div><p class="eyebrow">02 / LA COLECCIÓN</p><h2 class="section-title" id="categoryTitle">Todas</h2></div><div class="atelier-section-tools"><span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span><div class="filter-container"><select class="filter-select" id="sortFilter" onchange="applySortFilter()"><option value="default">Ordenar</option><option value="price-desc">Precio mayor</option><option value="price-asc">Precio menor</option></select></div></div></div><div class="products-grid" id="productsContainer"></div>
+            <div class="section-header atelier-section-header"><div><p class="eyebrow">02 / LA COLECCIÓN</p><h2 class="section-title" id="categoryTitle">Todas</h2></div><div class="atelier-section-tools"><span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span><div class="filter-container"><select class="filter-select" id="sortFilter" onchange="applySortFilter()"><option value="default">Ordenar</option><option value="price-desc">Precio mayor</option><option value="price-asc">Precio menor</option></select></div></div></div>            <p class="daymar-catalog-help" id="daymarProductDetailsHelp">
+                <span class="daymar-desktop-copy">Haz clic en la imagen para ver la descripción del producto.</span>
+                <span class="daymar-touch-copy">Toca la imagen para ver la descripción del producto.</span>
+            </p>
+<div class="products-grid" id="productsContainer"></div>
             <div class="load-more-products-wrap" id="loadMoreProductsWrap" style="display: none;">
                 <button class="load-more-products-btn" id="loadMoreProductsBtn" type="button" onclick="loadMoreProducts()">Cargar más productos</button>
             </div>
@@ -9714,13 +9785,13 @@ html.device-ios .cart-modal .remove-item {
     </a>
 
     <!-- Newsletter Popup -->
-    <div class="newsletter-overlay" id="newsletterOverlay" onclick="closeNewsletter()"></div>
+    <div class="newsletter-overlay" id="newsletterOverlay"></div>
     <div class="newsletter-popup" id="newsletterPopup" role="dialog" aria-modal="true" aria-labelledby="daymarWelcomeTitle" aria-describedby="daymarWelcomeOffers" tabindex="-1">
         <svg class="daymar-welcome-shape" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <path fill="#662D42" d="M 52 176 C 105 48 217 54 340 72 C 463 96 550 54 675 32 C 830 4 956 82 976 235 C 1000 384 953 562 835 642 C 753 698 687 674 612 640 C 527 602 468 610 375 648 C 244 702 111 678 57 551 C 14 449 9 275 52 176 Z"/>
         </svg>
         <div class="daymar-welcome-content">
-            <button class="newsletter-close" type="button" onclick="closeNewsletter()" aria-label="Cerrar bienvenida"><span aria-hidden="true">×</span></button>
+            <button class="newsletter-close" type="button" aria-label="Cerrar bienvenida"><span aria-hidden="true">×</span></button>
             <p class="daymar-welcome-season">DAYMAR / VERANO 2026</p>
             <h3 id="daymarWelcomeTitle">Bienvenido</h3>
             <p class="daymar-welcome-subtitle">Tu próximo detalle empieza aquí.</p>
@@ -9731,6 +9802,70 @@ html.device-ios .cart-modal .remove-item {
             </div>
         </div>
     </div>
+
+    <script id="daymar-welcome-instant">
+(() => {
+  const popup = document.getElementById('newsletterPopup');
+  const overlay = document.getElementById('newsletterOverlay');
+  const closeButton = popup?.querySelector('.newsletter-close');
+  if (!popup || !overlay || !closeButton) return;
+  let previousFocus = null;
+
+  const focusables = () => [...popup.querySelectorAll('button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+    .filter(element => !element.disabled && element.getClientRects().length);
+
+  const show = () => {
+    if (popup.classList.contains('active')) return;
+    previousFocus = document.activeElement;
+    popup.setAttribute('aria-hidden', 'false');
+    popup.classList.add('active');
+    overlay.classList.add('active');
+    document.documentElement.classList.add('daymar-welcome-open');
+    requestAnimationFrame(() => {
+      if (popup.classList.contains('active')) closeButton.focus({ preventScroll: true });
+    });
+  };
+
+  const close = () => {
+    if (!popup.classList.contains('active')) return;
+    popup.classList.remove('active');
+    overlay.classList.remove('active');
+    popup.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('daymar-welcome-open');
+    if (previousFocus?.isConnected && previousFocus !== document.body) {
+      previousFocus.focus({ preventScroll: true });
+    } else if (popup.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
+  };
+
+  window.daymarWelcome = { show, close };
+  closeButton.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', event => {
+    if (!popup.classList.contains('active')) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      close();
+    } else if (event.key === 'Tab') {
+      const items = focusables();
+      const first = items[0] || popup;
+      const last = items[items.length - 1] || popup;
+      if (!popup.contains(document.activeElement) ||
+          (event.shiftKey && document.activeElement === first) ||
+          (!event.shiftKey && document.activeElement === last)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus({ preventScroll: true });
+      }
+    }
+  }, true);
+
+  // Se ejecuta en cuanto existe el modal, antes del catálogo y de sus scripts.
+  // Sin temporizador, sin esperar imágenes, sin guardar la visita en el navegador.
+  show();
+})();
+    </script>
 
     <!-- Overlay -->
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
@@ -10934,7 +11069,7 @@ html.device-ios .cart-modal .remove-item {
             const fineMaterialClass = fineMaterial.includes('PLATA') ? 'silver' : fineMaterial === 'ORO' ? 'gold' : 'mixed';
 
             card.innerHTML = `
-                <div class="product-image-container" onclick="openPreview(${realIndex})">
+                <div class="product-image-container" role="button" tabindex="0" aria-haspopup="dialog" onclick="openPreview(${realIndex})">
                     <img src="${getPrimaryProductImage(product)}" 
                          alt="${product.name}" 
                          class="product-image"
@@ -10955,12 +11090,22 @@ html.device-ios .cart-modal .remove-item {
                     <span class="product-stock ${hasStock ? 'available' : 'out'}">
                         ${hasStock ? `${product.stock} disponibles` : 'Agotado'}
                     </span>
+                    <button class="product-details-trigger" type="button" aria-haspopup="dialog" onclick="event.stopPropagation(); openPreview(${realIndex})">Ver detalles <span aria-hidden="true">↗</span></button>
                     <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
                         <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label">${hasStock ? `AÑADIR AL CARRITO` : 'Agotado'}</span>
                     </button>
                 </div>
             `;
             
+            const imageAction = card.querySelector('.product-image-container');
+            imageAction.setAttribute('aria-label', `Ver descripción de ${product.name}`);
+            card.querySelector('.product-details-trigger').setAttribute('aria-label', `Ver detalles de ${product.name}`);
+            imageAction.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openPreview(realIndex);
+                }
+            });
             const img = card.querySelector('.product-image');
             if (img && imageObserver) imageObserver.observe(img);
 
@@ -11880,13 +12025,11 @@ html.device-ios .cart-modal .remove-item {
         }
 
         function showNewsletter() {
-            document.getElementById('newsletterPopup').classList.add('active');
-            document.getElementById('newsletterOverlay').classList.add('active');
+            window.daymarWelcome?.show();
         }
 
         function closeNewsletter() {
-            document.getElementById('newsletterPopup').classList.remove('active');
-            document.getElementById('newsletterOverlay').classList.remove('active');
+            window.daymarWelcome?.close();
         }
 
         function submitComment(e) {
@@ -12025,7 +12168,7 @@ html.device-ios .cart-modal .remove-item {
                 }
             });
 
-            setTimeout(showNewsletter, 5000);
+            // La bienvenida ya se abrió antes del catálogo, sin espera de 5 segundos.
             setInterval(nextTestimonial, 5000);
         });
 

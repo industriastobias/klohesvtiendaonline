@@ -9301,6 +9301,103 @@ html.device-ios .cart-modal .remove-item {
     display: none !important;
   }
 </style>
+<style id="daymar-desktop-summer-full-width">
+/* SOLO COMPUTADORA: la composición ocupa el ancho real de la pantalla.
+   Se mantienen las vistas aprobadas de teléfonos y tablets. */
+@media (min-width: 901px) {
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer {
+    width: 100% !important;
+    max-width: none !important;
+    padding-top: 18px !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer > .atelier-hero-grid {
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: 0 !important;
+    padding-inline: clamp(14px, 1.25vw, 24px) !important;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr) !important;
+    gap: clamp(18px, 1.6vw, 30px) !important;
+    align-items: center !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-hero-copy {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-hero-copy > .eyebrow {
+    font-size: clamp(11px, .85vw, 15px) !important;
+    line-height: 1.4 !important;
+    margin-bottom: clamp(16px, 1.4vw, 24px) !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-hero-copy h1 {
+    font-size: clamp(56px, 6.4vw, 120px) !important;
+    line-height: .96 !important;
+    letter-spacing: -.045em !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .hero-intro {
+    width: 100% !important;
+    max-width: none !important;
+    font-size: clamp(14px, 1.15vw, 22px) !important;
+    line-height: 1.65 !important;
+    letter-spacing: .1em !important;
+    margin: clamp(20px, 2vw, 34px) 0 !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-hero-actions {
+    gap: clamp(18px, 2vw, 32px) !important;
+    flex-wrap: wrap !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-primary-cta {
+    font-size: clamp(11px, .85vw, 14px) !important;
+    padding: 16px 22px !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-hero-actions > span {
+    font-size: clamp(11px, .85vw, 14px) !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-hero-art {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    justify-self: stretch !important;
+    margin: 0 !important;
+    padding: 10px !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .hero-art-image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  /* La nota lateral no ocupa una tercera columna vacía en escritorio. */
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-hero-note {
+    display: none !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-search-row {
+    margin-top: 18px !important;
+  }
+
+  html.device-desktop:not(.daymar-tablet-capable) #daymarSummer .atelier-search-row > .container {
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: 0 !important;
+    padding: 12px clamp(14px, 1.25vw, 24px) !important;
+  }
+}
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -11959,9 +12056,24 @@ html.device-ios .cart-modal .remove-item {
   let current = 0;
   let navigationRequest = 0;
   let gesture = null;
+  let timer = null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const stopAuto = () => {
+    clearTimeout(timer);
+    timer = null;
+  };
+
+  const startAuto = () => {
+    stopAuto();
+    if (slides.length > 1 && !document.hidden && !gesture && !reducedMotion.matches) {
+      timer = setTimeout(() => navigate(current + 1), 5200);
+    }
+  };
 
   const update = (index) => {
     if (!slides.length) {
+      stopAuto();
       empty.hidden = false;
       empty.textContent = 'No hay imágenes disponibles en carpetaimg.';
       live.textContent = empty.textContent;
@@ -11988,10 +12100,12 @@ html.device-ios .cart-modal .remove-item {
     slide.remove();
     const nextIndex = active === slide ? Math.min(index, slides.length - 1) : slides.indexOf(active);
     update(Math.max(0, nextIndex));
+    startAuto();
   };
 
   const navigate = async (index) => {
     if (slides.length < 2) return;
+    stopAuto();
     const request = ++navigationRequest;
     const target = slides[((index % slides.length) + slides.length) % slides.length];
     target.loading = 'eager';
@@ -12003,6 +12117,7 @@ html.device-ios .cart-modal .remove-item {
     }
     if (request !== navigationRequest || !slides.includes(target)) return;
     update(slides.indexOf(target));
+    startAuto();
   };
 
   // pan-y permite seguir desplazando la página verticalmente. No se bloquea
@@ -12014,12 +12129,15 @@ html.device-ios .cart-modal .remove-item {
     if (previous && gallery.hasPointerCapture(previous.id)) {
       gallery.releasePointerCapture(previous.id);
     }
+    startAuto();
     return previous;
   };
 
   gallery.addEventListener('pointerdown', (event) => {
     if (!event.isPrimary) { finishGesture(); return; }
     if (slides.length < 2 || (event.pointerType === 'mouse' && event.button !== 0)) return;
+    stopAuto();
+    navigationRequest++;
     gesture = { id: event.pointerId, x: event.clientX, y: event.clientY };
     gallery.classList.add('is-dragging');
     gallery.setPointerCapture(event.pointerId);
@@ -12039,7 +12157,18 @@ html.device-ios .cart-modal .remove-item {
   gallery.addEventListener('lostpointercapture', () => {
     gesture = null;
     gallery.classList.remove('is-dragging');
+    startAuto();
   });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAuto();
+      navigationRequest++;
+    } else {
+      startAuto();
+    }
+  });
+  reducedMotion.addEventListener('change', startAuto);
 
   // Alternativa accesible para computadora, sin botones sobre la fotografía.
   gallery.addEventListener('keydown', (event) => {
@@ -12086,7 +12215,9 @@ html.device-ios .cart-modal .remove-item {
         return slide;
       });
       update(0);
+      startAuto();
     } catch (error) {
+      stopAuto();
       empty.hidden = false;
       empty.textContent = 'No se pudo cargar la galería. Revisa carpetaimg/imagenes.json.';
       live.textContent = empty.textContent;

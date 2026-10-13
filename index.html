@@ -9269,6 +9269,23 @@ html.device-ios .cart-modal .remove-item {
   }
 </style>
 <style id="daymar-external-gallery-states">
+  [data-daymar-gallery] {
+    touch-action: pan-y pinch-zoom;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  [data-daymar-gallery].is-dragging {
+    cursor: grabbing;
+  }
+  [data-daymar-gallery] .hero-gallery-slide {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+  [data-daymar-gallery]:focus-visible {
+    outline: 2px solid #662D42;
+    outline-offset: 3px;
+  }
   [data-daymar-gallery] .hero-gallery-empty {
     position: absolute;
     inset: 0;
@@ -9282,15 +9299,6 @@ html.device-ios .cart-modal .remove-item {
   }
   [data-daymar-gallery] [hidden] {
     display: none !important;
-  }
-  [data-daymar-gallery] .hero-gallery-btn:disabled {
-    opacity: .45;
-    cursor: default;
-  }
-  [data-daymar-gallery] .hero-gallery-dots {
-    max-width: min(34vw, 280px);
-    flex-wrap: wrap;
-    row-gap: 4px;
   }
 </style>
 </head>
@@ -9368,20 +9376,9 @@ html.device-ios .cart-modal .remove-item {
                 <div class="atelier-hero-actions"><a href="#catalogo" class="atelier-primary-cta">Ver la selección <i class="fas fa-arrow-right"></i></a><span>01 — 04</span></div>
             </div>
             <div class="atelier-hero-art">
-                <div class="hero-art-label">La luz también se lleva</div>
-                <div class="hero-art-image" data-daymar-gallery="true" data-gallery-manifest="carpetaimg/imagenes.json" aria-roledescription="carrusel" aria-label="Galería de modelos y accesorios Daymar">
+                <div class="hero-art-image" data-daymar-gallery="true" data-gallery-manifest="carpetaimg/imagenes.json" role="region" tabindex="0" aria-roledescription="carrusel" aria-label="Galería DAYMAR / SUMMER EDIT 2026" aria-describedby="daymarGalleryInstructions">
                     <div class="hero-gallery-empty" data-gallery-empty role="status">Cargando imágenes…</div>
-                    <div class="hero-gallery-vignette"></div>
-                    <div class="hero-gallery-controls" hidden>
-                        <div class="hero-gallery-arrows">
-                            <button class="hero-gallery-btn" type="button" data-gallery-prev aria-label="Imagen anterior"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
-                            <button class="hero-gallery-btn" type="button" data-gallery-next aria-label="Imagen siguiente"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
-                        </div>
-                        <div class="hero-gallery-progress">
-                            <div class="hero-gallery-dots"></div>
-                            <span data-gallery-count>00 / 00</span>
-                        </div>
-                    </div>
+                    <span class="hero-gallery-sr" id="daymarGalleryInstructions">Desliza hacia la izquierda o la derecha para cambiar de foto. En computadora puedes arrastrar con el mouse o usar las teclas de flecha al enfocar el carrusel.</span>
                     <span class="hero-gallery-sr" data-gallery-live aria-live="polite"></span>
                 </div>
             </div>
@@ -11956,72 +11953,26 @@ html.device-ios .cart-modal .remove-item {
   const gallery = document.querySelector('[data-daymar-gallery]');
   if (!gallery) return;
 
-  const count = gallery.querySelector('[data-gallery-count]');
   const live = gallery.querySelector('[data-gallery-live]');
-  const previous = gallery.querySelector('[data-gallery-prev]');
-  const next = gallery.querySelector('[data-gallery-next]');
-  const controls = gallery.querySelector('.hero-gallery-controls');
-  const dotContainer = gallery.querySelector('.hero-gallery-dots');
   const empty = gallery.querySelector('[data-gallery-empty]');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let slides = [];
-  let dots = [];
   let current = 0;
-  let timer = null;
-  let hovered = false;
   let navigationRequest = 0;
-
-  const stop = () => {
-    if (timer) clearInterval(timer);
-    timer = null;
-  };
-
-  const start = () => {
-    stop();
-    if (slides.length > 1 && !document.hidden && !hovered &&
-        !gallery.contains(document.activeElement) && !reducedMotion.matches) {
-      timer = setInterval(() => navigate(current + 1), 5200);
-    }
-  };
-
-  const renderDots = () => {
-    dotContainer.replaceChildren();
-    dots = slides.map((slide, index) => {
-      slide.dataset.gallerySlide = String(index);
-      const dot = document.createElement('button');
-      dot.className = 'hero-gallery-dot';
-      dot.type = 'button';
-      dot.dataset.galleryGo = String(index);
-      dot.setAttribute('aria-label', `Ver imagen ${index + 1} de ${slides.length}`);
-      dot.addEventListener('click', () => navigate(index));
-      dotContainer.append(dot);
-      return dot;
-    });
-  };
+  let gesture = null;
 
   const update = (index) => {
     if (!slides.length) {
-      stop();
-      controls.hidden = true;
       empty.hidden = false;
       empty.textContent = 'No hay imágenes disponibles en carpetaimg.';
-      count.textContent = '00 / 00';
-      live.textContent = 'No hay imágenes disponibles';
+      live.textContent = empty.textContent;
       return;
     }
     current = ((index % slides.length) + slides.length) % slides.length;
     slides.forEach((slide, i) => {
+      slide.dataset.gallerySlide = String(i);
       slide.classList.toggle('active', i === current);
       slide.setAttribute('aria-hidden', String(i !== current));
     });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === current);
-      dot.setAttribute('aria-current', String(i === current));
-    });
-    controls.hidden = false;
-    previous.disabled = next.disabled = slides.length < 2;
-    dotContainer.hidden = slides.length < 2;
-    count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
     live.textContent = `Imagen ${current + 1} de ${slides.length}`;
     const active = slides[current];
     active.loading = 'eager';
@@ -12035,14 +11986,12 @@ html.device-ios .cart-modal .remove-item {
     const active = slides[current];
     slides.splice(index, 1);
     slide.remove();
-    current = active === slide ? Math.min(index, slides.length - 1) : slides.indexOf(active);
-    renderDots();
-    update(Math.max(0, current));
-    start();
+    const nextIndex = active === slide ? Math.min(index, slides.length - 1) : slides.indexOf(active);
+    update(Math.max(0, nextIndex));
   };
 
   const navigate = async (index) => {
-    if (!slides.length) return;
+    if (slides.length < 2) return;
     const request = ++navigationRequest;
     const target = slides[((index % slides.length) + slides.length) % slides.length];
     target.loading = 'eager';
@@ -12054,19 +12003,52 @@ html.device-ios .cart-modal .remove-item {
     }
     if (request !== navigationRequest || !slides.includes(target)) return;
     update(slides.indexOf(target));
-    start();
   };
 
-  previous.addEventListener('click', () => navigate(current - 1));
-  next.addEventListener('click', () => navigate(current + 1));
-  gallery.addEventListener('mouseenter', () => { hovered = true; stop(); });
-  gallery.addEventListener('mouseleave', () => { hovered = false; start(); });
-  gallery.addEventListener('focusin', stop);
-  gallery.addEventListener('focusout', (event) => {
-    if (!gallery.contains(event.relatedTarget)) setTimeout(start, 0);
+  // pan-y permite seguir desplazando la página verticalmente. No se bloquea
+  // el zoom con dos dedos ni se usa preventDefault sobre los eventos táctiles.
+  const finishGesture = () => {
+    const previous = gesture;
+    gesture = null;
+    gallery.classList.remove('is-dragging');
+    if (previous && gallery.hasPointerCapture(previous.id)) {
+      gallery.releasePointerCapture(previous.id);
+    }
+    return previous;
+  };
+
+  gallery.addEventListener('pointerdown', (event) => {
+    if (!event.isPrimary) { finishGesture(); return; }
+    if (slides.length < 2 || (event.pointerType === 'mouse' && event.button !== 0)) return;
+    gesture = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    gallery.classList.add('is-dragging');
+    gallery.setPointerCapture(event.pointerId);
   });
-  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
-  reducedMotion.addEventListener('change', start);
+
+  gallery.addEventListener('pointerup', (event) => {
+    if (!gesture || event.pointerId !== gesture.id) return;
+    const previous = finishGesture();
+    const dx = event.clientX - previous.x;
+    const dy = event.clientY - previous.y;
+    const threshold = Math.max(36, Math.min(70, gallery.clientWidth * .1));
+    if (Math.abs(dx) >= threshold && Math.abs(dx) > Math.abs(dy) * 1.25) {
+      navigate(current + (dx < 0 ? 1 : -1));
+    }
+  });
+  gallery.addEventListener('pointercancel', finishGesture);
+  gallery.addEventListener('lostpointercapture', () => {
+    gesture = null;
+    gallery.classList.remove('is-dragging');
+  });
+
+  // Alternativa accesible para computadora, sin botones sobre la fotografía.
+  gallery.addEventListener('keydown', (event) => {
+    if (event.target !== gallery || slides.length < 2) return;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      navigate(current + (event.key === 'ArrowRight' ? 1 : -1));
+    }
+  });
 
   const initialize = async () => {
     const controller = new AbortController();
@@ -12081,7 +12063,7 @@ html.device-ios .cart-modal .remove-item {
       const seen = new Set();
       for (const filename of filenames) {
         if (typeof filename !== 'string' || !/^[A-Za-z0-9_-]+\.(?:png|jpe?g|webp)$/i.test(filename)) {
-          throw new Error('Usa nombres de archivo sin espacios y extensión png, jpg, jpeg o webp.');
+          throw new Error('Usa nombres sin espacios y extensión png, jpg, jpeg o webp.');
         }
         if (!seen.has(filename)) { seen.add(filename); valid.push(filename); }
       }
@@ -12091,6 +12073,7 @@ html.device-ios .cart-modal .remove-item {
         slide.alt = `DAYMAR / SUMMER EDIT 2026 — imagen ${index + 1}`;
         slide.width = 1200;
         slide.height = 1200;
+        slide.draggable = false;
         slide.decoding = 'async';
         slide.loading = index === 0 ? 'eager' : 'lazy';
         slide.fetchPriority = index === 0 ? 'high' : 'low';
@@ -12102,12 +12085,8 @@ html.device-ios .cart-modal .remove-item {
         gallery.insertBefore(slide, gallery.firstChild);
         return slide;
       });
-      renderDots();
       update(0);
-      start();
     } catch (error) {
-      stop();
-      controls.hidden = true;
       empty.hidden = false;
       empty.textContent = 'No se pudo cargar la galería. Revisa carpetaimg/imagenes.json.';
       live.textContent = empty.textContent;

@@ -10001,30 +10001,23 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
 }
 </style>
 
-    <style id="daymar-login-ui">
-        .daymar-login-entry { display:flex !important; align-items:center; gap:12px; margin: 0 0 1.25rem; padding: 14px 12px !important; border: 1px solid rgba(102,45,66,.18) !important; color: var(--azul-cielo,#662D42) !important; font-weight:700; }
+        <style id="daymar-login-ui">
+        .daymar-login-entry { display:flex !important; align-items:center; gap:12px; margin:0 0 1.25rem; padding:14px 12px !important; border:1px solid rgba(102,45,66,.18) !important; color:var(--azul-cielo,#662D42) !important; font-weight:700; }
         .daymar-login-entry::after { display:none !important; }
         .daymar-login-entry > i:last-child { margin-left:auto; font-size:.8rem; }
         .daymar-login-overlay { position:fixed; inset:0; z-index:2500; display:none; place-items:center; padding:20px; background:rgba(26,23,23,.52); backdrop-filter:blur(5px); }
         .daymar-login-overlay.active { display:grid; animation:fadeIn .2s ease both; }
         .daymar-login-dialog { position:relative; width:min(100%,440px); max-height:min(90vh,720px); overflow:auto; padding:38px 32px 30px; background:#fff; color:var(--negro,#1A1717); box-shadow:0 24px 70px rgba(26,23,23,.22); border-radius:18px; }
-        .daymar-login-close { position:absolute; top:14px; right:14px; width:38px; height:38px; border:0; border-radius:50%; background:#f4f0ed; color:#33292c; font-size:1rem; cursor:pointer; }
+        .daymar-login-close { position:absolute; top:14px; right:14px; width:44px; height:44px; border:0; border-radius:50%; background:#f4f0ed; color:#33292c; font-size:1rem; cursor:pointer; }
         .daymar-login-eyebrow { margin:0 0 10px; color:#662D42; font-size:.68rem; font-weight:700; letter-spacing:.18em; }
         .daymar-login-dialog h2 { margin:0 0 8px; font-family:'Poppins','Outfit',sans-serif; font-size:1.8rem; letter-spacing:-.03em; }
         .daymar-login-description { margin:0 0 24px; color:#665F5B; font-size:.92rem; }
-        .daymar-login-google,.daymar-login-phone-submit { width:100%; min-height:48px; display:flex; align-items:center; justify-content:center; gap:10px; border-radius:8px; font:600 .9rem 'Outfit',sans-serif; cursor:pointer; transition:transform .2s ease, background .2s ease; }
+        .daymar-login-google,.daymar-login-action { width:100%; min-height:48px; display:flex; align-items:center; justify-content:center; gap:10px; border-radius:8px; font:600 .9rem 'Outfit',sans-serif; cursor:pointer; transition:transform .2s ease, background .2s ease; }
         .daymar-login-google { border:1px solid #d9d4d1; background:#fff; color:#252120; }
         .daymar-login-google:hover { background:#f8f6f4; transform:translateY(-1px); }
         .daymar-login-google i { color:#4285f4; font-size:1.05rem; }
-        .daymar-login-divider { display:flex; align-items:center; gap:12px; margin:20px 0; color:#817a76; font-size:.78rem; }
-        .daymar-login-divider::before,.daymar-login-divider::after { content:""; height:1px; flex:1; background:#e9e4e1; }
-        .daymar-login-phone-form { display:grid; gap:9px; }
-        .daymar-login-phone-form label { color:#39312f; font-size:.82rem; font-weight:600; }
-        .daymar-login-phone-form input { width:100%; min-height:48px; padding:0 13px; border:1px solid #d9d4d1; border-radius:8px; background:#fff; color:#1a1717; font:400 1rem 'Outfit',sans-serif; outline:none; }
-        .daymar-login-phone-form input:focus { border-color:#662D42; box-shadow:0 0 0 3px rgba(102,45,66,.12); }
-        .daymar-login-phone-submit { margin-top:4px; border:0; background:#662D42; color:#fff; }
-        .daymar-login-phone-submit:hover { background:#4f2132; transform:translateY(-1px); }
-        .daymar-login-phone-submit i { font-size:.8rem; }
+        .daymar-login-action { margin-top:18px; border:0; background:#662D42; color:#fff; }
+        .daymar-login-action:hover { background:#4f2132; }
         .daymar-login-setup-note { display:flex; align-items:flex-start; gap:8px; margin:18px 0 0; color:#756d69; font-size:.74rem; line-height:1.5; }
         .daymar-login-setup-note i { margin-top:2px; color:#662D42; }
         @media(max-width:480px) { .daymar-login-dialog { padding:34px 23px 24px; } .daymar-login-dialog h2 { font-size:1.55rem; } }
@@ -10069,13 +10062,13 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
         .daymar-auth-status { margin-top:18px; color:#3e563e; font-size:.85rem; line-height:1.5; overflow-wrap:anywhere; }
         .daymar-auth-status.is-error { color:#9a2438; }
         .daymar-auth-help { font-size:.78rem; line-height:1.5; color:#665F5B; margin:4px 0; overflow-wrap:anywhere; }
-        #daymarRecaptcha:empty { display:none; }
-        #daymarRecaptcha { margin:14px 0; min-height:0; }
+        
+        
         #daymarLoginOverlay button:disabled { opacity:.55; cursor:not-allowed; transform:none; }
-        html body #daymarLoginOverlay .daymar-phone-consent { display:flex; align-items:flex-start; gap:9px; font-weight:400; font-size:.74rem; line-height:1.5; margin:5px 0; }
-        html body #daymarLoginOverlay .daymar-phone-consent input { width:20px; height:20px; min-height:20px; flex:0 0 20px; margin-top:2px; accent-color:#662D42; }
-        .daymar-code-actions { display:flex; flex-wrap:wrap; gap:12px; }
-        .daymar-code-actions button, .daymar-menu-signout { font:600 .8rem 'Outfit',sans-serif; padding:10px 0; min-height:44px; background:transparent; border:0; color:#662D42; cursor:pointer; text-align:left; }
+        
+        
+        
+        .daymar-menu-signout { font:600 .8rem 'Outfit',sans-serif; padding:10px 0; min-height:44px; background:transparent; border:0; color:#662D42; cursor:pointer; text-align:left; }
         #daymarAccountName { font-weight:600; }
         /* El logo queda centrado; restaurar una hamburguesa táctil a su izquierda. */
         @media (max-width:900px) {
@@ -10113,7 +10106,31 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
         @media(prefers-reduced-motion:reduce) {
             html body #categoriesMenu, html body #menuOverlay, html body #daymarLoginOverlay { transition:none !important; animation:none !important; }
         }
-    </style>
+    
+        /* La foto proviene de user.photoURL de Google; fallback si no existe o falla. */
+        .daymar-user-avatar { display:inline-grid; place-items:center; position:relative; width:36px; height:36px; flex:0 0 36px; overflow:hidden; border-radius:50%; background:#ede8db; color:#662D42; border:1px solid rgba(102,45,66,.18); line-height:1; }
+        .daymar-user-avatar img { display:block; width:100%; height:100%; object-fit:cover; }
+        .daymar-user-avatar [data-daymar-profile-fallback] { display:grid; place-items:center; width:100%; height:100%; font:700 16px/1 'Outfit',sans-serif; }
+        html body .daymar-user-avatar [hidden], html body .atelier-header [data-daymar-account-trigger][hidden] { display:none !important; }
+        html body #categoriesMenu .daymar-login-entry { padding-top:12px !important; padding-bottom:12px !important; }
+        .daymar-login-entry-copy { display:flex; flex-direction:column; align-items:flex-start; gap:5px; flex:1; min-width:0; }
+        #daymarMenuAccountEmail { max-width:100%; color:#665f5b; font:500 11px/1.45 'Outfit',sans-serif; letter-spacing:0; text-transform:none; overflow-wrap:anywhere; text-align:left; }
+        .daymar-account-profile { display:flex; align-items:center; gap:16px; margin:8px 0 16px; }
+        .daymar-account-profile .daymar-user-avatar { width:76px; height:76px; flex-basis:76px; }
+        .daymar-account-profile [data-daymar-profile-fallback] { font-size:30px; }
+        .daymar-account-details { flex:1; min-width:0; }
+        #daymarAccountName { font-weight:600; font-size:1rem; overflow-wrap:anywhere; }
+        #daymarAccountContact { font-size:.9rem; overflow-wrap:anywhere; }
+        .daymar-account-trigger { display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; min-width:44px; flex:0 0 44px; border:0; padding:4px; border-radius:50%; background:transparent; cursor:pointer; touch-action:manipulation; }
+        .daymar-account-trigger:hover { background:rgba(102,45,66,.06); }
+        .daymar-account-trigger:focus-visible { outline:2px solid #662D42; outline-offset:2px; }
+        .daymar-account-trigger > * { pointer-events:none; }
+        #daymarHeaderAccountMobile { display:none !important; }
+        @media(max-width:900px) {
+            html body .atelier-header #daymarHeaderAccountMobile:not([hidden]) { display:inline-flex !important; position:absolute; right:0; top:50%; transform:translateY(-50%); z-index:2; }
+        }
+        :is(html.device-ios,html.device-android) body .atelier-header #daymarHeaderAccountMobile:not([hidden]) { display:inline-flex !important; position:absolute; right:0; top:50%; transform:translateY(-50%); z-index:2; }
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -10158,17 +10175,19 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
             <!-- Contenedor 3: acciones; se conserva Buscar en escritorio. -->
             <div class="atelier-nav-end daymar-nav-actions">
                 <button class="atelier-search-link" onclick="focusSearch()" aria-label="Buscar"><i class="fas fa-search"></i><span>Buscar</span></button>
-                <div class="daymar-shopping-actions" role="group" aria-label="Favoritos y carrito de compras">
+                <div class="daymar-shopping-actions" role="group" aria-label="Cuenta, favoritos y carrito de compras">
+                    <button class="daymar-account-trigger " id="daymarHeaderAccountDesktop" type="button" data-daymar-open-login data-daymar-account-trigger aria-label="Ver mi cuenta" hidden><span class="daymar-user-avatar" aria-hidden="true"><img data-daymar-profile-photo alt="" referrerpolicy="no-referrer" decoding="async" hidden><span data-daymar-profile-fallback>D</span></span></button>
                     <button class="header-icon favorites-icon-btn atelier-icon" onclick="toggleFavorites()" aria-label="Favoritos" id="favoritesBtn"><i class="far fa-heart"></i><span class="favorites-count-header" id="favoritesBadge" style="display:none">0</span></button>
                     <button class="header-icon cart-icon-header atelier-icon" onclick="toggleCart()" aria-label="Carrito"><i class="fas fa-shopping-bag"></i><span class="cart-count-header" id="cartBadge" style="display:none">0</span></button>
                 </div>
             </div>
+        <button class="daymar-account-trigger daymar-mobile-account-trigger" id="daymarHeaderAccountMobile" type="button" data-daymar-open-login data-daymar-account-trigger aria-label="Ver mi cuenta" hidden><span class="daymar-user-avatar" aria-hidden="true"><img data-daymar-profile-photo alt="" referrerpolicy="no-referrer" decoding="async" hidden><span data-daymar-profile-fallback>D</span></span></button>
         </div>
     </header>
     <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
     <div class="categories-menu atelier-categories" id="categoriesMenu" role="dialog" aria-modal="true" aria-label="Menú de categorías DAYMAR" aria-hidden="true" tabindex="-1" inert>
         <div class="atelier-menu-heading"><button class="close-menu" type="button" data-daymar-menu-close aria-label="Cerrar menú"><i class="fas fa-times" aria-hidden="true"></i></button></div>
-        <button class="category-btn daymar-login-entry" type="button" data-daymar-open-login><i class="far fa-user" aria-hidden="true"></i><span id="daymarLoginEntryLabel">Iniciar sesión</span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        <button class="category-btn daymar-login-entry" type="button" data-daymar-open-login><i id="daymarLoginIcon" class="far fa-user" aria-hidden="true"></i><span class="daymar-user-avatar" id="daymarMenuAccountAvatar" hidden aria-hidden="true"><img data-daymar-profile-photo alt="" referrerpolicy="no-referrer" decoding="async" hidden><span data-daymar-profile-fallback>D</span></span><span class="daymar-login-entry-copy"><span id="daymarLoginEntryLabel">Iniciar sesión</span><small id="daymarMenuAccountEmail" hidden></small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
         <button class="daymar-menu-signout" id="daymarMenuSignOut" type="button" hidden>Cerrar sesión</button>
         <p>Encuentra tu pieza para cada momento.</p>
         <button class="category-btn active" onclick="filterProducts('todos', this)">Todas</button>
@@ -10188,32 +10207,18 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
             <button class="daymar-login-close" type="button" data-daymar-login-close aria-label="Cerrar inicio de sesión"><i class="fas fa-times" aria-hidden="true"></i></button>
             <p class="daymar-login-eyebrow">DAYMAR / TU CUENTA</p>
             <h2 id="daymarLoginTitle">Iniciar sesión</h2>
-            <p class="daymar-login-description" id="daymarLoginDescription">Accede a tu cuenta con Google o con un código de verificación por SMS.</p>
+            <p class="daymar-login-description" id="daymarLoginDescription">Ingresa de forma segura con tu cuenta de Google.</p>
             <div id="daymarSignInOptions">
                 <button class="daymar-login-google" id="daymarGoogleSignIn" type="button" disabled><i class="fab fa-google" aria-hidden="true"></i><span>Continuar con Google</span></button>
-                <div class="daymar-login-divider"><span>o con tu teléfono</span></div>
-                <form class="daymar-login-phone-form" id="daymarLoginPhoneForm">
-                    <label for="daymarLoginPhone">Número de teléfono</label>
-                    <input id="daymarLoginPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+503 7000 0000" maxlength="25" aria-describedby="daymarPhoneHelp" required disabled>
-                    <p id="daymarPhoneHelp" class="daymar-auth-help">8 dígitos de El Salvador o formato internacional con + y código de país.</p>
-                    <label class="daymar-phone-consent" for="daymarPhoneConsent"><input id="daymarPhoneConsent" type="checkbox" required disabled><span>Acepto recibir un SMS de verificación. Google recibirá y almacenará mi número para prevenir spam y abuso. Pueden aplicarse las tarifas de mi operador.</span></label>
-                    <button class="daymar-login-phone-submit" id="daymarSendCode" type="submit" disabled>Enviar código SMS <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
-                </form>
-                <div id="daymarRecaptcha" aria-label="Verificación reCAPTCHA"></div>
-                <form class="daymar-login-phone-form" id="daymarLoginCodeForm" hidden>
-                    <p id="daymarCodeDestination" class="daymar-auth-help"></p>
-                    <label for="daymarLoginCode">Código de verificación</label>
-                    <input id="daymarLoginCode" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" minlength="6" maxlength="6" placeholder="000000" aria-describedby="daymarCodeDestination" required disabled>
-                    <button class="daymar-login-phone-submit" id="daymarVerifyCode" type="submit" disabled>Verificar código</button>
-                    <div class="daymar-code-actions"><button id="daymarResendCode" type="button" disabled>Reenviar SMS</button><button id="daymarChangePhone" type="button" disabled>Cambiar número</button></div>
-                </form>
             </div>
             <div id="daymarAccount" hidden>
-                <p id="daymarAccountName"></p>
-                <p id="daymarAccountContact" class="daymar-auth-help"></p>
-                <button class="daymar-login-phone-submit" id="daymarSignOut" type="button" disabled>Cerrar sesión</button>
+                <div class="daymar-account-profile">
+                    <span class="daymar-user-avatar" aria-hidden="true"><img data-daymar-profile-photo alt="" referrerpolicy="no-referrer" decoding="async" hidden><span data-daymar-profile-fallback>D</span></span>
+                    <div class="daymar-account-details"><p id="daymarAccountName"></p><p id="daymarAccountContact" class="daymar-auth-help"></p></div>
+                </div>
+                <button class="daymar-login-action" id="daymarSignOut" type="button" disabled>Cerrar sesión</button>
             </div>
-            <p id="daymarAuthStatus" class="daymar-auth-status" role="status" aria-live="polite" aria-atomic="true">Preparando el acceso…</p>
+            <p id="daymarAuthStatus" class="daymar-auth-status" role="status" aria-live="polite" aria-atomic="true">Conectando con Google…</p>
             <button class="daymar-login-google" id="daymarAuthRetry" type="button" hidden>Recargar para reintentar el acceso</button>
             <p class="daymar-login-setup-note"><i class="fas fa-lock" aria-hidden="true"></i> Tu carrito y favoritos se mantienen en este navegador; no se sincronizan entre dispositivos.</p>
         </section>
@@ -10363,7 +10368,7 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
       window.setDaymarMenuOpen(false);
     } else if (target.closest('[data-daymar-open-login]')) {
       event.preventDefault();
-      openPanel(dialog);
+      openPanel(dialog, target.closest('[data-daymar-open-login]'));
     } else if (target.closest('[data-daymar-login-close]') || target === login) {
       window.closeDaymarLogin();
     }
@@ -13239,28 +13244,23 @@ const firebaseConfig = {
   'use strict';
   const byId = id => document.getElementById(id);
   const googleButton = byId('daymarGoogleSignIn');
-  const phoneForm = byId('daymarLoginPhoneForm');
-  const codeForm = byId('daymarLoginCodeForm');
-  const phoneInput = byId('daymarLoginPhone');
-  const codeInput = byId('daymarLoginCode');
-  const resendButton = byId('daymarResendCode');
-  const changeButton = byId('daymarChangePhone');
   const status = byId('daymarAuthStatus');
   const account = byId('daymarAccount');
   const signInOptions = byId('daymarSignInOptions');
   const menuEntryLabel = byId('daymarLoginEntryLabel');
+  const menuEmail = byId('daymarMenuAccountEmail');
+  const menuAvatar = byId('daymarMenuAccountAvatar');
+  const menuIcon = byId('daymarLoginIcon');
   const menuSignOut = byId('daymarMenuSignOut');
   const signOutButton = byId('daymarSignOut');
+  const accountTriggers = Array.from(document.querySelectorAll('[data-daymar-account-trigger]'));
+  const avatars = Array.from(document.querySelectorAll('.daymar-user-avatar'));
   let sdk = null;
   let auth = null;
   let provider = null;
-  let verifier = null;
-  let confirmation = null; // Solo memoria. Nunca guardar códigos SMS ni tokens manualmente.
-  let sentPhone = '';
   let ready = false;
   let busy = false;
-  let cooldownUntil = 0;
-  let cooldownTimer = null;
+  let currentUser = null;
   let persistenceNotice = '';
   const SDK_VERSION = '12.4.0';
 
@@ -13272,138 +13272,98 @@ const firebaseConfig = {
   function explainError(error) {
     const messages = {
       'auth/unauthorized-domain': 'Este dominio no está autorizado. Agrega industriastobias.github.io en Firebase Authentication → Configuración → Dominios autorizados.',
-      'auth/operation-not-allowed': 'Este método de acceso no está habilitado o la región SMS no está permitida. Revisa Google/Teléfono y la política SMS en Firebase.',
+      'auth/operation-not-allowed': 'El acceso con Google no está habilitado. Revisa el proveedor Google en Firebase Authentication.',
       'auth/invalid-api-key': 'La configuración web de Firebase no es válida. Revisa el firebaseConfig exacto de esta app.',
       'auth/app-not-authorized': 'La app no está autorizada. Revisa los dominios y las restricciones de la API key pública en Firebase/Google Cloud.',
-      'auth/invalid-app-credential': 'No se pudo validar reCAPTCHA. Intenta de nuevo y revisa la configuración y el dominio autorizado.',
-      'auth/captcha-check-failed': 'La verificación reCAPTCHA falló. Completa una nueva verificación e intenta de nuevo.',
-      'auth/missing-app-credential': 'Falta la verificación reCAPTCHA. Intenta nuevamente.',
-      'auth/invalid-phone-number': 'Escribe 8 dígitos de El Salvador o un número internacional con + y código de país.',
-      'auth/missing-phone-number': 'Escribe tu número de teléfono.',
-      'auth/invalid-verification-code': 'El código SMS no es correcto. Revisa los 6 dígitos e intenta de nuevo.',
-      'auth/missing-verification-code': 'Escribe el código de 6 dígitos recibido por SMS.',
-      'auth/code-expired': 'El código venció. Solicita otro SMS.',
-      'auth/session-expired': 'La verificación venció. Solicita un nuevo código SMS.',
       'auth/too-many-requests': 'Demasiados intentos. Espera unos minutos antes de intentar de nuevo.',
-      'auth/quota-exceeded': 'Se alcanzó el límite de SMS del proyecto. Intenta más tarde o usa Google.',
-      'auth/billing-not-enabled': 'El envío de SMS no está disponible en este proyecto. El administrador debe revisar los requisitos del plan de Firebase.',
       'auth/popup-blocked': 'El navegador bloqueó la ventana de Google. Permite ventanas emergentes para este sitio y vuelve a tocar Continuar con Google.',
       'auth/popup-closed-by-user': 'Cerraste la ventana de Google. Puedes volver a intentarlo.',
       'auth/cancelled-popup-request': 'Ya había una ventana de acceso abierta. Intenta de nuevo.',
       'auth/operation-not-supported-in-this-environment': 'Abre la tienda en Safari, Chrome o un navegador completo mediante HTTPS.',
       'auth/web-storage-unsupported': 'El navegador bloqueó el almacenamiento del acceso. Revisa su configuración de privacidad.',
-      'auth/network-request-failed': 'No se pudo conectar. Revisa tu conexión y permite Firebase y reCAPTCHA en tu navegador.',
+      'auth/network-request-failed': 'No se pudo conectar. Revisa tu conexión y permite Firebase en tu navegador.',
       'auth/user-disabled': 'Esta cuenta está deshabilitada. Comunícate con DAYMAR.',
-      'auth/account-exists-with-different-credential': 'Esta cuenta ya usa otro método de acceso. Ingresa con ese método; no se vinculan cuentas automáticamente.',
-      'auth/invalid-credential': 'No se pudo validar el acceso. Intenta de nuevo.',
+      'auth/account-exists-with-different-credential': 'Este correo ya tiene una cuenta con otro método de acceso. Comunícate con DAYMAR; no se vinculan cuentas automáticamente.',
+      'auth/invalid-credential': 'No se pudo validar el acceso con Google. Intenta de nuevo.',
       'auth/internal-error': 'El servicio de acceso respondió con un error. Intenta nuevamente.'
     };
     return messages[error?.code] || 'No se pudo completar el acceso. Intenta de nuevo. ' +
       (error?.code ? '(' + error.code + ')' : 'Revisa tu conexión o la configuración de Firebase.');
   }
 
-  function cooldownSeconds() { return Math.max(0, Math.ceil((cooldownUntil - Date.now()) / 1000)); }
   function refreshControls() {
     const unavailable = !ready || busy;
     googleButton.disabled = unavailable;
-    phoneForm.querySelectorAll('input, button').forEach(el => { el.disabled = unavailable; });
-    codeInput.disabled = unavailable;
-    byId('daymarVerifyCode').disabled = unavailable || !confirmation;
-    changeButton.disabled = unavailable;
-    resendButton.disabled = unavailable || !confirmation || cooldownSeconds() > 0;
-    resendButton.textContent = cooldownSeconds() > 0 ? 'Reenviar SMS en ' + cooldownSeconds() + ' s' : 'Reenviar SMS';
     signOutButton.disabled = unavailable;
     menuSignOut.disabled = unavailable;
     byId('daymarLoginDialog').setAttribute('aria-busy', String(busy));
   }
 
-  function clearVerifier() {
-    if (verifier) {
-      try { verifier.clear(); } catch (_) { /* Puede haberse destruido al vencer. */ }
-      verifier = null;
+  function safePhotoURL(value) {
+    if (!value) return '';
+    try {
+      const url = new URL(value);
+      return url.protocol === 'https:' ? url.href : '';
+    } catch (_) { return ''; }
+  }
+
+  avatars.forEach(avatar => {
+    const image = avatar.querySelector('[data-daymar-profile-photo]');
+    const fallback = avatar.querySelector('[data-daymar-profile-fallback]');
+    image.addEventListener('error', () => {
+      image.hidden = true;
+      fallback.hidden = false;
+    });
+  });
+
+  function renderAvatar(avatar, user) {
+    const image = avatar.querySelector('[data-daymar-profile-photo]');
+    const fallback = avatar.querySelector('[data-daymar-profile-fallback]');
+    const label = user?.displayName || user?.email || 'Cliente DAYMAR';
+    const initial = Array.from(label.trim())[0] || 'D';
+    fallback.textContent = initial.toLocaleUpperCase('es');
+    const url = safePhotoURL(user?.photoURL);
+    image.alt = user ? 'Foto de perfil de ' + label : '';
+    if (url) {
+      // Conservar el fallback si esta misma URL ya falló; no mostrar imágenes rotas.
+      if (image.getAttribute('src') !== url) {
+        image.hidden = false;
+        fallback.hidden = true;
+        image.src = url;
+      }
+    } else {
+      image.hidden = true;
+      image.removeAttribute('src');
+      fallback.hidden = false;
     }
-    byId('daymarRecaptcha').replaceChildren();
-  }
-
-  function resetPhoneFlow() {
-    confirmation = null;
-    sentPhone = '';
-    cooldownUntil = 0;
-    clearInterval(cooldownTimer);
-    cooldownTimer = null;
-    clearVerifier();
-    codeInput.value = '';
-    codeForm.hidden = true;
-    phoneForm.hidden = false;
-    refreshControls();
-  }
-
-  function startCooldown() {
-    cooldownUntil = Date.now() + 60000;
-    clearInterval(cooldownTimer);
-    cooldownTimer = setInterval(() => {
-      refreshControls();
-      if (!cooldownSeconds()) { clearInterval(cooldownTimer); cooldownTimer = null; }
-    }, 1000);
-    refreshControls();
   }
 
   function renderUser(user) {
+    currentUser = user;
     const signedIn = !!user;
+    const email = user?.email || '';
+    const name = user?.displayName || 'Cliente DAYMAR';
     signInOptions.hidden = signedIn;
     account.hidden = !signedIn;
     menuSignOut.hidden = !signedIn;
+    menuAvatar.hidden = !signedIn;
+    menuIcon.hidden = signedIn;
+    menuEmail.hidden = !signedIn;
+    menuEmail.textContent = signedIn ? (email || 'Correo no disponible') : '';
+    menuEmail.title = email;
     menuEntryLabel.textContent = signedIn ? 'Mi cuenta' : 'Iniciar sesión';
     byId('daymarLoginTitle').textContent = signedIn ? 'Mi cuenta' : 'Iniciar sesión';
-    byId('daymarLoginDescription').textContent = signedIn ? 'Tu sesión está activa en DAYMAR.' :
-      'Accede a tu cuenta con Google o con un código de verificación por SMS.';
-    byId('daymarAccountName').textContent = user?.displayName || 'Cliente DAYMAR';
-    byId('daymarAccountContact').textContent = user?.email || user?.phoneNumber || '';
-    if (signedIn) {
-      resetPhoneFlow();
-      phoneInput.value = '';
-      byId('daymarPhoneConsent').checked = false;
-      message('Sesión iniciada.' + persistenceNotice);
-    }
-  }
-
-  function normalizePhone(value) {
-    const number = value.trim().replace(/[\s().-]/g, '');
-    // La tienda es de El Salvador; admite también E.164 explícito de otros países.
-    if (/^\d{8}$/.test(number)) return '+503' + number;
-    if (!/^\+[1-9]\d{7,14}$/.test(number)) throw { code: 'auth/invalid-phone-number' };
-    return number;
-  }
-
-  async function sendSMS(phone) {
-    if (!ready || busy) return;
-    busy = true;
-    refreshControls();
-    message('Completa reCAPTCHA para solicitar el código SMS.');
-    try {
-      clearVerifier();
-      verifier = new sdk.RecaptchaVerifier(auth, 'daymarRecaptcha', {
-        size: 'compact',
-        'expired-callback': () => message('reCAPTCHA venció. Completa una nueva verificación.', true),
-        'error-callback': () => message('No se pudo cargar reCAPTCHA. Revisa la conexión e intenta de nuevo.', true)
-      });
-      await verifier.render();
-      confirmation = await sdk.signInWithPhoneNumber(auth, phone, verifier);
-      sentPhone = phone;
-      phoneForm.hidden = true;
-      codeForm.hidden = false;
-      byId('daymarCodeDestination').textContent = 'Enviamos un código a ' + phone + '.';
-      codeInput.value = '';
-      startCooldown();
-      message('SMS enviado. Escribe el código de 6 dígitos.');
-    } catch (error) {
-      message(explainError(error), true);
-    } finally {
-      busy = false;
-      clearVerifier(); // Cada intento usa una verificación nueva, nunca un token vencido.
-      refreshControls();
-      if (confirmation && byId('daymarLoginOverlay').classList.contains('active')) codeInput.focus();
-    }
+    byId('daymarLoginDescription').textContent = signedIn ? 'Esta es la cuenta con la que iniciaste sesión en DAYMAR.' :
+      'Ingresa de forma segura con tu cuenta de Google.';
+    byId('daymarAccountName').textContent = signedIn ? name : '';
+    byId('daymarAccountContact').textContent = signedIn ? (email || 'Correo no disponible') : '';
+    avatars.forEach(avatar => renderAvatar(avatar, user));
+    accountTriggers.forEach(button => {
+      button.hidden = !signedIn;
+      button.setAttribute('aria-label', signedIn ? 'Ver mi cuenta: ' + (email || name) : 'Ver mi cuenta');
+      button.title = signedIn ? (email || name) : '';
+    });
+    message(signedIn ? 'Sesión iniciada con Google.' + persistenceNotice : 'Continúa con Google para ingresar.');
   }
 
   googleButton.addEventListener('click', () => {
@@ -13411,10 +13371,10 @@ const firebaseConfig = {
     busy = true;
     refreshControls();
     message('Continúa en la ventana de Google.');
-    // Invocación directa desde el gesto del usuario: no esperar imports ni persistencia aquí.
-    // Popup evita la dependencia del redirect entre dominios en Safari/GitHub Pages.
+    // Invocar desde el gesto del usuario, sin esperar imports ni persistencia en este handler.
     try {
-      sdk.signInWithPopup(auth, provider).catch(error => message(explainError(error), true))
+      sdk.signInWithPopup(auth, provider)
+        .catch(error => message(explainError(error), true))
         .finally(() => { busy = false; refreshControls(); });
     } catch (error) {
       busy = false;
@@ -13423,64 +13383,32 @@ const firebaseConfig = {
     }
   });
 
-  phoneForm.addEventListener('submit', event => {
-    event.preventDefault();
-    if (!ready || busy || !phoneForm.reportValidity()) return;
-    if (!byId('daymarPhoneConsent').checked) {
-      message('Acepta la verificación por SMS para continuar.', true);
-      return;
-    }
-    try { sendSMS(normalizePhone(phoneInput.value)); }
-    catch (error) { message(explainError(error), true); phoneInput.focus(); }
-  });
-
-  codeForm.addEventListener('submit', async event => {
-    event.preventDefault();
-    if (!ready || busy || !confirmation || !codeForm.reportValidity()) return;
-    const code = codeInput.value.trim();
-    if (!/^\d{6}$/.test(code)) { message('Escribe el código de 6 dígitos.', true); return; }
-    busy = true;
-    refreshControls();
-    message('Verificando el código…');
-    try { await confirmation.confirm(code); }
-    catch (error) {
-      message(explainError(error), true);
-      if (['auth/code-expired', 'auth/session-expired'].includes(error?.code)) {
-        resetPhoneFlow();
-      }
-    } finally { busy = false; refreshControls(); }
-  });
-
-  resendButton.addEventListener('click', () => {
-    if (ready && !busy && confirmation && !cooldownSeconds()) sendSMS(sentPhone);
-  });
-  changeButton.addEventListener('click', () => {
-    if (busy) return;
-    resetPhoneFlow();
-    message('Escribe el número al que deseas enviar un nuevo código.');
-    phoneInput.focus();
-  });
-
   async function signOut() {
     if (!ready || busy) return;
     busy = true;
     refreshControls();
     try {
       await sdk.signOut(auth);
-      resetPhoneFlow();
+      renderUser(null);
       message('Sesión cerrada.');
-      // No borra el carrito ni los favoritos locales.
+      // Mantener carrito y favoritos locales; limpiar solo la presentación de la cuenta.
       if (typeof window.showNotification === 'function') window.showNotification('Sesión cerrada.');
     } catch (error) {
       window.openDaymarLogin();
       message(explainError(error), true);
-    } finally { busy = false; refreshControls(); }
+    } finally {
+      busy = false;
+      refreshControls();
+      if (!currentUser) {
+        if (byId('daymarLoginOverlay').classList.contains('active')) googleButton.focus();
+        else if (byId('categoriesMenu').classList.contains('active')) {
+          byId('daymarLoginEntryLabel').closest('button').focus();
+        }
+      }
+    }
   }
   signOutButton.addEventListener('click', signOut);
   menuSignOut.addEventListener('click', signOut);
-  document.addEventListener('daymar:login-closed', () => { if (!busy) clearVerifier(); });
-  // Solo visible tras un fallo de inicialización. Recargar vuelve a solicitar los módulos
-  // y evita conservar en caché una importación fallida o duplicar apps/listeners.
   byId('daymarAuthRetry').addEventListener('click', () => window.location.reload());
 
   async function initializeAuth() {
@@ -13489,9 +13417,9 @@ const firebaseConfig = {
     if (!config || !['apiKey', 'authDomain', 'projectId', 'appId'].every(key =>
       typeof config[key] === 'string' && config[key].trim())) {
       message('El inicio de sesión aún no está disponible: falta el firebaseConfig exacto de la app web DAYMAR.', true);
-      return; // No inicializar Firebase con ejemplos ni derivar valores a partir del nombre.
+      return;
     }
-    message('Conectando con el servicio de acceso…');
+    message('Conectando con Google…');
     try {
       const [appSDK, authSDK] = await Promise.all([
         import('https://www.gstatic.com/firebasejs/' + SDK_VERSION + '/firebase-app.js'),
@@ -13513,10 +13441,9 @@ const firebaseConfig = {
           persistenceNotice = ' Tu navegador limita el almacenamiento; deberás ingresar de nuevo al recargar.';
         }
       }
-      sdk.onAuthStateChanged(auth, user => renderUser(user), error => message(explainError(error), true));
       ready = true;
       refreshControls();
-      message('Elige un método para continuar.');
+      sdk.onAuthStateChanged(auth, renderUser, error => message(explainError(error), true));
     } catch (error) {
       message(explainError(error), true);
       ready = false;

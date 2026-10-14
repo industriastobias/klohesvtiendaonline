@@ -10000,6 +10000,35 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
   color: inherit !important;
 }
 </style>
+
+    <style id="daymar-login-ui">
+        .daymar-login-entry { display:flex !important; align-items:center; gap:12px; margin: 0 0 1.25rem; padding: 14px 12px !important; border: 1px solid rgba(102,45,66,.18) !important; color: var(--azul-cielo,#662D42) !important; font-weight:700; }
+        .daymar-login-entry::after { display:none !important; }
+        .daymar-login-entry > i:last-child { margin-left:auto; font-size:.8rem; }
+        .daymar-login-overlay { position:fixed; inset:0; z-index:2500; display:none; place-items:center; padding:20px; background:rgba(26,23,23,.52); backdrop-filter:blur(5px); }
+        .daymar-login-overlay.active { display:grid; animation:fadeIn .2s ease both; }
+        .daymar-login-dialog { position:relative; width:min(100%,440px); max-height:min(90vh,720px); overflow:auto; padding:38px 32px 30px; background:#fff; color:var(--negro,#1A1717); box-shadow:0 24px 70px rgba(26,23,23,.22); border-radius:18px; }
+        .daymar-login-close { position:absolute; top:14px; right:14px; width:38px; height:38px; border:0; border-radius:50%; background:#f4f0ed; color:#33292c; font-size:1rem; cursor:pointer; }
+        .daymar-login-eyebrow { margin:0 0 10px; color:#662D42; font-size:.68rem; font-weight:700; letter-spacing:.18em; }
+        .daymar-login-dialog h2 { margin:0 0 8px; font-family:'Poppins','Outfit',sans-serif; font-size:1.8rem; letter-spacing:-.03em; }
+        .daymar-login-description { margin:0 0 24px; color:#665F5B; font-size:.92rem; }
+        .daymar-login-google,.daymar-login-phone-submit { width:100%; min-height:48px; display:flex; align-items:center; justify-content:center; gap:10px; border-radius:8px; font:600 .9rem 'Outfit',sans-serif; cursor:pointer; transition:transform .2s ease, background .2s ease; }
+        .daymar-login-google { border:1px solid #d9d4d1; background:#fff; color:#252120; }
+        .daymar-login-google:hover { background:#f8f6f4; transform:translateY(-1px); }
+        .daymar-login-google i { color:#4285f4; font-size:1.05rem; }
+        .daymar-login-divider { display:flex; align-items:center; gap:12px; margin:20px 0; color:#817a76; font-size:.78rem; }
+        .daymar-login-divider::before,.daymar-login-divider::after { content:""; height:1px; flex:1; background:#e9e4e1; }
+        .daymar-login-phone-form { display:grid; gap:9px; }
+        .daymar-login-phone-form label { color:#39312f; font-size:.82rem; font-weight:600; }
+        .daymar-login-phone-form input { width:100%; min-height:48px; padding:0 13px; border:1px solid #d9d4d1; border-radius:8px; background:#fff; color:#1a1717; font:400 .95rem 'Outfit',sans-serif; outline:none; }
+        .daymar-login-phone-form input:focus { border-color:#662D42; box-shadow:0 0 0 3px rgba(102,45,66,.12); }
+        .daymar-login-phone-submit { margin-top:4px; border:0; background:#662D42; color:#fff; }
+        .daymar-login-phone-submit:hover { background:#4f2132; transform:translateY(-1px); }
+        .daymar-login-phone-submit i { font-size:.8rem; }
+        .daymar-login-setup-note { display:flex; align-items:flex-start; gap:8px; margin:18px 0 0; color:#756d69; font-size:.74rem; line-height:1.5; }
+        .daymar-login-setup-note i { margin-top:2px; color:#662D42; }
+        @media(max-width:480px) { .daymar-login-dialog { padding:34px 23px 24px; } .daymar-login-dialog h2 { font-size:1.55rem; } }
+    </style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -10054,6 +10083,7 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="categories-menu atelier-categories" id="categoriesMenu">
         <div class="atelier-menu-heading"><button class="close-menu" onclick="toggleMenu()" aria-label="Cerrar menú"><i class="fas fa-times" aria-hidden="true"></i></button></div>
+        <button class="category-btn daymar-login-entry" type="button" onclick="openDaymarLogin()"><i class="far fa-user" aria-hidden="true"></i><span>Iniciar sesión</span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
         <p>Encuentra tu pieza para cada momento.</p>
         <button class="category-btn active" onclick="filterProducts('todos', this)">Todas</button>
         <button class="category-btn fine-jewelry-category" onclick="filterProducts('oro-plata', this)">Oro y Plata</button>
@@ -10065,6 +10095,23 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
         <button class="category-btn" onclick="filterProducts('lentes-sol', this)">Lentes de sol</button>
         <button class="category-btn" onclick="filterProducts('otros', this)">Indispensables</button>
         <button class="category-btn" onclick="filterProducts('pulsera', this)">Pulseras</button>
+    </div>
+
+    <div class="daymar-login-overlay" id="daymarLoginOverlay" aria-hidden="true" onclick="if(event.target === this) closeDaymarLogin()">
+        <section class="daymar-login-dialog" id="daymarLoginDialog" role="dialog" aria-modal="true" aria-labelledby="daymarLoginTitle" aria-describedby="daymarLoginDescription" tabindex="-1">
+            <button class="daymar-login-close" type="button" onclick="closeDaymarLogin()" aria-label="Cerrar inicio de sesión"><i class="fas fa-times" aria-hidden="true"></i></button>
+            <p class="daymar-login-eyebrow">DAYMAR / TU CUENTA</p>
+            <h2 id="daymarLoginTitle">Iniciar sesión</h2>
+            <p class="daymar-login-description" id="daymarLoginDescription">Guarda tus favoritos y disfruta una experiencia más personal.</p>
+            <button class="daymar-login-google" type="button" onclick="daymarAuthNotConfigured('Google')"><i class="fab fa-google" aria-hidden="true"></i><span>Continuar con Google</span></button>
+            <div class="daymar-login-divider"><span>o con tu teléfono</span></div>
+            <form class="daymar-login-phone-form" id="daymarLoginPhoneForm">
+                <label for="daymarLoginPhone">Número de teléfono</label>
+                <input id="daymarLoginPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+503 7000 0000" required>
+                <button class="daymar-login-phone-submit" type="submit">Continuar con teléfono <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+            </form>
+            <p class="daymar-login-setup-note"><i class="fas fa-lock" aria-hidden="true"></i> Acceso seguro con Google o código SMS. La conexión se habilitará al configurar el servicio de autenticación.</p>
+        </section>
     </div>
     <section class="hero atelier-hero daymar-compact-hero" id="daymarSummer">
         <div class="container atelier-hero-grid">
@@ -10306,7 +10353,7 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
 
     <!-- Navegación rápida para teléfonos -->
     <nav class="mobile-bottom-nav" aria-label="Navegación rápida">
-        <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'}); toggleMenu();" aria-label="Ir al inicio"><i class="fas fa-house" aria-hidden="true"></i><span>Inicio</span></button>
+        <button type="button" onclick="document.getElementById('daymarSummer').scrollIntoView({behavior:'smooth'});" aria-label="Ver novedades"><i class="fas fa-sparkles" aria-hidden="true"></i><span>Novedades</span></button>
         <button type="button" onclick="focusSearch()"><i class="fas fa-search" aria-hidden="true"></i><span>Buscar</span></button>
         <button type="button" onclick="toggleFavorites()"><i class="far fa-heart" aria-hidden="true"></i><span>Favoritos</span><span class="mobile-nav-badge" id="bottomFavoritesBadge" style="display:none">0</span></button>
         <button type="button" onclick="toggleCart()"><i class="fas fa-shopping-bag" aria-hidden="true"></i><span>Carrito</span><span class="mobile-nav-badge" id="bottomCartBadge" style="display:none">0</span></button>
@@ -12920,6 +12967,68 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
   };
 
   initialize();
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="daymar-login-ui-behavior">
+(() => {
+  const overlay = document.getElementById('daymarLoginOverlay');
+  const dialog = document.getElementById('daymarLoginDialog');
+  const phoneForm = document.getElementById('daymarLoginPhoneForm');
+  let previousFocus = null;
+  window.openDaymarLogin = function() {
+    if (!overlay || !dialog) return;
+    const menu = document.getElementById('categoriesMenu');
+    if (menu && menu.classList.contains('active')) toggleMenu();
+    previousFocus = document.activeElement;
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    dialog.focus();
+  };
+  window.closeDaymarLogin = function() {
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+  };
+  window.daymarAuthNotConfigured = function(method) {
+    if (typeof window.showNotification === 'function') {
+      window.showNotification('El acceso con ' + method + ' requiere conectar el servicio de autenticación.', 'error');
+    } else {
+      window.alert('El acceso con ' + method + ' aún requiere configurar el servicio de autenticación.');
+    }
+  };
+  if (phoneForm) phoneForm.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!phoneForm.reportValidity()) return;
+    window.daymarAuthNotConfigured('teléfono por SMS');
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && overlay && overlay.classList.contains('active')) window.closeDaymarLogin();
+  });
 })();
 </script>
 </body>

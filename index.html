@@ -10158,6 +10158,28 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
         :is(html.device-ios,html.device-android) body .atelier-header #daymarHeaderAccountMobile:not([hidden]) { display:inline-flex !important; position:absolute; right:0; top:50%; transform:translateY(-50%); z-index:2; }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@500&amp;display=swap">
+
+<style id="daymar-promotions-style">
+.daymar-benefit { margin:16px 0; padding:16px; border:1px solid #e8dce1; border-radius:14px; background:#faf7f3; color:#3b2b33; font-family:'Outfit',sans-serif; }
+.daymar-member-notice { font-size:12px; line-height:1.6; margin:0 0 12px; }
+.daymar-benefit h3 { margin:0 0 7px; font-size:17px; }
+.daymar-benefit-status { font-size:12px; line-height:1.6; margin:0 0 12px; }
+.daymar-benefit fieldset { min-width:0; margin:0; padding:0; border:0; }
+.daymar-benefit legend { padding:0; font-size:12px; margin-bottom:10px; }
+.daymar-benefit label { display:flex; align-items:center; gap:10px; padding:12px; margin:8px 0; border:1px solid #e1d4da; border-radius:10px; background:#fff; cursor:pointer; }
+.daymar-benefit input { width:18px; height:18px; min-height:18px; flex:0 0 18px; margin:0; accent-color:#662D42; }
+.daymar-benefit label span { display:flex; flex-direction:column; gap:4px; }
+.daymar-benefit label strong { font-size:13px; }
+.daymar-benefit small { font-size:11px; line-height:1.4; color:#786c71; }
+.daymar-benefit fieldset:disabled { opacity:.65; }
+.daymar-benefit button { min-height:44px; padding:10px 12px; border:1px solid #d6c6ce; border-radius:9px; background:#fff; color:#662D42; font:500 12px/1.5 'Outfit',sans-serif; cursor:pointer; }
+.daymar-benefit button:focus-visible, .daymar-benefit input:focus-visible { outline:2px solid #662D42; outline-offset:3px; }
+html body #cartModal [hidden] { display:none !important; }
+#daymarCouponRow { color:#662D42; }
+html body #daymarLoginDialog .daymar-login-benefits { margin:14px 0 0; color:#662D42; font:500 12px/1.6 'Outfit',sans-serif; }
+.daymar-monthly-condition { margin:12px 0; color:#662D42; font:500 12px/1.6 'Outfit',sans-serif; }
+html body #daymarLoginDialog .daymar-monthly-condition { font-size:11px; }
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -10237,6 +10259,7 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
                 <p class="daymar-login-eyebrow">TU ESPACIO PERSONAL</p>
                 <h2 id="daymarLoginTitle">Tu cuenta DAYMAR</h2>
                 <p class="daymar-login-description" id="daymarLoginDescription">Inicia sesión con Google para acceder a tu perfil.</p>
+                <p id="daymarLoginBenefits" class="daymar-login-benefits">Con Google: 15% en relojes, 25% en los demás productos y 2% en oro/plata.</p><p id="daymarMonthlyLoginNotice" class="daymar-monthly-condition">El beneficio de $5 o envío gratis se puede usar una sola vez al mes por cuenta Google.</p>
             </div>
             <div class="daymar-login-content">
                 <div id="daymarSignInOptions">
@@ -10693,9 +10716,9 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
             <h3 id="daymarWelcomeTitle">Bienvenido</h3>
             <p class="daymar-welcome-subtitle">Tu próximo detalle empieza aquí.</p>
             <div class="daymar-welcome-offers" id="daymarWelcomeOffers">
-                <p><span>Relojes</span><strong>15% de descuento</strong></p>
+                <p><span>Relojes</span><strong>10% de descuento</strong></p>
                 <p><span>Oro y plata</span><strong>Sin descuento</strong></p>
-                <p><span>Los demás accesorios</span><strong>30% de descuento</strong></p>
+                <p><span>Los demás accesorios</span><strong>20% de descuento</strong></p>
             </div>
         </div>
     </div>
@@ -10802,6 +10825,21 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
         <div id="cartItems">
             <div class="cart-empty">Tu carrito esta vacio</div>
         </div>
+        <section class="daymar-benefit" id="daymarBenefit" aria-labelledby="daymarBenefitTitle">
+            <p id="daymarMemberNotice" class="daymar-member-notice">Descuentos para todos: relojes 10% · demás productos 20% · oro/plata sin descuento.</p>
+            <h3 id="daymarBenefitTitle">Tu beneficio con Google</h3>
+            <p id="daymarBenefitStatus" class="daymar-benefit-status" role="status" aria-live="polite">Con Google obtienes mayores descuentos y un beneficio Google.</p>
+            <p id="daymarMonthlyCartNotice" class="daymar-monthly-condition">El beneficio de $5 o envío gratis se puede usar una sola vez al mes por cuenta Google.</p>
+            <button type="button" id="daymarBenefitLogin">Iniciar sesión con Google</button>
+            <fieldset id="daymarBenefitChoices" hidden disabled>
+                <legend>Elige un solo beneficio para tu pedido</legend>
+                <label><input type="radio" name="daymarBenefitChoice" value="coupon"> <span><strong>$5 en productos</strong><small>Hasta $5 después del descuento; incluye oro y plata.</small></span></label>
+                <label><input type="radio" name="daymarBenefitChoice" value="shipping"> <span><strong>Envío gratis</strong><small>Activa el envío para elegir esta opción.</small></span></label>
+                <button type="button" id="daymarBenefitRemove">Comprar sin usar mi beneficio</button>
+            </fieldset>
+            
+            
+        </section>
         <div class="cart-summary" id="cartSummary" style="display: none;">
             <div class="summary-row cart-real-price-row" id="cartRealPriceRow" style="display: none;">
                 <span>Precio real:</span>
@@ -10815,9 +10853,10 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
                 <span>Precio con descuento:</span>
                 <span id="cartSubtotal">$0.00</span>
             </div>
+            <div class="summary-row" id="daymarCouponRow" hidden><span>Beneficio Google:</span><span id="daymarCouponAmount">-$0.00</span></div>
             <div class="summary-row" id="shippingRow" style="display: none;">
-                <span>Envio:</span>
-                <span>$4.00</span>
+                <span>Envío:</span>
+                <span id="daymarCartShippingCost">$4.00</span>
             </div>
         </div>        <div class="cart-total">
             <span>Total:</span>
@@ -11493,8 +11532,10 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
         // PRECIOS
         // ==========================================
         function getDiscountRate(product) {
-            if (isFineJewelryProduct(product)) return 0;
-            return String(product?.category || '').trim().toLowerCase() === 'relojes' ? 0.15 : 0.30;
+            const googleMember = Boolean(window.DaymarPromo?.isGoogleMember());
+            if (isFineJewelryProduct(product)) return googleMember ? 0.02 : 0;
+            const isWatch = String(product?.category || '').trim().toLowerCase() === 'relojes';
+            return isWatch ? (googleMember ? 0.15 : 0.10) : (googleMember ? 0.25 : 0.20);
         }
         function getOriginalPrice(product) {
             return Number(product?.price) || 0;
@@ -11509,6 +11550,31 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
         // ==========================================
         // FILTROS Y ORDENAMIENTO
         // ==========================================
+        function refreshDaymarPrices() {
+            const previousPage = AppState.currentPage;
+            sortProducts();
+            const container = document.getElementById('productsContainer');
+            if (container) {
+                container.innerHTML = '';
+                for (let page = 0; page <= previousPage; page++) {
+                    AppState.currentPage = page;
+                    renderProducts();
+                }
+            }
+            AppState.currentPage = previousPage;
+            updateFavorites();
+            updateCart();
+            if (currentPreviewIndex !== null && document.getElementById('previewModal')?.classList.contains('active')) {
+                const product = products[currentPreviewIndex];
+                if (product) {
+                    document.getElementById('previewPrice').textContent = '$' + getProductPrice(product).toFixed(2);
+                    const original = document.getElementById('previewPriceOriginal');
+                    original.textContent = getDiscountRate(product) > 0 ? '$' + getOriginalPrice(product).toFixed(2) : '';
+                    original.style.display = getDiscountRate(product) > 0 ? '' : 'none';
+                }
+            }
+        }
+
         function applySortFilter() {
             const sortValue = document.getElementById('sortFilter').value;
             AppState.currentSort = sortValue;
@@ -12310,6 +12376,7 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
 
             localStorage.setItem('daymar_cart', JSON.stringify(AppState.cart));
             syncAddButtonStates();
+            window.DaymarPromo?.syncCart();
 
             const totalItems = AppState.cart.reduce((sum, item) => sum + item.quantity, 0);
             
@@ -12331,6 +12398,8 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
                 if (summary) summary.style.display = 'none';
                 if (whatsappBtn) whatsappBtn.style.display = 'none';
                 if (cartTotal) cartTotal.textContent = '$0.00';
+                document.getElementById('daymarCouponRow').hidden = true;
+                if (whatsappBtn) whatsappBtn.dataset.daymarBenefitKind = '';
                 return;
             }
 
@@ -12383,8 +12452,15 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
                         </div>
                     `;
                 });
-                const shippingCost = AppState.shippingEnabled ? CONFIG.shippingCost : 0;
-                const total = roundPrice(subtotal + shippingCost);
+                const baseShippingCost = AppState.shippingEnabled ? CONFIG.shippingCost : 0;
+                const benefitQuote = window.DaymarPromo?.quote(subtotal, baseShippingCost) || { coupon:0, shipping:baseShippingCost, total:roundPrice(subtotal + baseShippingCost), kind:'' };
+                const shippingCost = benefitQuote.shipping;
+                const total = benefitQuote.total;
+                document.getElementById('daymarCouponRow').hidden = benefitQuote.coupon <= 0;
+                document.getElementById('daymarCouponAmount').textContent = '-$' + benefitQuote.coupon.toFixed(2);
+                document.getElementById('daymarCartShippingCost').textContent = '$' + shippingCost.toFixed(2);
+                document.getElementById('shippingPrice').textContent = shippingCost === 0 && AppState.shippingEnabled ? 'Gratis con tu beneficio' : '+$' + CONFIG.shippingCost.toFixed(2);
+                whatsappBtn.dataset.daymarBenefitKind = benefitQuote.kind;
 
                 const hasDiscounts = regularSubtotal > subtotal;
                 const realPriceRow = document.getElementById('cartRealPriceRow');
@@ -12412,8 +12488,9 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
                         const imageUrl = getWhatsAppProductImage(liveProduct || item);
                         return `* ${liveProduct?.name || item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}${imageUrl ? `\n  Imagen del producto: ${imageUrl}` : ''}`;
                     });
-                    const shippingText = AppState.shippingEnabled ? `\n\nEnvio nacional: $${CONFIG.shippingCost.toFixed(2)}` : '';
-                    const fullMessage = `*Hola! Quiero comprar estos productos de DAYMAR:*\n\n${messageLines.join('\n\n')}${shippingText}\n\n*Total: $${total.toFixed(2)}*\n\nGracias!`;
+                    const shippingText = AppState.shippingEnabled ? `\n\nEnvío nacional: $${shippingCost.toFixed(2)}${benefitQuote.kind === 'shipping' ? ' (beneficio Google)' : ''}` : '';
+                    const benefitText = benefitQuote.coupon > 0 ? `\n\nBeneficio Google en productos: -$${benefitQuote.coupon.toFixed(2)}` : '';
+                    const fullMessage = `*Hola! Quiero comprar estos productos de DAYMAR:*\n\n${messageLines.join('\n\n')}${benefitText}${shippingText}\n\n*Total: $${total.toFixed(2)}*\n\nGracias!`;
                     whatsappBtn.href = `https://wa.me/${CONFIG.phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
                 }
             }
@@ -13272,6 +13349,97 @@ const firebaseConfig = {
   measurementId: "G-KJ90YSS63V"
 };
 </script>
+<script id="daymar-promotion-controller">
+// Promoción por pedido: no hay canjes únicos, Firestore ni registros de uso.
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  let auth = null, user = null, selected = '', lastMember = false;
+  const member = () => Boolean(user?.uid && auth?.currentUser?.uid === user.uid &&
+    user.providerData?.some(provider => provider.providerId === 'google.com'));
+  const cents = value => Math.max(0, Math.round((Number(value) + Number.EPSILON) * 100) || 0);
+
+  function updateCartSafely() {
+    if (typeof window.updateCart === 'function') window.updateCart();
+  }
+  function render() {
+    const isMember = member();
+    $('daymarBenefitChoices').hidden = !isMember;
+    $('daymarBenefitLogin').hidden = isMember;
+    $('daymarBenefitChoices').disabled = !isMember;
+    document.querySelectorAll('[name="daymarBenefitChoice"]').forEach(input => {
+      input.checked = input.value === selected;
+      if (input.value === 'shipping') input.disabled = !document.querySelector('#shippingToggle')?.classList.contains('active');
+    });
+    $('daymarBenefitStatus').textContent = isMember ?
+      'Elige $5 en productos o envío gratis. No se acumulan ambos beneficios.' :
+      'Inicia sesión con Google para elegir $5 en productos o envío gratis en tu pedido.';
+    $('daymarMemberNotice').textContent = isMember ?
+      'Descuentos Google: relojes 15% · demás productos 25% · oro/plata 2%.' :
+      'Descuentos para todos: relojes 10% · demás productos 20% · oro/plata sin descuento.';
+    const offers = document.querySelectorAll('#daymarWelcomeOffers strong');
+    if (offers.length === 3) {
+      offers[0].textContent = isMember ? '15% con Google' : '10% de descuento';
+      offers[1].textContent = isMember ? '2% con Google' : 'Sin descuento';
+      offers[2].textContent = isMember ? '25% con Google' : '20% de descuento';
+    }
+    const details = $('daymarLoginBenefits');
+    if (details) details.textContent = isMember ?
+      'Tus descuentos: 15% en relojes, 25% en los demás productos y 2% en oro/plata. Elige $5 en productos o envío gratis desde el carrito.' :
+      'Con Google: 15% en relojes, 25% en los demás productos y 2% en oro/plata. Además, elige $5 en productos o envío gratis, una vez al mes.';
+  }
+
+  function initialize(_, firebaseAuth) { auth = firebaseAuth; }
+  function setUser(value) {
+    const previous = lastMember;
+    user = value; selected = ''; lastMember = member();
+    render();
+    if (previous !== lastMember && typeof window.refreshDaymarPrices === 'function') window.refreshDaymarPrices();
+    else updateCartSafely();
+  }
+
+  function quote(subtotal, shippingCost) {
+    const subtotalCents = cents(subtotal), baseShipping = cents(shippingCost);
+    const eligible = member() && Boolean(selected) && subtotalCents > 0;
+    const couponCents = eligible && selected === 'coupon' ? Math.min(500, subtotalCents) : 0;
+    const shippingCents = eligible && selected === 'shipping' && baseShipping > 0 ? 0 : baseShipping;
+    return {
+      coupon: couponCents / 100,
+      shipping: shippingCents / 100,
+      total: (subtotalCents - couponCents + shippingCents) / 100,
+      kind: eligible && (selected === 'coupon' || baseShipping > 0) ? selected : ''
+    };
+  }
+
+  $('daymarBenefitLogin').addEventListener('click', () => window.openDaymarLogin());
+  document.querySelectorAll('[name="daymarBenefitChoice"]').forEach(input => input.addEventListener('change', () => {
+    if (!member()) return;
+    if (input.value === 'shipping' && !document.querySelector('#shippingToggle')?.classList.contains('active')) return;
+    selected = input.checked ? input.value : ''; render(); updateCartSafely();
+  }));
+  $('daymarBenefitRemove').addEventListener('click', () => {
+    selected = ''; render(); updateCartSafely();
+  });
+  $('whatsappBtn').addEventListener('click', event => {
+    // Recalcular antes de abrir el borrador, sin enviar mensajes automáticamente.
+    if (!member() && selected) {
+      selected = '';
+      if (typeof window.refreshDaymarPrices === 'function') window.refreshDaymarPrices();
+    }
+    updateCartSafely();
+    if ($('whatsappBtn').style.display === 'none') event.preventDefault();
+  });
+  window.DaymarPromo = Object.freeze({
+    initialize, setUser, isGoogleMember:member, quote,
+    syncCart:() => {
+      if (selected === 'shipping' && !document.querySelector('#shippingToggle')?.classList.contains('active')) selected = '';
+      render();
+    }
+  });
+  render();
+})();
+
+</script>
 <script id="daymar-firebase-auth">
 (() => {
   'use strict';
@@ -13398,6 +13566,7 @@ const firebaseConfig = {
       button.title = signedIn ? (email || name) : '';
     });
     message(signedIn ? 'Sesión iniciada con Google.' + persistenceNotice : 'Continúa con Google para ingresar.');
+    window.DaymarPromo?.setUser(user);
   }
 
   googleButton.addEventListener('click', () => {
@@ -13463,6 +13632,7 @@ const firebaseConfig = {
       const app = appSDK.initializeApp(config, 'daymar-storefront');
       auth = sdk.getAuth(app);
       auth.languageCode = 'es';
+      window.DaymarPromo?.initialize(app, auth);
       provider = new sdk.GoogleAuthProvider();
       provider.setCustomParameters({ prompt: 'select_account' });
       try { await sdk.setPersistence(auth, sdk.browserLocalPersistence); }
@@ -13477,7 +13647,10 @@ const firebaseConfig = {
       }
       ready = true;
       refreshControls();
-      sdk.onAuthStateChanged(auth, renderUser, error => message(explainError(error), true));
+      sdk.onAuthStateChanged(auth, renderUser, error => {
+        renderUser(null);
+        message(explainError(error), true);
+      });
     } catch (error) {
       message(explainError(error), true);
       ready = false;

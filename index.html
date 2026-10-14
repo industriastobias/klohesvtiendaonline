@@ -10062,7 +10062,7 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
         <div class="container atelier-nav daymar-header-layout" role="navigation" aria-label="Navegación principal">
             <!-- Contenedor 1: Explorar, Colección y Esenciales. -->
             <div class="atelier-nav-start daymar-nav-links" role="group" aria-label="Explorar, Colección y Esenciales">
-                <button class="menu-toggle atelier-menu-trigger" id="menuBtn" aria-label="Abrir categorías"><span></span><span></span><span></span><b>Explorar</b></button>
+                <button class="menu-toggle atelier-menu-trigger" id="menuBtn" type="button" aria-label="Abrir categorías" aria-controls="categoriesMenu" aria-expanded="false"><span></span><span></span><span></span><b>Explorar</b></button>
                 <a href="#catalogo" class="atelier-link">Colección</a>
                 <a href="#catalogo" class="atelier-link">Esenciales</a>
             </div>
@@ -12589,17 +12589,13 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
             
             const isActive = menu.classList.contains('active');
             
-            if (isActive) {
-                menu.classList.remove('active');
-                overlay.classList.remove('active');
-                btn.classList.remove('active');
-                document.body.style.overflow = '';
-            } else {
-                menu.classList.add('active');
-                overlay.classList.add('active');
-                btn.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            const nextOpen = !isActive;
+            menu.classList.toggle('active', nextOpen);
+            overlay.classList.toggle('active', nextOpen);
+            btn.classList.toggle('active', nextOpen);
+            btn.setAttribute('aria-expanded', String(nextOpen));
+            btn.setAttribute('aria-label', nextOpen ? 'Cerrar categorías' : 'Abrir categorías');
+            document.body.style.overflow = nextOpen ? 'hidden' : '';
         }
 
         function showNotification(message, type = 'success') {
@@ -12673,6 +12669,19 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
         // INICIALIZACION
         // ==========================================
         document.addEventListener('DOMContentLoaded', async function() {
+            // El menú se conecta primero para que errores secundarios no bloqueen la navegación.
+            const menuBtn = document.getElementById('menuBtn');
+            const menuOverlay = document.getElementById('menuOverlay');
+            if (menuBtn) menuBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+            });
+            if (menuOverlay) menuOverlay.addEventListener('click', function() {
+                const menu = document.getElementById('categoriesMenu');
+                if (menu && menu.classList.contains('active')) toggleMenu();
+            });
+
             console.log('DAYMAR - Iniciando...');
             detectDevicePlatform();
             initFavoritesMobileGestures();
@@ -12719,20 +12728,6 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
                 searchInput.addEventListener('input', debounce((e) => {
                     searchProducts(e.target.value);
                 }, 300));
-            }
-
-            const menuBtn = document.getElementById('menuBtn');
-            const menuOverlay = document.getElementById('menuOverlay');
-            
-            if (menuBtn) {
-                menuBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    toggleMenu();
-                });
-            }
-            
-            if (menuOverlay) {
-                menuOverlay.addEventListener('click', toggleMenu);
             }
 
             document.addEventListener('keydown', (e) => {

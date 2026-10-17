@@ -11344,34 +11344,52 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
 </style>
 <style id="daymar-cart-extras-design">
   html body #cartModal #daymarBenefit {
-    margin: 0 22px 12px;
-    padding: 14px;
-    border: 1px solid #e7dbd8;
-    border-radius: 14px;
-    background: #fcfaf7;
+    margin: 0 22px 6px;
+    padding: 5px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
   }
-  html body #cartModal #daymarBenefitControls { display: grid; gap: 10px; }
+  html body #cartModal #daymarBenefitControls { display: grid; grid-template-columns: minmax(90px, .7fr) minmax(0, 1fr); align-items: center; gap: 8px; }
   html body #cartModal #daymarBenefitSelect { display: none !important; }
-  #cartModal .cart-extra-heading { display: flex; align-items: center; gap: 8px; color: #662d42; font: 600 10px/1.4 'Outfit', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
-  #cartModal .cart-extra-heading i { font-size: 12px; }
+  #cartModal .cart-extra-heading { display: flex; align-items: center; gap: 6px; color: #662d42; font: 500 9px/1.4 'Outfit', sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+  #cartModal .cart-extra-heading i { font-size: 10px; }
   html body #cartModal #cartExtraTrigger {
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    width: 100%; min-height: 44px; padding: 10px 12px;
-    border: 1px solid #ded0d6; border-radius: 10px; background: #fff; color: #662d42;
-    font: 500 13px/1.4 'Outfit', sans-serif; text-align: left; text-transform: none; letter-spacing: normal; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 7px;
+    width: 100%; min-height: 36px; padding: 6px 9px;
+    border: 1px solid #e4dadd; border-radius: 7px; background: #fff; color: #662d42;
+    font: 400 12px/1.4 'Outfit', sans-serif; text-align: left; text-transform: none; letter-spacing: normal; cursor: pointer;
   }
   html body #cartModal #cartExtraTrigger[data-has-extra="true"] { border-color: #662d42; background: #f2e9ed; }
   #cartExtraTrigger #cartExtraValue { min-width: 0; overflow-wrap: anywhere; }
-  #cartExtraTrigger .cart-extra-action { display: inline-flex; align-items: center; gap: 8px; color: #927582; font-size: 11px; flex-shrink: 0; }
-  #cartExtraTrigger .cart-extra-action i { font-size: 9px; transition: transform .2s ease; }
+  #cartExtraTrigger .cart-extra-action { display: inline-flex; align-items: center; gap: 5px; color: #927582; font-size: 10px; flex-shrink: 0; }
+  #cartExtraTrigger .cart-extra-action i { font-size: 8px; transition: transform .2s ease; }
   #cartExtraTrigger[aria-expanded="true"] .cart-extra-action i { transform: rotate(180deg); }
   #cartExtraTrigger:focus-visible { outline: 2px solid #662d42; outline-offset: 3px; }
+  #cartExtraDialog { width: min(360px, calc(100vw - 32px)); padding: 18px; border-radius: 16px; }
+  #cartExtraDialog .catalog-sort-dialog-head { gap: 8px; margin-bottom: 12px; }
+  #cartExtraDialog .catalog-sort-eyebrow { margin-bottom: 6px; font-size: 8px; }
+  #cartExtraDialog h2 { margin-bottom: 5px; font-size: 23px; }
+  #cartExtraDialog #cartExtraDescription { font-size: 11px; }
+  #cartExtraDialog .catalog-sort-close { width: 28px; height: 28px; flex-basis: 28px; font-size: 21px; }
+  #cartExtraDialog .catalog-sort-options { gap: 7px; }
+  #cartExtraDialog .catalog-sort-option { min-height: 56px; padding: 9px 10px; gap: 9px; border-radius: 9px; }
+  #cartExtraDialog .catalog-sort-option-icon { width: 26px; height: 26px; flex-basis: 26px; border-radius: 7px; font-size: 12px; }
+  #cartExtraDialog .catalog-sort-option-copy { gap: 3px; }
+  #cartExtraDialog .catalog-sort-option-copy strong { font-size: 12px; font-weight: 500; }
+  #cartExtraDialog .catalog-sort-option-copy small { font-size: 10px; line-height: 1.35; }
+  #cartExtraDialog .catalog-sort-option-check { width: 18px; height: 18px; flex-basis: 18px; font-size: 8px; }
+  #cartExtraDialog .catalog-sort-dialog-note { margin-top: 12px; font-size: 9px; }
   #cartExtraDialog .catalog-sort-option:disabled { opacity: .5; cursor: not-allowed; border-color: #e7dbd8; background: #f8f5f3; }
   #cartExtraDialog .catalog-sort-option:disabled .catalog-sort-option-icon { background: #ebe5e6; }
   #cartExtraDialog .catalog-sort-option:disabled:hover { border-color: #e7dbd8; }
   #cartExtraTrigger:disabled { opacity: .5; cursor: not-allowed; }
+  @media (max-width: 600px) {
+    #cartExtraDialog { width: 100%; padding: 22px 16px max(16px, env(safe-area-inset-bottom)); border-radius: 18px 18px 0 0; }
+    #cartExtraDialog::before { height: 3px; margin-bottom: 13px; }
+  }
   @media (max-width: 480px) {
-    html body #cartModal #daymarBenefit { margin-left: 16px; margin-right: 16px; padding: 12px; }
+    html body #cartModal #daymarBenefit { margin-left: 16px; margin-right: 16px; padding: 5px 0; }
   }
 </style>
 </head>

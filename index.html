@@ -11599,6 +11599,26 @@ html.daymar-christmas .daymar-browser-color-edge { display: none; }
     z-index: 20;
   }
 }
+
+/* Buscar y ordenar se muestran únicamente cuando el cliente pulsa Buscar. */
+html.daymar-christmas #daymarSummer #catalogSearchPanel[hidden] { display: none !important; }
+html.daymar-christmas #catalogSearchPanel .catalog-search-panel-head {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 4px;
+}
+html.daymar-christmas #catalogSearchPanel .catalog-search-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 0 3px 8px;
+  border: 0;
+  background: transparent;
+  color: #662d42;
+  font: 400 10px/1.3 'Outfit', sans-serif;
+  cursor: pointer;
+}
+html.daymar-christmas #catalogSearchPanel .catalog-search-close:focus-visible { outline: 2px solid #662d42; outline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -11929,8 +11949,9 @@ html.daymar-christmas .daymar-browser-color-edge { display: none; }
             </div>
             <div class="atelier-hero-note"><span>El arte de regalar</span><strong>Pequeños detalles.<br>Grandes momentos.</strong><small>San Salvador / El Salvador</small></div>
         </div>
-        <div class="atelier-search-row">
+        <div class="atelier-search-row" id="catalogSearchPanel" hidden>
             <div class="container">
+                <div class="catalog-search-panel-head"><button type="button" id="catalogSearchClose" class="catalog-search-close" aria-label="Cerrar búsqueda"><span>Cerrar</span><i class="fas fa-times" aria-hidden="true"></i></button></div>
                 <div class="catalog-search-toolbar" role="search" aria-label="Buscar y ordenar productos">
                     <div class="catalog-search-field">
                         <label class="catalog-search-label" for="searchInput"><span>Buscar por nombre o tipo</span><i class="fas fa-arrow-right" aria-hidden="true"></i></label>
@@ -14886,6 +14907,75 @@ const firebaseConfig = {
   }, { rootMargin: '24px', threshold: 0 });
   observer.observe(toolbar);
   mobile.addEventListener('change', apply);
+})();
+</script>
+<script id="daymar-search-panel-controller">
+(() => {
+  const panel = document.getElementById('catalogSearchPanel');
+  const input = document.getElementById('searchInput');
+  const closeButton = document.getElementById('catalogSearchClose');
+  const sortDialog = document.getElementById('catalogSortDialog');
+  const buttons = Array.from(document.querySelectorAll('[onclick*="focusSearch"]'));
+  if (!panel || !input || !closeButton) return;
+  let lastButton = buttons[0] || null;
+  let selectedSort = false;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const syncButtons = () => buttons.forEach(button => {
+    button.setAttribute('aria-controls', panel.id);
+    button.setAttribute('aria-expanded', String(!panel.hidden));
+  });
+  const showResults = () => document.getElementById('catalogo')?.scrollIntoView({
+    behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start'
+  });
+  const close = ({ restoreFocus = false, results = false } = {}) => {
+    if (panel.hidden) return;
+    if (sortDialog?.open) return;
+    if (panel.contains(document.activeElement)) document.activeElement.blur();
+    panel.hidden = true;
+    syncButtons();
+    if (restoreFocus && lastButton?.getClientRects().length) lastButton.focus({ preventScroll: true });
+    if (results) showResults();
+  };
+  const open = () => {
+    panel.hidden = false;
+    syncButtons();
+    try { input.focus({ preventScroll: true }); } catch (_) { input.focus(); }
+    panel.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
+  };
+  buttons.forEach(button => button.addEventListener('click', () => { lastButton = button; }, true));
+  window.focusSearch = open;
+  window.daymarSearchPanel = { open, close };
+  closeButton.addEventListener('click', () => close({ restoreFocus: true }));
+  input.addEventListener('keydown', event => {
+    if (event.key !== 'Enter' || event.isComposing) return;
+    event.preventDefault();
+    if (typeof window.searchProducts === 'function') window.searchProducts(input.value);
+    close({ results: true });
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !panel.hidden && !document.querySelector('dialog[open]')) {
+      event.preventDefault();
+      close({ restoreFocus: true });
+    }
+  });
+  document.addEventListener('click', event => {
+    if (panel.hidden || panel.contains(event.target) || sortDialog?.open) return;
+    if (buttons.some(button => button.contains(event.target))) return;
+    if (event.target.closest('#catalogSortDialog')) return;
+    close();
+  });
+  if (sortDialog) {
+    sortDialog.addEventListener('click', event => {
+      if (event.target.closest('[data-sort-value]')) selectedSort = true;
+    }, true);
+    sortDialog.addEventListener('close', () => {
+      if (!selectedSort) return;
+      selectedSort = false;
+      // Deja que el diálogo termine de devolver el foco antes de ocultar la barra.
+      setTimeout(() => close({ results: true }), 0);
+    });
+  }
+  syncButtons();
 })();
 </script>
 </body>

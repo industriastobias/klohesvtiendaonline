@@ -12749,6 +12749,47 @@ html.daymar-brand.daymar-anniversary body > footer .copyright .footer-credits a:
   html.daymar-brand.daymar-anniversary body > footer .copyright .footer-credits { justify-content: center !important; gap: 6px !important; }
   html.daymar-brand.daymar-anniversary body > footer .copyright .footer-credits a { font-size: 13px !important; }
 }
+
+html.daymar-brand.daymar-anniversary body .daymar-faq { padding: 16px 20px !important; }
+html.daymar-brand.daymar-anniversary body .daymar-faq > .container { padding: 0 !important; max-width: 1200px !important; }
+html.daymar-brand.daymar-anniversary body .daymar-faq-grid { display: block !important; }
+html.daymar-brand.daymar-anniversary .faq-compact-row { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+html.daymar-brand.daymar-anniversary .faq-compact-row h2 { margin: 0 !important; color: #662d42; font: 500 20px/1.25 'Outfit',sans-serif !important; }
+html.daymar-brand.daymar-anniversary .faq-compact-row p { margin: 4px 0 0; color: #645653; font: 400 12px/1.5 'Outfit',sans-serif; }
+html.daymar-brand.daymar-anniversary #daymarFaqOpen { flex: 0 0 42px; width: 42px; height: 42px; border: 1px solid #c8ad78; border-radius: 50%; background: #662d42; color: #ede8db; font: 400 26px/1 'Outfit',sans-serif; cursor: pointer; }
+html.daymar-brand.daymar-anniversary #daymarFaqOpen:focus-visible { outline: 2px solid #662d42; outline-offset: 3px; }
+html.daymar-brand.daymar-anniversary body > footer { margin-bottom: 0 !important; }
+html.daymar-brand.daymar-anniversary body .daymar-trust { padding: 24px 0 !important; }
+html.daymar-brand.daymar-anniversary body #catalogo { padding-bottom: 24px !important; }
+html.daymar-brand.daymar-anniversary #daymarFaqDialog { inset: 0; margin: auto; width: min(580px,calc(100% - 28px)); max-width: calc(100% - 28px); max-height: calc(100dvh - 40px); padding: 0; border: 1px solid #c8ad78; border-radius: 16px; background: #f7f3eb; color: #32282a; box-shadow: 0 20px 65px #0005; }
+html.daymar-brand.daymar-anniversary #daymarFaqDialog[open] { display: flex; flex-direction: column; }
+#daymarFaqDialog::backdrop { background: #21151b99; }
+html.daymar-brand.daymar-anniversary .faq-modal-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; border-bottom: 1px solid #d8c8a8; }
+html.daymar-brand.daymar-anniversary .faq-modal-header h2 { margin: 0; color: #662d42; font: 600 21px/1.25 'Outfit',sans-serif; }
+html.daymar-brand.daymar-anniversary .faq-modal-header button { width: 38px; height: 38px; flex: 0 0 38px; border: 0; background: transparent; color: #662d42; font-size: 26px; cursor: pointer; }
+html.daymar-brand.daymar-anniversary .faq-modal-content { overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: 0 18px 16px; font: 400 14px/1.6 'Outfit',sans-serif; }
+html.daymar-brand.daymar-anniversary .faq-modal-content article { padding: 14px 0; border-bottom: 1px solid #dfd4c3; }
+html.daymar-brand.daymar-anniversary .faq-modal-content h3 { margin: 0 0 6px; color: #662d42; font-size: 16px; line-height: 1.4; }
+html.daymar-brand.daymar-anniversary .faq-modal-content p { margin: 6px 0; }
+html.daymar-brand.daymar-anniversary .faq-modal-content .faq-policies h4 { margin: 14px 0 4px; color: #662d42; font-size: 14px; }
+html.daymar-brand.daymar-anniversary .faq-modal-content .faq-help { display: inline-block; margin-top: 16px; color: #662d42; font-weight: 600; text-underline-offset: 3px; }
+@media(max-width:700px) {
+ html.daymar-brand.daymar-anniversary body #daymarSummer.daymar-compact-hero .atelier-hero-grid { padding-top: 20px !important; padding-bottom: 20px !important; gap: 16px !important; }
+ html.daymar-brand.daymar-anniversary .anniversary-thanks { padding: 12px 18px !important; }
+ html.daymar-brand.daymar-anniversary body .daymar-faq { padding: 14px 18px !important; }
+ html.daymar-brand.daymar-anniversary .faq-compact-row h2 { font-size: 18px !important; }
+}
+html.daymar-brand.daymar-anniversary body .daymar-compact-location { padding: 18px 0 !important; }
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-container,
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-info { min-height: 0 !important; height: auto !important; }
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-info { padding: 16px !important; }
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-map { min-height: 0 !important; height: 200px !important; }
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-map iframe { height: 100% !important; }
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-container { display: block !important; }
+html.daymar-brand.daymar-anniversary .location-map-toggle { margin: 8px 16px 0; }
+html.daymar-brand.daymar-anniversary .location-map-toggle summary { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; cursor: pointer; color: #662d42; font: 500 13px/1.5 'Outfit',sans-serif; list-style: none; }
+html.daymar-brand.daymar-anniversary .location-map-toggle summary::-webkit-details-marker { display: none; }
+html.daymar-brand.daymar-anniversary .location-map-toggle:not([open]) .location-map { display: none !important; }
 </style>
 </head>
 <body>
@@ -13210,9 +13251,9 @@ html.daymar-brand.daymar-anniversary body > footer .copyright .footer-credits a:
                         </div>
                     </div>
                 </div>
-                <div class="location-map">
+                <details class="location-map-toggle"><summary>Ver mapa de ubicación <span aria-hidden="true">+</span></summary><div class="location-map">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248305.97300153466!2d-89.30428505!3d13.72410255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6327c9ab3fc8d1%3A0x7ed5e553f5e3d91e!2sSan%20Salvador!5e0!3m2!1ses!2ssv!4v1700000000000!5m2!1ses!2ssv" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+                </div></details>
             </div>
         </div>
     </section>
@@ -13309,18 +13350,21 @@ html.daymar-brand.daymar-anniversary body > footer .copyright .footer-credits a:
     </div>
 
 
-    <section class="daymar-faq" id="preguntas-frecuentes" aria-labelledby="faq-title">
-        <div class="container daymar-faq-grid">
-            <div><p class="eyebrow">Información útil</p><h2 id="faq-title">Preguntas frecuentes.</h2><p class="daymar-faq-intro">Si necesitas ayuda con una pieza o con tu envío, escríbenos por WhatsApp.</p><a class="daymar-faq-link" href="https://wa.me/50366711569?text=Hola%20DAYMAR,%20tengo%20una%20consulta" target="_blank" rel="noopener noreferrer">Hablar con DAYMAR <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
-            <div class="daymar-faq-list">
-                <details><summary>¿A dónde realizan envíos?</summary><p>Realizamos envíos a todo El Salvador. El tiempo estimado es de 2 a 5 días hábiles.</p></details>
-                <details><summary>¿Cómo puedo realizar mi pedido?</summary><p>Agrega tus productos al carrito y confirma tu pedido por WhatsApp. Te ayudaremos a revisar disponibilidad y entrega.</p></details>
-                <details><summary>¿Qué métodos de pago aceptan?</summary><p>Aceptamos efectivo y transferencia bancaria. Los detalles se confirman por WhatsApp.</p></details>
-                <details><summary>¿Cuál es su política de cambios?</summary><p>Aceptamos cambios y devoluciones únicamente si el producto presenta un daño de fábrica. Comunícate con nosotros para revisar tu caso.</p></details>
-                <button id="daymarPromotionsPolicyOpen" class="daymar-policy-open" type="button" data-daymar-open-policy aria-controls="daymarPromotionsPolicyDialog" aria-expanded="false" aria-haspopup="dialog"><span>Política de Promociones Basic y Premium</span><span class="daymar-policy-plus" aria-hidden="true">+</span></button>
-            </div>
-        </div>
-    </section>
+    <section class="daymar-faq" id="preguntas-frecuentes" aria-labelledby="faq-title"><div class="container daymar-faq-grid"><div class="faq-compact-row"><div><h2 id="faq-title">Preguntas frecuentes</h2><p>Envíos, pedidos, pagos y promociones.</p></div><button id="daymarFaqOpen" type="button" aria-label="Ver todas las preguntas frecuentes" aria-haspopup="dialog" aria-controls="daymarFaqDialog" aria-expanded="false">+</button></div></div></section>
+<dialog id="daymarFaqDialog" aria-labelledby="daymarFaqTitle"><header class="faq-modal-header"><h2 id="daymarFaqTitle">Preguntas frecuentes</h2><button type="button" data-faq-close aria-label="Cerrar preguntas frecuentes" autofocus>×</button></header><div class="faq-modal-content"><article><h3>¿A dónde realizan envíos?</h3><p>Realizamos envíos a todo El Salvador. El tiempo estimado es de 2 a 5 días hábiles.</p></article><article><h3>¿Cómo puedo realizar mi pedido?</h3><p>Agrega tus productos al carrito y confirma tu pedido por WhatsApp. Te ayudaremos a revisar disponibilidad y entrega.</p></article><article><h3>¿Qué métodos de pago aceptan?</h3><p>Aceptamos efectivo y transferencia bancaria. Los detalles se confirman por WhatsApp.</p></article><article><h3>¿Cuál es su política de cambios?</h3><p>Aceptamos cambios y devoluciones únicamente si el producto presenta un daño de fábrica. Comunícate con nosotros para revisar tu caso.</p></article><article class="faq-policies"><h3>Política de Promociones Basic y Premium</h3>
+                <h4>Basic</h4>
+                <p>Se aplica cuando no tienes una sesión Google activa. Obtienes 10% de descuento en relojes, 20% en los demás productos y ningún descuento en oro y plata.</p>
+                <h4>Premium</h4>
+                <p>Se aplica al iniciar sesión con Google. Obtienes 15% de descuento en relojes, 25% en los demás productos y 2% en oro y plata. Basic y Premium identifican tu nivel de sesión, no una suscripción de pago.</p>
+                <h4>Beneficio extra Premium</h4>
+                <p>Puedes elegir <strong>$5 en productos o envío gratis</strong>. No puedes acumular ambos beneficios en el mismo pedido.</p>
+                <p><strong>Para activar el beneficio extra Premium, el subtotal de productos debe ser mayor a $25.</strong> Se calcula después de los descuentos por porcentaje, antes del cupón y sin sumar el envío. Con $25 exactos o menos no se activa. Esta condición no modifica tus porcentajes Premium ni tu nivel de sesión.</p>
+                <p>El cupón se aplica una vez al subtotal de productos, después de los descuentos, también en oro y plata. El cupón no descuenta el envío.</p>
+                <p>Para elegir envío gratis, activa la opción de envío del carrito. Se aplica al envío estándar nacional de $4.</p>
+                <h4>Uso mensual y confirmación</h4>
+                <p><strong>El beneficio de $5 o envío gratis se puede usar una sola vez al mes por cuenta Google.</strong> Esta condición corresponde al beneficio extra, no a los porcentajes Premium.</p>
+                <p>Seleccionar una opción en el carrito o abrir WhatsApp no confirma ni paga un pedido. DAYMAR revisa disponibilidad, importes y cumplimiento de la condición mensual al confirmar la compra.</p>
+            </article><a class="faq-help" href="https://wa.me/50366711569?text=Hola%20DAYMAR,%20tengo%20una%20consulta" target="_blank" rel="noopener noreferrer">Hablar con DAYMAR por WhatsApp</a></div></dialog>
 
     <!-- Footer -->
     <footer aria-label="Derechos y créditos de DAYMAR">
@@ -16117,7 +16161,7 @@ const firebaseConfig = {
 (() => {
   const contact = document.getElementById('whatsappFloat');
   if (!contact) return;
-  const regions = [...document.querySelectorAll('.anniversary-thanks, .anniversary-actions, .anniversary-gallery-hint, #catalogo .section-header')];
+  const regions = [...document.querySelectorAll('.anniversary-thanks, .anniversary-actions, .anniversary-gallery-hint, #catalogo .section-header, footer .copyright, .faq-compact-row')];
   let scheduled = false;
   const update = () => {
     scheduled = false;
@@ -16139,6 +16183,32 @@ const firebaseConfig = {
   if (window.ResizeObserver) new ResizeObserver(schedule).observe(document.body);
   document.fonts?.ready.then(schedule);
   schedule();
+})();
+</script>
+<script id="daymar-faq-controller">
+(() => {
+  const dialog = document.getElementById('daymarFaqDialog');
+  const trigger = document.getElementById('daymarFaqOpen');
+  if (!dialog || !trigger) return;
+  let overflow = '';
+  trigger.addEventListener('click', () => {
+    overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    trigger.setAttribute('aria-expanded', 'true');
+    dialog.showModal();
+    dialog.querySelector('.faq-modal-content').scrollTop = 0;
+  });
+  dialog.querySelector('[data-faq-close]').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => {
+    if (event.target !== dialog) return;
+    const box = dialog.getBoundingClientRect();
+    if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.close();
+  });
+  dialog.addEventListener('close', () => {
+    document.body.style.overflow = overflow;
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.focus({preventScroll: true});
+  });
 })();
 </script>
 </body>

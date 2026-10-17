@@ -11343,31 +11343,45 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
   }
 </style>
 <style id="daymar-cart-extras-design">
+  html body #cartModal.active > .shipping-option {
+    grid-template-columns: minmax(74px, .55fr) minmax(0, 1.45fr) !important;
+    grid-template-rows: auto !important;
+    column-gap: 10px !important;
+    align-items: center !important;
+  }
+  html body #cartModal.active > .shipping-option > .shipping-header {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    gap: 6px !important;
+    min-width: 0;
+  }
+  html body #cartModal.active > .shipping-option > .shipping-desc,
+  html body #cartModal.active > .shipping-option > .shipping-price { display: none !important; }
   html body #cartModal #daymarBenefit {
-    grid-column: 1 / -1;
-    grid-row: 3;
+    grid-column: 2;
+    grid-row: 1;
     width: 100%;
     min-width: 0;
     margin: 0;
-    padding: 7px 0 0;
+    padding: 0 0 0 8px;
     border: 0;
-    border-top: 1px solid #efeded;
+    border-left: 1px solid #efeded;
     border-radius: 0;
     background: transparent;
   }
-  html body #cartModal #daymarBenefitControls { display: grid; grid-template-columns: minmax(90px, .7fr) minmax(0, 1fr); align-items: center; gap: 8px; }
+  html body #cartModal #daymarBenefitControls { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 6px; }
   html body #cartModal #daymarBenefitSelect { display: none !important; }
-  #cartModal .cart-extra-heading { display: flex; align-items: center; gap: 6px; color: #662d42; font: 500 9px/1.4 'Outfit', sans-serif; letter-spacing: .06em; text-transform: uppercase; }
-  #cartModal .cart-extra-heading i { font-size: 10px; }
+  #cartModal .cart-extra-heading { display: flex; align-items: center; gap: 4px; color: #662d42; font: 500 8px/1.4 'Outfit', sans-serif; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+  #cartModal .cart-extra-heading i { font-size: 9px; }
   html body #cartModal #cartExtraTrigger {
-    display: flex; align-items: center; justify-content: space-between; gap: 7px;
-    width: 100%; min-height: 36px; padding: 6px 9px;
+    display: flex; align-items: center; justify-content: space-between; gap: 4px;
+    width: 100%; min-width: 0; min-height: 34px; padding: 6px;
     border: 1px solid #e4dadd; border-radius: 7px; background: #fff; color: #662d42;
-    font: 400 12px/1.4 'Outfit', sans-serif; text-align: left; text-transform: none; letter-spacing: normal; cursor: pointer;
+    font: 400 10.5px/1.4 'Outfit', sans-serif; text-align: left; text-transform: none; letter-spacing: normal; cursor: pointer;
   }
   html body #cartModal #cartExtraTrigger[data-has-extra="true"] { border-color: #662d42; background: #f2e9ed; }
-  #cartExtraTrigger #cartExtraValue { min-width: 0; overflow-wrap: anywhere; }
-  #cartExtraTrigger .cart-extra-action { display: inline-flex; align-items: center; gap: 5px; color: #927582; font-size: 10px; flex-shrink: 0; }
+  #cartExtraTrigger #cartExtraValue { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #cartExtraTrigger .cart-extra-action { display: inline-flex; align-items: center; gap: 0; color: #927582; font-size: 0; flex-shrink: 0; }
   #cartExtraTrigger .cart-extra-action i { font-size: 8px; transition: transform .2s ease; }
   #cartExtraTrigger[aria-expanded="true"] .cart-extra-action i { transform: rotate(180deg); }
   #cartExtraTrigger:focus-visible { outline: 2px solid #662d42; outline-offset: 3px; }
@@ -11394,7 +11408,7 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
     #cartExtraDialog::before { height: 3px; margin-bottom: 13px; }
   }
   @media (max-width: 480px) {
-    html body #cartModal #daymarBenefit { margin: 0; padding: 7px 0 0; }
+    html body #cartModal #daymarBenefit { margin: 0; padding: 0 0 0 8px; }
   }
 </style>
 </head>
@@ -12097,16 +12111,16 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
             <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
         </div>
         <div class="shipping-option">
-            <div class="shipping-header">
-                <span class="shipping-title">Envio a todo el pais</span>
-                <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()"></div>
+            <div class="shipping-header" title="Envío a todo el país · Entrega en 2–5 días hábiles">
+                <span class="shipping-title">Envío</span>
+                <div class="shipping-toggle" id="shippingToggle" onclick="toggleShipping()" aria-label="Envío a todo el país" aria-describedby="cartShippingDescription" title="Envío a todo el país"></div>
             </div>
             <div class="shipping-price" id="shippingPrice" style="display: none;">+$4.00</div>
-            <div class="shipping-desc">Entrega en 2-5 dias habiles</div>
+            <div class="shipping-desc" id="cartShippingDescription">Entrega en 2-5 dias habiles</div>
             <div class="daymar-benefit-compact" id="daymarBenefit" hidden>
                 <p id="daymarBenefitMinimumNotice" class="daymar-benefit-minimum" role="status" aria-live="polite">Para activar el beneficio Premium, suma más de $25 en productos.</p>
                 <div id="daymarBenefitControls" class="daymar-benefit-controls" hidden>
-                    <div class="cart-extra-heading"><i class="fas fa-gift" aria-hidden="true"></i><span id="cartExtraLabel">Extras Premium</span></div>
+                    <div class="cart-extra-heading"><i class="fas fa-gift" aria-hidden="true"></i><span id="cartExtraLabel">Premium</span></div>
                     <select id="daymarBenefitSelect" aria-label="Elegir un beneficio Premium" disabled hidden>
                         <option value="">Sin extra</option>
                         <option value="coupon">$5 en productos</option>

@@ -11443,7 +11443,7 @@ html.daymar-christmas .atelier-header { background: rgba(251, 250, 248, .96) !im
 html.daymar-christmas #daymarSummer,
 html.daymar-christmas #catalogo { background: #fbfaf8 !important; }
 
-/* Mensaje centrado y carrusel cuadrado centrado debajo. */
+/* Mensaje alineado como antes; solo las tres opciones permanecen centradas. */
 html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-grid {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
@@ -11460,17 +11460,17 @@ html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy 
   max-width: 760px !important;
   margin: 0 auto !important;
   padding: 0 16px !important;
-  text-align: center !important;
+  text-align: left !important;
   box-sizing: border-box !important;
 }
 html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy .eyebrow {
   margin: 0 auto 10px !important;
-  text-align: center !important;
+  text-align: left !important;
   color: #662d42 !important;
 }
 html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy h1 {
   margin: 0 auto !important;
-  text-align: center !important;
+  text-align: left !important;
   font-size: clamp(38px, 5vw, 58px) !important;
   color: #1a1717 !important;
 }
@@ -11479,7 +11479,7 @@ html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy 
   width: 100% !important;
   max-width: 660px !important;
   margin: 14px auto !important;
-  text-align: center !important;
+  text-align: left !important;
   color: #746b68 !important;
 }
 html.daymar-christmas .holiday-gift-notes {
@@ -11566,6 +11566,10 @@ html.daymar-christmas .mobile-bottom-nav button,
 html.daymar-christmas .mobile-bottom-nav button i { color: #662d42 !important; }
 html.daymar-christmas .atelier-footer { background: #ede8db !important; color: #662d42 !important; }
 html.daymar-christmas .atelier-footer a { color: #662d42 !important; }
+@media (min-width: 901px) {
+  html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; align-items: center !important; }
+  html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-art { grid-column: 2 !important; grid-row: 1 !important; }
+}
 @media (max-width: 600px) {
   html.daymar-christmas body > .holiday-page-garland { height: 42px; }
   html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy h1 { font-size: clamp(30px, 9.4vw, 38px) !important; }

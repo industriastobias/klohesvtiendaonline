@@ -11251,6 +11251,20 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
       grid-template-columns: minmax(0, 1fr);
     }
   }
+
+  #catalogo.atelier-catalog #categoryTitle {
+    margin: 0 !important;
+    font-size: clamp(20px, 2.2vw, 28px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: .02em !important;
+    text-transform: uppercase !important;
+  }
+
+  #catalogo.atelier-catalog #categoryTitle::before,
+  #catalogo.atelier-catalog #categoryTitle::after {
+    content: none !important;
+    display: none !important;
+  }
 </style>
 </head>
 <body>
@@ -11607,36 +11621,11 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
             <div class="section-header atelier-section-header">
                 <div>
                     <p class="eyebrow">02 / LA COLECCIÓN</p>
-                    <h2 class="section-title" id="categoryTitle">Todas</h2>
+                    <h2 class="section-title" id="categoryTitle">TODOS</h2>
                 </div>
                 <div class="atelier-section-tools">
                     <span class="products-count" id="productsCount">Mostrando 0 de 0 productos</span>
                 </div>
-            </div>
-
-            <div class="catalog-filter-bar" role="group" aria-label="Filtros del catálogo">
-                <label class="catalog-filter-field" for="categoryFilter"><span>Categoría</span>
-                    <select id="categoryFilter" aria-label="Filtrar por categoría">
-                        <option value="todos">Todas las categorías</option>
-                        <option value="oro-plata">Joyería fina · oro y plata</option>
-                        <option value="reloj">Relojes</option>
-                        <option value="anillo">Anillos</option>
-                        <option value="aritos">Aritos y pendientes</option>
-                        <option value="cartera">Carteras</option>
-                        <option value="collar">Collares</option>
-                        <option value="lentes-sol">Lentes de sol</option>
-                        <option value="pulsera">Pulseras</option>
-                        <option value="accesorios-cabello">Accesorios para el cabello</option>
-                        <option value="otros">Otros accesorios</option>
-                    </select>
-                </label>
-                <label class="catalog-filter-field" for="minPriceFilter"><span>Precio desde ($)</span>
-                    <input type="number" id="minPriceFilter" min="0" step="0.01" inputmode="decimal" placeholder="Sin mínimo">
-                </label>
-                <label class="catalog-filter-field" for="maxPriceFilter"><span>Precio hasta ($)</span>
-                    <input type="number" id="maxPriceFilter" min="0" step="0.01" inputmode="decimal" placeholder="Sin máximo">
-                </label>
-                <button class="catalog-filter-clear" type="button" onclick="clearCatalogFilters()">Limpiar filtros</button>
             </div>
 
 <div class="products-grid" id="productsContainer"></div>

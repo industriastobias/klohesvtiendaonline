@@ -12790,6 +12790,28 @@ html.daymar-brand.daymar-anniversary .location-map-toggle { margin: 8px 16px 0; 
 html.daymar-brand.daymar-anniversary .location-map-toggle summary { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; cursor: pointer; color: #662d42; font: 500 13px/1.5 'Outfit',sans-serif; list-style: none; }
 html.daymar-brand.daymar-anniversary .location-map-toggle summary::-webkit-details-marker { display: none; }
 html.daymar-brand.daymar-anniversary .location-map-toggle:not([open]) .location-map { display: none !important; }
+/* El mapa aprovecha la columna libre sin añadir altura al bloque de contacto. */
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-container {
+  display: grid !important; grid-template-columns: minmax(0,1fr) minmax(0,1.25fr) !important;
+  align-items: center !important; gap: 20px !important; padding: 16px !important;
+}
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-info { padding: 0 !important; min-width: 0 !important; }
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-map {
+  display: block !important; width: 100% !important; height: 310px !important;
+  overflow: hidden !important; border: 1px solid #c8ad78 !important; border-radius: 10px !important; background: #ede8db !important;
+}
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-map iframe {
+  display: block !important; width: 100% !important; height: 100% !important; min-height: 0 !important; border: 0 !important;
+}
+@media(max-width:700px) {
+ html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-container { grid-template-columns: minmax(0,1fr) !important; gap: 14px !important; padding: 14px !important; }
+ html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-map { height: 190px !important; }
+ html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-info h3 { margin: 10px 0 14px !important; font-size: 28px !important; }
+ html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-hours { margin-top: 14px !important; }
+}
+html.daymar-brand.daymar-anniversary body .daymar-compact-location .location-map { position: relative !important; padding-bottom: 32px !important; box-sizing: border-box !important; }
+html.daymar-brand.daymar-anniversary .location-map-link { position: absolute; inset: auto 0 0; height: 32px; display: flex; align-items: center; justify-content: center; background: #662d42; color: #ede8db; font: 500 12px/1.3 'Outfit',sans-serif; text-decoration: none; }
+html.daymar-brand.daymar-anniversary .location-map-link:focus-visible { outline: 2px solid #c9d66a; outline-offset: -3px; }
 </style>
 </head>
 <body>
@@ -13251,9 +13273,7 @@ html.daymar-brand.daymar-anniversary .location-map-toggle:not([open]) .location-
                         </div>
                     </div>
                 </div>
-                <details class="location-map-toggle"><summary>Ver mapa de ubicación <span aria-hidden="true">+</span></summary><div class="location-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248305.97300153466!2d-89.30428505!3d13.72410255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6327c9ab3fc8d1%3A0x7ed5e553f5e3d91e!2sSan%20Salvador!5e0!3m2!1ses!2ssv!4v1700000000000!5m2!1ses!2ssv" allowfullscreen="" loading="lazy"></iframe>
-                </div></details>
+                <div class="location-map"><iframe title="Mapa de San Salvador, El Salvador" src="https://maps.google.com/maps?q=San%20Salvador%2C%20El%20Salvador&amp;z=12&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><a class="location-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=San%20Salvador%2C%20El%20Salvador" target="_blank" rel="noopener noreferrer">Abrir San Salvador en Google Maps ↗</a></div>
             </div>
         </div>
     </section>

@@ -11290,9 +11290,9 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
   #catalogSortTrigger i { flex-shrink: 0; font-size: 10px; transition: transform .2s ease; }
   #catalogSortTrigger[aria-expanded="true"] i { transform: rotate(180deg); }
   #daymarSummer #catalogSortTrigger:focus-visible { outline: 2px solid #662d42; outline-offset: 4px; }
-  html.catalog-sort-open { overflow: hidden !important; }
-  html.catalog-sort-open body { overflow: hidden !important; }
-  #catalogSortDialog {
+  html:is(.catalog-sort-open, .cart-extra-open) { overflow: hidden !important; }
+  html:is(.catalog-sort-open, .cart-extra-open) body { overflow: hidden !important; }
+  :is(#catalogSortDialog, #cartExtraDialog) {
     position: fixed;
     inset: 0;
     box-sizing: border-box;
@@ -11312,34 +11312,66 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
     font-family: 'Outfit', sans-serif;
     text-align: left;
   }
-  #catalogSortDialog:not([open]) { display: none; }
-  #catalogSortDialog[open] { display: block; animation: daymar-sort-enter .18s ease-out; }
-  #catalogSortDialog::backdrop { background: rgba(39, 19, 29, .42); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
-  #catalogSortDialog .catalog-sort-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
-  #catalogSortDialog .catalog-sort-eyebrow { margin: 0 0 9px; color: #927582; font-size: 9px; letter-spacing: .15em; font-weight: 600; }
-  #catalogSortDialog h2 { margin: 0 0 8px; color: #662d42; font: 500 29px/1.08 'Cormorant Garamond', Georgia, serif; letter-spacing: -.02em; text-transform: none; }
-  #catalogSortDialog #catalogSortDescription { margin: 0; color: #857780; font-size: 12px; line-height: 1.5; }
-  #catalogSortDialog .catalog-sort-close { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; padding: 0; border: 1px solid #e7dbd8; border-radius: 50%; background: transparent; color: #662d42; font: 400 24px/1 Arial, sans-serif; cursor: pointer; }
-  #catalogSortDialog .catalog-sort-options { display: grid; gap: 9px; }
-  #catalogSortDialog .catalog-sort-option { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 76px; padding: 14px 12px; border: 1px solid #e7dbd8; border-radius: 13px; background: #fff; color: #662d42; text-align: left; cursor: pointer; font-family: inherit; letter-spacing: normal; text-transform: none; transition: border-color .15s ease, background .15s ease; }
-  #catalogSortDialog .catalog-sort-option[aria-checked="true"] { border-color: #662d42; background: #f2e9ed; }
-  #catalogSortDialog .catalog-sort-option:hover { border-color: #9d7084; }
-  #catalogSortDialog .catalog-sort-option-icon { display: grid; place-items: center; width: 31px; height: 31px; flex: 0 0 31px; color: #662d42; background: #f5efef; border-radius: 9px; font-size: 14px; }
-  #catalogSortDialog .catalog-sort-option-copy { display: grid; min-width: 0; flex: 1; gap: 4px; }
-  #catalogSortDialog .catalog-sort-option-copy strong { font-size: 13px; font-weight: 600; line-height: 1.35; }
-  #catalogSortDialog .catalog-sort-option-copy small { font-size: 11px; color: #857780; line-height: 1.45; }
-  #catalogSortDialog .catalog-sort-option-check { display: grid; place-items: center; width: 20px; height: 20px; flex: 0 0 20px; border: 1px solid #d8c8cf; border-radius: 50%; color: transparent; background: transparent; font-size: 9px; }
-  #catalogSortDialog .catalog-sort-option[aria-checked="true"] .catalog-sort-option-check { color: #fff; background: #662d42; border-color: #662d42; }
-  #catalogSortDialog .catalog-sort-dialog-note { margin: 18px 0 0; font-size: 10px; line-height: 1.5; color: #998c92; text-align: center; }
-  #catalogSortDialog button:focus-visible { outline: 2px solid #662d42; outline-offset: 3px; }
+  :is(#catalogSortDialog, #cartExtraDialog):not([open]) { display: none; }
+  :is(#catalogSortDialog, #cartExtraDialog)[open] { display: block; animation: daymar-sort-enter .18s ease-out; }
+  :is(#catalogSortDialog, #cartExtraDialog)::backdrop { background: rgba(39, 19, 29, .42); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-eyebrow { margin: 0 0 9px; color: #927582; font-size: 9px; letter-spacing: .15em; font-weight: 600; }
+  :is(#catalogSortDialog, #cartExtraDialog) h2 { margin: 0 0 8px; color: #662d42; font: 500 29px/1.08 'Cormorant Garamond', Georgia, serif; letter-spacing: -.02em; text-transform: none; }
+  :is(#catalogSortDialog, #cartExtraDialog) :is(#catalogSortDescription, #cartExtraDescription) { margin: 0; color: #857780; font-size: 12px; line-height: 1.5; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-close { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; padding: 0; border: 1px solid #e7dbd8; border-radius: 50%; background: transparent; color: #662d42; font: 400 24px/1 Arial, sans-serif; cursor: pointer; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-options { display: grid; gap: 9px; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 76px; padding: 14px 12px; border: 1px solid #e7dbd8; border-radius: 13px; background: #fff; color: #662d42; text-align: left; cursor: pointer; font-family: inherit; letter-spacing: normal; text-transform: none; transition: border-color .15s ease, background .15s ease; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option[aria-checked="true"] { border-color: #662d42; background: #f2e9ed; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option:hover { border-color: #9d7084; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option-icon { display: grid; place-items: center; width: 31px; height: 31px; flex: 0 0 31px; color: #662d42; background: #f5efef; border-radius: 9px; font-size: 14px; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option-copy { display: grid; min-width: 0; flex: 1; gap: 4px; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option-copy strong { font-size: 13px; font-weight: 600; line-height: 1.35; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option-copy small { font-size: 11px; color: #857780; line-height: 1.45; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option-check { display: grid; place-items: center; width: 20px; height: 20px; flex: 0 0 20px; border: 1px solid #d8c8cf; border-radius: 50%; color: transparent; background: transparent; font-size: 9px; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option[aria-checked="true"] .catalog-sort-option-check { color: #fff; background: #662d42; border-color: #662d42; }
+  :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-dialog-note { margin: 18px 0 0; font-size: 10px; line-height: 1.5; color: #998c92; text-align: center; }
+  :is(#catalogSortDialog, #cartExtraDialog) button:focus-visible { outline: 2px solid #662d42; outline-offset: 3px; }
   @keyframes daymar-sort-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @media (max-width: 600px) {
-    #catalogSortDialog { inset: auto 0 0; width: 100%; max-height: calc(100dvh - 24px); margin: 0; padding: 26px 20px max(24px, env(safe-area-inset-bottom)); border-radius: 24px 24px 0 0; }
-    #catalogSortDialog::before { content: ''; display: block; width: 36px; height: 4px; margin: -12px auto 19px; border-radius: 4px; background: #d8c8cf; }
+    :is(#catalogSortDialog, #cartExtraDialog) { inset: auto 0 0; width: 100%; max-height: calc(100dvh - 24px); margin: 0; padding: 26px 20px max(24px, env(safe-area-inset-bottom)); border-radius: 24px 24px 0 0; }
+    :is(#catalogSortDialog, #cartExtraDialog)::before { content: ''; display: block; width: 36px; height: 4px; margin: -12px auto 19px; border-radius: 4px; background: #d8c8cf; }
   }
   @media (prefers-reduced-motion: reduce) {
-    #catalogSortDialog[open] { animation: none; }
-    #catalogSortDialog .catalog-sort-option, #catalogSortTrigger i { transition: none; }
+    :is(#catalogSortDialog, #cartExtraDialog)[open] { animation: none; }
+    :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-option, #catalogSortTrigger i { transition: none; }
+  }
+</style>
+<style id="daymar-cart-extras-design">
+  html body #cartModal #daymarBenefit {
+    margin: 0 22px 12px;
+    padding: 14px;
+    border: 1px solid #e7dbd8;
+    border-radius: 14px;
+    background: #fcfaf7;
+  }
+  html body #cartModal #daymarBenefitControls { display: grid; gap: 10px; }
+  html body #cartModal #daymarBenefitSelect { display: none !important; }
+  #cartModal .cart-extra-heading { display: flex; align-items: center; gap: 8px; color: #662d42; font: 600 10px/1.4 'Outfit', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+  #cartModal .cart-extra-heading i { font-size: 12px; }
+  html body #cartModal #cartExtraTrigger {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    width: 100%; min-height: 44px; padding: 10px 12px;
+    border: 1px solid #ded0d6; border-radius: 10px; background: #fff; color: #662d42;
+    font: 500 13px/1.4 'Outfit', sans-serif; text-align: left; text-transform: none; letter-spacing: normal; cursor: pointer;
+  }
+  html body #cartModal #cartExtraTrigger[data-has-extra="true"] { border-color: #662d42; background: #f2e9ed; }
+  #cartExtraTrigger #cartExtraValue { min-width: 0; overflow-wrap: anywhere; }
+  #cartExtraTrigger .cart-extra-action { display: inline-flex; align-items: center; gap: 8px; color: #927582; font-size: 11px; flex-shrink: 0; }
+  #cartExtraTrigger .cart-extra-action i { font-size: 9px; transition: transform .2s ease; }
+  #cartExtraTrigger[aria-expanded="true"] .cart-extra-action i { transform: rotate(180deg); }
+  #cartExtraTrigger:focus-visible { outline: 2px solid #662d42; outline-offset: 3px; }
+  #cartExtraDialog .catalog-sort-option:disabled { opacity: .5; cursor: not-allowed; border-color: #e7dbd8; background: #f8f5f3; }
+  #cartExtraDialog .catalog-sort-option:disabled .catalog-sort-option-icon { background: #ebe5e6; }
+  #cartExtraDialog .catalog-sort-option:disabled:hover { border-color: #e7dbd8; }
+  #cartExtraTrigger:disabled { opacity: .5; cursor: not-allowed; }
+  @media (max-width: 480px) {
+    html body #cartModal #daymarBenefit { margin-left: 16px; margin-right: 16px; padding: 12px; }
   }
 </style>
 </head>
@@ -12055,12 +12087,15 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
         <div class="daymar-benefit-compact" id="daymarBenefit" hidden>
             <p id="daymarBenefitMinimumNotice" class="daymar-benefit-minimum" role="status" aria-live="polite">Para activar el beneficio Premium, suma más de $25 en productos.</p>
             <div id="daymarBenefitControls" class="daymar-benefit-controls" hidden>
-                <label for="daymarBenefitSelect">Beneficio Premium</label>
-                <select id="daymarBenefitSelect" aria-label="Elegir un beneficio Premium" disabled>
+                <div class="cart-extra-heading"><i class="fas fa-gift" aria-hidden="true"></i><span id="cartExtraLabel">Extras Premium</span></div>
+                <select id="daymarBenefitSelect" aria-label="Elegir un beneficio Premium" disabled hidden>
                     <option value="">Sin extra</option>
                     <option value="coupon">$5 en productos</option>
                     <option value="shipping" disabled>Envío gratis</option>
                 </select>
+                <button id="cartExtraTrigger" type="button" class="cart-extra-trigger" aria-haspopup="dialog" aria-controls="cartExtraDialog" aria-expanded="false" aria-labelledby="cartExtraLabel cartExtraValue" disabled>
+                    <span id="cartExtraValue">Sin extra</span><span class="cart-extra-action">Elegir <i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+                </button>
             </div>
         </div>
         <div class="cart-summary" id="cartSummary" style="display: none;">
@@ -12138,6 +12173,35 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
             </button>
         </div>
         <p class="catalog-sort-dialog-note">Tu búsqueda se conserva al cambiar el orden.</p>
+    </dialog>
+
+    <dialog id="cartExtraDialog" class="catalog-sort-dialog" aria-labelledby="cartExtraTitle" aria-describedby="cartExtraDescription">
+        <div class="catalog-sort-dialog-head">
+            <div>
+                <p class="catalog-sort-eyebrow">DAYMAR / PREMIUM</p>
+                <h2 id="cartExtraTitle">Un extra para ti.</h2>
+                <p id="cartExtraDescription">Elige un beneficio para esta compra.</p>
+            </div>
+            <button class="catalog-sort-close" type="button" data-extra-close aria-label="Cerrar opciones de extras">&times;</button>
+        </div>
+        <div class="catalog-sort-options" role="radiogroup" aria-label="Extras Premium">
+            <button class="catalog-sort-option" type="button" role="radio" aria-checked="true" data-extra-value="">
+                <span class="catalog-sort-option-icon" aria-hidden="true"><i class="fas fa-shopping-bag"></i></span>
+                <span class="catalog-sort-option-copy"><strong>Sin extra</strong><small>Continuar sin aplicar un beneficio.</small></span>
+                <span class="catalog-sort-option-check" aria-hidden="true"><i class="fas fa-check"></i></span>
+            </button>
+            <button class="catalog-sort-option" type="button" role="radio" aria-checked="false" data-extra-value="coupon" disabled>
+                <span class="catalog-sort-option-icon" aria-hidden="true"><i class="fas fa-gift"></i></span>
+                <span class="catalog-sort-option-copy"><strong>$5 en productos</strong><small>$5 de descuento en el subtotal.</small></span>
+                <span class="catalog-sort-option-check" aria-hidden="true"><i class="fas fa-check"></i></span>
+            </button>
+            <button class="catalog-sort-option" type="button" role="radio" aria-checked="false" data-extra-value="shipping" disabled>
+                <span class="catalog-sort-option-icon" aria-hidden="true"><i class="fas fa-truck"></i></span>
+                <span class="catalog-sort-option-copy"><strong>Envío gratis</strong><small id="cartExtraShippingHint">Activa el envío en tu carrito.</small></span>
+                <span class="catalog-sort-option-check" aria-hidden="true"><i class="fas fa-check"></i></span>
+            </button>
+        </div>
+        <p class="catalog-sort-dialog-note">Beneficio Premium para compras de más de $25 en productos.</p>
     </dialog>
 
     <!-- Notification -->
@@ -14230,6 +14294,17 @@ const firebaseConfig = {
     choice.value = selected;
     choice.querySelector('option[value="shipping"]').disabled =
       !document.querySelector('#shippingToggle')?.classList.contains('active');
+    const extraTrigger = $('cartExtraTrigger');
+    extraTrigger.disabled = !eligible;
+    extraTrigger.dataset.hasExtra = String(Boolean(selected));
+    $('cartExtraValue').textContent = selected === 'coupon' ? '$5 en productos' : selected === 'shipping' ? 'Envío gratis' : 'Sin extra';
+    const shippingAvailable = !choice.querySelector('option[value="shipping"]').disabled;
+    $('cartExtraShippingHint').textContent = shippingAvailable ? 'Entrega sin costo de envío.' : 'Activa el envío en tu carrito.';
+    document.querySelectorAll('#cartExtraDialog [data-extra-value]').forEach(button => {
+      button.disabled = !eligible || (button.dataset.extraValue === 'shipping' && !shippingAvailable);
+      button.setAttribute('aria-checked', String(button.dataset.extraValue === selected));
+    });
+    if (!eligible && $('cartExtraDialog').open) $('cartExtraDialog').close();
     $('daymarLoginDescription').textContent = tier;
     $('daymarLoginDescription').classList.toggle('is-premium', isMember);
     $('daymarWelcomeTier').textContent = tier;
@@ -14277,6 +14352,53 @@ const firebaseConfig = {
     if (selected === 'shipping' && !document.querySelector('#shippingToggle')?.classList.contains('active')) selected = '';
     render(); updateCartSafely();
   });
+
+  // El panel visual usa el mismo evento y las mismas validaciones del selector original.
+  const extraDialog = $('cartExtraDialog');
+  const extraTrigger = $('cartExtraTrigger');
+  const closeExtras = () => { if (extraDialog.open) extraDialog.close(); };
+  extraTrigger.addEventListener('click', () => {
+    if (!eligibleCart() || extraDialog.open) return;
+    render();
+    extraDialog.showModal();
+    extraTrigger.setAttribute('aria-expanded', 'true');
+    document.documentElement.classList.add('cart-extra-open');
+    (extraDialog.querySelector('[aria-checked="true"]:not(:disabled)') || extraDialog.querySelector('[data-extra-value]:not(:disabled)'))?.focus();
+  });
+  extraDialog.querySelector('[data-extra-close]').addEventListener('click', closeExtras);
+  extraDialog.addEventListener('close', () => {
+    extraTrigger.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('cart-extra-open');
+    const focusTarget = !extraTrigger.disabled && !extraTrigger.closest('[hidden]') ? extraTrigger : document.querySelector('#cartModal .close-cart');
+    focusTarget?.focus({ preventScroll: true });
+  });
+  extraDialog.addEventListener('cancel', event => { event.preventDefault(); closeExtras(); });
+  extraDialog.addEventListener('click', event => {
+    const option = event.target.closest('[data-extra-value]');
+    if (option && !option.disabled && eligibleCart()) {
+      const choice = $('daymarBenefitSelect');
+      choice.value = option.dataset.extraValue;
+      choice.dispatchEvent(new Event('change', { bubbles: true }));
+      closeExtras();
+    } else if (event.target === extraDialog) {
+      const rect = extraDialog.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) closeExtras();
+    }
+  });
+  extraDialog.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      event.preventDefault(); event.stopPropagation(); closeExtras(); return;
+    }
+    if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+    const options = Array.from(extraDialog.querySelectorAll('[data-extra-value]:not(:disabled)'));
+    const index = options.indexOf(document.activeElement);
+    if (index < 0) return;
+    event.preventDefault();
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? options.length - 1
+      : (index + (['ArrowDown', 'ArrowRight'].includes(event.key) ? 1 : -1) + options.length) % options.length;
+    options[next].focus();
+  });
+
   $('whatsappBtn').addEventListener('click', event => {
     // Recalcular antes de abrir el borrador, sin enviar mensajes automáticamente.
     if (!member() && selected) {

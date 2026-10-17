@@ -11266,6 +11266,82 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
     display: none !important;
   }
 </style>
+<style id="daymar-designed-sort">
+  #daymarSummer #catalogSortTrigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 10px;
+    border: 0;
+    border-bottom: 1px solid #662d42;
+    border-radius: 0;
+    background: transparent;
+    color: #662d42;
+    font: 500 13px/1.3 'Outfit', sans-serif;
+    letter-spacing: 0;
+    text-transform: none;
+    cursor: pointer;
+    text-align: left;
+  }
+  #catalogSortTrigger #catalogSortValue { min-width: 0; overflow-wrap: anywhere; }
+  #catalogSortTrigger i { flex-shrink: 0; font-size: 10px; transition: transform .2s ease; }
+  #catalogSortTrigger[aria-expanded="true"] i { transform: rotate(180deg); }
+  #daymarSummer #catalogSortTrigger:focus-visible { outline: 2px solid #662d42; outline-offset: 4px; }
+  html.catalog-sort-open { overflow: hidden !important; }
+  html.catalog-sort-open body { overflow: hidden !important; }
+  #catalogSortDialog {
+    position: fixed;
+    inset: 0;
+    box-sizing: border-box;
+    width: min(430px, calc(100vw - 36px));
+    max-width: none;
+    max-height: calc(100dvh - 40px);
+    height: fit-content;
+    min-height: 0;
+    margin: auto;
+    padding: 26px;
+    overflow: auto;
+    border: 1px solid #e7dbd8;
+    border-radius: 22px;
+    background: #fcfaf7;
+    color: #662d42;
+    box-shadow: 0 22px 90px rgba(41, 17, 28, .22);
+    font-family: 'Outfit', sans-serif;
+    text-align: left;
+  }
+  #catalogSortDialog:not([open]) { display: none; }
+  #catalogSortDialog[open] { display: block; animation: daymar-sort-enter .18s ease-out; }
+  #catalogSortDialog::backdrop { background: rgba(39, 19, 29, .42); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  #catalogSortDialog .catalog-sort-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+  #catalogSortDialog .catalog-sort-eyebrow { margin: 0 0 9px; color: #927582; font-size: 9px; letter-spacing: .15em; font-weight: 600; }
+  #catalogSortDialog h2 { margin: 0 0 8px; color: #662d42; font: 500 29px/1.08 'Cormorant Garamond', Georgia, serif; letter-spacing: -.02em; text-transform: none; }
+  #catalogSortDialog #catalogSortDescription { margin: 0; color: #857780; font-size: 12px; line-height: 1.5; }
+  #catalogSortDialog .catalog-sort-close { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; padding: 0; border: 1px solid #e7dbd8; border-radius: 50%; background: transparent; color: #662d42; font: 400 24px/1 Arial, sans-serif; cursor: pointer; }
+  #catalogSortDialog .catalog-sort-options { display: grid; gap: 9px; }
+  #catalogSortDialog .catalog-sort-option { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 76px; padding: 14px 12px; border: 1px solid #e7dbd8; border-radius: 13px; background: #fff; color: #662d42; text-align: left; cursor: pointer; font-family: inherit; letter-spacing: normal; text-transform: none; transition: border-color .15s ease, background .15s ease; }
+  #catalogSortDialog .catalog-sort-option[aria-checked="true"] { border-color: #662d42; background: #f2e9ed; }
+  #catalogSortDialog .catalog-sort-option:hover { border-color: #9d7084; }
+  #catalogSortDialog .catalog-sort-option-icon { display: grid; place-items: center; width: 31px; height: 31px; flex: 0 0 31px; color: #662d42; background: #f5efef; border-radius: 9px; font-size: 14px; }
+  #catalogSortDialog .catalog-sort-option-copy { display: grid; min-width: 0; flex: 1; gap: 4px; }
+  #catalogSortDialog .catalog-sort-option-copy strong { font-size: 13px; font-weight: 600; line-height: 1.35; }
+  #catalogSortDialog .catalog-sort-option-copy small { font-size: 11px; color: #857780; line-height: 1.45; }
+  #catalogSortDialog .catalog-sort-option-check { display: grid; place-items: center; width: 20px; height: 20px; flex: 0 0 20px; border: 1px solid #d8c8cf; border-radius: 50%; color: transparent; background: transparent; font-size: 9px; }
+  #catalogSortDialog .catalog-sort-option[aria-checked="true"] .catalog-sort-option-check { color: #fff; background: #662d42; border-color: #662d42; }
+  #catalogSortDialog .catalog-sort-dialog-note { margin: 18px 0 0; font-size: 10px; line-height: 1.5; color: #998c92; text-align: center; }
+  #catalogSortDialog button:focus-visible { outline: 2px solid #662d42; outline-offset: 3px; }
+  @keyframes daymar-sort-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 600px) {
+    #catalogSortDialog { inset: auto 0 0; width: 100%; max-height: calc(100dvh - 24px); margin: 0; padding: 26px 20px max(24px, env(safe-area-inset-bottom)); border-radius: 24px 24px 0 0; }
+    #catalogSortDialog::before { content: ''; display: block; width: 36px; height: 4px; margin: -12px auto 19px; border-radius: 4px; background: #d8c8cf; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #catalogSortDialog[open] { animation: none; }
+    #catalogSortDialog .catalog-sort-option, #catalogSortTrigger i { transition: none; }
+  }
+</style>
 </head>
 <body>
     <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -11600,14 +11676,14 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
                         <label class="catalog-search-label" for="searchInput"><span>Buscar por nombre o tipo</span><i class="fas fa-arrow-right" aria-hidden="true"></i></label>
                         <input type="text" class="search-input" id="searchInput" placeholder="Plata 925, aretes, cartera..." aria-label="Buscar productos">
                     </div>
-                    <label class="catalog-sort-field" for="sortFilter">
-                        <span>Ordenar precio</span>
-                        <select class="filter-select" id="sortFilter" onchange="applySortFilter()" aria-label="Ordenar productos por precio">
-                            <option value="default">Orden recomendado</option>
-                            <option value="price-desc">Precio: mayor a menor</option>
-                            <option value="price-asc">Precio: menor a mayor</option>
-                        </select>
-                    </label>
+                    <div class="catalog-sort-field">
+                        <span id="catalogSortLabel">Ordenar precio</span>
+                        <input type="hidden" id="sortFilter" value="default">
+                        <button class="catalog-sort-trigger" id="catalogSortTrigger" type="button" aria-haspopup="dialog" aria-controls="catalogSortDialog" aria-expanded="false" aria-labelledby="catalogSortLabel catalogSortValue">
+                            <span id="catalogSortValue">Recomendados</span>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -12035,6 +12111,35 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
         </div>
     </div>
 
+    <dialog id="catalogSortDialog" class="catalog-sort-dialog" aria-labelledby="catalogSortTitle" aria-describedby="catalogSortDescription">
+        <div class="catalog-sort-dialog-head">
+            <div>
+                <p class="catalog-sort-eyebrow">DAYMAR / LA COLECCIÓN</p>
+                <h2 id="catalogSortTitle">Ordena a tu gusto.</h2>
+                <p id="catalogSortDescription">Elige cómo quieres ver las piezas.</p>
+            </div>
+            <button class="catalog-sort-close" type="button" data-sort-close aria-label="Cerrar opciones de orden">&times;</button>
+        </div>
+        <div class="catalog-sort-options" role="radiogroup" aria-label="Orden de los productos">
+            <button class="catalog-sort-option" type="button" role="radio" aria-checked="true" data-sort-value="default">
+                <span class="catalog-sort-option-icon" aria-hidden="true"><i class="fas fa-th-large"></i></span>
+                <span class="catalog-sort-option-copy"><strong>Recomendados</strong><small>La selección original de la tienda.</small></span>
+                <span class="catalog-sort-option-check" aria-hidden="true"><i class="fas fa-check"></i></span>
+            </button>
+            <button class="catalog-sort-option" type="button" role="radio" aria-checked="false" data-sort-value="price-desc">
+                <span class="catalog-sort-option-icon" aria-hidden="true"><i class="fas fa-sort-amount-down"></i></span>
+                <span class="catalog-sort-option-copy"><strong>Precio: mayor a menor</strong><small>Las piezas de mayor precio primero.</small></span>
+                <span class="catalog-sort-option-check" aria-hidden="true"><i class="fas fa-check"></i></span>
+            </button>
+            <button class="catalog-sort-option" type="button" role="radio" aria-checked="false" data-sort-value="price-asc">
+                <span class="catalog-sort-option-icon" aria-hidden="true"><i class="fas fa-sort-amount-up"></i></span>
+                <span class="catalog-sort-option-copy"><strong>Precio: menor a mayor</strong><small>Las piezas más accesibles primero.</small></span>
+                <span class="catalog-sort-option-check" aria-hidden="true"><i class="fas fa-check"></i></span>
+            </button>
+        </div>
+        <p class="catalog-sort-dialog-note">Tu búsqueda se conserva al cambiar el orden.</p>
+    </dialog>
+
     <!-- Notification -->
     <div class="notification" id="notification">Producto agregado</div>
 
@@ -12193,21 +12298,74 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
             }
         }
 
-        function applySortFilter() {
-            const sortValue = document.getElementById('sortFilter').value;
-            AppState.currentSort = sortValue;
-            AppState.currentPage = 0;
-            AppState.hasMoreProducts = true;
-            
-            document.getElementById('productsContainer').innerHTML = '';
-            renderSkeletons(4);
-            
-            setTimeout(() => {
-                sortProducts();
-                document.getElementById('productsContainer').innerHTML = '';
-                renderProducts();
-                updateProductsCount();
-            }, 200);
+        function applySortFilter(value) {
+            const requested = typeof value === 'string' ? value : document.getElementById('sortFilter')?.value;
+            AppState.currentSort = ['default', 'price-desc', 'price-asc'].includes(requested) ? requested : 'default';
+            syncCatalogSortControl();
+            // Reconstruye desde products.js, no desde la lista que ya fue ordenada.
+            // Conserva la búsqueda y la categoría, y restaura realmente Recomendados.
+            applyCatalogFilters();
+        }
+
+        function syncCatalogSortControl() {
+            const labels = { default: 'Recomendados', 'price-desc': 'Mayor a menor', 'price-asc': 'Menor a mayor' };
+            const input = document.getElementById('sortFilter');
+            const text = document.getElementById('catalogSortValue');
+            if (input) input.value = AppState.currentSort;
+            if (text) text.textContent = labels[AppState.currentSort] || labels.default;
+            document.querySelectorAll('#catalogSortDialog [data-sort-value]').forEach(option => {
+                option.setAttribute('aria-checked', String(option.dataset.sortValue === AppState.currentSort));
+            });
+        }
+
+        function initCatalogSortDialog() {
+            const dialog = document.getElementById('catalogSortDialog');
+            const trigger = document.getElementById('catalogSortTrigger');
+            if (!dialog || !trigger) return;
+            const options = Array.from(dialog.querySelectorAll('[data-sort-value]'));
+            const close = () => { if (dialog.open) dialog.close(); };
+            trigger.addEventListener('click', () => {
+                if (dialog.open) return;
+                syncCatalogSortControl();
+                dialog.showModal();
+                trigger.setAttribute('aria-expanded', 'true');
+                document.documentElement.classList.add('catalog-sort-open');
+                (options.find(option => option.getAttribute('aria-checked') === 'true') || options[0])?.focus();
+            });
+            dialog.querySelector('[data-sort-close]')?.addEventListener('click', close);
+            dialog.addEventListener('close', () => {
+                trigger.setAttribute('aria-expanded', 'false');
+                document.documentElement.classList.remove('catalog-sort-open');
+                trigger.focus({ preventScroll: true });
+            });
+            dialog.addEventListener('cancel', event => { event.preventDefault(); close(); });
+            dialog.addEventListener('click', event => {
+                const option = event.target.closest('[data-sort-value]');
+                if (option) {
+                    applySortFilter(option.dataset.sortValue);
+                    close();
+                } else if (event.target === dialog) {
+                    const rect = dialog.getBoundingClientRect();
+                    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) close();
+                }
+            });
+            dialog.addEventListener('keydown', event => {
+                if (event.key === 'Escape') {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    close();
+                    return;
+                }
+                const keys = ['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End'];
+                if (!keys.includes(event.key)) return;
+                const index = options.indexOf(document.activeElement);
+                if (index < 0) return;
+                event.preventDefault();
+                const next = event.key === 'Home' ? 0 : event.key === 'End' ? options.length - 1
+                    : (index + (['ArrowDown', 'ArrowRight'].includes(event.key) ? 1 : -1) + options.length) % options.length;
+                options[next].focus();
+            });
+            syncCatalogSortControl();
         }
         
         function sortProducts() {
@@ -13779,6 +13937,8 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
                     searchProducts(e.target.value);
                 }, 180));
             }
+
+            initCatalogSortDialog();
 
             const categoryFilter = document.getElementById('categoryFilter');
             if (categoryFilter) categoryFilter.addEventListener('change', event => setCatalogCategoryFilter(event.target.value));

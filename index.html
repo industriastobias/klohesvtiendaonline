@@ -11344,9 +11344,14 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
 </style>
 <style id="daymar-cart-extras-design">
   html body #cartModal #daymarBenefit {
-    margin: 0 22px 6px;
-    padding: 5px 0;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 7px 0 0;
     border: 0;
+    border-top: 1px solid #efeded;
     border-radius: 0;
     background: transparent;
   }
@@ -11389,7 +11394,7 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
     #cartExtraDialog::before { height: 3px; margin-bottom: 13px; }
   }
   @media (max-width: 480px) {
-    html body #cartModal #daymarBenefit { margin-left: 16px; margin-right: 16px; padding: 5px 0; }
+    html body #cartModal #daymarBenefit { margin: 0; padding: 7px 0 0; }
   }
 </style>
 </head>
@@ -12098,23 +12103,23 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
             </div>
             <div class="shipping-price" id="shippingPrice" style="display: none;">+$4.00</div>
             <div class="shipping-desc">Entrega en 2-5 dias habiles</div>
+            <div class="daymar-benefit-compact" id="daymarBenefit" hidden>
+                <p id="daymarBenefitMinimumNotice" class="daymar-benefit-minimum" role="status" aria-live="polite">Para activar el beneficio Premium, suma más de $25 en productos.</p>
+                <div id="daymarBenefitControls" class="daymar-benefit-controls" hidden>
+                    <div class="cart-extra-heading"><i class="fas fa-gift" aria-hidden="true"></i><span id="cartExtraLabel">Extras Premium</span></div>
+                    <select id="daymarBenefitSelect" aria-label="Elegir un beneficio Premium" disabled hidden>
+                        <option value="">Sin extra</option>
+                        <option value="coupon">$5 en productos</option>
+                        <option value="shipping" disabled>Envío gratis</option>
+                    </select>
+                    <button id="cartExtraTrigger" type="button" class="cart-extra-trigger" aria-haspopup="dialog" aria-controls="cartExtraDialog" aria-expanded="false" aria-labelledby="cartExtraLabel cartExtraValue" disabled>
+                        <span id="cartExtraValue">Sin extra</span><span class="cart-extra-action">Elegir <i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+                    </button>
+                </div>
+            </div>
         </div>
         <div id="cartItems">
             <div class="cart-empty">Tu carrito esta vacio</div>
-        </div>
-        <div class="daymar-benefit-compact" id="daymarBenefit" hidden>
-            <p id="daymarBenefitMinimumNotice" class="daymar-benefit-minimum" role="status" aria-live="polite">Para activar el beneficio Premium, suma más de $25 en productos.</p>
-            <div id="daymarBenefitControls" class="daymar-benefit-controls" hidden>
-                <div class="cart-extra-heading"><i class="fas fa-gift" aria-hidden="true"></i><span id="cartExtraLabel">Extras Premium</span></div>
-                <select id="daymarBenefitSelect" aria-label="Elegir un beneficio Premium" disabled hidden>
-                    <option value="">Sin extra</option>
-                    <option value="coupon">$5 en productos</option>
-                    <option value="shipping" disabled>Envío gratis</option>
-                </select>
-                <button id="cartExtraTrigger" type="button" class="cart-extra-trigger" aria-haspopup="dialog" aria-controls="cartExtraDialog" aria-expanded="false" aria-labelledby="cartExtraLabel cartExtraValue" disabled>
-                    <span id="cartExtraValue">Sin extra</span><span class="cart-extra-action">Elegir <i class="fas fa-chevron-down" aria-hidden="true"></i></span>
-                </button>
-            </div>
         </div>
         <div class="cart-summary" id="cartSummary" style="display: none;">
             <div class="summary-row cart-real-price-row" id="cartRealPriceRow" style="display: none;">

@@ -11435,103 +11435,96 @@ html.daymar-christmas {
   --line: #e7dfdb !important;
   --rosa-vieja: #662d42;
 }
-html.daymar-christmas body {
-  background: #fbfaf8 !important;
-  background-image: none !important;
-}
-html.daymar-christmas .atelier-topline {
-  background: #662d42 !important;
-  border-color: #662d42 !important;
-  color: #ede8db !important;
-}
+html.daymar-christmas body { background: #fbfaf8 !important; background-image: none !important; }
+html.daymar-christmas .atelier-topline { background: #662d42 !important; border-color: #662d42 !important; color: #ede8db !important; }
 html.daymar-christmas .atelier-topline-copy span { color: #ede8db !important; }
 html.daymar-christmas .atelier-topline-copy span:first-child { color: #c9d66a !important; }
-html.daymar-christmas .atelier-header {
-  background: rgba(251, 250, 248, .96) !important;
-  border-color: #e7dfdb !important;
-}
+html.daymar-christmas .atelier-header { background: rgba(251, 250, 248, .96) !important; border-color: #e7dfdb !important; }
 html.daymar-christmas #daymarSummer,
 html.daymar-christmas #catalogo { background: #fbfaf8 !important; }
-html.daymar-christmas #daymarSummer .atelier-hero-copy { position: relative; }
-html.daymar-christmas #daymarSummer .eyebrow { color: #662d42 !important; }
-html.daymar-christmas #daymarSummer h1 { color: #1a1717 !important; }
-html.daymar-christmas #daymarSummer h1 em { color: #662d42 !important; }
-html.daymar-christmas #daymarSummer .hero-intro { color: #746b68 !important; }
-html.daymar-christmas #daymarSummer .atelier-primary-cta {
-  background: #662d42 !important;
-  color: #ede8db !important;
-  border: 1px solid #662d42 !important;
-}
-html.daymar-christmas #daymarSummer .atelier-primary-cta:hover { background: #542537 !important; }
-html.daymar-christmas #daymarSummer .atelier-hero-art {
-  position: relative;
-  background: #662d42 !important;
-  border-color: #662d42 !important;
-}
-html.daymar-christmas #daymarSummer .hero-art-image { background: #662d42 !important; }
-html.daymar-christmas #daymarSummer .hero-gallery-slide {
-  object-fit: contain !important;
-  background: #662d42 !important;
-}
-html.daymar-christmas #daymarSummer .atelier-hero-art::before {
-  content: 'EDICIÓN NAVIDAD';
-  position: absolute;
-  left: 14px;
-  top: 14px;
-  z-index: 3;
-  padding: 6px 10px;
-  background: #662d42;
-  color: #c9d66a;
-  border: 1px solid rgba(201, 214, 106, .45);
-  font: 500 9px/1.2 'Outfit', sans-serif;
-  letter-spacing: .13em;
-  pointer-events: none;
-}
-html.daymar-christmas #daymarSummer .atelier-hero-note span { color: #662d42 !important; }
-html.daymar-christmas #daymarSummer .atelier-hero-note strong { color: #662d42 !important; }
-html.daymar-christmas #daymarSummer .atelier-search-row {
-  background: #fbfaf8 !important;
-  border-color: #e7dfdb !important;
-}
-html.daymar-christmas #catalogo .section-kicker,
-html.daymar-christmas #catalogo #categoryTitle { color: #662d42 !important; }
-html.daymar-christmas #newsletterPopup .daymar-welcome-season,
-html.daymar-christmas #newsletterPopup .daymar-welcome-offers strong { color: #c9d66a !important; }
-html.daymar-christmas #newsletterPopup #daymarWelcomeTier { color: #ede8db !important; font-weight: 500 !important; }
-html.daymar-christmas #newsletterPopup .daymar-welcome-subtitle { font-weight: 400 !important; }
-html.daymar-christmas #newsletterPopup .daymar-welcome-shape path { fill: #662d42; }
-html.daymar-christmas #newsletterPopup .holiday-welcome-star { color: #c9d66a; font-size: 15px; margin-bottom: 9px; }
-html.daymar-christmas #newsletterPopup #daymarWelcomeTitle { font-size: clamp(29px, 5vw, 40px) !important; }
-html.daymar-christmas :is(#catalogSortDialog, #cartExtraDialog) { background: #fbfaf8 !important; }
-html.daymar-christmas :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-eyebrow { color: #662d42 !important; }
-html.daymar-christmas .mobile-bottom-nav { background: #fbfaf8 !important; border-color: #e7dfdb !important; }
-html.daymar-christmas .mobile-bottom-nav button,
-html.daymar-christmas .mobile-bottom-nav button i { color: #662d42 !important; }
-html.daymar-christmas .atelier-footer { background: #ede8db !important; color: #662d42 !important; }
-html.daymar-christmas .atelier-footer a { color: #662d42 !important; }
-@media (max-width: 600px) {
-  html.daymar-christmas #daymarSummer .atelier-hero-art::before { left: 10px; top: 10px; font-size: 8px; padding: 5px 8px; }
-  html.daymar-christmas #daymarSummer h1 { font-size: clamp(34px, 9.4vw, 46px) !important; }
-}
-html.daymar-christmas #whatsappFloat { box-shadow: 0 5px 16px rgba(102, 45, 66, .16) !important; }
-html.daymar-christmas #whatsappFloat.holiday-search-clear { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 
-/* Carrusel compacto: todas las fotos siguen viniendo de carpetaimg. */
+/* Mensaje centrado y carrusel cuadrado centrado debajo. */
+html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+  align-items: start !important;
+  gap: 18px !important;
+}
+html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  position: relative !important;
+  width: min(100%, 760px) !important;
+  min-width: 0 !important;
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy .eyebrow {
+  margin: 0 auto 10px !important;
+  text-align: center !important;
+  color: #662d42 !important;
+}
+html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy h1 {
+  margin: 0 auto !important;
+  text-align: center !important;
+  font-size: clamp(38px, 5vw, 58px) !important;
+  color: #1a1717 !important;
+}
+html.daymar-christmas #daymarSummer h1 em { color: #662d42 !important; }
+html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy .hero-intro {
+  width: 100% !important;
+  max-width: 660px !important;
+  margin: 14px auto !important;
+  text-align: center !important;
+  color: #746b68 !important;
+}
+html.daymar-christmas .holiday-gift-notes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 15px;
+  margin: 14px auto 0;
+  color: #662d42;
+  font: 400 10px/1.4 'Outfit', sans-serif;
+}
+html.daymar-christmas .holiday-gift-notes span { display: inline-flex; align-items: center; gap: 6px; }
+html.daymar-christmas .holiday-gift-notes i { font-size: 11px; }
+html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-note { display: none !important; }
+
+/* Las seis fotos se mantienen completas, con ajuste contain. */
 html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-art {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  position: relative !important;
+  width: 340px !important;
+  max-width: calc(100% - 32px) !important;
+  min-width: 0 !important;
   height: auto !important;
   min-height: 0 !important;
-  aspect-ratio: auto !important;
+  aspect-ratio: 1 / 1 !important;
+  box-sizing: border-box !important;
   display: block !important;
-  padding: 28px 8px 8px !important;
+  margin: 0 auto !important;
+  padding: 8px !important;
   overflow: hidden !important;
+  background: #662d42 !important;
+  border: 0 !important;
 }
+html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-art::before,
+html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-art::after { content: none !important; display: none !important; }
 html.daymar-christmas body #daymarSummer.daymar-compact-hero .hero-art-image {
   position: relative !important;
   inset: auto !important;
   width: 100% !important;
-  height: 340px !important;
+  height: auto !important;
   min-height: 0 !important;
-  aspect-ratio: auto !important;
+  aspect-ratio: 1 / 1 !important;
+  margin: 0 !important;
   overflow: hidden !important;
   background: #ede8db !important;
 }
@@ -11541,6 +11534,8 @@ html.daymar-christmas body #daymarSummer.daymar-compact-hero .hero-gallery-slide
   object-fit: contain !important;
   background: #ede8db !important;
 }
+
+/* Guirnalda situada arriba de toda la página. */
 html.daymar-christmas body > .holiday-page-garland {
   display: block;
   position: relative;
@@ -11554,32 +11549,31 @@ html.daymar-christmas body > .holiday-page-garland {
   overflow: hidden;
   pointer-events: none;
 }
-html.daymar-christmas #daymarSummer .atelier-hero-art::before {
-  top: 5px;
-  left: 8px;
-  padding: 4px 7px;
-  font-size: 8px;
-}
-html.daymar-christmas .holiday-heading-star { color: #662d42; margin-right: 5px; font-size: 11px; }
-html.daymar-christmas .holiday-gift-notes {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 15px;
-  margin: 15px 0 19px;
-  color: #662d42;
-  font: 400 10px/1.4 'Outfit', sans-serif;
-}
-html.daymar-christmas .holiday-gift-notes span { display: inline-flex; align-items: center; gap: 6px; }
-html.daymar-christmas .holiday-gift-notes i { font-size: 11px; }
-html.daymar-christmas #newsletterPopup .holiday-welcome-star { font-size: 25px; }
+html.daymar-christmas #daymarSummer .atelier-search-row { background: #fbfaf8 !important; border-color: #e7dfdb !important; }
+html.daymar-christmas #catalogo .section-kicker,
+html.daymar-christmas #catalogo #categoryTitle { color: #662d42 !important; }
+html.daymar-christmas #newsletterPopup .daymar-welcome-season,
+html.daymar-christmas #newsletterPopup .daymar-welcome-offers strong { color: #c9d66a !important; }
+html.daymar-christmas #newsletterPopup #daymarWelcomeTier { color: #ede8db !important; font-weight: 500 !important; }
+html.daymar-christmas #newsletterPopup .daymar-welcome-subtitle { font-weight: 400 !important; }
+html.daymar-christmas #newsletterPopup .daymar-welcome-shape path { fill: #662d42; }
+html.daymar-christmas #newsletterPopup .holiday-welcome-star { color: #c9d66a; font-size: 25px; margin-bottom: 9px; }
+html.daymar-christmas #newsletterPopup #daymarWelcomeTitle { font-size: clamp(29px, 5vw, 40px) !important; }
+html.daymar-christmas :is(#catalogSortDialog, #cartExtraDialog) { background: #fbfaf8 !important; }
+html.daymar-christmas :is(#catalogSortDialog, #cartExtraDialog) .catalog-sort-eyebrow { color: #662d42 !important; }
+html.daymar-christmas .mobile-bottom-nav { background: #fbfaf8 !important; border-color: #e7dfdb !important; }
+html.daymar-christmas .mobile-bottom-nav button,
+html.daymar-christmas .mobile-bottom-nav button i { color: #662d42 !important; }
+html.daymar-christmas .atelier-footer { background: #ede8db !important; color: #662d42 !important; }
+html.daymar-christmas .atelier-footer a { color: #662d42 !important; }
 @media (max-width: 600px) {
   html.daymar-christmas body > .holiday-page-garland { height: 68px; }
-  html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-art { padding: 25px 7px 7px !important; }
-  html.daymar-christmas body #daymarSummer.daymar-compact-hero .hero-art-image { height: clamp(220px, 65vw, 280px) !important; }
-  html.daymar-christmas #daymarSummer .atelier-hero-art::before { top: 4px; left: 7px; padding: 4px 7px; }
-  html.daymar-christmas .holiday-gift-notes { margin: 12px 0 15px; gap: 12px; font-size: 9px; }
+  html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-copy h1 { font-size: clamp(30px, 9.4vw, 38px) !important; }
+  html.daymar-christmas body #daymarSummer.daymar-compact-hero .atelier-hero-art { width: 280px !important; padding: 7px !important; }
+  html.daymar-christmas .holiday-gift-notes { margin: 12px auto 0; gap: 12px; font-size: 9px; }
 }
+html.daymar-christmas #whatsappFloat { box-shadow: 0 5px 16px rgba(102, 45, 66, .16) !important; }
+html.daymar-christmas #whatsappFloat.holiday-search-clear { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 </style>
 </head>
 <body>
@@ -11895,10 +11889,10 @@ html.daymar-christmas #newsletterPopup .holiday-welcome-star { font-size: 25px; 
     <section class="hero atelier-hero daymar-compact-hero" id="daymarSummer">
         <div class="container atelier-hero-grid">
             <div class="atelier-hero-copy">
-                <p class="eyebrow"><i class="fas fa-star holiday-heading-star" aria-hidden="true"></i> DAYMAR / EDICIÓN NAVIDAD 2026</p>
+                <p class="eyebrow">DAYMAR / EDICIÓN NAVIDAD 2026</p>
                 <h1>Una Navidad<br><em>llena de detalles.</em></h1>
                 <p class="hero-intro">Que cada regalo cuente algo bonito. Encuentra el detalle para celebrar, agradecer y compartir la magia de esta Navidad.</p>
-                <div class="holiday-gift-notes"><span><i class="fas fa-gift" aria-hidden="true"></i> Para regalar</span><span><i class="fas fa-star" aria-hidden="true"></i> Para celebrar</span><span><i class="fas fa-heart" aria-hidden="true"></i> Para ti</span></div><div class="atelier-hero-actions"><a href="#catalogo" class="atelier-primary-cta">Encontrar mi regalo <i class="fas fa-arrow-right"></i></a><span id="daymarGalleryCounter">01 — 06</span></div>
+                <div class="holiday-gift-notes"><span><i class="fas fa-gift" aria-hidden="true"></i> Para regalar</span><span><i class="fas fa-star" aria-hidden="true"></i> Para celebrar</span><span><i class="fas fa-heart" aria-hidden="true"></i> Para ti</span></div>
             </div>
             <div class="atelier-hero-art">
                 <div class="hero-art-image" data-daymar-gallery="true" data-gallery-manifest="carpetaimg/imagenes.json" role="region" tabindex="0" aria-roledescription="carrusel" aria-label="Galería DAYMAR / EDICIÓN NAVIDAD 2026" aria-describedby="daymarGalleryInstructions">
@@ -14297,8 +14291,6 @@ html.daymar-christmas #newsletterPopup .holiday-welcome-star { font-size: 25px; 
       slide.setAttribute('aria-hidden', String(i !== current));
     });
     live.textContent = `Imagen ${current + 1} de ${slides.length}`;
-    const visibleCounter = document.getElementById("daymarGalleryCounter");
-    if (visibleCounter) visibleCounter.textContent = `${String(current + 1).padStart(2, "0")} — ${String(slides.length).padStart(2, "0")}`;
     const active = slides[current];
     active.loading = 'eager';
     empty.hidden = active.complete && active.naturalWidth > 0;

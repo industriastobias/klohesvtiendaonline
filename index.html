@@ -9115,10 +9115,16 @@ html.device-ios .cart-modal .remove-item {
     overflow-y: auto;
     overflow-x: hidden;
     overscroll-behavior: contain;
-    scrollbar-width: thin;
-    scrollbar-color: #C9D66A #662D42;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     padding: 0;
     min-width: 0;
+  }
+
+  #newsletterPopup .daymar-welcome-content::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
 
   #newsletterPopup .daymar-welcome-content p,
@@ -9138,8 +9144,9 @@ html.device-ios .cart-modal .remove-item {
     margin: 0 0 12px auto !important;
     background: transparent !important;
     color: #EDE8DB !important;
-    border: 1px solid rgba(237, 232, 219, .38) !important;
-    border-radius: 50% !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
     font-size: 23px !important;
     font-weight: 300;
     line-height: 1;
@@ -9149,8 +9156,8 @@ html.device-ios .cart-modal .remove-item {
 
   #newsletterPopup .newsletter-close:hover,
   #newsletterPopup .newsletter-close:focus-visible {
-    background: #EDE8DB !important;
-    color: #662D42 !important;
+    background: transparent !important;
+    color: #EDE8DB !important;
   }
 
   #newsletterPopup .daymar-welcome-season {
@@ -9218,7 +9225,11 @@ html.device-ios .cart-modal .remove-item {
   }
 
   #newsletterPopup :focus-visible {
-    outline: 2px solid #C9D66A;
+    outline: none;
+  }
+
+  #newsletterPopup.daymar-welcome-keyboard :focus-visible {
+    outline: 2px solid rgba(237, 232, 219, .75);
     outline-offset: 4px;
   }
 
@@ -12036,6 +12047,7 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
     welcomeTimer = null;
     if (popup.classList.contains('active')) return;
     previousFocus = document.activeElement;
+    popup.classList.remove('daymar-welcome-keyboard');
     popup.setAttribute('aria-hidden', 'false');
     popup.classList.add('active');
     overlay.classList.add('active');
@@ -12070,6 +12082,7 @@ html:not(.daymar-catalog-phone) body #favoritesModal #favoritesList { grid-templ
       event.stopImmediatePropagation();
       close();
     } else if (event.key === 'Tab') {
+      popup.classList.add('daymar-welcome-keyboard');
       const items = focusables();
       const first = items[0] || popup;
       const last = items[items.length - 1] || popup;

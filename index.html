@@ -16367,8 +16367,16 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     });
     live.textContent = `Imagen ${current + 1} de ${slides.length}`;
     const active = slides[current];
-    active.loading = 'eager';
-    empty.hidden = active.complete && active.naturalWidth > 0;
+    if (active.tagName === 'VIDEO') {
+      active.play().catch(() => {});
+      empty.hidden = active.readyState >= 2;
+    } else {
+      active.loading = 'eager';
+      empty.hidden = active.complete && active.naturalWidth > 0;
+    }
+    slides.forEach((slide, i) => {
+      if (slide.tagName === 'VIDEO' && i !== current) slide.pause();
+    });
     if (!empty.hidden) empty.textContent = 'Cargando imágenes…';
   };
 
@@ -16388,9 +16396,16 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     stopAuto();
     const request = ++navigationRequest;
     const target = slides[((index % slides.length) + slides.length) % slides.length];
-    target.loading = 'eager';
+    if (target.tagName === 'VIDEO') {
+      target.play().catch(() => {});
+      if (target.readyState < 2) {
+        await new Promise(resolve => target.addEventListener('loadeddata', resolve, { once: true }));
+      }
+    } else {
+      target.loading = 'eager';
+    }
     try {
-      await target.decode();
+      if (target.tagName !== 'VIDEO') await target.decode();
     } catch (_) {
       removeBroken(target);
       return;
@@ -16476,7 +16491,30 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
         }
         if (!seen.has(filename)) { seen.add(filename); valid.push(filename); }
       }
-      slides = valid.map((filename, index) => {
+      const video = document.createElement('video');
+      video.className = 'hero-gallery-slide hero-gallery-video';
+      video.muted = true;
+      video.defaultMuted = true;
+      video.autoplay = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('autoplay', '');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('aria-label', 'DAYMAR / DETALLES PARA CADA DÍA — video de presentación');
+      video.width = 1200;
+      video.height = 1200;
+      video.preload = 'auto';
+      video.addEventListener('loadeddata', () => {
+        if (video === slides[current]) empty.hidden = false;
+        update(current);
+      });
+      video.addEventListener('error', () => removeBroken(video));
+      video.src = new URL('fille.mp4', new URL('carpetaimg/', document.baseURI)).href;
+      slides = [video];
+      gallery.insertBefore(video, gallery.firstChild);
+
+      slides.push(...valid.map((filename, index) => {
         const slide = document.createElement('img');
         slide.className = 'hero-gallery-slide';
         slide.alt = `DAYMAR / DETALLES PARA CADA DÍA — imagen ${index + 1}`;
@@ -16491,9 +16529,9 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
         });
         slide.addEventListener('error', () => removeBroken(slide));
         slide.src = new URL(encodeURIComponent(filename), manifestURL).href;
-        gallery.insertBefore(slide, gallery.firstChild);
+        gallery.appendChild(slide);
         return slide;
-      });
+      }));
       update(0);
       startAuto();
     } catch (error) {
@@ -18656,6 +18694,21 @@ const firebaseConfig = {
         color: #4e2031 !important;
         background: transparent !important;
         -webkit-text-fill-color: #4e2031 !important;
+    }
+</style>
+<style id="daymar-first-carousel-video">
+    #daymarSummer .hero-gallery-video {
+        display: block !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        background: #ede8db !important;
+    }
+
+    #daymarSummer .hero-gallery-video::-webkit-media-controls,
+    #daymarSummer .hero-gallery-video::-webkit-media-controls-panel,
+    #daymarSummer .hero-gallery-video::-webkit-media-controls-play-button {
+        display: none !important;
+        -webkit-appearance: none !important;
     }
 </style>
 </body>

@@ -16435,7 +16435,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     if (slides.length < 2 || (event.pointerType === 'mouse' && event.button !== 0)) return;
     const active = slides[current];
     if (active?.tagName === 'VIDEO') {
-      active.muted = true;
+      active.muted = false;
       active.play().catch(() => {});
     }
     stopAuto();
@@ -16513,10 +16513,9 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
           slide.loop = false;
           slide.playsInline = true;
           slide.preload = index === 0 ? 'auto' : 'metadata';
-          slide.muted = true;
-          slide.defaultMuted = true;
+          slide.muted = false;
+          slide.defaultMuted = false;
           slide.setAttribute('autoplay', '');
-          slide.setAttribute('muted', '');
           slide.setAttribute('playsinline', '');
           slide.setAttribute('aria-label', `DAYMAR / DETALLES PARA CADA DÍA — video ${index + 1}`);
           slide.addEventListener('loadeddata', () => {

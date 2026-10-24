@@ -16431,6 +16431,11 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   gallery.addEventListener('pointerdown', (event) => {
     if (!event.isPrimary) { finishGesture(); return; }
     if (slides.length < 2 || (event.pointerType === 'mouse' && event.button !== 0)) return;
+    const active = slides[current];
+    if (active?.tagName === 'VIDEO') {
+      active.muted = false;
+      active.play().catch(() => {});
+    }
     stopAuto();
     navigationRequest++;
     gesture = { id: event.pointerId, x: event.clientX, y: event.clientY };
@@ -16486,52 +16491,50 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
       const valid = [];
       const seen = new Set();
       for (const filename of filenames) {
-        if (typeof filename !== 'string' || !/^[A-Za-z0-9_-]+\.(?:png|jpe?g|webp)$/i.test(filename)) {
-          throw new Error('Usa nombres sin espacios y extensión png, jpg, jpeg o webp.');
+        if (typeof filename !== 'string' || !/^[A-Za-z0-9_-]+\.(?:png|jpe?g|webp|mp4|webm|ogg)$/i.test(filename)) {
+          throw new Error('Usa nombres sin espacios y extensión png, jpg, jpeg, webp, mp4, webm u ogg.');
         }
         if (!seen.has(filename)) { seen.add(filename); valid.push(filename); }
       }
-      const video = document.createElement('video');
-      video.className = 'hero-gallery-slide hero-gallery-video';
-      video.muted = true;
-      video.defaultMuted = true;
-      video.autoplay = true;
-      video.loop = true;
-      video.playsInline = true;
-      video.setAttribute('muted', '');
-      video.setAttribute('autoplay', '');
-      video.setAttribute('playsinline', '');
-      video.setAttribute('aria-label', 'DAYMAR / DETALLES PARA CADA DÍA — video de presentación');
-      video.width = 1200;
-      video.height = 1200;
-      video.preload = 'auto';
-      video.addEventListener('loadeddata', () => {
-        if (video === slides[current]) empty.hidden = false;
-        update(current);
-      });
-      video.addEventListener('error', () => removeBroken(video));
-      video.src = new URL('fille.mp4', new URL('carpetaimg/', document.baseURI)).href;
-      slides = [video];
-      gallery.insertBefore(video, gallery.firstChild);
 
-      slides.push(...valid.map((filename, index) => {
-        const slide = document.createElement('img');
-        slide.className = 'hero-gallery-slide';
-        slide.alt = `DAYMAR / DETALLES PARA CADA DÍA — imagen ${index + 1}`;
+      slides = valid.map((filename, index) => {
+        const isVideo = /\.(?:mp4|webm|ogg)$/i.test(filename);
+        const slide = document.createElement(isVideo ? 'video' : 'img');
+        slide.className = `hero-gallery-slide${isVideo ? ' hero-gallery-video' : ''}`;
+        slide.alt = isVideo ? '' : `DAYMAR / DETALLES PARA CADA DÍA — imagen ${index + 1}`;
         slide.width = 1200;
         slide.height = 1200;
         slide.draggable = false;
-        slide.decoding = 'async';
-        slide.loading = index === 0 ? 'eager' : 'lazy';
-        slide.fetchPriority = index === 0 ? 'high' : 'low';
-        slide.addEventListener('load', () => {
-          if (slide === slides[current]) empty.hidden = true;
-        });
+
+        if (isVideo) {
+          slide.autoplay = true;
+          slide.loop = true;
+          slide.playsInline = true;
+          slide.preload = index === 0 ? 'auto' : 'metadata';
+          slide.muted = false;
+          slide.defaultMuted = false;
+          slide.setAttribute('autoplay', '');
+          slide.setAttribute('loop', '');
+          slide.setAttribute('playsinline', '');
+          slide.setAttribute('aria-label', `DAYMAR / DETALLES PARA CADA DÍA — video ${index + 1}`);
+          slide.addEventListener('loadeddata', () => {
+            if (slide === slides[current]) empty.hidden = false;
+            update(current);
+          });
+        } else {
+          slide.decoding = 'async';
+          slide.loading = index === 0 ? 'eager' : 'lazy';
+          slide.fetchPriority = index === 0 ? 'high' : 'low';
+          slide.addEventListener('load', () => {
+            if (slide === slides[current]) empty.hidden = true;
+          });
+        }
+
         slide.addEventListener('error', () => removeBroken(slide));
         slide.src = new URL(encodeURIComponent(filename), manifestURL).href;
         gallery.appendChild(slide);
         return slide;
-      }));
+      });
       update(0);
       startAuto();
     } catch (error) {

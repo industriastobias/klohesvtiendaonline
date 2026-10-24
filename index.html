@@ -15245,7 +15245,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
                     <div class="product-card-actions">
                         <button class="product-details-trigger" type="button" aria-haspopup="dialog" onclick="event.stopPropagation(); openPreview(${realIndex})"><span class="daymar-action-full">Ver detalles</span><span class="daymar-action-mobile">Detalles</span></button>
                         <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
-                            <i class="fas ${hasStock ? 'fa-shopping-bag' : 'fa-ban'}"></i> <span class="cart-btn-label"><span class="daymar-action-full">${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}</span><span class="daymar-action-mobile">${hasStock ? 'Añadir al carrito' : 'Agotado'}</span></span>
+                            <i class="fas ${hasStock ? 'fa-shopping-cart' : 'fa-ban'}"></i> <span class="cart-btn-label"><span class="daymar-action-full">${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}</span><span class="daymar-action-mobile">${hasStock ? 'Añadir al carrito' : 'Agotado'}</span></span>
                         </button>
                     </div>
                     </div>
@@ -18546,6 +18546,63 @@ const firebaseConfig = {
     html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn.out-of-stock {
         color: #8b7d79 !important;
         background: transparent !important;
+    }
+</style>
+<style id="daymar-add-button-text-color-fix">
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn,
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn .cart-btn-label,
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn .cart-btn-label > span,
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn .daymar-action-full,
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn .daymar-action-mobile {
+        color: #662d42 !important;
+        -webkit-text-fill-color: #662d42 !important;
+        background: transparent !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn:hover:not(:disabled),
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn:hover:not(:disabled) .cart-btn-label,
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn:hover:not(:disabled) .cart-btn-label > span {
+        color: #4e2031 !important;
+        -webkit-text-fill-color: #4e2031 !important;
+        background: transparent !important;
+    }
+</style>
+<style id="daymar-cart-icon-action">
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn {
+        width: 30px !important;
+        min-width: 30px !important;
+        min-height: 22px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+        color: #662d42 !important;
+        font-size: 0 !important;
+        line-height: 1 !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn > i {
+        display: inline-block !important;
+        margin: 0 !important;
+        color: #662d42 !important;
+        font-size: 16px !important;
+        line-height: 1 !important;
+        -webkit-text-fill-color: #662d42 !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn .cart-btn-label {
+        display: none !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn:hover:not(:disabled),
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn:hover:not(:disabled) > i {
+        background: transparent !important;
+        color: #4e2031 !important;
+        -webkit-text-fill-color: #4e2031 !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn.out-of-stock > i {
+        color: #8b7d79 !important;
+        -webkit-text-fill-color: #8b7d79 !important;
     }
 </style>
 </body>

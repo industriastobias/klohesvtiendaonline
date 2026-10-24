@@ -16360,9 +16360,13 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     if (!video || video.tagName !== 'VIDEO') return;
     video.muted = true;
     video.defaultMuted = true;
+    video.volume = 0;
     video.autoplay = true;
     video.controls = false;
     video.removeAttribute('controls');
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
     const attempt = () => video.play().catch(() => {});
     attempt();
     setTimeout(attempt, 120);
@@ -16495,6 +16499,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
       navigationRequest++;
     } else {
       startAuto();
+      if (slides[current]?.tagName === 'VIDEO') playVideo(slides[current]);
     }
   });
   reducedMotion.addEventListener('change', startAuto);
@@ -16542,9 +16547,11 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
           slide.preload = index === 0 ? 'auto' : 'metadata';
           slide.muted = true;
           slide.defaultMuted = true;
+          slide.volume = 0;
           slide.setAttribute('autoplay', '');
           slide.setAttribute('muted', '');
           slide.setAttribute('playsinline', '');
+          slide.setAttribute('webkit-playsinline', '');
           slide.setAttribute('aria-label', `DAYMAR / DETALLES PARA CADA DÍA — video ${index + 1}`);
           slide.controls = false;
           slide.removeAttribute('controls');
@@ -16572,12 +16579,10 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
 
         slide.addEventListener('error', () => removeBroken(slide));
         slide.src = new URL(encodeURIComponent(filename), manifestURL).href;
+        gallery.appendChild(slide);
         if (isVideo) {
           slide.setAttribute('preload', 'auto');
           slide.load();
-        }
-        gallery.appendChild(slide);
-        if (isVideo) {
           requestAnimationFrame(() => playVideo(slide));
         }
         return slide;
@@ -16595,6 +16600,11 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     }
   };
 
+  const retryActiveVideo = () => {
+    if (slides[current]?.tagName === 'VIDEO') playVideo(slides[current]);
+  };
+  window.addEventListener('load', retryActiveVideo, { once: true });
+  window.addEventListener('pageshow', retryActiveVideo);
   initialize();
 })();
 </script>
@@ -18779,7 +18789,7 @@ const firebaseConfig = {
 
     #daymarSummer .atelier-hero-art.daymar-dynamic-gallery-frame .hero-gallery-video {
         background: transparent !important;
-        object-fit: contain !important;
+        object-fit: fill !important;
     }
 </style>
 </body>

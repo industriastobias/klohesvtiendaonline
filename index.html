@@ -18468,5 +18468,46 @@ const firebaseConfig = {
         html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .product-card-actions { gap: 8px !important; }
     }
 </style>
+<style id="daymar-plum-product-actions">
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .product-details-trigger,
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 30px !important;
+        padding: 0 12px !important;
+        border: 1px solid #662d42 !important;
+        border-radius: 0 !important;
+        background: #662d42 !important;
+        color: #fffaf7 !important;
+        font: 600 8px/1 'Helvetica Neue', Arial, sans-serif !important;
+        letter-spacing: .04em !important;
+        text-transform: uppercase !important;
+        opacity: 1 !important;
+        transition: background-color .2s ease, color .2s ease, border-color .2s ease !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .product-details-trigger:hover,
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn:hover:not(:disabled) {
+        border-color: #4e2031 !important;
+        background: #4e2031 !important;
+        color: #fffaf7 !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn.out-of-stock {
+        border-color: #a89591 !important;
+        background: #a89591 !important;
+        color: #fff !important;
+    }
+
+    @media (max-width: 520px) {
+        html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .product-details-trigger,
+        html.daymar-brand body #catalogo.atelier-catalog #productsContainer.products-grid > .product-card.daymar-structural-card:nth-child(n) .daymar-card-info .cart-corner-btn {
+            min-height: 27px !important;
+            padding: 0 9px !important;
+            font-size: 7px !important;
+        }
+    }
+</style>
 </body>
 </html>

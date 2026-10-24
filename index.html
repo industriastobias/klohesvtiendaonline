@@ -16332,6 +16332,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
 
   const live = gallery.querySelector('[data-gallery-live]');
   const empty = gallery.querySelector('[data-gallery-empty]');
+  const frame = gallery.closest('.atelier-hero-art');
   let slides = [];
   let current = 0;
   let navigationRequest = 0;
@@ -16339,9 +16340,33 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   let timer = null;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  const syncFrameToMedia = (media) => {
+    if (!frame || !media) return;
+    const width = media.tagName === 'VIDEO' ? media.videoWidth : media.naturalWidth;
+    const height = media.tagName === 'VIDEO' ? media.videoHeight : media.naturalHeight;
+    if (!width || !height) return;
+    const ratio = Math.max(.42, Math.min(1.8, width / height));
+    frame.style.setProperty('--daymar-gallery-ratio', String(ratio));
+    gallery.style.setProperty('--daymar-gallery-ratio', String(ratio));
+    frame.classList.add('daymar-dynamic-gallery-frame');
+  };
+
   const stopAuto = () => {
     clearTimeout(timer);
     timer = null;
+  };
+
+  const playVideo = (video) => {
+    if (!video || video.tagName !== 'VIDEO') return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.autoplay = true;
+    video.controls = false;
+    video.removeAttribute('controls');
+    const attempt = () => video.play().catch(() => {});
+    attempt();
+    setTimeout(attempt, 120);
+    setTimeout(attempt, 700);
   };
 
   const startAuto = () => {
@@ -16370,10 +16395,12 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     live.textContent = `Imagen ${current + 1} de ${slides.length}`;
     const active = slides[current];
     if (active.tagName === 'VIDEO') {
-      active.play().catch(() => {});
+      playVideo(active);
+      syncFrameToMedia(active);
       empty.hidden = active.readyState >= 2;
     } else {
       active.loading = 'eager';
+      syncFrameToMedia(active);
       empty.hidden = active.complete && active.naturalWidth > 0;
     }
     slides.forEach((slide, i) => {
@@ -16519,10 +16546,17 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
           slide.setAttribute('muted', '');
           slide.setAttribute('playsinline', '');
           slide.setAttribute('aria-label', `DAYMAR / DETALLES PARA CADA DÍA — video ${index + 1}`);
-          slide.addEventListener('loadeddata', () => {
+          slide.controls = false;
+          slide.removeAttribute('controls');
+          const startVideo = () => {
+            playVideo(slide);
+            syncFrameToMedia(slide);
             if (slide === slides[current]) empty.hidden = false;
             update(current);
-          });
+          };
+          slide.addEventListener('loadedmetadata', startVideo);
+          slide.addEventListener('canplay', startVideo);
+          slide.addEventListener('loadeddata', startVideo);
           slide.addEventListener('ended', () => {
             if (slide === slides[current] && slides.length > 1) navigate(current + 1);
           });
@@ -16531,6 +16565,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
           slide.loading = index === 0 ? 'eager' : 'lazy';
           slide.fetchPriority = index === 0 ? 'high' : 'low';
           slide.addEventListener('load', () => {
+            syncFrameToMedia(slide);
             if (slide === slides[current]) empty.hidden = true;
           });
         }
@@ -18717,6 +18752,27 @@ const firebaseConfig = {
     #daymarSummer .hero-gallery-video::-webkit-media-controls-play-button {
         display: none !important;
         -webkit-appearance: none !important;
+    }
+</style>
+<style id="daymar-dynamic-carousel-ratio">
+    #daymarSummer .atelier-hero-art.daymar-dynamic-gallery-frame {
+        height: auto !important;
+        aspect-ratio: var(--daymar-gallery-ratio, 1) !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+
+    #daymarSummer .atelier-hero-art.daymar-dynamic-gallery-frame .hero-art-image {
+        height: 100% !important;
+        min-height: 0 !important;
+        aspect-ratio: auto !important;
+        background: transparent !important;
+    }
+
+    #daymarSummer .atelier-hero-art.daymar-dynamic-gallery-frame .hero-gallery-video {
+        background: transparent !important;
+        object-fit: contain !important;
     }
 </style>
 </body>

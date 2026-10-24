@@ -16380,6 +16380,8 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('preload', 'auto');
+    if (video.readyState === 0) video.load();
     if (video.ended || !videoStartedAt.has(video)) {
       videoStartedAt.set(video, performance.now());
     }
@@ -16639,8 +16641,16 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   const retryActiveVideo = () => {
     if (slides[current]?.tagName === 'VIDEO') playVideo(slides[current]);
   };
+  const galleryVisibility = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries) => {
+        if (entries.some(entry => entry.isIntersecting)) retryActiveVideo();
+      }, { threshold: 0.15 })
+    : null;
+  galleryVisibility?.observe(gallery);
   window.addEventListener('load', retryActiveVideo, { once: true });
   window.addEventListener('pageshow', retryActiveVideo);
+  document.addEventListener('visibilitychange', retryActiveVideo);
+  document.addEventListener('touchstart', retryActiveVideo, { passive: true, capture: true });
   initialize();
 })();
 </script>

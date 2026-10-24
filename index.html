@@ -17588,5 +17588,213 @@ const firebaseConfig = {
         html.daymar-brand body #catalogo.atelier-catalog .product-name { font-size: 13px !important; }
     }
 </style>
+<style id="daymar-product-cards-collage-layout">
+    /* Collage editorial: tamaños, ritmos y posiciones variables. No es una cuadrícula repetitiva. */
+    html.daymar-brand body #catalogo.atelier-catalog {
+        background: #f6f2ed !important;
+        padding: 78px 0 120px !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog > .container {
+        width: min(1260px, calc(100% - 68px)) !important;
+        max-width: 1260px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .atelier-section-header {
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: space-between !important;
+        margin: 0 0 48px !important;
+        padding: 0 0 17px !important;
+        border-bottom: 1px solid #ded4ce !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .atelier-section-header .section-title {
+        color: #2c2527 !important;
+        font: 400 clamp(38px, 5vw, 62px)/.9 Georgia, 'Times New Roman', serif !important;
+        letter-spacing: -.055em !important;
+        text-transform: none !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .atelier-section-header .eyebrow {
+        margin-bottom: 13px !important;
+        color: #8c716b !important;
+        font: 600 9px/1 'Helvetica Neue', Arial, sans-serif !important;
+        letter-spacing: .13em !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .products-count {
+        color: #917c76 !important;
+        font: 400 9px/1.3 'Helvetica Neue', Arial, sans-serif !important;
+        letter-spacing: .02em !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .products-grid {
+        display: grid !important;
+        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+        gap: 78px 20px !important;
+        align-items: start !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-card,
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(n) {
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    /* Ritmo principal: 7 + 5, luego tres piezas y después un dúo desplazado. */
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+1) { grid-column: span 7 !important; }
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+2) { grid-column: span 5 !important; margin-top: 118px !important; }
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+3) { grid-column: span 4 !important; }
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+4) { grid-column: span 4 !important; margin-top: 34px !important; }
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+5) { grid-column: span 4 !important; }
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+6) { grid-column: 3 / span 5 !important; margin-top: 28px !important; }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-image-container,
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(n) .product-image-container {
+        width: 100% !important;
+        aspect-ratio: .82 !important;
+        overflow: hidden !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: #e5ddd6 !important;
+        box-shadow: none !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+1) .product-image-container { aspect-ratio: 1.22 !important; }
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+3) .product-image-container { aspect-ratio: .88 !important; }
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+4) .product-image-container { aspect-ratio: .72 !important; }
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+6) .product-image-container { aspect-ratio: 1.05 !important; }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-image {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transform: scale(1.01) !important;
+        filter: saturate(.88) !important;
+        transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .7s ease !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:hover .product-image,
+    html.daymar-brand body #catalogo.atelier-catalog .product-card:focus-within .product-image {
+        transform: scale(1.06) !important;
+        filter: saturate(1) !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-info {
+        padding: 15px 1px 0 !important;
+        text-align: left !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-name {
+        margin: 0 0 6px !important;
+        color: #2d2728 !important;
+        font: 500 13px/1.2 'Helvetica Neue', Arial, sans-serif !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-description {
+        margin: 0 !important;
+        color: #8d7a74 !important;
+        font: 400 10px/1.4 'Helvetica Neue', Arial, sans-serif !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-price-container {
+        display: flex !important;
+        align-items: baseline !important;
+        gap: 8px !important;
+        margin: 9px 0 0 !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-price {
+        color: #2d2728 !important;
+        font: 600 12px/1 'Helvetica Neue', Arial, sans-serif !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-price-original {
+        color: #ae9991 !important;
+        font: 400 10px/1 'Helvetica Neue', Arial, sans-serif !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-stock { display: none !important; }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-card-actions {
+        display: flex !important;
+        gap: 13px !important;
+        margin-top: 12px !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .product-details-trigger,
+    html.daymar-brand body #catalogo.atelier-catalog .cart-corner-btn {
+        min-height: 20px !important;
+        margin: 0 !important;
+        padding: 0 0 3px !important;
+        border: 0 !important;
+        border-bottom: 1px solid #c5aaa2 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        color: #765c58 !important;
+        font: 600 8px/1 'Helvetica Neue', Arial, sans-serif !important;
+        letter-spacing: .03em !important;
+        text-transform: uppercase !important;
+    }
+
+    html.daymar-brand body #catalogo.atelier-catalog .cart-corner-btn > i { display: none !important; }
+
+    html.daymar-brand body #catalogo.atelier-catalog .discount-tag {
+        top: 13px !important;
+        left: 13px !important;
+        padding: 6px 7px !important;
+        border-radius: 0 !important;
+        background: #662d42 !important;
+        color: #fff !important;
+        font: 600 8px/1 'Helvetica Neue', Arial, sans-serif !important;
+    }
+
+    @media (max-width: 900px) {
+        html.daymar-brand body #catalogo.atelier-catalog > .container { width: calc(100% - 32px) !important; }
+        html.daymar-brand body #catalogo.atelier-catalog { padding: 56px 0 92px !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .products-grid { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; gap: 52px 13px !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+1) { grid-column: span 4 !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+2) { grid-column: span 2 !important; margin-top: 62px !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+3),
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+4),
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+5) { grid-column: span 2 !important; margin-top: 0 !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+6) { grid-column: 2 / span 4 !important; margin-top: 20px !important; }
+    }
+
+    @media (max-width: 560px) {
+        html.daymar-brand body #catalogo.atelier-catalog > .container { width: calc(100% - 24px) !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .atelier-section-header { display: block !important; margin-bottom: 34px !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .atelier-section-tools { margin-top: 13px !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 42px 12px !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+1),
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+6) { grid-column: span 2 !important; margin-top: 0 !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+2),
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+3),
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+4),
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+5) { grid-column: span 1 !important; margin-top: 0 !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+1) .product-image-container,
+        html.daymar-brand body #catalogo.atelier-catalog .product-card:nth-child(6n+6) .product-image-container { aspect-ratio: 1.18 !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-image-container { aspect-ratio: .82 !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-info { padding-top: 11px !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-name { font-size: 11px !important; }
+        html.daymar-brand body #catalogo.atelier-catalog .product-description { font-size: 9px !important; }
+    }
+</style>
 </body>
 </html>

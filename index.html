@@ -12008,6 +12008,776 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
         else init();
     })();
 </script>
+<style id="daymar-category-menu-redesign">
+    /* Panel lateral de categorías: editorial, limpio y con mejor jerarquía visual. */
+    .menu-overlay {
+        background: rgba(24, 16, 20, .58) !important;
+        -webkit-backdrop-filter: blur(5px) !important;
+        backdrop-filter: blur(5px) !important;
+    }
+
+    .categories-menu.atelier-categories {
+        width: min(360px, calc(100vw - 18px)) !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        overflow-y: auto !important;
+        padding: 26px 22px 32px !important;
+        gap: 0 !important;
+        border: 0 !important;
+        border-right: 1px solid rgba(102, 45, 66, .12) !important;
+        border-radius: 0 28px 28px 0 !important;
+        background: #fbf8f4 !important;
+        color: #241d20 !important;
+        box-shadow: 18px 0 48px rgba(37, 22, 29, .18) !important;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(102, 45, 66, .3) transparent;
+    }
+
+    .categories-menu.atelier-categories::-webkit-scrollbar { width: 5px; }
+    .categories-menu.atelier-categories::-webkit-scrollbar-track { background: transparent; }
+    .categories-menu.atelier-categories::-webkit-scrollbar-thumb { background: rgba(102, 45, 66, .28); border-radius: 99px; }
+
+    .atelier-menu-heading {
+        position: relative !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: flex-end !important;
+        min-height: 57px !important;
+        padding: 2px 0 18px !important;
+        margin-bottom: 18px !important;
+        border-bottom: 1px solid #eadfd9 !important;
+    }
+
+    .atelier-menu-heading::before {
+        content: 'DAYMAR';
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #662d42;
+        font: 800 12px/1 'Poppins', sans-serif;
+        letter-spacing: .22em;
+    }
+
+    .atelier-menu-heading::after {
+        content: 'CATEGORÍAS';
+        position: absolute;
+        left: 0;
+        top: 22px;
+        color: #9b898c;
+        font: 600 9px/1 'Poppins', sans-serif;
+        letter-spacing: .18em;
+    }
+
+    .categories-menu.atelier-categories .close-menu {
+        position: relative !important;
+        z-index: 1;
+        display: grid !important;
+        place-items: center !important;
+        width: 38px !important;
+        height: 38px !important;
+        margin: -2px -4px 0 0 !important;
+        border: 1px solid #eadfd9 !important;
+        border-radius: 13px !important;
+        background: #fff !important;
+        color: #662d42 !important;
+        box-shadow: 0 4px 12px rgba(102, 45, 66, .08) !important;
+        transition: transform .2s ease, background-color .2s ease, color .2s ease !important;
+    }
+
+    .categories-menu.atelier-categories .close-menu:hover,
+    .categories-menu.atelier-categories .close-menu:focus-visible {
+        background: #662d42 !important;
+        color: #fff !important;
+        transform: rotate(90deg) !important;
+    }
+
+    .categories-menu.atelier-categories > p {
+        margin: 22px 6px 15px !important;
+        max-width: 240px;
+        color: #88787b !important;
+        font: 500 11px/1.65 'Poppins', sans-serif !important;
+        letter-spacing: .02em;
+        text-transform: none !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        min-height: 48px !important;
+        margin: 2px 0 !important;
+        padding: 0 14px !important;
+        border: 0 !important;
+        border-radius: 13px !important;
+        background: transparent !important;
+        color: #413438 !important;
+        font: 700 11px/1.2 'Poppins', sans-serif !important;
+        letter-spacing: .13em !important;
+        text-align: left !important;
+        text-transform: uppercase !important;
+        transition: background-color .2s ease, color .2s ease, padding-left .2s ease, transform .2s ease !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn::before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        flex: 0 0 5px;
+        margin-right: 12px;
+        border-radius: 50%;
+        background: #d9c6ca;
+        transition: background-color .2s ease, transform .2s ease;
+    }
+
+    .categories-menu.atelier-categories .category-btn::after {
+        display: none !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:hover,
+    .categories-menu.atelier-categories .category-btn:focus-visible,
+    .categories-menu.atelier-categories .category-btn.active {
+        padding-left: 18px !important;
+        background: #f1e5e8 !important;
+        color: #662d42 !important;
+        transform: translateX(2px);
+    }
+
+    .categories-menu.atelier-categories .category-btn.active::before,
+    .categories-menu.atelier-categories .category-btn:hover::before {
+        background: #662d42;
+        transform: scale(1.45);
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry {
+        min-height: 70px !important;
+        margin: 0 !important;
+        padding: 10px 12px !important;
+        border: 1px solid #eadfd9 !important;
+        border-radius: 18px !important;
+        background: #fff !important;
+        box-shadow: 0 8px 20px rgba(102, 45, 66, .07) !important;
+        color: #241d20 !important;
+        letter-spacing: .04em !important;
+        text-transform: none !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry::before { display: none !important; }
+    .categories-menu.atelier-categories .daymar-login-entry > i:first-child {
+        display: grid;
+        place-items: center;
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+        border-radius: 12px;
+        background: #f1e5e8;
+        color: #662d42;
+        font-size: 14px;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry-copy {
+        display: flex !important;
+        flex: 1;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+        min-width: 0;
+        color: #3b3034;
+        font-size: 10px;
+        line-height: 1.2;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry-copy small {
+        max-width: 175px;
+        overflow: hidden;
+        color: #9b898c;
+        font-size: 9px;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry > i:last-child {
+        margin-left: auto;
+        color: #662d42;
+        font-size: 13px;
+    }
+
+    .categories-menu.atelier-categories .daymar-menu-signout {
+        align-self: flex-start;
+        margin: 10px 0 2px 4px !important;
+        padding: 5px 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+        color: #9b5969 !important;
+        font: 700 10px/1.2 'Poppins', sans-serif !important;
+        letter-spacing: .04em;
+        cursor: pointer;
+    }
+
+    .categories-menu.atelier-categories .daymar-menu-signout:hover { color: #662d42 !important; text-decoration: underline; }
+
+    @media (max-width: 600px) {
+        .categories-menu.atelier-categories {
+            width: min(360px, calc(100vw - 12px)) !important;
+            border-radius: 0 24px 24px 0 !important;
+            padding: 24px 18px 28px !important;
+        }
+    }
+</style>
+<style id="daymar-category-menu-new-concept">
+    /* Concepto nuevo: panel premium vino, navegación por cápsulas y cuadrícula editorial. */
+    .categories-menu.atelier-categories {
+        width: min(390px, calc(100vw - 14px)) !important;
+        padding: 24px 20px 30px !important;
+        border: 0 !important;
+        border-radius: 0 30px 30px 0 !important;
+        background:
+            radial-gradient(circle at 86% 8%, rgba(219, 178, 151, .22), transparent 27%),
+            linear-gradient(155deg, #321a29 0%, #4a2335 48%, #662d42 100%) !important;
+        color: #fff !important;
+        box-shadow: 22px 0 55px rgba(20, 9, 15, .3) !important;
+        scrollbar-color: rgba(255, 255, 255, .3) transparent;
+    }
+
+    .categories-menu.atelier-categories::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, .25);
+    }
+
+    .atelier-menu-heading {
+        min-height: 68px !important;
+        margin-bottom: 16px !important;
+        padding: 4px 0 20px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, .18) !important;
+    }
+
+    .atelier-menu-heading::before {
+        content: 'DAYMAR';
+        top: 2px;
+        color: #f3d8c8;
+        font: 800 15px/1 'Poppins', sans-serif;
+        letter-spacing: .25em;
+    }
+
+    .atelier-menu-heading::after {
+        content: 'TU COLECCIÓN PERSONAL';
+        top: 32px;
+        color: rgba(255, 255, 255, .58);
+        font: 500 8px/1 'Poppins', sans-serif;
+        letter-spacing: .18em;
+    }
+
+    .categories-menu.atelier-categories .close-menu {
+        width: 40px !important;
+        height: 40px !important;
+        margin: -4px -2px 0 0 !important;
+        border: 1px solid rgba(255, 255, 255, .23) !important;
+        border-radius: 50% !important;
+        background: rgba(255, 255, 255, .1) !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .categories-menu.atelier-categories .close-menu:hover,
+    .categories-menu.atelier-categories .close-menu:focus-visible {
+        background: #f3d8c8 !important;
+        color: #4a2335 !important;
+        transform: rotate(90deg) scale(1.05) !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry {
+        display: flex !important;
+        min-height: 78px !important;
+        margin: 0 0 20px !important;
+        padding: 12px 13px !important;
+        border: 1px solid rgba(255, 255, 255, .16) !important;
+        border-radius: 20px !important;
+        background: rgba(255, 255, 255, .1) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1) !important;
+        color: #fff !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry > i:first-child {
+        width: 42px !important;
+        height: 42px !important;
+        margin-right: 11px !important;
+        border-radius: 14px !important;
+        background: #f3d8c8 !important;
+        color: #662d42 !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry-copy {
+        color: #fff !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry-copy small {
+        color: rgba(255, 255, 255, .62) !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry > i:last-child {
+        color: #f3d8c8 !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-menu-signout {
+        margin: -12px 0 19px 6px !important;
+        color: #f3d8c8 !important;
+    }
+
+    .categories-menu.atelier-categories > p {
+        margin: 0 4px 16px !important;
+        max-width: 270px;
+        color: rgba(255, 255, 255, .62) !important;
+        font: 500 11px/1.6 'Poppins', sans-serif !important;
+    }
+
+    /* Dos columnas: menos desplazamiento y una apariencia más de boutique. */
+    .categories-menu.atelier-categories {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        align-content: start !important;
+        column-gap: 8px !important;
+        row-gap: 8px !important;
+    }
+
+    .categories-menu.atelier-categories .atelier-menu-heading,
+    .categories-menu.atelier-categories .daymar-login-entry,
+    .categories-menu.atelier-categories .daymar-menu-signout,
+    .categories-menu.atelier-categories > p {
+        grid-column: 1 / -1;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry) {
+        min-height: 57px !important;
+        margin: 0 !important;
+        padding: 10px 11px !important;
+        border: 1px solid rgba(255, 255, 255, .13) !important;
+        border-radius: 15px !important;
+        background: rgba(255, 255, 255, .055) !important;
+        color: rgba(255, 255, 255, .86) !important;
+        font-size: 9px !important;
+        letter-spacing: .12em !important;
+        line-height: 1.25 !important;
+        text-align: center !important;
+        justify-content: center !important;
+        transition: border-color .2s ease, background-color .2s ease, transform .2s ease, color .2s ease !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry)::before {
+        display: none !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry):hover,
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry):focus-visible,
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry).active {
+        padding-left: 11px !important;
+        border-color: rgba(243, 216, 200, .72) !important;
+        background: #f3d8c8 !important;
+        color: #4a2335 !important;
+        transform: translateY(-2px) !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:nth-last-child(1) {
+        grid-column: 1 / -1;
+    }
+
+    @media (max-width: 360px) {
+        .categories-menu.atelier-categories {
+            width: calc(100vw - 8px) !important;
+            padding-left: 14px !important;
+            padding-right: 14px !important;
+        }
+        .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry) {
+            font-size: 8px !important;
+        }
+    }
+</style>
+<style id="daymar-category-menu-clean-layout">
+    /* Versión limpia y ordenada: misma lógica, jerarquía visual más clara. */
+    .categories-menu.atelier-categories {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: min(410px, calc(100vw - 22px)) !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        padding: 30px 28px 36px !important;
+        border: 0 !important;
+        border-right: 1px solid #e8ded9 !important;
+        border-radius: 0 22px 22px 0 !important;
+        background: #fcfaf7 !important;
+        color: #241d20 !important;
+        box-shadow: 20px 0 46px rgba(40, 25, 30, .13) !important;
+        scrollbar-width: thin;
+        scrollbar-color: #d7c3c5 transparent;
+    }
+
+    .categories-menu.atelier-categories::-webkit-scrollbar { width: 5px; }
+    .categories-menu.atelier-categories::-webkit-scrollbar-track { background: transparent; }
+    .categories-menu.atelier-categories::-webkit-scrollbar-thumb { background: #d7c3c5; border-radius: 99px; }
+
+    .atelier-menu-heading {
+        position: relative !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: space-between !important;
+        min-height: 62px !important;
+        margin: 0 0 24px !important;
+        padding: 0 0 18px !important;
+        border-bottom: 1px solid #e8ded9 !important;
+    }
+
+    .atelier-menu-heading::before {
+        content: 'DAYMAR';
+        position: static !important;
+        display: block;
+        padding-top: 1px;
+        color: #662d42;
+        font: 800 14px/1 'Poppins', sans-serif;
+        letter-spacing: .21em;
+    }
+
+    .atelier-menu-heading::after {
+        content: 'CATEGORÍAS';
+        position: absolute !important;
+        left: 0 !important;
+        top: 25px !important;
+        color: #9a898b !important;
+        font: 600 8px/1 'Poppins', sans-serif !important;
+        letter-spacing: .18em !important;
+    }
+
+    .categories-menu.atelier-categories .close-menu {
+        width: 36px !important;
+        height: 36px !important;
+        margin: -7px 0 0 !important;
+        display: grid !important;
+        place-items: center !important;
+        border: 1px solid #e3d6d3 !important;
+        border-radius: 50% !important;
+        background: #fff !important;
+        color: #662d42 !important;
+        box-shadow: none !important;
+        transition: background-color .2s ease, color .2s ease, transform .2s ease !important;
+    }
+
+    .categories-menu.atelier-categories .close-menu:hover,
+    .categories-menu.atelier-categories .close-menu:focus-visible {
+        background: #662d42 !important;
+        color: #fff !important;
+        transform: rotate(90deg) !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry {
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        min-height: 74px !important;
+        margin: 0 0 20px !important;
+        padding: 11px 13px !important;
+        border: 1px solid #eadfda !important;
+        border-radius: 16px !important;
+        background: #fff !important;
+        color: #30262a !important;
+        box-shadow: 0 5px 16px rgba(102, 45, 66, .06) !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry > i:first-child {
+        display: grid !important;
+        place-items: center !important;
+        width: 38px !important;
+        height: 38px !important;
+        margin-right: 11px !important;
+        border-radius: 12px !important;
+        background: #f4e9e7 !important;
+        color: #662d42 !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry-copy {
+        display: flex !important;
+        flex: 1 !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+        min-width: 0 !important;
+        color: #30262a !important;
+        font: 700 10px/1.2 'Poppins', sans-serif !important;
+        letter-spacing: .04em !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry-copy small {
+        max-width: 210px !important;
+        overflow: hidden !important;
+        color: #9a898b !important;
+        font-size: 9px !important;
+        font-weight: 500 !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry > i:last-child {
+        color: #662d42 !important;
+        font-size: 13px !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-menu-signout {
+        align-self: flex-start !important;
+        margin: -10px 0 24px 3px !important;
+        padding: 4px 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+        color: #9a5968 !important;
+        font: 700 10px/1.2 'Poppins', sans-serif !important;
+        cursor: pointer !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-menu-signout:hover { color: #662d42 !important; text-decoration: underline; }
+
+    .categories-menu.atelier-categories > p {
+        margin: 0 4px 14px !important;
+        padding-bottom: 14px !important;
+        border-bottom: 1px solid #e8ded9 !important;
+        color: #8b7b7d !important;
+        font: 500 11px/1.55 'Poppins', sans-serif !important;
+        text-transform: none !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry) {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        min-height: 50px !important;
+        margin: 0 !important;
+        padding: 0 12px !important;
+        border: 0 !important;
+        border-bottom: 1px solid #eee6e2 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        color: #44383b !important;
+        font: 700 10px/1.25 'Poppins', sans-serif !important;
+        letter-spacing: .13em !important;
+        text-align: left !important;
+        text-transform: uppercase !important;
+        transition: background-color .2s ease, color .2s ease, padding-left .2s ease !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry)::before {
+        content: '' !important;
+        display: block !important;
+        width: 5px !important;
+        height: 5px !important;
+        margin-right: 12px !important;
+        border-radius: 50% !important;
+        background: #d8c2c5 !important;
+        transition: background-color .2s ease, transform .2s ease !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry)::after {
+        content: '›' !important;
+        display: block !important;
+        margin-left: auto !important;
+        color: #b9a5a8 !important;
+        font: 400 20px/1 'Poppins', sans-serif !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry):hover,
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry):focus-visible,
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry).active {
+        padding-left: 17px !important;
+        background: #f5eceb !important;
+        color: #662d42 !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry):hover::before,
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry).active::before {
+        background: #662d42 !important;
+        transform: scale(1.5) !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry):hover::after,
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry).active::after {
+        color: #662d42 !important;
+    }
+
+    @media (max-width: 600px) {
+        .categories-menu.atelier-categories {
+            width: min(370px, calc(100vw - 8px)) !important;
+            padding: 25px 20px 30px !important;
+            border-radius: 0 18px 18px 0 !important;
+        }
+        .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry) {
+            min-height: 48px !important;
+        }
+    }
+</style>
+<style id="daymar-category-menu-minimal">
+    /* Minimalismo delicado: aire, líneas finas y una sola acentuación de color. */
+    .categories-menu.atelier-categories {
+        width: min(292px, calc(100vw - 18px)) !important;
+        padding: 30px 21px 32px !important;
+        border: 0 !important;
+        border-right: 1px solid #f0e9e6 !important;
+        border-radius: 0 !important;
+        background: #fffdfb !important;
+        color: #30292b !important;
+        box-shadow: 10px 0 30px rgba(54, 38, 42, .06) !important;
+        scrollbar-width: none;
+    }
+
+    .categories-menu.atelier-categories::-webkit-scrollbar { display: none; }
+
+    .atelier-menu-heading {
+        min-height: 55px !important;
+        margin-bottom: 26px !important;
+        padding: 0 0 18px !important;
+        border-bottom: 1px solid #f0e9e6 !important;
+    }
+
+    .atelier-menu-heading::before {
+        content: 'DAYMAR';
+        color: #662d42 !important;
+        font: 700 12px/1 'Poppins', sans-serif !important;
+        letter-spacing: .24em !important;
+    }
+
+    .atelier-menu-heading::after {
+        content: 'MENÚ';
+        top: 23px !important;
+        color: #b3a5a5 !important;
+        font: 500 8px/1 'Poppins', sans-serif !important;
+        letter-spacing: .2em !important;
+    }
+
+    .categories-menu.atelier-categories .close-menu {
+        width: 28px !important;
+        height: 28px !important;
+        margin: -4px 0 0 !important;
+        border: 0 !important;
+        border-radius: 50% !important;
+        background: transparent !important;
+        color: #8f7c80 !important;
+        box-shadow: none !important;
+        font-size: 13px !important;
+    }
+
+    .categories-menu.atelier-categories .close-menu:hover,
+    .categories-menu.atelier-categories .close-menu:focus-visible {
+        background: #f7eeee !important;
+        color: #662d42 !important;
+        transform: none !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry {
+        min-height: 54px !important;
+        margin: 0 0 12px !important;
+        padding: 0 0 16px !important;
+        border: 0 !important;
+        border-bottom: 1px solid #f0e9e6 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        color: #41373a !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry > i:first-child {
+        width: 28px !important;
+        height: 28px !important;
+        margin-right: 10px !important;
+        border-radius: 50% !important;
+        background: #f8efed !important;
+        color: #9d707a !important;
+        font-size: 11px !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry-copy {
+        gap: 3px !important;
+        color: #41373a !important;
+        font: 600 10px/1.25 'Poppins', sans-serif !important;
+        letter-spacing: .08em !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry-copy small {
+        color: #b2a4a5 !important;
+        font-size: 8px !important;
+        letter-spacing: 0 !important;
+    }
+
+    .categories-menu.atelier-categories .daymar-login-entry > i:last-child { color: #b79ba0 !important; font-size: 11px !important; }
+
+    .categories-menu.atelier-categories .daymar-menu-signout {
+        margin: 0 0 28px 38px !important;
+        padding: 0 !important;
+        color: #ad7c87 !important;
+        font: 500 9px/1.2 'Poppins', sans-serif !important;
+        letter-spacing: .03em !important;
+    }
+
+    .categories-menu.atelier-categories > p {
+        margin: 0 0 18px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        color: #aaa0a0 !important;
+        font: 400 10px/1.7 'Poppins', sans-serif !important;
+        text-transform: none !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry) {
+        min-height: 44px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        border-bottom: 1px solid #f3edeb !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        color: #554a4d !important;
+        font: 500 10px/1.2 'Poppins', sans-serif !important;
+        letter-spacing: .12em !important;
+        text-align: left !important;
+        transition: color .2s ease, padding-left .2s ease !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry)::before {
+        display: none !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry)::after {
+        content: '' !important;
+        display: block !important;
+        width: 4px !important;
+        height: 4px !important;
+        margin-left: auto !important;
+        border-radius: 50% !important;
+        background: transparent !important;
+        transform: none !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry):hover,
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry):focus-visible,
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry).active {
+        padding-left: 7px !important;
+        background: transparent !important;
+        color: #662d42 !important;
+    }
+
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry):hover::after,
+    .categories-menu.atelier-categories .category-btn:not(.daymar-login-entry).active::after {
+        background: #c99da7 !important;
+    }
+
+    @media (max-width: 600px) {
+        .categories-menu.atelier-categories {
+            width: min(286px, calc(100vw - 18px)) !important;
+            padding: 27px 19px 30px !important;
+        }
+    }
+</style>
 </head>
 <body>
 <div class="daymar-browser-color-edge" aria-hidden="true"></div>

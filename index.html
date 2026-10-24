@@ -16572,7 +16572,14 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
 
         slide.addEventListener('error', () => removeBroken(slide));
         slide.src = new URL(encodeURIComponent(filename), manifestURL).href;
+        if (isVideo) {
+          slide.setAttribute('preload', 'auto');
+          slide.load();
+        }
         gallery.appendChild(slide);
+        if (isVideo) {
+          requestAnimationFrame(() => playVideo(slide));
+        }
         return slide;
       });
       update(0);

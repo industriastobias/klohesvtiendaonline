@@ -11823,19 +11823,6 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             backdrop-filter: blur(22px) saturate(1.35);
         }
 
-        .mobile-bottom-nav::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 3px;
-            width: 34%;
-            height: 4px;
-            border-radius: 999px;
-            background: rgba(26, 23, 23, .22);
-            transform: translateX(-50%);
-            pointer-events: none;
-        }
-
         .mobile-bottom-nav a,
         .mobile-bottom-nav button {
             position: relative;
@@ -11926,13 +11913,79 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
                 background: rgba(35, 27, 30, .86);
                 border-color: rgba(255, 255, 255, .13);
             }
-            .mobile-bottom-nav::after { background: rgba(255, 255, 255, .35); }
             .mobile-bottom-nav a,
             .mobile-bottom-nav button { color: #d6cace; }
             .mobile-bottom-nav a.active,
             .mobile-bottom-nav button.active,
             .mobile-bottom-nav a[aria-current="page"],
             .mobile-bottom-nav button[aria-current="page"] { background: rgba(237, 232, 219, .13); color: #f0cbd5; }
+        }
+    }
+
+    /* Menú DAYMAR: control compacto, contrastado y reconocible en una mano. */
+    .menu-toggle.atelier-menu-trigger {
+        position: relative !important;
+        width: 46px !important;
+        height: 46px !important;
+        min-height: 46px !important;
+        display: inline-flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 1px solid rgba(255, 255, 255, .28) !important;
+        border-radius: 15px !important;
+        background: #662D42 !important;
+        box-shadow: 0 7px 16px rgba(102, 45, 66, .22), inset 0 1px 0 rgba(255, 255, 255, .16);
+        color: #fff !important;
+        transition: transform .22s ease, background-color .22s ease, box-shadow .22s ease !important;
+    }
+
+    .menu-toggle.atelier-menu-trigger:hover,
+    .menu-toggle.atelier-menu-trigger:focus-visible {
+        background: #4e2031 !important;
+        box-shadow: 0 9px 20px rgba(102, 45, 66, .3), inset 0 1px 0 rgba(255, 255, 255, .2);
+        transform: translateY(-1px);
+    }
+
+    .menu-toggle.atelier-menu-trigger:active {
+        transform: scale(.93) !important;
+    }
+
+    .menu-toggle.atelier-menu-trigger span {
+        display: block !important;
+        width: 20px !important;
+        height: 2px !important;
+        margin: 0 !important;
+        border-radius: 999px !important;
+        background: #fff !important;
+        transform-origin: center !important;
+        transition: width .22s ease, transform .25s ease, opacity .2s ease !important;
+    }
+
+    .menu-toggle.atelier-menu-trigger span:nth-child(1) { width: 14px !important; margin-right: 6px !important; }
+    .menu-toggle.atelier-menu-trigger span:nth-child(3) { width: 14px !important; margin-left: 6px !important; }
+    .menu-toggle.atelier-menu-trigger b { display: none !important; }
+
+    .menu-toggle.atelier-menu-trigger.active span:nth-child(1),
+    .menu-toggle.atelier-menu-trigger.active span:nth-child(3) {
+        width: 20px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .menu-toggle.atelier-menu-trigger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+    .menu-toggle.atelier-menu-trigger.active span:nth-child(2) { opacity: 0 !important; transform: scaleX(0) !important; }
+    .menu-toggle.atelier-menu-trigger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
+
+    @media (max-width: 900px) {
+        .menu-toggle.atelier-menu-trigger {
+            width: 42px !important;
+            height: 42px !important;
+            min-height: 42px !important;
+            border-radius: 14px !important;
         }
     }
 </style>

@@ -16339,6 +16339,8 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   let gesture = null;
   let timer = null;
   let currentMediaRatio = 1;
+  const videoStartedAt = new WeakMap();
+  const videoAdvanceTimers = new WeakMap();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const syncFrameToMedia = (media) => {
@@ -16378,10 +16380,29 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
-    const attempt = () => video.play().catch(() => {});
+    if (video.ended || !videoStartedAt.has(video)) {
+      videoStartedAt.set(video, performance.now());
+    }
+    const attempt = () => video.play().then(() => scheduleVideoAdvance(video)).catch(() => {});
     attempt();
     setTimeout(attempt, 120);
     setTimeout(attempt, 700);
+  };
+
+  const scheduleVideoAdvance = (video) => {
+    clearTimeout(videoAdvanceTimers.get(video));
+    const duration = Number.isFinite(video.duration) ? video.duration : 0;
+    if (!duration || slides.length < 2) return;
+    const startedAt = videoStartedAt.get(video) || performance.now();
+    const elapsed = (performance.now() - startedAt) / 1000;
+    const wait = Math.max(250, (duration - elapsed) * 1000 + 250);
+    const advanceTimer = setTimeout(() => {
+      if (video !== slides[current]) return;
+      const reachedEnd = video.ended || video.currentTime >= duration - .25;
+      if (reachedEnd) navigate(current + 1);
+      else scheduleVideoAdvance(video);
+    }, wait);
+    videoAdvanceTimers.set(video, advanceTimer);
   };
 
   const startAuto = () => {
@@ -16580,7 +16601,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
           slide.addEventListener('ended', () => {
             const duration = Number.isFinite(slide.duration) ? slide.duration : 0;
             const reachedEnd = !duration || slide.currentTime >= duration - .25;
-            if (slide === slides[current] && slides.length > 1 && reachedEnd) navigate(current + 1);
+            if (slide === slides[current] && slides.length > 1 && reachedEnd) scheduleVideoAdvance(slide);
           });
         } else {
           slide.decoding = 'async';

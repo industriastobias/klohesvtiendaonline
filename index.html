@@ -16338,6 +16338,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   let navigationRequest = 0;
   let gesture = null;
   let timer = null;
+  let currentMediaRatio = 1;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const syncFrameToMedia = (media) => {
@@ -16346,9 +16347,19 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     const height = media.tagName === 'VIDEO' ? media.videoHeight : media.naturalHeight;
     if (!width || !height) return;
     const ratio = Math.max(.42, Math.min(1.8, width / height));
+    currentMediaRatio = ratio;
     frame.style.setProperty('--daymar-gallery-ratio', String(ratio));
     gallery.style.setProperty('--daymar-gallery-ratio', String(ratio));
     frame.classList.add('daymar-dynamic-gallery-frame');
+    const applyHeight = () => {
+      const frameWidth = frame.getBoundingClientRect().width;
+      if (frameWidth > 0) {
+        frame.style.setProperty('height', `${Math.round(frameWidth / currentMediaRatio)}px`, 'important');
+        frame.style.setProperty('aspect-ratio', 'auto', 'important');
+      }
+    };
+    applyHeight();
+    requestAnimationFrame(applyHeight);
   };
 
   const stopAuto = () => {
@@ -16378,7 +16389,9 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     const active = slides[current];
     if (active?.tagName === 'VIDEO') return;
     if (slides.length > 1 && !document.hidden && !gesture && !reducedMotion.matches) {
-      timer = setTimeout(() => navigate(current + 1), 5200);
+      timer = setTimeout(() => {
+        if (slides[current]?.tagName !== 'VIDEO') navigate(current + 1);
+      }, 5200);
     }
   };
 
@@ -16430,7 +16443,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     const request = ++navigationRequest;
     const target = slides[((index % slides.length) + slides.length) % slides.length];
     if (target.tagName === 'VIDEO') {
-      target.play().catch(() => {});
+      playVideo(target);
       if (target.readyState < 2) {
         await new Promise(resolve => target.addEventListener('loadeddata', resolve, { once: true }));
       }
@@ -16565,7 +16578,9 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
           slide.addEventListener('canplay', startVideo);
           slide.addEventListener('loadeddata', startVideo);
           slide.addEventListener('ended', () => {
-            if (slide === slides[current] && slides.length > 1) navigate(current + 1);
+            const duration = Number.isFinite(slide.duration) ? slide.duration : 0;
+            const reachedEnd = !duration || slide.currentTime >= duration - .25;
+            if (slide === slides[current] && slides.length > 1 && reachedEnd) navigate(current + 1);
           });
         } else {
           slide.decoding = 'async';
@@ -18789,6 +18804,26 @@ const firebaseConfig = {
 
     #daymarSummer .atelier-hero-art.daymar-dynamic-gallery-frame .hero-gallery-video {
         background: transparent !important;
+        object-fit: fill !important;
+    }
+
+    /* Última prioridad: elimina las reglas antiguas que forzaban 1:1. */
+    html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame {
+        aspect-ratio: auto !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+    }
+
+    html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame .hero-art-image {
+        width: 100% !important;
+        height: 100% !important;
+        aspect-ratio: auto !important;
+        min-height: 0 !important;
+    }
+
+    html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame .hero-gallery-slide {
+        width: 100% !important;
+        height: 100% !important;
         object-fit: fill !important;
     }
 </style>

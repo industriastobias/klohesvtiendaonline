@@ -16339,7 +16339,6 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   let gesture = null;
   let timer = null;
   let currentMediaRatio = 1;
-  const videoStartedAt = new WeakMap();
   const videoAdvanceTimers = new WeakMap();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -16382,9 +16381,6 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     video.setAttribute('webkit-playsinline', '');
     video.setAttribute('preload', 'auto');
     if (video.readyState === 0) video.load();
-    if (video.ended || !videoStartedAt.has(video)) {
-      videoStartedAt.set(video, performance.now());
-    }
     const attempt = () => video.play().then(() => scheduleVideoAdvance(video)).catch(() => {});
     attempt();
     setTimeout(attempt, 120);
@@ -16395,9 +16391,8 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     clearTimeout(videoAdvanceTimers.get(video));
     const duration = Number.isFinite(video.duration) ? video.duration : 0;
     if (!duration || slides.length < 2) return;
-    const startedAt = videoStartedAt.get(video) || performance.now();
-    const elapsed = (performance.now() - startedAt) / 1000;
-    const wait = Math.max(250, (duration - elapsed) * 1000 + 250);
+    const remaining = Math.max(0, duration - (Number.isFinite(video.currentTime) ? video.currentTime : 0));
+    const wait = Math.max(250, remaining * 1000 + 300);
     const advanceTimer = setTimeout(() => {
       if (video !== slides[current]) return;
       const reachedEnd = video.ended || video.currentTime >= duration - .25;
@@ -16600,6 +16595,10 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
           slide.addEventListener('loadedmetadata', startVideo);
           slide.addEventListener('canplay', startVideo);
           slide.addEventListener('loadeddata', startVideo);
+          slide.addEventListener('playing', () => scheduleVideoAdvance(slide));
+          slide.addEventListener('timeupdate', () => {
+            if (slide === slides[current] && !slide.paused) scheduleVideoAdvance(slide);
+          });
           slide.addEventListener('ended', () => {
             const duration = Number.isFinite(slide.duration) ? slide.duration : 0;
             const reachedEnd = !duration || slide.currentTime >= duration - .25;

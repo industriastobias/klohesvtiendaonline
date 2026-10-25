@@ -13956,6 +13956,10 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
 })();
     </script>
     <section class="hero atelier-hero daymar-compact-hero" id="daymarSummer">
+        <div class="daymar-black-friday-bar" role="note" aria-label="Promoción Black Friday">
+            <span class="daymar-black-friday-kicker">BLACK FRIDAY</span>
+            <span class="daymar-black-friday-copy">Relojes <b>-40%</b><i aria-hidden="true">·</i> Todo lo demás <b>-50%</b><i aria-hidden="true">·</i> Oro y plata <b>-2%</b></span>
+        </div>
         <div class="container atelier-hero-grid">
             <div class="atelier-hero-copy">
                 <p class="eyebrow">DAYMAR / DETALLES PARA CADA DÍA</p>
@@ -14245,9 +14249,9 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             <p class="daymar-welcome-subtitle">Tu próximo detalle empieza aquí.</p>
             <p id="daymarWelcomeTier" class="daymar-welcome-tier">BASIC</p>
             <div class="daymar-welcome-offers" id="daymarWelcomeOffers">
-                <p><span>Relojes</span><strong>10% de descuento</strong></p>
-                <p><span>Oro y plata</span><strong>Sin descuento</strong></p>
-                <p><span>Los demás accesorios</span><strong>20% de descuento</strong></p>
+                <p><span>Relojes</span><strong>40% de descuento</strong></p>
+                <p><span>Oro y plata</span><strong>2% de descuento</strong></p>
+                <p><span>Los demás accesorios</span><strong>50% de descuento</strong></p>
             </div>
         </div>
     </div>
@@ -14590,10 +14594,10 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
         // PRECIOS
         // ==========================================
         function getDiscountRate(product) {
-            const googleMember = Boolean(window.DaymarPromo?.isGoogleMember());
-            if (isFineJewelryProduct(product)) return googleMember ? 0.02 : 0;
-            const isWatch = String(product?.category || '').trim().toLowerCase() === 'relojes';
-            return isWatch ? (googleMember ? 0.15 : 0.10) : (googleMember ? 0.25 : 0.20);
+            // BLACK FRIDAY: promoción general, independiente del inicio de sesión.
+            if (isFineJewelryProduct(product)) return 0.02;
+            const isWatch = String(product?.category || '').trim().toLowerCase().includes('reloj');
+            return isWatch ? 0.40 : 0.50;
         }
         function getOriginalPrice(product) {
             return Number(product?.price) || 0;
@@ -16782,9 +16786,9 @@ const firebaseConfig = {
     }
     const offers = document.querySelectorAll('#daymarWelcomeOffers strong');
     if (offers.length === 3) {
-      offers[0].textContent = isMember ? '15% de descuento' : '10% de descuento';
-      offers[1].textContent = isMember ? '2% de descuento' : 'Sin descuento';
-      offers[2].textContent = isMember ? '25% de descuento' : '20% de descuento';
+      offers[0].textContent = '40% de descuento';
+      offers[1].textContent = '2% de descuento';
+      offers[2].textContent = '50% de descuento';
     }
   }
 
@@ -18928,6 +18932,101 @@ const firebaseConfig = {
             transition: none !important;
         }
     }
-</style>
+    </style>
+    <style id="daymar-black-friday-campaign">
+        html.daymar-brand body .daymar-black-friday-bar {
+            position: relative;
+            z-index: 4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(18px, 4vw, 58px);
+            width: min(1440px, calc(100% - 32px));
+            min-height: 58px;
+            margin: 0 auto;
+            padding: 13px 20px;
+            overflow: hidden;
+            background: #171315;
+            color: #fffaf4;
+            border-top: 1px solid rgba(214, 168, 91, .55);
+            border-bottom: 1px solid rgba(214, 168, 91, .55);
+            box-shadow: 0 10px 28px rgba(23, 19, 21, .12);
+        }
+
+        html.daymar-brand body .daymar-black-friday-bar::before,
+        html.daymar-brand body .daymar-black-friday-bar::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 1px solid rgba(214, 168, 91, .18);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        html.daymar-brand body .daymar-black-friday-bar::before { left: -82px; top: -105px; }
+        html.daymar-brand body .daymar-black-friday-bar::after { right: -82px; bottom: -105px; }
+
+        html.daymar-brand body .daymar-black-friday-kicker {
+            position: relative;
+            z-index: 1;
+            color: #e1b56d;
+            font: 700 11px/1 'Helvetica Neue', Arial, sans-serif;
+            letter-spacing: .24em;
+            white-space: nowrap;
+        }
+
+        html.daymar-brand body .daymar-black-friday-copy {
+            position: relative;
+            z-index: 1;
+            color: #eadfd5;
+            font: 500 10px/1.3 'Helvetica Neue', Arial, sans-serif;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        html.daymar-brand body .daymar-black-friday-copy b {
+            color: #f2c978;
+            font-weight: 700;
+        }
+
+        html.daymar-brand body .daymar-black-friday-copy i {
+            margin: 0 .8em;
+            color: #8c6a45;
+            font-style: normal;
+        }
+
+        html.daymar-brand body #daymarSummer .atelier-hero-grid {
+            position: relative;
+        }
+
+        @media (max-width: 900px) {
+            html.daymar-brand body .daymar-black-friday-bar {
+                width: calc(100% - 32px);
+                min-height: 72px;
+                flex-direction: column;
+                gap: 8px;
+                padding: 14px 12px;
+                text-align: center;
+            }
+
+            html.daymar-brand body .daymar-black-friday-kicker { font-size: 10px; }
+            html.daymar-brand body .daymar-black-friday-copy {
+                white-space: normal;
+                font-size: 8px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (max-width: 520px) {
+            html.daymar-brand body .daymar-black-friday-bar {
+                width: calc(100% - 24px);
+                min-height: 78px;
+            }
+
+            html.daymar-brand body .daymar-black-friday-copy i { margin: 0 .35em; }
+        }
+    </style>
 </body>
 </html>

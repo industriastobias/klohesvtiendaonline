@@ -16387,12 +16387,24 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   const scheduleVideoAdvance = (video) => {
     clearTimeout(videoAdvanceTimers.get(video));
     const duration = Number.isFinite(video.duration) ? video.duration : 0;
-    if (!duration || slides.length < 2) return;
+    if (!duration || slides.length < 2) {
+      if (slides.length > 1 && video === slides[current]) {
+        const fallbackTimer = setTimeout(() => {
+          if (video === slides[current] && video.ended) navigate(current + 1);
+        }, 15000);
+        videoAdvanceTimers.set(video, fallbackTimer);
+      }
+      return;
+    }
     const remaining = Math.max(0, duration - (Number.isFinite(video.currentTime) ? video.currentTime : 0));
-    const wait = Math.max(250, remaining * 1000 + 300);
+    // Margen extra para evitar que Safari/Android avance antes de que termine
+    // el último fotograma del video.
+    const wait = Math.max(700, remaining * 1000 + 750);
     const advanceTimer = setTimeout(() => {
       if (video !== slides[current]) return;
-      const reachedEnd = video.ended || video.currentTime >= duration - .25;
+      const currentDuration = Number.isFinite(video.duration) ? video.duration : duration;
+      const currentTime = Number.isFinite(video.currentTime) ? video.currentTime : 0;
+      const reachedEnd = video.ended || currentTime >= currentDuration - .15;
       if (reachedEnd) navigate(current + 1);
       else scheduleVideoAdvance(video);
     }, wait);

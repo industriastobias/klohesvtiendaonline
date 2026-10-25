@@ -16338,13 +16338,24 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   let navigationRequest = 0;
   let gesture = null;
   let timer = null;
+  let currentMediaRatio = 1;
   const videoAdvanceTimers = new WeakMap();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const syncFrameToMedia = (media) => {
     if (!frame || !media) return;
-    // El marco conserva una altura estable; nunca se redimensiona según el archivo activo.
+    const width = media.tagName === 'VIDEO' ? media.videoWidth : media.naturalWidth;
+    const height = media.tagName === 'VIDEO' ? media.videoHeight : media.naturalHeight;
+    if (!width || !height) return;
+    const ratio = Math.max(.55, Math.min(1.8, width / height));
+    currentMediaRatio = ratio;
+    frame.style.setProperty('--daymar-gallery-ratio', String(ratio));
+    gallery.style.setProperty('--daymar-gallery-ratio', String(ratio));
     frame.classList.add('daymar-dynamic-gallery-frame');
+    const frameWidth = frame.getBoundingClientRect().width;
+    if (frameWidth > 0) {
+      frame.style.setProperty('height', `${Math.round(frameWidth / currentMediaRatio)}px`, 'important');
+    }
   };
 
   const stopAuto = () => {
@@ -18852,6 +18863,7 @@ const firebaseConfig = {
         min-height: 0 !important;
         padding: 0 !important;
         background: transparent !important;
+        transition: height .65s cubic-bezier(.22, .61, .36, 1) !important;
     }
 
     #daymarSummer .atelier-hero-art.daymar-dynamic-gallery-frame .hero-art-image {
@@ -18868,10 +18880,10 @@ const firebaseConfig = {
 
     /* Última prioridad: elimina las reglas antiguas que forzaban 1:1. */
     html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame {
-        height: clamp(350px, 41vw, 555px) !important;
         aspect-ratio: auto !important;
         padding: 0 !important;
         min-height: 0 !important;
+        transition: height .65s cubic-bezier(.22, .61, .36, 1) !important;
     }
 
     html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame .hero-art-image {
@@ -18889,13 +18901,19 @@ const firebaseConfig = {
     }
 
     html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame .hero-gallery-video {
-        object-fit: contain !important;
+        object-fit: cover !important;
         background: #20191c !important;
     }
 
     @media (max-width: 900px) {
         html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame {
             height: 420px !important;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame {
+            transition: none !important;
         }
     }
 </style>

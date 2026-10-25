@@ -18830,8 +18830,8 @@ const firebaseConfig = {
 </style>
 <style id="daymar-dynamic-carousel-ratio">
     #daymarSummer .atelier-hero-art.daymar-dynamic-gallery-frame {
-        height: auto !important;
-        aspect-ratio: var(--daymar-gallery-ratio, 1) !important;
+        height: clamp(350px, 41vw, 555px) !important;
+        aspect-ratio: auto !important;
         min-height: 0 !important;
         padding: 0 !important;
         background: transparent !important;
@@ -18851,6 +18851,7 @@ const firebaseConfig = {
 
     /* Última prioridad: elimina las reglas antiguas que forzaban 1:1. */
     html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame {
+        height: clamp(350px, 41vw, 555px) !important;
         aspect-ratio: auto !important;
         padding: 0 !important;
         min-height: 0 !important;
@@ -18866,7 +18867,19 @@ const firebaseConfig = {
     html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame .hero-gallery-slide {
         width: 100% !important;
         height: 100% !important;
-        object-fit: fill !important;
+        object-fit: cover !important;
+        object-position: center !important;
+    }
+
+    html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame .hero-gallery-video {
+        object-fit: contain !important;
+        background: #20191c !important;
+    }
+
+    @media (max-width: 900px) {
+        html.daymar-brand body #daymarSummer.daymar-compact-hero .atelier-hero-art.daymar-dynamic-gallery-frame {
+            height: 420px !important;
+        }
     }
 </style>
 </body>

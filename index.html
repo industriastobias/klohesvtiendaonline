@@ -16384,6 +16384,8 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     attempt();
     setTimeout(attempt, 120);
     setTimeout(attempt, 700);
+    setTimeout(attempt, 1500);
+    setTimeout(attempt, 3000);
   };
 
   const scheduleVideoAdvance = (video) => {
@@ -16405,7 +16407,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     stopAuto();
     const active = slides[current];
     if (active?.tagName === 'VIDEO') return;
-    if (slides.length > 1 && !document.hidden && !gesture && !reducedMotion.matches) {
+    if (slides.length > 1 && !document.hidden && !gesture) {
       // Las imágenes avanzan con un ritmo más ágil; los videos usan su duración real.
       timer = setTimeout(() => {
         if (slides[current]?.tagName !== 'VIDEO') navigate(current + 1);
@@ -16594,6 +16596,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
           };
           slide.addEventListener('loadedmetadata', startVideo);
           slide.addEventListener('canplay', startVideo);
+          slide.addEventListener('canplaythrough', startVideo);
           slide.addEventListener('loadeddata', startVideo);
           slide.addEventListener('playing', () => scheduleVideoAdvance(slide));
           slide.addEventListener('timeupdate', () => {

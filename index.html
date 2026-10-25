@@ -16338,29 +16338,13 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   let navigationRequest = 0;
   let gesture = null;
   let timer = null;
-  let currentMediaRatio = 1;
   const videoAdvanceTimers = new WeakMap();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const syncFrameToMedia = (media) => {
     if (!frame || !media) return;
-    const width = media.tagName === 'VIDEO' ? media.videoWidth : media.naturalWidth;
-    const height = media.tagName === 'VIDEO' ? media.videoHeight : media.naturalHeight;
-    if (!width || !height) return;
-    const ratio = Math.max(.42, Math.min(1.8, width / height));
-    currentMediaRatio = ratio;
-    frame.style.setProperty('--daymar-gallery-ratio', String(ratio));
-    gallery.style.setProperty('--daymar-gallery-ratio', String(ratio));
+    // El marco conserva una altura estable; nunca se redimensiona según el archivo activo.
     frame.classList.add('daymar-dynamic-gallery-frame');
-    const applyHeight = () => {
-      const frameWidth = frame.getBoundingClientRect().width;
-      if (frameWidth > 0) {
-        frame.style.setProperty('height', `${Math.round(frameWidth / currentMediaRatio)}px`, 'important');
-        frame.style.setProperty('aspect-ratio', 'auto', 'important');
-      }
-    };
-    applyHeight();
-    requestAnimationFrame(applyHeight);
   };
 
   const stopAuto = () => {
@@ -16466,16 +16450,49 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     if (target.tagName === 'VIDEO') {
       playVideo(target);
       if (target.readyState < 2) {
-        await new Promise(resolve => target.addEventListener('loadeddata', resolve, { once: true }));
+        await new Promise(resolve => {
+          let settled = false;
+          const finish = () => {
+            if (settled) return;
+            settled = true;
+            target.removeEventListener('loadeddata', finish);
+            target.removeEventListener('error', finish);
+            resolve();
+          };
+          target.addEventListener('loadeddata', finish, { once: true });
+          target.addEventListener('error', finish, { once: true });
+          setTimeout(finish, 4000);
+        });
       }
     } else {
       target.loading = 'eager';
-    }
-    try {
-      if (target.tagName !== 'VIDEO') await target.decode();
-    } catch (_) {
-      removeBroken(target);
-      return;
+      await new Promise(resolve => {
+        if (target.complete) {
+          resolve();
+          return;
+        }
+        let settled = false;
+        const finish = () => {
+          if (settled) return;
+          settled = true;
+          target.removeEventListener('load', finish);
+          target.removeEventListener('error', finish);
+          resolve();
+        };
+        target.addEventListener('load', finish, { once: true });
+        target.addEventListener('error', finish, { once: true });
+        setTimeout(finish, 4000);
+      });
+      if (typeof target.decode === 'function' && target.naturalWidth > 0) {
+        await Promise.race([
+          target.decode().catch(() => {}),
+          new Promise(resolve => setTimeout(resolve, 1200))
+        ]);
+      }
+      if (target.complete && target.naturalWidth === 0) {
+        removeBroken(target);
+        return;
+      }
     }
     if (request !== navigationRequest || !slides.includes(target)) return;
     update(slides.indexOf(target));

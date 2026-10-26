@@ -10071,8 +10071,8 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
     <style id="daymar-navigation-auth-fix">
         /* Reglas finales acotadas: conservar el diseño y corregir la interacción. */
         html body #menuBtn {
-            display:inline-flex !important; min-width:44px !important; min-height:44px !important;
-            width:auto !important; height:44px !important; touch-action:manipulation;
+            display:inline-flex !important; min-width:38px !important; min-height:38px !important;
+            width:38px !important; height:38px !important; touch-action:manipulation;
         }
         html body #menuBtn > span { flex-shrink:0; pointer-events:none; }
         html body #menuBtn > b { pointer-events:none; }
@@ -10123,7 +10123,7 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
                 transform:translateY(-50%); z-index:2; width:44px; min-width:44px !important;
             }
             html body .atelier-header .daymar-nav-links > .atelier-link { display:none !important; }
-            html body #menuBtn { width:44px !important; flex-direction:column; gap:5px; }
+            html body #menuBtn { width:38px !important; height:38px !important; min-height:38px !important; flex-direction:column; gap:4px; }
             html body #menuBtn b { display:none !important; }
             html body nav.mobile-bottom-nav {
                 display:grid !important; position:fixed; grid-template-columns:repeat(4,minmax(0,1fr));
@@ -10146,7 +10146,7 @@ html body #catalogo .product-card .cart-corner-btn .cart-btn-label > span {
             transform:translateY(-50%); z-index:2; width:44px; min-width:44px !important;
         }
         :is(html.device-ios,html.device-android) body .atelier-header .daymar-nav-links > .atelier-link { display:none !important; }
-        :is(html.device-ios,html.device-android) body #menuBtn { width:44px !important; flex-direction:column; gap:5px; }
+        :is(html.device-ios,html.device-android) body #menuBtn { width:38px !important; height:38px !important; min-height:38px !important; flex-direction:column; gap:4px; }
         :is(html.device-ios,html.device-android) body #menuBtn b { display:none !important; }
         @media(prefers-reduced-motion:reduce) {
             html body #categoriesMenu, html body #menuOverlay, html body #daymarLoginOverlay { transition:none !important; animation:none !important; }

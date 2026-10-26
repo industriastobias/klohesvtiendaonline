@@ -9193,6 +9193,111 @@ html.device-ios .cart-modal .remove-item {
     opacity: 1;
   }
 
+  #newsletterPopup .daymar-welcome-wheel-area {
+    margin: 0 auto 24px;
+    text-align: center;
+  }
+  #newsletterPopup .daymar-welcome-wheel-hint {
+    margin: 0 0 12px !important;
+    color: rgba(237, 232, 219, .86) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1.4;
+  }
+  #newsletterPopup .daymar-wheel-wrap {
+    position: relative;
+    width: min(220px, 62vw);
+    aspect-ratio: 1;
+    margin: 0 auto 14px;
+  }
+  #newsletterPopup .daymar-wheel-wrap::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    top: -5px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 18px solid #C9D66A;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 2px 3px rgba(26,23,23,.25));
+  }
+  #newsletterPopup .daymar-wheel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 7px solid #EDE8DB;
+    border-radius: 50%;
+    background: conic-gradient(#C9D66A 0deg 90deg, #EDE8DB 90deg 180deg, #9A536B 180deg 270deg, #C9D66A 270deg 360deg);
+    box-shadow: 0 10px 22px rgba(26,23,23,.22), inset 0 0 0 2px rgba(26,23,23,.18);
+    transform: rotate(0deg);
+    transition: transform 1.8s cubic-bezier(.12,.72,.18,1);
+    overflow: hidden;
+  }
+  #newsletterPopup .daymar-wheel.is-spinning { transition-duration: 2.4s; }
+  #newsletterPopup .daymar-wheel-label {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    width: 50%;
+    height: 50%;
+    display: grid;
+    place-items: center;
+    color: #1A1717;
+    font-size: clamp(15px, 4vw, 20px);
+    font-weight: 800;
+    line-height: 1;
+    transform-origin: 0 0;
+  }
+  #newsletterPopup .daymar-wheel-label:nth-child(1) { transform: rotate(45deg) translate(12%, -50%); }
+  #newsletterPopup .daymar-wheel-label:nth-child(2) { transform: rotate(135deg) translate(12%, -50%); color: #662D42; }
+  #newsletterPopup .daymar-wheel-label:nth-child(3) { transform: rotate(225deg) translate(12%, -50%); color: #EDE8DB; }
+  #newsletterPopup .daymar-wheel-label:nth-child(4) { transform: rotate(315deg) translate(12%, -50%); }
+  #newsletterPopup .daymar-wheel-center {
+    position: absolute;
+    z-index: 2;
+    inset: 50% auto auto 50%;
+    width: 30px;
+    height: 30px;
+    border: 4px solid #EDE8DB;
+    border-radius: 50%;
+    background: #662D42;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 5px rgba(26,23,23,.28);
+  }
+  #newsletterPopup .daymar-wheel-spin {
+    min-height: 38px;
+    padding: 9px 18px;
+    border: 1px solid rgba(201,214,106,.75);
+    border-radius: 999px;
+    background: #C9D66A;
+    color: #1A1717;
+    cursor: pointer;
+    font: 700 11px/1 'Poppins', sans-serif;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    transition: transform .2s ease, background .2s ease, opacity .2s ease;
+  }
+  #newsletterPopup .daymar-wheel-spin:hover,
+  #newsletterPopup .daymar-wheel-spin:focus-visible { background: #EDE8DB; transform: translateY(-1px); outline: none; }
+  #newsletterPopup .daymar-wheel-spin:disabled { cursor: wait; opacity: .65; }
+  #newsletterPopup .daymar-wheel-result {
+    min-height: 20px;
+    margin: 12px 0 0 !important;
+    color: #C9D66A !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+  }
+  #newsletterPopup .daymar-wheel-note {
+    margin: 7px 0 0 !important;
+    color: rgba(237, 232, 219, .66) !important;
+    font-size: 10px !important;
+    line-height: 1.4;
+  }
+
   #newsletterPopup .daymar-welcome-offers {
     display: grid;
     gap: 0;
@@ -9252,6 +9357,9 @@ html.device-ios .cart-modal .remove-item {
       gap: 8px;
       padding: 12px 0;
     }
+    #newsletterPopup .daymar-welcome-wheel-area { margin-bottom: 18px; }
+    #newsletterPopup .daymar-wheel-wrap { width: min(190px, 58vw); }
+    #newsletterPopup .daymar-wheel-note { font-size: 9px !important; }
   }
 
   @media (max-height: 540px) {
@@ -14269,6 +14377,21 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             <div class="holiday-welcome-star" aria-hidden="true"><i class="fas fa-gift"></i></div><h3 id="daymarWelcomeTitle">Bienvenido</h3>
             <p class="daymar-welcome-subtitle">Tu próximo detalle empieza aquí.</p>
             <p id="daymarWelcomeTier" class="daymar-welcome-tier">BASIC</p>
+            <div class="daymar-welcome-wheel-area" aria-labelledby="daymarWheelHint">
+                <p id="daymarWheelHint" class="daymar-welcome-wheel-hint">Pulsa y descubre tu porcentaje sorpresa</p>
+                <div class="daymar-wheel-wrap">
+                    <div class="daymar-wheel" data-daymar-wheel role="img" aria-label="Ruleta con porcentajes de 20, 35, 40 y 50 por ciento">
+                        <span class="daymar-wheel-label">20%</span>
+                        <span class="daymar-wheel-label">35%</span>
+                        <span class="daymar-wheel-label">40%</span>
+                        <span class="daymar-wheel-label">50%</span>
+                        <span class="daymar-wheel-center" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <button type="button" class="daymar-wheel-spin" data-daymar-wheel-spin>Pulsa para girar</button>
+                <p class="daymar-wheel-result" data-daymar-wheel-result aria-live="polite"></p>
+                <p class="daymar-wheel-note">La ruleta es una dinámica de bienvenida. Las promociones oficiales de la tienda se mantienen.</p>
+            </div>
             <div class="daymar-welcome-offers" id="daymarWelcomeOffers">
                 <p><span>Relojes</span><strong>40% de descuento</strong></p>
                 <p><span>Oro y plata</span><strong>2% de descuento</strong></p>
@@ -14277,6 +14400,36 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
         </div>
     </div>
 
+    <script id="daymar-welcome-wheel">
+(() => {
+  const wheel = document.querySelector('[data-daymar-wheel]');
+  const spinButton = document.querySelector('[data-daymar-wheel-spin]');
+  const result = document.querySelector('[data-daymar-wheel-result]');
+  if (!wheel || !spinButton || !result) return;
+  const prizes = [20, 35, 40, 50];
+  let rotation = 0;
+  let spinning = false;
+  spinButton.addEventListener('click', () => {
+    if (spinning) return;
+    spinning = true;
+    spinButton.disabled = true;
+    result.textContent = 'Girando…';
+    const prizeIndex = Math.floor(Math.random() * prizes.length);
+    const prize = prizes[prizeIndex];
+    const segmentCenter = prizeIndex * 90 + 45;
+    const target = 360 - segmentCenter;
+    const normalized = ((rotation % 360) + 360) % 360;
+    rotation += 1440 + ((target - normalized + 360) % 360);
+    wheel.style.transform = `rotate(${rotation}deg)`;
+    window.setTimeout(() => {
+      result.textContent = `Tu porcentaje sorpresa: ${prize}%`;
+      spinButton.disabled = false;
+      spinButton.textContent = 'Girar de nuevo';
+      spinning = false;
+    }, 2450);
+  });
+})();
+</script>
     <script id="daymar-welcome-instant">
 (() => {
   const popup = document.getElementById('newsletterPopup');

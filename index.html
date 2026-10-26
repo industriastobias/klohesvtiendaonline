@@ -9206,14 +9206,14 @@ html.device-ios .cart-modal .remove-item {
   }
   #newsletterPopup .daymar-wheel-wrap {
     position: relative;
-    width: min(222px, 64vw);
+    width: min(196px, 56vw);
     aspect-ratio: 1;
-    margin: 0 auto 16px;
-    padding: 7px;
-    border: 1px solid rgba(237,232,219,.35);
+    margin: 0 auto 14px;
+    padding: 6px;
+    border: 2px solid #C9D66A;
     border-radius: 50%;
-    background: #3F2A35;
-    filter: drop-shadow(0 12px 16px rgba(26,23,23,.24));
+    background: #662D42;
+    filter: drop-shadow(0 9px 12px rgba(26,23,23,.2));
   }
   #newsletterPopup .daymar-wheel-wrap::after {
     content: '';
@@ -9225,7 +9225,7 @@ html.device-ios .cart-modal .remove-item {
     height: 0;
     border-left: 9px solid transparent;
     border-right: 9px solid transparent;
-    border-top: 19px solid #EDE8DB;
+    border-top: 16px solid #C9D66A;
     transform: translateX(-50%);
     filter: drop-shadow(0 2px 3px rgba(26,23,23,.35));
   }
@@ -9233,10 +9233,10 @@ html.device-ios .cart-modal .remove-item {
     position: relative;
     width: 100%;
     height: 100%;
-    border: 4px solid #C9D66A;
+    border: 3px solid #EDE8DB;
     border-radius: 50%;
     background: conic-gradient(#C9D66A 0deg 88deg, #662D42 88deg 90deg, #EDE8DB 90deg 178deg, #662D42 178deg 180deg, #9A536B 180deg 268deg, #662D42 268deg 270deg, #3F2A35 270deg 358deg, #662D42 358deg 360deg);
-    box-shadow: 0 5px 12px rgba(26,23,23,.2), inset 0 0 0 2px rgba(26,23,23,.25);
+    box-shadow: 0 4px 9px rgba(26,23,23,.18), inset 0 0 0 1px rgba(26,23,23,.25);
     transform: rotate(0deg);
     transition: transform 1.8s cubic-bezier(.12,.72,.18,1);
     overflow: hidden;
@@ -9251,24 +9251,25 @@ html.device-ios .cart-modal .remove-item {
     width: auto;
     height: auto;
     display: block;
-    font-size: clamp(15px, 4vw, 20px);
+    font-size: clamp(12px, 3.2vw, 17px);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: -.04em;
+    letter-spacing: -.05em;
+    white-space: nowrap;
     text-shadow: 0 1px 1px rgba(255,255,255,.18);
   }
   /* Cada número queda dentro del mismo segmento que señala el puntero. */
-  #newsletterPopup .daymar-wheel-label:nth-child(1) { left: 70.7%; top: 29.3%; transform: translate(-50%, -50%); color: #1A1717; }
-  #newsletterPopup .daymar-wheel-label:nth-child(2) { left: 70.7%; top: 70.7%; transform: translate(-50%, -50%); color: #1A1717; }
-  #newsletterPopup .daymar-wheel-label:nth-child(3) { left: 29.3%; top: 70.7%; transform: translate(-50%, -50%); color: #EDE8DB; }
-  #newsletterPopup .daymar-wheel-label:nth-child(4) { left: 29.3%; top: 29.3%; transform: translate(-50%, -50%); color: #EDE8DB; }
+  #newsletterPopup .daymar-wheel-label:nth-child(1) { left: 63%; top: 37%; transform: translate(-50%, -50%); color: #1A1717; }
+  #newsletterPopup .daymar-wheel-label:nth-child(2) { left: 63%; top: 63%; transform: translate(-50%, -50%); color: #1A1717; }
+  #newsletterPopup .daymar-wheel-label:nth-child(3) { left: 37%; top: 63%; transform: translate(-50%, -50%); color: #EDE8DB; }
+  #newsletterPopup .daymar-wheel-label:nth-child(4) { left: 37%; top: 37%; transform: translate(-50%, -50%); color: #EDE8DB; }
   #newsletterPopup .daymar-wheel-center {
     position: absolute;
     z-index: 2;
     inset: 50% auto auto 50%;
-    width: 38px;
-    height: 38px;
-    border: 4px solid #EDE8DB;
+    width: 34px;
+    height: 34px;
+    border: 3px solid #EDE8DB;
     border-radius: 50%;
     background: #662D42;
     transform: translate(-50%, -50%);
@@ -9305,8 +9306,12 @@ html.device-ios .cart-modal .remove-item {
     min-height: 20px;
     margin: 12px 0 0 !important;
     color: #C9D66A !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
     font-weight: 700 !important;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   #newsletterPopup .daymar-wheel-note {
     margin: 7px 0 0 !important;
@@ -19842,9 +19847,16 @@ const firebaseConfig = {
   html.daymar-brand #newsletterPopup .daymar-welcome-wheel-area {
     margin-top: 0 !important;
   }
+  html.daymar-brand #newsletterPopup .daymar-welcome-content {
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
   html.daymar-brand #newsletterPopup .daymar-wheel-wrap {
-    width: min(178px, 54vw) !important;
-    margin-bottom: 11px !important;
+    width: min(164px, 52vw) !important;
+    margin-bottom: 9px !important;
+  }
+  html.daymar-brand #newsletterPopup .daymar-wheel-label {
+    font-size: 12px !important;
   }
   html.daymar-brand #newsletterPopup .daymar-wheel-spin {
     min-height: 35px !important;

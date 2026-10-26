@@ -9281,7 +9281,6 @@ html.device-ios .cart-modal .remove-item {
       animation: none !important;
     }
     #newsletterPopup .daymar-typing-char,
-    #newsletterPopup #daymarWelcomeTitle.daymar-welcome-title-smooth,
     #newsletterPopup .daymar-welcome-offers p {
       opacity: 1 !important;
       transform: none !important;
@@ -10203,16 +10202,6 @@ html body #daymarLoginDialog .daymar-auth-status:empty { display:none; }
   @keyframes daymarWelcomeTypeChar {
     from { opacity: 0; }
     to { opacity: 1; }
-  }
-  #newsletterPopup #daymarWelcomeTitle.daymar-welcome-title-smooth {
-    opacity: 0;
-    transform: translateY(6px);
-    animation: daymarWelcomeTitleIn .7s cubic-bezier(.22,.75,.25,1) .08s forwards;
-    will-change: opacity, transform;
-  }
-  @keyframes daymarWelcomeTitleIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
   }
   #newsletterPopup .daymar-welcome-offers p {
     opacity: 0;
@@ -14338,14 +14327,8 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (title) {
       title.textContent = titleText;
-      title.classList.remove('daymar-welcome-title-smooth');
-      void title.offsetWidth;
-      if (reduceMotion) {
-        title.style.opacity = '1';
-        title.style.transform = 'none';
-      } else {
-        title.classList.add('daymar-welcome-title-smooth');
-      }
+      title.style.opacity = '1';
+      title.style.transform = 'none';
     }
     const offers = popup.querySelector('.daymar-welcome-offers');
     const offerRows = offers ? [...offers.querySelectorAll('p')] : [];

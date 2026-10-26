@@ -19731,5 +19731,38 @@ const firebaseConfig = {
             html.daymar-brand body .daymar-black-friday-cta { animation: none !important; }
         }
     </style>
+<style id="daymar-mobile-material-separation">
+@media (max-width: 900px) {
+  html.daymar-brand body #catalogo #productsContainer > .product-card .fine-jewelry-overline,
+  html.daymar-catalog-phone body #catalogo #productsContainer > .product-card .fine-jewelry-overline {
+    display: none !important;
+  }
+  html.daymar-brand body #catalogo #productsContainer > .product-card .fine-jewelry-meta,
+  html.daymar-catalog-phone body #catalogo #productsContainer > .product-card .fine-jewelry-meta {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+    min-height: 15px !important;
+    margin: 0 0 7px !important;
+    color: #958780 !important;
+    font: 500 8px/1.2 'Outfit', sans-serif !important;
+    letter-spacing: .08em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+  }
+  html.daymar-brand body #catalogo #productsContainer > .product-card .fine-jewelry-meta span:last-child,
+  html.daymar-catalog-phone body #catalogo #productsContainer > .product-card .fine-jewelry-meta span:last-child {
+    color: #695346 !important;
+    font-weight: 600 !important;
+    text-align: right !important;
+  }
+  html.daymar-brand body #catalogo #productsContainer > .product-card .discount-tag,
+  html.daymar-catalog-phone body #catalogo #productsContainer > .product-card .discount-tag {
+    z-index: 3 !important;
+  }
+}
+</style>
 </body>
 </html>

@@ -9206,14 +9206,23 @@ html.device-ios .cart-modal .remove-item {
   }
   #newsletterPopup .daymar-wheel-wrap {
     position: relative;
-    width: min(196px, 56vw);
+    width: min(210px, 60vw);
     aspect-ratio: 1;
-    margin: 0 auto 14px;
-    padding: 6px;
+    margin: 0 auto 15px;
+    padding: 8px;
     border: 2px solid #C9D66A;
     border-radius: 50%;
     background: #662D42;
-    filter: drop-shadow(0 9px 12px rgba(26,23,23,.2));
+    filter: drop-shadow(0 11px 15px rgba(26,23,23,.24));
+  }
+  #newsletterPopup .daymar-wheel-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 1px dashed rgba(201,214,106,.75);
+    border-radius: 50%;
+    opacity: .9;
+    pointer-events: none;
   }
   #newsletterPopup .daymar-wheel-wrap::after {
     content: '';
@@ -9241,7 +9250,17 @@ html.device-ios .cart-modal .remove-item {
     transition: transform 1.8s cubic-bezier(.12,.72,.18,1);
     overflow: hidden;
   }
-  #newsletterPopup .daymar-wheel::before { display: none; }
+  #newsletterPopup .daymar-wheel::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 9px;
+    z-index: 0;
+    border: 1px solid rgba(237,232,219,.5);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(26,23,23,.14);
+    pointer-events: none;
+  }
   #newsletterPopup .daymar-wheel.is-spinning { transition-duration: 2.4s; }
   #newsletterPopup .daymar-wheel-label {
     position: absolute;
@@ -9259,17 +9278,25 @@ html.device-ios .cart-modal .remove-item {
     text-shadow: 0 1px 1px rgba(255,255,255,.18);
   }
   /* Cada número queda dentro del mismo segmento que señala el puntero. */
-  #newsletterPopup .daymar-wheel-label:nth-child(1) { left: 63%; top: 37%; transform: translate(-50%, -50%); color: #1A1717; }
-  #newsletterPopup .daymar-wheel-label:nth-child(2) { left: 63%; top: 63%; transform: translate(-50%, -50%); color: #1A1717; }
-  #newsletterPopup .daymar-wheel-label:nth-child(3) { left: 37%; top: 63%; transform: translate(-50%, -50%); color: #EDE8DB; }
-  #newsletterPopup .daymar-wheel-label:nth-child(4) { left: 37%; top: 37%; transform: translate(-50%, -50%); color: #EDE8DB; }
+  #newsletterPopup .daymar-wheel-label:nth-child(1) { left: 63%; top: 37%; transform: translate(-50%, -50%); color: #1A1717; background: rgba(237,232,219,.92); }
+  #newsletterPopup .daymar-wheel-label:nth-child(2) { left: 63%; top: 63%; transform: translate(-50%, -50%); color: #1A1717; background: rgba(201,214,106,.94); }
+  #newsletterPopup .daymar-wheel-label:nth-child(3) { left: 37%; top: 63%; transform: translate(-50%, -50%); color: #EDE8DB; background: rgba(26,23,23,.3); border-color: rgba(237,232,219,.65); }
+  #newsletterPopup .daymar-wheel-label:nth-child(4) { left: 37%; top: 37%; transform: translate(-50%, -50%); color: #EDE8DB; background: rgba(26,23,23,.3); border-color: rgba(237,232,219,.65); }
+  #newsletterPopup .daymar-wheel-label:nth-child(-n+4) {
+    min-width: 38px;
+    padding: 5px 6px;
+    border: 1px solid rgba(26,23,23,.2);
+    border-radius: 999px;
+    box-shadow: 0 2px 5px rgba(26,23,23,.2);
+    text-align: center;
+  }
   #newsletterPopup .daymar-wheel-center {
     position: absolute;
     z-index: 2;
     inset: 50% auto auto 50%;
-    width: 34px;
-    height: 34px;
-    border: 3px solid #EDE8DB;
+    width: 42px;
+    height: 42px;
+    border: 4px solid #EDE8DB;
     border-radius: 50%;
     background: #662D42;
     transform: translate(-50%, -50%);
@@ -19852,11 +19879,13 @@ const firebaseConfig = {
     overflow-x: hidden !important;
   }
   html.daymar-brand #newsletterPopup .daymar-wheel-wrap {
-    width: min(164px, 52vw) !important;
-    margin-bottom: 9px !important;
+    width: min(172px, 52vw) !important;
+    margin-bottom: 10px !important;
   }
   html.daymar-brand #newsletterPopup .daymar-wheel-label {
-    font-size: 12px !important;
+    min-width: 32px !important;
+    padding: 4px 4px !important;
+    font-size: 11px !important;
   }
   html.daymar-brand #newsletterPopup .daymar-wheel-spin {
     min-height: 35px !important;

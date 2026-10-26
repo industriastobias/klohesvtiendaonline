@@ -18913,29 +18913,32 @@ const firebaseConfig = {
     #daymarSummer .hero-gallery-audio-toggle {
         position: absolute;
         z-index: 5;
-        right: 22px;
-        bottom: 18px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        min-height: 30px;
-        padding: 7px 10px;
-        border: 1px solid rgba(255,255,255,.72);
-        background: rgba(26,23,23,.78);
-        color: #fff;
+        right: 20px;
+        bottom: 16px;
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: 1px solid rgba(255,255,255,.45);
+        border-radius: 50%;
+        background: rgba(26,23,23,.38);
+        color: rgba(255,255,255,.9);
         cursor: pointer;
         font: inherit;
-        font-size: 9px;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-        transition: background .25s ease, color .25s ease;
+        font-size: 11px;
+        opacity: .62;
+        transition: background .25s ease, color .25s ease, opacity .25s ease, transform .25s ease;
     }
+    #daymarSummer .hero-gallery-audio-toggle span { display: none; }
     #daymarSummer .hero-gallery-audio-toggle[hidden] { display: none !important; }
     #daymarSummer .hero-gallery-audio-toggle:hover,
     #daymarSummer .hero-gallery-audio-toggle:focus-visible {
-        background: #fff;
-        color: var(--ink, #1a1717);
+        background: rgba(26,23,23,.72);
+        color: #fff;
+        opacity: 1;
         outline: none;
+        transform: scale(1.06);
     }
     #daymarSummer .hero-gallery-video {
         display: block !important;
@@ -18952,9 +18955,11 @@ const firebaseConfig = {
     }
     @media (max-width: 900px) {
         #daymarSummer .hero-gallery-audio-toggle {
-            right: 15px;
-            bottom: 14px;
-            font-size: 8px;
+            right: 13px;
+            bottom: 12px;
+            width: 26px;
+            height: 26px;
+            font-size: 10px;
         }
     }
 </style>

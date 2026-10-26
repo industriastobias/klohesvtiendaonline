@@ -9280,7 +9280,8 @@ html.device-ios .cart-modal .remove-item {
       transition: none !important;
       animation: none !important;
     }
-    #newsletterPopup .daymar-typing-char {
+    #newsletterPopup .daymar-typing-char,
+    #newsletterPopup .daymar-welcome-offers p {
       opacity: 1 !important;
       transform: none !important;
     }
@@ -10201,6 +10202,18 @@ html body #daymarLoginDialog .daymar-auth-status:empty { display:none; }
   @keyframes daymarWelcomeTypeChar {
     from { opacity: 0; }
     to { opacity: 1; }
+  }
+  #newsletterPopup .daymar-welcome-offers p {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  #newsletterPopup .daymar-welcome-offers.is-animating p {
+    animation: daymarWelcomeOfferIn .6s cubic-bezier(.22,.75,.25,1) forwards;
+    animation-delay: calc(1.85s + (var(--offer-index, 0) * .18s));
+  }
+  @keyframes daymarWelcomeOfferIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
 .daymar-policy-open { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; min-height:54px; padding:18px 0; border:0; border-bottom:1px solid #e5dcd8; background:transparent; color:#33252c; text-align:left; font:500 14px/1.5 'Outfit',sans-serif; cursor:pointer; }
@@ -14310,7 +14323,27 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   const animateWelcomeText = () => {
     clearTimeout(typingTimer);
     const targets = typingTargets();
+    const offers = popup.querySelector('.daymar-welcome-offers');
+    const offerRows = offers ? [...offers.querySelectorAll('p')] : [];
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (offers) {
+      offers.classList.remove('is-animating');
+      offerRows.forEach((row, index) => {
+        row.style.setProperty('--offer-index', index);
+        row.style.animation = 'none';
+      });
+      void offers.offsetWidth;
+      offerRows.forEach(row => { row.style.animation = ''; });
+      if (reduceMotion) {
+        offers.classList.remove('is-animating');
+        offerRows.forEach(row => {
+          row.style.opacity = '1';
+          row.style.transform = 'none';
+        });
+      } else {
+        offers.classList.add('is-animating');
+      }
+    }
     targets.forEach((element, lineIndex) => {
       const text = element.textContent.trim();
       element.setAttribute('aria-label', text);

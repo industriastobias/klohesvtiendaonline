@@ -13989,6 +13989,10 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
                     <div class="hero-gallery-empty" data-gallery-empty role="status">Cargando imágenes…</div>
                     <span class="hero-gallery-sr" id="daymarGalleryInstructions">Desliza hacia la izquierda o la derecha para cambiar de foto. En computadora puedes arrastrar con el mouse o usar las teclas de flecha al enfocar el carrusel.</span>
                     <span class="hero-gallery-sr" data-gallery-live aria-live="polite"></span>
+                    <button type="button" class="hero-gallery-audio-toggle" data-gallery-audio-toggle hidden aria-pressed="false" aria-label="Activar sonido del video">
+                        <i class="fas fa-volume-mute" aria-hidden="true"></i>
+                        <span>Activar sonido</span>
+                    </button>
                 </div>
             </div>
             <div class="atelier-hero-note"><span>El arte de regalar</span><strong>Pequeños detalles.<br>Grandes momentos.</strong><small>San Salvador / El Salvador</small></div>
@@ -14112,7 +14116,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
                         </div>
                         <div class="hour-item">
                             <strong>Sabado - Domingo</strong>
-                            8:00 AM - 8:00 PM
+                            7:00 AM - 10:00 PM
                         </div>
                     </div>
                 </div>
@@ -16354,6 +16358,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
 
   const live = gallery.querySelector('[data-gallery-live]');
   const empty = gallery.querySelector('[data-gallery-empty]');
+  const audioToggle = gallery.querySelector('[data-gallery-audio-toggle]');
   const frame = gallery.closest('.atelier-hero-art');
   let slides = [];
   let current = 0;
@@ -16361,6 +16366,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   let gesture = null;
   let timer = null;
   let currentMediaRatio = 1;
+  let audioEnabled = false;
   const videoAdvanceTimers = new WeakMap();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -16387,13 +16393,14 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
 
   const playVideo = (video) => {
     if (!video || video.tagName !== 'VIDEO') return;
-    video.muted = true;
-    video.defaultMuted = true;
-    video.volume = 0;
+    video.muted = !audioEnabled;
+    video.defaultMuted = !audioEnabled;
+    video.volume = audioEnabled ? 1 : 0;
     video.autoplay = true;
     video.controls = false;
     video.removeAttribute('controls');
-    video.setAttribute('muted', '');
+    if (audioEnabled) video.removeAttribute('muted');
+    else video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
     video.setAttribute('preload', 'auto');
@@ -16405,6 +16412,32 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     setTimeout(attempt, 1500);
     setTimeout(attempt, 3000);
   };
+
+  const updateAudioToggle = () => {
+    const active = slides[current];
+    const isVideo = active?.tagName === 'VIDEO';
+    if (!audioToggle) return;
+    audioToggle.hidden = !isVideo;
+    if (!isVideo) return;
+    const isEnabled = audioEnabled && !active.muted;
+    audioToggle.setAttribute('aria-pressed', String(isEnabled));
+    audioToggle.setAttribute('aria-label', isEnabled ? 'Silenciar video' : 'Activar sonido del video');
+    audioToggle.innerHTML = `<i class="fas ${isEnabled ? 'fa-volume-high' : 'fa-volume-mute'}" aria-hidden="true"></i><span>${isEnabled ? 'Silenciar' : 'Activar sonido'}</span>`;
+  };
+  if (audioToggle) {
+    audioToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const active = slides[current];
+      if (active?.tagName !== 'VIDEO') return;
+      audioEnabled = !audioEnabled;
+      active.muted = !audioEnabled;
+      active.defaultMuted = !audioEnabled;
+      active.volume = audioEnabled ? 1 : 0;
+      updateAudioToggle();
+      active.play().catch(() => {});
+    });
+  }
 
   const scheduleVideoAdvance = (video) => {
     clearTimeout(videoAdvanceTimers.get(video));
@@ -16461,6 +16494,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     });
     live.textContent = `Imagen ${current + 1} de ${slides.length}`;
     const active = slides[current];
+    updateAudioToggle();
     if (active.tagName === 'VIDEO') {
       playVideo(active);
       syncFrameToMedia(active);
@@ -16558,11 +16592,11 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   };
 
   gallery.addEventListener('pointerdown', (event) => {
+    if (event.target.closest?.('[data-gallery-audio-toggle]')) return;
     if (!event.isPrimary) { finishGesture(); return; }
     if (slides.length < 2 || (event.pointerType === 'mouse' && event.button !== 0)) return;
     const active = slides[current];
     if (active?.tagName === 'VIDEO') {
-      active.muted = true;
       active.play().catch(() => {});
     }
     stopAuto();
@@ -16641,9 +16675,9 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
           slide.loop = false;
           slide.playsInline = true;
           slide.preload = index === 0 ? 'auto' : 'metadata';
-          slide.muted = true;
-          slide.defaultMuted = true;
-          slide.volume = 0;
+          slide.muted = !audioEnabled;
+          slide.defaultMuted = !audioEnabled;
+          slide.volume = audioEnabled ? 1 : 0;
           slide.setAttribute('autoplay', '');
           slide.setAttribute('muted', '');
           slide.setAttribute('playsinline', '');
@@ -18876,6 +18910,33 @@ const firebaseConfig = {
     }
 </style>
 <style id="daymar-first-carousel-video">
+    #daymarSummer .hero-gallery-audio-toggle {
+        position: absolute;
+        z-index: 5;
+        right: 22px;
+        bottom: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 30px;
+        padding: 7px 10px;
+        border: 1px solid rgba(255,255,255,.72);
+        background: rgba(26,23,23,.78);
+        color: #fff;
+        cursor: pointer;
+        font: inherit;
+        font-size: 9px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        transition: background .25s ease, color .25s ease;
+    }
+    #daymarSummer .hero-gallery-audio-toggle[hidden] { display: none !important; }
+    #daymarSummer .hero-gallery-audio-toggle:hover,
+    #daymarSummer .hero-gallery-audio-toggle:focus-visible {
+        background: #fff;
+        color: var(--ink, #1a1717);
+        outline: none;
+    }
     #daymarSummer .hero-gallery-video {
         display: block !important;
         object-fit: contain !important;
@@ -18888,6 +18949,13 @@ const firebaseConfig = {
     #daymarSummer .hero-gallery-video::-webkit-media-controls-play-button {
         display: none !important;
         -webkit-appearance: none !important;
+    }
+    @media (max-width: 900px) {
+        #daymarSummer .hero-gallery-audio-toggle {
+            right: 15px;
+            bottom: 14px;
+            font-size: 8px;
+        }
     }
 </style>
 <style id="daymar-dynamic-carousel-ratio">

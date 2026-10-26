@@ -9278,6 +9278,14 @@ html.device-ios .cart-modal .remove-item {
     #newsletterOverlay,
     #newsletterPopup * {
       transition: none !important;
+      animation: none !important;
+    }
+    #newsletterPopup .daymar-typing-char {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    #newsletterPopup .daymar-typing-target::after {
+      display: none !important;
     }
   }
 </style>
@@ -10187,6 +10195,29 @@ html body #daymarLoginDialog .daymar-tier-badge { display:inline-block; margin:0
 html body #daymarLoginDialog .daymar-tier-badge.is-premium { border-color:#d7c0cb; color:#662D42; background:#f5eaf0; }
 html body #daymarLoginDialog .daymar-auth-status:empty { display:none; }
 .daymar-welcome-tier { margin:0 0 12px; font:600 12px/1.5 'Outfit',sans-serif; letter-spacing:.16em; color:inherit; }
+  #newsletterPopup .daymar-typing-target .daymar-typing-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(.18em);
+    animation: daymarWelcomeTypeChar .045s ease-out forwards;
+    animation-delay: var(--typing-char-delay, 0ms);
+  }
+  #newsletterPopup .daymar-typing-target.is-typing::after {
+    content: '';
+    display: inline-block;
+    height: 1em;
+    margin-left: 3px;
+    border-right: 2px solid #C9D66A;
+    vertical-align: -.12em;
+    animation: daymarWelcomeCaret .72s step-end infinite;
+  }
+  @keyframes daymarWelcomeTypeChar {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes daymarWelcomeCaret {
+    50% { opacity: 0; }
+  }
+
 .daymar-policy-open { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; min-height:54px; padding:18px 0; border:0; border-bottom:1px solid #e5dcd8; background:transparent; color:#33252c; text-align:left; font:500 14px/1.5 'Outfit',sans-serif; cursor:pointer; }
 .daymar-policy-plus { flex:0 0 18px; font-size:21px; color:#662D42; }
 .daymar-policy-overlay { position:fixed; inset:0; z-index:12000; display:none; place-items:center; padding:24px; background:rgba(27,20,24,.52); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px); }
@@ -14285,6 +14316,40 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
   if (!popup || !overlay || !closeButton) return;
   let previousFocus = null;
   let welcomeTimer = null;
+  let typingTimer = null;
+  const typingTargets = () => [
+    document.getElementById('daymarWelcomeTitle'),
+    popup.querySelector('.daymar-welcome-subtitle'),
+    document.getElementById('daymarWelcomeTier')
+  ].filter(Boolean);
+  const animateWelcomeText = () => {
+    clearTimeout(typingTimer);
+    const targets = typingTargets();
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    targets.forEach((element, lineIndex) => {
+      const text = element.textContent.trim();
+      element.setAttribute('aria-label', text);
+      element.classList.remove('is-typing');
+      if (reduceMotion) {
+        element.textContent = text;
+        return;
+      }
+      element.replaceChildren(...[...text].map((character, charIndex) => {
+        const span = document.createElement('span');
+        span.className = 'daymar-typing-char';
+        span.setAttribute('aria-hidden', 'true');
+        span.style.setProperty('--typing-char-delay', `${lineIndex * 520 + charIndex * 42}ms`);
+        span.textContent = character === ' ' ? '\u00a0' : character;
+        return span;
+      }));
+      element.style.setProperty('--typing-line-delay', `${lineIndex * 520}ms`);
+      element.classList.add('is-typing');
+    });
+    const longest = Math.max(...targets.map(element => element.textContent.trim().length), 0);
+    typingTimer = window.setTimeout(() => {
+      targets.forEach(element => element.classList.remove('is-typing'));
+    }, 1040 + longest * 42);
+  };
 
   const focusables = () => [...popup.querySelectorAll('button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
     .filter(element => !element.disabled && element.getClientRects().length);
@@ -14300,6 +14365,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     overlay.classList.add('active');
     document.documentElement.classList.add('daymar-welcome-open');
     requestAnimationFrame(() => {
+      animateWelcomeText();
       if (popup.classList.contains('active')) closeButton.focus({ preventScroll: true });
     });
   };
@@ -14319,7 +14385,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     }
   };
 
-  window.daymarWelcome = { show, close };
+  window.daymarWelcome = { show, close, animateText: animateWelcomeText };
   closeButton.addEventListener('click', close);
   overlay.addEventListener('click', close);
   document.addEventListener('keydown', event => {
@@ -16830,6 +16896,9 @@ const firebaseConfig = {
     $('daymarLoginDescription').textContent = tier;
     $('daymarLoginDescription').classList.toggle('is-premium', isMember);
     $('daymarWelcomeTier').textContent = tier;
+    if ($('newsletterPopup')?.classList.contains('active')) {
+      window.daymarWelcome?.animateText?.();
+    }
     const previewTier = $('daymarPreviewTier');
     if (previewTier) {
       previewTier.textContent = tier;

@@ -14329,6 +14329,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     targets.forEach((element, lineIndex) => {
       const text = element.textContent.trim();
       element.setAttribute('aria-label', text);
+      element.classList.add('daymar-typing-target');
       element.classList.remove('is-typing');
       if (reduceMotion) {
         element.textContent = text;

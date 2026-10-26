@@ -9194,7 +9194,7 @@ html.device-ios .cart-modal .remove-item {
   }
 
   #newsletterPopup .daymar-welcome-wheel-area {
-    margin: 0 auto 24px;
+    margin: 8px auto 0;
     text-align: center;
   }
   #newsletterPopup .daymar-welcome-wheel-hint {
@@ -9206,7 +9206,7 @@ html.device-ios .cart-modal .remove-item {
   }
   #newsletterPopup .daymar-wheel-wrap {
     position: relative;
-    width: min(220px, 62vw);
+    width: min(210px, 60vw);
     aspect-ratio: 1;
     margin: 0 auto 14px;
   }
@@ -9230,7 +9230,7 @@ html.device-ios .cart-modal .remove-item {
     height: 100%;
     border: 7px solid #EDE8DB;
     border-radius: 50%;
-    background: conic-gradient(#C9D66A 0deg 90deg, #EDE8DB 90deg 180deg, #9A536B 180deg 270deg, #C9D66A 270deg 360deg);
+    background: conic-gradient(#C9D66A 0deg 90deg, #EDE8DB 90deg 180deg, #9A536B 180deg 270deg, #3F2A35 270deg 360deg);
     box-shadow: 0 10px 22px rgba(26,23,23,.22), inset 0 0 0 2px rgba(26,23,23,.18);
     transform: rotate(0deg);
     transition: transform 1.8s cubic-bezier(.12,.72,.18,1);
@@ -9252,10 +9252,10 @@ html.device-ios .cart-modal .remove-item {
     line-height: 1;
     transform-origin: 0 0;
   }
-  #newsletterPopup .daymar-wheel-label:nth-child(1) { transform: rotate(45deg) translate(12%, -50%); }
-  #newsletterPopup .daymar-wheel-label:nth-child(2) { transform: rotate(135deg) translate(12%, -50%); color: #662D42; }
+  #newsletterPopup .daymar-wheel-label:nth-child(1) { transform: rotate(45deg) translate(12%, -50%); color: #1A1717; }
+  #newsletterPopup .daymar-wheel-label:nth-child(2) { transform: rotate(135deg) translate(12%, -50%); color: #1A1717; }
   #newsletterPopup .daymar-wheel-label:nth-child(3) { transform: rotate(225deg) translate(12%, -50%); color: #EDE8DB; }
-  #newsletterPopup .daymar-wheel-label:nth-child(4) { transform: rotate(315deg) translate(12%, -50%); }
+  #newsletterPopup .daymar-wheel-label:nth-child(4) { transform: rotate(315deg) translate(12%, -50%); color: #EDE8DB; }
   #newsletterPopup .daymar-wheel-center {
     position: absolute;
     z-index: 2;
@@ -9357,9 +9357,7 @@ html.device-ios .cart-modal .remove-item {
       gap: 8px;
       padding: 12px 0;
     }
-    #newsletterPopup .daymar-welcome-wheel-area { margin-bottom: 18px; }
     #newsletterPopup .daymar-wheel-wrap { width: min(190px, 58vw); }
-    #newsletterPopup .daymar-wheel-note { font-size: 9px !important; }
   }
 
   @media (max-height: 540px) {
@@ -14367,18 +14365,14 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
 
     <!-- Newsletter Popup -->
     <div class="newsletter-overlay" id="newsletterOverlay"></div>
-    <div class="newsletter-popup" id="newsletterPopup" role="dialog" aria-modal="true" aria-labelledby="daymarWelcomeTitle" aria-describedby="daymarWelcomeOffers" tabindex="-1">
+    <div class="newsletter-popup" id="newsletterPopup" role="dialog" aria-modal="true" aria-labelledby="daymarWelcomeTitle" aria-describedby="daymarWheelResult" tabindex="-1">
         <svg class="daymar-welcome-shape" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <path fill="#662D42" d="M 52 176 C 105 48 217 54 340 72 C 463 96 550 54 675 32 C 830 4 956 82 976 235 C 1000 384 953 562 835 642 C 753 698 687 674 612 640 C 527 602 468 610 375 648 C 244 702 111 678 57 551 C 14 449 9 275 52 176 Z"/>
         </svg>
         <div class="daymar-welcome-content">
             <button class="newsletter-close" type="button" aria-label="Cerrar bienvenida"><span aria-hidden="true">×</span></button>
-            <p class="daymar-welcome-season">DAYMAR / EL SALVADOR</p>
-            <div class="holiday-welcome-star" aria-hidden="true"><i class="fas fa-gift"></i></div><h3 id="daymarWelcomeTitle">Bienvenido</h3>
-            <p class="daymar-welcome-subtitle">Tu próximo detalle empieza aquí.</p>
-            <p id="daymarWelcomeTier" class="daymar-welcome-tier">BASIC</p>
-            <div class="daymar-welcome-wheel-area" aria-labelledby="daymarWheelHint">
-                <p id="daymarWheelHint" class="daymar-welcome-wheel-hint">Pulsa y descubre tu porcentaje sorpresa</p>
+            <h3 id="daymarWelcomeTitle">Bienvenido</h3>
+            <div class="daymar-welcome-wheel-area">
                 <div class="daymar-wheel-wrap">
                     <div class="daymar-wheel" data-daymar-wheel role="img" aria-label="Ruleta con porcentajes de 20, 35, 40 y 50 por ciento">
                         <span class="daymar-wheel-label">20%</span>
@@ -14389,13 +14383,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
                     </div>
                 </div>
                 <button type="button" class="daymar-wheel-spin" data-daymar-wheel-spin>Pulsa para girar</button>
-                <p class="daymar-wheel-result" data-daymar-wheel-result aria-live="polite"></p>
-                <p class="daymar-wheel-note">La ruleta es una dinámica de bienvenida. Las promociones oficiales de la tienda se mantienen.</p>
-            </div>
-            <div class="daymar-welcome-offers" id="daymarWelcomeOffers">
-                <p><span>Relojes</span><strong>40% de descuento</strong></p>
-                <p><span>Oro y plata</span><strong>2% de descuento</strong></p>
-                <p><span>Los demás accesorios</span><strong>50% de descuento</strong></p>
+                <p id="daymarWheelResult" class="daymar-wheel-result" data-daymar-wheel-result aria-live="polite"></p>
             </div>
         </div>
     </div>
@@ -16982,7 +16970,8 @@ const firebaseConfig = {
     if (!eligible && $('cartExtraDialog').open) $('cartExtraDialog').close();
     $('daymarLoginDescription').textContent = tier;
     $('daymarLoginDescription').classList.toggle('is-premium', isMember);
-    $('daymarWelcomeTier').textContent = tier;
+    const welcomeTier = $('daymarWelcomeTier');
+    if (welcomeTier) welcomeTier.textContent = tier;
     const previewTier = $('daymarPreviewTier');
     if (previewTier) {
       previewTier.textContent = tier;

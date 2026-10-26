@@ -9206,9 +9206,14 @@ html.device-ios .cart-modal .remove-item {
   }
   #newsletterPopup .daymar-wheel-wrap {
     position: relative;
-    width: min(210px, 60vw);
+    width: min(222px, 64vw);
     aspect-ratio: 1;
-    margin: 0 auto 14px;
+    margin: 0 auto 16px;
+    padding: 5px;
+    border: 1px solid rgba(201,214,106,.62);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(237,232,219,.2), transparent 66%);
+    filter: drop-shadow(0 13px 18px rgba(26,23,23,.22));
   }
   #newsletterPopup .daymar-wheel-wrap::after {
     content: '';
@@ -9220,21 +9225,33 @@ html.device-ios .cart-modal .remove-item {
     height: 0;
     border-left: 9px solid transparent;
     border-right: 9px solid transparent;
-    border-top: 18px solid #C9D66A;
+    border-top: 19px solid #C9D66A;
     transform: translateX(-50%);
-    filter: drop-shadow(0 2px 3px rgba(26,23,23,.25));
+    filter: drop-shadow(0 2px 3px rgba(26,23,23,.35));
   }
   #newsletterPopup .daymar-wheel {
     position: relative;
     width: 100%;
     height: 100%;
-    border: 7px solid #EDE8DB;
+    border: 8px solid #EDE8DB;
+    outline: 2px solid rgba(26,23,23,.25);
     border-radius: 50%;
-    background: conic-gradient(#C9D66A 0deg 90deg, #EDE8DB 90deg 180deg, #9A536B 180deg 270deg, #3F2A35 270deg 360deg);
-    box-shadow: 0 10px 22px rgba(26,23,23,.22), inset 0 0 0 2px rgba(26,23,23,.18);
+    background: radial-gradient(circle at 30% 22%, rgba(255,255,255,.28), transparent 28%), conic-gradient(#C9D66A 0deg 88deg, #662D42 88deg 90deg, #EDE8DB 90deg 178deg, #662D42 178deg 180deg, #9A536B 180deg 268deg, #662D42 268deg 270deg, #3F2A35 270deg 358deg, #C9D66A 358deg 360deg);
+    background-blend-mode: screen, normal;
+    box-shadow: 0 10px 22px rgba(26,23,23,.22), inset 0 0 0 3px rgba(26,23,23,.2), inset 0 0 0 10px rgba(237,232,219,.12);
     transform: rotate(0deg);
     transition: transform 1.8s cubic-bezier(.12,.72,.18,1);
     overflow: hidden;
+  }
+  #newsletterPopup .daymar-wheel::before {
+    content: '';
+    position: absolute;
+    inset: 11px;
+    z-index: 0;
+    border: 1px solid rgba(237,232,219,.55);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(26,23,23,.18);
+    pointer-events: none;
   }
   #newsletterPopup .daymar-wheel.is-spinning { transition-duration: 2.4s; }
   #newsletterPopup .daymar-wheel-label {
@@ -9250,6 +9267,8 @@ html.device-ios .cart-modal .remove-item {
     font-size: clamp(15px, 4vw, 20px);
     font-weight: 800;
     line-height: 1;
+    letter-spacing: -.04em;
+    text-shadow: 0 1px 1px rgba(255,255,255,.18);
     transform-origin: 0 0;
   }
   #newsletterPopup .daymar-wheel-label:nth-child(1) { transform: rotate(45deg) translate(12%, -50%); color: #1A1717; }
@@ -9260,29 +9279,40 @@ html.device-ios .cart-modal .remove-item {
     position: absolute;
     z-index: 2;
     inset: 50% auto auto 50%;
-    width: 30px;
-    height: 30px;
-    border: 4px solid #EDE8DB;
+    width: 42px;
+    height: 42px;
+    border: 5px solid #EDE8DB;
     border-radius: 50%;
-    background: #662D42;
+    background: radial-gradient(circle at 35% 30%, #9A536B, #662D42 62%, #3F2A35);
     transform: translate(-50%, -50%);
-    box-shadow: 0 2px 5px rgba(26,23,23,.28);
+    box-shadow: 0 3px 7px rgba(26,23,23,.35), inset 0 0 0 2px rgba(201,214,106,.65);
+  }
+  #newsletterPopup .daymar-wheel-center::after {
+    content: '✦';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #C9D66A;
+    font-size: 15px;
   }
   #newsletterPopup .daymar-wheel-spin {
-    min-height: 38px;
-    padding: 9px 18px;
-    border: 1px solid rgba(201,214,106,.75);
+    min-height: 40px;
+    padding: 10px 22px;
+    border: 1px solid rgba(201,214,106,.9);
     border-radius: 999px;
-    background: #C9D66A;
+    background: linear-gradient(135deg, #C9D66A, #E4E9A4);
     color: #1A1717;
     cursor: pointer;
     font: 700 11px/1 'Poppins', sans-serif;
     letter-spacing: .12em;
     text-transform: uppercase;
-    transition: transform .2s ease, background .2s ease, opacity .2s ease;
+    box-shadow: 0 5px 0 rgba(26,23,23,.22), 0 9px 16px rgba(26,23,23,.18);
+    transition: transform .2s ease, background .2s ease, opacity .2s ease, box-shadow .2s ease;
   }
   #newsletterPopup .daymar-wheel-spin:hover,
-  #newsletterPopup .daymar-wheel-spin:focus-visible { background: #EDE8DB; transform: translateY(-1px); outline: none; }
+  #newsletterPopup .daymar-wheel-spin:focus-visible { background: linear-gradient(135deg, #EDE8DB, #fff); transform: translateY(-2px); box-shadow: 0 6px 0 rgba(26,23,23,.22), 0 11px 18px rgba(26,23,23,.2); outline: none; }
+  #newsletterPopup .daymar-wheel-spin:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(26,23,23,.22), 0 5px 10px rgba(26,23,23,.18); }
   #newsletterPopup .daymar-wheel-spin:disabled { cursor: wait; opacity: .65; }
   #newsletterPopup .daymar-wheel-result {
     min-height: 20px;
@@ -9357,7 +9387,7 @@ html.device-ios .cart-modal .remove-item {
       gap: 8px;
       padding: 12px 0;
     }
-    #newsletterPopup .daymar-wheel-wrap { width: min(190px, 58vw); }
+    #newsletterPopup .daymar-wheel-wrap { width: min(200px, 60vw); }
   }
 
   @media (max-height: 540px) {

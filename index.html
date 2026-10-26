@@ -9206,110 +9206,80 @@ html.device-ios .cart-modal .remove-item {
   }
   #newsletterPopup .daymar-wheel-wrap {
     position: relative;
-    width: min(210px, 60vw);
+    width: min(224px, 62vw);
     aspect-ratio: 1;
-    margin: 0 auto 15px;
-    padding: 8px;
-    border: 2px solid #C9D66A;
-    border-radius: 50%;
-    background: #662D42;
-    filter: drop-shadow(0 11px 15px rgba(26,23,23,.24));
+    margin: 10px auto 16px;
+    display: grid;
+    place-items: center;
   }
   #newsletterPopup .daymar-wheel-wrap::before {
     content: '';
     position: absolute;
-    inset: -5px;
-    border: 1px dashed rgba(201,214,106,.75);
+    inset: 1px;
+    border: 1px solid rgba(201,214,106,.7);
     border-radius: 50%;
-    opacity: .9;
+    box-shadow: 0 12px 24px rgba(26,23,23,.26), 0 0 0 7px rgba(237,232,219,.14);
     pointer-events: none;
   }
   #newsletterPopup .daymar-wheel-wrap::after {
     content: '';
     position: absolute;
-    z-index: 3;
-    top: -5px;
+    z-index: 4;
+    top: -2px;
     left: 50%;
     width: 0;
     height: 0;
-    border-left: 9px solid transparent;
-    border-right: 9px solid transparent;
-    border-top: 16px solid #C9D66A;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 20px solid #C9D66A;
     transform: translateX(-50%);
     filter: drop-shadow(0 2px 3px rgba(26,23,23,.35));
   }
   #newsletterPopup .daymar-wheel {
     position: relative;
+    z-index: 1;
+    display: block;
     width: 100%;
     height: 100%;
-    border: 3px solid #EDE8DB;
-    border-radius: 50%;
-    background: conic-gradient(#C9D66A 0deg 88deg, #662D42 88deg 90deg, #EDE8DB 90deg 178deg, #662D42 178deg 180deg, #9A536B 180deg 268deg, #662D42 268deg 270deg, #3F2A35 270deg 358deg, #662D42 358deg 360deg);
-    box-shadow: 0 4px 9px rgba(26,23,23,.18), inset 0 0 0 1px rgba(26,23,23,.25);
-    transform: rotate(0deg);
-    transition: transform 1.8s cubic-bezier(.12,.72,.18,1);
-    overflow: hidden;
-  }
-  #newsletterPopup .daymar-wheel::before {
-    content: '';
-    display: block;
-    position: absolute;
-    inset: 9px;
-    z-index: 0;
-    border: 1px solid rgba(237,232,219,.5);
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 1px rgba(26,23,23,.14);
-    pointer-events: none;
+    overflow: visible;
+    transform-origin: 50% 50%;
+    transition: transform 2.4s cubic-bezier(.12,.72,.18,1);
   }
   #newsletterPopup .daymar-wheel.is-spinning { transition-duration: 2.4s; }
+  #newsletterPopup .daymar-wheel-segment {
+    stroke: #662D42;
+    stroke-width: 3;
+    vector-effect: non-scaling-stroke;
+  }
+  #newsletterPopup .daymar-wheel-segment:nth-of-type(1) { fill: #C9D66A; }
+  #newsletterPopup .daymar-wheel-segment:nth-of-type(2) { fill: #EDE8DB; }
+  #newsletterPopup .daymar-wheel-segment:nth-of-type(3) { fill: #B86A84; }
+  #newsletterPopup .daymar-wheel-segment:nth-of-type(4) { fill: #3F2A35; }
   #newsletterPopup .daymar-wheel-label {
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    top: 50%;
-    width: auto;
-    height: auto;
-    display: block;
-    font-size: clamp(12px, 3.2vw, 17px);
+    fill: #1A1717;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
     font-weight: 800;
-    line-height: 1;
-    letter-spacing: -.05em;
-    white-space: nowrap;
-    text-shadow: 0 1px 1px rgba(255,255,255,.18);
+    letter-spacing: -.04em;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    paint-order: stroke;
+    stroke: rgba(255,255,255,.18);
+    stroke-width: 1px;
   }
-  /* Cada número queda dentro del mismo segmento que señala el puntero. */
-  #newsletterPopup .daymar-wheel-label:nth-child(1) { left: 63%; top: 37%; transform: translate(-50%, -50%); color: #1A1717; background: rgba(237,232,219,.92); }
-  #newsletterPopup .daymar-wheel-label:nth-child(2) { left: 63%; top: 63%; transform: translate(-50%, -50%); color: #1A1717; background: rgba(201,214,106,.94); }
-  #newsletterPopup .daymar-wheel-label:nth-child(3) { left: 37%; top: 63%; transform: translate(-50%, -50%); color: #EDE8DB; background: rgba(26,23,23,.3); border-color: rgba(237,232,219,.65); }
-  #newsletterPopup .daymar-wheel-label:nth-child(4) { left: 37%; top: 37%; transform: translate(-50%, -50%); color: #EDE8DB; background: rgba(26,23,23,.3); border-color: rgba(237,232,219,.65); }
-  #newsletterPopup .daymar-wheel-label:nth-child(-n+4) {
-    min-width: 38px;
-    padding: 5px 6px;
-    border: 1px solid rgba(26,23,23,.2);
-    border-radius: 999px;
-    box-shadow: 0 2px 5px rgba(26,23,23,.2);
-    text-align: center;
+  #newsletterPopup .daymar-wheel-label.dark { fill: #EDE8DB; stroke: rgba(26,23,23,.3); }
+  #newsletterPopup .daymar-wheel-center-ring {
+    fill: #662D42;
+    stroke: #EDE8DB;
+    stroke-width: 5;
   }
-  #newsletterPopup .daymar-wheel-center {
-    position: absolute;
-    z-index: 2;
-    inset: 50% auto auto 50%;
-    width: 42px;
-    height: 42px;
-    border: 4px solid #EDE8DB;
-    border-radius: 50%;
-    background: #662D42;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 3px 7px rgba(26,23,23,.3), inset 0 0 0 2px rgba(201,214,106,.7);
-  }
-  #newsletterPopup .daymar-wheel-center::after {
-    content: '✦';
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    color: #C9D66A;
-    font-size: 15px;
+  #newsletterPopup .daymar-wheel-center-mark {
+    fill: #C9D66A;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: middle;
   }
   #newsletterPopup .daymar-wheel-spin {
     min-height: 40px;
@@ -14423,13 +14393,18 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             <h3 id="daymarWelcomeTitle">Bienvenido</h3>
             <div class="daymar-welcome-wheel-area">
                 <div class="daymar-wheel-wrap">
-                    <div class="daymar-wheel" data-daymar-wheel role="img" aria-label="Ruleta con porcentajes de 20, 35, 40 y 50 por ciento">
-                        <span class="daymar-wheel-label">20%</span>
-                        <span class="daymar-wheel-label">35%</span>
-                        <span class="daymar-wheel-label">40%</span>
-                        <span class="daymar-wheel-label">50%</span>
-                        <span class="daymar-wheel-center" aria-hidden="true"></span>
-                    </div>
+                    <svg class="daymar-wheel" data-daymar-wheel viewBox="0 0 240 240" role="img" aria-label="Ruleta con porcentajes de 20, 35, 40 y 50 por ciento">
+                        <path class="daymar-wheel-segment" d="M120 120 L120 16 A104 104 0 0 1 224 120 Z" />
+                        <path class="daymar-wheel-segment" d="M120 120 L224 120 A104 104 0 0 1 120 224 Z" />
+                        <path class="daymar-wheel-segment" d="M120 120 L120 224 A104 104 0 0 1 16 120 Z" />
+                        <path class="daymar-wheel-segment" d="M120 120 L16 120 A104 104 0 0 1 120 16 Z" />
+                        <text class="daymar-wheel-label" x="174" y="66">20%</text>
+                        <text class="daymar-wheel-label" x="174" y="174">35%</text>
+                        <text class="daymar-wheel-label dark" x="66" y="174">40%</text>
+                        <text class="daymar-wheel-label dark" x="66" y="66">50%</text>
+                        <circle class="daymar-wheel-center-ring" cx="120" cy="120" r="25" />
+                        <text class="daymar-wheel-center-mark" x="120" y="121">✦</text>
+                    </svg>
                 </div>
                 <button type="button" class="daymar-wheel-spin" data-daymar-wheel-spin>Pulsa para girar</button>
                 <p id="daymarWheelResult" class="daymar-wheel-result" data-daymar-wheel-result aria-live="polite"></p>
@@ -19879,13 +19854,14 @@ const firebaseConfig = {
     overflow-x: hidden !important;
   }
   html.daymar-brand #newsletterPopup .daymar-wheel-wrap {
-    width: min(172px, 52vw) !important;
+    width: min(178px, 54vw) !important;
     margin-bottom: 10px !important;
   }
   html.daymar-brand #newsletterPopup .daymar-wheel-label {
-    min-width: 32px !important;
-    padding: 4px 4px !important;
-    font-size: 11px !important;
+    font-size: 15px !important;
+  }
+  html.daymar-brand #newsletterPopup .daymar-wheel-center-mark {
+    font-size: 16px !important;
   }
   html.daymar-brand #newsletterPopup .daymar-wheel-spin {
     min-height: 35px !important;

@@ -9206,34 +9206,33 @@ html.device-ios .cart-modal .remove-item {
   }
   #newsletterPopup .daymar-wheel-wrap {
     position: relative;
-    width: min(224px, 62vw);
+    width: min(236px, 64vw);
     aspect-ratio: 1;
-    margin: 10px auto 16px;
+    margin: 8px auto 16px;
     display: grid;
     place-items: center;
   }
   #newsletterPopup .daymar-wheel-wrap::before {
     content: '';
     position: absolute;
-    inset: 1px;
-    border: 1px solid rgba(201,214,106,.7);
+    inset: -3px;
+    border: 2px solid #C9D66A;
     border-radius: 50%;
-    box-shadow: 0 12px 24px rgba(26,23,23,.26), 0 0 0 7px rgba(237,232,219,.14);
+    box-shadow: 0 0 0 7px rgba(237,232,219,.16), 0 14px 28px rgba(26,23,23,.3);
     pointer-events: none;
   }
   #newsletterPopup .daymar-wheel-wrap::after {
     content: '';
     position: absolute;
-    z-index: 4;
-    top: -2px;
+    z-index: 5;
+    top: -7px;
     left: 50%;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 20px solid #C9D66A;
+    width: 22px;
+    height: 28px;
+    border-radius: 12px 12px 4px 4px;
+    background: linear-gradient(#EDE8DB 0 48%, #C9D66A 49% 100%);
     transform: translateX(-50%);
-    filter: drop-shadow(0 2px 3px rgba(26,23,23,.35));
+    filter: drop-shadow(0 3px 3px rgba(26,23,23,.35));
   }
   #newsletterPopup .daymar-wheel {
     position: relative;
@@ -9243,38 +9242,57 @@ html.device-ios .cart-modal .remove-item {
     height: 100%;
     overflow: visible;
     transform-origin: 50% 50%;
-    transition: transform 2.4s cubic-bezier(.12,.72,.18,1);
+    transition: transform 2.5s cubic-bezier(.12,.72,.18,1);
   }
-  #newsletterPopup .daymar-wheel.is-spinning { transition-duration: 2.4s; }
+  #newsletterPopup .daymar-wheel.is-spinning { transition-duration: 2.5s; }
+  #newsletterPopup .daymar-wheel-outer {
+    fill: #662D42;
+    stroke: #EDE8DB;
+    stroke-width: 6;
+  }
+  #newsletterPopup .daymar-wheel-inner {
+    fill: none;
+    stroke: rgba(201,214,106,.9);
+    stroke-width: 3;
+  }
   #newsletterPopup .daymar-wheel-segment {
     stroke: #662D42;
-    stroke-width: 3;
+    stroke-width: 2.5;
     vector-effect: non-scaling-stroke;
   }
-  #newsletterPopup .daymar-wheel-segment:nth-of-type(1) { fill: #C9D66A; }
-  #newsletterPopup .daymar-wheel-segment:nth-of-type(2) { fill: #EDE8DB; }
-  #newsletterPopup .daymar-wheel-segment:nth-of-type(3) { fill: #B86A84; }
-  #newsletterPopup .daymar-wheel-segment:nth-of-type(4) { fill: #3F2A35; }
+  #newsletterPopup .daymar-wheel-segment.one { fill: url(#daymarWheelSage); }
+  #newsletterPopup .daymar-wheel-segment.two { fill: url(#daymarWheelCream); }
+  #newsletterPopup .daymar-wheel-segment.three { fill: url(#daymarWheelRose); }
+  #newsletterPopup .daymar-wheel-segment.four { fill: url(#daymarWheelPlum); }
+  #newsletterPopup .daymar-wheel-light {
+    fill: #EDE8DB;
+    stroke: #C9D66A;
+    stroke-width: 2;
+  }
+  #newsletterPopup .daymar-wheel-badge {
+    stroke: #EDE8DB;
+    stroke-width: 2;
+  }
+  #newsletterPopup .daymar-wheel-badge.light { fill: #EDE8DB; }
+  #newsletterPopup .daymar-wheel-badge.sage { fill: #C9D66A; }
+  #newsletterPopup .daymar-wheel-badge.dark { fill: #3F2A35; }
   #newsletterPopup .daymar-wheel-label {
     fill: #1A1717;
     font-family: 'Poppins', sans-serif;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 800;
-    letter-spacing: -.04em;
+    letter-spacing: -.05em;
     text-anchor: middle;
     dominant-baseline: middle;
-    paint-order: stroke;
-    stroke: rgba(255,255,255,.18);
-    stroke-width: 1px;
   }
-  #newsletterPopup .daymar-wheel-label.dark { fill: #EDE8DB; stroke: rgba(26,23,23,.3); }
+  #newsletterPopup .daymar-wheel-label.dark { fill: #EDE8DB; }
   #newsletterPopup .daymar-wheel-center-ring {
     fill: #662D42;
-    stroke: #EDE8DB;
+    stroke: #C9D66A;
     stroke-width: 5;
   }
   #newsletterPopup .daymar-wheel-center-mark {
-    fill: #C9D66A;
+    fill: #EDE8DB;
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
     font-weight: 700;
@@ -14393,16 +14411,25 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             <h3 id="daymarWelcomeTitle">Bienvenido</h3>
             <div class="daymar-welcome-wheel-area">
                 <div class="daymar-wheel-wrap">
-                    <svg class="daymar-wheel" data-daymar-wheel viewBox="0 0 240 240" role="img" aria-label="Ruleta con porcentajes de 20, 35, 40 y 50 por ciento">
-                        <path class="daymar-wheel-segment" d="M120 120 L120 16 A104 104 0 0 1 224 120 Z" />
-                        <path class="daymar-wheel-segment" d="M120 120 L224 120 A104 104 0 0 1 120 224 Z" />
-                        <path class="daymar-wheel-segment" d="M120 120 L120 224 A104 104 0 0 1 16 120 Z" />
-                        <path class="daymar-wheel-segment" d="M120 120 L16 120 A104 104 0 0 1 120 16 Z" />
-                        <text class="daymar-wheel-label" x="174" y="66">20%</text>
-                        <text class="daymar-wheel-label" x="174" y="174">35%</text>
-                        <text class="daymar-wheel-label dark" x="66" y="174">40%</text>
-                        <text class="daymar-wheel-label dark" x="66" y="66">50%</text>
-                        <circle class="daymar-wheel-center-ring" cx="120" cy="120" r="25" />
+                    <svg class="daymar-wheel" data-daymar-wheel="true" viewBox="0 0 240 240" role="img" aria-label="Ruleta con porcentajes de 20, 35, 40 y 50 por ciento">
+                        <defs>
+                            <linearGradient id="daymarWheelSage" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E2E99B"/><stop offset="1" stop-color="#AEBB4C"/></linearGradient>
+                            <linearGradient id="daymarWheelCream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF8EC"/><stop offset="1" stop-color="#D8CDBE"/></linearGradient>
+                            <linearGradient id="daymarWheelRose" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D58A9F"/><stop offset="1" stop-color="#954C68"/></linearGradient>
+                            <linearGradient id="daymarWheelPlum" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#704054"/><stop offset="1" stop-color="#321F2C"/></linearGradient>
+                        </defs>
+                        <circle class="daymar-wheel-outer" cx="120" cy="120" r="112" />
+                        <circle class="daymar-wheel-inner" cx="120" cy="120" r="106" />
+                        <path class="daymar-wheel-segment one" d="M120 120 L120 17 A103 103 0 0 1 223 120 Z" />
+                        <path class="daymar-wheel-segment two" d="M120 120 L223 120 A103 103 0 0 1 120 223 Z" />
+                        <path class="daymar-wheel-segment three" d="M120 120 L120 223 A103 103 0 0 1 17 120 Z" />
+                        <path class="daymar-wheel-segment four" d="M120 120 L17 120 A103 103 0 0 1 120 17 Z" />
+                        <circle class="daymar-wheel-light" cx="120" cy="8" r="4" /><circle class="daymar-wheel-light" cx="176" cy="23" r="4" /><circle class="daymar-wheel-light" cx="217" cy="64" r="4" /><circle class="daymar-wheel-light" cx="232" cy="120" r="4" /><circle class="daymar-wheel-light" cx="217" cy="176" r="4" /><circle class="daymar-wheel-light" cx="176" cy="217" r="4" /><circle class="daymar-wheel-light" cx="120" cy="232" r="4" /><circle class="daymar-wheel-light" cx="64" cy="217" r="4" /><circle class="daymar-wheel-light" cx="23" cy="176" r="4" /><circle class="daymar-wheel-light" cx="8" cy="120" r="4" /><circle class="daymar-wheel-light" cx="23" cy="64" r="4" /><circle class="daymar-wheel-light" cx="64" cy="23" r="4" />
+                        <circle class="daymar-wheel-badge sage" cx="174" cy="66" r="23" /><text class="daymar-wheel-label" x="174" y="67">20%</text>
+                        <circle class="daymar-wheel-badge light" cx="174" cy="174" r="23" /><text class="daymar-wheel-label" x="174" y="175">35%</text>
+                        <circle class="daymar-wheel-badge dark" cx="66" cy="174" r="23" /><text class="daymar-wheel-label dark" x="66" y="175">40%</text>
+                        <circle class="daymar-wheel-badge dark" cx="66" cy="66" r="23" /><text class="daymar-wheel-label dark" x="66" y="67">50%</text>
+                        <circle class="daymar-wheel-center-ring" cx="120" cy="120" r="27" />
                         <text class="daymar-wheel-center-mark" x="120" y="121">✦</text>
                     </svg>
                 </div>
@@ -19854,7 +19881,7 @@ const firebaseConfig = {
     overflow-x: hidden !important;
   }
   html.daymar-brand #newsletterPopup .daymar-wheel-wrap {
-    width: min(178px, 54vw) !important;
+    width: min(184px, 56vw) !important;
     margin-bottom: 10px !important;
   }
   html.daymar-brand #newsletterPopup .daymar-wheel-label {
@@ -19863,6 +19890,7 @@ const firebaseConfig = {
   html.daymar-brand #newsletterPopup .daymar-wheel-center-mark {
     font-size: 16px !important;
   }
+  html.daymar-brand #newsletterPopup .daymar-wheel-light { r: 3.5px; }
   html.daymar-brand #newsletterPopup .daymar-wheel-spin {
     min-height: 35px !important;
     padding: 8px 17px !important;

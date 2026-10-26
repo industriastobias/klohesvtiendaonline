@@ -9259,22 +9259,20 @@ html.device-ios .cart-modal .remove-item {
     z-index: 1;
     left: 50%;
     top: 50%;
-    width: 50%;
-    height: 50%;
-    display: grid;
-    place-items: center;
-    color: #1A1717;
+    width: auto;
+    height: auto;
+    display: block;
     font-size: clamp(15px, 4vw, 20px);
     font-weight: 800;
     line-height: 1;
     letter-spacing: -.04em;
     text-shadow: 0 1px 1px rgba(255,255,255,.18);
-    transform-origin: 0 0;
   }
-  #newsletterPopup .daymar-wheel-label:nth-child(1) { transform: rotate(45deg) translate(12%, -50%); color: #1A1717; }
-  #newsletterPopup .daymar-wheel-label:nth-child(2) { transform: rotate(135deg) translate(12%, -50%); color: #1A1717; }
-  #newsletterPopup .daymar-wheel-label:nth-child(3) { transform: rotate(225deg) translate(12%, -50%); color: #EDE8DB; }
-  #newsletterPopup .daymar-wheel-label:nth-child(4) { transform: rotate(315deg) translate(12%, -50%); color: #EDE8DB; }
+  /* Cada número queda dentro del mismo segmento que señala el puntero. */
+  #newsletterPopup .daymar-wheel-label:nth-child(1) { left: 70.7%; top: 70.7%; transform: translate(-50%, -50%); color: #1A1717; }
+  #newsletterPopup .daymar-wheel-label:nth-child(2) { left: 29.3%; top: 70.7%; transform: translate(-50%, -50%); color: #1A1717; }
+  #newsletterPopup .daymar-wheel-label:nth-child(3) { left: 29.3%; top: 29.3%; transform: translate(-50%, -50%); color: #EDE8DB; }
+  #newsletterPopup .daymar-wheel-label:nth-child(4) { left: 70.7%; top: 29.3%; transform: translate(-50%, -50%); color: #EDE8DB; }
   #newsletterPopup .daymar-wheel-center {
     position: absolute;
     z-index: 2;
@@ -14440,7 +14438,7 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     rotation += 1440 + ((target - normalized + 360) % 360);
     wheel.style.transform = `rotate(${rotation}deg)`;
     window.setTimeout(() => {
-      result.textContent = `Tu porcentaje sorpresa: ${prize}%`;
+      result.textContent = `Te salió: ${prize}%`;
       spinButton.disabled = false;
       spinButton.textContent = 'Girar de nuevo';
       spinning = false;
@@ -19833,5 +19831,43 @@ const firebaseConfig = {
             html.daymar-brand body .daymar-black-friday-cta { animation: none !important; }
         }
     </style>
+<style id="daymar-welcome-android-fix">
+@media (max-width: 600px) {
+  html.daymar-brand #newsletterPopup {
+    padding: 38px 28px 44px !important;
+  }
+  html.daymar-brand #newsletterPopup .daymar-welcome-content {
+    max-height: calc(100dvh - 92px) !important;
+  }
+  html.daymar-brand #newsletterPopup .newsletter-close {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    margin-bottom: 4px !important;
+    font-size: 20px !important;
+  }
+  html.daymar-brand #newsletterPopup #daymarWelcomeTitle {
+    margin-bottom: 4px !important;
+    font-size: clamp(27px, 8vw, 34px) !important;
+  }
+  html.daymar-brand #newsletterPopup .daymar-welcome-wheel-area {
+    margin-top: 0 !important;
+  }
+  html.daymar-brand #newsletterPopup .daymar-wheel-wrap {
+    width: min(178px, 54vw) !important;
+    margin-bottom: 11px !important;
+  }
+  html.daymar-brand #newsletterPopup .daymar-wheel-spin {
+    min-height: 35px !important;
+    padding: 8px 17px !important;
+    font-size: 10px !important;
+  }
+  html.daymar-brand #newsletterPopup .daymar-wheel-result {
+    min-height: 18px !important;
+    margin-top: 8px !important;
+    font-size: 13px !important;
+  }
+}
+</style>
 </body>
 </html>

@@ -14402,12 +14402,13 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
     if (popup.classList.contains('active')) return;
     previousFocus = document.activeElement;
     popup.classList.remove('daymar-welcome-keyboard');
+    // Preparar el estado inicial antes de mostrar el modal evita un flash de texto.
+    animateWelcomeText();
     popup.setAttribute('aria-hidden', 'false');
     popup.classList.add('active');
     overlay.classList.add('active');
     document.documentElement.classList.add('daymar-welcome-open');
     requestAnimationFrame(() => {
-      animateWelcomeText();
       if (popup.classList.contains('active')) closeButton.focus({ preventScroll: true });
     });
   };

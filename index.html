@@ -9284,9 +9284,6 @@ html.device-ios .cart-modal .remove-item {
       opacity: 1 !important;
       transform: none !important;
     }
-    #newsletterPopup .daymar-typing-target::after {
-      display: none !important;
-    }
   }
 </style>
 <style id="daymar-external-gallery-states">
@@ -10198,24 +10195,12 @@ html body #daymarLoginDialog .daymar-auth-status:empty { display:none; }
   #newsletterPopup .daymar-typing-target .daymar-typing-char {
     display: inline-block;
     opacity: 0;
-    transform: translateY(.18em);
-    animation: daymarWelcomeTypeChar .045s ease-out forwards;
+    animation: daymarWelcomeTypeChar .12s ease-out forwards;
     animation-delay: var(--typing-char-delay, 0ms);
   }
-  #newsletterPopup .daymar-typing-target.is-typing::after {
-    content: '';
-    display: inline-block;
-    height: 1em;
-    margin-left: 3px;
-    border-right: 2px solid #C9D66A;
-    vertical-align: -.12em;
-    animation: daymarWelcomeCaret .72s step-end infinite;
-  }
   @keyframes daymarWelcomeTypeChar {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes daymarWelcomeCaret {
-    50% { opacity: 0; }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
 .daymar-policy-open { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; min-height:54px; padding:18px 0; border:0; border-bottom:1px solid #e5dcd8; background:transparent; color:#33252c; text-align:left; font:500 14px/1.5 'Outfit',sans-serif; cursor:pointer; }

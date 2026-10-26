@@ -16922,9 +16922,6 @@ const firebaseConfig = {
     $('daymarLoginDescription').textContent = tier;
     $('daymarLoginDescription').classList.toggle('is-premium', isMember);
     $('daymarWelcomeTier').textContent = tier;
-    if ($('newsletterPopup')?.classList.contains('active')) {
-      window.daymarWelcome?.animateText?.();
-    }
     const previewTier = $('daymarPreviewTier');
     if (previewTier) {
       previewTier.textContent = tier;

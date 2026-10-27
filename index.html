@@ -15342,7 +15342,6 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
                          decoding="async"
                          fetchpriority="${index < 6 ? 'high' : 'low'}"
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
-                    ${isFineJewelry ? `<div class="fine-jewelry-overline ${fineMaterialClass}"><span>${fineMaterial}</span><i class="fas fa-sparkles" aria-hidden="true"></i></div>` : ''}
                     ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>BLACK FRIDAY</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}
                     </div>
                     <span class="daymar-card-index">${String(index + 1).padStart(2, '0')}</span>

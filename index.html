@@ -15372,6 +15372,15 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             `;
             
             const imageAction = card.querySelector('.product-image-container');
+            card.addEventListener('click', event => {
+                if (event.target.closest('button, a, input, select, textarea')) return;
+                const blackFridayTag = card.querySelector('.daymar-black-friday-card-tag');
+                if (!blackFridayTag) return;
+                blackFridayTag.classList.remove('is-clicking');
+                void blackFridayTag.offsetWidth;
+                blackFridayTag.classList.add('is-clicking');
+                window.setTimeout(() => blackFridayTag.classList.remove('is-clicking'), 760);
+            });
             imageAction.setAttribute('aria-label', `Ver descripción de ${product.name}`);
             card.querySelector('.product-details-trigger').setAttribute('aria-label', `Ver detalles de ${product.name}`);
             imageAction.addEventListener('keydown', event => {
@@ -19372,6 +19381,17 @@ const firebaseConfig = {
             0%, 45% { transform: translateX(-130%) rotate(20deg); }
             72%, 100% { transform: translateX(180%) rotate(20deg); }
         }
+        @keyframes daymarBlackFridayTap {
+            0% { transform: rotate(-4deg) scale(1); filter: brightness(1); }
+            28% { transform: rotate(0deg) scale(1.12); filter: brightness(1.22); }
+            58% { transform: rotate(2deg) scale(1.06); filter: brightness(1.1); }
+            100% { transform: rotate(-4deg) scale(1); filter: brightness(1); }
+        }
+        @keyframes daymarBlackFridayTapShine {
+            0% { transform: translateX(-130%) rotate(20deg); opacity: 0; }
+            22% { opacity: 1; }
+            100% { transform: translateX(210%) rotate(20deg); opacity: 0; }
+        }
 
         html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag {
             position: absolute !important;
@@ -19429,6 +19449,13 @@ const firebaseConfig = {
             animation-play-state: paused;
             background: linear-gradient(145deg, #5b2937 0%, #8d4c45 100%) !important;
             transform: rotate(0deg) scale(1.06);
+        }
+        html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag.is-clicking {
+            animation: daymarBlackFridayTap .72s cubic-bezier(.22,.8,.24,1) both;
+            background: linear-gradient(145deg, #6d3041 0%, #a45a4e 100%) !important;
+        }
+        html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag.is-clicking::before {
+            animation: daymarBlackFridayTapShine .68s ease-out both;
         }
 
         @media (max-width: 900px) {

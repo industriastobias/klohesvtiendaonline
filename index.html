@@ -14178,6 +14178,9 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
 
                 <h3 class="preview-name" id="previewName"></h3>
                 <p class="preview-barcode" id="previewBarcode"></p>
+                <div class="preview-black-friday-badge" id="previewBlackFridayTag" hidden aria-label="Promoción Black Friday">
+                    <span>BLACK FRIDAY</span><strong></strong>
+                </div>
                 <p class="preview-description" id="previewDescription"></p>
                 <div class="preview-price-container">
                     <span class="preview-price" id="previewPrice"></span>
@@ -15906,6 +15909,14 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             previewNameEl.classList.toggle('long-name', String(product.name || '').length > 18);
             previewNameEl.classList.toggle('very-long-name', String(product.name || '').length > 30);
             document.getElementById('previewBarcode').textContent = `COD: ${product.barcode}`;
+            const previewBlackFridayTag = document.getElementById('previewBlackFridayTag');
+            const previewDiscountRate = getDiscountRate(product);
+            if (previewBlackFridayTag) {
+                previewBlackFridayTag.hidden = previewDiscountRate <= 0;
+                previewBlackFridayTag.classList.remove('is-clicking');
+                const previewDiscountText = previewBlackFridayTag.querySelector('strong');
+                if (previewDiscountText) previewDiscountText.textContent = `-${Math.round(previewDiscountRate * 100)}%`;
+            }
             document.getElementById('previewDescription').textContent = product.description || 'No hay descripcion disponible.';
             document.getElementById('previewPrice').textContent = `$${productPrice.toFixed(2)}`;
             const previewOriginalPrice = document.getElementById('previewPriceOriginal');
@@ -15959,6 +15970,12 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             syncAddButtonStates();
             document.getElementById('previewModal').classList.add('active');
             document.body.style.overflow = 'hidden';
+            if (previewBlackFridayTag && !previewBlackFridayTag.hidden) {
+                requestAnimationFrame(() => {
+                    previewBlackFridayTag.classList.add('is-clicking');
+                    window.setTimeout(() => previewBlackFridayTag.classList.remove('is-clicking'), 760);
+                });
+            }
         }
 
         function contactProductWhatsApp() {
@@ -19474,6 +19491,68 @@ const firebaseConfig = {
         @media (prefers-reduced-motion: reduce) {
             html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag,
             html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag::before { animation: none !important; }
+        }
+        html.daymar-brand body #previewModal .preview-black-friday-badge[hidden] {
+            display: none !important;
+        }
+        html.daymar-brand body #previewModal .preview-black-friday-badge {
+            position: relative;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            min-width: 92px;
+            margin: 0 0 14px;
+            padding: 8px 11px 9px;
+            overflow: hidden;
+            color: #fffaf5;
+            background: linear-gradient(145deg, #171315 0%, #4b2730 100%);
+            border: 1px solid rgba(228, 181, 105, .85);
+            border-radius: 3px;
+            box-shadow: 0 7px 16px rgba(29, 17, 19, .18), inset 0 0 0 1px rgba(255,255,255,.08);
+        }
+        html.daymar-brand body #previewModal .preview-black-friday-badge::before {
+            content: '';
+            position: absolute;
+            top: -35%;
+            bottom: -35%;
+            left: 0;
+            width: 24px;
+            background: linear-gradient(90deg, transparent, rgba(255, 232, 179, .75), transparent);
+            transform: translateX(-130%) rotate(20deg);
+            pointer-events: none;
+        }
+        html.daymar-brand body #previewModal .preview-black-friday-badge span,
+        html.daymar-brand body #previewModal .preview-black-friday-badge strong { position: relative; }
+        html.daymar-brand body #previewModal .preview-black-friday-badge span {
+            color: #e4b86f;
+            font: 700 7px/1 'Helvetica Neue', Arial, sans-serif;
+            letter-spacing: .12em;
+        }
+        html.daymar-brand body #previewModal .preview-black-friday-badge strong {
+            color: #fffaf5;
+            font: 400 25px/.8 'DM Serif Display', Georgia, serif;
+            letter-spacing: -.04em;
+        }
+        html.daymar-brand body #previewModal .preview-black-friday-badge.is-clicking {
+            animation: daymarBlackFridayTap .72s cubic-bezier(.22,.8,.24,1) both;
+            background: linear-gradient(145deg, #6d3041 0%, #a45a4e 100%);
+        }
+        html.daymar-brand body #previewModal .preview-black-friday-badge.is-clicking::before {
+            animation: daymarBlackFridayTapShine .68s ease-out both;
+        }
+        @media (max-width: 600px) {
+            html.daymar-brand body #previewModal .preview-black-friday-badge {
+                min-width: 82px;
+                margin-bottom: 12px;
+                padding: 7px 9px 8px;
+            }
+            html.daymar-brand body #previewModal .preview-black-friday-badge strong { font-size: 22px; }
+            html.daymar-brand body #previewModal .preview-black-friday-badge span { font-size: 6px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html.daymar-brand body #previewModal .preview-black-friday-badge,
+            html.daymar-brand body #previewModal .preview-black-friday-badge::before { animation: none !important; }
         }
     </style>
     <style id="daymar-black-friday-title-motion">

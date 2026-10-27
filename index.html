@@ -14178,9 +14178,6 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
 
                 <h3 class="preview-name" id="previewName"></h3>
                 <p class="preview-barcode" id="previewBarcode"></p>
-                <div class="preview-black-friday-badge" id="previewBlackFridayTag" hidden aria-label="Promoción Black Friday">
-                    <span>BLACK FRIDAY</span><strong></strong>
-                </div>
                 <p class="preview-description" id="previewDescription"></p>
                 <div class="preview-price-container">
                     <span class="preview-price" id="previewPrice"></span>
@@ -15909,14 +15906,6 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             previewNameEl.classList.toggle('long-name', String(product.name || '').length > 18);
             previewNameEl.classList.toggle('very-long-name', String(product.name || '').length > 30);
             document.getElementById('previewBarcode').textContent = `COD: ${product.barcode}`;
-            const previewBlackFridayTag = document.getElementById('previewBlackFridayTag');
-            const previewDiscountRate = getDiscountRate(product);
-            if (previewBlackFridayTag) {
-                previewBlackFridayTag.hidden = previewDiscountRate <= 0;
-                previewBlackFridayTag.classList.remove('is-clicking');
-                const previewDiscountText = previewBlackFridayTag.querySelector('strong');
-                if (previewDiscountText) previewDiscountText.textContent = `-${Math.round(previewDiscountRate * 100)}%`;
-            }
             document.getElementById('previewDescription').textContent = product.description || 'No hay descripcion disponible.';
             document.getElementById('previewPrice').textContent = `$${productPrice.toFixed(2)}`;
             const previewOriginalPrice = document.getElementById('previewPriceOriginal');
@@ -15970,12 +15959,6 @@ html.daymar-brand .whatsapp-float.anniversary-contact-clear{visibility:hidden!im
             syncAddButtonStates();
             document.getElementById('previewModal').classList.add('active');
             document.body.style.overflow = 'hidden';
-            if (previewBlackFridayTag && !previewBlackFridayTag.hidden) {
-                requestAnimationFrame(() => {
-                    previewBlackFridayTag.classList.add('is-clicking');
-                    window.setTimeout(() => previewBlackFridayTag.classList.remove('is-clicking'), 760);
-                });
-            }
         }
 
         function contactProductWhatsApp() {
@@ -19409,11 +19392,6 @@ const firebaseConfig = {
             22% { opacity: 1; }
             100% { transform: translateX(210%) rotate(20deg); opacity: 0; }
         }
-        @keyframes daymarBlackFridayCardTap {
-            0% { transform: scale(1); filter: brightness(1); }
-            38% { transform: scale(1.045); filter: brightness(1.1); }
-            100% { transform: scale(1); filter: brightness(1); }
-        }
 
         html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag {
             position: absolute !important;
@@ -19430,12 +19408,12 @@ const firebaseConfig = {
             padding: 9px 10px 8px !important;
             overflow: hidden;
             color: #fffaf5 !important;
-            background: #191617 !important;
-            border: 0 !important;
-            border-radius: 0 !important;
-            box-shadow: none;
-            transform: none;
-            animation: none;
+            background: linear-gradient(145deg, #171315 0%, #4b2730 100%) !important;
+            border: 1px solid rgba(228, 181, 105, .85) !important;
+            border-radius: 2px !important;
+            box-shadow: 0 8px 18px rgba(29, 17, 19, .24), inset 0 0 0 1px rgba(255,255,255,.08);
+            transform: rotate(-4deg);
+            animation: daymarBlackFridayFloat 3.8s ease-in-out infinite;
         }
 
         html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag::before {
@@ -19445,8 +19423,8 @@ const firebaseConfig = {
             bottom: -35%;
             left: 0;
             width: 22px;
-            background: linear-gradient(90deg, transparent, rgba(255, 232, 179, .38), transparent);
-            animation: none;
+            background: linear-gradient(90deg, transparent, rgba(255, 232, 179, .68), transparent);
+            animation: daymarBlackFridayShine 3.4s ease-in-out infinite;
             pointer-events: none;
         }
 
@@ -19468,12 +19446,13 @@ const firebaseConfig = {
 
         html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag:hover,
         html.daymar-brand body #catalogo.atelier-catalog .product-card:hover .daymar-black-friday-card-tag {
-            background: #191617 !important;
-            transform: scale(1.03);
+            animation-play-state: paused;
+            background: linear-gradient(145deg, #5b2937 0%, #8d4c45 100%) !important;
+            transform: rotate(0deg) scale(1.06);
         }
         html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag.is-clicking {
-            animation: daymarBlackFridayCardTap .7s cubic-bezier(.22,.8,.24,1) both;
-            background: #282124 !important;
+            animation: daymarBlackFridayTap .72s cubic-bezier(.22,.8,.24,1) both;
+            background: linear-gradient(145deg, #6d3041 0%, #a45a4e 100%) !important;
         }
         html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag.is-clicking::before {
             animation: daymarBlackFridayTapShine .68s ease-out both;
@@ -19483,90 +19462,18 @@ const firebaseConfig = {
             html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag {
                 top: 10px !important;
                 left: 10px !important;
-                min-width: 56px;
-                min-height: 46px;
-                padding: 7px 7px 6px !important;
+                min-width: 67px;
+                min-height: 51px;
+                padding: 8px 8px 7px !important;
             }
 
-            html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag strong { font-size: 20px !important; }
+            html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag strong { font-size: 22px !important; }
             html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag span { font-size: 6px !important; }
         }
 
         @media (prefers-reduced-motion: reduce) {
             html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag,
             html.daymar-brand body #catalogo.atelier-catalog .daymar-black-friday-card-tag::before { animation: none !important; }
-        }
-        html.daymar-brand body #previewModal .preview-black-friday-badge[hidden] {
-            display: none !important;
-        }
-        @keyframes daymarBlackFridayPreviewIn {
-            0% { opacity: .72; transform: translateY(2px) scale(.98); }
-            55% { opacity: 1; transform: translateY(0) scale(1.035); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes daymarBlackFridayPreviewShine {
-            0% { transform: translateX(-140%) rotate(20deg); opacity: 0; }
-            25% { opacity: .45; }
-            100% { transform: translateX(190%) rotate(20deg); opacity: 0; }
-        }
-        html.daymar-brand body #previewModal .preview-black-friday-badge {
-            position: relative;
-            display: inline-flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 4px;
-            min-width: 78px;
-            margin: 0 0 13px;
-            padding: 7px 9px 8px;
-            overflow: hidden;
-            color: #f7f0e8;
-            background: linear-gradient(145deg, #292124 0%, #513640 100%);
-            border: 1px solid rgba(196, 157, 111, .62);
-            border-radius: 3px;
-            box-shadow: 0 5px 12px rgba(29, 17, 19, .12), inset 0 0 0 1px rgba(255,255,255,.06);
-        }
-        html.daymar-brand body #previewModal .preview-black-friday-badge::before {
-            content: '';
-            position: absolute;
-            top: -35%;
-            bottom: -35%;
-            left: 0;
-            width: 24px;
-            background: linear-gradient(90deg, transparent, rgba(255, 232, 179, .4), transparent);
-            transform: translateX(-130%) rotate(20deg);
-            pointer-events: none;
-        }
-        html.daymar-brand body #previewModal .preview-black-friday-badge span,
-        html.daymar-brand body #previewModal .preview-black-friday-badge strong { position: relative; }
-        html.daymar-brand body #previewModal .preview-black-friday-badge span {
-            color: #e4b86f;
-            font: 700 7px/1 'Helvetica Neue', Arial, sans-serif;
-            letter-spacing: .12em;
-        }
-        html.daymar-brand body #previewModal .preview-black-friday-badge strong {
-            color: #fffaf5;
-            font: 400 21px/.8 'DM Serif Display', Georgia, serif;
-            letter-spacing: -.04em;
-        }
-        html.daymar-brand body #previewModal .preview-black-friday-badge.is-clicking {
-            animation: daymarBlackFridayPreviewIn .82s cubic-bezier(.22,.75,.25,1) both;
-            background: linear-gradient(145deg, #3c2a31 0%, #65414a 100%);
-        }
-        html.daymar-brand body #previewModal .preview-black-friday-badge.is-clicking::before {
-            animation: daymarBlackFridayPreviewShine .78s ease-out both;
-        }
-        @media (max-width: 600px) {
-            html.daymar-brand body #previewModal .preview-black-friday-badge {
-                min-width: 74px;
-                margin-bottom: 11px;
-                padding: 6px 8px 7px;
-            }
-            html.daymar-brand body #previewModal .preview-black-friday-badge strong { font-size: 19px; }
-            html.daymar-brand body #previewModal .preview-black-friday-badge span { font-size: 6px; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            html.daymar-brand body #previewModal .preview-black-friday-badge,
-            html.daymar-brand body #previewModal .preview-black-friday-badge::before { animation: none !important; }
         }
     </style>
     <style id="daymar-black-friday-title-motion">

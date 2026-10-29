@@ -1647,6 +1647,11 @@ html.dm-bf-anim .daymar-black-friday-banner:not(.dm-bf-play) .daymar-black-frida
   html.dm-bf-anim .daymar-black-friday-label::before, html.dm-bf-anim .daymar-black-friday-label::after { transform: none !important; animation: none !important; }
 }
 
+/* En celulares no se muestra el anuncio de Black Friday */
+@media (max-width: 640px) {
+  .daymar-black-friday-banner { display: none !important; }
+}
+
     </style>
 </head>
 <body>

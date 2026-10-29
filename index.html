@@ -1472,6 +1472,120 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 }
 .cart-empty::before { font-weight: 900; }
 
+/* ---------- Bienvenida: caja de regalo ---------- */
+.newsletter-overlay { background: radial-gradient(circle at 50% 45%, rgba(102, 45, 66, .55), rgba(30, 14, 21, .88) 70%); }
+.newsletter-popup.dm-gift-mode {
+  width: min(400px, calc(100% - 32px)); max-height: calc(100dvh - 24px); overflow: visible;
+  background: none; box-shadow: none; border-radius: 0; color: var(--ivory);
+}
+.newsletter-popup.dm-gift-mode::before { display: none; }
+.dm-gift-mode .daymar-welcome-content { display: none; }
+
+/* La caja */
+.dm-gift { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 0 0; }
+.dm-gift-glow { position: absolute; top: -20px; left: 50%; width: 320px; height: 320px; margin-left: -160px; border-radius: 50%; background: radial-gradient(circle, rgba(232, 214, 172, .32), transparent 65%); animation: dm-glow 2.6s ease-in-out infinite; pointer-events: none; }
+.dm-gift-box { position: relative; width: 170px; height: 178px; margin-bottom: 26px; animation: dm-wiggle 2.8s ease-in-out infinite; transform-origin: 50% 100%; }
+.dm-gift-box:focus { outline: none; }
+.dm-gift-box:focus-visible .dm-gift-body { box-shadow: inset 0 14px 18px -10px rgba(0, 0, 0, .35), 0 0 0 3px var(--gold-soft); }
+.dm-gift-body {
+  position: absolute; left: 10px; right: 10px; bottom: 0; height: 120px; border-radius: 4px 4px 10px 10px;
+  background: linear-gradient(90deg, transparent 42%, #E9CF92 42%, #C99B4F 50%, #E9CF92 58%, transparent 58%),
+              linear-gradient(160deg, #8A3D5A, var(--wine) 55%, var(--wine-deep));
+  box-shadow: inset 0 14px 18px -10px rgba(0, 0, 0, .35), 0 22px 40px rgba(0, 0, 0, .35);
+}
+.dm-gift-lid {
+  position: absolute; left: 0; right: 0; top: 30px; height: 42px; z-index: 2; border-radius: 6px;
+  background: linear-gradient(90deg, transparent 41%, #F1D99B 41%, #C99B4F 50%, #F1D99B 59%, transparent 59%),
+              linear-gradient(170deg, #9A4766, #7A3450);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .25);
+  transition: transform .7s cubic-bezier(.3, 1.4, .5, 1), opacity .5s .2s;
+}
+.dm-gift-bow { position: absolute; left: 50%; top: -30px; width: 0; height: 0; }
+.dm-gift-bow::before, .dm-gift-bow::after {
+  content: ''; position: absolute; top: 0; width: 46px; height: 34px; border: 7px solid #E2C27F; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: rgba(201, 155, 79, .2);
+}
+.dm-gift-bow::before { right: 2px; transform: rotate(-22deg); }
+.dm-gift-bow::after { left: 2px; transform: rotate(22deg); }
+.dm-gift-lid::after { content: ''; position: absolute; left: 50%; top: -9px; width: 18px; height: 16px; margin-left: -9px; border-radius: 6px; background: #C99B4F; z-index: 1; }
+
+.dm-gift-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 8px; }
+.dm-gift-title { font-family: var(--font-display); font-style: italic; font-size: 46px; line-height: 1; color: #fff; margin-bottom: 8px; }
+.dm-gift-hint { font-size: 13px; letter-spacing: .06em; color: rgba(244, 239, 229, .75); animation: dm-hint 1.6s ease-in-out infinite; }
+.dm-gift-skip { margin-top: 22px; padding: 8px 14px; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(244, 239, 229, .55); text-decoration: underline; text-underline-offset: 4px; }
+.dm-gift-skip:hover { color: #fff; }
+
+/* Destellos */
+.dm-gift-sparks { position: absolute; top: 100px; left: 50%; width: 0; height: 0; pointer-events: none; z-index: 3; }
+.dm-gift-sparks i {
+  position: absolute; width: 10px; height: 10px; margin: -5px; background: #E9CF92; transform: rotate(45deg) scale(0); opacity: 0;
+  animation: dm-spark .9s cubic-bezier(.2, .8, .3, 1) var(--d) forwards; box-shadow: 0 0 10px rgba(233, 207, 146, .8);
+}
+.dm-gift-sparks i.is-ivory { background: #fff; width: 6px; height: 6px; margin: -3px; }
+
+/* Abriendo */
+.dm-opening .dm-gift-box { animation: dm-shake .35s ease-in-out; }
+.dm-opening .dm-gift-lid { transform: translate(40px, -150px) rotate(38deg); opacity: 0; }
+.dm-opening .dm-gift-body { transition: transform .5s .25s, opacity .4s .3s; transform: scale(.85) translateY(10px); opacity: 0; }
+.dm-opening .dm-gift-hint { animation: none; }
+.dm-opening .dm-gift-title, .dm-opening .dm-gift-hint, .dm-opening .dm-gift-eyebrow, .dm-opening .dm-gift-skip { transition: opacity .3s; opacity: 0; }
+
+/* Abierta: tarjeta con cupones */
+.dm-open .dm-gift { display: none; }
+.newsletter-popup.dm-gift-mode.dm-open { overflow: hidden auto; }
+.dm-gift-mode.dm-open .daymar-welcome-content {
+  display: flex; flex-direction: column; align-items: center; padding: 34px 26px 26px; border-radius: 20px; background: var(--paper); color: var(--ink);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .45); animation: dm-reveal .55s cubic-bezier(.3, 1.3, .5, 1) both;
+}
+.dm-gift-mode .newsletter-close { position: absolute; top: 14px; right: 14px; left: auto; margin: 0; background: var(--wine-wash); color: var(--wine); font-size: 20px; }
+.dm-gift-mode .holiday-welcome-star { order: 0; width: 54px; height: 54px; margin-bottom: 12px; background: linear-gradient(150deg, #F3E1B2, #C99B4F); color: var(--wine-deep); }
+.dm-gift-mode .daymar-welcome-season { order: 1; color: var(--gold); margin-bottom: 4px; }
+.dm-gift-mode .daymar-welcome-content h3 { order: 2; font-size: 46px; color: var(--wine); margin-bottom: 4px; }
+.dm-gift-mode .daymar-welcome-subtitle { order: 3; margin-bottom: 10px; }
+.dm-gift-mode .daymar-welcome-tier { order: 4; margin-bottom: 18px; }
+.dm-gift-mode .daymar-welcome-offers { order: 5; display: grid; grid-template-columns: 1fr; gap: 10px; width: 100%; }
+.dm-gift-mode .daymar-welcome-offers p, .dm-gift-mode .daymar-welcome-offers p:nth-child(3) {
+  position: relative; flex-direction: row; justify-content: space-between; align-items: center; gap: 0; padding: 0; text-align: left;
+  min-height: 58px; border: 0; border-radius: 10px; background: var(--wine); color: #fff; overflow: visible;
+  animation: dm-coupon .45s cubic-bezier(.3, 1.3, .5, 1) both; animation-delay: calc(var(--offer-index, 0) * 120ms + 250ms);
+}
+.dm-gift-mode .daymar-welcome-offers p::before, .dm-gift-mode .daymar-welcome-offers p::after {
+  content: ''; position: absolute; top: 50%; width: 16px; height: 16px; margin-top: -8px; border-radius: 50%; background: var(--paper);
+}
+.dm-gift-mode .daymar-welcome-offers p::before { left: -8px; }
+.dm-gift-mode .daymar-welcome-offers p::after { right: -8px; }
+.dm-gift-mode .daymar-welcome-offers p span, .dm-gift-mode .daymar-welcome-offers p:nth-child(3) span {
+  flex: 1; padding: 0 14px 0 22px; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft);
+}
+.dm-gift-mode .daymar-welcome-offers p strong, .dm-gift-mode .daymar-welcome-offers p:nth-child(3) strong {
+  align-self: stretch; display: flex; align-items: center; padding: 0 22px 0 16px; border-left: 2px dashed rgba(232, 214, 172, .45);
+  font-family: var(--font-display); font-size: 19px; font-weight: 600; color: #fff; text-align: right; white-space: nowrap;
+}
+.dm-gift-mode .daymar-welcome-offers p:nth-child(3) { background: linear-gradient(120deg, #F3E1B2, #C99B4F); }
+.dm-gift-mode .daymar-welcome-offers p:nth-child(3) span { color: var(--wine-deep); }
+.dm-gift-mode .daymar-welcome-offers p:nth-child(3) strong { color: var(--wine-deep); border-left-color: rgba(74, 31, 48, .35); }
+.dm-gift-cta {
+  order: 6; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 50px; margin-top: 18px; border-radius: 999px;
+  background: var(--wine); color: #fff; font-size: 11.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; transition: background .2s;
+}
+.dm-gift-cta:hover { background: var(--wine-deep); }
+
+@keyframes dm-wiggle { 0%, 70%, 100% { transform: rotate(0); } 76% { transform: rotate(-5deg); } 82% { transform: rotate(5deg); } 88% { transform: rotate(-3deg); } 94% { transform: rotate(2deg); } }
+@keyframes dm-shake { 0%, 100% { transform: none; } 25% { transform: rotate(-6deg) scale(1.04); } 75% { transform: rotate(6deg) scale(1.04); } }
+@keyframes dm-glow { 0%, 100% { transform: scale(.92); opacity: .7; } 50% { transform: scale(1.06); opacity: 1; } }
+@keyframes dm-hint { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+@keyframes dm-spark { 0% { transform: translate(0, 0) rotate(45deg) scale(0); opacity: 1; } 60% { opacity: 1; } 100% { transform: translate(var(--x), var(--y)) rotate(45deg) scale(var(--s)); opacity: 0; } }
+@keyframes dm-reveal { from { transform: translateY(40px) scale(.7); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes dm-coupon { from { transform: translateX(-24px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+@media (max-width: 640px) {
+  .dm-gift-title { font-size: 40px; }
+  .dm-gift-mode.dm-open .daymar-welcome-content { padding: 28px 18px 20px; }
+  .dm-gift-mode .daymar-welcome-content h3 { font-size: 40px; }
+  .dm-gift-mode .daymar-welcome-offers p span { padding-left: 18px; font-size: 9.5px; letter-spacing: .1em; }
+  .dm-gift-mode .daymar-welcome-offers p strong { padding-right: 18px; font-size: 17px; }
+}
+
     </style>
 </head>
 <body>
@@ -5240,6 +5354,82 @@ const firebaseConfig = {
 })();
 </script>
 
+
+<script id="daymar-gift-welcome">
+(() => {
+  const popup = document.getElementById('newsletterPopup');
+  const content = popup && popup.querySelector('.daymar-welcome-content');
+  if (!popup || !content) return;
+  popup.classList.add('dm-gift-mode');
+  const gift = document.createElement('div');
+  gift.className = 'dm-gift';
+  gift.innerHTML = `
+    <div class="dm-gift-glow" aria-hidden="true"></div>
+    <button type="button" class="dm-gift-box" aria-label="Abrir tu regalo de bienvenida">
+      <span class="dm-gift-lid"><span class="dm-gift-bow"></span></span>
+      <span class="dm-gift-body"></span>
+    </button>
+    <div class="dm-gift-sparks" aria-hidden="true"></div>
+    <p class="dm-gift-eyebrow">DAYMAR / El Salvador</p>
+    <p class="dm-gift-title">Tienes un regalo</p>
+    <p class="dm-gift-hint">Toca la caja para abrirlo</p>
+    <button type="button" class="dm-gift-skip">Ahora no</button>`;
+  content.before(gift);
+  const cta = document.createElement('button');
+  cta.type = 'button';
+  cta.className = 'dm-gift-cta';
+  cta.innerHTML = 'Ver ofertas <i class="fas fa-arrow-right" aria-hidden="true"></i>';
+  content.append(cta);
+
+  const sparks = gift.querySelector('.dm-gift-sparks');
+  const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let timer = null;
+  const burst = () => {
+    sparks.replaceChildren();
+    for (let i = 0; i < 26; i++) {
+      const s = document.createElement('i');
+      const angle = (Math.PI * 2 * i) / 26 + Math.random() * .3;
+      const dist = 90 + Math.random() * 110;
+      s.style.setProperty('--x', Math.cos(angle) * dist + 'px');
+      s.style.setProperty('--y', Math.sin(angle) * dist - 40 + 'px');
+      s.style.setProperty('--d', Math.round(Math.random() * 120) + 'ms');
+      s.style.setProperty('--s', (.6 + Math.random() * .9).toFixed(2));
+      if (i % 3 === 0) s.className = 'is-ivory';
+      sparks.append(s);
+    }
+  };
+  const open = () => {
+    if (popup.classList.contains('dm-opening') || popup.classList.contains('dm-open')) return;
+    clearTimeout(timer);
+    if (reduce()) { popup.classList.add('dm-open'); window.daymarWelcome?.animateText?.(); return; }
+    burst();
+    popup.classList.add('dm-opening');
+    timer = setTimeout(() => {
+      popup.classList.remove('dm-opening');
+      popup.classList.add('dm-open');
+      window.daymarWelcome?.animateText?.();
+    }, 720);
+  };
+  const reset = () => {
+    clearTimeout(timer);
+    popup.classList.remove('dm-opening', 'dm-open');
+    sparks.replaceChildren();
+  };
+  gift.querySelector('.dm-gift-box').addEventListener('click', open);
+  gift.querySelector('.dm-gift-skip').addEventListener('click', () => window.daymarWelcome?.close());
+  cta.addEventListener('click', () => {
+    window.daymarWelcome?.close();
+    setTimeout(() => window.dmGoCatalog?.(), 150);
+  });
+  let wasActive = popup.classList.contains('active');
+  new MutationObserver(() => {
+    const active = popup.classList.contains('active');
+    if (active && !wasActive) reset();
+    wasActive = active;
+  }).observe(popup, { attributes: true, attributeFilter: ['class'] });
+  if (wasActive) reset();
+})();
+</script>
 <script id="daymar-category-rail-sync">
 (() => {
   window.dmGoCatalog = () => {

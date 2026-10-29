@@ -2231,10 +2231,22 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 
     <!-- Newsletter Popup -->
     <div class="newsletter-overlay" id="newsletterOverlay"></div>
-    <div class="newsletter-popup" id="newsletterPopup" role="dialog" aria-modal="true" aria-labelledby="daymarWelcomeTitle" aria-describedby="daymarWelcomeOffers" tabindex="-1">
+    <div class="newsletter-popup dm-gift-mode" id="newsletterPopup" role="dialog" aria-modal="true" aria-labelledby="daymarWelcomeTitle" aria-describedby="daymarWelcomeOffers" tabindex="-1">
         <svg class="daymar-welcome-shape" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <path fill="#662D42" d="M 52 176 C 105 48 217 54 340 72 C 463 96 550 54 675 32 C 830 4 956 82 976 235 C 1000 384 953 562 835 642 C 753 698 687 674 612 640 C 527 602 468 610 375 648 C 244 702 111 678 57 551 C 14 449 9 275 52 176 Z"/>
         </svg>
+        <div class="dm-gift">
+            <div class="dm-gift-glow" aria-hidden="true"></div>
+            <button type="button" class="dm-gift-box" aria-label="Abrir tu regalo de bienvenida">
+                <span class="dm-gift-lid"><span class="dm-gift-bow"></span></span>
+                <span class="dm-gift-body"></span>
+            </button>
+            <div class="dm-gift-sparks" aria-hidden="true"></div>
+            <p class="dm-gift-eyebrow">DAYMAR / El Salvador</p>
+            <p class="dm-gift-title">Sorpresa para ti</p>
+            <p class="dm-gift-hint">Ábreme ✦</p>
+            <button type="button" class="dm-gift-skip">Ahora no</button>
+        </div>
         <div class="daymar-welcome-content">
             <button class="newsletter-close" type="button" aria-label="Cerrar bienvenida"><span aria-hidden="true">×</span></button>
             <p class="daymar-welcome-season">DAYMAR / EL SALVADOR</p>
@@ -2246,6 +2258,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
                 <p><span>Oro y plata</span><strong>2% de descuento</strong></p>
                 <p><span>Los demás accesorios</span><strong>50% de descuento</strong></p>
             </div>
+            <button type="button" class="dm-gift-cta">Ver ofertas <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
         </div>
     </div>
 
@@ -5360,27 +5373,9 @@ const firebaseConfig = {
   const popup = document.getElementById('newsletterPopup');
   const content = popup && popup.querySelector('.daymar-welcome-content');
   if (!popup || !content) return;
-  popup.classList.add('dm-gift-mode');
-  const gift = document.createElement('div');
-  gift.className = 'dm-gift';
-  gift.innerHTML = `
-    <div class="dm-gift-glow" aria-hidden="true"></div>
-    <button type="button" class="dm-gift-box" aria-label="Abrir tu regalo de bienvenida">
-      <span class="dm-gift-lid"><span class="dm-gift-bow"></span></span>
-      <span class="dm-gift-body"></span>
-    </button>
-    <div class="dm-gift-sparks" aria-hidden="true"></div>
-    <p class="dm-gift-eyebrow">DAYMAR / El Salvador</p>
-    <p class="dm-gift-title">Sorpresa para ti</p>
-    <p class="dm-gift-hint">Ábreme ✦</p>
-    <button type="button" class="dm-gift-skip">Ahora no</button>`;
-  content.before(gift);
-  const cta = document.createElement('button');
-  cta.type = 'button';
-  cta.className = 'dm-gift-cta';
-  cta.innerHTML = 'Ver ofertas <i class="fas fa-arrow-right" aria-hidden="true"></i>';
-  content.append(cta);
-
+  const gift = popup.querySelector('.dm-gift');
+  const cta = popup.querySelector('.dm-gift-cta');
+  if (!gift || !cta) return;
   const sparks = gift.querySelector('.dm-gift-sparks');
   const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let timer = null;

@@ -27,6 +27,16 @@
         }
         detectDevicePlatform();
     </script>
+    <script id="daymar-generalimg-fallback">
+    window.addEventListener('error', event => {
+      const img = event.target;
+      if (!(img instanceof HTMLImageElement) || img.dataset.dmRootTried) return;
+      const src = img.getAttribute('src') || '';
+      if (!/(^|\/)generalimg\//.test(src)) return;
+      img.dataset.dmRootTried = '1';
+      img.src = src.replace(/(^|\/)generalimg\//, '$1');
+    }, true);
+    </script>
     <title>DAYMAR | El Salvador</title>
     <meta name="description" content="Descubre relojes, joyería, carteras, anillos y accesorios DAYMAR. Envíos a todo El Salvador y pedidos por WhatsApp.">
     <meta name="keywords" content="accesorios El Salvador, relojes, collares, carteras, anillos, DAYMAR">
@@ -41,7 +51,7 @@
     <meta property="og:site_name" content="DAYMAR">
     <meta property="og:title" content="DAYMAR | El Salvador">
     <meta property="og:description" content="Detalles para regalar, celebrar y para ti. Accesorios DAYMAR, envíos a todo El Salvador y pedidos por WhatsApp.">
-    <meta property="og:image" content="https://industriastobias.github.io/klohesvtiendaonline/IMG_4183.png?v=1">
+    <meta property="og:image" content="https://industriastobias.github.io/klohesvtiendaonline/generalimg/IMG_4183.png?v=1">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:alt" content="DAYMAR">
     <meta property="og:url" content="https://industriastobias.github.io/klohesvtiendaonline/">
@@ -49,7 +59,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DAYMAR | El Salvador">
     <meta name="twitter:description" content="Detalles DAYMAR para cada día. Pedidos por WhatsApp.">
-    <meta name="twitter:image" content="https://industriastobias.github.io/klohesvtiendaonline/IMG_4183.png?v=1">
+    <meta name="twitter:image" content="https://industriastobias.github.io/klohesvtiendaonline/generalimg/IMG_4183.png?v=1">
     <meta name="twitter:image:alt" content="DAYMAR">
     
     <script type="application/ld+json">
@@ -58,8 +68,8 @@
       "@type": "OnlineStore",
       "name": "DAYMAR",
       "url": "https://industriastobias.github.io/klohesvtiendaonline/",
-      "logo": "https://industriastobias.github.io/klohesvtiendaonline/isotipo.png?v=2",
-      "image": "https://industriastobias.github.io/klohesvtiendaonline/isotipo.png?v=2",
+      "logo": "https://industriastobias.github.io/klohesvtiendaonline/generalimg/isotipo.png?v=2",
+      "image": "https://industriastobias.github.io/klohesvtiendaonline/generalimg/isotipo.png?v=2",
       "description": "Tienda en línea de accesorios con envíos a todo El Salvador.",
       "telephone": "+50366711569",
       "email": "daymarsv@gmail.com",
@@ -77,7 +87,7 @@
       }
     }
     </script>
-    <link rel="icon" type="image/png" href="IMG_4183.png?v=1">
+    <link rel="icon" type="image/png" href="generalimg/IMG_4183.png?v=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -720,19 +730,19 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 .dm-ornament::before, .dm-ornament::after { content: ''; width: 46px; height: 1px; background: currentColor; opacity: .7; }
 .dm-ornament i { width: 7px; height: 7px; transform: rotate(45deg); border: 1px solid currentColor; }
 
-/* ---------- Barra superior: un solo mensaje centrado ---------- */
+/* ---------- Barra superior: texto en movimiento ---------- */
 .atelier-topline {
   position: relative; z-index: 60; height: 34px; overflow: hidden;
   background: var(--wine); color: var(--gold-soft);
   font-size: 10.5px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase;
 }
-.atelier-topline-viewport { height: 100%; display: flex; align-items: center; justify-content: center; }
-.atelier-topline-track { display: flex; justify-content: center; width: 100%; }
-.atelier-topline-copy { display: flex; align-items: center; justify-content: center; }
-.atelier-topline-copy[aria-hidden="true"] { display: none; }
-.atelier-topline-copy span { white-space: nowrap; padding: 0 22px; position: relative; }
-.atelier-topline-copy span + span::before {
-  content: ''; position: absolute; left: -3px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px;
+.atelier-topline-viewport { height: 100%; display: flex; align-items: center; overflow: hidden; }
+.atelier-topline-track { display: flex; width: max-content; animation: dm-marquee 40s linear infinite; }
+.atelier-topline:hover .atelier-topline-track { animation-play-state: paused; }
+.atelier-topline-copy { display: flex; align-items: center; flex: none; }
+.atelier-topline-copy span { white-space: nowrap; padding: 0 26px; position: relative; }
+.atelier-topline-copy span::after {
+  content: ''; position: absolute; right: -3px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px;
   transform: rotate(45deg); border: 1px solid var(--gold);
 }
 
@@ -1271,7 +1281,6 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
   html { scroll-padding-top: 70px; }
   body { padding-bottom: calc(66px + var(--safe-b)); }
   .atelier-topline { height: 30px; font-size: 9.5px; letter-spacing: .18em; }
-  .atelier-topline-copy span:nth-child(3) { display: none; }
   .atelier-nav { min-height: 62px; }
   .menu-toggle b { display: none; }
   .menu-toggle { width: 42px; padding: 0; }
@@ -1321,8 +1330,6 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 
 @media (max-width: 640px) {
   body { font-size: 14.5px; }
-  .atelier-topline-copy span:nth-child(1) { display: none; }
-  .atelier-topline-copy span + span::before { display: none; }
 
   .daymar-black-friday-banner::before { inset: 10px; }
   .daymar-black-friday-banner::after { inset: 15px; }
@@ -1506,7 +1513,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
             </div>
             <!-- Contenedor 2: isotipo independiente, grande y centrado. -->
             <div class="nav-center atelier-brand-lockup daymar-nav-brand">
-                <a href="#catalogo" class="logo" aria-label="DAYMAR"><img class="brand-isotipo" src="isotipo.png?v=2" alt="Isotipo DAYMAR" width="1254" height="295" decoding="async" fetchpriority="high"></a>
+                <a href="#catalogo" class="logo" aria-label="DAYMAR"><img class="brand-isotipo" src="generalimg/isotipo.png?v=2" alt="Isotipo DAYMAR" width="1254" height="295" decoding="async" fetchpriority="high"></a>
             </div>
             <!-- Contenedor 3: acciones; se conserva Buscar en escritorio. -->
             <div class="atelier-nav-end daymar-nav-actions">
@@ -1552,7 +1559,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
         <section class="daymar-login-dialog" id="daymarLoginDialog" role="dialog" aria-modal="true" aria-labelledby="daymarLoginTitle" aria-describedby="daymarLoginDescription" tabindex="-1">
             <button class="daymar-login-close" type="button" data-daymar-login-close aria-label="Cerrar inicio de sesión"><i class="fas fa-times" aria-hidden="true"></i></button>
             <div class="daymar-login-heading">
-                <img class="daymar-login-brand" src="isotipo.png?v=2" alt="DAYMAR" width="1254" height="295" decoding="async">
+                <img class="daymar-login-brand" src="generalimg/isotipo.png?v=2" alt="DAYMAR" width="1254" height="295" decoding="async">
                 <p class="daymar-login-eyebrow">TU ESPACIO PERSONAL</p>
                 <h2 id="daymarLoginTitle">Tu cuenta DAYMAR</h2>
                 <p class="daymar-login-description daymar-tier-badge" id="daymarLoginDescription">BASIC</p>
@@ -1867,15 +1874,15 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
             <div class="atelier-category-rail" role="group" aria-label="Filtrar por categoría">
                 <button type="button" class="active" onclick="filterProducts('todos', this)"><span class="dm-cat-photo"><img src="carpetaimg/Carpeta01.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Todas</span></button>
                 <button type="button" onclick="filterProducts('oro-plata', this)"><span class="dm-cat-photo"><img src="prodimg/12296214.1.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Oro y Plata</span></button>
-                <button type="button" onclick="filterProducts('reloj', this)"><span class="dm-cat-photo"><img src="811652.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Relojes</span></button>
-                <button type="button" onclick="filterProducts('anillo', this)"><span class="dm-cat-photo"><img src="017.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Anillos</span></button>
-                <button type="button" onclick="filterProducts('aritos', this)"><span class="dm-cat-photo"><img src="046.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Aritos</span></button>
-                <button type="button" onclick="filterProducts('cartera', this)"><span class="dm-cat-photo"><img src="152.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Carteras</span></button>
-                <button type="button" onclick="filterProducts('collar', this)"><span class="dm-cat-photo"><img src="066.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Collares</span></button>
-                <button type="button" onclick="filterProducts('lentes-sol', this)"><span class="dm-cat-photo"><img src="015.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Lentes de sol</span></button>
-                <button type="button" onclick="filterProducts('accesorios-cabello', this)"><span class="dm-cat-photo"><img src="137.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Para el cabello</span></button>
-                <button type="button" onclick="filterProducts('otros', this)"><span class="dm-cat-photo"><img src="122.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Indispensables</span></button>
-                <button type="button" onclick="filterProducts('pulsera', this)"><span class="dm-cat-photo"><img src="40107.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Pulseras</span></button>
+                <button type="button" onclick="filterProducts('reloj', this)"><span class="dm-cat-photo"><img src="generalimg/811652.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Relojes</span></button>
+                <button type="button" onclick="filterProducts('anillo', this)"><span class="dm-cat-photo"><img src="generalimg/017.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Anillos</span></button>
+                <button type="button" onclick="filterProducts('aritos', this)"><span class="dm-cat-photo"><img src="generalimg/046.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Aritos</span></button>
+                <button type="button" onclick="filterProducts('cartera', this)"><span class="dm-cat-photo"><img src="generalimg/152.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Carteras</span></button>
+                <button type="button" onclick="filterProducts('collar', this)"><span class="dm-cat-photo"><img src="generalimg/066.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Collares</span></button>
+                <button type="button" onclick="filterProducts('lentes-sol', this)"><span class="dm-cat-photo"><img src="generalimg/015.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Lentes de sol</span></button>
+                <button type="button" onclick="filterProducts('accesorios-cabello', this)"><span class="dm-cat-photo"><img src="generalimg/137.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Para el cabello</span></button>
+                <button type="button" onclick="filterProducts('otros', this)"><span class="dm-cat-photo"><img src="generalimg/122.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Indispensables</span></button>
+                <button type="button" onclick="filterProducts('pulsera', this)"><span class="dm-cat-photo"><img src="generalimg/40107.jpg" alt="" loading="lazy" decoding="async"></span><span class="dm-cat-label">Pulseras</span></button>
             </div>
 
 <div class="products-grid" id="productsContainer"></div>
@@ -1911,7 +1918,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
                 <span class="daymar-contact-label">Métodos de pago</span>
                 <span>Efectivo o transferencia bancaria</span>
                 <span>Confirma tu pedido por WhatsApp</span>
-                <img src="visa-mastercard.png" alt="Visa y Mastercard" loading="lazy">
+                <img src="generalimg/visa-mastercard.png" alt="Visa y Mastercard" loading="lazy">
             </div>
         </div>
     </section>
@@ -2078,7 +2085,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
     <footer aria-label="Derechos y créditos de DAYMAR">
         <div class="container">
             <div class="dm-footer-brand">
-                <img class="dm-footer-logo" src="isotipo.png?v=2" alt="DAYMAR" width="1254" height="295" loading="lazy" decoding="async">
+                <img class="dm-footer-logo" src="generalimg/isotipo.png?v=2" alt="DAYMAR" width="1254" height="295" loading="lazy" decoding="async">
                 <p class="dm-footer-tagline">Detalles para regalar, celebrar y para ti.</p>
                 <div class="dm-footer-social">
                     <a href="https://instagram.com/daymarsv" target="_blank" rel="noopener noreferrer" aria-label="Instagram DAYMAR"><i class="fab fa-instagram" aria-hidden="true"></i></a>
@@ -2994,8 +3001,10 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
                 let imagePath = String(image).trim();
                 const isAbsolute = /^(https?:|data:|\/)/i.test(imagePath);
 
-                if (!isFineJewelryProduct(product) || isAbsolute) {
-                    return imagePath;
+                if (isAbsolute) return imagePath;
+                if (!isFineJewelryProduct(product)) {
+                    // Las fotos generales viven en generalimg/.
+                    return imagePath.includes('/') ? imagePath : `generalimg/${imagePath}`;
                 }
 
                 imagePath = imagePath.replace(/^prodimg\//i, '');
@@ -3573,7 +3582,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
                         <div class="${itemClass}" aria-label="${displayName}: ${statusText}">
                             <div class="cart-item-image">
                                 <img src="${getPrimaryProductImage(liveProduct || item)}" alt="${displayName}" loading="lazy" decoding="async"
-                                     onerror="if (!this.dataset.fallback) { this.dataset.fallback='1'; this.src = new URL(String((liveProduct || item).barcode) + '.jpg', document.baseURI).href; } else { this.removeAttribute('src'); }">
+                                     onerror="if (!this.dataset.fallback) { this.dataset.fallback='1'; this.src = new URL('generalimg/' + String((liveProduct || item).barcode) + '.jpg', document.baseURI).href; } else { this.removeAttribute('src'); }">
                             </div>
                             <div class="cart-item-details">
                                 <h4>${displayName}</h4>

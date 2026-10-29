@@ -1661,6 +1661,12 @@ html.dm-bf-anim .daymar-black-friday-banner:not(.dm-bf-play) .daymar-black-frida
   .atelier-hero-copy .eyebrow { margin-bottom: 14px; }
 }
 
+/* ---------- Computadora: menos margen a los lados ---------- */
+:root { --edge: clamp(16px, 2vw, 28px); --maxw: 1720px; }
+@media (min-width: 1500px) {
+  .products-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
     </style>
 </head>
 <body>

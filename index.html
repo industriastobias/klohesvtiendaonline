@@ -103,9 +103,27 @@
                 history.scrollRestoration = 'manual';
             }
 
-            const goToTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+            // Quita #catalogo u otra marca de la dirección para que al recargar no salte hacia abajo.
+            if (location.hash) {
+                history.replaceState(null, '', location.pathname + location.search);
+            }
+            const goToTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            goToTop();
+            document.addEventListener('DOMContentLoaded', goToTop, { once: true });
             window.addEventListener('load', goToTop, { once: true });
             window.addEventListener('pageshow', goToTop);
+            // Los enlaces internos (#catalogo) desplazan sin cambiar la dirección.
+            document.addEventListener('click', event => {
+                const link = event.target instanceof Element ? event.target.closest('a[href^="#"]') : null;
+                if (!link) return;
+                const id = link.getAttribute('href').slice(1);
+                const target = id && document.getElementById(id);
+                if (!target) return;
+                event.preventDefault();
+                const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+                if (id !== 'catalogo' && target.matches('a, button, input, [tabindex]')) target.focus({ preventScroll: true });
+            });
         })();
     </script>
 

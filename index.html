@@ -1435,6 +1435,36 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 .cart-corner-btn.out-of-stock { background: transparent; color: #9A8F94; box-shadow: inset 0 0 0 1px var(--line); }
 @media (max-width: 640px) { .cart-corner-btn { height: 38px; font-size: 9.5px; letter-spacing: .1em; border-radius: 5px; } }
 
+/* ---------- Carrito: más espacio para los productos ---------- */
+.dm-cart-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.dm-cart-body #cartItems { flex: none; overflow: visible; min-height: 0; padding-top: 4px; padding-bottom: 4px; }
+.dm-cart-body .shipping-option { border-bottom: 1px solid var(--line); }
+.dm-cart-body .cart-summary { border-top: 0; margin: 0 24px 16px; padding: 14px 16px; border-radius: var(--r-md); background: var(--ivory); }
+.dm-cart-footer {
+  flex: none; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0 12px;
+  padding: 12px 24px calc(12px + var(--safe-b)); background: var(--paper); border-top: 1px solid var(--line);
+  box-shadow: 0 -10px 24px rgba(30, 22, 25, .06);
+}
+.dm-cart-footer .cart-total { grid-column: 1 / -1; padding: 0 0 2px; border: 0; background: none; }
+.dm-cart-footer .cart-total span:last-child { font-size: 30px; }
+.dm-cart-footer .payment-note { grid-column: 1 / -1; padding: 0 0 10px; background: none; font-size: 11.5px; }
+.dm-cart-footer .btn-whatsapp { grid-column: 1; margin: 0; height: 50px; }
+.dm-cart-footer .btn-clear-cart { grid-column: 2; margin: 0; width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--line); padding: 0; }
+.dm-cart-footer .btn-clear-cart span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.dm-cart-footer .btn-clear-cart i { font-size: 15px; }
+.dm-cart-footer .btn-clear-cart:hover { border-color: var(--danger); }
+.cart-item { grid-template-columns: 92px minmax(0, 1fr); gap: 16px; padding: 16px 0; }
+.cart-item-image { width: 92px; height: 104px; border-radius: var(--r-md); }
+.cart-item-details h4 { font-size: 13px; }
+.shipping-option { padding-block: 14px; }
+@media (max-width: 640px) {
+  .dm-cart-body .cart-summary { margin-inline: 18px; }
+  .dm-cart-footer { padding-inline: 18px; }
+  .dm-cart-footer .btn-whatsapp { height: 48px; font-size: 11px; letter-spacing: .1em; }
+  .dm-cart-footer .btn-clear-cart { width: 48px; height: 48px; }
+}
+.cart-empty::before { font-weight: 900; }
+
     </style>
 </head>
 <body>
@@ -2253,6 +2283,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
             <h2>Carrito de compras</h2>
             <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
         </div>
+        <div class="dm-cart-body">
         <div class="shipping-option">
             <div class="shipping-header" title="Envío a todo el país · Entrega en 2–5 días hábiles">
                 <span class="shipping-title">Envío</span>
@@ -2296,7 +2327,10 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
                 <span>Envío:</span>
                 <span id="daymarCartShippingCost">$4.00</span>
             </div>
-        </div>        <div class="cart-total">
+        </div>
+        </div>
+        <div class="dm-cart-footer">
+        <div class="cart-total">
             <span>Total:</span>
             <span id="cartTotal">$0.00</span>
         </div>
@@ -2307,9 +2341,10 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
         <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank" rel="noopener" title="Comprar por WhatsApp" aria-label="Comprar por WhatsApp">
             <i class="fab fa-whatsapp"></i> <span>COMPRAR POR WHATSAPP</span>
         </a>
-        <button class="btn-clear-cart" onclick="clearCart()" id="clearCartBtn" style="display: none;">
+        <button class="btn-clear-cart" onclick="clearCart()" id="clearCartBtn" style="display: none;" aria-label="Vaciar carrito" title="Vaciar carrito">
             <i class="fas fa-trash-alt"></i> <span>Vaciar carrito</span>
         </button>
+        </div>
     </div>
 
 

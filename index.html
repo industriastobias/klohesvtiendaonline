@@ -99,6 +99,7 @@
 
     <script id="scroll-to-top-on-load">
         (() => {
+            document.documentElement.classList.add('dm-bf-anim');
             if ('scrollRestoration' in history) {
                 history.scrollRestoration = 'manual';
             }
@@ -1602,6 +1603,48 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
   .dm-gift-mode .daymar-welcome-content h3 { font-size: 40px; }
   .dm-gift-mode .daymar-welcome-offers p span { padding-left: 18px; font-size: 9.5px; letter-spacing: .1em; }
   .dm-gift-mode .daymar-welcome-offers p strong { padding-right: 18px; font-size: 17px; }
+}
+
+/* ---------- Animación de entrada del Black Friday ---------- */
+.daymar-black-friday-label::before, .daymar-black-friday-label::after { content: ''; width: 34px; height: 1px; background: var(--gold-soft); opacity: .8; }
+.daymar-black-friday-banner h2 span { display: inline-block; }
+.daymar-black-friday-banner h2 em {
+  display: inline-block; padding-right: .06em;
+  background-image: linear-gradient(100deg, #D2A95E 0%, #F4E3B5 18%, #FFF8E6 24%, #F4E3B5 30%, #D2A95E 48%, #F1D99B 70%, #D2A95E 100%);
+  background-size: 260% 100%; background-position: 100% 0;
+}
+.dm-bf-letter { display: inline-block; }
+
+html.dm-bf-anim .daymar-black-friday-banner:not(.dm-bf-play) :is(.daymar-black-friday-label span, .daymar-black-friday-label i, .dm-bf-letter, h2 em, .daymar-black-friday-copy-block p, .daymar-black-friday-deal, .daymar-black-friday-cta) { opacity: 0; }
+html.dm-bf-anim .daymar-black-friday-banner:not(.dm-bf-play) .daymar-black-friday-label::before,
+html.dm-bf-anim .daymar-black-friday-banner:not(.dm-bf-play) .daymar-black-friday-label::after { transform: scaleX(0); }
+
+.dm-bf-play .daymar-black-friday-label span { animation: dm-bf-track 1s cubic-bezier(.2, .7, .2, 1) both; }
+.dm-bf-play .daymar-black-friday-label i { animation: dm-bf-track 1s .15s cubic-bezier(.2, .7, .2, 1) both; }
+.dm-bf-play .daymar-black-friday-label::before { transform-origin: right; animation: dm-bf-line .8s .35s cubic-bezier(.2, .7, .2, 1) both; }
+.dm-bf-play .daymar-black-friday-label::after { transform-origin: left; animation: dm-bf-line .8s .35s cubic-bezier(.2, .7, .2, 1) both; }
+.dm-bf-play .dm-bf-letter { animation: dm-bf-drop .75s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(.45s + var(--i) * 80ms); }
+.dm-bf-play h2 em {
+  animation: dm-bf-wipe 1s .95s cubic-bezier(.65, 0, .35, 1) both, dm-bf-shine 5s 2.2s ease-in-out infinite;
+}
+.dm-bf-play .daymar-black-friday-copy-block p { animation: dm-bf-rise .7s 1.5s ease both; }
+.dm-bf-play .daymar-black-friday-deal { animation: dm-bf-pop .7s cubic-bezier(.2, 1.4, .4, 1) both; }
+.dm-bf-play .daymar-black-friday-deal.deal-watch { animation-delay: 1.65s; }
+.dm-bf-play .daymar-black-friday-deal.deal-main { animation-delay: 1.8s; }
+.dm-bf-play .daymar-black-friday-deal.deal-jewelry { animation-delay: 1.95s; }
+.dm-bf-play .daymar-black-friday-cta { animation: dm-bf-rise .7s 2.25s ease both; }
+
+@keyframes dm-bf-track { from { opacity: 0; letter-spacing: .9em; filter: blur(4px); } to { opacity: 1; filter: none; } }
+@keyframes dm-bf-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes dm-bf-drop { from { opacity: 0; transform: translateY(-.55em) rotate(-8deg); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes dm-bf-wipe { from { opacity: 1; clip-path: inset(-10% 100% -10% 0); } to { opacity: 1; clip-path: inset(-10% 0 -10% 0); } }
+@keyframes dm-bf-shine { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+@keyframes dm-bf-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes dm-bf-pop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html.dm-bf-anim .daymar-black-friday-banner :is(.daymar-black-friday-label span, .daymar-black-friday-label i, .dm-bf-letter, h2 em, .daymar-black-friday-copy-block p, .daymar-black-friday-deal, .daymar-black-friday-cta) { opacity: 1 !important; animation: none !important; }
+  html.dm-bf-anim .daymar-black-friday-label::before, html.dm-bf-anim .daymar-black-friday-label::after { transform: none !important; animation: none !important; }
 }
 
     </style>
@@ -5441,6 +5484,45 @@ const firebaseConfig = {
     wasActive = active;
   }).observe(popup, { attributes: true, attributeFilter: ['class'] });
   if (wasActive) reset();
+})();
+</script>
+
+<script id="daymar-black-friday-intro">
+(() => {
+  const banner = document.querySelector('.daymar-black-friday-banner');
+  if (!banner) return;
+  const black = banner.querySelector('h2 span');
+  if (black && !black.querySelector('.dm-bf-letter')) {
+    const word = black.textContent;
+    black.setAttribute('aria-label', word);
+    black.replaceChildren(...[...word].map((ch, i) => {
+      const s = document.createElement('span');
+      s.className = 'dm-bf-letter';
+      s.setAttribute('aria-hidden', 'true');
+      s.style.setProperty('--i', i);
+      s.textContent = ch;
+      return s;
+    }));
+  }
+  const popup = document.getElementById('newsletterPopup');
+  let visible = false, played = false;
+  const play = () => {
+    if (played) return;
+    played = true;
+    banner.classList.add('dm-bf-play');
+  };
+  const check = () => {
+    if (played || !visible) return;
+    if (popup && popup.classList.contains('active')) return;
+    play();
+  };
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => { visible = entries[0].isIntersecting; check(); }, { threshold: .25 }).observe(banner);
+  } else { visible = true; }
+  if (popup) new MutationObserver(check).observe(popup, { attributes: true, attributeFilter: ['class'] });
+  check();
+  // Respaldo: nunca dejar el anuncio oculto.
+  setTimeout(play, 15000);
 })();
 </script>
 <script id="daymar-category-rail-sync">

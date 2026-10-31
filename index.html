@@ -42,8 +42,8 @@
     <meta name="keywords" content="accesorios El Salvador, relojes, collares, carteras, anillos, DAYMAR">
     <meta name="author" content="DAYMAR">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#662D42" media="(max-width: 800px)">
-    <meta name="theme-color" content="#662D42" media="(min-width: 801px)">
+    <meta name="theme-color" content="#662D42">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="color-scheme" content="light">
     <link rel="canonical" href="https://industriastobias.github.io/klohesvtiendaonline/">
     
@@ -1675,6 +1675,16 @@ html.dm-bf-anim .daymar-black-friday-banner:not(.dm-bf-play) .daymar-black-frida
 }
 .hero-gallery-audio-toggle span { display: none; }
 .hero-gallery-audio-toggle:hover, .hero-gallery-audio-toggle:focus-visible { opacity: 1; background: rgba(30, 22, 25, .5); }
+
+/* Color de la barra del navegador (Safari / Chrome): vino DAYMAR */
+html { color-scheme: only light; background-color: #662d42; }
+body { background-color: var(--ivory); }
+@supports (-webkit-touch-callout: none) {
+  html.device-ios .daymar-browser-color-edge {
+    display: block; position: fixed; top: 0; left: 0; width: 100%; height: 6px; margin: 0; padding: 0; border: 0;
+    background-color: #662d42; pointer-events: none; z-index: 20;
+  }
+}
 
     </style>
 </head>

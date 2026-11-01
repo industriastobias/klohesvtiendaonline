@@ -3254,7 +3254,7 @@ body { background-color: var(--ivory); }
         }
         // URL pública estable para que WhatsApp pueda abrir la imagen desde iPhone y Android.
         function getWhatsAppProductImage(product) {
-            const image = getProductImages(product)[0] || '';
+            const image = (getProductImages(product)[0] || '').replace(/^generalimg\//, '');
             if (!image || /^data:/i.test(image)) return '';
             try {
                 return new URL(image, 'https://industriastobias.github.io/klohesvtiendaonline/').href;

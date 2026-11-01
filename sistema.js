@@ -82,12 +82,8 @@
       var m = b.href.match(/^([^?]*\?text=)([^&]*)(.*)$/); if (!m) return;
       var t = decodeURIComponent(m[2].replace(/\+/g, ' '));
       var i = t.indexOf('\n\n*Datos de entrega*'); if (i >= 0) t = t.slice(0, i);
-      var d = datos(), L = [];
-      if (d.nombre) L.push('Nombre: ' + d.nombre);
-      if (d.telefono) L.push('Teléfono: ' + d.telefono);
-      if (d.correo) L.push('Correo: ' + d.correo);
-      if (d.direccion) L.push('Dirección: ' + d.direccion);
-      if (L.length) t += '\n\n*Datos de entrega*\n' + L.join('\n');
+      var d = datos();
+      if (d.nombre || d.telefono || d.correo || d.direccion) t += '\n\n*Datos de entrega*\nYa llené mis datos en la tienda. ¿Me confirmas si están correctos?';
       var nuevo = m[1] + encodeURIComponent(t) + m[3];
       if (nuevo !== b.href) { applying = true; b.href = nuevo; applying = false; }
     } catch (e) { applying = false; }

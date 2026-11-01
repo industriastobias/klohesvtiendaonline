@@ -3335,10 +3335,27 @@ body { background-color: var(--ivory); }
         function getWhatsAppProductImage(product) {
             const image = (getProductImages(product)[0] || '').replace(/^generalimg\//, '');
             if (!image || /^data:/i.test(image)) return '';
+            const code = String((product && product.barcode) || '').trim();
+            if (code && /^[A-Za-z0-9._-]+$/.test(code)) return 'https://industriastobias.github.io/klohesvtiendaonline/p/' + code + '.html';
             try {
                 return new URL(image, 'https://industriastobias.github.io/klohesvtiendaonline/').href;
             } catch (_) { return ''; }
         }
+
+        // Enlace de producto compartido (?cod=090): abre el catálogo filtrado por ese código
+        (function () {
+            const code = new URLSearchParams(location.search).get('cod');
+            if (!code) return;
+            let tries = 0;
+            const timer = setInterval(() => {
+                tries++;
+                if (typeof searchProducts === 'function' && typeof products !== 'undefined' && document.getElementById('searchInput')) {
+                    clearInterval(timer);
+                    searchProducts(code);
+                    setTimeout(() => document.getElementById('catalogo')?.scrollIntoView({ behavior: 'instant', block: 'start' }), 400);
+                } else if (tries > 80) clearInterval(timer);
+            }, 150);
+        })();
 
         // Cambia automáticamente las imágenes de las tarjetas que tienen una galería.
         function initProductCardGallery(card, images) {
@@ -3942,7 +3959,7 @@ body { background-color: var(--ivory); }
                     whatsappBtn.style.display = purchasableCartItems.length > 0 ? 'flex' : 'none';
                     const messageLines = purchasableCartItems.map(({ item, liveProduct, itemPrice }) => {
                         const imageUrl = getWhatsAppProductImage(liveProduct || item);
-                        return `* ${liveProduct?.name || item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}${imageUrl ? `\n  Imagen del producto: ${imageUrl}` : ''}`;
+                        return `* ${liveProduct?.name || item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}${imageUrl ? `\n  Ver producto: ${imageUrl}` : ''}`;
                     });
                     const shippingText = AppState.shippingEnabled ? `\n\nEnvío nacional: $${shippingCost.toFixed(2)}${benefitQuote.kind === 'shipping' ? ' (beneficio Premium)' : ''}` : '';
                     const benefitText = benefitQuote.coupon > 0 ? `\n\nBeneficio Premium en productos: -$${benefitQuote.coupon.toFixed(2)}` : '';

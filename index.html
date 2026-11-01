@@ -1697,7 +1697,7 @@ body { background-color: var(--ivory); }
 /* Envío + aviso Premium: franja compacta */
 .dm-cart-body .shipping-option { padding: 12px 24px; gap: 2px 12px; }
 .shipping-desc { font-size: 12px; }
-.daymar-benefit-compact { grid-column: 1 / -1; margin-top: 6px; }
+.daymar-benefit-compact { grid-column: 1 / -1; margin-top: 6px; padding: 0; border: 0; background: none; border-radius: 0; }
 .daymar-benefit-minimum {
   margin: 0; padding: 8px 12px; font-size: 12px; line-height: 1.45; color: var(--wine);
   background: rgba(184, 146, 74, .1); border: 1px dashed rgba(184, 146, 74, .55); border-radius: 8px;
@@ -1721,6 +1721,25 @@ body { background-color: var(--ivory); }
   .dm-cart-footer .payment-note strong { display: block; margin: 0 0 2px; }
   .dm-cart-footer .btn-whatsapp { height: 48px; }
   .dm-cart-footer .btn-clear-cart { width: 48px; height: 48px; }
+}
+
+/* Pantallas bajas (laptops, zoom de Windows): todo más compacto para que quepan los productos */
+@media (min-width: 901px) and (max-height: 760px) {
+  .cart-header { padding: 12px 28px; }
+  .cart-header h2 { font-size: 24px; }
+  .cart-header .close-cart { width: 34px; height: 34px; }
+  .dm-cart-body .shipping-option { padding-block: 8px; }
+  .shipping-desc { font-size: 11.5px; }
+  .daymar-benefit-minimum { padding: 6px 10px; font-size: 11.5px; }
+  .cart-item { grid-template-columns: 64px minmax(0, 1fr); gap: 12px; padding: 10px 0; }
+  .cart-item-image { width: 64px; height: 72px; }
+  .cart-item-details h4 { font-size: 12px; }
+  .dm-cart-footer { padding: 10px 28px 12px; }
+  .dm-cart-footer .cart-total span:last-child { font-size: 26px; }
+  .dm-cart-footer .payment-note { padding-bottom: 8px; font-size: 11px; }
+  .dm-cart-footer .payment-note strong { display: inline; margin: 0 6px 0 0; }
+  .dm-cart-footer .btn-whatsapp, .dm-cart-footer .btn-clear-cart { height: 42px; }
+  .dm-cart-footer .btn-clear-cart { width: 42px; }
 }
 
 </style>

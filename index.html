@@ -1686,7 +1686,44 @@ body { background-color: var(--ivory); }
   }
 }
 
-    </style>
+/* ---------- Carrito: acabado más fino (computadora) ---------- */
+/* Barra de desplazamiento delgada y discreta */
+.dm-cart-body, .favorites-list { scrollbar-width: thin; scrollbar-color: rgba(102, 45, 66, .35) transparent; }
+.dm-cart-body::-webkit-scrollbar, .favorites-list::-webkit-scrollbar { width: 6px; }
+.dm-cart-body::-webkit-scrollbar-track, .favorites-list::-webkit-scrollbar-track { background: transparent; }
+.dm-cart-body::-webkit-scrollbar-thumb, .favorites-list::-webkit-scrollbar-thumb { background: rgba(102, 45, 66, .3); border-radius: 6px; }
+.dm-cart-body::-webkit-scrollbar-thumb:hover, .favorites-list::-webkit-scrollbar-thumb:hover { background: rgba(102, 45, 66, .55); }
+
+/* Envío + aviso Premium: franja compacta */
+.dm-cart-body .shipping-option { padding: 12px 24px; gap: 2px 12px; }
+.shipping-desc { font-size: 12px; }
+.daymar-benefit-compact { grid-column: 1 / -1; margin-top: 6px; }
+.daymar-benefit-minimum {
+  margin: 0; padding: 8px 12px; font-size: 12px; line-height: 1.45; color: var(--wine);
+  background: rgba(184, 146, 74, .1); border: 1px dashed rgba(184, 146, 74, .55); border-radius: 8px;
+}
+
+@media (min-width: 901px) {
+  .cart-modal, .favorites-modal { width: 480px; }
+  .cart-header { padding: 20px 28px 18px; }
+  .cart-header h2 { font-size: 30px; }
+  .dm-cart-body .shipping-option { padding-inline: 28px; }
+  .dm-cart-body #cartItems { padding-inline: 28px; }
+  .cart-item { grid-template-columns: 84px minmax(0, 1fr); gap: 16px; padding: 14px 0; align-items: center; }
+  .cart-item-image { width: 84px; height: 96px; }
+  .dm-cart-body .cart-summary { margin-inline: 28px; }
+
+  /* Pie: total en una línea y nota de pago discreta */
+  .dm-cart-footer { padding: 14px 28px 18px; gap: 0 12px; }
+  .dm-cart-footer .cart-total { display: flex; align-items: baseline; justify-content: space-between; padding: 0 0 4px; }
+  .dm-cart-footer .cart-total span:last-child { font-size: 32px; }
+  .dm-cart-footer .payment-note { padding: 0 0 12px; font-size: 11.5px; line-height: 1.45; }
+  .dm-cart-footer .payment-note strong { display: block; margin: 0 0 2px; }
+  .dm-cart-footer .btn-whatsapp { height: 48px; }
+  .dm-cart-footer .btn-clear-cart { width: 48px; height: 48px; }
+}
+
+</style>
 </head>
 <body>
 <div class="daymar-browser-color-edge" aria-hidden="true"></div>

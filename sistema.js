@@ -65,7 +65,7 @@
 
 
   /* 3) Datos de entrega opcionales: el cliente puede llenarlos en la tienda y se agregan al mensaje de WhatsApp y al pedido */
-  var CAMPOS = [['nombre', 'Nombre', 'text', 'name'], ['telefono', 'Teléfono', 'tel', 'tel'], ['correo', 'Correo (para tu factura)', 'email', 'email'], ['direccion', 'Dirección de entrega', 'text', 'street-address']];
+  var CAMPOS = [['nombre', 'Nombre', 'text', 'name'], ['telefono', 'Teléfono', 'tel', 'tel'], ['correo', 'Correo (para tu garantía)', 'email', 'email'], ['direccion', 'Dirección de entrega', 'text', 'street-address']];
   var KEY = 'daymar_datos_entrega', applying = false;
   function leer() { try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { return {}; } }
   function guardar(o) { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }

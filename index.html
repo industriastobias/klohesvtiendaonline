@@ -3957,9 +3957,9 @@ body { background-color: var(--ivory); }
                 
                 if (whatsappBtn) {
                     whatsappBtn.style.display = purchasableCartItems.length > 0 ? 'flex' : 'none';
-                    const messageLines = purchasableCartItems.map(({ item, liveProduct, itemPrice }) => {
-                        const imageUrl = getWhatsAppProductImage(liveProduct || item);
-                        return `* ${liveProduct?.name || item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}${imageUrl ? `\n  Ver producto: ${imageUrl}` : ''}`;
+                    const messageLines = purchasableCartItems.map(({ item, liveProduct, itemPrice }, lineIndex) => {
+                        const imageUrl = lineIndex === 0 ? getWhatsAppProductImage(liveProduct || item) : '';
+                        return `* ${liveProduct?.name || item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}${imageUrl ? `\n  Foto: ${imageUrl}` : ''}`;
                     });
                     const shippingText = AppState.shippingEnabled ? `\n\nEnvío nacional: $${shippingCost.toFixed(2)}${benefitQuote.kind === 'shipping' ? ' (beneficio Premium)' : ''}` : '';
                     const benefitText = benefitQuote.coupon > 0 ? `\n\nBeneficio Premium en productos: -$${benefitQuote.coupon.toFixed(2)}` : '';

@@ -3336,7 +3336,7 @@ body { background-color: var(--ivory); }
             const image = (getProductImages(product)[0] || '').replace(/^generalimg\//, '');
             if (!image || /^data:/i.test(image)) return '';
             const code = String((product && product.barcode) || '').trim();
-            if (code && /^[A-Za-z0-9._-]+$/.test(code)) return 'https://industriastobias.github.io/klohesvtiendaonline/p/' + code + '.html';
+            if (code && /^[A-Za-z0-9._-]+$/.test(code)) return 'https://industriastobias.github.io/klohesvtiendaonline/p/' + code;
             try {
                 return new URL(image, 'https://industriastobias.github.io/klohesvtiendaonline/').href;
             } catch (_) { return ''; }

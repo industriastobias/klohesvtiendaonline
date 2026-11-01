@@ -2055,7 +2055,7 @@ body { background-color: var(--ivory); }
                 <div class="catalog-search-toolbar" role="search" aria-label="Buscar y ordenar productos">
                     <div class="catalog-search-field">
                         <label class="catalog-search-label" for="searchInput"><span>Buscar por nombre o tipo</span><i class="fas fa-arrow-right" aria-hidden="true"></i></label>
-                        <input type="text" class="search-input" id="searchInput" placeholder="Plata 925, aretes, cartera..." aria-label="Buscar productos">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Nombre o código: aretes, 090, cartera..." aria-label="Buscar productos">
                     </div>
                     <div class="catalog-sort-field">
                         <span id="catalogSortLabel">Ordenar precio</span>
@@ -3093,7 +3093,16 @@ body { background-color: var(--ivory); }
                 : getCategoryProducts(products, AppState.currentFilter);
 
             if (normalizedSearch) {
-                matchingProducts = matchingProducts.filter(product => matchesProductSearch(product, normalizedSearch));
+                const codeQuery = normalizedSearch.replace(/ /g, '');
+                const byCode = /^[0-9]{2,}$/.test(codeQuery)
+                    ? (() => {
+                        const exact = matchingProducts.filter(product => normalizeSearchText(product.barcode).replace(/ /g, '') === codeQuery);
+                        if (exact.length) return exact;
+                        const starts = matchingProducts.filter(product => normalizeSearchText(product.barcode).replace(/ /g, '').startsWith(codeQuery));
+                        return starts.length ? starts : null;
+                    })()
+                    : null;
+                matchingProducts = byCode || matchingProducts.filter(product => matchesProductSearch(product, normalizedSearch));
             }
 
             const minValue = document.getElementById('minPriceFilter')?.value;

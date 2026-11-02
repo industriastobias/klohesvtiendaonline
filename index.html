@@ -525,6 +525,11 @@ h1, h2, h3, h4, p { margin: 0; }
 .preview-add-btn:active, .preview-whatsapp-btn:active { transform: scale(.98); }
 .preview-whatsapp-btn { border: 1px solid #1CA64F; color: #178C42; background: transparent; }
 .preview-whatsapp-btn:hover { background: #1CA64F; color: #fff; }
+/* Botones del detalle: más compactos y en una sola línea (celular y escritorio) */
+.preview-actions { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 8px; padding-top: 12px; }
+.preview-add-btn, .preview-whatsapp-btn { height: 44px; gap: 6px; padding: 0 10px; font-size: 11px; letter-spacing: .06em; white-space: nowrap; }
+.preview-add-btn i, .preview-whatsapp-btn i { font-size: 13px; flex: none; }
+@media (max-width: 380px) { .preview-add-btn, .preview-whatsapp-btn { font-size: 10px; letter-spacing: .03em; padding: 0 6px; gap: 4px; } }
 
 /* Imagen ampliada */
 .image-lightbox {

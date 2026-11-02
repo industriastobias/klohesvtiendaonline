@@ -3331,15 +3331,9 @@ body { background-color: var(--ivory); }
             if (!image) return '';
             try { return new URL(image, document.baseURI).href; } catch (_) { return image; }
         }
-        // URL pública estable para que WhatsApp pueda abrir la imagen desde iPhone y Android.
-        function getWhatsAppProductImage(product) {
-            const image = (getProductImages(product)[0] || '').replace(/^generalimg\//, '');
-            if (!image || /^data:/i.test(image)) return '';
-            const code = String((product && product.barcode) || '').trim();
-            if (code && /^[A-Za-z0-9._-]+$/.test(code)) return 'https://industriastobias.github.io/klohesvtiendaonline/p/' + code;
-            try {
-                return new URL(image, 'https://industriastobias.github.io/klohesvtiendaonline/').href;
-            } catch (_) { return ''; }
+        // Enlace que se pega en el mensaje de WhatsApp: abre la tienda y WhatsApp muestra solo el logo de la marca (og:image de esta página).
+        function getWhatsAppProductImage() {
+            return 'https://industriastobias.github.io/klohesvtiendaonline/';
         }
 
         // Enlace de producto compartido (?cod=090): abre el catálogo filtrado por ese código
@@ -3959,7 +3953,7 @@ body { background-color: var(--ivory); }
                     whatsappBtn.style.display = purchasableCartItems.length > 0 ? 'flex' : 'none';
                     const messageLines = purchasableCartItems.map(({ item, liveProduct, itemPrice }, lineIndex) => {
                         const imageUrl = lineIndex === 0 ? getWhatsAppProductImage(liveProduct || item) : '';
-                        return `* ${liveProduct?.name || item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}${imageUrl ? `\n  Foto: ${imageUrl}` : ''}`;
+                        return `* ${liveProduct?.name || item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}${imageUrl ? `\n  Tienda: ${imageUrl}` : ''}`;
                     });
                     const shippingText = AppState.shippingEnabled ? `\n\nEnvío nacional: $${shippingCost.toFixed(2)}${benefitQuote.kind === 'shipping' ? ' (beneficio Premium)' : ''}` : '';
                     const benefitText = benefitQuote.coupon > 0 ? `\n\nBeneficio Premium en productos: -$${benefitQuote.coupon.toFixed(2)}` : '';

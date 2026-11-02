@@ -73,7 +73,7 @@
         items.push({
           codigo: String(it.barcode), sys: live.sys ? String(live.sys) : null, nombre: live.name || it.name,
           cantidad: Math.max(1, Math.min(99, Number(it.quantity) || 1)), precio: Number(getProductPrice(live)) || 0,
-          imagen: (typeof getWhatsAppProductImage === 'function' ? getWhatsAppProductImage(live) : '') || ''
+          imagen: ''
         });
       });
       if (!items.length) return;

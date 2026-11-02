@@ -13,23 +13,54 @@
     }, opts || {}));
   }
 
-  /* 1) Stock en vivo (espera máximo 2.5 s; nunca bloquea la tienda) */
-  var ready = new Promise(function (done) {
-    var timer = setTimeout(done, 2500);
-    rpc('tienda_stock').then(function (r) { return r.ok ? r.json() : []; }).then(function (rows) {
+  /* 1) Catálogo y stock desde el sistema (espera máximo 4 s; nunca bloquea la tienda).
+        Si el sistema no responde, se usa la última copia guardada o, si no hay, la lista de products.js. */
+  var CK = 'daymar_catalogo_v1', FRESCO = 2 * 60 * 1000;
+  function leerCache() { try { var c = JSON.parse(localStorage.getItem(CK) || 'null'); return c && Array.isArray(c.p) && c.p.length ? c : null; } catch (e) { return null; } }
+  function guardarCache(p) { try { localStorage.setItem(CK, JSON.stringify({ t: Date.now(), p: p })); } catch (e) {} }
+  function aplicarCatalogo(lista) {
+    if (typeof products === 'undefined' || !Array.isArray(products) || !Array.isArray(lista) || !lista.length) return false;
+    var nuevos = lista.filter(function (x) { return x && x.barcode && x.name; }).map(function (x) {
+      var o = { name: String(x.name), price: Number(x.price) || 0, stock: Math.max(0, Number(x.stock) || 0), barcode: String(x.barcode), category: x.category || 'Otros', _sistema: true };
+      if (x.description) o.description = String(x.description);
+      if (Array.isArray(x.images) && x.images.length) o.images = x.images.map(String);
+      return o;
+    });
+    if (!nuevos.length) return false;
+    products.length = 0;
+    nuevos.forEach(function (o) { products.push(o); });
+    window.DAYMAR_SYS_STATS = { enSistema: nuevos.length, total: nuevos.length, catalogo: true };
+    return true;
+  }
+  function stockSolo() {
+    /* respaldo: la lista fija de la tienda, con el stock en vivo del sistema */
+    return rpc('tienda_stock').then(function (r) { return r.ok ? r.json() : []; }).then(function (rows) {
       var map = {};
       (rows || []).forEach(function (x) { if (x && x.codigo) map[String(x.codigo).trim().toLowerCase()] = x; });
       if (typeof products !== 'undefined' && Array.isArray(products) && Object.keys(map).length) {
         var found = 0;
         products.forEach(function (p) {
           if (!p || typeof p !== 'object') return;
-          var key = String(p.sys || p.barcode || '').trim().toLowerCase();
-          var s = map[key];
+          var s = map[String(p.sys || p.barcode || '').trim().toLowerCase()];
           if (s) { p.stock = Number(s.stock) || 0; p._sistema = true; found++; }
         });
         window.DAYMAR_SYS_STATS = { enSistema: found, total: products.length };
       }
-    }).catch(function () {}).then(function () { clearTimeout(timer); done(); });
+    });
+  }
+  var ready = new Promise(function (done) {
+    var cerrado = false, timer = setTimeout(function () { cerrado = true; done(); }, 4000), cache = leerCache();
+    if (cache && Date.now() - cache.t < FRESCO && aplicarCatalogo(cache.p)) { clearTimeout(timer); done(); return; }
+    rpc('tienda_catalogo').then(function (r) { return r.ok ? r.json() : null; }).then(function (lista) {
+      if (Array.isArray(lista) && lista.length) { guardarCache(lista); if (!cerrado) aplicarCatalogo(lista); return; }
+      if (cerrado) return;
+      if (cache && aplicarCatalogo(cache.p)) return;
+      return stockSolo();
+    }).catch(function () {
+      if (cerrado) return;
+      if (cache && aplicarCatalogo(cache.p)) return;
+      return stockSolo().catch(function () {});
+    }).then(function () { clearTimeout(timer); done(); });
   });
 
   /* 2) Pedido hacia el sistema al tocar el botón de WhatsApp (no cambia lo que ya hace) */

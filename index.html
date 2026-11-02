@@ -2841,10 +2841,9 @@ body { background-color: var(--ivory); }
         // PRECIOS
         // ==========================================
         function getDiscountRate(product) {
-            // BLACK FRIDAY: promoción general, independiente del inicio de sesión.
-            if (isFineJewelryProduct(product)) return 0.02;
-            const isWatch = String(product?.category || '').trim().toLowerCase().includes('reloj');
-            return isWatch ? 0.40 : 0.50;
+            // Descuento de cada producto, tal como está en el sistema DAYMARSV (0 = precio completo).
+            const d = Number(product?.discount) || 0;
+            return d > 0 ? Math.min(d, 90) / 100 : 0;
         }
         function getOriginalPrice(product) {
             return Number(product?.price) || 0;
@@ -3517,7 +3516,7 @@ body { background-color: var(--ivory); }
                          decoding="async"
                          fetchpriority="${index < 6 ? 'high' : 'low'}"
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
-                    ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>BLACK FRIDAY</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}
+                    ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>OFERTA</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}
                     </div>
                     <span class="daymar-card-index">${String(index + 1).padStart(2, '0')}</span>
                   </div>

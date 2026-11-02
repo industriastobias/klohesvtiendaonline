@@ -21,7 +21,7 @@
   function aplicarCatalogo(lista) {
     if (typeof products === 'undefined' || !Array.isArray(products) || !Array.isArray(lista)) return false;
     var nuevos = lista.filter(function (x) { return x && x.barcode && x.name; }).map(function (x) {
-      var o = { name: String(x.name), price: Number(x.price) || 0, stock: Math.max(0, Number(x.stock) || 0), barcode: String(x.barcode), category: x.category || 'Otros', _sistema: true };
+      var o = { name: String(x.name), price: Number(x.price) || 0, stock: Math.max(0, Number(x.stock) || 0), barcode: String(x.barcode), category: x.category || 'Otros', _sistema: true, discount: Math.max(0, Math.min(90, Number(x.discount) || 0)) };
       if (x.description) o.description = String(x.description);
       if (Array.isArray(x.images) && x.images.length) o.images = x.images.map(String);
       return o;

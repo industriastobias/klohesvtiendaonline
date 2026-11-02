@@ -480,7 +480,7 @@ h1, h2, h3, h4, p { margin: 0; }
   content: ''; position: absolute; top: 50%; left: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
   border: 2px solid rgba(102, 45, 66, .2); border-top-color: var(--wine); animation: dm-spin .8s linear infinite;
 }
-.share-corner { position: absolute; z-index: 4; top: 14px; left: 14px; display: flex; flex-direction: column; gap: 8px; }
+.share-corner { position: absolute; z-index: 4; bottom: 14px; right: 14px; display: flex; flex-direction: column; gap: 8px; }
 .share-corner-btn {
   display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: rgba(252, 250, 246, .94); color: var(--ink-soft);
   font-size: 17px; box-shadow: var(--shadow-sm); transition: transform .2s, background .2s, color .2s;
@@ -2269,9 +2269,6 @@ body { background-color: var(--ivory); }
             <div class="preview-image-container">
                 <img src="" alt="" class="preview-image preview-image-zoomable" id="previewImage" loading="eager" decoding="async" onclick="event.stopPropagation(); openImageLightbox()" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openImageLightbox(); }" tabindex="0" role="button" aria-label="Abrir imagen en grande">
                 <div class="share-corner">
-                    <button class="share-corner-btn whatsapp" onclick="shareWhatsApp()" title="Compartir por WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </button>
                     <button class="share-corner-btn favorite" id="previewFavBtn" onclick="togglePreviewFavorite()" title="Agregar a favoritos">
                         <i class="far fa-heart"></i>
                     </button>

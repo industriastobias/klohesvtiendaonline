@@ -3160,8 +3160,9 @@ body { background-color: var(--ivory); }
             const normalizedSearch = normalizeSearchText(rawSearch);
             AppState.searchTerm = normalizedSearch;
 
+            // Al buscar, también salen los agotados (con su etiqueta), para que quien busque por código sepa que existe.
             let matchingProducts = AppState.currentFilter === 'todos'
-                ? prepareAllProducts(products)
+                ? (normalizedSearch ? placeSoldOutAndZeroPriceLast(products) : prepareAllProducts(products))
                 : getCategoryProducts(products, AppState.currentFilter);
 
             if (normalizedSearch) {

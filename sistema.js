@@ -14,9 +14,18 @@
   function codigoActual() {
     try { var c = sessionStorage.getItem(CODK); if (c) return c; c = nuevoCodigo(); sessionStorage.setItem(CODK, c); return c; } catch (e) { return nuevoCodigo(); }
   }
-  function misPedidos() { try { var l = JSON.parse(localStorage.getItem(MISK) || '[]'); return Array.isArray(l) ? l : []; } catch (e) { return []; } }
+  /* Lista de pedidos de este dispositivo: máximo 5 y se borran solos a los 30 días */
+  var MAXMIS = 5, DIASMIS = 30;
+  function misPedidos() {
+    try {
+      var l = JSON.parse(localStorage.getItem(MISK) || '[]'); if (!Array.isArray(l)) return [];
+      var lim = Date.now() - DIASMIS * 864e5, v = l.filter(function (x) { return x && x.c && Number(x.t) > lim; }).slice(0, MAXMIS);
+      if (v.length !== l.length) localStorage.setItem(MISK, JSON.stringify(v));
+      return v;
+    } catch (e) { return []; }
+  }
   function guardarPedido(c, total) {
-    try { var l = misPedidos().filter(function (x) { return x.c !== c; }); l.unshift({ c: c, t: Date.now(), total: total }); localStorage.setItem(MISK, JSON.stringify(l.slice(0, 8))); } catch (e) {}
+    try { var l = misPedidos().filter(function (x) { return x.c !== c; }); l.unshift({ c: c, t: Date.now(), total: total }); localStorage.setItem(MISK, JSON.stringify(l.slice(0, MAXMIS))); } catch (e) {}
   }
 
   function rpc(fn, body, opts) {
@@ -278,7 +287,7 @@
     var o = abrirDlg('Consultar mi pedido',
       '<p style="margin:0 0 10px;font-size:14px">Escribe el número que te dimos al hacer tu pedido.</p>' +
       '<div style="display:flex;gap:8px"><input id="dmPedIn" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" placeholder="DM-XXXX-XXXX" maxlength="14" style="flex:1;min-width:0;box-sizing:border-box;padding:12px;border:1.5px solid var(--line,#ccc);border-radius:12px;font:600 16px monospace;text-transform:uppercase"><button type="button" id="dmPedGo" style="' + BTN + 'background:var(--wine,#6b2d3e);color:#fff">Ver</button></div>' +
-      (mis.length ? '<div style="margin:12px 0 4px;font-size:12.5px;color:var(--muted,#777)">Tus pedidos en este dispositivo:</div><div style="display:flex;gap:6px;flex-wrap:wrap">' + mis.map(function (x) { return '<button type="button" data-c="' + h(x.c) + '" style="border:1px solid var(--line,#ccc);background:transparent;color:inherit;border-radius:999px;padding:7px 12px;font:600 13px monospace;cursor:pointer">' + h(x.c) + '</button>'; }).join('') + '</div>' : '') +
+      (mis.length ? '<div style="margin:12px 0 4px;font-size:12.5px;color:var(--muted,#777)">Tus pedidos en este dispositivo: <button type="button" id="dmPedClr" style="border:0;background:none;color:var(--wine,#6b2d3e);text-decoration:underline;font-size:12.5px;cursor:pointer;padding:0 0 0 6px">Borrar lista</button></div><div style="display:flex;gap:6px;flex-wrap:wrap">' + mis.map(function (x) { return '<button type="button" data-c="' + h(x.c) + '" style="border:1px solid var(--line,#ccc);background:transparent;color:inherit;border-radius:999px;padding:7px 12px;font:600 13px monospace;cursor:pointer">' + h(x.c) + '</button>'; }).join('') + '</div>' : '') +
       '<div id="dmPedRes" style="margin-top:14px" aria-live="polite"></div>', true);
     var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes');
     function ir() {
@@ -287,6 +296,7 @@
       rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) { pintarEstado(res, r, v); })
         .catch(function () { res.innerHTML = '<p style="color:#a33;margin:0">No pudimos consultar ahora. Intenta de nuevo en un momento.</p>'; });
     }
+    var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); } catch (e) {} abrirConsulta(); };
     o.querySelector('#dmPedGo').onclick = ir;
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') ir(); });
     o.querySelectorAll('[data-c]').forEach(function (b) { b.onclick = function () { inp.value = b.dataset.c; ir(); }; });

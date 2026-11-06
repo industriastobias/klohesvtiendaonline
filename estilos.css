@@ -1079,11 +1079,11 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
   .cart-modal, .favorites-modal { width: 100%; }
 
   .mobile-bottom-nav {
-    position: fixed; z-index: 800; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(5, 1fr);
+    position: fixed; z-index: 800; left: 0; right: 0; bottom: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; grid-template-columns: none;
     padding: 3px 8px calc(3px + var(--safe-b)); background: var(--wine); box-shadow: 0 -8px 26px rgba(30, 22, 25, .2);
     border-top: 1px solid rgba(232, 214, 172, .25);
   }
-  .mobile-bottom-nav button { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; height: 42px; color: rgba(244, 239, 229, .7); font-size: 9.5px; font-weight: 700; letter-spacing: .06em; transition: color .2s; }
+  .mobile-bottom-nav button { min-width: 0; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; height: 42px; color: rgba(244, 239, 229, .7); font-size: 9.5px; font-weight: 700; letter-spacing: .06em; transition: color .2s; }
   .mobile-bottom-nav button i { font-size: 15px; }
   .mobile-bottom-nav button:hover, .mobile-bottom-nav button.active { color: var(--gold-soft); }
   .mobile-bottom-nav button.active::before { content: ''; position: absolute; top: -3px; left: 50%; width: 22px; height: 2px; margin-left: -11px; background: var(--gold-soft); border-radius: 2px; }

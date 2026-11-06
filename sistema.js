@@ -214,17 +214,64 @@
     o.querySelector('#dmPedCp').onclick = function () { var b = this; try { navigator.clipboard.writeText(c).then(function () { b.textContent = '¡Copiado!'; }); } catch (e) { b.textContent = c; } };
     o.querySelector('#dmPedCons').onclick = function () { abrirConsulta(c); };
   }
+  /* Línea de tiempo del pedido: pasos con iconos; si se rechaza, vence o cancela, el recorrido termina ahí */
+  var PASOS = [
+    ['creada', 'Orden creada', 'fa-receipt'],
+    ['aceptada', 'Orden aceptada', 'fa-circle-check'],
+    ['preparacion', 'En preparación', 'fa-box-open'],
+    ['envio', 'En camino', 'fa-truck-fast'],
+    ['entregado', 'Entregado', 'fa-house-circle-check']
+  ];
+  var NIVEL = { recibido: 0, aceptado: 1, preparacion: 2, listo: 3, envio: 3, entregado: 4 };
+  var FIN = {
+    rechazado: ['Orden rechazada', 'fa-circle-xmark', 'No se pudo atender tu pedido. Escríbenos por WhatsApp y lo resolvemos.'],
+    vencido: ['Orden vencida', 'fa-clock', 'Pasaron más de 12 horas sin confirmarse. Escríbenos por WhatsApp si todavía lo quieres.'],
+    cancelado: ['Orden cancelada', 'fa-ban', 'Si fue un error, escríbenos por WhatsApp.']
+  };
+  var MENSAJE = {
+    recibido: 'Recibimos tu orden y la estamos revisando. Te confirmamos por WhatsApp.',
+    aceptado: 'Tu orden fue aceptada. Pronto empezamos a prepararla.',
+    preparacion: 'Estamos alistando tu pedido con cariño.',
+    listo: 'Tu pedido está listo. Escríbenos por WhatsApp para coordinar el retiro.',
+    envio: 'Tu pedido va en camino hacia ti.',
+    entregado: '¡Gracias por tu compra! Esperamos que lo disfrutes.'
+  };
+  function fechaCorta(t) { try { return new Date(t).toLocaleString('es-SV', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } }
   function pintarEstado(box, r, cod) {
-    if (!r) { box.innerHTML = '<p style="color:#a33;margin:0">No encontramos ese número. Revisa que esté bien escrito (por ejemplo DM-7K4P-2QX9).</p>'; return; }
-    var e = ESTADOS[r.estado] || [r.estado, ''], items = Array.isArray(r.items) ? r.items : [];
+    if (!r) { box.innerHTML = '<div style="text-align:center;padding:18px 8px"><div style="font-size:34px;color:#a33"><i class="fas fa-circle-question"></i></div><p style="margin:8px 0 0;color:#a33;font-weight:600">No encontramos ese número.</p><p style="margin:4px 0 0;font-size:13.5px;color:var(--muted,#777)">Revisa que esté bien escrito (por ejemplo DM-7K4P-2QX9).</p></div>'; return; }
+    var W = 'var(--wine,#6b2d3e)', G = 'var(--gold,#b8963e)', fin = FIN[r.estado], items = Array.isArray(r.items) ? r.items : [];
     var sub = items.reduce(function (a, x) { return a + (Number(x.precio) || 0) * (Number(x.cantidad) || 0); }, 0);
-    box.innerHTML = '<div style="border:1px solid var(--line,#ddd);border-radius:14px;padding:14px">' +
-      '<div style="font:700 13px monospace;color:var(--muted,#777)">' + h(r.codigo) + ' · ' + h(new Date(r.creado).toLocaleString('es-SV', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })) + '</div>' +
-      '<div style="font-size:20px;font-weight:800;margin:6px 0 2px">' + h(e[0]) + '</div><div style="font-size:14px;margin-bottom:10px">' + h(e[1]) + '</div>' +
-      items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span>' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +
-      (Number(r.envio) ? '<div style="display:flex;justify-content:space-between;font-size:14px;padding:3px 0"><span>Envío</span><span>' + usd(r.envio) + '</span></div>' : '') +
-      '<div style="display:flex;justify-content:space-between;font-weight:800;border-top:1px solid var(--line,#ddd);margin-top:6px;padding-top:8px"><span>Total</span><span>' + usd(r.total) + '</span></div></div>' +
-      '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="' + BTN + 'display:block;margin-top:12px;background:#25d366;color:#fff">Escribir por WhatsApp</a>';
+    var nivel = fin ? (r.estado === 'cancelado' ? 1 : 0) : (NIVEL[r.estado] == null ? 0 : NIVEL[r.estado]);
+    var pasos = PASOS.map(function (p) { return p.slice(); });
+    if (r.estado === 'listo') { pasos[3] = ['listo', 'Listo para retirar', 'fa-store']; }
+    var lista = fin ? pasos.slice(0, nivel + 1).concat([['fin', fin[0], fin[1]]]) : pasos;
+    var titulo = fin ? fin[0] : pasos[nivel][1], icono = fin ? fin[1] : pasos[nivel][2];
+    var msg = fin ? fin[2] : (MENSAJE[r.estado] || ''), color = fin ? '#b3392f' : W;
+    var tl = lista.map(function (p, i) {
+      var esFin = p[0] === 'fin', hecho = esFin || i <= nivel, actual = esFin || (!fin && i === nivel), col = esFin ? '#b3392f' : W;
+      var cuando = i === 0 ? fechaCorta(r.creado) : ((actual || (fin && i === nivel)) && r.actualizado ? fechaCorta(r.actualizado) : '');
+      var ultimo = i === lista.length - 1;
+      return '<div style="display:flex;gap:12px;align-items:stretch">' +
+        '<div style="display:flex;flex-direction:column;align-items:center;width:38px;flex:none">' +
+          '<div style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none;' +
+            (hecho ? 'background:' + col + ';color:#fff;' : 'background:transparent;color:#b9b0b3;border:2px dashed #d8d0d3;box-sizing:border-box;') +
+            (actual ? 'box-shadow:0 0 0 5px ' + (esFin ? 'rgba(179,57,47,.15)' : 'rgba(107,45,62,.15)') + ';' : '') + '"><i class="fas ' + p[2] + '"></i></div>' +
+          (ultimo ? '' : '<div style="flex:1;width:3px;min-height:18px;margin:3px 0;border-radius:2px;background:' + (i < nivel && !esFin ? W : (hecho && !esFin ? 'linear-gradient(' + W + ',#e4dcdf)' : '#e4dcdf')) + '"></div>') +
+        '</div>' +
+        '<div style="padding:7px 0 ' + (ultimo ? '0' : '16px') + ';min-width:0"><div style="font-weight:' + (actual ? '800' : '600') + ';font-size:15px;color:' + (hecho ? 'inherit' : '#a89fa2') + '">' + h(p[1]) + '</div>' +
+        (cuando ? '<div style="font-size:12.5px;color:var(--muted,#777);margin-top:1px">' + h(cuando) + '</div>' : '') + '</div></div>';
+    }).join('');
+    box.innerHTML =
+      '<div style="text-align:center;padding:6px 0 16px"><div style="width:64px;height:64px;margin:0 auto 10px;border-radius:50%;background:' + color + ';color:#fff;display:flex;align-items:center;justify-content:center;font-size:27px;box-shadow:0 8px 20px rgba(107,45,62,.22)"><i class="fas ' + icono + '"></i></div>' +
+      '<div style="font-size:21px;font-weight:800;color:' + color + '">' + h(titulo) + '</div>' +
+      '<div style="font:700 12.5px monospace;letter-spacing:.5px;color:var(--muted,#777);margin-top:4px">' + h(r.codigo) + '</div>' +
+      '<div style="font-size:14px;margin:8px auto 0;max-width:320px;line-height:1.4">' + h(msg) + '</div></div>' +
+      '<div style="border:1px solid var(--line,#e6dde0);border-radius:16px;padding:16px 14px 14px">' + tl + '</div>' +
+      '<div style="border:1px solid var(--line,#e6dde0);border-radius:16px;padding:12px 14px;margin-top:12px"><div style="font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:' + G + ';margin-bottom:6px">Tu pedido</div>' +
+      items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:4px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span style="white-space:nowrap">' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +
+      (Number(r.envio) ? '<div style="display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:var(--muted,#777)"><span>Envío</span><span>' + usd(r.envio) + '</span></div>' : '') +
+      '<div style="display:flex;justify-content:space-between;font-weight:800;font-size:16px;border-top:1px solid var(--line,#e6dde0);margin-top:6px;padding-top:9px"><span>Total</span><span>' + usd(r.total) + '</span></div></div>' +
+      '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="' + BTN + 'display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;background:#25d366;color:#fff"><i class="fab fa-whatsapp" style="font-size:19px"></i>Escribir por WhatsApp</a>';
   }
   function abrirConsulta(pref) {
     var mis = misPedidos();

@@ -1504,3 +1504,11 @@ body { background-color: var(--ivory); }
   .dm-cart-body .cart-summary { margin-inline: 28px; }
 }
 
+
+/* Filtros extra del catálogo: precio y solo disponibles */
+.catalog-extra-filters { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 16px; margin-top: 14px; }
+.catalog-extra-filters label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
+.catalog-extra-filters input[type="number"] { width: 112px; box-sizing: border-box; padding: 10px 12px; border: 1px solid currentColor; border-radius: 10px; background: transparent; color: inherit; font: inherit; font-size: 15px; text-transform: none; letter-spacing: 0; }
+.catalog-extra-filters .catalog-only-available { flex-direction: row; align-items: center; gap: 8px; min-height: 42px; cursor: pointer; text-transform: none; letter-spacing: 0; font-size: 14px; opacity: 1; }
+.catalog-extra-filters .catalog-only-available input { width: 20px; height: 20px; accent-color: var(--wine, #6b2d3e); }
+@media (max-width: 600px) { .catalog-extra-filters { gap: 10px 12px; } .catalog-extra-filters input[type="number"] { width: 100px; } }

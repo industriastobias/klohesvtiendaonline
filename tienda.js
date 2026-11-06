@@ -451,6 +451,10 @@
                 matchingProducts = matchingProducts.filter(product => getProductPrice(product) <= maxPrice);
             }
 
+            if (document.getElementById('onlyAvailableFilter')?.checked) {
+                matchingProducts = matchingProducts.filter(product => Number(product?.stock) > 0);
+            }
+
             AppState.filteredProducts = matchingProducts;
             AppState.currentPage = 0;
             AppState.hasMoreProducts = true;
@@ -477,6 +481,8 @@
             if (searchInput) searchInput.value = '';
             if (minPriceInput) minPriceInput.value = '';
             if (maxPriceInput) maxPriceInput.value = '';
+            const onlyAvail = document.getElementById('onlyAvailableFilter');
+            if (onlyAvail) onlyAvail.checked = false;
             if (sortSelect) sortSelect.value = 'default';
             AppState.currentSort = 'default';
             setCatalogCategoryFilter('todos');
@@ -613,6 +619,12 @@
             const image = getProductImages(product)[0] || '';
             if (!image) return '';
             try { return new URL(image, document.baseURI).href; } catch (_) { return image; }
+        }
+        // Miniatura liviana para las tarjetas del catálogo (si el sistema no la tiene, se usa la imagen normal)
+        function getCardProductImage(product) {
+            const t = product && Array.isArray(product.thumbs) && product.thumbs[0];
+            if (!t) return getPrimaryProductImage(product);
+            try { return new URL(t, document.baseURI).href; } catch (_) { return t; }
         }
         // Enlace que se pega en el mensaje de WhatsApp: abre la tienda y WhatsApp muestra solo el logo de la marca (og:image de esta página).
         function getWhatsAppProductImage() {
@@ -772,7 +784,7 @@
                 <div class="daymar-card-shell">
                   <div class="daymar-card-media">
                     <div class="product-image-container" role="button" tabindex="0" aria-haspopup="dialog" onclick="openPreview(${realIndex})">
-                    <img src="${getPrimaryProductImage(product)}" 
+                    <img src="${getCardProductImage(product)}" 
                          alt="${product.name}" 
                          class="product-image"
                          loading="${index < 6 ? 'eager' : 'lazy'}"
@@ -1853,6 +1865,8 @@
                 const priceInput = document.getElementById(id);
                 if (priceInput) priceInput.addEventListener('input', debounce(applyCatalogFilters, 180));
             });
+            const onlyAvailableInput = document.getElementById('onlyAvailableFilter');
+            if (onlyAvailableInput) onlyAvailableInput.addEventListener('change', applyCatalogFilters);
 
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {

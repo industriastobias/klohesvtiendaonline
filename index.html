@@ -254,7 +254,7 @@
         else init();
     })();
 </script>
-<link rel="stylesheet" href="estilos.css?v=202611061420">
+<link rel="stylesheet" href="estilos.css?v=202611061530">
 </head>
 <body>
 <div class="daymar-browser-color-edge" aria-hidden="true"></div>
@@ -633,6 +633,11 @@
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </button>
                     </div>
+                </div>
+                <div class="catalog-extra-filters" id="catalogExtraFilters" role="group" aria-label="Filtrar por precio y disponibilidad">
+                    <label>Desde $<input id="minPriceFilter" type="number" min="0" step="1" inputmode="decimal" placeholder="0"></label>
+                    <label>Hasta $<input id="maxPriceFilter" type="number" min="0" step="1" inputmode="decimal" placeholder="Sin límite"></label>
+                    <label class="catalog-only-available"><input id="onlyAvailableFilter" type="checkbox"> Solo disponibles</label>
                 </div>
             </div>
         </div>
@@ -1227,7 +1232,7 @@
         document.write('<script src="products.js?v=' + Date.now() + '"><\/script>');
         document.write('<script src="sistema.js?v=' + Date.now() + '"><\/script>');
     </script>
-<script src="tienda.js?v=202611061420"></script>
+<script src="tienda.js?v=202611061530"></script>
 
 <script src="galeria.js?v=202611061420"></script>
 

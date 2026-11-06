@@ -189,12 +189,17 @@
   function h(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function usd(n) { return '$' + (Number(n) || 0).toFixed(2); }
   function cerrarDlg() { var o = document.getElementById('dmPedOv'); if (o) o.remove(); document.documentElement.style.overflow = ''; }
-  function abrirDlg(titulo, html) {
+  function abrirDlg(titulo, html, completa) {
     cerrarDlg();
     var o = document.createElement('div'); o.id = 'dmPedOv'; o.setAttribute('role', 'dialog'); o.setAttribute('aria-modal', 'true'); o.setAttribute('aria-label', titulo);
     o.style.cssText = 'position:fixed;inset:0;z-index:100000;background:rgba(20,10,14,.55);display:flex;align-items:flex-end;justify-content:center;padding:0;font-family:inherit';
     o.innerHTML = '<div style="background:var(--surface,#fff);color:var(--ink,#2a1a1f);width:100%;max-width:460px;max-height:90vh;overflow:auto;border-radius:20px 20px 0 0;padding:20px 18px 24px;box-shadow:0 -8px 30px rgba(0,0,0,.25);overscroll-behavior:contain">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px"><h2 style="margin:0;font-size:19px">' + h(titulo) + '</h2><button type="button" id="dmPedX" aria-label="Cerrar" style="border:0;background:transparent;font-size:26px;line-height:1;cursor:pointer;color:inherit;padding:4px 8px">×</button></div>' + html + '</div>';
+    if (completa && window.matchMedia && window.matchMedia('(max-width:700px)').matches) {
+      o.style.alignItems = 'stretch';
+      var sh = o.firstChild; sh.style.maxWidth = 'none'; sh.style.maxHeight = 'none'; sh.style.height = '100%'; sh.style.borderRadius = '0';
+      sh.style.boxSizing = 'border-box'; sh.style.paddingTop = 'calc(20px + env(safe-area-inset-top,0px))'; sh.style.paddingBottom = 'calc(24px + env(safe-area-inset-bottom,0px))';
+    }
     o.addEventListener('click', function (e) { if (e.target === o) cerrarDlg(); });
     document.body.appendChild(o); document.documentElement.style.overflow = 'hidden';
     document.getElementById('dmPedX').onclick = cerrarDlg;
@@ -227,7 +232,7 @@
       '<p style="margin:0 0 10px;font-size:14px">Escribe el número que te dimos al hacer tu pedido.</p>' +
       '<div style="display:flex;gap:8px"><input id="dmPedIn" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" placeholder="DM-XXXX-XXXX" maxlength="14" style="flex:1;min-width:0;box-sizing:border-box;padding:12px;border:1.5px solid var(--line,#ccc);border-radius:12px;font:600 16px monospace;text-transform:uppercase"><button type="button" id="dmPedGo" style="' + BTN + 'background:var(--wine,#6b2d3e);color:#fff">Ver</button></div>' +
       (mis.length ? '<div style="margin:12px 0 4px;font-size:12.5px;color:var(--muted,#777)">Tus pedidos en este dispositivo:</div><div style="display:flex;gap:6px;flex-wrap:wrap">' + mis.map(function (x) { return '<button type="button" data-c="' + h(x.c) + '" style="border:1px solid var(--line,#ccc);background:transparent;color:inherit;border-radius:999px;padding:7px 12px;font:600 13px monospace;cursor:pointer">' + h(x.c) + '</button>'; }).join('') + '</div>' : '') +
-      '<div id="dmPedRes" style="margin-top:14px" aria-live="polite"></div>');
+      '<div id="dmPedRes" style="margin-top:14px" aria-live="polite"></div>', true);
     var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes');
     function ir() {
       var v = inp.value.trim(); if (!v) { inp.focus(); return; }

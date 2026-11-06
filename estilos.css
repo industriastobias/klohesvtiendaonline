@@ -594,7 +594,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 .categories-menu {
   position: fixed; top: 0; left: 0; bottom: 0; z-index: 950; width: min(400px, 90vw);
   display: flex; flex-direction: column; gap: 0; overflow-y: auto; overscroll-behavior: contain;
-  padding: 18px 30px calc(30px + var(--safe-b));
+  padding: calc(16px + env(safe-area-inset-top, 0px)) 30px calc(30px + var(--safe-b));
   background:
     radial-gradient(ellipse 90% 40% at 0% 100%, rgba(184, 146, 74, .18), transparent 70%),
     linear-gradient(170deg, var(--wine) 0%, var(--wine-deep) 100%);
@@ -602,7 +602,8 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
   transform: translateX(-102%); visibility: hidden; transition: transform .45s var(--ease), visibility .45s;
 }
 .categories-menu.active { transform: none; visibility: visible; }
-.atelier-menu-heading { display: flex; justify-content: flex-end; margin: -8px -14px 4px 0; }
+.atelier-menu-heading { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: 14px; z-index: 3; margin: 0; }
+.categories-menu .atelier-menu-heading + * { width: calc(100% - 42px) !important; margin-right: 0 !important; box-sizing: border-box; }
 .categories-menu .close-menu { width: 34px; height: 34px; min-width: 0; padding: 0; border: 0; box-shadow: none; background: transparent; color: var(--ivory); font-size: 18px; opacity: .85; }
 .categories-menu .close-menu:hover { background: rgba(255, 255, 255, .12); color: var(--ivory); opacity: 1; }
 /* sin barra de desplazamiento visible (en el celular se veía como un borde grueso) */

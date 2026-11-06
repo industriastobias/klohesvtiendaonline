@@ -6,10 +6,9 @@
   var user = null, lastSent = { sig: '', t: 0 };
   var AL = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', CODK = 'daymar_cod_actual', MISK = 'daymar_mis_pedidos';
   function nuevoCodigo() {
-    var r = '', a = new Uint8Array(8);
-    try { crypto.getRandomValues(a); } catch (e) { for (var k = 0; k < 8; k++) a[k] = Math.floor(Math.random() * 256); }
-    for (var i = 0; i < 8; i++) r += AL.charAt(a[i] % AL.length);
-    return 'DM-' + r.slice(0, 4) + '-' + r.slice(4);
+    var n, a = new Uint32Array(1);
+    try { crypto.getRandomValues(a); n = a[0] % 1000000; } catch (e) { n = Math.floor(Math.random() * 1000000); }
+    return 'DY-' + ('00000' + n).slice(-6);
   }
   function codigoActual() {
     try { var c = sessionStorage.getItem(CODK); if (c) return c; c = nuevoCodigo(); sessionStorage.setItem(CODK, c); return c; } catch (e) { return nuevoCodigo(); }
@@ -247,7 +246,7 @@
   };
   function fechaCorta(t) { try { return new Date(t).toLocaleString('es-SV', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } }
   function pintarEstado(box, r, cod) {
-    if (!r) { box.innerHTML = '<div style="text-align:center;padding:18px 8px"><div style="font-size:34px;color:#a33"><i class="fas fa-circle-question"></i></div><p style="margin:8px 0 0;color:#a33;font-weight:600">No encontramos ese número.</p><p style="margin:4px 0 0;font-size:13.5px;color:var(--muted,#777)">Revisa que esté bien escrito (por ejemplo DM-7K4P-2QX9).</p></div>'; return; }
+    if (!r) { box.innerHTML = '<div style="text-align:center;padding:18px 8px"><div style="font-size:34px;color:#a33"><i class="fas fa-circle-question"></i></div><p style="margin:8px 0 0;color:#a33;font-weight:600">No encontramos ese número.</p><p style="margin:4px 0 0;font-size:13.5px;color:var(--muted,#777)">Revisa que esté bien escrito (por ejemplo DY-482915).</p></div>'; return; }
     var W = 'var(--wine,#6b2d3e)', G = 'var(--gold,#b8963e)', fin = FIN[r.estado], items = Array.isArray(r.items) ? r.items : [];
     var sub = items.reduce(function (a, x) { return a + (Number(x.precio) || 0) * (Number(x.cantidad) || 0); }, 0);
     var nivel = fin ? (r.estado === 'cancelado' ? 1 : 0) : (NIVEL[r.estado] == null ? 0 : NIVEL[r.estado]);
@@ -286,7 +285,7 @@
     var mis = misPedidos();
     var o = abrirDlg('Consultar mi pedido',
       '<p style="margin:0 0 10px;font-size:14px">Escribe el número que te dimos al hacer tu pedido.</p>' +
-      '<div style="display:flex;gap:8px"><input id="dmPedIn" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" placeholder="DM-XXXX-XXXX" maxlength="14" style="flex:1;min-width:0;box-sizing:border-box;padding:12px;border:1.5px solid var(--line,#ccc);border-radius:12px;font:600 16px monospace;text-transform:uppercase"><button type="button" id="dmPedGo" style="' + BTN + 'background:var(--wine,#6b2d3e);color:#fff">Ver</button></div>' +
+      '<div style="display:flex;gap:8px"><input id="dmPedIn" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" placeholder="DY-123456" maxlength="14" style="flex:1;min-width:0;box-sizing:border-box;padding:12px;border:1.5px solid var(--line,#ccc);border-radius:12px;font:600 16px monospace;text-transform:uppercase"><button type="button" id="dmPedGo" style="' + BTN + 'background:var(--wine,#6b2d3e);color:#fff">Ver</button></div>' +
       (mis.length ? '<div style="margin:12px 0 4px;font-size:12.5px;color:var(--muted,#777)">Tus pedidos en este dispositivo: <button type="button" id="dmPedClr" style="border:0;background:none;color:var(--wine,#6b2d3e);text-decoration:underline;font-size:12.5px;cursor:pointer;padding:0 0 0 6px">Borrar lista</button></div><div style="display:flex;gap:6px;flex-wrap:wrap">' + mis.map(function (x) { return '<button type="button" data-c="' + h(x.c) + '" style="border:1px solid var(--line,#ccc);background:transparent;color:inherit;border-radius:999px;padding:7px 12px;font:600 13px monospace;cursor:pointer">' + h(x.c) + '</button>'; }).join('') + '</div>' : '') +
       '<div id="dmPedRes" style="margin-top:14px" aria-live="polite"></div>', true);
     var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes');

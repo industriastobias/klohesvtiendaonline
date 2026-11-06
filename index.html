@@ -302,6 +302,7 @@
                 <button class="atelier-search-link" onclick="focusSearch()" aria-label="Buscar"><i class="fas fa-search"></i><span>Buscar</span></button>
                 <div class="daymar-shopping-actions" role="group" aria-label="Cuenta, favoritos y carrito de compras">
                     <button class="daymar-account-trigger " id="daymarHeaderAccountDesktop" type="button" data-daymar-open-login data-daymar-account-trigger aria-label="Ver mi cuenta" hidden><span class="daymar-user-avatar" aria-hidden="true"><img data-daymar-profile-photo alt="" referrerpolicy="no-referrer" decoding="async" hidden><span data-daymar-profile-fallback>D</span></span></button>
+                    <button class="header-icon atelier-icon" type="button" id="dmConsHdr" aria-label="Consultar mi pedido" title="Consultar mi pedido"><i class="fas fa-box"></i></button>
                     <button class="header-icon favorites-icon-btn atelier-icon" onclick="toggleFavorites()" aria-label="Favoritos" id="favoritesBtn"><i class="far fa-heart"></i><span class="favorites-count-header" id="favoritesBadge" style="display:none">0</span></button>
                     <button class="header-icon cart-icon-header atelier-icon" onclick="toggleCart()" aria-label="Carrito"><i class="fas fa-shopping-bag"></i><span class="cart-count-header" id="cartBadge" style="display:none">0</span></button>
                 </div>
@@ -891,6 +892,7 @@
         <button id="mobileMenuBtn" type="button" data-daymar-menu-trigger aria-controls="categoriesMenu" aria-expanded="false" aria-label="Novedades: abrir menú de categorías"><i class="fas fa-house" aria-hidden="true"></i><span>Novedades</span></button>
         <button type="button" onclick="focusSearch()"><i class="fas fa-search" aria-hidden="true"></i><span>Buscar</span></button>
         <button type="button" onclick="toggleFavorites()"><i class="far fa-heart" aria-hidden="true"></i><span>Favoritos</span><span class="mobile-nav-badge" id="bottomFavoritesBadge" style="display:none">0</span></button>
+        <button type="button" id="dmConsNav" aria-label="Consultar mi pedido"><i class="fas fa-box" aria-hidden="true"></i><span>Mi pedido</span></button>
         <button type="button" onclick="toggleCart()"><i class="fas fa-shopping-bag" aria-hidden="true"></i><span>Carrito</span><span class="mobile-nav-badge" id="bottomCartBadge" style="display:none">0</span></button>
     </nav>
 

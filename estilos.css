@@ -1079,7 +1079,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
   .cart-modal, .favorites-modal { width: 100%; }
 
   .mobile-bottom-nav {
-    position: fixed; z-index: 800; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr);
+    position: fixed; z-index: 800; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(5, 1fr);
     padding: 3px 8px calc(3px + var(--safe-b)); background: var(--wine); box-shadow: 0 -8px 26px rgba(30, 22, 25, .2);
     border-top: 1px solid rgba(232, 214, 172, .25);
   }

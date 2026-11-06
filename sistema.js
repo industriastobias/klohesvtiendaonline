@@ -176,7 +176,10 @@
   /* 4) Número de pedido y consulta del estado */
   var ESTADOS = {
     recibido: ['Recibido', 'Lo estamos revisando. Te confirmamos por WhatsApp.'],
-    aceptado: ['Aceptado', 'Estamos preparando tu pedido.'],
+    aceptado: ['Aceptado', 'Tu pedido fue confirmado.'],
+    preparacion: ['En preparación', 'Estamos alistando tu pedido.'],
+    listo: ['Listo para retirar', 'Tu pedido está listo. Escríbenos por WhatsApp para coordinar.'],
+    envio: ['En camino', 'Tu pedido va en camino hacia ti.'],
     entregado: ['Entregado', '¡Gracias por tu compra!'],
     rechazado: ['No se pudo atender', 'Escríbenos por WhatsApp y lo resolvemos.'],
     vencido: ['Venció sin confirmarse', 'Pasaron más de 12 horas. Escríbenos por WhatsApp si todavía lo quieres.'],
@@ -238,6 +241,7 @@
     if (pref) { inp.value = pref; ir(); } else if (mis.length) { inp.value = mis[0].c; }
   }
   function montarConsulta() {
+    ['dmConsHdr', 'dmConsNav'].forEach(function (id) { var hb = document.getElementById(id); if (hb && !hb.dataset.ok) { hb.dataset.ok = '1'; hb.onclick = function () { abrirConsulta(); }; } });
     var tag = document.querySelector('.dm-footer-tagline');
     if (tag && !document.getElementById('dmConsFt')) {
       var b = document.createElement('button'); b.type = 'button'; b.id = 'dmConsFt'; b.textContent = 'Consultar mi pedido';

@@ -280,7 +280,7 @@
       items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:4px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span style="white-space:nowrap">' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +
       (Number(r.envio) ? '<div style="display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:var(--muted,#777)"><span>Envío</span><span>' + usd(r.envio) + '</span></div>' : '') +
       '<div style="display:flex;justify-content:space-between;font-weight:800;font-size:16px;border-top:1px solid var(--line,#e6dde0);margin-top:6px;padding-top:9px"><span>Total</span><span>' + usd(r.total) + '</span></div></div>' +
-      '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="' + BTN + 'display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;background:#25d366;color:#fff"><i class="fab fa-whatsapp" style="font-size:19px"></i>Escribir por WhatsApp</a>';
+      '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:14px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
   }
   function abrirConsulta(pref) {
     var mis = misPedidos();

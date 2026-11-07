@@ -307,7 +307,6 @@
   function abrirConsulta(pref) {
     estilosConsulta();
     var mis = misPedidos(), W = 'var(--wine,#6b2d3e)', G = 'var(--gold,#c9973f)', puedePegar = !!(navigator.clipboard && navigator.clipboard.readText);
-    var pasos = [['fa-receipt', 'Creada'], ['fa-circle-check', 'Aceptada'], ['fa-box-open', 'Preparación'], ['fa-truck-fast', 'En camino'], ['fa-house-circle-check', 'Entregado']];
     var o = abrirDlg('Consultar mi pedido',
       '<div id="dmConsHero" style="text-align:center;padding:4px 0 14px">' +
         '<div style="width:74px;height:74px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(145deg,' + W + ',#4e1f31);color:#e8c777;display:flex;align-items:center;justify-content:center;font-size:31px;box-shadow:0 10px 24px rgba(107,45,62,.3);animation:dmflot 3.2s ease-in-out infinite"><i class="fas fa-box-open"></i></div>' +
@@ -318,10 +317,7 @@
         (puedePegar ? '<button type="button" id="dmPedPaste" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;border-radius:10px;padding:8px 11px;background:rgba(201,151,63,.16);color:' + W + ';font-weight:800;font-size:12.5px;cursor:pointer"><i class="far fa-clipboard"></i> Pegar</button>' : '') + '</div>' +
       '<div id="dmPedMsg" style="min-height:18px;margin:6px 2px 0;font-size:12.5px;color:var(--muted,#777)">Ejemplo: DY-482915</div>' +
       '<button type="button" id="dmPedGo" class="dm-go" style="' + BTN + 'width:100%;margin-top:6px;padding:14px;background:linear-gradient(145deg,' + W + ',#4e1f31);color:#fff;box-shadow:0 8px 18px rgba(107,45,62,.28);display:flex;align-items:center;justify-content:center;gap:9px"><i class="fas fa-magnifying-glass"></i><span>Ver mi pedido</span></button>' +
-      '<div id="dmConsSteps" style="display:flex;justify-content:space-between;gap:4px;margin:20px 2px 4px">' + pasos.map(function (p, i) {
-        return '<div style="flex:1;text-align:center;min-width:0"><div style="width:38px;height:38px;margin:0 auto 5px;border-radius:50%;background:rgba(107,45,62,.09);color:' + W + ';display:flex;align-items:center;justify-content:center;font-size:15px"><i class="fas ' + p[0] + '"></i></div><div style="font-size:10.5px;font-weight:700;color:var(--muted,#777);line-height:1.15">' + p[1] + '</div></div>';
-      }).join('') + '</div>' +
-      (mis.length ? '<div id="dmConsMis" style="margin-top:16px"><div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:' + G + '"><span>Tus pedidos en este teléfono</span><button type="button" id="dmPedClr" style="border:0;background:none;color:var(--muted,#777);text-decoration:underline;font-size:12px;font-weight:600;cursor:pointer;padding:0;text-transform:none;letter-spacing:0">Borrar lista</button></div>' +
+      (mis.length ? '<div id="dmConsMis" style="margin-top:22px"><div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:' + G + '"><span>Tus pedidos en este teléfono</span><button type="button" id="dmPedClr" style="border:0;background:none;color:var(--muted,#777);text-decoration:underline;font-size:12px;font-weight:600;cursor:pointer;padding:0;text-transform:none;letter-spacing:0">Borrar lista</button></div>' +
         mis.map(function (x) { return '<button type="button" class="dm-mis" data-c="' + h(x.c) + '"><span style="width:36px;height:36px;border-radius:50%;background:rgba(201,151,63,.16);color:' + W + ';display:flex;align-items:center;justify-content:center;flex:none"><i class="fas fa-bag-shopping"></i></span><span style="flex:1;min-width:0"><b style="display:block;font:800 15px monospace;letter-spacing:.04em">' + h(x.c) + '</b><small style="color:var(--muted,#777)">' + hace(x.t) + (x.total ? ' · ' + usd(x.total) : '') + '</small></span><i class="fas fa-chevron-right" style="color:' + G + ';font-size:13px"></i></button>'; }).join('') + '</div>' : '') +
       '<div id="dmPedRes" class="dm-res" style="margin-top:14px" aria-live="polite"></div>', true);
     var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes'), msg = o.querySelector('#dmPedMsg'), go = o.querySelector('#dmPedGo');
@@ -333,7 +329,7 @@
     }
     function mal(t) { inp.classList.remove('ok'); inp.classList.remove('mal'); void inp.offsetWidth; inp.classList.add('mal'); msg.style.color = '#c0392b'; msg.textContent = t; inp.focus(); }
     function volver() {
-      res.innerHTML = ''; ['dmConsHero', 'dmConsSteps', 'dmConsMis'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = ''; }); inp.focus();
+      res.innerHTML = ''; ['dmConsHero', 'dmConsMis'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = ''; }); inp.focus();
     }
     function ir() {
       var v = formatoCodigo(inp.value); inp.value = v;
@@ -344,7 +340,7 @@
       rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
         fin();
         if (!r) { res.innerHTML = ''; mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
-        ['dmConsHero', 'dmConsSteps', 'dmConsMis'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = 'none'; });
+        ['dmConsHero', 'dmConsMis'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = 'none'; });
         pintarEstado(res, r, v);
         res.insertAdjacentHTML('beforeend', '<button type="button" id="dmPedOtro" style="display:block;margin:12px auto 0;border:0;background:none;color:' + W + ';font-weight:700;font-size:13.5px;text-decoration:underline;cursor:pointer;padding:6px"><i class="fas fa-arrow-left"></i> Consultar otro pedido</button>');
         res.querySelector('#dmPedOtro').onclick = volver;

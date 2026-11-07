@@ -288,24 +288,22 @@
     if (r.estado === 'listo') pasos[3] = ['listo', 'Listo para retirar', 'fa-store'];
     var corto = ['Recibido', 'Aceptado', 'Preparando', 'En camino', 'Entregado'];
     if (r.estado === 'listo') corto[3] = 'Listo';
-    var titulo = fin ? fin[0] : pasos[nivel][1], msg = fin ? fin[2] : (MENSAJE[r.estado] || '');
-    var cuando = r.actualizado ? fechaCorta(r.actualizado) : fechaCorta(r.creado);
-    var fila = fin ? '' :
-      '<div style="display:flex;align-items:flex-start;margin:4px -4px 0">' + pasos.map(function (p, i) {
-        var hecho = i < nivel, act = i === nivel, ult = i === pasos.length - 1;
-        var bg = act ? GOLD : hecho ? INK : '#fff', col = (act || hecho) ? '#fff' : '#b9aab0';
-        return '<div style="flex:1;min-width:0;text-align:center;position:relative">' +
-          (ult ? '' : '<div style="position:absolute;top:22px;left:50%;width:100%;height:3px;background:' + (hecho ? INK : '#e6dcd9') + ';z-index:0"></div>') +
-          '<div style="position:relative;z-index:1;width:46px;height:46px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:' + bg + ';color:' + col + ';' + (act ? '' : (hecho ? '' : 'border:2px solid #e6dcd9;box-sizing:border-box;')) + (act ? 'box-shadow:0 0 0 6px rgba(201,151,63,.25);animation:dmglow 2.4s infinite;' : '') + '"><i class="fas ' + (hecho ? 'fa-check' : p[2]) + '"></i></div>' +
-          '<div style="margin-top:8px;font-size:11.5px;font-weight:' + (act ? '800' : '600') + ';color:' + (act ? INK : hecho ? INK : '#a89fa2') + ';line-height:1.2">' + h(corto[i]) + '</div></div>';
-      }).join('') + '</div>';
+    var titulo = fin ? fin[0] : pasos[nivel][1], icono = fin ? fin[1] : pasos[nivel][2], msg = fin ? fin[2] : (MENSAJE[r.estado] || '');
+    var cuando = r.actualizado ? fechaCorta(r.actualizado) : fechaCorta(r.creado), col = fin ? '#b3392f' : INK;
+    var tiles = fin ? '' : '<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:20px">' + pasos.map(function (p, i) {
+      var hecho = i < nivel, act = i === nivel;
+      return '<div style="text-align:center"><div style="position:relative;aspect-ratio:1;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;' +
+        (act ? 'background:' + GOLD + ';color:#fff;box-shadow:0 6px 14px rgba(201,151,63,.45);animation:dmglow 2.4s infinite;' : hecho ? 'background:' + INK + ';color:#fff;' : 'background:#f1ebe6;color:#c4b6bb;') + '">' +
+        '<i class="fas ' + p[2] + '"></i>' + (hecho ? '<span style="position:absolute;right:-5px;top:-5px;width:18px;height:18px;border-radius:50%;background:#2e9d62;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-sizing:content-box"><i class="fas fa-check"></i></span>' : '') + '</div>' +
+        '<div style="margin-top:7px;font-size:10.5px;line-height:1.15;white-space:nowrap;margin-left:-4px;margin-right:-4px;font-weight:' + (act ? '800' : '600') + ';color:' + (act || hecho ? INK : '#a89fa2') + '">' + h(corto[i]) + '</div></div>';
+    }).join('') + '</div>';
     box.innerHTML =
-      '<div style="margin-top:26px">' + fila + '</div>' +
-      '<div style="margin-top:22px;border-radius:18px;background:#fff;border:1px solid #eadfd8;border-left:5px solid ' + (fin ? '#b3392f' : GOLD) + ';padding:16px 18px;box-shadow:0 6px 18px rgba(58,22,36,.07)">' +
-        '<div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#8a7a80"><i class="fas ' + (fin ? fin[1] : 'fa-circle-info') + '" style="color:' + (fin ? '#b3392f' : GOLD) + '"></i><span style="font:700 12px monospace;letter-spacing:.06em">' + h(r.codigo) + '</span><span style="margin-left:auto">' + h(cuando) + '</span></div>' +
-        '<div style="margin-top:8px;font-size:21px;font-weight:800;color:' + (fin ? '#b3392f' : INK) + '">' + h(titulo) + '</div>' +
-        '<p style="margin:6px 0 0;font-size:14.5px;line-height:1.45;color:#5b4950">' + h(msg) + '</p></div>' +
-      '<details style="margin-top:12px;border-radius:16px;background:#fff;border:1px solid #eadfd8;padding:2px 16px"><summary style="cursor:pointer;padding:13px 0;font-weight:700;font-size:14px;color:' + INK + ';list-style:none;display:flex;justify-content:space-between"><span><i class="fas fa-bag-shopping" style="color:' + GOLD + ';margin-right:7px"></i>Ver mi pedido</span><span>' + usd(r.total) + ' ▾</span></summary>' +
+      '<div style="margin-top:22px;border-radius:22px;background:#fff;box-shadow:0 10px 30px rgba(58,22,36,.1);padding:22px 18px 20px;text-align:center">' +
+        '<div style="width:72px;height:72px;margin:0 auto;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;background:' + (fin ? '#b3392f' : INK) + ';transform:rotate(-6deg)"><i class="fas ' + icono + '"></i></div>' +
+        '<div style="margin-top:14px;font-size:23px;font-weight:800;color:' + col + '">' + h(titulo) + '</div>' +
+        '<p style="margin:6px auto 0;max-width:300px;font-size:14.5px;line-height:1.45;color:#5b4950">' + h(msg) + '</p>' + tiles +
+        '<div style="margin-top:18px;padding-top:12px;border-top:1px dashed #e3d6cf;display:flex;justify-content:space-between;font-size:12px;color:#8a7a80"><span style="font:700 12px monospace;letter-spacing:.06em">' + h(r.codigo) + '</span><span>' + h(cuando) + '</span></div></div>' +
+      '<details style="margin-top:12px;border-radius:16px;background:#fff;box-shadow:0 4px 14px rgba(58,22,36,.06);padding:2px 16px"><summary style="cursor:pointer;padding:13px 0;font-weight:700;font-size:14px;color:' + INK + ';list-style:none;display:flex;justify-content:space-between"><span><i class="fas fa-bag-shopping" style="color:' + GOLD + ';margin-right:7px"></i>Ver mi pedido</span><span>' + usd(r.total) + ' ▾</span></summary>' +
         '<div style="padding:0 0 12px;font-size:14px;color:#5b4950">' + items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;padding:4px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span>' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +
         (Number(r.envio) ? '<div style="display:flex;justify-content:space-between;padding:4px 0;color:#8a7a80"><span>Envío</span><span>' + usd(r.envio) + '</span></div>' : '') + '</div></details>' +
       '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:16px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
@@ -314,13 +312,14 @@
     if (document.getElementById('dmConsCss')) return;
     var st = document.createElement('style'); st.id = 'dmConsCss';
     st.textContent = '@keyframes dmshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}' +
-      '@keyframes dmspin{to{transform:rotate(360deg)}}@keyframes dmpop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}' +
-      '@keyframes dmglow{0%,100%{box-shadow:0 0 0 0 rgba(201,151,63,.55)}50%{box-shadow:0 0 0 12px rgba(201,151,63,0)}}' +
-      '#dmPedOv .dm-line{display:flex;align-items:center;gap:12px;border-bottom:2px solid rgba(201,151,63,.45);padding-bottom:10px;transition:border-color .2s}' +
-      '#dmPedOv .dm-line:focus-within{border-color:#c9973f}#dmPedOv .dm-line.ok{border-color:#2e9d62}#dmPedOv .dm-line.mal{animation:dmshake .4s;border-color:#d9574a}' +
-      '#dmPedOv .dm-cin{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#3a1624;font:700 30px/1.1 monospace;letter-spacing:.1em;text-transform:uppercase;padding:6px 0}#dmPedOv .dm-cin::placeholder{color:rgba(58,22,36,.28)}' +
-      '#dmPedOv .dm-arrow{flex:none;width:54px;height:54px;border:0;border-radius:50%;background:#c9973f;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;animation:dmglow 2.4s infinite;transition:transform .15s}#dmPedOv .dm-arrow:active{transform:scale(.92)}#dmPedOv .dm-arrow:disabled{animation:none;opacity:.8}' +
-      '#dmPedOv .dm-chip{border:1px solid rgba(201,151,63,.7);border-radius:999px;background:#fff;color:#3a1624;padding:8px 14px;cursor:pointer;font:700 13.5px monospace;letter-spacing:.05em;transition:background .15s,transform .15s}#dmPedOv .dm-chip:hover,#dmPedOv .dm-chip:active{background:rgba(201,151,63,.2);transform:translateY(-1px)}#dmPedOv .dm-chip small{font:600 11px sans-serif;letter-spacing:0;color:rgba(58,22,36,.6);margin-left:6px}' +
+      '@keyframes dmspin{to{transform:rotate(360deg)}}@keyframes dmpop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}' +
+      '@keyframes dmglow{0%,100%{box-shadow:0 6px 14px rgba(201,151,63,.45),0 0 0 0 rgba(201,151,63,.5)}50%{box-shadow:0 6px 14px rgba(201,151,63,.45),0 0 0 9px rgba(201,151,63,0)}}' +
+      '#dmPedOv .dm-box{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #eadfd8;border-radius:18px;padding:6px 8px 6px 16px;box-shadow:0 8px 22px rgba(58,22,36,.08);transition:border-color .2s}' +
+      '#dmPedOv .dm-box:focus-within{border-color:#c9973f}#dmPedOv .dm-box.ok{border-color:#2e9d62}#dmPedOv .dm-box.mal{animation:dmshake .4s;border-color:#d9574a}' +
+      '#dmPedOv .dm-cin{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#3a1624;font:700 22px/1.1 monospace;letter-spacing:.08em;text-transform:uppercase;padding:14px 0}#dmPedOv .dm-cin::placeholder{color:#cdbfc4}' +
+      '#dmPedOv .dm-buscar{flex:none;border:0;border-radius:13px;background:#3a1624;color:#fff;font:800 14px sans-serif;padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:7px}#dmPedOv .dm-buscar:active{transform:scale(.96)}#dmPedOv .dm-buscar:disabled{opacity:.7}' +
+      '#dmPedOv .dm-row{display:flex;align-items:center;gap:12px;width:100%;border:0;background:#fff;border-radius:14px;padding:12px 14px;margin-top:8px;cursor:pointer;text-align:left;box-shadow:0 3px 10px rgba(58,22,36,.06);color:#3a1624}' +
+      '#dmPedOv .dm-row b{font:700 15px monospace;letter-spacing:.05em}#dmPedOv .dm-row small{margin-left:auto;color:#8a7a80;font-size:12px}' +
       '#dmPedOv .dm-res{animation:dmpop .35s}@media (prefers-reduced-motion:reduce){#dmPedOv *{animation:none!important}}';
     document.head.appendChild(st);
   }
@@ -335,55 +334,43 @@
   function hace(t) { var d = Math.floor((Date.now() - Number(t)) / 864e5); return d <= 0 ? 'Hoy' : d === 1 ? 'Ayer' : 'Hace ' + d + ' días'; }
   function abrirConsulta(pref) {
     estilosConsulta();
-    var mis = misPedidos(), puedePegar = !!(navigator.clipboard && navigator.clipboard.readText), SERIF = "var(--font-display,'Cormorant Garamond',Georgia,serif)";
+    var mis = misPedidos(), puedePegar = !!(navigator.clipboard && navigator.clipboard.readText);
     var o = abrirDlg('Consultar mi pedido',
-      '<div id="dmConsHero" style="padding:8px 2px 0">' +
-        '<div style="font:800 11.5px/1 sans-serif;letter-spacing:.3em;color:#c9973f;text-transform:uppercase">✦ Daymar · Seguimiento</div>' +
-        '<h3 style="margin:16px 0 8px;font:italic 600 clamp(40px,11vw,52px)/1.02 ' + SERIF + ';color:#3a1624">¿Dónde está<br>mi pedido?</h3>' +
-        '<p style="margin:0 0 34px;font-size:14.5px;line-height:1.5;color:rgba(58,22,36,.7);max-width:300px">Escribe el número que te dimos y te contamos en qué va.</p></div>' +
-      '<div class="dm-line" id="dmPedLine"><input id="dmPedIn" class="dm-cin" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="DY-000000" maxlength="14" aria-label="Número de pedido">' +
-        '<button type="button" id="dmPedGo" class="dm-arrow" aria-label="Ver mi pedido"><i class="fas fa-arrow-right"></i></button></div>' +
-      '<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-top:9px"><div id="dmPedMsg" style="min-height:18px;font-size:12.5px;color:rgba(58,22,36,.6)">Ejemplo: DY-482915</div>' +
-        (puedePegar ? '<button type="button" id="dmPedPaste" style="border:0;background:none;color:#c9973f;font-weight:700;font-size:12.5px;text-decoration:underline;cursor:pointer;padding:0;white-space:nowrap">Pegar</button>' : '') + '</div>' +
-      (mis.length ? '<div id="dmConsMis" style="margin-top:34px"><div style="display:flex;justify-content:space-between;align-items:center;font:800 11.5px/1 sans-serif;letter-spacing:.2em;color:rgba(58,22,36,.55);text-transform:uppercase"><span>Tus pedidos</span><button type="button" id="dmPedClr" style="border:0;background:none;color:rgba(58,22,36,.55);text-decoration:underline;font-size:12px;font-weight:600;cursor:pointer;padding:0;letter-spacing:0;text-transform:none">Borrar</button></div>' +
-        '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">' + mis.map(function (x) { return '<button type="button" class="dm-chip" data-c="' + h(x.c) + '">' + h(x.c) + '<small>' + hace(x.t) + '</small></button>'; }).join('') + '</div></div>' : '') +
-      '<div id="dmConsAyuda" style="margin-top:44px;font-size:13px;color:rgba(58,22,36,.6)">¿No encuentras tu número? <a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, no encuentro el número de mi pedido') + '" target="_blank" rel="noopener" style="color:#c9973f;font-weight:700">Escríbenos por WhatsApp</a></div>' +
-      '<div id="dmPedRes" class="dm-res" style="margin-top:6px" aria-live="polite"></div>', true);
-    var sh = o.firstChild, hd = sh.firstChild, ttl = hd.querySelector('h2'), xb = hd.querySelector('#dmPedX');
+      '<div id="dmPedForm" style="padding-top:6px"><div class="dm-box" id="dmPedLine"><i class="fas fa-receipt" style="font-size:20px;color:#c9973f"></i>' +
+        '<input id="dmPedIn" class="dm-cin" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="DY-000000" maxlength="14" aria-label="Número de pedido">' +
+        '<button type="button" id="dmPedGo" class="dm-buscar">Buscar</button></div>' +
+      '<div style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;padding:0 4px"><div id="dmPedMsg" style="min-height:18px;font-size:12.5px;color:#8a7a80"></div>' +
+        (puedePegar ? '<button type="button" id="dmPedPaste" style="border:0;background:none;color:#a9792a;font-weight:700;font-size:12.5px;cursor:pointer;padding:0;white-space:nowrap"><i class="far fa-paste"></i> Pegar</button>' : '') + '</div></div>' +
+      (mis.length ? '<div id="dmConsMis" style="margin-top:26px"><div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px;font-weight:800;font-size:13px;color:#3a1624"><span><i class="fas fa-clock-rotate-left" style="color:#c9973f;margin-right:6px"></i>Recientes</span><button type="button" id="dmPedClr" style="border:0;background:none;color:#8a7a80;font-size:12px;font-weight:600;cursor:pointer;padding:0">Borrar</button></div>' +
+        mis.map(function (x) { return '<button type="button" class="dm-row" data-c="' + h(x.c) + '"><i class="fas fa-box" style="color:#c9973f"></i><b>' + h(x.c) + '</b><small>' + hace(x.t) + '</small><i class="fas fa-chevron-right" style="font-size:11px;color:#c4b6bb"></i></button>'; }).join('') + '</div>' : '') +
+      '<div id="dmPedRes" class="dm-res" aria-live="polite"></div>' +
+      '<a id="dmConsAyuda" href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, no encuentro el número de mi pedido') + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;width:fit-content;margin:28px auto 0;font-size:13px;font-weight:700;color:#1f9d55;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:17px"></i>Ayuda por WhatsApp</a>', true);
+    var sh = o.firstChild; sh.style.background = '#fbf6ee'; sh.style.color = '#3a1624';
     var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes'), msg = o.querySelector('#dmPedMsg'), go = o.querySelector('#dmPedGo'), line = o.querySelector('#dmPedLine');
-    function tema(oscuro) {
-      sh.style.background = oscuro ? 'radial-gradient(ellipse 90% 45% at 50% 0%,rgba(201,151,63,.2),transparent 70%),linear-gradient(180deg,#fbf6ee,#f3e9dc)' : '#fbf6ee';
-      sh.style.color = oscuro ? '#3a1624' : '#3a1624';
-      if (ttl) ttl.style.display = oscuro ? 'none' : ''; hd.style.justifyContent = oscuro ? 'flex-end' : 'space-between';
-      if (xb) xb.style.color = oscuro ? '#3a1624' : '';
-    }
-    tema(true);
-    function bloques(v) { ['dmConsHero', 'dmConsMis', 'dmConsAyuda', 'dmPedLine'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = v ? '' : 'none'; }); msg.parentNode.style.display = v ? '' : 'none'; }
+    function ocultar(v) { ['dmConsMis', 'dmConsAyuda'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = v ? 'none' : ''; }); }
     function estado() {
       var v = inp.value; line.classList.remove('mal'); line.classList.toggle('ok', codigoValido(v));
-      msg.style.color = codigoValido(v) ? '#2e9d62' : 'rgba(58,22,36,.6)';
-      msg.textContent = codigoValido(v) ? '✓ Listo, toca la flecha' : (v ? 'Sigue escribiendo… ejemplo: DY-482915' : 'Ejemplo: DY-482915');
+      msg.style.color = codigoValido(v) ? '#2e9d62' : '#8a7a80';
+      msg.textContent = codigoValido(v) ? '✓ Número completo' : (v ? 'Sigue escribiendo…' : '');
     }
     function mal(t) { line.classList.remove('ok'); line.classList.remove('mal'); void line.offsetWidth; line.classList.add('mal'); msg.style.color = '#b3392f'; msg.textContent = t; inp.focus(); }
-    
     function ir() {
       var v = formatoCodigo(inp.value); inp.value = v;
       if (!v) { mal('Escribe tu número de pedido.'); return; }
-      if (!codigoValido(v)) { mal('Está incompleto. Debe verse como DY-482915.'); return; }
+      if (!codigoValido(v)) { mal('Está incompleto. Ejemplo: DY-482915'); return; }
       go.disabled = true; go.innerHTML = '<i class="fas fa-circle-notch" style="animation:dmspin .8s linear infinite"></i>';
-      function fin() { go.disabled = false; go.innerHTML = '<i class="fas fa-arrow-right"></i>'; }
+      function fin() { go.disabled = false; go.textContent = 'Buscar'; }
       rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
         fin();
-        if (!r) { mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
-        ['dmConsHero', 'dmConsMis', 'dmConsAyuda'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = 'none'; }); pintarSeguimiento(res, r);
-                
-      }).catch(function () { fin(); res.innerHTML = ''; mal('No pudimos consultar ahora. Intenta de nuevo en un momento.'); });
+        if (!r) { res.innerHTML = ''; ocultar(false); mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
+        ocultar(true); pintarSeguimiento(res, r); res.classList.remove('dm-res'); void res.offsetWidth; res.classList.add('dm-res');
+      }).catch(function () { fin(); mal('No pudimos consultar ahora. Intenta en un momento.'); });
     }
     var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); } catch (e) {} abrirConsulta(); };
     var pg = o.querySelector('#dmPedPaste');
     if (pg) pg.onclick = function () { navigator.clipboard.readText().then(function (t) { inp.value = formatoCodigo(t); estado(); if (codigoValido(inp.value)) ir(); }).catch(function () { inp.focus(); }); };
     go.onclick = ir;
-    inp.addEventListener('input', function () { inp.value = formatoCodigo(inp.value); estado(); if (res.innerHTML) { res.innerHTML = ''; ['dmConsHero', 'dmConsMis', 'dmConsAyuda'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = ''; }); } });
+    inp.addEventListener('input', function () { inp.value = formatoCodigo(inp.value); estado(); if (res.innerHTML) { res.innerHTML = ''; ocultar(false); } });
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') ir(); });
     o.querySelectorAll('[data-c]').forEach(function (b) { b.onclick = function () { inp.value = b.dataset.c; estado(); ir(); }; });
     if (pref) { inp.value = formatoCodigo(pref); estado(); ir(); }

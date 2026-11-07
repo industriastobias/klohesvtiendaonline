@@ -299,7 +299,7 @@
         '<div style="margin-top:7px;font-size:10.5px;line-height:1.15;white-space:nowrap;margin-left:-4px;margin-right:-4px;font-weight:' + (act ? '800' : '600') + ';color:' + (act || hecho ? INK : '#a89fa2') + '">' + h(corto[i]) + '</div></div>';
     }).join('') + '</div>';
     box.innerHTML =
-      '<div style="margin-top:22px;border-radius:22px;background:#fff;box-shadow:0 10px 30px rgba(58,22,36,.1);padding:22px 18px 20px;text-align:center">' +
+      '<div style="margin-top:16px;border-radius:22px;background:#fff;box-shadow:0 10px 30px rgba(58,22,36,.1);padding:22px 18px 20px;text-align:center">' +
         '<div style="width:72px;height:72px;margin:0 auto;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;background:' + (fin ? '#b3392f' : INK) + ';transform:rotate(-6deg)"><i class="fas ' + icono + '"></i></div>' +
         '<div style="margin-top:14px;font-size:23px;font-weight:800;color:' + col + '">' + h(titulo) + '</div>' +
         '<p style="margin:6px auto 0;max-width:300px;font-size:14.5px;line-height:1.45;color:#5b4950">' + h(msg) + '</p>' + tiles +
@@ -353,7 +353,7 @@
       '<a id="dmConsAyuda" href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, no encuentro el número de mi pedido') + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;width:fit-content;margin:28px auto 0;font-size:13px;font-weight:700;color:#1f9d55;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:17px"></i>Ayuda por WhatsApp</a>', true);
     var sh = o.firstChild; sh.style.background = '#fbf6ee'; sh.style.color = '#3a1624';
     var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes'), msg = o.querySelector('#dmPedMsg'), go = o.querySelector('#dmPedGo'), line = o.querySelector('#dmPedLine');
-    function ocultar(v) { ['dmConsMis', 'dmConsAyuda'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = v ? 'none' : ''; }); }
+    function ocultar(v) { ['dmConsMis', 'dmConsAyuda', 'dmPedForm'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = v ? 'none' : ''; }); }
     function estado() {
       var v = inp.value; line.classList.remove('mal'); line.classList.toggle('ok', codigoValido(v));
       msg.style.color = codigoValido(v) ? '#2e9d62' : '#8a7a80';
@@ -369,7 +369,7 @@
       rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
         fin();
         if (!r) { res.innerHTML = ''; ocultar(false); mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
-        try { localStorage.setItem(ULTK, JSON.stringify({ c: v, t: Date.now() })); } catch (e) {} ocultar(true); pintarSeguimiento(res, r); res.classList.remove('dm-res'); void res.offsetWidth; res.classList.add('dm-res');
+        try { localStorage.setItem(ULTK, JSON.stringify({ c: v, t: Date.now() })); } catch (e) {} ocultar(true); pintarSeguimiento(res, r); res.insertAdjacentHTML('afterbegin', '<button type="button" id="dmPedOtro" style="display:inline-flex;align-items:center;gap:7px;border:0;background:#fff;color:#3a1624;font-weight:800;font-size:13.5px;padding:10px 16px;border-radius:999px;box-shadow:0 3px 10px rgba(58,22,36,.1);cursor:pointer;margin-top:6px"><i class="fas fa-arrow-left"></i> Buscar otro pedido</button>'); res.querySelector('#dmPedOtro').onclick = function () { res.innerHTML = ''; ocultar(false); estado(); inp.focus(); }; res.classList.remove('dm-res'); void res.offsetWidth; res.classList.add('dm-res');
       }).catch(function () { fin(); mal('No pudimos consultar ahora. Intenta en un momento.'); });
     }
     var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); } catch (e) {} abrirConsulta(); };

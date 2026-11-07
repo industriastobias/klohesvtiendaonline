@@ -281,6 +281,31 @@
       '<div style="display:flex;justify-content:space-between;font-weight:800;font-size:16px;border-top:1px solid var(--line,#e6dde0);margin-top:6px;padding-top:9px"><span>Total</span><span>' + usd(r.total) + '</span></div></div>' +
       '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:14px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
   }
+  function pintarSeguimiento(box, r) {
+    var fin = FIN[r.estado], items = Array.isArray(r.items) ? r.items : [];
+    var nivel = fin ? 0 : (NIVEL[r.estado] == null ? 0 : NIVEL[r.estado]);
+    var pasos = PASOS.map(function (p) { return p.slice(); });
+    if (r.estado === 'listo') pasos[3] = ['listo', 'Listo para retirar', 'fa-store'];
+    var titulo = fin ? fin[0] : pasos[nivel][1], icono = fin ? fin[1] : pasos[nivel][2], msg = fin ? fin[2] : (MENSAJE[r.estado] || '');
+    var cuando = r.actualizado ? fechaCorta(r.actualizado) : fechaCorta(r.creado);
+    var pct = fin ? 0 : Math.round(nivel / (pasos.length - 1) * 100);
+    var pista = fin ? '' :
+      '<div style="position:relative;margin:22px 4px 6px;height:14px"><div style="position:absolute;left:0;right:0;top:5px;height:4px;border-radius:2px;background:rgba(255,255,255,.14)"></div>' +
+      '<div style="position:absolute;left:0;top:5px;height:4px;border-radius:2px;background:#e8c777;width:0;transition:width 1s cubic-bezier(.3,.8,.3,1)" data-w="' + pct + '"></div>' +
+      pasos.map(function (p, i) { return '<span style="position:absolute;top:0;left:calc(' + (i / (pasos.length - 1) * 100) + '% - 7px);width:14px;height:14px;border-radius:50%;box-sizing:border-box;' + (i <= nivel ? 'background:#e8c777;' : 'background:#3a1624;border:2px solid rgba(255,255,255,.22);') + (i === nivel ? 'box-shadow:0 0 0 5px rgba(232,199,119,.25);' : '') + '"></span>'; }).join('') + '</div>' +
+      '<div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(244,239,229,.5);margin:0 -2px"><span>Creada</span><span style="text-align:right">Entregado</span></div>';
+    box.innerHTML =
+      '<div style="margin-top:26px;border-radius:22px;background:rgba(255,255,255,.07);border:1px solid rgba(232,199,119,.3);padding:20px 18px 18px">' +
+        '<div style="display:flex;align-items:center;gap:14px"><div style="flex:none;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;' + (fin ? 'background:#b3392f;color:#fff' : 'background:#e8c777;color:#4e1f31') + '"><i class="fas ' + icono + '"></i></div>' +
+        '<div style="min-width:0"><div style="font:italic 600 28px/1.05 var(--font-display,Georgia,serif);color:#fff">' + h(titulo) + '</div><div style="font:700 12px monospace;letter-spacing:.08em;color:#e8c777;margin-top:4px">' + h(r.codigo) + '</div><div style="font-size:12px;color:rgba(244,239,229,.6);margin-top:2px">' + h(cuando) + '</div></div></div>' +
+        '<p style="margin:14px 0 0;font-size:14.5px;line-height:1.45;color:rgba(244,239,229,.85)">' + h(msg) + '</p>' + pista +
+      '</div>' +
+      '<details style="margin-top:12px;border-radius:16px;background:rgba(255,255,255,.05);padding:2px 16px"><summary style="cursor:pointer;padding:13px 0;font-weight:700;font-size:14px;color:#f4efe5;list-style:none;display:flex;justify-content:space-between"><span>Ver mi pedido</span><span style="color:#e8c777">' + usd(r.total) + ' ▾</span></summary>' +
+        '<div style="padding:0 0 12px;font-size:14px;color:rgba(244,239,229,.85)">' + items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;padding:4px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span>' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +
+        (Number(r.envio) ? '<div style="display:flex;justify-content:space-between;padding:4px 0;color:rgba(244,239,229,.6)"><span>Envío</span><span>' + usd(r.envio) + '</span></div>' : '') + '</div></details>' +
+      '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:16px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
+    setTimeout(function () { var b = box.querySelector('[data-w]'); if (b) b.style.width = b.dataset.w + '%'; }, 60);
+  }
   function estilosConsulta() {
     if (document.getElementById('dmConsCss')) return;
     var st = document.createElement('style'); st.id = 'dmConsCss';
@@ -336,7 +361,7 @@
       msg.textContent = codigoValido(v) ? '✓ Listo, toca la flecha' : (v ? 'Sigue escribiendo… ejemplo: DY-482915' : 'Ejemplo: DY-482915');
     }
     function mal(t) { line.classList.remove('ok'); line.classList.remove('mal'); void line.offsetWidth; line.classList.add('mal'); msg.style.color = '#ffb4a8'; msg.textContent = t; inp.focus(); }
-    function volver() { res.innerHTML = ''; tema(true); bloques(true); inp.focus(); }
+    
     function ir() {
       var v = formatoCodigo(inp.value); inp.value = v;
       if (!v) { mal('Escribe tu número de pedido.'); return; }
@@ -345,18 +370,16 @@
       function fin() { go.disabled = false; go.innerHTML = '<i class="fas fa-arrow-right"></i>'; }
       rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
         fin();
-        if (!r) { res.innerHTML = ''; mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
-        tema(false); bloques(false); pintarEstado(res, r, v);
-        res.insertAdjacentHTML('beforeend', '<button type="button" id="dmPedOtro" style="display:block;margin:12px auto 0;border:0;background:none;color:var(--wine,#6b2d3e);font-weight:700;font-size:13.5px;text-decoration:underline;cursor:pointer;padding:6px"><i class="fas fa-arrow-left"></i> Consultar otro pedido</button>');
-        res.querySelector('#dmPedOtro').onclick = volver;
-        try { sh.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+        if (!r) { mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
+        ['dmConsHero', 'dmConsMis', 'dmConsAyuda'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = 'none'; }); pintarSeguimiento(res, r);
+                
       }).catch(function () { fin(); res.innerHTML = ''; mal('No pudimos consultar ahora. Intenta de nuevo en un momento.'); });
     }
     var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); } catch (e) {} abrirConsulta(); };
     var pg = o.querySelector('#dmPedPaste');
     if (pg) pg.onclick = function () { navigator.clipboard.readText().then(function (t) { inp.value = formatoCodigo(t); estado(); if (codigoValido(inp.value)) ir(); }).catch(function () { inp.focus(); }); };
     go.onclick = ir;
-    inp.addEventListener('input', function () { inp.value = formatoCodigo(inp.value); estado(); });
+    inp.addEventListener('input', function () { inp.value = formatoCodigo(inp.value); estado(); if (res.innerHTML) { res.innerHTML = ''; ['dmConsHero', 'dmConsMis', 'dmConsAyuda'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = ''; }); } });
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') ir(); });
     o.querySelectorAll('[data-c]').forEach(function (b) { b.onclick = function () { inp.value = b.dataset.c; estado(); ir(); }; });
     if (pref) { inp.value = formatoCodigo(pref); estado(); ir(); }

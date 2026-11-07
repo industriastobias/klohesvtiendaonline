@@ -284,15 +284,15 @@
   function estilosConsulta() {
     if (document.getElementById('dmConsCss')) return;
     var st = document.createElement('style'); st.id = 'dmConsCss';
-    st.textContent = '@keyframes dmflot{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}' +
-      '@keyframes dmshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}' +
+    st.textContent = '@keyframes dmshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}' +
       '@keyframes dmspin{to{transform:rotate(360deg)}}@keyframes dmpop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}' +
-      '#dmPedOv .dm-cin{transition:border-color .2s,box-shadow .2s,background .2s}#dmPedOv .dm-cin:focus{outline:none;border-color:var(--wine,#6b2d3e);box-shadow:0 0 0 4px rgba(107,45,62,.14)}' +
-      '#dmPedOv .dm-cin.ok{border-color:#3fae6a;background:rgba(63,174,106,.07)}#dmPedOv .dm-cin.mal{animation:dmshake .4s;border-color:#c0392b}' +
-      '#dmPedOv .dm-mis{display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;text-align:left;padding:11px 12px;margin-top:8px;border:1.5px solid var(--line,#e6dde0);border-radius:14px;background:transparent;color:inherit;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}' +
-      '#dmPedOv .dm-mis:hover,#dmPedOv .dm-mis:active{transform:translateY(-1px);border-color:var(--wine,#6b2d3e);background:rgba(107,45,62,.05)}' +
-      '#dmPedOv .dm-go{transition:transform .15s,box-shadow .15s}#dmPedOv .dm-go:active{transform:scale(.98)}#dmPedOv .dm-res{animation:dmpop .35s}' +
-      '@media (prefers-reduced-motion:reduce){#dmPedOv *{animation:none!important}}';
+      '@keyframes dmglow{0%,100%{box-shadow:0 0 0 0 rgba(232,199,119,.55)}50%{box-shadow:0 0 0 12px rgba(232,199,119,0)}}' +
+      '#dmPedOv .dm-line{display:flex;align-items:center;gap:12px;border-bottom:2px solid rgba(232,199,119,.45);padding-bottom:10px;transition:border-color .2s}' +
+      '#dmPedOv .dm-line:focus-within{border-color:#e8c777}#dmPedOv .dm-line.ok{border-color:#7fd6a0}#dmPedOv .dm-line.mal{animation:dmshake .4s;border-color:#ff9d8f}' +
+      '#dmPedOv .dm-cin{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#f4efe5;font:700 30px/1.1 monospace;letter-spacing:.1em;text-transform:uppercase;padding:6px 0}#dmPedOv .dm-cin::placeholder{color:rgba(244,239,229,.28)}' +
+      '#dmPedOv .dm-arrow{flex:none;width:54px;height:54px;border:0;border-radius:50%;background:#e8c777;color:#4e1f31;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;animation:dmglow 2.4s infinite;transition:transform .15s}#dmPedOv .dm-arrow:active{transform:scale(.92)}#dmPedOv .dm-arrow:disabled{animation:none;opacity:.8}' +
+      '#dmPedOv .dm-chip{border:1px solid rgba(232,199,119,.5);border-radius:999px;background:rgba(255,255,255,.05);color:#f4efe5;padding:8px 14px;cursor:pointer;font:700 13.5px monospace;letter-spacing:.05em;transition:background .15s,transform .15s}#dmPedOv .dm-chip:hover,#dmPedOv .dm-chip:active{background:rgba(232,199,119,.2);transform:translateY(-1px)}#dmPedOv .dm-chip small{font:600 11px sans-serif;letter-spacing:0;color:rgba(244,239,229,.6);margin-left:6px}' +
+      '#dmPedOv .dm-res{animation:dmpop .35s}@media (prefers-reduced-motion:reduce){#dmPedOv *{animation:none!important}}';
     document.head.appendChild(st);
   }
   function formatoCodigo(v) {
@@ -306,46 +306,50 @@
   function hace(t) { var d = Math.floor((Date.now() - Number(t)) / 864e5); return d <= 0 ? 'Hoy' : d === 1 ? 'Ayer' : 'Hace ' + d + ' días'; }
   function abrirConsulta(pref) {
     estilosConsulta();
-    var mis = misPedidos(), W = 'var(--wine,#6b2d3e)', G = 'var(--gold,#c9973f)', puedePegar = !!(navigator.clipboard && navigator.clipboard.readText);
+    var mis = misPedidos(), puedePegar = !!(navigator.clipboard && navigator.clipboard.readText), SERIF = "var(--font-display,'Cormorant Garamond',Georgia,serif)";
     var o = abrirDlg('Consultar mi pedido',
-      '<div id="dmConsHero" style="text-align:center;padding:4px 0 14px">' +
-        '<div style="width:74px;height:74px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(145deg,' + W + ',#4e1f31);color:#e8c777;display:flex;align-items:center;justify-content:center;font-size:31px;box-shadow:0 10px 24px rgba(107,45,62,.3);animation:dmflot 3.2s ease-in-out infinite"><i class="fas fa-box-open"></i></div>' +
-        '<div style="font-size:22px;font-weight:800;color:' + W + '">Sigue tu pedido</div>' +
-        '<p style="margin:6px auto 0;max-width:300px;font-size:14px;line-height:1.45;color:var(--muted,#777)">Escribe el número que te dimos al hacer tu pedido y mira en qué paso va.</p></div>' +
-      '<div style="position:relative"><i class="fas fa-hashtag" aria-hidden="true" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:' + G + '"></i>' +
-        '<input id="dmPedIn" class="dm-cin" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="DY-123456" maxlength="14" aria-label="Número de pedido" style="width:100%;box-sizing:border-box;padding:15px ' + (puedePegar ? '84px' : '14px') + ' 15px 40px;border:2px solid var(--line,#ddd);border-radius:14px;font:700 19px/1.2 monospace;letter-spacing:.08em;text-transform:uppercase;background:var(--surface,#fff);color:inherit">' +
-        (puedePegar ? '<button type="button" id="dmPedPaste" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;border-radius:10px;padding:8px 11px;background:rgba(201,151,63,.16);color:' + W + ';font-weight:800;font-size:12.5px;cursor:pointer"><i class="far fa-clipboard"></i> Pegar</button>' : '') + '</div>' +
-      '<div id="dmPedMsg" style="min-height:18px;margin:6px 2px 0;font-size:12.5px;color:var(--muted,#777)">Ejemplo: DY-482915</div>' +
-      '<button type="button" id="dmPedGo" class="dm-go" style="' + BTN + 'width:100%;margin-top:6px;padding:14px;background:linear-gradient(145deg,' + W + ',#4e1f31);color:#fff;box-shadow:0 8px 18px rgba(107,45,62,.28);display:flex;align-items:center;justify-content:center;gap:9px"><i class="fas fa-magnifying-glass"></i><span>Ver mi pedido</span></button>' +
-      (mis.length ? '<div id="dmConsMis" style="margin-top:22px"><div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:' + G + '"><span>Tus pedidos en este teléfono</span><button type="button" id="dmPedClr" style="border:0;background:none;color:var(--muted,#777);text-decoration:underline;font-size:12px;font-weight:600;cursor:pointer;padding:0;text-transform:none;letter-spacing:0">Borrar lista</button></div>' +
-        mis.map(function (x) { return '<button type="button" class="dm-mis" data-c="' + h(x.c) + '"><span style="width:36px;height:36px;border-radius:50%;background:rgba(201,151,63,.16);color:' + W + ';display:flex;align-items:center;justify-content:center;flex:none"><i class="fas fa-bag-shopping"></i></span><span style="flex:1;min-width:0"><b style="display:block;font:800 15px monospace;letter-spacing:.04em">' + h(x.c) + '</b><small style="color:var(--muted,#777)">' + hace(x.t) + (x.total ? ' · ' + usd(x.total) : '') + '</small></span><i class="fas fa-chevron-right" style="color:' + G + ';font-size:13px"></i></button>'; }).join('') + '</div>' : '') +
-      '<div id="dmPedRes" class="dm-res" style="margin-top:14px" aria-live="polite"></div>', true);
-    var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes'), msg = o.querySelector('#dmPedMsg'), go = o.querySelector('#dmPedGo');
+      '<div id="dmConsHero" style="padding:8px 2px 0">' +
+        '<div style="font:800 11.5px/1 sans-serif;letter-spacing:.3em;color:#e8c777;text-transform:uppercase">✦ Daymar · Seguimiento</div>' +
+        '<h3 style="margin:16px 0 8px;font:italic 600 clamp(40px,11vw,52px)/1.02 ' + SERIF + ';color:#fff">¿Dónde está<br>mi pedido?</h3>' +
+        '<p style="margin:0 0 34px;font-size:14.5px;line-height:1.5;color:rgba(244,239,229,.7);max-width:300px">Escribe el número que te dimos y te contamos en qué va.</p></div>' +
+      '<div class="dm-line" id="dmPedLine"><input id="dmPedIn" class="dm-cin" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="DY-000000" maxlength="14" aria-label="Número de pedido">' +
+        '<button type="button" id="dmPedGo" class="dm-arrow" aria-label="Ver mi pedido"><i class="fas fa-arrow-right"></i></button></div>' +
+      '<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-top:9px"><div id="dmPedMsg" style="min-height:18px;font-size:12.5px;color:rgba(244,239,229,.6)">Ejemplo: DY-482915</div>' +
+        (puedePegar ? '<button type="button" id="dmPedPaste" style="border:0;background:none;color:#e8c777;font-weight:700;font-size:12.5px;text-decoration:underline;cursor:pointer;padding:0;white-space:nowrap">Pegar</button>' : '') + '</div>' +
+      (mis.length ? '<div id="dmConsMis" style="margin-top:34px"><div style="display:flex;justify-content:space-between;align-items:center;font:800 11.5px/1 sans-serif;letter-spacing:.2em;color:rgba(244,239,229,.55);text-transform:uppercase"><span>Tus pedidos</span><button type="button" id="dmPedClr" style="border:0;background:none;color:rgba(244,239,229,.55);text-decoration:underline;font-size:12px;font-weight:600;cursor:pointer;padding:0;letter-spacing:0;text-transform:none">Borrar</button></div>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">' + mis.map(function (x) { return '<button type="button" class="dm-chip" data-c="' + h(x.c) + '">' + h(x.c) + '<small>' + hace(x.t) + '</small></button>'; }).join('') + '</div></div>' : '') +
+      '<div id="dmConsAyuda" style="margin-top:44px;font-size:13px;color:rgba(244,239,229,.6)">¿No encuentras tu número? <a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, no encuentro el número de mi pedido') + '" target="_blank" rel="noopener" style="color:#e8c777;font-weight:700">Escríbenos por WhatsApp</a></div>' +
+      '<div id="dmPedRes" class="dm-res" style="margin-top:6px" aria-live="polite"></div>', true);
+    var sh = o.firstChild, hd = sh.firstChild, ttl = hd.querySelector('h2'), xb = hd.querySelector('#dmPedX');
+    var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes'), msg = o.querySelector('#dmPedMsg'), go = o.querySelector('#dmPedGo'), line = o.querySelector('#dmPedLine');
+    function tema(oscuro) {
+      sh.style.background = oscuro ? 'radial-gradient(ellipse 90% 45% at 50% 0%,rgba(201,151,63,.22),transparent 70%),linear-gradient(170deg,#5d2639,#34111f)' : 'var(--surface,#fff)';
+      sh.style.color = oscuro ? '#f4efe5' : 'var(--ink,#2a1a1f)';
+      if (ttl) ttl.style.display = oscuro ? 'none' : ''; hd.style.justifyContent = oscuro ? 'flex-end' : 'space-between';
+      if (xb) xb.style.color = oscuro ? '#f4efe5' : '';
+    }
+    tema(true);
+    function bloques(v) { ['dmConsHero', 'dmConsMis', 'dmConsAyuda', 'dmPedLine'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = v ? '' : 'none'; }); msg.parentNode.style.display = v ? '' : 'none'; }
     function estado() {
-      var v = inp.value; inp.classList.remove('mal');
-      inp.classList.toggle('ok', codigoValido(v));
-      msg.style.color = 'var(--muted,#777)';
-      msg.textContent = codigoValido(v) ? '✓ Listo, toca «Ver mi pedido»' : (v ? 'Sigue escribiendo… ejemplo: DY-482915' : 'Ejemplo: DY-482915');
+      var v = inp.value; line.classList.remove('mal'); line.classList.toggle('ok', codigoValido(v));
+      msg.style.color = codigoValido(v) ? '#7fd6a0' : 'rgba(244,239,229,.6)';
+      msg.textContent = codigoValido(v) ? '✓ Listo, toca la flecha' : (v ? 'Sigue escribiendo… ejemplo: DY-482915' : 'Ejemplo: DY-482915');
     }
-    function mal(t) { inp.classList.remove('ok'); inp.classList.remove('mal'); void inp.offsetWidth; inp.classList.add('mal'); msg.style.color = '#c0392b'; msg.textContent = t; inp.focus(); }
-    function volver() {
-      res.innerHTML = ''; ['dmConsHero', 'dmConsMis'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = ''; }); inp.focus();
-    }
+    function mal(t) { line.classList.remove('ok'); line.classList.remove('mal'); void line.offsetWidth; line.classList.add('mal'); msg.style.color = '#ffb4a8'; msg.textContent = t; inp.focus(); }
+    function volver() { res.innerHTML = ''; tema(true); bloques(true); inp.focus(); }
     function ir() {
       var v = formatoCodigo(inp.value); inp.value = v;
       if (!v) { mal('Escribe tu número de pedido.'); return; }
-      if (!codigoValido(v)) { mal('Ese número está incompleto. Debe verse como DY-482915.'); return; }
-      go.disabled = true; go.querySelector('span').textContent = 'Buscando…'; go.querySelector('i').className = 'fas fa-circle-notch'; go.querySelector('i').style.animation = 'dmspin .8s linear infinite';
-      function fin() { go.disabled = false; go.querySelector('span').textContent = 'Ver mi pedido'; go.querySelector('i').className = 'fas fa-magnifying-glass'; go.querySelector('i').style.animation = ''; }
+      if (!codigoValido(v)) { mal('Está incompleto. Debe verse como DY-482915.'); return; }
+      go.disabled = true; go.innerHTML = '<i class="fas fa-circle-notch" style="animation:dmspin .8s linear infinite"></i>';
+      function fin() { go.disabled = false; go.innerHTML = '<i class="fas fa-arrow-right"></i>'; }
       rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
         fin();
         if (!r) { res.innerHTML = ''; mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
-        ['dmConsHero', 'dmConsMis'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = 'none'; });
-        pintarEstado(res, r, v);
-        res.insertAdjacentHTML('beforeend', '<button type="button" id="dmPedOtro" style="display:block;margin:12px auto 0;border:0;background:none;color:' + W + ';font-weight:700;font-size:13.5px;text-decoration:underline;cursor:pointer;padding:6px"><i class="fas fa-arrow-left"></i> Consultar otro pedido</button>');
+        tema(false); bloques(false); pintarEstado(res, r, v);
+        res.insertAdjacentHTML('beforeend', '<button type="button" id="dmPedOtro" style="display:block;margin:12px auto 0;border:0;background:none;color:var(--wine,#6b2d3e);font-weight:700;font-size:13.5px;text-decoration:underline;cursor:pointer;padding:6px"><i class="fas fa-arrow-left"></i> Consultar otro pedido</button>');
         res.querySelector('#dmPedOtro').onclick = volver;
-        res.className = 'dm-res'; void res.offsetWidth;
-        try { res.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
+        try { sh.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
       }).catch(function () { fin(); res.innerHTML = ''; mal('No pudimos consultar ahora. Intenta de nuevo en un momento.'); });
     }
     var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); } catch (e) {} abrirConsulta(); };

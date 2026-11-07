@@ -281,25 +281,85 @@
       '<div style="display:flex;justify-content:space-between;font-weight:800;font-size:16px;border-top:1px solid var(--line,#e6dde0);margin-top:6px;padding-top:9px"><span>Total</span><span>' + usd(r.total) + '</span></div></div>' +
       '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:14px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
   }
+  function estilosConsulta() {
+    if (document.getElementById('dmConsCss')) return;
+    var st = document.createElement('style'); st.id = 'dmConsCss';
+    st.textContent = '@keyframes dmflot{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}' +
+      '@keyframes dmshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}' +
+      '@keyframes dmspin{to{transform:rotate(360deg)}}@keyframes dmpop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}' +
+      '#dmPedOv .dm-cin{transition:border-color .2s,box-shadow .2s,background .2s}#dmPedOv .dm-cin:focus{outline:none;border-color:var(--wine,#6b2d3e);box-shadow:0 0 0 4px rgba(107,45,62,.14)}' +
+      '#dmPedOv .dm-cin.ok{border-color:#3fae6a;background:rgba(63,174,106,.07)}#dmPedOv .dm-cin.mal{animation:dmshake .4s;border-color:#c0392b}' +
+      '#dmPedOv .dm-mis{display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;text-align:left;padding:11px 12px;margin-top:8px;border:1.5px solid var(--line,#e6dde0);border-radius:14px;background:transparent;color:inherit;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}' +
+      '#dmPedOv .dm-mis:hover,#dmPedOv .dm-mis:active{transform:translateY(-1px);border-color:var(--wine,#6b2d3e);background:rgba(107,45,62,.05)}' +
+      '#dmPedOv .dm-go{transition:transform .15s,box-shadow .15s}#dmPedOv .dm-go:active{transform:scale(.98)}#dmPedOv .dm-res{animation:dmpop .35s}' +
+      '@media (prefers-reduced-motion:reduce){#dmPedOv *{animation:none!important}}';
+    document.head.appendChild(st);
+  }
+  function formatoCodigo(v) {
+    var t = String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (/^DY/.test(t)) { var d = t.slice(2).replace(/\D/g, '').slice(0, 6); return 'DY' + (d ? '-' + d : ''); }
+    if (/^DM/.test(t)) { var r = t.slice(2).slice(0, 8); return 'DM' + (r ? '-' + r.slice(0, 4) + (r.length > 4 ? '-' + r.slice(4) : '') : ''); }
+    if (/^\d/.test(t)) return 'DY-' + t.replace(/\D/g, '').slice(0, 6);
+    return t.slice(0, 2);
+  }
+  function codigoValido(v) { return /^DY-\d{6}$/.test(v) || /^DM-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(v); }
+  function hace(t) { var d = Math.floor((Date.now() - Number(t)) / 864e5); return d <= 0 ? 'Hoy' : d === 1 ? 'Ayer' : 'Hace ' + d + ' días'; }
   function abrirConsulta(pref) {
-    var mis = misPedidos();
+    estilosConsulta();
+    var mis = misPedidos(), W = 'var(--wine,#6b2d3e)', G = 'var(--gold,#c9973f)', puedePegar = !!(navigator.clipboard && navigator.clipboard.readText);
+    var pasos = [['fa-receipt', 'Creada'], ['fa-circle-check', 'Aceptada'], ['fa-box-open', 'Preparación'], ['fa-truck-fast', 'En camino'], ['fa-house-circle-check', 'Entregado']];
     var o = abrirDlg('Consultar mi pedido',
-      '<p style="margin:0 0 10px;font-size:14px">Escribe el número que te dimos al hacer tu pedido.</p>' +
-      '<div style="display:flex;gap:8px"><input id="dmPedIn" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" placeholder="DY-123456" maxlength="14" style="flex:1;min-width:0;box-sizing:border-box;padding:12px;border:1.5px solid var(--line,#ccc);border-radius:12px;font:600 16px monospace;text-transform:uppercase"><button type="button" id="dmPedGo" style="' + BTN + 'background:var(--wine,#6b2d3e);color:#fff">Ver</button></div>' +
-      (mis.length ? '<div style="margin:12px 0 4px;font-size:12.5px;color:var(--muted,#777)">Tus pedidos en este dispositivo: <button type="button" id="dmPedClr" style="border:0;background:none;color:var(--wine,#6b2d3e);text-decoration:underline;font-size:12.5px;cursor:pointer;padding:0 0 0 6px">Borrar lista</button></div><div style="display:flex;gap:6px;flex-wrap:wrap">' + mis.map(function (x) { return '<button type="button" data-c="' + h(x.c) + '" style="border:1px solid var(--line,#ccc);background:transparent;color:inherit;border-radius:999px;padding:7px 12px;font:600 13px monospace;cursor:pointer">' + h(x.c) + '</button>'; }).join('') + '</div>' : '') +
-      '<div id="dmPedRes" style="margin-top:14px" aria-live="polite"></div>', true);
-    var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes');
+      '<div id="dmConsHero" style="text-align:center;padding:4px 0 14px">' +
+        '<div style="width:74px;height:74px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(145deg,' + W + ',#4e1f31);color:#e8c777;display:flex;align-items:center;justify-content:center;font-size:31px;box-shadow:0 10px 24px rgba(107,45,62,.3);animation:dmflot 3.2s ease-in-out infinite"><i class="fas fa-box-open"></i></div>' +
+        '<div style="font-size:22px;font-weight:800;color:' + W + '">Sigue tu pedido</div>' +
+        '<p style="margin:6px auto 0;max-width:300px;font-size:14px;line-height:1.45;color:var(--muted,#777)">Escribe el número que te dimos al hacer tu pedido y mira en qué paso va.</p></div>' +
+      '<div style="position:relative"><i class="fas fa-hashtag" aria-hidden="true" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:' + G + '"></i>' +
+        '<input id="dmPedIn" class="dm-cin" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="DY-123456" maxlength="14" aria-label="Número de pedido" style="width:100%;box-sizing:border-box;padding:15px ' + (puedePegar ? '84px' : '14px') + ' 15px 40px;border:2px solid var(--line,#ddd);border-radius:14px;font:700 19px/1.2 monospace;letter-spacing:.08em;text-transform:uppercase;background:var(--surface,#fff);color:inherit">' +
+        (puedePegar ? '<button type="button" id="dmPedPaste" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;border-radius:10px;padding:8px 11px;background:rgba(201,151,63,.16);color:' + W + ';font-weight:800;font-size:12.5px;cursor:pointer"><i class="far fa-clipboard"></i> Pegar</button>' : '') + '</div>' +
+      '<div id="dmPedMsg" style="min-height:18px;margin:6px 2px 0;font-size:12.5px;color:var(--muted,#777)">Ejemplo: DY-482915</div>' +
+      '<button type="button" id="dmPedGo" class="dm-go" style="' + BTN + 'width:100%;margin-top:6px;padding:14px;background:linear-gradient(145deg,' + W + ',#4e1f31);color:#fff;box-shadow:0 8px 18px rgba(107,45,62,.28);display:flex;align-items:center;justify-content:center;gap:9px"><i class="fas fa-magnifying-glass"></i><span>Ver mi pedido</span></button>' +
+      '<div id="dmConsSteps" style="display:flex;justify-content:space-between;gap:4px;margin:20px 2px 4px">' + pasos.map(function (p, i) {
+        return '<div style="flex:1;text-align:center;min-width:0"><div style="width:38px;height:38px;margin:0 auto 5px;border-radius:50%;background:rgba(107,45,62,.09);color:' + W + ';display:flex;align-items:center;justify-content:center;font-size:15px"><i class="fas ' + p[0] + '"></i></div><div style="font-size:10.5px;font-weight:700;color:var(--muted,#777);line-height:1.15">' + p[1] + '</div></div>';
+      }).join('') + '</div>' +
+      (mis.length ? '<div id="dmConsMis" style="margin-top:16px"><div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:' + G + '"><span>Tus pedidos en este teléfono</span><button type="button" id="dmPedClr" style="border:0;background:none;color:var(--muted,#777);text-decoration:underline;font-size:12px;font-weight:600;cursor:pointer;padding:0;text-transform:none;letter-spacing:0">Borrar lista</button></div>' +
+        mis.map(function (x) { return '<button type="button" class="dm-mis" data-c="' + h(x.c) + '"><span style="width:36px;height:36px;border-radius:50%;background:rgba(201,151,63,.16);color:' + W + ';display:flex;align-items:center;justify-content:center;flex:none"><i class="fas fa-bag-shopping"></i></span><span style="flex:1;min-width:0"><b style="display:block;font:800 15px monospace;letter-spacing:.04em">' + h(x.c) + '</b><small style="color:var(--muted,#777)">' + hace(x.t) + (x.total ? ' · ' + usd(x.total) : '') + '</small></span><i class="fas fa-chevron-right" style="color:' + G + ';font-size:13px"></i></button>'; }).join('') + '</div>' : '') +
+      '<div id="dmPedRes" class="dm-res" style="margin-top:14px" aria-live="polite"></div>', true);
+    var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes'), msg = o.querySelector('#dmPedMsg'), go = o.querySelector('#dmPedGo');
+    function estado() {
+      var v = inp.value; inp.classList.remove('mal');
+      inp.classList.toggle('ok', codigoValido(v));
+      msg.style.color = 'var(--muted,#777)';
+      msg.textContent = codigoValido(v) ? '✓ Listo, toca «Ver mi pedido»' : (v ? 'Sigue escribiendo… ejemplo: DY-482915' : 'Ejemplo: DY-482915');
+    }
+    function mal(t) { inp.classList.remove('ok'); inp.classList.remove('mal'); void inp.offsetWidth; inp.classList.add('mal'); msg.style.color = '#c0392b'; msg.textContent = t; inp.focus(); }
+    function volver() {
+      res.innerHTML = ''; ['dmConsHero', 'dmConsSteps', 'dmConsMis'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = ''; }); inp.focus();
+    }
     function ir() {
-      var v = inp.value.trim(); if (!v) { inp.focus(); return; }
-      res.innerHTML = '<p style="margin:0;color:var(--muted,#777)">Buscando…</p>';
-      rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) { pintarEstado(res, r, v); })
-        .catch(function () { res.innerHTML = '<p style="color:#a33;margin:0">No pudimos consultar ahora. Intenta de nuevo en un momento.</p>'; });
+      var v = formatoCodigo(inp.value); inp.value = v;
+      if (!v) { mal('Escribe tu número de pedido.'); return; }
+      if (!codigoValido(v)) { mal('Ese número está incompleto. Debe verse como DY-482915.'); return; }
+      go.disabled = true; go.querySelector('span').textContent = 'Buscando…'; go.querySelector('i').className = 'fas fa-circle-notch'; go.querySelector('i').style.animation = 'dmspin .8s linear infinite';
+      function fin() { go.disabled = false; go.querySelector('span').textContent = 'Ver mi pedido'; go.querySelector('i').className = 'fas fa-magnifying-glass'; go.querySelector('i').style.animation = ''; }
+      rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
+        fin();
+        if (!r) { res.innerHTML = ''; mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
+        ['dmConsHero', 'dmConsSteps', 'dmConsMis'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = 'none'; });
+        pintarEstado(res, r, v);
+        res.insertAdjacentHTML('beforeend', '<button type="button" id="dmPedOtro" style="display:block;margin:12px auto 0;border:0;background:none;color:' + W + ';font-weight:700;font-size:13.5px;text-decoration:underline;cursor:pointer;padding:6px"><i class="fas fa-arrow-left"></i> Consultar otro pedido</button>');
+        res.querySelector('#dmPedOtro').onclick = volver;
+        res.className = 'dm-res'; void res.offsetWidth;
+        try { res.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
+      }).catch(function () { fin(); res.innerHTML = ''; mal('No pudimos consultar ahora. Intenta de nuevo en un momento.'); });
     }
     var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); } catch (e) {} abrirConsulta(); };
-    o.querySelector('#dmPedGo').onclick = ir;
+    var pg = o.querySelector('#dmPedPaste');
+    if (pg) pg.onclick = function () { navigator.clipboard.readText().then(function (t) { inp.value = formatoCodigo(t); estado(); if (codigoValido(inp.value)) ir(); }).catch(function () { inp.focus(); }); };
+    go.onclick = ir;
+    inp.addEventListener('input', function () { inp.value = formatoCodigo(inp.value); estado(); });
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') ir(); });
-    o.querySelectorAll('[data-c]').forEach(function (b) { b.onclick = function () { inp.value = b.dataset.c; ir(); }; });
-    if (pref) { inp.value = pref; ir(); } else if (mis.length) { inp.value = mis[0].c; }
+    o.querySelectorAll('[data-c]').forEach(function (b) { b.onclick = function () { inp.value = b.dataset.c; estado(); ir(); }; });
+    if (pref) { inp.value = formatoCodigo(pref); estado(); ir(); }
   }
   function montarConsulta() {
     ['dmConsHdr', 'dmConsNav'].forEach(function (id) { var hb = document.getElementById(id); if (hb && !hb.dataset.ok) { hb.dataset.ok = '1'; hb.onclick = function () { abrirConsulta(); }; } });

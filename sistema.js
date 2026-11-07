@@ -304,7 +304,7 @@
         '<div style="margin-top:14px;font-size:23px;font-weight:800;color:' + col + '">' + h(titulo) + '</div>' +
         '<p style="margin:6px auto 0;max-width:300px;font-size:14.5px;line-height:1.45;color:#5b4950">' + h(msg) + '</p>' + tiles +
         '<div style="margin-top:18px;padding-top:12px;border-top:1px dashed #e3d6cf;display:flex;justify-content:space-between;font-size:12px;color:#8a7a80"><span style="font:700 12px monospace;letter-spacing:.06em">' + h(r.codigo) + '</span><span>' + h(cuando) + '</span></div></div>' +
-      '<details style="margin-top:12px;border-radius:16px;background:#fff;box-shadow:0 4px 14px rgba(58,22,36,.06);padding:2px 16px"><summary style="cursor:pointer;padding:13px 0;font-weight:700;font-size:14px;color:' + INK + ';list-style:none;display:flex;justify-content:space-between"><span><i class="fas fa-bag-shopping" style="color:' + GOLD + ';margin-right:7px"></i>Ver mi pedido</span><span>' + usd(r.total) + ' ▾</span></summary>' +
+      '<details style="margin-top:12px;border-radius:16px;background:#fff;box-shadow:0 4px 14px rgba(58,22,36,.06);padding:2px 16px"><summary style="cursor:pointer;padding:13px 0;font-weight:700;font-size:14px;color:' + INK + ';list-style:none;display:flex;justify-content:space-between"><span><i class="fas fa-bag-shopping" style="color:' + GOLD + ';margin-right:7px"></i>Productos</span><span>' + usd(r.total) + ' ▾</span></summary>' +
         '<div style="padding:0 0 12px;font-size:14px;color:#5b4950">' + items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;padding:4px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span>' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +
         (Number(r.envio) ? '<div style="display:flex;justify-content:space-between;padding:4px 0;color:#8a7a80"><span>Envío</span><span>' + usd(r.envio) + '</span></div>' : '') + '</div></details>' +
       '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:16px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
@@ -315,12 +315,17 @@
     st.textContent = '@keyframes dmshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}' +
       '@keyframes dmspin{to{transform:rotate(360deg)}}@keyframes dmpop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}' +
       '@keyframes dmglow{0%,100%{box-shadow:0 6px 14px rgba(201,151,63,.45),0 0 0 0 rgba(201,151,63,.5)}50%{box-shadow:0 6px 14px rgba(201,151,63,.45),0 0 0 9px rgba(201,151,63,0)}}' +
-      '#dmPedOv .dm-box{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #eadfd8;border-radius:18px;padding:6px 8px 6px 16px;box-shadow:0 8px 22px rgba(58,22,36,.08);transition:border-color .2s}' +
-      '#dmPedOv .dm-box:focus-within{border-color:#c9973f}#dmPedOv .dm-box.ok{border-color:#2e9d62}#dmPedOv .dm-box.mal{animation:dmshake .4s;border-color:#d9574a}' +
-      '#dmPedOv .dm-cin{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#3a1624;font:700 22px/1.1 monospace;letter-spacing:.08em;text-transform:uppercase;padding:14px 0}#dmPedOv .dm-cin::placeholder{color:#cdbfc4}' +
-      '#dmPedOv .dm-buscar{flex:none;border:0;border-radius:13px;background:#3a1624;color:#fff;font:800 14px sans-serif;padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:7px}#dmPedOv .dm-buscar:active{transform:scale(.96)}#dmPedOv .dm-buscar:disabled{opacity:.7}' +
-      '#dmPedOv .dm-row{display:flex;align-items:center;gap:12px;width:100%;border:0;background:#fff;border-radius:14px;padding:12px 14px;margin-top:8px;cursor:pointer;text-align:left;box-shadow:0 3px 10px rgba(58,22,36,.06);color:#3a1624}' +
-      '#dmPedOv .dm-row b{font:700 15px monospace;letter-spacing:.05em}#dmPedOv .dm-row small{margin-left:auto;color:#8a7a80;font-size:12px}' +
+      '#dmPedOv .dm-box{position:relative;background:#fff;border-radius:20px;padding:22px 18px 18px;text-align:center;box-shadow:0 12px 30px rgba(58,22,36,.1);transition:box-shadow .2s}' +
+      '#dmPedOv .dm-box:before,#dmPedOv .dm-box:after{content:"";position:absolute;top:118px;width:22px;height:22px;border-radius:50%;background:#fbf6ee}#dmPedOv .dm-box:before{left:-11px}#dmPedOv .dm-box:after{right:-11px}' +
+      '#dmPedOv .dm-tk{font:800 11px/1 sans-serif;letter-spacing:.26em;color:#a9792a;text-transform:uppercase}' +
+      '#dmPedOv .dm-cut{border-top:2px dashed #eadfd8;margin:16px 4px 0}' +
+      '#dmPedOv .dm-cin{width:100%;box-sizing:border-box;border:0;outline:0;background:transparent;text-align:center;color:#3a1624;font:800 32px/1.1 monospace;letter-spacing:.1em;text-transform:uppercase;padding:18px 0 4px;border-radius:0}#dmPedOv .dm-cin::placeholder{color:#d8cbd0}' +
+      '#dmPedOv .dm-box.ok{box-shadow:0 12px 30px rgba(46,157,98,.22)}#dmPedOv .dm-box.mal{animation:dmshake .4s;box-shadow:0 12px 30px rgba(217,87,74,.25)}' +
+      '#dmPedOv .dm-buscar{width:100%;border:0;border-radius:14px;background:#3a1624;color:#fff;font:800 15px sans-serif;padding:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px}#dmPedOv .dm-buscar:active{transform:scale(.98)}#dmPedOv .dm-buscar:disabled{opacity:.7}' +
+      '#dmPedOv .dm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}' +
+      '#dmPedOv .dm-row{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;border:2px dashed #e3d6cf;background:#fff;border-radius:14px;padding:12px 14px;cursor:pointer;text-align:left;color:#3a1624;position:relative}#dmPedOv .dm-row:active{transform:scale(.97)}' +
+      '#dmPedOv .dm-row b{font:800 15px monospace;letter-spacing:.04em}#dmPedOv .dm-row small{color:#8a7a80;font-size:12px}#dmPedOv .dm-row.ult{border:2px solid #c9973f;background:#fffaf0}' +
+      '#dmPedOv .dm-row em{position:absolute;top:-9px;right:10px;background:#c9973f;color:#fff;font:800 9.5px sans-serif;font-style:normal;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:999px}' +
       '#dmPedOv .dm-res{animation:dmpop .35s}@media (prefers-reduced-motion:reduce){#dmPedOv *{animation:none!important}}';
     document.head.appendChild(st);
   }
@@ -337,13 +342,13 @@
     estilosConsulta();
     var mis = misPedidos(), ult = ultimaBusqueda(), lista = ult ? [ult].concat(mis.filter(function (x) { return x.c !== ult.c; })) : mis, puedePegar = !!(navigator.clipboard && navigator.clipboard.readText);
     var o = abrirDlg('Consultar mi pedido',
-      '<div id="dmPedForm" style="padding-top:6px"><div class="dm-box" id="dmPedLine"><i class="fas fa-receipt" style="font-size:20px;color:#c9973f"></i>' +
+      '<div id="dmPedForm" style="padding-top:8px"><div class="dm-box" id="dmPedLine"><div class="dm-tk"><i class="fas fa-ticket"></i> Tu número de pedido</div>' +
         '<input id="dmPedIn" class="dm-cin" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="DY-000000" maxlength="14" aria-label="Número de pedido">' +
-        '<button type="button" id="dmPedGo" class="dm-buscar">Buscar</button></div>' +
-      '<div style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;padding:0 4px"><div id="dmPedMsg" style="min-height:18px;font-size:12.5px;color:#8a7a80"></div>' +
-        (puedePegar ? '<button type="button" id="dmPedPaste" style="border:0;background:none;color:#a9792a;font-weight:700;font-size:12.5px;cursor:pointer;padding:0;white-space:nowrap"><i class="far fa-paste"></i> Pegar</button>' : '') + '</div></div>' +
-      (lista.length ? '<div id="dmConsMis" style="margin-top:26px"><div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px;font-weight:800;font-size:13px;color:#3a1624"><span><i class="fas fa-clock-rotate-left" style="color:#c9973f;margin-right:6px"></i>Tus pedidos</span><button type="button" id="dmPedClr" style="border:0;background:none;color:#8a7a80;font-size:12px;font-weight:600;cursor:pointer;padding:0">Borrar</button></div>' +
-        lista.map(function (x, i) { var u = ult && i === 0; return '<button type="button" class="dm-row" data-c="' + h(x.c) + '"' + (u ? ' style="border:2px solid #c9973f"' : '') + '><i class="fas fa-box' + (u ? '-open' : '') + '" style="color:#c9973f"></i><span style="display:flex;flex-direction:column;gap:3px;align-items:flex-start"><b>' + h(x.c) + '</b>' + (u ? '<em style="font:800 10.5px sans-serif;font-style:normal;letter-spacing:.06em;color:#a9792a;text-transform:uppercase">Última búsqueda</em>' : '') + '</span><small>' + hace(x.t) + '</small><i class="fas fa-chevron-right" style="font-size:11px;color:#c4b6bb"></i></button>'; }).join('') + '</div>' : '') +
+        '<div id="dmPedMsg" style="min-height:20px;font-size:12.5px;color:#8a7a80;margin-top:2px"></div><div class="dm-cut"></div>' +
+        '<div style="padding-top:16px"><button type="button" id="dmPedGo" class="dm-buscar">Ver mi pedido</button>' +
+        (puedePegar ? '<button type="button" id="dmPedPaste" style="border:0;background:none;color:#a9792a;font-weight:700;font-size:13px;cursor:pointer;padding:12px 0 0"><i class="far fa-paste"></i> Pegar número</button>' : '') + '</div></div></div>' +
+      (lista.length ? '<div id="dmConsMis" style="margin-top:28px"><div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px;font-weight:800;font-size:13px;color:#3a1624"><span>Tus pedidos</span><button type="button" id="dmPedClr" style="border:0;background:none;color:#8a7a80;font-size:12px;font-weight:600;cursor:pointer;padding:0">Borrar</button></div><div class="dm-grid">' +
+        lista.map(function (x, i) { var u = ult && i === 0; return '<button type="button" class="dm-row' + (u ? ' ult' : '') + '" data-c="' + h(x.c) + '">' + (u ? '<em>Última</em>' : '') + '<b>' + h(x.c) + '</b><small>' + hace(x.t) + '</small></button>'; }).join('') + '</div></div>' : '') +
       '<div id="dmPedRes" class="dm-res" aria-live="polite"></div>' +
       '<a id="dmConsAyuda" href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, no encuentro el número de mi pedido') + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;width:fit-content;margin:28px auto 0;font-size:13px;font-weight:700;color:#1f9d55;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:17px"></i>Ayuda por WhatsApp</a>', true);
     var sh = o.firstChild; sh.style.background = '#fbf6ee'; sh.style.color = '#3a1624';
@@ -360,7 +365,7 @@
       if (!v) { mal('Escribe tu número de pedido.'); return; }
       if (!codigoValido(v)) { mal('Está incompleto. Ejemplo: DY-482915'); return; }
       go.disabled = true; go.innerHTML = '<i class="fas fa-circle-notch" style="animation:dmspin .8s linear infinite"></i>';
-      function fin() { go.disabled = false; go.textContent = 'Buscar'; }
+      function fin() { go.disabled = false; go.textContent = 'Ver mi pedido'; }
       rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
         fin();
         if (!r) { res.innerHTML = ''; ocultar(false); mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }

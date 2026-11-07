@@ -4,7 +4,7 @@
   'use strict';
   var SYS = { url: 'https://itafqiemoulcztmhfqah.supabase.co', key: 'sb_publishable_gkdG2OvACj7eGxaa5JSsLw_wO7w0bEB' };
   var user = null, lastSent = { sig: '', t: 0 };
-  var AL = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', CODK = 'daymar_cod_actual', MISK = 'daymar_mis_pedidos';
+  var AL = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', CODK = 'daymar_cod_actual', MISK = 'daymar_mis_pedidos', ULTK = 'daymar_ultima_busqueda';
   function nuevoCodigo() {
     var n, a = new Uint32Array(1);
     try { crypto.getRandomValues(a); n = a[0] % 1000000; } catch (e) { n = Math.floor(Math.random() * 1000000); }
@@ -23,6 +23,7 @@
       return v;
     } catch (e) { return []; }
   }
+  function ultimaBusqueda() { try { var u = JSON.parse(localStorage.getItem(ULTK) || 'null'); return u && u.c && codigoValido(u.c) ? u : null; } catch (e) { return null; } }
   function guardarPedido(c, total) {
     try { var l = misPedidos().filter(function (x) { return x.c !== c; }); l.unshift({ c: c, t: Date.now(), total: total }); localStorage.setItem(MISK, JSON.stringify(l.slice(0, MAXMIS))); } catch (e) {}
   }
@@ -334,20 +335,21 @@
   function hace(t) { var d = Math.floor((Date.now() - Number(t)) / 864e5); return d <= 0 ? 'Hoy' : d === 1 ? 'Ayer' : 'Hace ' + d + ' días'; }
   function abrirConsulta(pref) {
     estilosConsulta();
-    var mis = misPedidos(), puedePegar = !!(navigator.clipboard && navigator.clipboard.readText);
+    var mis = misPedidos(), ult = ultimaBusqueda(), puedePegar = !!(navigator.clipboard && navigator.clipboard.readText);
     var o = abrirDlg('Consultar mi pedido',
       '<div id="dmPedForm" style="padding-top:6px"><div class="dm-box" id="dmPedLine"><i class="fas fa-receipt" style="font-size:20px;color:#c9973f"></i>' +
         '<input id="dmPedIn" class="dm-cin" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="DY-000000" maxlength="14" aria-label="Número de pedido">' +
         '<button type="button" id="dmPedGo" class="dm-buscar">Buscar</button></div>' +
       '<div style="display:flex;justify-content:space-between;gap:10px;margin-top:8px;padding:0 4px"><div id="dmPedMsg" style="min-height:18px;font-size:12.5px;color:#8a7a80"></div>' +
         (puedePegar ? '<button type="button" id="dmPedPaste" style="border:0;background:none;color:#a9792a;font-weight:700;font-size:12.5px;cursor:pointer;padding:0;white-space:nowrap"><i class="far fa-paste"></i> Pegar</button>' : '') + '</div></div>' +
+      (ult ? '<div id="dmConsUlt" style="margin-top:22px"><div style="padding:0 4px;font-weight:800;font-size:13px;color:#3a1624"><i class="fas fa-magnifying-glass" style="color:#c9973f;margin-right:6px"></i>Última búsqueda</div><button type="button" class="dm-row" data-c="' + h(ult.c) + '" style="border:2px solid #c9973f"><i class="fas fa-box-open" style="color:#c9973f"></i><b>' + h(ult.c) + '</b><small>' + hace(ult.t) + '</small><i class="fas fa-chevron-right" style="font-size:11px;color:#c4b6bb"></i></button></div>' : '') +
       (mis.length ? '<div id="dmConsMis" style="margin-top:26px"><div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px;font-weight:800;font-size:13px;color:#3a1624"><span><i class="fas fa-clock-rotate-left" style="color:#c9973f;margin-right:6px"></i>Recientes</span><button type="button" id="dmPedClr" style="border:0;background:none;color:#8a7a80;font-size:12px;font-weight:600;cursor:pointer;padding:0">Borrar</button></div>' +
         mis.map(function (x) { return '<button type="button" class="dm-row" data-c="' + h(x.c) + '"><i class="fas fa-box" style="color:#c9973f"></i><b>' + h(x.c) + '</b><small>' + hace(x.t) + '</small><i class="fas fa-chevron-right" style="font-size:11px;color:#c4b6bb"></i></button>'; }).join('') + '</div>' : '') +
       '<div id="dmPedRes" class="dm-res" aria-live="polite"></div>' +
       '<a id="dmConsAyuda" href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, no encuentro el número de mi pedido') + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;width:fit-content;margin:28px auto 0;font-size:13px;font-weight:700;color:#1f9d55;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:17px"></i>Ayuda por WhatsApp</a>', true);
     var sh = o.firstChild; sh.style.background = '#fbf6ee'; sh.style.color = '#3a1624';
     var inp = o.querySelector('#dmPedIn'), res = o.querySelector('#dmPedRes'), msg = o.querySelector('#dmPedMsg'), go = o.querySelector('#dmPedGo'), line = o.querySelector('#dmPedLine');
-    function ocultar(v) { ['dmConsMis', 'dmConsAyuda'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = v ? 'none' : ''; }); }
+    function ocultar(v) { ['dmConsUlt', 'dmConsMis', 'dmConsAyuda'].forEach(function (i) { var e = o.querySelector('#' + i); if (e) e.style.display = v ? 'none' : ''; }); }
     function estado() {
       var v = inp.value; line.classList.remove('mal'); line.classList.toggle('ok', codigoValido(v));
       msg.style.color = codigoValido(v) ? '#2e9d62' : '#8a7a80';
@@ -363,7 +365,7 @@
       rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
         fin();
         if (!r) { res.innerHTML = ''; ocultar(false); mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
-        ocultar(true); pintarSeguimiento(res, r); res.classList.remove('dm-res'); void res.offsetWidth; res.classList.add('dm-res');
+        try { localStorage.setItem(ULTK, JSON.stringify({ c: v, t: Date.now() })); } catch (e) {} ocultar(true); pintarSeguimiento(res, r); res.classList.remove('dm-res'); void res.offsetWidth; res.classList.add('dm-res');
       }).catch(function () { fin(); mal('No pudimos consultar ahora. Intenta en un momento.'); });
     }
     var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); } catch (e) {} abrirConsulta(); };

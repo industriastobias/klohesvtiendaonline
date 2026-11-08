@@ -806,7 +806,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 .daymar-contact-socials { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
 .daymar-contact-socials a { display: inline-flex; align-items: center; justify-content: center; gap: 7px; font-size: 13px; }
 .daymar-contact-socials i { color: var(--gold); }
-.daymar-payment-item img { height: 22px; width: auto; margin-top: 8px; border-radius: 3px; }
+.daymar-payment-item img { height: 56px; width: auto; margin-top: 12px; padding: 6px 12px; background: #fff; border: 1px solid rgba(201,151,63,.35); border-radius: 12px; box-shadow: 0 4px 12px rgba(58,22,36,.08); }
 
 /* ---------- Confianza (preguntas) ---------- */
 .daymar-trust { padding: clamp(60px, 8vw, 110px) 0; background: var(--paper); }

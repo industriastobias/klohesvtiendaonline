@@ -1542,3 +1542,4 @@ body { background-color: var(--ivory); }
 
 /* Evita el zoom por doble toque al tocar botones rápido (por ejemplo, al eliminar varios productos del carrito) */
 button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item, .product-card, input, select, label { touch-action: manipulation; }
+.dm-cart-body .shipping-option .shipping-header .shipping-price { order:0; white-space:nowrap; font-size:14px; }

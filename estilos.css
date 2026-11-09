@@ -1539,3 +1539,6 @@ body { background-color: var(--ivory); }
 #cartItems .cart-item-prices { gap: 6px; margin: 0 0 4px; }
 #cartItems .cart-stock-status { font-size: 10.5px; }
 #cartItems .remove-item { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; background: rgba(255, 255, 255, .92); box-shadow: 0 2px 8px rgba(0, 0, 0, .15); color: var(--wine); }
+
+/* Evita el zoom por doble toque al tocar botones rápido (por ejemplo, al eliminar varios productos del carrito) */
+button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item, .product-card, input, select, label { touch-action: manipulation; }

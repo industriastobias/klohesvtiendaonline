@@ -417,10 +417,77 @@
             });
         }
 
+
+        /* ---- Búsqueda inteligente: precios en la frase, errores de escritura y orden por parecido ---- */
+        function parseSearchPrice(raw) {
+            let t = String(raw || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLocaleLowerCase('es').replace(/,/g, '.');
+            let min = null, max = null;
+            const num = '\\$?\\s*(\\d+(?:\\.\\d+)?)';
+            t = t.replace(new RegExp('(?:menos de|menor a|menor que|hasta|maximo|max|bajo|debajo de|no mas de|por menos de)\\s*' + num, 'g'), (m, n) => { max = Number(n); return ' '; });
+            t = t.replace(new RegExp('(?:mas de|mayor a|mayor que|desde|minimo|min|arriba de|sobre)\\s*' + num, 'g'), (m, n) => { min = Number(n); return ' '; });
+            t = t.replace(new RegExp('entre\\s*' + num + '\\s*y\\s*' + num, 'g'), (m, a, b) => { min = Math.min(+a, +b); max = Math.max(+a, +b); return ' '; });
+            t = t.replace(/\b(dolares|dolar|usd|dls)\b|\$/g, ' ');
+            return { text: t, min, max };
+        }
+
+        function editDistanceWithin(a, b, limit) {
+            if (Math.abs(a.length - b.length) > limit) return false;
+            let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+            for (let i = 1; i <= a.length; i++) {
+                const cur = [i]; let rowMin = i;
+                for (let j = 1; j <= b.length; j++) {
+                    cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+                    if (cur[j] < rowMin) rowMin = cur[j];
+                }
+                if (rowMin > limit) return false;
+                prev = cur;
+            }
+            return prev[b.length] <= limit;
+        }
+
+        function scoreProductTokens(product, tokens) {
+            const name = normalizeSearchText(product?.name), cat = normalizeSearchText(product?.category);
+            const desc = normalizeSearchText(product?.description), code = normalizeSearchText(product?.barcode);
+            const words = (name + ' ' + cat + ' ' + desc).split(' ').filter(Boolean);
+            let total = 0, hits = 0;
+            tokens.forEach(token => {
+                const alts = getSearchAlternatives(token).map(normalizeSearchText);
+                let best = 0;
+                alts.forEach(alt => {
+                    if (!alt) return;
+                    if (name.includes(alt)) best = Math.max(best, name.split(' ').includes(alt) ? 5 : 4);
+                    else if (cat.includes(alt)) best = Math.max(best, 3);
+                    else if (code.includes(alt)) best = Math.max(best, 3);
+                    else if (desc.includes(alt)) best = Math.max(best, 2);
+                });
+                if (!best && token.length >= 4) {
+                    const limit = token.length >= 8 ? 2 : 1;
+                    if (words.some(w => w.length >= 3 && editDistanceWithin(token, w, limit))) best = 1;
+                }
+                if (best) { total += best; hits++; }
+            });
+            return { total, hits };
+        }
+
+        function smartSearch(list, rawQuery) {
+            const price = parseSearchPrice(rawQuery);
+            let pool = list;
+            if (price.min !== null) pool = pool.filter(p => getProductPrice(p) >= price.min);
+            if (price.max !== null) pool = pool.filter(p => getProductPrice(p) <= price.max);
+            const tokens = normalizeSearchText(price.text).split(' ').filter(t => t && !SEARCH_STOPWORDS.has(t));
+            if (!tokens.length) return { items: pool, approx: false };
+            const scored = pool.map(p => ({ p, ...scoreProductTokens(p, tokens) }));
+            const all = scored.filter(x => x.hits === tokens.length).sort((a, b) => b.total - a.total);
+            if (all.length) return { items: all.map(x => x.p), approx: false };
+            const some = scored.filter(x => x.hits > 0).sort((a, b) => b.hits - a.hits || b.total - a.total);
+            return { items: some.map(x => x.p), approx: some.length > 0 };
+        }
+
         function applyCatalogFilters() {
             const rawSearch = document.getElementById('searchInput')?.value || '';
             const normalizedSearch = normalizeSearchText(rawSearch);
             AppState.searchTerm = normalizedSearch;
+            AppState.searchApprox = false;
 
             // Al buscar, también salen los agotados (con su etiqueta), para que quien busque por código sepa que existe.
             let matchingProducts = AppState.currentFilter === 'todos'
@@ -437,7 +504,7 @@
                         return starts.length ? starts : null;
                     })()
                     : null;
-                matchingProducts = byCode || matchingProducts.filter(product => matchesProductSearch(product, normalizedSearch));
+                if (byCode) { matchingProducts = byCode; } else { const r = smartSearch(matchingProducts, rawSearch); matchingProducts = r.items; AppState.searchApprox = r.approx; }
             }
 
             const minValue = document.getElementById('minPriceFilter')?.value;
@@ -468,7 +535,7 @@
             const title = document.getElementById('categoryTitle');
             if (title) {
                 title.textContent = normalizedSearch
-                    ? `Resultados para: "${String(rawSearch).trim()}"`
+                    ? `${AppState.searchApprox ? 'Resultados parecidos a' : 'Resultados para'}: "${String(rawSearch).trim()}"`
                     : (categoryDisplayNames[AppState.currentFilter] || 'Todas');
             }
         }

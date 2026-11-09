@@ -380,7 +380,20 @@
             gold: ['oro', 'gold', '14k', '18k', '24k', 'au375', 'au750'],
             dorado: ['dorado', 'dorada', 'dorados', 'doradas', 'oro', 'gold'],
             plateado: ['plateado', 'plateada', 'plateados', 'plateadas', 'plata', 'silver'],
-            joyeria: ['joyeria', 'joya', 'joyas']
+            joyeria: ['joyeria', 'joya', 'joyas'],
+            bano: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            banado: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            banada: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            enchape: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            enchapado: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            enchapada: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            chapado: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            chapada: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            laminado: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            laminada: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            plaque: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            plated: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado'],
+            filled: ['bano', 'banos', 'banado', 'banada', 'banados', 'banadas', 'enchape', 'enchapes', 'enchapado', 'enchapada', 'enchapados', 'enchapadas', 'chapado', 'chapada', 'chapados', 'chapadas', 'laminado', 'laminada', 'laminados', 'laminadas', 'plaque', 'plated', 'filled', 'baño', 'bañado']
         };
 
         function normalizeSearchText(value) {

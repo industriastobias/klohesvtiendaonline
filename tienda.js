@@ -455,10 +455,12 @@
                 let best = 0;
                 alts.forEach(alt => {
                     if (!alt) return;
-                    if (name.includes(alt)) best = Math.max(best, name.split(' ').includes(alt) ? 5 : 4);
-                    else if (cat.includes(alt)) best = Math.max(best, 3);
+                    // Palabras cortas (oro, ring, 14k…) solo cuentan como palabra completa, no dentro de otra palabra.
+                    const has = (text) => alt.length <= 4 ? (' ' + text + ' ').includes(' ' + alt + ' ') : text.includes(alt);
+                    if (has(name)) best = Math.max(best, name.split(' ').includes(alt) ? 5 : 4);
+                    else if (has(cat)) best = Math.max(best, 3);
                     else if (code.includes(alt)) best = Math.max(best, 3);
-                    else if (desc.includes(alt)) best = Math.max(best, 2);
+                    else if (has(desc)) best = Math.max(best, 2);
                 });
                 if (!best && token.length >= 4) {
                     const limit = token.length >= 8 ? 2 : 1;

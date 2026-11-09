@@ -1236,7 +1236,7 @@
             }
 
             if (AppState.cart.length === 0) {
-                if (cartItems) cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>';
+                if (cartItems) { cartItems.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>'; delete cartItems.dataset.html; }
                 if (summary) summary.style.display = 'none';
                 if (whatsappBtn) whatsappBtn.style.display = 'none';
                 if (cartTotal) cartTotal.textContent = '$0.00';
@@ -1247,7 +1247,7 @@
             }
 
             if (cartItems) {
-                cartItems.innerHTML = '';
+                let cartHtml = '';
                 let subtotal = 0;
                 let regularSubtotal = 0;
                 const purchasableCartItems = [];
@@ -1273,7 +1273,7 @@
                     const displayName = liveProduct?.name || item.name || 'Producto';
 
                     const itemQuantity = Math.max(1, Math.floor(Number(item.quantity) || 1));
-                    cartItems.innerHTML += `
+                    cartHtml += `
                         <div class="${itemClass}" aria-label="${displayName}: ${statusText}">
                             <div class="cart-item-image">
                                 <img src="${getPrimaryProductImage(liveProduct || item)}" alt="${displayName}" loading="lazy" decoding="async"
@@ -1295,6 +1295,7 @@
                         </div>
                     `;
                 });
+                if (cartItems.dataset.html !== cartHtml) { cartItems.innerHTML = cartHtml; cartItems.dataset.html = cartHtml; }
                 window.DaymarPromo?.syncCart(subtotal);
                 const baseShippingCost = AppState.shippingEnabled ? CONFIG.shippingCost : 0;
                 const benefitQuote = window.DaymarPromo?.quote(subtotal, baseShippingCost) || { coupon:0, shipping:baseShippingCost, total:roundPrice(subtotal + baseShippingCost), kind:'' };

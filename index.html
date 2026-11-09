@@ -1339,7 +1339,8 @@ const firebaseConfig = {
     if (event.key !== 'Enter' || event.isComposing) return;
     event.preventDefault();
     if (typeof window.searchProducts === 'function') window.searchProducts(input.value);
-    close({ results: true });
+    input.blur();
+    showResults();
   });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !panel.hidden && !document.querySelector('dialog[open]')) {

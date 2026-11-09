@@ -1520,3 +1520,7 @@ body { background-color: var(--ivory); }
 /* Buscar junto al menú en el celular (en computadora queda a la derecha) */
 .dm-search-m { display: none; }
 @media (max-width: 900px) { .dm-search-m { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 17px; } }
+
+/* Carrito: envío más compacto */
+.dm-cart-body .shipping-option { padding-block: 6px 8px !important; gap: 2px 12px !important; }
+.dm-cart-body .shipping-option .shipping-header { gap: 10px; }

@@ -155,8 +155,8 @@
     var foot = document.querySelector('.dm-cart-footer'), b = document.getElementById('whatsappBtn');
     if (!foot || !b || document.getElementById('dmEntrega')) return;
     var o = leer(), det = document.createElement('details');
-    det.id = 'dmEntrega'; det.style.cssText = 'margin:10px 0;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:transparent';
-    det.innerHTML = '<summary style="cursor:pointer;font-size:12.5px;font-weight:600;color:var(--wine)">Dirección de envío</summary>' +
+    det.id = 'dmEntrega'; det.style.cssText = 'flex:1 0 100%;margin:2px 0 0;border:0;padding:0;background:transparent';
+    det.innerHTML = '<summary style="cursor:pointer;font-size:12.5px;font-weight:700;color:var(--wine);list-style:none;display:flex;align-items:center;gap:6px;padding:2px 0"><i class="fas fa-location-dot" aria-hidden="true"></i><span style="text-decoration:underline">Dirección de envío</span></summary>' +
       '<p style="margin:8px 0 6px;font-size:11.5px;color:var(--muted)">Así no tenemos que pedírtelos por WhatsApp. Se guardan solo en tu navegador.</p>' +
       CAMPOS.map(function (c) {
         return '<input id="dmEnt_' + c[0] + '" type="' + c[2] + '" autocomplete="' + c[3] + '" placeholder="' + c[1] + '" maxlength="' + (c[0] === 'direccion' ? 300 : 120) + '" style="width:100%;box-sizing:border-box;margin:0 0 6px;padding:9px 10px;font:inherit;font-size:13px;border:1px solid var(--line);border-radius:8px;background:transparent;color:inherit">';

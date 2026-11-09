@@ -1436,6 +1436,8 @@ body { background-color: var(--ivory); }
     display: block; position: fixed; top: 0; left: 0; width: 100%; height: 6px; margin: 0; padding: 0; border: 0;
     background-color: #662d42; pointer-events: none; z-index: 2147483000;
   }
+  /* Al bajar, el encabezado se pega 6px más abajo para que Safari siga tomando el vino de arriba como color de la barra */
+  html.device-ios .atelier-header { top: 6px; }
 }
 
 /* ---------- Carrito: acabado más fino (computadora) ---------- */

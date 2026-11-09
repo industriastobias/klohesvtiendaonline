@@ -389,12 +389,6 @@
       b.style.cssText = 'margin:10px 0 0;background:transparent;border:1.5px solid currentColor;color:inherit;border-radius:999px;padding:9px 16px;font-weight:700;font-size:13.5px;cursor:pointer';
       b.onclick = function () { abrirConsulta(); }; tag.parentNode.insertBefore(b, tag.nextSibling);
     }
-    var pn = document.querySelector('.dm-cart-footer .payment-note');
-    if (pn && !document.getElementById('dmConsCart')) {
-      var a = document.createElement('button'); a.type = 'button'; a.id = 'dmConsCart'; a.textContent = '¿Ya hiciste un pedido? Consultar estado';
-      a.style.cssText = 'display:block;margin:8px auto 0;background:none;border:0;color:var(--wine,#6b2d3e);text-decoration:underline;font-size:12.5px;font-weight:600;cursor:pointer;padding:4px';
-      a.onclick = function () { abrirConsulta(); }; pn.parentNode.insertBefore(a, pn.nextSibling);
-    }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', montarConsulta); else montarConsulta();
   window.addEventListener('load', montarConsulta);

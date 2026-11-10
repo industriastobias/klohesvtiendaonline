@@ -9,6 +9,7 @@
 <html lang="es" class="daymar-brand">
 <head>
     <meta charset="UTF-8">
+    <script>window.__dmDirecto=/[?&]pedido=\d{6}/.test(location.search);</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <script id="daymar-device-bootstrap">
         // Detecta la plataforma sin depender del ancho de pantalla.
@@ -1014,6 +1015,7 @@
     .filter(element => !element.disabled && element.getClientRects().length);
 
   const show = () => {
+    if (window.__dmDirecto) return;
     clearTimeout(welcomeTimer);
     welcomeTimer = null;
     if (popup.classList.contains('active')) return;

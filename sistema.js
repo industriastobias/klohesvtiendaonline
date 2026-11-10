@@ -398,8 +398,8 @@
     if (!q) return;
     var c = formatoCodigo(q); if (!codigoValido(c)) return;
     try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
-    function abrir() { try { window.daymarWelcome && window.daymarWelcome.close && window.daymarWelcome.close(); } catch (e) {} setTimeout(function () { abrirConsulta(c); }, 250); }
-    if (document.readyState === 'complete') setTimeout(abrir, 400); else window.addEventListener('load', function () { setTimeout(abrir, 700); });
+    function abrir() { try { window.daymarWelcome && window.daymarWelcome.close && window.daymarWelcome.close(); } catch (e) {} abrirConsulta(c); }
+    if (document.readyState === 'complete') abrir(); else window.addEventListener('load', abrir);
   })();
 
   window.DaymarSistema = { ready: ready, setUser: function (u) { user = u || null; rellenarUsuario(); } };

@@ -144,7 +144,7 @@
       var m = b.href.match(/^([^?]*\?text=)([^&]*)(.*)$/); if (!m) return;
       var t = decodeURIComponent(m[2].replace(/\+/g, ' '));
       var i = t.indexOf('\n\n*Pedido:'); if (i < 0) i = t.indexOf('\n\n*Datos de entrega*'); if (i >= 0) t = t.slice(0, i);
-      t += '\n\n*Pedido: ' + codigoActual() + '*';
+      t += '\n\n*Pedido: ' + vis(codigoActual()) + '*';
       var d = datos();
       if (d.nombre || d.telefono || d.correo || d.direccion) t += '\n\n*Datos de entrega*\nYa llené mis datos en la tienda. ¿Me confirmas si están correctos?';
       var nuevo = m[1] + encodeURIComponent(t) + m[3];
@@ -273,14 +273,14 @@
     box.innerHTML =
       '<div style="text-align:center;padding:6px 0 16px"><div style="width:64px;height:64px;margin:0 auto 10px;border-radius:50%;background:' + color + ';color:#fff;display:flex;align-items:center;justify-content:center;font-size:27px;box-shadow:0 8px 20px rgba(107,45,62,.22)"><i class="fas ' + icono + '"></i></div>' +
       '<div style="font-size:21px;font-weight:800;color:' + color + '">' + h(titulo) + '</div>' +
-      '<div style="font:700 12.5px monospace;letter-spacing:.5px;color:var(--muted,#777);margin-top:4px">' + h(r.codigo) + '</div>' +
+      '<div style="font:700 12.5px monospace;letter-spacing:.5px;color:var(--muted,#777);margin-top:4px">' + h(vis(r.codigo)) + '</div>' +
       '<div style="font-size:14px;margin:8px auto 0;max-width:320px;line-height:1.4">' + h(msg) + '</div></div>' +
       '<div style="border:1px solid var(--line,#e6dde0);border-radius:16px;padding:16px 14px 14px">' + tl + '</div>' +
       '<div style="border:1px solid var(--line,#e6dde0);border-radius:16px;padding:12px 14px;margin-top:12px"><div style="font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:' + G + ';margin-bottom:6px">Tu pedido</div>' +
       items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:4px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span style="white-space:nowrap">' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +
       (Number(r.envio) ? '<div style="display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:var(--muted,#777)"><span>Envío</span><span>' + usd(r.envio) + '</span></div>' : '') +
       '<div style="display:flex;justify-content:space-between;font-weight:800;font-size:16px;border-top:1px solid var(--line,#e6dde0);margin-top:6px;padding-top:9px"><span>Total</span><span>' + usd(r.total) + '</span></div></div>' +
-      '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:14px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
+      '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + vis(r.codigo)) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:14px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
   }
   function pintarSeguimiento(box, r) {
     var fin = FIN[r.estado], items = Array.isArray(r.items) ? r.items : [], INK = '#3a1624', GOLD = '#c9973f';
@@ -303,11 +303,11 @@
         '<div style="width:72px;height:72px;margin:0 auto;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;background:' + (fin ? '#b3392f' : INK) + ';transform:rotate(-6deg)"><i class="fas ' + icono + '"></i></div>' +
         '<div style="margin-top:14px;font-size:23px;font-weight:800;color:' + col + '">' + h(titulo) + '</div>' +
         '<p style="margin:6px auto 0;max-width:300px;font-size:14.5px;line-height:1.45;color:#5b4950">' + h(msg) + '</p>' + tiles +
-        '<div style="margin-top:18px;padding-top:12px;border-top:1px dashed #e3d6cf;display:flex;justify-content:space-between;font-size:12px;color:#8a7a80"><span style="font:700 12px monospace;letter-spacing:.06em">' + h(r.codigo) + '</span><span>' + h(cuando) + '</span></div></div>' +
+        '<div style="margin-top:18px;padding-top:12px;border-top:1px dashed #e3d6cf;display:flex;justify-content:space-between;font-size:12px;color:#8a7a80"><span style="font:700 12px monospace;letter-spacing:.06em">' + h(vis(r.codigo)) + '</span><span>' + h(cuando) + '</span></div></div>' +
       '<details style="margin-top:12px;border-radius:16px;background:#fff;box-shadow:0 4px 14px rgba(58,22,36,.06);padding:2px 16px"><summary style="cursor:pointer;padding:13px 0;font-weight:700;font-size:14px;color:' + INK + ';list-style:none;display:flex;justify-content:space-between"><span><i class="fas fa-bag-shopping" style="color:' + GOLD + ';margin-right:7px"></i>Productos</span><span>' + usd(r.total) + ' ▾</span></summary>' +
         '<div style="padding:0 0 12px;font-size:14px;color:#5b4950">' + items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;padding:4px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span>' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +
         (Number(r.envio) ? '<div style="display:flex;justify-content:space-between;padding:4px 0;color:#8a7a80"><span>Envío</span><span>' + usd(r.envio) + '</span></div>' : '') + '</div></details>' +
-      '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + r.codigo) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:16px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
+      '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + vis(r.codigo)) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:16px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
   }
   function estilosConsulta() {
     if (document.getElementById('dmConsCss')) return;
@@ -331,24 +331,24 @@
   }
   function formatoCodigo(v) {
     var t = String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-    if (/^DY/.test(t)) { var d = t.slice(2).replace(/\D/g, '').slice(0, 6); return 'DY' + (d ? '-' + d : ''); }
     if (/^DM/.test(t)) { var r = t.slice(2).slice(0, 8); return 'DM' + (r ? '-' + r.slice(0, 4) + (r.length > 4 ? '-' + r.slice(4) : '') : ''); }
-    if (/^\d/.test(t)) return 'DY-' + t.replace(/\D/g, '').slice(0, 6);
-    return t.slice(0, 2);
+    return t.replace(/^DY/, '').replace(/\D/g, '').slice(0, 6);
   }
-  function codigoValido(v) { return /^DY-\d{6}$/.test(v) || /^DM-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(v); }
+  function codigoValido(v) { return /^(DY-)?\d{6}$/.test(v) || /^DM-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(v); }
+  function aDB(v) { return /^\d{6}$/.test(v) ? 'DY-' + v : v; }
+  function vis(c) { var m = /^DY-(\d{6})$/.exec(String(c || '')); return m ? m[1] : String(c || ''); }
   function hace(t) { var d = Math.floor((Date.now() - Number(t)) / 864e5); return d <= 0 ? 'Hoy' : d === 1 ? 'Ayer' : 'Hace ' + d + ' días'; }
   function abrirConsulta(pref) {
     estilosConsulta();
     var mis = misPedidos(), ult = ultimaBusqueda(), lista = ult ? [ult].concat(mis.filter(function (x) { return x.c !== ult.c; })) : mis, puedePegar = !!(navigator.clipboard && navigator.clipboard.readText);
     var o = abrirDlg('Consultar mi pedido',
       '<div id="dmPedForm" style="padding-top:8px"><div class="dm-box" id="dmPedLine"><div class="dm-tk"><i class="fas fa-ticket"></i> Tu número de pedido</div>' +
-        '<input id="dmPedIn" class="dm-cin" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="DY-000000" maxlength="14" aria-label="Número de pedido">' +
+        '<input id="dmPedIn" class="dm-cin" type="text" inputmode="numeric" pattern="[0-9]*" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="000000" maxlength="14" aria-label="Número de pedido">' +
         '<div id="dmPedMsg" style="min-height:20px;font-size:12.5px;color:#8a7a80;margin-top:2px"></div><div class="dm-cut"></div>' +
         '<div style="padding-top:16px"><button type="button" id="dmPedGo" class="dm-buscar">Ver mi pedido</button>' +
         (puedePegar ? '<button type="button" id="dmPedPaste" style="border:0;background:none;color:#a9792a;font-weight:700;font-size:13px;cursor:pointer;padding:12px 0 0"><i class="far fa-paste"></i> Pegar número</button>' : '') + '</div></div></div>' +
       (lista.length ? '<div id="dmConsMis" style="margin-top:28px"><div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px;font-weight:800;font-size:13px;color:#3a1624"><span>Tus pedidos</span><button type="button" id="dmPedClr" style="border:0;background:none;color:#8a7a80;font-size:12px;font-weight:600;cursor:pointer;padding:0">Borrar</button></div><div class="dm-grid">' +
-        lista.map(function (x, i) { var u = ult && i === 0; return '<button type="button" class="dm-row' + (u ? ' ult' : '') + '" data-c="' + h(x.c) + '">' + (u ? '<em>Última</em>' : '') + '<b>' + h(x.c) + '</b><small>' + hace(x.t) + '</small></button>'; }).join('') + '</div></div>' : '') +
+        lista.map(function (x, i) { var u = ult && i === 0; return '<button type="button" class="dm-row' + (u ? ' ult' : '') + '" data-c="' + h(vis(x.c)) + '">' + (u ? '<em>Última</em>' : '') + '<b>' + h(vis(x.c)) + '</b><small>' + hace(x.t) + '</small></button>'; }).join('') + '</div></div>' : '') +
       '<div id="dmPedRes" class="dm-res" aria-live="polite"></div>' +
       '<a id="dmConsAyuda" href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, no encuentro el número de mi pedido') + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;width:fit-content;margin:28px auto 0;font-size:13px;font-weight:700;color:#1f9d55;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:17px"></i>Ayuda por WhatsApp</a>', true);
     var sh = o.firstChild; sh.style.background = '#fbf6ee'; sh.style.color = '#3a1624';
@@ -363,13 +363,13 @@
     function ir() {
       var v = formatoCodigo(inp.value); inp.value = v;
       if (!v) { mal('Escribe tu número de pedido.'); return; }
-      if (!codigoValido(v)) { mal('Está incompleto. Ejemplo: DY-482915'); return; }
+      if (!codigoValido(v)) { mal('Está incompleto. Son 6 números. Ejemplo: 482915'); return; }
       go.disabled = true; go.innerHTML = '<i class="fas fa-circle-notch" style="animation:dmspin .8s linear infinite"></i>';
       function fin() { go.disabled = false; go.textContent = 'Ver mi pedido'; }
-      rpc('tienda_pedido_estado', { p_codigo: v }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
+      rpc('tienda_pedido_estado', { p_codigo: aDB(v) }).then(function (r) { return r.ok ? r.json() : null; }).then(function (r) {
         fin();
         if (!r) { res.innerHTML = ''; ocultar(false); mal('No encontramos ese número. Revísalo e intenta de nuevo.'); return; }
-        try { localStorage.setItem(ULTK, JSON.stringify({ c: v, t: Date.now() })); } catch (e) {} ocultar(true); pintarSeguimiento(res, r); res.insertAdjacentHTML('afterbegin', '<button type="button" id="dmPedOtro" style="display:inline-flex;align-items:center;gap:7px;border:0;background:#fff;color:#3a1624;font-weight:800;font-size:13.5px;padding:10px 16px;border-radius:999px;box-shadow:0 3px 10px rgba(58,22,36,.1);cursor:pointer;margin-top:6px"><i class="fas fa-arrow-left"></i> Buscar otro pedido</button>'); res.querySelector('#dmPedOtro').onclick = function () { res.innerHTML = ''; ocultar(false); estado(); inp.focus(); }; res.classList.remove('dm-res'); void res.offsetWidth; res.classList.add('dm-res');
+        try { localStorage.setItem(ULTK, JSON.stringify({ c: aDB(v), t: Date.now() })); } catch (e) {} ocultar(true); pintarSeguimiento(res, r); res.insertAdjacentHTML('afterbegin', '<button type="button" id="dmPedOtro" style="display:inline-flex;align-items:center;gap:7px;border:0;background:#fff;color:#3a1624;font-weight:800;font-size:13.5px;padding:10px 16px;border-radius:999px;box-shadow:0 3px 10px rgba(58,22,36,.1);cursor:pointer;margin-top:6px"><i class="fas fa-arrow-left"></i> Buscar otro pedido</button>'); res.querySelector('#dmPedOtro').onclick = function () { res.innerHTML = ''; ocultar(false); estado(); inp.focus(); }; res.classList.remove('dm-res'); void res.offsetWidth; res.classList.add('dm-res');
       }).catch(function () { fin(); mal('No pudimos consultar ahora. Intenta en un momento.'); });
     }
     var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); } catch (e) {} abrirConsulta(); };

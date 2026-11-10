@@ -1578,3 +1578,6 @@ button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item,
 .preview-gallery-counter i.on { width: 18px; background: #fff; }
 @media (hover: none), (pointer: coarse) { .preview-gallery-controls { display: none !important; } }
 @media (hover: hover) and (pointer: fine) { .preview-gallery-btn { width: 34px; height: 34px; opacity: .85; } }
+.preview-gallery-counter i { display: block; flex: none; box-shadow: 0 0 0 1px rgba(0, 0, 0, .12); }
+.preview-gallery-counter i:not(.on) { background: rgba(255, 255, 255, .85); }
+.preview-gallery-counter { background: rgba(30, 22, 25, .38); }

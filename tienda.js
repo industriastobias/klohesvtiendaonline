@@ -806,7 +806,7 @@
             const hasGallery = currentPreviewImages.length > 1;
             controls.style.display = hasGallery ? 'flex' : 'none';
             if (counter) {
-                counter.style.display = hasGallery ? 'block' : 'none';
+                counter.style.display = hasGallery ? 'flex' : 'none';
                 renderPreviewDots();
             }
         }

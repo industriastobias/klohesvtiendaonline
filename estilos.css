@@ -1571,3 +1571,10 @@ button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item,
   .dm-gift-mode .daymar-welcome-tier { margin-bottom: 10px; }
   .dm-gift-mode .daymar-welcome-offers { gap: 7px; }
 }
+
+/* Galería de la vista previa: puntos minimalistas, sin números ni flechas en celular */
+.preview-gallery-counter { display: flex; gap: 6px; align-items: center; padding: 6px 9px; background: rgba(30, 22, 25, .28); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font-size: 0; }
+.preview-gallery-counter i { width: 6px; height: 6px; border-radius: 99px; background: rgba(255, 255, 255, .55); transition: width .3s ease, background .3s ease; }
+.preview-gallery-counter i.on { width: 18px; background: #fff; }
+@media (hover: none), (pointer: coarse) { .preview-gallery-controls { display: none !important; } }
+@media (hover: hover) and (pointer: fine) { .preview-gallery-btn { width: 34px; height: 34px; opacity: .85; } }

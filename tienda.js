@@ -807,8 +807,18 @@
             controls.style.display = hasGallery ? 'flex' : 'none';
             if (counter) {
                 counter.style.display = hasGallery ? 'block' : 'none';
-                counter.textContent = hasGallery ? `1 / ${currentPreviewImages.length}` : '';
+                renderPreviewDots();
             }
+        }
+
+        function renderPreviewDots() {
+            const box = document.getElementById('previewGalleryCounter');
+            if (!box) return;
+            const n = currentPreviewImages.length;
+            if (n < 2) { box.innerHTML = ''; return; }
+            let h = '';
+            for (let i = 0; i < n; i++) h += `<i class="${i === currentPreviewImageIndex ? 'on' : ''}"></i>`;
+            box.innerHTML = h;
         }
 
         function changePreviewImage(step) {
@@ -837,7 +847,7 @@
 
             const counterText = `${currentPreviewImageIndex + 1} / ${currentPreviewImages.length}`;
             const counter = document.getElementById('previewGalleryCounter');
-            if (counter) counter.textContent = counterText;
+            renderPreviewDots();
             const lightboxCounter = document.getElementById('imageLightboxCounter');
             if (lightboxCounter) lightboxCounter.textContent = counterText;
         }

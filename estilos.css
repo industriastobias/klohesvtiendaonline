@@ -1306,7 +1306,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 .newsletter-popup.dm-gift-mode.dm-open { overflow: hidden auto; }
 .dm-gift-mode.dm-open .daymar-welcome-content {
   display: flex; flex-direction: column; align-items: center; padding: 34px 26px 26px; border-radius: 20px; background: var(--paper); color: var(--ink);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, .45); animation: dm-reveal .55s cubic-bezier(.3, 1.3, .5, 1) both;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .45); animation: dm-reveal .9s cubic-bezier(.22, .7, .25, 1) both;
 }
 .dm-gift-mode .newsletter-close { position: absolute; top: 14px; right: 14px; left: auto; margin: 0; background: var(--wine-wash); color: var(--wine); font-size: 20px; }
 .dm-gift-mode .holiday-welcome-star { order: 0; width: 54px; height: 54px; margin-bottom: 12px; background: linear-gradient(150deg, #F3E1B2, #C99B4F); color: var(--wine-deep); }
@@ -1346,7 +1346,8 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 @keyframes dm-glow { 0%, 100% { transform: scale(.92); opacity: .7; } 50% { transform: scale(1.06); opacity: 1; } }
 @keyframes dm-hint { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
 @keyframes dm-spark { 0% { transform: translate(0, 0) rotate(45deg) scale(0); opacity: 1; } 60% { opacity: 1; } 100% { transform: translate(var(--x), var(--y)) rotate(45deg) scale(var(--s)); opacity: 0; } }
-@keyframes dm-reveal { from { transform: translateY(40px) scale(.7); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes dm-reveal { from { transform: translateY(14px) scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes dm-soft { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes dm-coupon { from { transform: translateX(-24px); opacity: 0; } to { transform: none; opacity: 1; } }
 
 @media (max-width: 640px) {
@@ -1549,3 +1550,13 @@ button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item,
 .dm-cart-footer .btn-whatsapp i { font-size: 15px !important; }
 .dm-cart-footer .btn-clear-cart { width: 40px !important; height: 40px !important; }
 .dm-cart-footer .cart-total { margin-bottom: 6px; }
+
+/* Bienvenida: contenido aparece por partes, suave */
+.dm-gift-mode.dm-open .daymar-welcome-content > :not(.newsletter-close) { animation: dm-soft .8s cubic-bezier(.22, .7, .25, 1) both; }
+.dm-gift-mode.dm-open .holiday-welcome-star { animation-delay: .15s !important; }
+.dm-gift-mode.dm-open .daymar-welcome-season { animation-delay: .3s !important; }
+.dm-gift-mode.dm-open .daymar-welcome-content h3 { animation-delay: .42s !important; }
+.dm-gift-mode.dm-open .daymar-welcome-subtitle { animation-delay: .55s !important; }
+.dm-gift-mode.dm-open .daymar-welcome-tier { animation-delay: .65s !important; }
+.dm-gift-mode.dm-open .daymar-welcome-offers { animation-delay: .75s !important; }
+.dm-gift-mode.dm-open .dm-gift-cta { animation-delay: .9s !important; }

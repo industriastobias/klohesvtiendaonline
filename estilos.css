@@ -1560,3 +1560,14 @@ button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item,
 .dm-gift-mode.dm-open .daymar-welcome-tier { animation-delay: .65s !important; }
 .dm-gift-mode.dm-open .daymar-welcome-offers { animation-delay: .75s !important; }
 .dm-gift-mode.dm-open .dm-gift-cta { animation-delay: .9s !important; }
+
+/* Bienvenida: sin barra de desplazamiento visible en computadora */
+.newsletter-popup.dm-gift-mode.dm-open { scrollbar-width: none; -ms-overflow-style: none; }
+.newsletter-popup.dm-gift-mode.dm-open::-webkit-scrollbar { display: none; width: 0; height: 0; }
+@media (max-height: 760px) {
+  .dm-gift-mode.dm-open .daymar-welcome-content { padding: 22px 22px 18px; }
+  .dm-gift-mode .holiday-welcome-star { width: 44px; height: 44px; margin-bottom: 8px; font-size: 16px; }
+  .dm-gift-mode .daymar-welcome-content h3 { font-size: 38px; }
+  .dm-gift-mode .daymar-welcome-tier { margin-bottom: 10px; }
+  .dm-gift-mode .daymar-welcome-offers { gap: 7px; }
+}

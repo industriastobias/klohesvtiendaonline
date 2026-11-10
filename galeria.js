@@ -304,7 +304,7 @@
         if (typeof filename !== 'string' || !/^[A-Za-z0-9_-]+\.(?:png|jpe?g|webp|mp4|webm|ogg)$/i.test(filename)) {
           throw new Error('Usa nombres sin espacios y extensión png, jpg, jpeg, webp, mp4, webm u ogg.');
         }
-        if (!seen.has(filename)) { seen.add(filename); valid.push(filename); }
+        valid.push(filename);
       }
 
       slides = valid.map((filename, index) => {

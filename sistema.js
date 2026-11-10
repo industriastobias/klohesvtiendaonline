@@ -392,6 +392,15 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', montarConsulta); else montarConsulta();
   window.addEventListener('load', montarConsulta);
+  /* Enlace personal: tienda/?pedido=482915 abre directo el seguimiento */
+  (function () {
+    var q; try { q = new URLSearchParams(location.search).get('pedido'); } catch (e) {}
+    if (!q) return;
+    var c = formatoCodigo(q); if (!codigoValido(c)) return;
+    try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+    function abrir() { try { window.daymarWelcome && window.daymarWelcome.close && window.daymarWelcome.close(); } catch (e) {} setTimeout(function () { abrirConsulta(c); }, 250); }
+    if (document.readyState === 'complete') setTimeout(abrir, 400); else window.addEventListener('load', function () { setTimeout(abrir, 700); });
+  })();
 
   window.DaymarSistema = { ready: ready, setUser: function (u) { user = u || null; rellenarUsuario(); } };
 })();

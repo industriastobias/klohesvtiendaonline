@@ -67,11 +67,19 @@
     medir(); window.addEventListener('resize', medir);
     for (var j = 0; j < N; j++) fl.push({ x: Math.random() * w, y: Math.random() * h, r: 2.2 + Math.random() * 2.6, v: .3 + Math.random() * .6, o: Math.random() * 6.28 });
     function estrella(x, y, r) { cx.beginPath(); for (var k = 0; k < 4; k++) { var a = k * Math.PI / 2; cx.lineTo(x + Math.cos(a) * r * 2.2, y + Math.sin(a) * r * 2.2); cx.lineTo(x + Math.cos(a + Math.PI / 4) * r * .5, y + Math.sin(a + Math.PI / 4) * r * .5); } cx.closePath(); cx.fill(); }
+    var ultimo = 0, conSonido = false;
+    /* Cuando un video tiene sonido, se pausan los destellos para no competir con el video */
+    window.addEventListener('daymar-audio', function (e) {
+      conSonido = !!(e.detail && e.detail.on); cv.style.display = conSonido ? 'none' : '';
+      if (!conSonido && corriendo) requestAnimationFrame(paso);
+    });
     function paso(t) {
-      if (!corriendo) return;
+      if (!corriendo || conSonido) return;
+      if (t - ultimo < 50) { requestAnimationFrame(paso); return; }
+      ultimo = t;
       cx.clearRect(0, 0, w, h);
       fl.forEach(function (f) {
-        f.y += f.v; f.x += Math.sin(t / 2000 + f.o) * .3;
+        f.y += f.v * 2; f.x += Math.sin(t / 2000 + f.o) * .6;
         if (f.y > h + 10) { f.y = -10; f.x = Math.random() * w; }
         cx.fillStyle = 'rgba(201,151,63,' + (.55 + .35 * Math.sin(t / 700 + f.o)).toFixed(2) + ')';
         estrella(f.x, f.y, f.r * .8);

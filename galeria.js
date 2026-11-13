@@ -81,7 +81,8 @@
       active.defaultMuted = !audioEnabled;
       active.volume = audioEnabled ? 1 : 0;
       updateAudioToggle();
-      active.play().catch(() => {});
+      try { window.dispatchEvent(new CustomEvent('daymar-audio', { detail: { on: audioEnabled } })); } catch (e) {}
+      if (active.paused) active.play().catch(() => {});
     });
   }
 

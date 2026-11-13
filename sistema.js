@@ -46,6 +46,7 @@
     var nuevos = lista.filter(function (x) { return x && x.barcode && x.name; }).map(function (x) {
       var o = { name: String(x.name), price: Number(x.price) || 0, stock: Math.max(0, Number(x.stock) || 0), barcode: String(x.barcode), category: x.category || 'Otros', _sistema: true, discount: Math.max(0, Math.min(90, Number(x.discount) || 0)) };
       if (x.alta) { var ta = Date.parse(x.alta); if (ta) o.alta = ta; }
+      if (x.foto) o.foto = String(x.foto);
       if (x.description) o.description = String(x.description);
       if (Array.isArray(x.images) && x.images.length) o.images = x.images.map(String);
       if (Array.isArray(x.thumbs) && x.thumbs.length) o.thumbs = x.thumbs.map(String);

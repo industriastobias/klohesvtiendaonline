@@ -715,6 +715,11 @@
             try { return new URL(image, document.baseURI).href; } catch (_) { return image; }
         }
         // Miniatura liviana para las tarjetas del catálogo (si el sistema no la tiene, se usa la imagen normal)
+        function dmImgFallo(img) {
+            let c = []; try { c = JSON.parse(decodeURIComponent(img.dataset.cands || '[]')); } catch (_) {}
+            const i = (Number(img.dataset.n) || 0) + 1;
+            if (i < c.length) { img.dataset.n = i; img.src = c[i]; } else { img.removeAttribute('onerror'); img.style.display = 'none'; }
+        }
         function getCardProductImage(product) {
             const t = product && Array.isArray(product.thumbs) && product.thumbs[0];
             if (!t) return getPrimaryProductImage(product);
@@ -894,8 +899,8 @@
                          loading="${index < 6 ? 'eager' : 'lazy'}"
                          decoding="async"
                          fetchpriority="${index < 6 ? 'high' : 'low'}"
-                         data-full="${getPrimaryProductImage(product)}"
-                         onerror="if(this.dataset.full && this.src !== this.dataset.full){ this.src = this.dataset.full; } else { this.removeAttribute('onerror'); this.style.display='none'; }"
+                         data-cands="${encodeURIComponent(JSON.stringify([...new Set([getCardProductImage(product), getPrimaryProductImage(product), product.foto].filter(Boolean))]))}"
+                         onerror="dmImgFallo(this)"
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
                     ${isNewProduct(product) ? '<div class="dm-nuevo-tag">NUEVO</div>' : ''}
                     ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>OFERTA</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}

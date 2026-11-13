@@ -894,6 +894,8 @@
                          loading="${index < 6 ? 'eager' : 'lazy'}"
                          decoding="async"
                          fetchpriority="${index < 6 ? 'high' : 'low'}"
+                         data-full="${getPrimaryProductImage(product)}"
+                         onerror="if(this.dataset.full && this.src !== this.dataset.full){ this.src = this.dataset.full; } else { this.removeAttribute('onerror'); this.style.display='none'; }"
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
                     ${isNewProduct(product) ? '<div class="dm-nuevo-tag">NUEVO</div>' : ''}
                     ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>OFERTA</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}

@@ -51,8 +51,8 @@
       if (Array.isArray(x.thumbs) && x.thumbs.length) o.thumbs = x.thumbs.map(String);
       return o;
     });
-    /* "NUEVO": solo los 12 agregados más recientemente (evita marcar todo si se cargó mucho de golpe) */
-    nuevos.filter(function (o) { return o.alta; }).sort(function (a, b) { return b.alta - a.alta; }).slice(12).forEach(function (o) { delete o.alta; });
+    /* "NUEVO": solo los 40 agregados más recientemente (evita marcar todo si se cargó mucho de golpe) */
+    nuevos.filter(function (o) { return o.alta; }).sort(function (a, b) { return b.alta - a.alta; }).slice(40).forEach(function (o) { delete o.alta; });
     products.length = 0;
     nuevos.forEach(function (o) { products.push(o); });
     window.DAYMAR_SYS_STATS = { enSistema: nuevos.length, total: nuevos.length, catalogo: true };

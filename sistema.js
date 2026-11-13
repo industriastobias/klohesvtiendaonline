@@ -312,37 +312,6 @@
         '<div style="padding:0 0 12px;font-size:14px;color:#5b4950">' + items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;padding:4px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span>' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +
         (Number(r.envio) ? '<div style="display:flex;justify-content:space-between;padding:4px 0;color:#8a7a80"><span>Envío</span><span>' + usd(r.envio) + '</span></div>' : '') + '</div></details>' +
       '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + vis(r.codigo)) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:16px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
-    if (r && r.estado === 'entregado') bloqueResena(box, r);
-  }
-  /* Reseña de la clienta: solo con pedido entregado, una por pedido; llega al sistema para aprobarse */
-  function bloqueResena(box, r) {
-    var cod = String(r.codigo || ''), key = 'daymar_resena_' + cod, div = document.createElement('div');
-    div.style.cssText = 'margin-top:14px;border-radius:16px;background:#fff;box-shadow:0 4px 14px rgba(58,22,36,.06);padding:16px;text-align:center';
-    var hecho = false; try { hecho = !!localStorage.getItem(key); } catch (e) {}
-    if (hecho) { div.innerHTML = '<div style="font-size:14px;color:#5b4950">Gracias por tu reseña. ¡Nos alegra mucho! ♥</div>'; box.appendChild(div); return; }
-    var n = 5;
-    div.innerHTML = '<div style="font-weight:700;font-size:14px;color:#5e2c40">¿Qué tal te pareció tu pedido?</div>' +
-      '<div id="dmRsSt" style="margin:8px 0 2px;font-size:30px;letter-spacing:6px;color:#c9973f;cursor:pointer;user-select:none"></div>' +
-      '<textarea id="dmRsT" rows="3" maxlength="280" placeholder="Cuéntanos tu experiencia (tu nombre aparecerá como Nombre + inicial)" style="width:100%;box-sizing:border-box;border:1px solid #e3d6cf;border-radius:12px;padding:10px 12px;font:inherit;font-size:14px;resize:none;margin-top:6px"></textarea>' +
-      '<div id="dmRsE" style="color:#b3261e;font-size:12.5px;min-height:16px;margin-top:4px"></div>' +
-      '<button id="dmRsGo" type="button" style="margin-top:4px;border:0;border-radius:999px;padding:11px 22px;background:#5e2c40;color:#fff;font-weight:700;letter-spacing:.08em;font-size:12px;text-transform:uppercase">Enviar reseña</button>' +
-      '<div style="margin-top:8px;font-size:11px;color:#9a8f94">La revisamos antes de mostrarla en la tienda.</div>';
-    box.appendChild(div);
-    var st = div.querySelector('#dmRsSt');
-    function pintar() { var t = ''; for (var i = 1; i <= 5; i++) t += '<span data-n="' + i + '" role="button" aria-label="' + i + ' estrellas">' + (i <= n ? '★' : '☆') + '</span>'; st.innerHTML = t; }
-    pintar(); st.addEventListener('click', function (e) { var b = e.target.closest('[data-n]'); if (b) { n = +b.dataset.n; pintar(); } });
-    div.querySelector('#dmRsGo').addEventListener('click', function () {
-      var btn = this, txt = div.querySelector('#dmRsT').value.trim(), er = div.querySelector('#dmRsE');
-      if (txt.length < 5) { er.textContent = 'Cuéntanos un poquito más.'; return; }
-      btn.disabled = true; btn.textContent = 'Enviando…'; er.textContent = '';
-      rpc('tienda_resena_enviar', { p_codigo: aDB(vis(cod)), p_estrellas: n, p_texto: txt }).then(function (x) { return x.json().then(function (j) { return { ok: x.ok, j: j }; }); })
-        .then(function (o) {
-          if (o.ok) { try { localStorage.setItem(key, '1'); } catch (e) {} div.innerHTML = '<div style="font-size:14px;color:#5b4950">¡Gracias por tu reseña! La revisaremos y pronto podrá aparecer en la tienda. ♥</div>'; return; }
-          var m = (o.j && o.j.message) || 'No se pudo enviar. Intenta de nuevo.';
-          if (/Ya dejaste/.test(m)) { try { localStorage.setItem(key, '1'); } catch (e) {} }
-          er.textContent = m; btn.disabled = false; btn.textContent = 'Enviar reseña';
-        }).catch(function () { er.textContent = 'Sin conexión. Intenta de nuevo.'; btn.disabled = false; btn.textContent = 'Enviar reseña'; });
-    });
   }
   function estilosConsulta() {
     if (document.getElementById('dmConsCss')) return;

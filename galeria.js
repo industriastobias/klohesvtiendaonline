@@ -50,7 +50,7 @@
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
     video.setAttribute('preload', 'auto');
-    if (video.readyState === 0) video.load();
+    if (video.readyState === 0 && video.networkState === 0) video.load();
     const attempt = () => video.play().then(() => scheduleVideoAdvance(video)).catch(() => {});
     attempt();
     setTimeout(attempt, 120);
@@ -125,6 +125,7 @@
     }
   };
 
+  let precargaTimer = null;
   const update = (index) => {
     if (!slides.length) {
       stopAuto();
@@ -145,7 +146,7 @@
     if (active.tagName === 'VIDEO') {
       playVideo(active);
       syncFrameToMedia(active);
-      empty.hidden = active.readyState >= 2;
+      empty.hidden = active.readyState >= 2 || !!active.poster;
     } else {
       active.loading = 'eager';
       syncFrameToMedia(active);
@@ -155,6 +156,11 @@
       if (slide.tagName === 'VIDEO' && i !== current) slide.pause();
     });
     if (!empty.hidden) empty.textContent = 'Cargando imágenes…';
+    clearTimeout(precargaTimer);
+    precargaTimer = setTimeout(() => {
+      const nxt = slides[(current + 1) % slides.length];
+      if (nxt && nxt.tagName === 'VIDEO' && nxt.preload !== 'auto') { nxt.autoplay = false; nxt.removeAttribute('autoplay'); nxt.preload = 'auto'; nxt.load(); }
+    }, 1200);
   };
 
   const removeBroken = (slide) => {
@@ -318,21 +324,23 @@
         slide.draggable = false;
 
         if (isVideo) {
-          slide.autoplay = true;
+          slide.autoplay = index === 0;
           slide.loop = false;
           slide.playsInline = true;
-          slide.preload = index === 0 ? 'auto' : 'metadata';
+          slide.preload = index === 0 ? 'auto' : 'none';
           slide.muted = !audioEnabled;
           slide.defaultMuted = !audioEnabled;
           slide.volume = audioEnabled ? 1 : 0;
-          slide.setAttribute('autoplay', '');
+          if (index === 0) slide.setAttribute('autoplay', '');
           slide.setAttribute('muted', '');
           slide.setAttribute('playsinline', '');
           slide.setAttribute('webkit-playsinline', '');
+          slide.poster = new URL(encodeURIComponent(filename.replace(/\.[^.]+$/, '-poster.jpg')), manifestURL).href;
           slide.setAttribute('aria-label', `DAYMAR / DETALLES PARA CADA DÍA — video ${index + 1}`);
           slide.controls = false;
           slide.removeAttribute('controls');
           const startVideo = () => {
+            if (slide !== slides[current]) return;
             playVideo(slide);
             syncFrameToMedia(slide);
             if (slide === slides[current]) empty.hidden = false;
@@ -364,9 +372,7 @@
         slide.addEventListener('error', () => removeBroken(slide));
         slide.src = new URL(encodeURIComponent(filename), manifestURL).href;
         gallery.appendChild(slide);
-        if (isVideo) {
-          slide.setAttribute('preload', 'auto');
-          slide.load();
+        if (isVideo && index === 0) {
           requestAnimationFrame(() => playVideo(slide));
         }
         return slide;

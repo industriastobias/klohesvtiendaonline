@@ -221,7 +221,7 @@
             return Number(product?.alta) > 0 && Number(product?.stock) > 0 && (Date.now() - Number(product.alta)) < NUEVO_DIAS * 86400000;
         }
         function newFirst(list) {
-            const nuevos = list.filter(isNewProduct).sort((a, b) => b.alta - a.alta);
+            const nuevos = mixProductsByCategory(list.filter(isNewProduct).sort((a, b) => b.alta - a.alta));
             return nuevos.length ? [...nuevos, ...list.filter(p => !isNewProduct(p))] : list;
         }
 
@@ -282,7 +282,7 @@
             const inStock = productList.filter(product => Number(product?.stock) > 0);
             const pricedProducts = inStock.filter(product => getOriginalPrice(product) > 0);
             const zeroPriceProducts = inStock.filter(product => getOriginalPrice(product) <= 0);
-            const nuevos = pricedProducts.filter(isNewProduct).sort((a, b) => b.alta - a.alta);
+            const nuevos = mixProductsByCategory(pricedProducts.filter(isNewProduct).sort((a, b) => b.alta - a.alta));
             return [
                 ...nuevos,
                 ...mixProductsByCategory(pricedProducts.filter(p => !isNewProduct(p))),

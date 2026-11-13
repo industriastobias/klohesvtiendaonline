@@ -216,6 +216,15 @@
             syncCatalogSortControl();
         }
         
+        const NUEVO_DIAS = 14;
+        function isNewProduct(product) {
+            return Number(product?.alta) > 0 && Number(product?.stock) > 0 && (Date.now() - Number(product.alta)) < NUEVO_DIAS * 86400000;
+        }
+        function newFirst(list) {
+            const nuevos = list.filter(isNewProduct).sort((a, b) => b.alta - a.alta);
+            return nuevos.length ? [...nuevos, ...list.filter(p => !isNewProduct(p))] : list;
+        }
+
         function sortProducts() {
             const regularProducts = AppState.filteredProducts.filter(product =>
                 Number(product?.stock) > 0 && getOriginalPrice(product) > 0
@@ -233,6 +242,7 @@
                 regularProducts.sort((a, b) => getProductPrice(a) - getProductPrice(b));
             }
 
+            if (AppState.currentSort === 'default' && !AppState.searchApprox) { const r = newFirst(regularProducts); regularProducts.splice(0, regularProducts.length, ...r); }
             AppState.filteredProducts = [...regularProducts, ...zeroPriceProducts, ...soldOutProducts];
         }
 
@@ -272,8 +282,10 @@
             const inStock = productList.filter(product => Number(product?.stock) > 0);
             const pricedProducts = inStock.filter(product => getOriginalPrice(product) > 0);
             const zeroPriceProducts = inStock.filter(product => getOriginalPrice(product) <= 0);
+            const nuevos = pricedProducts.filter(isNewProduct).sort((a, b) => b.alta - a.alta);
             return [
-                ...mixProductsByCategory(pricedProducts),
+                ...nuevos,
+                ...mixProductsByCategory(pricedProducts.filter(p => !isNewProduct(p))),
                 ...mixProductsByCategory(zeroPriceProducts)
             ];
         }
@@ -283,12 +295,12 @@
                 .map((product, index) => ({ product, index }))
                 .sort((a, b) => {
                     const aPriority = Number(a.product?.stock) > 0
-                        ? (getOriginalPrice(a.product) > 0 ? 0 : 1)
+                        ? (getOriginalPrice(a.product) > 0 ? (isNewProduct(a.product) ? -1 : 0) : 1)
                         : 2;
                     const bPriority = Number(b.product?.stock) > 0
-                        ? (getOriginalPrice(b.product) > 0 ? 0 : 1)
+                        ? (getOriginalPrice(b.product) > 0 ? (isNewProduct(b.product) ? -1 : 0) : 1)
                         : 2;
-                    return aPriority - bPriority || a.index - b.index;
+                    return aPriority - bPriority || (aPriority === -1 ? b.product.alta - a.product.alta : 0) || a.index - b.index;
                 })
                 .map(item => item.product);
         }
@@ -883,6 +895,7 @@
                          decoding="async"
                          fetchpriority="${index < 6 ? 'high' : 'low'}"
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
+                    ${isNewProduct(product) ? '<div class="dm-nuevo-tag">NUEVO</div>' : ''}
                     ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>OFERTA</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}
                     </div>
                     <span class="daymar-card-index">${String(index + 1).padStart(2, '0')}</span>

@@ -216,7 +216,7 @@
             syncCatalogSortControl();
         }
         
-        const NUEVO_DIAS = 14;
+        const NUEVO_DIAS = 50;
         function isNewProduct(product) {
             return Number(product?.alta) > 0 && Number(product?.stock) > 0 && (Date.now() - Number(product.alta)) < NUEVO_DIAS * 86400000;
         }

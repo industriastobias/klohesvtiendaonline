@@ -298,12 +298,22 @@
 
   const initialize = async () => {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    const timeout = setTimeout(() => controller.abort(), 25000);
     try {
       const manifestURL = new URL(gallery.dataset.galleryManifest, document.baseURI);
-      const response = await fetch(manifestURL, { cache: 'no-store', signal: controller.signal });
-      if (!response.ok) throw new Error(`Lista de imágenes: HTTP ${response.status}`);
-      const filenames = await response.json();
+      let filenames, lastErr;
+      for (let intento = 0; intento < 3 && !filenames; intento++) {
+        try {
+          const response = await fetch(manifestURL, { cache: intento ? 'reload' : 'no-cache', signal: controller.signal });
+          if (!response.ok) throw new Error(`Lista de imágenes: HTTP ${response.status}`);
+          filenames = await response.json();
+        } catch (e) {
+          lastErr = e;
+          if (controller.signal.aborted) break;
+          await new Promise(r => setTimeout(r, 700 * (intento + 1)));
+        }
+      }
+      if (!filenames) throw lastErr || new Error('Sin lista de imágenes');
       if (!Array.isArray(filenames)) throw new Error('imagenes.json debe contener una lista de nombres.');
       const valid = [];
       const seen = new Set();
@@ -382,7 +392,10 @@
     } catch (error) {
       stopAuto();
       empty.hidden = false;
-      empty.textContent = 'No se pudo cargar la galería. Revisa carpetaimg/imagenes.json.';
+      empty.textContent = 'No se pudo cargar la galería. Toca para reintentar.';
+      empty.style.cursor = 'pointer';
+      empty.onclick = () => location.reload();
+      window.addEventListener('online', () => location.reload(), { once: true });
       live.textContent = empty.textContent;
       console.warn('DAYMAR: galería externa no disponible.', error);
     } finally {

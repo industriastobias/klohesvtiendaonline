@@ -376,7 +376,7 @@
         try { localStorage.setItem(ULTK, JSON.stringify({ c: aDB(v), t: Date.now() })); } catch (e) {} ocultar(true); pintarSeguimiento(res, r); res.insertAdjacentHTML('afterbegin', '<button type="button" id="dmPedOtro" style="display:inline-flex;align-items:center;gap:7px;border:0;background:#fff;color:#3a1624;font-weight:800;font-size:13.5px;padding:10px 16px;border-radius:999px;box-shadow:0 3px 10px rgba(58,22,36,.1);cursor:pointer;margin-top:6px"><i class="fas fa-arrow-left"></i> Buscar otro pedido</button>'); res.querySelector('#dmPedOtro').onclick = function () { res.innerHTML = ''; ocultar(false); estado(); inp.focus(); }; res.classList.remove('dm-res'); void res.offsetWidth; res.classList.add('dm-res');
       }).catch(function () { fin(); mal('No pudimos consultar ahora. Intenta en un momento.'); });
     }
-    var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); } catch (e) {} abrirConsulta(); };
+    var clr = o.querySelector('#dmPedClr'); if (clr) clr.onclick = function () { try { localStorage.removeItem(MISK); localStorage.removeItem(ULTK); } catch (e) {} abrirConsulta(); };
     var pg = o.querySelector('#dmPedPaste');
     if (pg) pg.onclick = function () { navigator.clipboard.readText().then(function (t) { inp.value = formatoCodigo(t); estado(); if (codigoValido(inp.value)) ir(); }).catch(function () { inp.focus(); }); };
     go.onclick = ir;

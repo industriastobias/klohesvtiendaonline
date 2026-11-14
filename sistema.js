@@ -38,7 +38,7 @@
 
   /* 1) Catálogo y stock desde el sistema (espera máximo 4 s; nunca bloquea la tienda).
         Si el sistema no responde, se usa la última copia guardada o, si no hay, la lista de products.js. */
-  var CK = 'daymar_catalogo_v1', FRESCO = 2 * 60 * 1000;
+  var CK = 'daymar_catalogo_v1', FRESCO = 20 * 1000;
   function leerCache() { try { var c = JSON.parse(localStorage.getItem(CK) || 'null'); return c && Array.isArray(c.p) ? c : null; } catch (e) { return null; } }
   function guardarCache(p) { try { localStorage.setItem(CK, JSON.stringify({ t: Date.now(), p: p })); } catch (e) {} }
   function aplicarCatalogo(lista) {
@@ -90,6 +90,21 @@
     }).then(function () { clearTimeout(timer); done(); });
   });
 
+  /* Vuelve a pedir el catálogo (stock real) y repinta; también al volver a la pestaña/app */
+  var ultimoRef = Date.now();
+  function refrescarCatalogo() {
+    ultimoRef = Date.now();
+    rpc('tienda_catalogo').then(function (r) { return r.ok ? r.json() : null; }).then(function (lista) {
+      if (!Array.isArray(lista)) return;
+      guardarCache(lista);
+      if (aplicarCatalogo(lista) && typeof refreshDaymarPrices === 'function') refreshDaymarPrices();
+    }).catch(function () {});
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible' && Date.now() - ultimoRef > 30000) refrescarCatalogo();
+  });
+  setInterval(function () { if (document.visibilityState === 'visible' && Date.now() - ultimoRef > 90000) refrescarCatalogo(); }, 30000);
+
   /* 2) Pedido hacia el sistema al tocar el botón de WhatsApp (no cambia lo que ya hace) */
   function enviarPedido() {
     try {
@@ -121,6 +136,13 @@
           if (!real) return;
           try { sessionStorage.removeItem(CODK); } catch (e) {}
           guardarPedido(real, tot); try { aplicarAlEnlace(); } catch (e) {} mostrarNumero(real);
+          /* el producto apartado deja de verse disponible: se descuenta aquí mismo y se vuelve a pedir el catálogo */
+          try {
+            items.forEach(function (x) { var p = products.find(function (q) { return String(q.barcode) === String(x.codigo); }); if (p) p.stock = Math.max(0, (Number(p.stock) || 0) - x.cantidad); });
+            try { localStorage.removeItem(CK); } catch (e) {}
+            if (typeof refreshDaymarPrices === 'function') refreshDaymarPrices();
+            setTimeout(refrescarCatalogo, 1500);
+          } catch (e) {}
         }).catch(function () {});
     } catch (e) { /* nunca debe afectar la compra por WhatsApp */ }
   }

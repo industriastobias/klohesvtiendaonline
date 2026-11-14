@@ -36,6 +36,6 @@
     b.onclick = instalar; social.parentNode.insertBefore(b, social.nextSibling);
   }
   try { localStorage.removeItem('daymar_resenas'); } catch (e) {}
-  function listo() { botonInstalar(); }
+  function listo() { /* enlace de instalar retirado a pedido; la tienda sigue siendo instalable desde el navegador */ }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', listo); else listo();
 })();

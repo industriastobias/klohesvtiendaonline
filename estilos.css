@@ -1598,8 +1598,8 @@ button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item,
 .favorites-list .favorite-stock { font-size: 10.5px; }
 .favorites-list .remove-favorite { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; background: rgba(255, 255, 255, .92); box-shadow: 0 2px 8px rgba(0, 0, 0, .15); color: var(--wine); }
 
-/* Barra inferior: más aire arriba, abajo y a los lados (esquinas redondeadas y barra de inicio del teléfono) */
-@media (max-width: 900px) {
+/* Barra inferior roomier: solo en la app instalada (pantalla de inicio); en el navegador queda como antes */
+@media (max-width: 900px) and (display-mode: standalone), (max-width: 900px) and (display-mode: fullscreen) {
   .mobile-bottom-nav { padding: 8px 18px calc(12px + var(--safe-b)); border-radius: 18px 18px 0 0; }
   .mobile-bottom-nav button { height: 48px; gap: 4px; font-size: 10px; }
   .mobile-bottom-nav button i { font-size: 18px; }

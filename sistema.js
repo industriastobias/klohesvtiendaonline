@@ -213,6 +213,7 @@
     recibido: ['Recibido', 'Lo estamos revisando. Te confirmamos por WhatsApp.'],
     aceptado: ['Aceptado', 'Tu pedido fue confirmado.'],
     pago_pendiente: ['Pago pendiente', 'Tu pedido está apartado; falta completar el pago.'],
+    entregado_pago: ['Entregado · pago pendiente', 'Ya tienes tu pedido; falta completar el pago.'],
     preparacion: ['En preparación', 'Estamos alistando tu pedido.'],
     listo: ['Listo para retirar', 'Tu pedido está listo. Escríbenos por WhatsApp para coordinar.'],
     envio: ['En camino', 'Tu pedido va en camino hacia ti.'],
@@ -258,7 +259,7 @@
     ['envio', 'En camino', 'fa-truck-fast'],
     ['entregado', 'Entregado', 'fa-house-circle-check']
   ];
-  var NIVEL = { recibido: 0, aceptado: 1, pago_pendiente: 1, preparacion: 2, listo: 3, envio: 3, entregado: 4 };
+  var NIVEL = { recibido: 0, aceptado: 1, pago_pendiente: 1, entregado_pago: 4, preparacion: 2, listo: 3, envio: 3, entregado: 4 };
   var FIN = {
     rechazado: ['Orden rechazada', 'fa-circle-xmark', 'No se pudo atender tu pedido. Escríbenos por WhatsApp y lo resolvemos.'],
     vencido: ['Orden vencida', 'fa-clock', 'Pasaron más de 12 horas sin confirmarse. Escríbenos por WhatsApp si todavía lo quieres.'],
@@ -268,6 +269,7 @@
     recibido: 'Recibimos tu orden y la estamos revisando. Te confirmamos por WhatsApp.',
     aceptado: 'Tu orden fue aceptada. Pronto empezamos a prepararla.',
     pago_pendiente: 'Tu pedido está apartado. Falta completar el pago para terminarlo.',
+    entregado_pago: 'Ya tienes tu pedido. Solo falta completar el pago.',
     preparacion: 'Estamos alistando tu pedido con cariño.',
     listo: 'Tu pedido está listo. Escríbenos por WhatsApp para coordinar el retiro.',
     envio: 'Tu pedido va en camino hacia ti.',
@@ -282,6 +284,7 @@
     var pasos = PASOS.map(function (p) { return p.slice(); });
     if (r.estado === 'listo') { pasos[3] = ['listo', 'Listo para retirar', 'fa-store']; }
     if (r.estado === 'pago_pendiente') { pasos[1] = ['pago', 'Pago pendiente', 'fa-hand-holding-dollar']; }
+    if (r.estado === 'entregado_pago') { pasos[4] = ['entregado_pago', 'Entregado · pago pendiente', 'fa-hand-holding-dollar']; }
     var lista = fin ? pasos.slice(0, nivel + 1).concat([['fin', fin[0], fin[1]]]) : pasos;
     var titulo = fin ? fin[0] : pasos[nivel][1], icono = fin ? fin[1] : pasos[nivel][2];
     var msg = fin ? fin[2] : (MENSAJE[r.estado] || ''), color = fin ? '#b3392f' : W;
@@ -323,6 +326,7 @@
     var corto = ['Recibido', 'Aceptado', 'Preparando', 'En camino', 'Entregado'];
     if (r.estado === 'listo') corto[3] = 'Listo';
     if (r.estado === 'pago_pendiente') { pasos[1] = ['pago', 'Pago pendiente', 'fa-hand-holding-dollar']; corto[1] = 'Por pagar'; }
+    if (r.estado === 'entregado_pago') { pasos[4] = ['entregado_pago', 'Entregado · pago pendiente', 'fa-hand-holding-dollar']; }
     var titulo = fin ? fin[0] : pasos[nivel][1], icono = fin ? fin[1] : pasos[nivel][2], msg = fin ? fin[2] : (MENSAJE[r.estado] || '');
     var cuando = r.actualizado ? fechaCorta(r.actualizado) : fechaCorta(r.creado), col = fin ? '#b3392f' : INK;
     var tiles = fin ? '' : '<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:20px">' + pasos.map(function (p, i) {

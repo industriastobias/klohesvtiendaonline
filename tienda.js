@@ -1699,6 +1699,7 @@
             try {
                 const element = document.getElementById('storyTemplate');
                 
+                if (!window.html2canvas) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); });
                 const canvas = await html2canvas(element, {
                     scale: 1,
                     useCORS: true,

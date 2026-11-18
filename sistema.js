@@ -212,6 +212,7 @@
   var ESTADOS = {
     recibido: ['Recibido', 'Lo estamos revisando. Te confirmamos por WhatsApp.'],
     aceptado: ['Aceptado', 'Tu pedido fue confirmado.'],
+    pago_pendiente: ['Pago pendiente', 'Tu pedido está apartado; falta completar el pago.'],
     preparacion: ['En preparación', 'Estamos alistando tu pedido.'],
     listo: ['Listo para retirar', 'Tu pedido está listo. Escríbenos por WhatsApp para coordinar.'],
     envio: ['En camino', 'Tu pedido va en camino hacia ti.'],
@@ -257,7 +258,7 @@
     ['envio', 'En camino', 'fa-truck-fast'],
     ['entregado', 'Entregado', 'fa-house-circle-check']
   ];
-  var NIVEL = { recibido: 0, aceptado: 1, preparacion: 2, listo: 3, envio: 3, entregado: 4 };
+  var NIVEL = { recibido: 0, aceptado: 1, pago_pendiente: 1, preparacion: 2, listo: 3, envio: 3, entregado: 4 };
   var FIN = {
     rechazado: ['Orden rechazada', 'fa-circle-xmark', 'No se pudo atender tu pedido. Escríbenos por WhatsApp y lo resolvemos.'],
     vencido: ['Orden vencida', 'fa-clock', 'Pasaron más de 12 horas sin confirmarse. Escríbenos por WhatsApp si todavía lo quieres.'],
@@ -266,6 +267,7 @@
   var MENSAJE = {
     recibido: 'Recibimos tu orden y la estamos revisando. Te confirmamos por WhatsApp.',
     aceptado: 'Tu orden fue aceptada. Pronto empezamos a prepararla.',
+    pago_pendiente: 'Tu pedido está apartado. Falta completar el pago para terminarlo.',
     preparacion: 'Estamos alistando tu pedido con cariño.',
     listo: 'Tu pedido está listo. Escríbenos por WhatsApp para coordinar el retiro.',
     envio: 'Tu pedido va en camino hacia ti.',
@@ -279,6 +281,7 @@
     var nivel = fin ? (r.estado === 'cancelado' ? 1 : 0) : (NIVEL[r.estado] == null ? 0 : NIVEL[r.estado]);
     var pasos = PASOS.map(function (p) { return p.slice(); });
     if (r.estado === 'listo') { pasos[3] = ['listo', 'Listo para retirar', 'fa-store']; }
+    if (r.estado === 'pago_pendiente') { pasos[1] = ['pago', 'Pago pendiente', 'fa-hand-holding-dollar']; }
     var lista = fin ? pasos.slice(0, nivel + 1).concat([['fin', fin[0], fin[1]]]) : pasos;
     var titulo = fin ? fin[0] : pasos[nivel][1], icono = fin ? fin[1] : pasos[nivel][2];
     var msg = fin ? fin[2] : (MENSAJE[r.estado] || ''), color = fin ? '#b3392f' : W;
@@ -308,6 +311,10 @@
       '<div style="display:flex;justify-content:space-between;font-weight:800;font-size:16px;border-top:1px solid var(--line,#e6dde0);margin-top:6px;padding-top:9px"><span>Total</span><span>' + usd(r.total) + '</span></div></div>' +
       '<a href="' + WA + '?text=' + encodeURIComponent('Hola DAYMAR, consulto mi pedido ' + vis(r.codigo)) + '" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:14px auto 0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:700;font-size:13.5px;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:16px"></i>Escribir por WhatsApp</a>';
   }
+  function saldoHtml(r) {
+    if (r.saldo == null || !(Number(r.saldo) > 0)) return '';
+    return '<div style="margin:12px auto 0;max-width:300px;display:flex;justify-content:space-between;gap:10px;padding:10px 14px;border-radius:14px;background:#fbf1e6;color:#8a4b14;font-size:14px"><span>Saldo pendiente' + (Number(r.abonado) > 0 ? ' <small style="opacity:.8">(abonado ' + usd(r.abonado) + ')</small>' : '') + '</span><b>' + usd(r.saldo) + '</b></div>';
+  }
   function pintarSeguimiento(box, r) {
     var fin = FIN[r.estado], items = Array.isArray(r.items) ? r.items : [], INK = '#3a1624', GOLD = '#c9973f';
     var nivel = fin ? 0 : (NIVEL[r.estado] == null ? 0 : NIVEL[r.estado]);
@@ -315,6 +322,7 @@
     if (r.estado === 'listo') pasos[3] = ['listo', 'Listo para retirar', 'fa-store'];
     var corto = ['Recibido', 'Aceptado', 'Preparando', 'En camino', 'Entregado'];
     if (r.estado === 'listo') corto[3] = 'Listo';
+    if (r.estado === 'pago_pendiente') { pasos[1] = ['pago', 'Pago pendiente', 'fa-hand-holding-dollar']; corto[1] = 'Por pagar'; }
     var titulo = fin ? fin[0] : pasos[nivel][1], icono = fin ? fin[1] : pasos[nivel][2], msg = fin ? fin[2] : (MENSAJE[r.estado] || '');
     var cuando = r.actualizado ? fechaCorta(r.actualizado) : fechaCorta(r.creado), col = fin ? '#b3392f' : INK;
     var tiles = fin ? '' : '<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:20px">' + pasos.map(function (p, i) {
@@ -328,7 +336,7 @@
       '<div style="margin-top:16px;border-radius:22px;background:#fff;box-shadow:0 10px 30px rgba(58,22,36,.1);padding:22px 18px 20px;text-align:center">' +
         '<div style="width:72px;height:72px;margin:0 auto;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;background:' + (fin ? '#b3392f' : INK) + ';transform:rotate(-6deg)"><i class="fas ' + icono + '"></i></div>' +
         '<div style="margin-top:14px;font-size:23px;font-weight:800;color:' + col + '">' + h(titulo) + '</div>' +
-        '<p style="margin:6px auto 0;max-width:300px;font-size:14.5px;line-height:1.45;color:#5b4950">' + h(msg) + '</p>' + tiles +
+        '<p style="margin:6px auto 0;max-width:300px;font-size:14.5px;line-height:1.45;color:#5b4950">' + h(msg) + '</p>' + saldoHtml(r) + tiles +
         '<div style="margin-top:18px;padding-top:12px;border-top:1px dashed #e3d6cf;display:flex;justify-content:space-between;font-size:12px;color:#8a7a80"><span style="font:700 12px monospace;letter-spacing:.06em">' + h(vis(r.codigo)) + '</span><span>' + h(cuando) + '</span></div></div>' +
       '<details style="margin-top:12px;border-radius:16px;background:#fff;box-shadow:0 4px 14px rgba(58,22,36,.06);padding:2px 16px"><summary style="cursor:pointer;padding:13px 0;font-weight:700;font-size:14px;color:' + INK + ';list-style:none;display:flex;justify-content:space-between"><span><i class="fas fa-bag-shopping" style="color:' + GOLD + ';margin-right:7px"></i>Productos</span><span>' + usd(r.total) + ' ▾</span></summary>' +
         '<div style="padding:0 0 12px;font-size:14px;color:#5b4950">' + items.map(function (x) { return '<div style="display:flex;justify-content:space-between;gap:10px;padding:4px 0"><span>' + h(x.cantidad) + ' × ' + h(x.nombre) + '</span><span>' + usd(x.precio * x.cantidad) + '</span></div>'; }).join('') +

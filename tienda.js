@@ -993,7 +993,7 @@
                          onerror="dmImgFallo(this)"
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
                     ${isNewProduct(product) && !isPreventa(product) ? '<div class="dm-nuevo-tag">NUEVO</div>' : ''}
-                    ${isPreventa(product) ? '<div class="pv-cinta">PREVENTA</div>' : ''}
+                    ${isPreventa(product) ? '<div class="dm-nuevo-tag pv-tag">PREVENTA</div>' : ''}
                     ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>OFERTA</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}
                     </div>
                     <span class="daymar-card-index">${String(index + 1).padStart(2, '0')}</span>

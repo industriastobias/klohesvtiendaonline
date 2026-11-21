@@ -1609,7 +1609,6 @@ button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item,
 }
 
 /* ===== Preventa (próxima colección) ===== */
-.pv-cinta{position:absolute;top:12px;left:-6px;z-index:3;background:linear-gradient(135deg,#e2b45a,#C9973F);color:#3a1520;font:800 11px/1 'Manrope',system-ui,sans-serif;letter-spacing:2px;padding:8px 12px;border-radius:0 6px 6px 0;box-shadow:0 3px 8px rgba(0,0,0,.2);pointer-events:none}
 .product-stock.pv-st{color:#8a621a!important;background:#fbf2df!important;font-weight:700!important}
 .product-stock.pv-st::before{background:#C9973F!important}
 .cart-corner-btn.pv-btn:not(.out-of-stock):not(.added),.preview-add-btn.pv-btn:not(.out-of-stock):not(.added),#previewAddBtn.pv-btn:not(.out-of-stock):not(.added){background:linear-gradient(135deg,#e2b45a,#C9973F)!important;color:#3a1520!important;border-color:#C9973F!important}

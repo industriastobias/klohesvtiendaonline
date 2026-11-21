@@ -1637,3 +1637,6 @@ button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item,
 .dm-var-g button.on{border-color:#6B2D3E;box-shadow:0 0 0 2px rgba(107,45,62,.15)}
 .dm-var-g button.off{opacity:.45}.dm-var-g button.off span{text-decoration:line-through}
 .dm-var-g button:focus-visible{outline:3px solid #C9973F;outline-offset:2px}
+/* Variantes en el detalle: solo la foto (el nombre se ve arriba en «Color: …») */
+.dm-var-g button{width:64px;padding:3px;gap:0}
+.dm-var-g button.off img{filter:grayscale(1)}

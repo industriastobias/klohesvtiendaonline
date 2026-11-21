@@ -301,7 +301,7 @@
             };
             box.innerHTML = '<div class="dm-var-l"></div><div class="dm-var-g">' + V.map((v, k) => {
                 const foto = v.foto || getPrimaryProductImage(product);
-                return `<button type="button" data-v="${k}" class="${Number(v.stock) > 0 ? '' : 'off'}" aria-label="${escapeHtmlDm(v.nombre)}${Number(v.stock) > 0 ? '' : ' (agotado)'}"><img src="${escapeHtmlDm(foto)}" alt="" loading="lazy" decoding="async"><span>${escapeHtmlDm(v.nombre)}</span></button>`;
+                return `<button type="button" data-v="${k}" class="${Number(v.stock) > 0 ? '' : 'off'}" aria-label="${escapeHtmlDm(v.nombre)}${Number(v.stock) > 0 ? '' : ' (agotado)'}"><img src="${escapeHtmlDm(foto)}" alt="" loading="lazy" decoding="async"></button>`;
             }).join('') + '</div>';
             box.onclick = (e) => { const b = e.target.closest('button[data-v]'); if (b) { e.stopPropagation(); elegir(Number(b.dataset.v)); } };
             elegir(dmVarSel);

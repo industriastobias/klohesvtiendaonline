@@ -217,8 +217,15 @@
         }
         
         const NUEVO_DIAS = 50;
+        /* Preventa (próxima colección): stock = cupo que queda; cupo null = sin límite */
+        function isPreventa(product) { return !!(product && product.preventa); }
+        function pvFecha(product) { if (!product || !product.llega) return ''; try { return new Date(product.llega + 'T12:00:00').toLocaleDateString('es-SV', { day: 'numeric', month: 'short' }).replace('.', ''); } catch (e) { return ''; } }
+        function pvTexto(product) { const f = pvFecha(product); if (!(Number(product.stock) > 0)) return 'Preventa agotada'; return (f ? `Llega aprox. ${f}` : 'Próxima colección') + (product.cupo != null ? ` · quedan ${product.stock}` : ''); }
+        function pvPago() { try { return localStorage.getItem('daymar_pv_pago') === 'completo' ? 'completo' : 'anticipo'; } catch (e) { return 'anticipo'; } }
+        window.dmPvPago = function (v) { try { localStorage.setItem('daymar_pv_pago', v === 'completo' ? 'completo' : 'anticipo'); } catch (e) {} updateCart(); };
+        window.daymarPvPago = pvPago;
         function isNewProduct(product) {
-            return Number(product?.alta) > 0 && Number(product?.stock) > 0 && (Date.now() - Number(product.alta)) < NUEVO_DIAS * 86400000;
+            return !isPreventa(product) && Number(product?.alta) > 0 && Number(product?.stock) > 0 && (Date.now() - Number(product.alta)) < NUEVO_DIAS * 86400000;
         }
         function newFirst(list) {
             const nuevos = mixProductsByCategory(list.filter(isNewProduct).sort((a, b) => b.alta - a.alta));
@@ -903,6 +910,7 @@
                          onerror="dmImgFallo(this)"
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
                     ${isNewProduct(product) ? '<div class="dm-nuevo-tag">NUEVO</div>' : ''}
+                    ${isPreventa(product) ? '<div class="pv-cinta">PREVENTA</div>' : ''}
                     ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>OFERTA</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}
                     </div>
                     <span class="daymar-card-index">${String(index + 1).padStart(2, '0')}</span>
@@ -917,13 +925,13 @@
                         <span class="product-price">$${productPrice.toFixed(2)}</span>
                         ${getDiscountRate(product) > 0 ? `<span class="product-price-original">$${getOriginalPrice(product).toFixed(2)}</span>` : ''}
                     </div>
-                    <span class="product-stock ${hasStock ? 'available' : 'out'}">
-                        ${hasStock ? `${product.stock} ${Number(product.stock) === 1 ? 'disponible' : 'disponibles'}` : 'Agotado'}
+                    <span class="product-stock ${isPreventa(product) ? 'pv-st' : (hasStock ? 'available' : 'out')}">
+                        ${isPreventa(product) ? pvTexto(product) : (hasStock ? `${product.stock} ${Number(product.stock) === 1 ? 'disponible' : 'disponibles'}` : 'Agotado')}
                     </span>
                     <div class="product-card-actions">
                         <button class="product-details-trigger" type="button" aria-haspopup="dialog" onclick="event.stopPropagation(); openPreview(${realIndex})"><span class="daymar-action-full">Ver detalles</span><span class="daymar-action-mobile">Detalles</span></button>
-                        <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado'}" title="${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}">
-                            <i class="fas ${hasStock ? 'fa-shopping-cart' : 'fa-ban'}"></i> <span class="cart-btn-label"><span class="daymar-action-full">${hasStock ? 'AÑADIR AL CARRITO' : 'Agotado'}</span><span class="daymar-action-mobile">${hasStock ? 'Añadir al carrito' : 'Agotado'}</span></span>
+                        <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}${isPreventa(product) ? ' pv-btn' : ''}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${isPreventa(product) ? (hasStock ? 'Pedir en preventa' : 'Preventa agotada') : (hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado')}" title="${isPreventa(product) ? (hasStock ? 'Pedir en preventa' : 'Preventa agotada') : (hasStock ? 'AÑADIR AL CARRITO' : 'Agotado')}">
+                            <i class="fas ${isPreventa(product) ? (hasStock ? 'fa-clock' : 'fa-ban') : (hasStock ? 'fa-shopping-cart' : 'fa-ban')}"></i> <span class="cart-btn-label"><span class="daymar-action-full">${isPreventa(product) ? (hasStock ? 'PEDIR EN PREVENTA' : 'Preventa agotada') : (hasStock ? 'AÑADIR AL CARRITO' : 'Agotado')}</span><span class="daymar-action-mobile">${isPreventa(product) ? (hasStock ? 'Pedir en preventa' : 'Agotada') : (hasStock ? 'Añadir al carrito' : 'Agotado')}</span></span>
                         </button>
                     </div>
                     </div>
@@ -1147,8 +1155,9 @@
             const label = button.querySelector('.cart-btn-label');
             if (!label) return;
             const outOfStock = button.classList.contains('out-of-stock');
-            const full = outOfStock ? 'Agotado' : added ? 'AÑADIDO' : 'AÑADIR AL CARRITO';
-            const compact = outOfStock ? 'Agotado' : added ? 'Añadido' : 'Añadir al carrito';
+            const pv = button.classList.contains('pv-btn');
+            const full = outOfStock ? (pv ? 'Preventa agotada' : 'Agotado') : added ? 'AÑADIDO' : (pv ? 'PEDIR EN PREVENTA' : 'AÑADIR AL CARRITO');
+            const compact = outOfStock ? (pv ? 'Agotada' : 'Agotado') : added ? 'Añadido' : (pv ? 'Pedir en preventa' : 'Añadir al carrito');
             label.innerHTML = `<span class="daymar-action-full">${full}</span><span class="daymar-action-mobile">${compact}</span>`;
         }
 
@@ -1164,7 +1173,9 @@
                 } else {
                     button.innerHTML = added
                         ? '<i class="fas fa-check" aria-hidden="true"></i><span>AÑADIDO</span>'
-                        : '<i class="fas fa-shopping-bag" aria-hidden="true"></i><span>AÑADIR AL CARRITO</span>';
+                        : button.classList.contains('pv-btn')
+                            ? '<i class="fas fa-clock" aria-hidden="true"></i><span>PEDIR EN PREVENTA</span>'
+                            : '<i class="fas fa-shopping-bag" aria-hidden="true"></i><span>AÑADIR AL CARRITO</span>';
                 }
             });
         }
@@ -1297,8 +1308,8 @@
                         regularSubtotal = roundPrice(regularSubtotal + itemOriginalTotal);
                         purchasableCartItems.push({ item, liveProduct, itemPrice, itemOriginalPrice, itemDiscountRate });
                     }
-                    const statusText = isDeleted ? 'Producto eliminado' : isOutOfStock ? 'Agotado' : `${currentStock} ${currentStock === 1 ? 'disponible' : 'disponibles'}`;
-                    const statusClass = isUnavailable ? 'unavailable' : 'available';
+                    const statusText = isDeleted ? 'Producto eliminado' : isPreventa(liveProduct) ? ('Preventa · ' + pvTexto(liveProduct)) : isOutOfStock ? 'Agotado' : `${currentStock} ${currentStock === 1 ? 'disponible' : 'disponibles'}`;
+                    const statusClass = isUnavailable ? 'unavailable' : (isPreventa(liveProduct) ? 'available pv-st' : 'available');
                     const itemClass = isUnavailable ? 'cart-item unavailable' : 'cart-item';
                     const displayName = liveProduct?.name || item.name || 'Producto';
 
@@ -1357,15 +1368,31 @@
                 if (discountRow) discountRow.style.display = hasDiscounts ? 'flex' : 'none';
                 if (summary) summary.style.display = 'block';
                 
+                const pvItems = purchasableCartItems.filter(x => isPreventa(x.liveProduct));
+                const pvTotal = roundPrice(pvItems.reduce((t, x) => t + x.itemPrice * Number(x.item.quantity || 0), 0));
+                const pvAnticipo = roundPrice(pvItems.reduce((t, x) => t + roundPrice(x.itemPrice * Number(x.item.quantity || 0) * (Number(x.liveProduct.anticipo) || 50) / 100), 0));
+                const pvModo = pvPago();
+                let pvBox = document.getElementById('dmPvPago');
+                if (!pvBox && whatsappBtn && whatsappBtn.parentNode) { pvBox = document.createElement('div'); pvBox.id = 'dmPvPago'; pvBox.className = 'pv-pago'; whatsappBtn.parentNode.insertBefore(pvBox, whatsappBtn); }
+                if (pvBox) {
+                    pvBox.hidden = !pvItems.length;
+                    const pcts = [...new Set(pvItems.map(x => Number(x.liveProduct.anticipo) || 50))];
+                    const pvHtml = pvItems.length ? `<div class="pv-pago-t">¿Cómo quieres pagar la preventa?</div>
+                        <label class="pv-op${pvModo === 'anticipo' ? ' on' : ''}"><input type="radio" name="dmPvPago" value="anticipo" ${pvModo === 'anticipo' ? 'checked' : ''} onchange="dmPvPago(this.value)"><span><b>Anticipo${pcts.length === 1 ? ' del ' + pcts[0] + '%' : ''}</b><small>Pagas $${pvAnticipo.toFixed(2)} ahora y $${roundPrice(pvTotal - pvAnticipo).toFixed(2)} cuando lo recibas</small></span><em>$${pvAnticipo.toFixed(2)}</em></label>
+                        <label class="pv-op${pvModo === 'completo' ? ' on' : ''}"><input type="radio" name="dmPvPago" value="completo" ${pvModo === 'completo' ? 'checked' : ''} onchange="dmPvPago(this.value)"><span><b>Pago completo</b><small>Pagas todo ahora y no debes nada al recibir</small></span><em>$${pvTotal.toFixed(2)}</em></label>
+                        <div class="pv-pago-n">Te avisamos por WhatsApp cuando llegue.</div>` : '';
+                    if (pvBox.dataset.html !== pvHtml) { pvBox.innerHTML = pvHtml; pvBox.dataset.html = pvHtml; }
+                }
                 if (whatsappBtn) {
                     whatsappBtn.style.display = purchasableCartItems.length > 0 ? 'flex' : 'none';
                     const messageLines = purchasableCartItems.map(({ item, liveProduct, itemPrice }, lineIndex) => {
                         const imageUrl = lineIndex === 0 ? getWhatsAppProductImage(liveProduct || item) : '';
-                        return `* ${liveProduct?.name || item.name}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}${imageUrl ? `\n  Tienda: ${imageUrl}` : ''}`;
+                        return `* ${liveProduct?.name || item.name}${isPreventa(liveProduct) ? ' (PREVENTA' + (pvFecha(liveProduct) ? ' · llega aprox. ' + pvFecha(liveProduct) : '') + ')' : ''}\n  COD: ${item.barcode}\n  Cantidad: ${item.quantity}\n  Precio: $${itemPrice.toFixed(2)}${imageUrl ? `\n  Tienda: ${imageUrl}` : ''}`;
                     });
                     const shippingText = AppState.shippingEnabled ? `\n\nEnvío nacional: $${shippingCost.toFixed(2)}${benefitQuote.kind === 'shipping' ? ' (beneficio Premium)' : ''}` : '';
                     const benefitText = benefitQuote.coupon > 0 ? `\n\nBeneficio Premium en productos: -$${benefitQuote.coupon.toFixed(2)}` : '';
-                    const fullMessage = `*¡Hola! Quiero comprar estos productos de DAYMAR:*\n\n${messageLines.join('\n\n')}${benefitText}${shippingText}\n\n*Total: $${total.toFixed(2)}*\n\n¡Gracias!`;
+                    const pvText = pvItems.length ? (pvModo === 'completo' ? `\n\n*Preventa:* pago completo $${pvTotal.toFixed(2)}` : `\n\n*Preventa:* anticipo $${pvAnticipo.toFixed(2)} ahora, resto $${roundPrice(pvTotal - pvAnticipo).toFixed(2)} al recibir`) : '';
+                    const fullMessage = `*¡Hola! Quiero comprar estos productos de DAYMAR:*\n\n${messageLines.join('\n\n')}${benefitText}${shippingText}\n\n*Total: $${total.toFixed(2)}*${pvText}\n\n¡Gracias!`;
                     whatsappBtn.href = `https://wa.me/${CONFIG.phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
                 }
             }
@@ -1474,7 +1501,11 @@
             previewOriginalPrice.style.display = getDiscountRate(product) > 0 ? '' : 'none';
 
             const stockEl = document.getElementById('previewStock');
-            if (product.stock > 0) {
+            stockEl.classList.toggle('pv-st', isPreventa(product));
+            if (isPreventa(product)) {
+                stockEl.textContent = pvTexto(product) + (Number(product.stock) > 0 && product.anticipo ? ` · anticipo desde ${product.anticipo}%` : '');
+                stockEl.classList.toggle('out', !(Number(product.stock) > 0));
+            } else if (product.stock > 0) {
                 stockEl.textContent = `${product.stock} ${Number(product.stock) === 1 ? 'unidad disponible' : 'unidades disponibles'}`;
                 stockEl.classList.remove('out');
             } else {
@@ -1504,7 +1535,10 @@
                 addBtn.disabled = false;
                 addBtn.dataset.barcode = String(product.barcode || '');
                 addBtn.classList.toggle('out-of-stock', !previewHasStock);
-                addBtn.innerHTML = previewHasStock
+                addBtn.classList.toggle('pv-btn', isPreventa(product));
+                addBtn.innerHTML = isPreventa(product)
+                    ? (previewHasStock ? '<i class="fas fa-clock" style="margin-right: 0.5rem;"></i> PEDIR EN PREVENTA' : '<i class="fas fa-ban" style="margin-right: 0.5rem;"></i> Preventa agotada')
+                    : previewHasStock
                     ? '<i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> AGREGAR AL CARRITO'
                     : '<i class="fas fa-ban" style="margin-right: 0.5rem;"></i> Agotado';
                 addBtn.title = previewHasStock ? 'AGREGAR AL CARRITO' : 'Producto agotado';

@@ -1607,3 +1607,20 @@ button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item,
   .whatsapp-float { bottom: calc(92px + var(--safe-b)); }
   .notification { bottom: calc(96px + var(--safe-b)); }
 }
+
+/* ===== Preventa (próxima colección) ===== */
+.pv-cinta{position:absolute;top:12px;left:-6px;z-index:3;background:linear-gradient(135deg,#e2b45a,#C9973F);color:#3a1520;font:800 11px/1 'Manrope',system-ui,sans-serif;letter-spacing:2px;padding:8px 12px;border-radius:0 6px 6px 0;box-shadow:0 3px 8px rgba(0,0,0,.2);pointer-events:none}
+.product-stock.pv-st{color:#8a621a!important;background:#fbf2df!important;font-weight:700!important}
+.product-stock.pv-st::before{background:#C9973F!important}
+.cart-corner-btn.pv-btn:not(.out-of-stock):not(.added),.preview-add-btn.pv-btn:not(.out-of-stock):not(.added),#previewAddBtn.pv-btn:not(.out-of-stock):not(.added){background:linear-gradient(135deg,#e2b45a,#C9973F)!important;color:#3a1520!important;border-color:#C9973F!important}
+#previewStock.pv-st{color:#8a621a}
+.pv-pago{margin:0 0 12px;padding:12px;border-radius:16px;background:#fbf8f3;border:1px solid #eadfd3}
+.pv-pago[hidden]{display:none!important}
+.pv-pago-t{font:italic 600 18px/1.2 'Cormorant Garamond',Georgia,serif;color:#6B2D3E;margin:0 0 8px}
+.pv-op{display:flex;gap:10px;align-items:flex-start;border:1.5px solid #e6d9cf;border-radius:14px;padding:10px 12px;margin:0 0 8px;background:#fff;cursor:pointer;color:#2a1a1f}
+.pv-op.on{border-color:#6B2D3E;box-shadow:0 0 0 3px rgba(107,45,62,.12)}
+.pv-op input{accent-color:#6B2D3E;width:18px;height:18px;margin:2px 0 0;flex:none}
+.pv-op span{flex:1;min-width:0}.pv-op b{display:block;font-size:14px}.pv-op small{display:block;font-size:12px;color:#6f5a60;line-height:1.35}
+.pv-op em{font-style:normal;font-weight:800;color:#6B2D3E;font-size:15px;white-space:nowrap}
+.pv-pago-n{font-size:12px;color:#7a5a62;margin-top:2px}
+.cart-stock-status.pv-st{color:#8a621a!important}.cart-stock-status.pv-st::before{background:#C9973F!important}

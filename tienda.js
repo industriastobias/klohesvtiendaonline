@@ -1457,15 +1457,15 @@
                 
                 const pvItems = purchasableCartItems.filter(x => isPreventa(x.liveProduct));
                 const pvTotal = roundPrice(pvItems.reduce((t, x) => t + x.itemPrice * Number(x.item.quantity || 0), 0));
-                const pvAnticipo = roundPrice(pvItems.reduce((t, x) => t + roundPrice(x.itemPrice * Number(x.item.quantity || 0) * (Number(x.liveProduct.anticipo) || 50) / 100), 0));
+                const pvAnticipo = roundPrice(pvItems.reduce((t, x) => t + roundPrice(x.itemPrice * Number(x.item.quantity || 0) * (x.liveProduct.anticipo == null ? 50 : Number(x.liveProduct.anticipo)) / 100), 0));
                 const pvModo = pvPago();
                 let pvBox = document.getElementById('dmPvPago');
                 if (!pvBox && whatsappBtn && whatsappBtn.parentNode) { pvBox = document.createElement('div'); pvBox.id = 'dmPvPago'; pvBox.className = 'pv-pago'; whatsappBtn.parentNode.insertBefore(pvBox, whatsappBtn); }
                 if (pvBox) {
                     pvBox.hidden = !pvItems.length;
-                    const pcts = [...new Set(pvItems.map(x => Number(x.liveProduct.anticipo) || 50))];
+                    const pcts = [...new Set(pvItems.map(x => x.liveProduct.anticipo == null ? 50 : Number(x.liveProduct.anticipo)))];
                     const pvHtml = pvItems.length ? `<div class="pv-pago-t">¿Cómo quieres pagar la preventa?</div>
-                        <label class="pv-op${pvModo === 'anticipo' ? ' on' : ''}"><input type="radio" name="dmPvPago" value="anticipo" ${pvModo === 'anticipo' ? 'checked' : ''} onchange="dmPvPago(this.value)"><span><b>Anticipo${pcts.length === 1 ? ' del ' + pcts[0] + '%' : ''}</b><small>Pagas $${pvAnticipo.toFixed(2)} ahora y $${roundPrice(pvTotal - pvAnticipo).toFixed(2)} cuando lo recibas</small></span><em>$${pvAnticipo.toFixed(2)}</em></label>
+                        <label class="pv-op${pvModo === 'anticipo' ? ' on' : ''}"><input type="radio" name="dmPvPago" value="anticipo" ${pvModo === 'anticipo' ? 'checked' : ''} onchange="dmPvPago(this.value)"><span><b>${pvAnticipo > 0 ? 'Anticipo' + (pcts.length === 1 ? ' del ' + pcts[0] + '%' : '') : 'Sin anticipo'}</b><small>${pvAnticipo > 0 ? `Pagas $${pvAnticipo.toFixed(2)} ahora y $${roundPrice(pvTotal - pvAnticipo).toFixed(2)} cuando lo recibas` : `No pagas nada ahora; pagas $${pvTotal.toFixed(2)} cuando lo recibas`}</small></span><em>$${pvAnticipo.toFixed(2)}</em></label>
                         <label class="pv-op${pvModo === 'completo' ? ' on' : ''}"><input type="radio" name="dmPvPago" value="completo" ${pvModo === 'completo' ? 'checked' : ''} onchange="dmPvPago(this.value)"><span><b>Pago completo</b><small>Pagas todo ahora y no debes nada al recibir</small></span><em>$${pvTotal.toFixed(2)}</em></label>
                         <div class="pv-pago-n">Te avisamos por WhatsApp cuando llegue.</div>` : '';
                     if (pvBox.dataset.html !== pvHtml) { pvBox.innerHTML = pvHtml; pvBox.dataset.html = pvHtml; }
@@ -1478,7 +1478,7 @@
                     });
                     const shippingText = AppState.shippingEnabled ? `\n\nEnvío nacional: $${shippingCost.toFixed(2)}${benefitQuote.kind === 'shipping' ? ' (beneficio Premium)' : ''}` : '';
                     const benefitText = benefitQuote.coupon > 0 ? `\n\nBeneficio Premium en productos: -$${benefitQuote.coupon.toFixed(2)}` : '';
-                    const pvText = pvItems.length ? (pvModo === 'completo' ? `\n\n*Preventa:* pago completo $${pvTotal.toFixed(2)}` : `\n\n*Preventa:* anticipo $${pvAnticipo.toFixed(2)} ahora, resto $${roundPrice(pvTotal - pvAnticipo).toFixed(2)} al recibir`) : '';
+                    const pvText = pvItems.length ? (pvModo === 'completo' ? `\n\n*Preventa:* pago completo $${pvTotal.toFixed(2)}` : pvAnticipo > 0 ? `\n\n*Preventa:* anticipo $${pvAnticipo.toFixed(2)} ahora, resto $${roundPrice(pvTotal - pvAnticipo).toFixed(2)} al recibir` : `\n\n*Preventa:* sin anticipo, pago $${pvTotal.toFixed(2)} al recibir`) : '';
                     const fullMessage = `*¡Hola! Quiero comprar estos productos de DAYMAR:*\n\n${messageLines.join('\n\n')}${benefitText}${shippingText}\n\n*Total: $${total.toFixed(2)}*${pvText}\n\n¡Gracias!`;
                     whatsappBtn.href = `https://wa.me/${CONFIG.phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
                 }
@@ -1590,7 +1590,7 @@
             const stockEl = document.getElementById('previewStock');
             stockEl.classList.toggle('pv-st', isPreventa(product));
             if (isPreventa(product)) {
-                stockEl.textContent = pvTexto(product) + (Number(product.stock) > 0 && product.anticipo ? ` · anticipo desde ${product.anticipo}%` : '');
+                stockEl.textContent = pvTexto(product) + (Number(product.stock) > 0 ? (Number(product.anticipo) > 0 ? ` · anticipo desde ${product.anticipo}%` : ' · sin anticipo') : '');
                 stockEl.classList.toggle('out', !(Number(product.stock) > 0));
             } else if (product.stock > 0) {
                 stockEl.textContent = `${product.stock} ${Number(product.stock) === 1 ? 'unidad disponible' : 'unidades disponibles'}`;

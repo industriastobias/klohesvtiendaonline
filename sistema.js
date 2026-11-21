@@ -52,7 +52,7 @@
       if (Array.isArray(x.thumbs) && x.thumbs.length) o.thumbs = x.thumbs.map(String);
       if (Array.isArray(x.variants) && x.variants.length) o.variants = x.variants.filter(function (v) { return v && v.barcode && v.nombre; }).map(function (v) { return { nombre: String(v.nombre), barcode: String(v.barcode), stock: Math.max(0, Number(v.stock) || 0), foto: v.foto ? String(v.foto) : null }; });
       if (o.variants && !o.variants.length) delete o.variants;
-      if (x.preventa) { o.preventa = true; if (x.llega) o.llega = String(x.llega); o.anticipo = Math.max(10, Math.min(100, Number(x.anticipo) || 50)); o.cupo = x.cupo == null ? null : Math.max(0, Number(x.cupo) || 0); }
+      if (x.preventa) { o.preventa = true; if (x.llega) o.llega = String(x.llega); o.anticipo = x.anticipo == null || isNaN(Number(x.anticipo)) ? 50 : Math.max(0, Math.min(100, Number(x.anticipo))); o.cupo = x.cupo == null ? null : Math.max(0, Number(x.cupo) || 0); }
       return o;
     });
     /* "NUEVO": solo los 70 agregados más recientemente (evita marcar todo si se cargó mucho de golpe) */

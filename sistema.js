@@ -50,6 +50,8 @@
       if (x.description) o.description = String(x.description);
       if (Array.isArray(x.images) && x.images.length) o.images = x.images.map(String);
       if (Array.isArray(x.thumbs) && x.thumbs.length) o.thumbs = x.thumbs.map(String);
+      if (Array.isArray(x.variants) && x.variants.length) o.variants = x.variants.filter(function (v) { return v && v.barcode && v.nombre; }).map(function (v) { return { nombre: String(v.nombre), barcode: String(v.barcode), stock: Math.max(0, Number(v.stock) || 0), foto: v.foto ? String(v.foto) : null }; });
+      if (o.variants && !o.variants.length) delete o.variants;
       if (x.preventa) { o.preventa = true; if (x.llega) o.llega = String(x.llega); o.anticipo = Math.max(10, Math.min(100, Number(x.anticipo) || 50)); o.cupo = x.cupo == null ? null : Math.max(0, Number(x.cupo) || 0); }
       return o;
     });
@@ -112,7 +114,7 @@
       if (typeof AppState === 'undefined' || !AppState.cart || !AppState.cart.length) return;
       var items = [];
       AppState.cart.forEach(function (it) {
-        var live = products.find(function (p) { return String(p.barcode) === String(it.barcode); });
+        var live = typeof window.dmLive === 'function' ? window.dmLive(it.barcode) : products.find(function (p) { return String(p.barcode) === String(it.barcode); });
         if (!live || !(Number(live.stock) > 0)) return;
         items.push({
           codigo: String(it.barcode), sys: live.sys ? String(live.sys) : null, nombre: live.name || it.name,

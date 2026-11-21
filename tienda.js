@@ -224,6 +224,92 @@
         function pvPago() { try { return localStorage.getItem('daymar_pv_pago') === 'completo' ? 'completo' : 'anticipo'; } catch (e) { return 'anticipo'; } }
         window.dmPvPago = function (v) { try { localStorage.setItem('daymar_pv_pago', v === 'completo' ? 'completo' : 'anticipo'); } catch (e) {} updateCart(); };
         window.daymarPvPago = pvPago;
+
+        /* Colores con su propia foto: un producto puede traer variants [{nombre, barcode, stock, foto}] */
+        const DM_COLORES = {rosado:'#f2a7b8',rosa:'#f2a7b8',fucsia:'#e0198b',rojo:'#d32f2f',vino:'#7b1e3a',celeste:'#8fd3e8',azul:'#1e66d0',turquesa:'#20b2aa',verde:'#2e9d57',menta:'#98e0c0',amarillo:'#f6d332',dorado:'#d4a62a',oro:'#d4a62a',plateado:'#c9c9cf',plata:'#c9c9cf',blanco:'#ffffff',negro:'#1a1a1a',gris:'#9e9e9e',cafe:'#7b4a2a',café:'#7b4a2a',beige:'#e8d8b8',crema:'#f3e9d2',nude:'#e3bfa5',morado:'#8e44ad',lila:'#b99be0',naranja:'#f58a1f',coral:'#ff7f6a',perla:'#f4efe6',champagne:'#e9d3a8',multicolor:'conic-gradient(#f2a7b8,#f6d332,#8fd3e8,#b99be0,#f2a7b8)'};
+        function dmColorHex(nombre) { const w = String(nombre || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').split(/[^a-zñ]+/); for (const k of w) if (DM_COLORES[k]) return DM_COLORES[k]; return null; }
+        function hasVariants(product) { return !!(product && Array.isArray(product.variants) && product.variants.length); }
+        function dmVarLive(product, v) {
+            if (!product || !v) return null;
+            const fotos = v.foto ? [v.foto].concat((product.images || []).filter(x => x !== v.foto)) : (product.images || []);
+            return Object.assign({}, product, { name: product.name + ' – ' + v.nombre, barcode: String(v.barcode), stock: Number(v.stock) || 0, images: fotos, thumbs: v.foto ? [v.foto] : product.thumbs, foto: v.foto || product.foto, variants: null, _parent: product.barcode, _color: v.nombre });
+        }
+        /* Producto "vivo" de un renglón del carrito: el producto o uno de sus colores */
+        function dmLive(barcode) {
+            const b = String(barcode);
+            const p = products.find(x => String(x.barcode) === b);
+            if (p) return p;
+            for (const q of products) { if (!hasVariants(q)) continue; const v = q.variants.find(x => String(x.barcode) === b); if (v) return dmVarLive(q, v); }
+            return null;
+        }
+        window.dmLive = dmLive;
+        function dmVarDots(product) {
+            if (!hasVariants(product)) return '';
+            const L = product.variants.slice(0, 6).map(v => { const h = dmColorHex(v.nombre); return h ? `<i style="background:${h}"></i>` : (v.foto ? `<i style="background-image:url('${String(v.foto).replace(/'/g, '%27')}')"></i>` : '<i></i>'); }).join('');
+            const n = product.variants.length;
+            return `<div class="dm-vdots" aria-label="${n} ${n === 1 ? 'color' : 'colores'}">${L}<span>${n} ${n === 1 ? 'color' : 'colores'}</span></div>`;
+        }
+        function addVariantToCart(index, vIdx, sourceButton = null) {
+            const product = products[index];
+            if (!product || !hasVariants(product)) return;
+            const live = dmVarLive(product, product.variants[vIdx]);
+            if (!live) return;
+            if (Number(live.stock) <= 0) { showNotification(isPreventa(product) ? 'Preventa agotada' : 'Agotado', 'error'); return; }
+            const existingItem = AppState.cart.find(item => String(item.barcode) === String(live.barcode));
+            if (existingItem) {
+                if (existingItem.quantity < live.stock) existingItem.quantity++;
+                else { showNotification('Stock máximo alcanzado', 'error'); return; }
+            } else {
+                AppState.cart.push({ ...live, price: getProductPrice(live), originalPrice: getOriginalPrice(live), discountRate: getDiscountRate(live), quantity: 1 });
+            }
+            updateCart();
+            showAddedButtonState(sourceButton);
+            showNotification('Añadido al carrito · ' + live._color);
+        }
+        let dmVarSel = 0;
+        function pintarVariantesPreview(product, index) {
+            let box = document.getElementById('dmVarBox');
+            if (!hasVariants(product)) { if (box) box.remove(); return; }
+            const anchor = document.getElementById('previewStock');
+            if (!box && anchor && anchor.parentNode) { box = document.createElement('div'); box.id = 'dmVarBox'; box.className = 'dm-var'; anchor.parentNode.insertBefore(box, anchor); }
+            if (!box) return;
+            const V = product.variants;
+            dmVarSel = Math.max(0, V.findIndex(v => Number(v.stock) > 0));
+            const elegir = (k) => {
+                dmVarSel = k;
+                const v = V[k], live = dmVarLive(product, v), hay = Number(v.stock) > 0;
+                box.querySelectorAll('button[data-v]').forEach(b => { b.classList.toggle('on', Number(b.dataset.v) === k); b.setAttribute('aria-pressed', Number(b.dataset.v) === k ? 'true' : 'false'); });
+                box.querySelector('.dm-var-l').innerHTML = 'Color: <b>' + escapeHtmlDm(v.nombre) + '</b>';
+                const img = document.getElementById('previewImage');
+                if (img && v.foto) { img.src = v.foto; img.alt = live.name; }
+                const st = document.getElementById('previewStock');
+                if (st) {
+                    if (isPreventa(product)) { st.textContent = pvTexto(live); }
+                    else st.textContent = hay ? `${v.stock} ${Number(v.stock) === 1 ? 'unidad disponible' : 'unidades disponibles'} en ${v.nombre}` : `${v.nombre} agotado`;
+                    st.classList.toggle('out', !hay);
+                }
+                const bc = document.getElementById('previewBarcode');
+                if (bc) bc.textContent = 'COD: ' + v.barcode;
+                const addBtn = document.getElementById('previewAddBtn');
+                if (addBtn) {
+                    addBtn.dataset.barcode = String(v.barcode);
+                    addBtn.classList.toggle('out-of-stock', !hay);
+                    addBtn.classList.remove('added');
+                    addBtn.innerHTML = isPreventa(product)
+                        ? (hay ? '<i class="fas fa-clock" style="margin-right: 0.5rem;"></i> PEDIR EN PREVENTA' : '<i class="fas fa-ban" style="margin-right: 0.5rem;"></i> Preventa agotada')
+                        : (hay ? '<i class="fas fa-shopping-bag" style="margin-right: 0.5rem;"></i> AGREGAR AL CARRITO' : '<i class="fas fa-ban" style="margin-right: 0.5rem;"></i> Agotado');
+                    addBtn.onclick = () => addVariantToCart(index, dmVarSel, addBtn);
+                    if (AppState.cart.some(it => String(it.barcode) === String(v.barcode))) addBtn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i><span>AÑADIDO</span>';
+                }
+            };
+            box.innerHTML = '<div class="dm-var-l"></div><div class="dm-var-g">' + V.map((v, k) => {
+                const foto = v.foto || getPrimaryProductImage(product);
+                return `<button type="button" data-v="${k}" class="${Number(v.stock) > 0 ? '' : 'off'}" aria-label="${escapeHtmlDm(v.nombre)}${Number(v.stock) > 0 ? '' : ' (agotado)'}"><img src="${escapeHtmlDm(foto)}" alt="" loading="lazy" decoding="async"><span>${escapeHtmlDm(v.nombre)}</span></button>`;
+            }).join('') + '</div>';
+            box.onclick = (e) => { const b = e.target.closest('button[data-v]'); if (b) { e.stopPropagation(); elegir(Number(b.dataset.v)); } };
+            elegir(dmVarSel);
+        }
+        function escapeHtmlDm(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
         function isNewProduct(product) {
             return !isPreventa(product) && Number(product?.alta) > 0 && Number(product?.stock) > 0 && (Date.now() - Number(product.alta)) < NUEVO_DIAS * 86400000;
         }
@@ -920,6 +1006,7 @@
                     <div class="product-info">
                     ${isFineJewelry ? `<div class="fine-jewelry-meta"><span>PIEZA ESPECIAL</span><span>${fineMaterial}</span></div>` : ''}
                     <h3 class="product-name">${product.name}</h3>
+                    ${dmVarDots(product)}
                     <p class="product-description">${product.description || ''}</p>
                     <div class="product-price-container">
                         <span class="product-price">$${productPrice.toFixed(2)}</span>
@@ -930,7 +1017,7 @@
                     </span>
                     <div class="product-card-actions">
                         <button class="product-details-trigger" type="button" aria-haspopup="dialog" onclick="event.stopPropagation(); openPreview(${realIndex})"><span class="daymar-action-full">Ver detalles</span><span class="daymar-action-mobile">Detalles</span></button>
-                        <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}${isPreventa(product) ? ' pv-btn' : ''}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); addToCart(${realIndex}, this)" aria-label="${isPreventa(product) ? (hasStock ? 'Pedir en preventa' : 'Preventa agotada') : (hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado')}" title="${isPreventa(product) ? (hasStock ? 'Pedir en preventa' : 'Preventa agotada') : (hasStock ? 'AÑADIR AL CARRITO' : 'Agotado')}">
+                        <button class="cart-corner-btn ${hasStock ? '' : 'out-of-stock'}${isPreventa(product) ? ' pv-btn' : ''}${hasVariants(product) && hasStock ? ' var-btn' : ''}" data-barcode="${product.barcode}" onclick="event.stopPropagation(); ${hasVariants(product) ? `openPreview(${realIndex})` : `addToCart(${realIndex}, this)`}" aria-label="${isPreventa(product) ? (hasStock ? 'Pedir en preventa' : 'Preventa agotada') : (hasStock ? 'AÑADIR AL CARRITO' : 'Producto agotado')}" title="${isPreventa(product) ? (hasStock ? 'Pedir en preventa' : 'Preventa agotada') : (hasStock ? 'AÑADIR AL CARRITO' : 'Agotado')}">
                             <i class="fas ${isPreventa(product) ? (hasStock ? 'fa-clock' : 'fa-ban') : (hasStock ? 'fa-shopping-cart' : 'fa-ban')}"></i> <span class="cart-btn-label"><span class="daymar-action-full">${isPreventa(product) ? (hasStock ? 'PEDIR EN PREVENTA' : 'Preventa agotada') : (hasStock ? 'AÑADIR AL CARRITO' : 'Agotado')}</span><span class="daymar-action-mobile">${isPreventa(product) ? (hasStock ? 'Pedir en preventa' : 'Agotada') : (hasStock ? 'Añadir al carrito' : 'Agotado')}</span></span>
                         </button>
                     </div>
@@ -1155,9 +1242,9 @@
             const label = button.querySelector('.cart-btn-label');
             if (!label) return;
             const outOfStock = button.classList.contains('out-of-stock');
-            const pv = button.classList.contains('pv-btn');
-            const full = outOfStock ? (pv ? 'Preventa agotada' : 'Agotado') : added ? 'AÑADIDO' : (pv ? 'PEDIR EN PREVENTA' : 'AÑADIR AL CARRITO');
-            const compact = outOfStock ? (pv ? 'Agotada' : 'Agotado') : added ? 'Añadido' : (pv ? 'Pedir en preventa' : 'Añadir al carrito');
+            const pv = button.classList.contains('pv-btn'), vb = button.classList.contains('var-btn');
+            const full = outOfStock ? (pv ? 'Preventa agotada' : 'Agotado') : vb ? 'ELEGIR COLOR' : added ? 'AÑADIDO' : (pv ? 'PEDIR EN PREVENTA' : 'AÑADIR AL CARRITO');
+            const compact = outOfStock ? (pv ? 'Agotada' : 'Agotado') : vb ? 'Elegir color' : added ? 'Añadido' : (pv ? 'Pedir en preventa' : 'Añadir al carrito');
             label.innerHTML = `<span class="daymar-action-full">${full}</span><span class="daymar-action-mobile">${compact}</span>`;
         }
 
@@ -1293,7 +1380,7 @@
                 let regularSubtotal = 0;
                 const purchasableCartItems = [];
                 AppState.cart.forEach(item => {
-                    const liveProduct = products.find(product => String(product.barcode) === String(item.barcode));
+                    const liveProduct = dmLive(item.barcode);
                     const isDeleted = !liveProduct;
                     const currentStock = liveProduct ? Number(liveProduct.stock) || 0 : 0;
                     const isOutOfStock = !isDeleted && currentStock <= 0;
@@ -1552,6 +1639,7 @@
             }
 
             syncAddButtonStates();
+            pintarVariantesPreview(product, index);
             document.getElementById('previewModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }

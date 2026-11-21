@@ -1624,3 +1624,17 @@ button, a, [role="button"], .cart-item, #cartItems, .dm-cart-body, .remove-item,
 .pv-op em{font-style:normal;font-weight:800;color:#6B2D3E;font-size:15px;white-space:nowrap}
 .pv-pago-n{font-size:12px;color:#7a5a62;margin-top:2px}
 .cart-stock-status.pv-st{color:#8a621a!important}.cart-stock-status.pv-st::before{background:#C9973F!important}
+
+/* ===== Colores con su propia foto ===== */
+.dm-vdots{display:flex;align-items:center;gap:5px;margin:2px 0 4px;font-size:11px;color:#7a6a6f;letter-spacing:.2px}
+.dm-vdots i{width:11px;height:11px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);background:#eee center/cover no-repeat;flex:none}
+.dm-vdots span{margin-left:2px}
+.dm-var{margin:12px 0 8px}
+.dm-var-l{font-size:13px;letter-spacing:.4px;color:#6f5a60;margin-bottom:8px}.dm-var-l b{color:#2a1a1f}
+.dm-var-g{display:flex;gap:10px;flex-wrap:wrap}
+.dm-var-g button{border:1.5px solid #e6d9cf;border-radius:12px;background:#fff;padding:4px;width:76px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font:600 11.5px/1.2 'Manrope',system-ui,sans-serif;color:#4a3a3f;transition:border-color .15s,box-shadow .15s}
+.dm-var-g button img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block;background:#f4efe8}
+.dm-var-g button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dm-var-g button.on{border-color:#6B2D3E;box-shadow:0 0 0 2px rgba(107,45,62,.15)}
+.dm-var-g button.off{opacity:.45}.dm-var-g button.off span{text-decoration:line-through}
+.dm-var-g button:focus-visible{outline:3px solid #C9973F;outline-offset:2px}

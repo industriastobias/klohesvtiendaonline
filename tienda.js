@@ -221,9 +221,6 @@
         function isPreventa(product) { return !!(product && product.preventa); }
         function pvFecha(product) { if (!product || !product.llega) return ''; try { return new Date(product.llega + 'T12:00:00').toLocaleDateString('es-SV', { day: 'numeric', month: 'short' }).replace('.', ''); } catch (e) { return ''; } }
         function pvTexto(product) { const f = pvFecha(product); if (!(Number(product.stock) > 0)) return 'Preventa agotada'; return (f ? `Llega aprox. ${f}` : 'Próxima colección') + (product.cupo != null ? ` · quedan ${product.stock}` : ''); }
-        function pvPago() { try { return localStorage.getItem('daymar_pv_pago') === 'completo' ? 'completo' : 'anticipo'; } catch (e) { return 'anticipo'; } }
-        window.dmPvPago = function (v) { try { localStorage.setItem('daymar_pv_pago', v === 'completo' ? 'completo' : 'anticipo'); } catch (e) {} updateCart(); };
-        window.daymarPvPago = pvPago;
 
         /* Colores con su propia foto: un producto puede traer variants [{nombre, barcode, stock, foto}] */
         const DM_COLORES = {rosado:'#f2a7b8',rosa:'#f2a7b8',fucsia:'#e0198b',rojo:'#d32f2f',vino:'#7b1e3a',celeste:'#8fd3e8',azul:'#1e66d0',turquesa:'#20b2aa',verde:'#2e9d57',menta:'#98e0c0',amarillo:'#f6d332',dorado:'#d4a62a',oro:'#d4a62a',plateado:'#c9c9cf',plata:'#c9c9cf',blanco:'#ffffff',negro:'#1a1a1a',gris:'#9e9e9e',cafe:'#7b4a2a',café:'#7b4a2a',beige:'#e8d8b8',crema:'#f3e9d2',nude:'#e3bfa5',morado:'#8e44ad',lila:'#b99be0',naranja:'#f58a1f',coral:'#ff7f6a',perla:'#f4efe6',champagne:'#e9d3a8',multicolor:'conic-gradient(#f2a7b8,#f6d332,#8fd3e8,#b99be0,#f2a7b8)'};
@@ -245,7 +242,7 @@
         window.dmLive = dmLive;
         function dmVarDots(product) {
             if (!hasVariants(product)) return '';
-            const L = product.variants.slice(0, 6).map(v => { const h = dmColorHex(v.nombre); return h ? `<i style="background:${h}"></i>` : (v.foto ? `<i style="background-image:url('${String(v.foto).replace(/'/g, '%27')}')"></i>` : '<i></i>'); }).join('');
+            const L = product.variants.slice(0, 6).map(v => { if (v.foto) return `<i style="background-image:url('${String(v.foto).replace(/'/g, '%27')}')"></i>`; const h = dmColorHex(v.nombre); return h ? `<i style="background:${h}"></i>` : '<i></i>'; }).join('');
             const n = product.variants.length;
             return `<div class="dm-vdots" aria-label="${n} ${n === 1 ? 'color' : 'colores'}">${L}<span>${n} ${n === 1 ? 'color' : 'colores'}</span></div>`;
         }
@@ -311,7 +308,7 @@
         }
         function escapeHtmlDm(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
         function isNewProduct(product) {
-            return !isPreventa(product) && Number(product?.alta) > 0 && Number(product?.stock) > 0 && (Date.now() - Number(product.alta)) < NUEVO_DIAS * 86400000;
+            return Number(product?.alta) > 0 && Number(product?.stock) > 0 && (Date.now() - Number(product.alta)) < NUEVO_DIAS * 86400000;
         }
         function newFirst(list) {
             const nuevos = mixProductsByCategory(list.filter(isNewProduct).sort((a, b) => b.alta - a.alta));
@@ -995,7 +992,7 @@
                          data-cands="${encodeURIComponent(JSON.stringify([...new Set([getCardProductImage(product), getPrimaryProductImage(product), product.foto].filter(Boolean))]))}"
                          onerror="dmImgFallo(this)"
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
-                    ${isNewProduct(product) ? '<div class="dm-nuevo-tag">NUEVO</div>' : ''}
+                    ${isNewProduct(product) && !isPreventa(product) ? '<div class="dm-nuevo-tag">NUEVO</div>' : ''}
                     ${isPreventa(product) ? '<div class="pv-cinta">PREVENTA</div>' : ''}
                     ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>OFERTA</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}
                     </div>
@@ -1457,19 +1454,8 @@
                 
                 const pvItems = purchasableCartItems.filter(x => isPreventa(x.liveProduct));
                 const pvTotal = roundPrice(pvItems.reduce((t, x) => t + x.itemPrice * Number(x.item.quantity || 0), 0));
-                const pvAnticipo = roundPrice(pvItems.reduce((t, x) => t + roundPrice(x.itemPrice * Number(x.item.quantity || 0) * (x.liveProduct.anticipo == null ? 50 : Number(x.liveProduct.anticipo)) / 100), 0));
-                const pvModo = pvPago();
-                let pvBox = document.getElementById('dmPvPago');
-                if (!pvBox && whatsappBtn && whatsappBtn.parentNode) { pvBox = document.createElement('div'); pvBox.id = 'dmPvPago'; pvBox.className = 'pv-pago'; whatsappBtn.parentNode.insertBefore(pvBox, whatsappBtn); }
-                if (pvBox) {
-                    pvBox.hidden = !pvItems.length;
-                    const pcts = [...new Set(pvItems.map(x => x.liveProduct.anticipo == null ? 50 : Number(x.liveProduct.anticipo)))];
-                    const pvHtml = pvItems.length ? `<div class="pv-pago-t">¿Cómo quieres pagar la preventa?</div>
-                        <label class="pv-op${pvModo === 'anticipo' ? ' on' : ''}"><input type="radio" name="dmPvPago" value="anticipo" ${pvModo === 'anticipo' ? 'checked' : ''} onchange="dmPvPago(this.value)"><span><b>${pvAnticipo > 0 ? 'Anticipo' + (pcts.length === 1 ? ' del ' + pcts[0] + '%' : '') : 'Sin anticipo'}</b><small>${pvAnticipo > 0 ? `Pagas $${pvAnticipo.toFixed(2)} ahora y $${roundPrice(pvTotal - pvAnticipo).toFixed(2)} cuando lo recibas` : `No pagas nada ahora; pagas $${pvTotal.toFixed(2)} cuando lo recibas`}</small></span><em>$${pvAnticipo.toFixed(2)}</em></label>
-                        <label class="pv-op${pvModo === 'completo' ? ' on' : ''}"><input type="radio" name="dmPvPago" value="completo" ${pvModo === 'completo' ? 'checked' : ''} onchange="dmPvPago(this.value)"><span><b>Pago completo</b><small>Pagas todo ahora y no debes nada al recibir</small></span><em>$${pvTotal.toFixed(2)}</em></label>
-                        <div class="pv-pago-n">Te avisamos por WhatsApp cuando llegue.</div>` : '';
-                    if (pvBox.dataset.html !== pvHtml) { pvBox.innerHTML = pvHtml; pvBox.dataset.html = pvHtml; }
-                }
+                /* la preventa se paga como se acuerde con el cliente por chat: aquí no se pregunta */
+                const pvBox = document.getElementById('dmPvPago'); if (pvBox) pvBox.remove();
                 if (whatsappBtn) {
                     whatsappBtn.style.display = purchasableCartItems.length > 0 ? 'flex' : 'none';
                     const messageLines = purchasableCartItems.map(({ item, liveProduct, itemPrice }, lineIndex) => {
@@ -1478,7 +1464,7 @@
                     });
                     const shippingText = AppState.shippingEnabled ? `\n\nEnvío nacional: $${shippingCost.toFixed(2)}${benefitQuote.kind === 'shipping' ? ' (beneficio Premium)' : ''}` : '';
                     const benefitText = benefitQuote.coupon > 0 ? `\n\nBeneficio Premium en productos: -$${benefitQuote.coupon.toFixed(2)}` : '';
-                    const pvText = pvItems.length ? (pvModo === 'completo' ? `\n\n*Preventa:* pago completo $${pvTotal.toFixed(2)}` : pvAnticipo > 0 ? `\n\n*Preventa:* anticipo $${pvAnticipo.toFixed(2)} ahora, resto $${roundPrice(pvTotal - pvAnticipo).toFixed(2)} al recibir` : `\n\n*Preventa:* sin anticipo, pago $${pvTotal.toFixed(2)} al recibir`) : '';
+                    const pvText = pvItems.length ? `\n\n*Preventa:* coordinamos el pago por aquí` : '';
                     const fullMessage = `*¡Hola! Quiero comprar estos productos de DAYMAR:*\n\n${messageLines.join('\n\n')}${benefitText}${shippingText}\n\n*Total: $${total.toFixed(2)}*${pvText}\n\n¡Gracias!`;
                     whatsappBtn.href = `https://wa.me/${CONFIG.phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
                 }
@@ -1590,7 +1576,7 @@
             const stockEl = document.getElementById('previewStock');
             stockEl.classList.toggle('pv-st', isPreventa(product));
             if (isPreventa(product)) {
-                stockEl.textContent = pvTexto(product) + (Number(product.stock) > 0 ? (Number(product.anticipo) > 0 ? ` · anticipo desde ${product.anticipo}%` : ' · sin anticipo') : '');
+                stockEl.textContent = pvTexto(product);
                 stockEl.classList.toggle('out', !(Number(product.stock) > 0));
             } else if (product.stock > 0) {
                 stockEl.textContent = `${product.stock} ${Number(product.stock) === 1 ? 'unidad disponible' : 'unidades disponibles'}`;

@@ -130,7 +130,7 @@
       var cliente = {
         nombre: d.nombre || (user && user.displayName) || '', correo: d.correo || (user && user.email) || '', telefono: d.telefono, direccion: d.direccion,
         envio: (AppState.shippingEnabled ? CONFIG.shippingCost : 0), metodo: 'Efectivo', nota: 'Pedido desde la tienda en línea',
-        pago: items.some(function (x) { return x.preventa === '1'; }) ? (typeof window.daymarPvPago === 'function' ? window.daymarPvPago() : 'anticipo') : undefined
+        pago: undefined /* el pago de la preventa se acuerda por chat */
       };
       var cod = codigoActual(), tot = items.reduce(function (a, x) { return a + x.precio * x.cantidad; }, 0) + (Number(cliente.envio) || 0);
       rpc('tienda_pedido', { p_cliente: cliente, p_items: items, p_codigo: cod }, { keepalive: true })

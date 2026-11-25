@@ -994,7 +994,7 @@
                          onload="this.classList.add('loaded')">                    <div class="image-placeholder" data-initial="${initial}"></div>
                     ${isNewProduct(product) && !isPreventa(product) ? '<div class="dm-nuevo-tag">NUEVO</div>' : ''}
                     ${isPreventa(product) ? '<div class="dm-nuevo-tag pv-tag">PREVENTA</div>' : ''}
-                    ${getDiscountRate(product) > 0 ? `<div class="discount-tag daymar-black-friday-card-tag"><span>OFERTA</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}
+                    ${getDiscountRate(product) > 0 ? `<div class="discount-tag dm-offer-tag"><span>OFERTA</span><strong>-${Math.round(getDiscountRate(product) * 100)}%</strong></div>` : ''}
                     </div>
                     <span class="daymar-card-index">${String(index + 1).padStart(2, '0')}</span>
                   </div>
@@ -1026,12 +1026,12 @@
             const imageAction = card.querySelector('.product-image-container');
             card.addEventListener('click', event => {
                 if (event.target.closest('button, a, input, select, textarea')) return;
-                const blackFridayTag = card.querySelector('.daymar-black-friday-card-tag');
-                if (!blackFridayTag) return;
-                blackFridayTag.classList.remove('is-clicking');
-                void blackFridayTag.offsetWidth;
-                blackFridayTag.classList.add('is-clicking');
-                window.setTimeout(() => blackFridayTag.classList.remove('is-clicking'), 760);
+                const offerTag = card.querySelector('.dm-offer-tag');
+                if (!offerTag) return;
+                offerTag.classList.remove('is-clicking');
+                void offerTag.offsetWidth;
+                offerTag.classList.add('is-clicking');
+                window.setTimeout(() => offerTag.classList.remove('is-clicking'), 760);
             });
             imageAction.setAttribute('aria-label', `Ver descripción de ${product.name}`);
             card.querySelector('.product-details-trigger').setAttribute('aria-label', `Ver detalles de ${product.name}`);

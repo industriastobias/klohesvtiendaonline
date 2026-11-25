@@ -107,7 +107,6 @@ h1, h2, h3, h4, p { margin: 0; }
 @keyframes bounceIn { 0% { transform: scale(.92); opacity: 0; } 100% { transform: none; opacity: 1; } }
 @keyframes dm-heart { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.35); } }
 
-
 /* ===== Tarjetas de producto (diseño conservado) ===== */
 .products-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px 22px; }
 
@@ -199,7 +198,6 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .load-more-products-btn:hover { background: var(--wine); color: #fff; }
 .load-more-products-btn:active { transform: scale(.97); }
-
 
 /* ===== Ventana de detalles (diseño conservado) ===== */
 /* ---------- 12. Vista previa de producto ---------- */
@@ -312,7 +310,6 @@ h1, h2, h3, h4, p { margin: 0; }
 .btn-download-story { background: var(--wine); color: #fff; }
 .btn-copy-story { border: 1px solid var(--wine); color: var(--wine); }
 .btn-copy-story.copied { background: var(--ok); border-color: var(--ok); color: #fff; }
-
 
 /* ===== Responsivo de tarjetas y detalles (conservado) ===== */
 @keyframes dm-sheet { from { transform: translateY(100%); } to { transform: none; } }
@@ -478,7 +475,6 @@ h1, h2, h3, h4, p { margin: 0; }
 .catalog-sort-dialog-note { margin-top: 16px; font-size: 11.5px; line-height: 1.5; color: #9A8F94; text-align: center; }
 html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflow: hidden; }
 
-
 /* =====================================================================
    DAYMAR · Maison — nueva composición (mismos colores)
    ===================================================================== */
@@ -640,68 +636,6 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
   letter-spacing: .12em; text-transform: uppercase; color: rgba(244, 239, 229, .6); text-decoration: underline; text-underline-offset: 3px;
 }
 .daymar-menu-signout:hover { color: var(--gold-soft); }
-
-/* ---------- Black Friday: composición centrada con medallones ---------- */
-.daymar-black-friday-banner {
-  position: relative; isolation: isolate; overflow: hidden; text-align: center; color: var(--ivory);
-  display: flex; flex-direction: column; align-items: center; padding: clamp(56px, 7vw, 92px) var(--edge) clamp(60px, 7vw, 96px);
-  background:
-    radial-gradient(circle at 50% 120%, rgba(184, 146, 74, .35), transparent 55%),
-    radial-gradient(circle at 10% 0%, rgba(138, 80, 104, .7), transparent 45%),
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 14px),
-    var(--wine);
-}
-.daymar-black-friday-banner::before, .daymar-black-friday-banner::after {
-  content: ''; position: absolute; pointer-events: none; z-index: 1; border: 1px solid rgba(232, 214, 172, .35);
-}
-.daymar-black-friday-banner::before { inset: 16px; }
-.daymar-black-friday-banner::after { inset: 22px; border-color: rgba(232, 214, 172, .16); }
-.daymar-black-friday-glow, .daymar-black-friday-ticker, .daymar-black-friday-orbit, .daymar-black-friday-spark { display: none; }
-.daymar-black-friday-copy-block { display: contents; }
-.daymar-black-friday-label {
-  order: 1; position: relative; z-index: 2; display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
-  font-size: 10.5px; letter-spacing: .3em; text-transform: uppercase;
-}
-.daymar-black-friday-label span { color: var(--gold-soft); font-weight: 800; }
-.daymar-black-friday-label i { font-style: normal; color: rgba(244, 239, 229, .6); font-weight: 600; }
-.daymar-black-friday-banner h2 {
-  order: 2; position: relative; z-index: 2; font-family: var(--font-display); font-weight: 500; line-height: .95; letter-spacing: -.01em;
-  font-size: clamp(58px, 9vw, 132px); margin-bottom: 14px;
-}
-.daymar-black-friday-banner h2 span { color: var(--ivory); }
-.daymar-black-friday-banner h2 em {
-  font-style: italic; color: transparent;
-  background: linear-gradient(100deg, #F4E3B5 0%, #D2A95E 50%, #F1D99B 100%); -webkit-background-clip: text; background-clip: text;
-}
-.daymar-black-friday-copy-block p { order: 3; position: relative; z-index: 2; max-width: 440px; margin-bottom: 38px; font-size: 15.5px; line-height: 1.6; color: rgba(244, 239, 229, .78); }
-.daymar-black-friday-deal-stage {
-  order: 4; position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: clamp(14px, 3vw, 36px); margin-bottom: 40px;
-}
-.daymar-black-friday-deal {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-  width: clamp(150px, 15vw, 186px); aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--gold-soft);
-  box-shadow: inset 0 0 0 7px var(--wine), inset 0 0 0 8px rgba(232, 214, 172, .4);
-  background: rgba(255, 255, 255, .04); transition: transform .35s var(--ease);
-}
-.daymar-black-friday-deal:hover { transform: translateY(-5px); }
-.daymar-black-friday-deal small { font-size: 9.5px; font-weight: 800; letter-spacing: .2em; color: var(--gold-soft); }
-.daymar-black-friday-deal strong { font-family: var(--font-display); font-variant-numeric: lining-nums; margin-block: 2px 4px; font-weight: 600; font-size: clamp(42px, 4.4vw, 58px); line-height: .9; color: #fff; }
-.daymar-black-friday-deal span { font-size: 9px; font-weight: 700; letter-spacing: .16em; color: rgba(244, 239, 229, .6); }
-.daymar-black-friday-deal.deal-main {
-  width: clamp(176px, 18vw, 224px); border: 0;
-  background: radial-gradient(circle at 30% 25%, #F6E6BC, #C99B4F 70%);
-  box-shadow: inset 0 0 0 7px rgba(255, 255, 255, .0), 0 18px 46px rgba(0, 0, 0, .28), inset 0 0 0 8px rgba(102, 45, 66, .25);
-}
-.daymar-black-friday-deal.deal-main small, .daymar-black-friday-deal.deal-main span { color: var(--wine-deep); }
-.daymar-black-friday-deal.deal-main strong { color: var(--wine-deep); font-size: clamp(52px, 5.4vw, 72px); }
-.daymar-black-friday-cta {
-  order: 5; position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 12px; height: 52px; padding: 0 32px; border-radius: 999px;
-  background: var(--ivory); color: var(--wine); font-size: 11.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
-  transition: background .25s, color .25s, transform .25s var(--ease);
-}
-.daymar-black-friday-cta:hover { background: var(--gold-soft); transform: translateY(-2px); }
-.daymar-black-friday-cta i { transition: transform .25s; }
-.daymar-black-friday-cta:hover i { transform: translateX(4px); }
 
 /* ---------- Portada editorial: foto a la izquierda con marco dorado ---------- */
 .atelier-hero { background: var(--ivory); }
@@ -1060,13 +994,13 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
   .daymar-nav-actions, .dm-catnav { display: none; }
   .daymar-mobile-account-trigger { display: inline-grid; grid-column: 3; justify-self: end; }
 
-  .daymar-black-friday-deal-stage { gap: 10px; }
-  .daymar-black-friday-deal { width: 120px; }
-  .daymar-black-friday-deal.deal-main { width: 140px; }
-  .daymar-black-friday-deal strong { font-size: 36px; }
-  .daymar-black-friday-deal.deal-main strong { font-size: 44px; }
-  .daymar-black-friday-deal small { font-size: 8px; letter-spacing: .12em; }
-  .daymar-black-friday-deal span { font-size: 7.5px; letter-spacing: .08em; }
+  
+  
+  
+  
+  
+  
+  
 
   .atelier-hero-grid { grid-template-columns: 1fr; grid-template-rows: auto; padding-block: 48px 64px; row-gap: 0; }
   .atelier-hero-copy { grid-column: 1; grid-row: 1; text-align: center; margin-bottom: 40px; }
@@ -1102,17 +1036,17 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 @media (max-width: 640px) {
   body { font-size: 14.5px; }
 
-  .daymar-black-friday-banner::before { inset: 10px; }
-  .daymar-black-friday-banner::after { inset: 15px; }
-  .daymar-black-friday-banner h2 { font-size: clamp(54px, 16vw, 76px); }
-  .daymar-black-friday-banner h2 em { display: block; }
-  .daymar-black-friday-copy-block p { font-size: 14.5px; margin-bottom: 30px; }
-  .daymar-black-friday-deal-stage { gap: 6px; margin-bottom: 32px; }
-  .daymar-black-friday-deal { width: 100px; box-shadow: inset 0 0 0 5px var(--wine), inset 0 0 0 6px rgba(232, 214, 172, .4); }
-  .daymar-black-friday-deal.deal-main { width: 122px; }
-  .daymar-black-friday-deal strong { font-size: 30px; }
-  .daymar-black-friday-deal.deal-main strong { font-size: 38px; }
-  .daymar-black-friday-deal span { display: none; }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   .atelier-hero-copy h1 { font-size: clamp(46px, 13vw, 64px); }
   .holiday-gift-notes span { padding: 2px 12px; font-size: 10px; letter-spacing: .12em; }
@@ -1147,11 +1081,11 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 }
 
 @media (max-width: 380px) {
-  .daymar-black-friday-deal { width: 88px; }
-  .daymar-black-friday-deal.deal-main { width: 108px; }
-  .daymar-black-friday-deal strong { font-size: 26px; }
-  .daymar-black-friday-deal.deal-main strong { font-size: 32px; }
-  .daymar-black-friday-deal small { font-size: 7px; }
+  
+  
+  
+  
+  
   .daymar-welcome-offers p strong { font-size: 15px; }
 }
 
@@ -1160,7 +1094,7 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
 }
 
 @media print {
-  .atelier-topline, .atelier-header, .mobile-bottom-nav, .whatsapp-float, .daymar-black-friday-banner { display: none !important; }
+  .atelier-topline, .atelier-header, .mobile-bottom-nav, .whatsapp-float { display: none !important; }
 }
 
 @media (max-width: 640px) {
@@ -1171,32 +1105,6 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
   .daymar-contact-socials { justify-content: start; }
   .daymar-contact-socials a { justify-content: flex-start; }
   .daymar-payment-item img { justify-self: start; }
-}
-
-/* ---------- Black Friday compacto en celular ---------- */
-@media (max-width: 640px) {
-  .daymar-black-friday-banner { padding: 30px 20px 28px; }
-  .daymar-black-friday-banner::before { inset: 8px; }
-  .daymar-black-friday-banner::after { display: none; }
-  .daymar-black-friday-label { margin-bottom: 8px; font-size: 9px; letter-spacing: .24em; }
-  .daymar-black-friday-banner h2 { font-size: clamp(40px, 12vw, 50px); line-height: 1; margin-bottom: 18px; white-space: nowrap; }
-  .daymar-black-friday-banner h2 em { display: inline; }
-  .daymar-black-friday-copy-block p { display: none; }
-  .daymar-black-friday-deal-stage { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 8px; width: 100%; margin-bottom: 18px; align-items: stretch; }
-  .daymar-black-friday-deal, .daymar-black-friday-deal.deal-main {
-    width: auto; aspect-ratio: auto; border-radius: 10px; padding: 12px 4px 11px; gap: 4px;
-    box-shadow: none; border: 1px solid rgba(232, 214, 172, .45); background: rgba(255, 255, 255, .05);
-  }
-  .daymar-black-friday-deal.deal-main { border: 0; background: linear-gradient(150deg, #F3E1B2, #C99B4F); box-shadow: 0 8px 22px rgba(0, 0, 0, .25); }
-  .daymar-black-friday-deal:hover { transform: none; }
-  .daymar-black-friday-deal small { font-size: 8px; letter-spacing: .12em; }
-  .daymar-black-friday-deal strong, .daymar-black-friday-deal.deal-main strong { font-size: 30px; margin: 0; }
-  .daymar-black-friday-deal span { display: none; }
-  .daymar-black-friday-cta { height: 42px; padding: 0 22px; font-size: 10.5px; letter-spacing: .16em; }
-}
-@media (max-width: 360px) {
-  .daymar-black-friday-deal strong, .daymar-black-friday-deal.deal-main strong { font-size: 25px; }
-  .daymar-black-friday-deal small { font-size: 7px; letter-spacing: .06em; }
 }
 
 /* ---------- Botón de carrito: contorno fino ---------- */
@@ -1358,52 +1266,6 @@ html.catalog-sort-open, html.cart-extra-open, html.daymar-welcome-open { overflo
   .dm-gift-mode .daymar-welcome-offers p strong { padding-right: 18px; font-size: 17px; }
 }
 
-/* ---------- Animación de entrada del Black Friday ---------- */
-.daymar-black-friday-label::before, .daymar-black-friday-label::after { content: ''; width: 34px; height: 1px; background: var(--gold-soft); opacity: .8; }
-.daymar-black-friday-banner h2 span { display: inline-block; }
-.daymar-black-friday-banner h2 em {
-  display: inline-block; padding-right: .06em;
-  background-image: linear-gradient(100deg, #D2A95E 0%, #F4E3B5 18%, #FFF8E6 24%, #F4E3B5 30%, #D2A95E 48%, #F1D99B 70%, #D2A95E 100%);
-  background-size: 260% 100%; background-position: 100% 0;
-}
-.dm-bf-letter { display: inline-block; }
-
-html.dm-bf-anim .daymar-black-friday-banner:not(.dm-bf-play) :is(.daymar-black-friday-label span, .daymar-black-friday-label i, .dm-bf-letter, h2 em, .daymar-black-friday-copy-block p, .daymar-black-friday-deal, .daymar-black-friday-cta) { opacity: 0; }
-html.dm-bf-anim .daymar-black-friday-banner:not(.dm-bf-play) .daymar-black-friday-label::before,
-html.dm-bf-anim .daymar-black-friday-banner:not(.dm-bf-play) .daymar-black-friday-label::after { transform: scaleX(0); }
-
-.dm-bf-play .daymar-black-friday-label span { animation: dm-bf-track 1s cubic-bezier(.2, .7, .2, 1) both; }
-.dm-bf-play .daymar-black-friday-label i { animation: dm-bf-track 1s .15s cubic-bezier(.2, .7, .2, 1) both; }
-.dm-bf-play .daymar-black-friday-label::before { transform-origin: right; animation: dm-bf-line .8s .35s cubic-bezier(.2, .7, .2, 1) both; }
-.dm-bf-play .daymar-black-friday-label::after { transform-origin: left; animation: dm-bf-line .8s .35s cubic-bezier(.2, .7, .2, 1) both; }
-.dm-bf-play .dm-bf-letter { animation: dm-bf-drop .75s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(.45s + var(--i) * 80ms); }
-.dm-bf-play h2 em {
-  animation: dm-bf-wipe 1s .95s cubic-bezier(.65, 0, .35, 1) both, dm-bf-shine 5s 2.2s ease-in-out infinite;
-}
-.dm-bf-play .daymar-black-friday-copy-block p { animation: dm-bf-rise .7s 1.5s ease both; }
-.dm-bf-play .daymar-black-friday-deal { animation: dm-bf-pop .7s cubic-bezier(.2, 1.4, .4, 1) both; }
-.dm-bf-play .daymar-black-friday-deal.deal-watch { animation-delay: 1.65s; }
-.dm-bf-play .daymar-black-friday-deal.deal-main { animation-delay: 1.8s; }
-.dm-bf-play .daymar-black-friday-deal.deal-jewelry { animation-delay: 1.95s; }
-.dm-bf-play .daymar-black-friday-cta { animation: dm-bf-rise .7s 2.25s ease both; }
-
-@keyframes dm-bf-track { from { opacity: 0; letter-spacing: .9em; filter: blur(4px); } to { opacity: 1; filter: none; } }
-@keyframes dm-bf-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes dm-bf-drop { from { opacity: 0; transform: translateY(-.55em) rotate(-8deg); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
-@keyframes dm-bf-wipe { from { opacity: 1; clip-path: inset(-10% 100% -10% 0); } to { opacity: 1; clip-path: inset(-10% 0 -10% 0); } }
-@keyframes dm-bf-shine { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
-@keyframes dm-bf-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-@keyframes dm-bf-pop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: none; } }
-
-@media (prefers-reduced-motion: reduce) {
-  html.dm-bf-anim .daymar-black-friday-banner :is(.daymar-black-friday-label span, .daymar-black-friday-label i, .dm-bf-letter, h2 em, .daymar-black-friday-copy-block p, .daymar-black-friday-deal, .daymar-black-friday-cta) { opacity: 1 !important; animation: none !important; }
-  html.dm-bf-anim .daymar-black-friday-label::before, html.dm-bf-anim .daymar-black-friday-label::after { transform: none !important; animation: none !important; }
-}
-
-/* En celulares no se muestra el anuncio de Black Friday */
-@media (max-width: 640px) {
-  .daymar-black-friday-banner { display: none !important; }
-}
 @media (max-width: 640px) {
   .atelier-hero-grid { padding-top: 10px; padding-bottom: 22px; }
   .atelier-hero-note { margin-top: 26px; }
@@ -1510,7 +1372,6 @@ body { background-color: var(--ivory); }
   .dm-cart-body .shipping-option { padding-inline: 28px; }
   .dm-cart-body .cart-summary { margin-inline: 28px; }
 }
-
 
 /* Filtros extra del catálogo: precio y solo disponibles */
 .catalog-extra-filters { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 16px; margin-top: 14px; }

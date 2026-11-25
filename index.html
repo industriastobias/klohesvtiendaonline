@@ -106,7 +106,6 @@
 
     <script id="scroll-to-top-on-load">
         (() => {
-            document.documentElement.classList.add('dm-bf-anim');
             if ('scrollRestoration' in history) {
                 history.scrollRestoration = 'manual';
             }
@@ -261,7 +260,7 @@
         else init();
     })();
 </script>
-<link rel="stylesheet" href="estilos.css?v=202611220900">
+<link rel="stylesheet" href="estilos.css?v=202611251700">
 </head>
 <body>
 <div class="daymar-browser-color-edge" aria-hidden="true"></div>
@@ -585,27 +584,6 @@
 })();
     </script>
     <section class="hero atelier-hero daymar-compact-hero" id="daymarSummer">
-        <div class="daymar-black-friday-banner" role="note" aria-label="Promoción Black Friday">
-            <div class="daymar-black-friday-glow" aria-hidden="true"></div>
-            <div class="daymar-black-friday-copy-block">
-                <div class="daymar-black-friday-label"><span>DAYMAR</span><i>LIMITED DROP / 2026</i></div>
-                <h2><span>BLACK</span> <em>FRIDAY</em></h2>
-                <p>Tu próxima pieza favorita, a un precio inesperado.</p>
-                <a class="daymar-black-friday-cta" href="#catalogo">Descubrir ofertas <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-            </div>
-            <div class="daymar-black-friday-deal-stage" aria-label="Descuentos de Black Friday">
-                <span class="daymar-black-friday-orbit orbit-one" aria-hidden="true"></span>
-                <span class="daymar-black-friday-orbit orbit-two" aria-hidden="true"></span>
-                <span class="daymar-black-friday-spark spark-one" aria-hidden="true">✦</span>
-                <span class="daymar-black-friday-spark spark-two" aria-hidden="true">✦</span>
-                <div class="daymar-black-friday-deal deal-watch"><small>RELOJES</small><strong>-40%</strong><span>TIEMPO PARA TI</span></div>
-                <div class="daymar-black-friday-deal deal-main"><small>TODO LO DEMÁS</small><strong>-50%</strong><span>THE BIG DEAL</span></div>
-                <div class="daymar-black-friday-deal deal-jewelry"><small>ORO Y PLATA</small><strong>-2%</strong><span>PIEZAS ESPECIALES</span></div>
-            </div>
-            <div class="daymar-black-friday-ticker" aria-hidden="true">
-                <span>BLACK FRIDAY <b>✦</b> DETALLES QUE DEJAN HUELLA <b>✦</b> BLACK FRIDAY <b>✦</b> DESCUENTOS ESPECIALES</span>
-            </div>
-        </div>
         <div class="container atelier-hero-grid">
             <div class="atelier-hero-copy">
                 <p class="eyebrow">DAYMAR / DETALLES PARA CADA DÍA</p>
@@ -1239,7 +1217,7 @@
         document.write('<script src="products.js?v=' + Date.now() + '"><\/script>');
         document.write('<script src="sistema.js?v=' + Date.now() + '"><\/script>');
     </script>
-<script src="tienda.js?v=202611220900"></script>
+<script src="tienda.js?v=202611251700"></script>
 
 <script src="galeria.js?v=202611141530"></script>
 <script src="extras.js?v=3" defer></script>
@@ -1482,44 +1460,6 @@ const firebaseConfig = {
 })();
 </script>
 
-<script id="daymar-black-friday-intro">
-(() => {
-  const banner = document.querySelector('.daymar-black-friday-banner');
-  if (!banner) return;
-  const black = banner.querySelector('h2 span');
-  if (black && !black.querySelector('.dm-bf-letter')) {
-    const word = black.textContent;
-    black.setAttribute('aria-label', word);
-    black.replaceChildren(...[...word].map((ch, i) => {
-      const s = document.createElement('span');
-      s.className = 'dm-bf-letter';
-      s.setAttribute('aria-hidden', 'true');
-      s.style.setProperty('--i', i);
-      s.textContent = ch;
-      return s;
-    }));
-  }
-  const popup = document.getElementById('newsletterPopup');
-  let visible = false, played = false;
-  const play = () => {
-    if (played) return;
-    played = true;
-    banner.classList.add('dm-bf-play');
-  };
-  const check = () => {
-    if (played || !visible) return;
-    if (popup && popup.classList.contains('active')) return;
-    play();
-  };
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(entries => { visible = entries[0].isIntersecting; check(); }, { threshold: .25 }).observe(banner);
-  } else { visible = true; }
-  if (popup) new MutationObserver(check).observe(popup, { attributes: true, attributeFilter: ['class'] });
-  check();
-  // Respaldo: nunca dejar el anuncio oculto.
-  setTimeout(play, 15000);
-})();
-</script>
 <script id="daymar-category-rail-sync">
 (() => {
   window.dmGoCatalog = () => {
